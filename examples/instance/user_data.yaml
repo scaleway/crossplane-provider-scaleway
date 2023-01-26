@@ -1,0 +1,31 @@
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: UserData
+metadata:
+  name: instance-user-data
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    serverIdRef:
+      name: instance-server
+    key: cloud-init
+    value: |
+      #cloud-config
+      apt-update: true
+      apt-upgrade: true
+  providerConfigRef:
+      name: default
+---
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  name: instance-server
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-instance-server
+    image: "ubuntu_focal"
+    type: "PRO2-S"
+  providerConfigRef:
+    name: default
