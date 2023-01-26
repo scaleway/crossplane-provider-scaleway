@@ -1,0 +1,29 @@
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Pool
+metadata:
+  name: k8s-pool
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-k8s-pool
+    clusterIdRef:
+      name: k8s-cluster
+    nodeType: PRO2-S
+    size: 1
+  providerConfigRef:
+    name: default
+---
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: k8s-cluster
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-k8s-cluster
+    version: 1.24.7
+    cni: cilium
+  providerConfigRef:
+    name: default

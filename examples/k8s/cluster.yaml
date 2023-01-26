@@ -1,0 +1,14 @@
+#file: noinspection YAMLSchemaValidation
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: k8s-cluster
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-k8s-cluster
+    version: 1.24.7
+    cni: cilium
+  providerConfigRef:
+    name: default
