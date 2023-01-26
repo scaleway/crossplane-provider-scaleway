@@ -1,0 +1,25 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGateway
+metadata:
+  name: vpc-public-gateway
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-public-gateway
+    type: VPC-GW-S
+    ipIdRef:
+      name: vpc-public-gateway-ip
+providerConfigRef:
+  name: default
+---
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGatewayIP
+metadata:
+  name: vpc-public-gateway-ip
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider: {}
+providerConfigRef:
+  name: default

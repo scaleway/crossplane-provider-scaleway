@@ -1,0 +1,11 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  name: vpc-private-network
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-private-network
+providerConfigRef:
+  name: default
