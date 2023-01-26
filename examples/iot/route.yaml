@@ -1,0 +1,32 @@
+apiVersion: iot.scaleway.upbound.io/v1alpha1
+kind: Route
+metadata:
+  name: iot-route
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-route
+    topic: route_topic
+    hubIdRef:
+      name: iot-hub
+    rest:
+      - verb: get
+        uri: "https://example.com"
+        headers:
+          Content-Type: application/json X-My-Header Hello World
+  providerConfigRef:
+    name: default
+---
+apiVersion: iot.scaleway.upbound.io/v1alpha1
+kind: Hub
+metadata:
+  name: iot-hub
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-hub
+    productPlan: plan_shared
+  providerConfigRef:
+    name: default
