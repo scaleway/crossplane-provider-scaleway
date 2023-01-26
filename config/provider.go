@@ -18,6 +18,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/k8s"
 	"github.com/scaleway/provider-scaleway/config/lb"
 	"github.com/scaleway/provider-scaleway/config/rdb"
+	"github.com/scaleway/provider-scaleway/config/redis"
 	"github.com/scaleway/provider-scaleway/config/registry"
 	"github.com/scaleway/provider-scaleway/config/vpc"
 	ujconfig "github.com/upbound/upjet/pkg/config"
@@ -54,6 +55,7 @@ func GetProvider() *ujconfig.Provider {
 		k8s.Configure,
 		lb.Configure,
 		rdb.Configure,
+		redis.Configure,
 		registry.Configure,
 		vpc.Configure,
 	} {

@@ -19,6 +19,7 @@ import (
 	v1alpha1k8s "github.com/scaleway/provider-scaleway/apis/k8s/v1alpha1"
 	v1alpha1lb "github.com/scaleway/provider-scaleway/apis/lb/v1alpha1"
 	v1alpha1rdb "github.com/scaleway/provider-scaleway/apis/rdb/v1alpha1"
+	v1alpha1redis "github.com/scaleway/provider-scaleway/apis/redis/v1alpha1"
 	v1alpha1registry "github.com/scaleway/provider-scaleway/apis/registry/v1alpha1"
 	v1alpha1apis "github.com/scaleway/provider-scaleway/apis/v1alpha1"
 	v1beta1 "github.com/scaleway/provider-scaleway/apis/v1beta1"
@@ -37,6 +38,7 @@ func init() {
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
 		v1alpha1rdb.SchemeBuilder.AddToScheme,
+		v1alpha1redis.SchemeBuilder.AddToScheme,
 		v1alpha1registry.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,

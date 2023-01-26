@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-cluster-secret
+  namespace: default
+stringData:
+  password: "thiZ_is_v&ry_s3cret"
+---
+apiVersion: redis.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  name: redis-cluster
+spec:
+  forProvider:
+    name: crossplane-redis-cluster
+    nodeType: RED1-XS
+    version: 7.0.5
+    userName: admin
+    passwordSecretRef:
+      key: password
+      name: redis-cluster-secret
+      namespace: default
+  providerConfigRef:
+    name: default
