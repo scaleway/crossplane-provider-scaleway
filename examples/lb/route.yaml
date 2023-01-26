@@ -1,0 +1,76 @@
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: Route
+metadata:
+  name: lb-route
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-lb-route
+    frontendIdRef:
+      name: lb-frontend
+    backendIdRef:
+      name: lb-backend
+    match:
+      - sni: sni.example.com
+  providerConfigRef:
+    name: default
+---
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: Frontend
+metadata:
+  name: lb-frontend
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-lb-frontend
+    lbIdRef:
+      name: lb-instance
+    backendIdRef:
+      name: lb-backend
+    inboundPort: 8080
+  providerConfigRef:
+    name: default
+---
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: Backend
+metadata:
+  name: lb-backend
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-lb-backend
+    lbIdRef:
+      name: lb-instance
+    forwardProtocol: tcp
+    forwardPort: 80
+  providerConfigRef:
+    name: default
+---
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: LB
+metadata:
+  name: lb-instance
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider:
+    name: crossplane-lb-instance
+    type: LB-S
+    ipIdRef:
+      name: lb-ip
+  providerConfigRef:
+    name: default
+---
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  name: lb-ip
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider: {}
+  providerConfigRef:
+    name: default

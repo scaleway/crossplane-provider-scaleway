@@ -1,0 +1,10 @@
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  name: lb-ip
+spec:
+  description: "Managed with Crossplane Github Provider (generated with Upjet)"
+  visibility: public
+  forProvider: {}
+  providerConfigRef:
+    name: default
