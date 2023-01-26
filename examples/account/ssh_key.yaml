@@ -1,0 +1,10 @@
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: SSHKey
+metadata:
+  name: account-ssh-key
+spec:
+  forProvider:
+    name: crossplane-account-ssh-key
+    publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEEYrzDOZmhItdKaDAEqJQ4ORS2GyBMtBozYsK5kiXXX foo@bar.com
+  providerConfigRef:
+    name: default

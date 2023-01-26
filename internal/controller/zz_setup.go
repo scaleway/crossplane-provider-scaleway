@@ -9,6 +9,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	project "github.com/scaleway/provider-scaleway/internal/controller/account/project"
 	sshkey "github.com/scaleway/provider-scaleway/internal/controller/account/sshkey"
 	server "github.com/scaleway/provider-scaleway/internal/controller/applesilicon/server"
 	serverbaremetal "github.com/scaleway/provider-scaleway/internal/controller/baremetal/server"
@@ -55,6 +56,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		project.Setup,
 		sshkey.Setup,
 		server.Setup,
 		serverbaremetal.Setup,

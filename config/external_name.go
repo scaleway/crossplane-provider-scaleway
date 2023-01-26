@@ -10,6 +10,7 @@ import "github.com/upbound/upjet/pkg/config"
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
+	"scaleway_account_project":               config.NameAsIdentifier,
 	"scaleway_account_ssh_key":               config.NameAsIdentifier,
 	"scaleway_apple_silicon_server":          config.NameAsIdentifier,
 	"scaleway_baremetal_server":              config.NameAsIdentifier,

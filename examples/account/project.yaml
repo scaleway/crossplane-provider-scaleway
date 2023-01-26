@@ -1,0 +1,9 @@
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  name: account-project
+spec:
+  forProvider:
+    name: crossplane-account-project
+  providerConfigRef:
+    name: default
