@@ -1,0 +1,40 @@
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: ACL
+metadata:
+  name: rdb-acl
+spec:
+  forProvider:
+    name: crossplane-rdb-acl
+    instanceIdRef:
+      name: rdb-instance
+    aclRules:
+      - ip: 1.2.3.4/32
+  providerConfigRef:
+    name: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rdb-instance-secret
+  namespace: default
+stringData:
+  password: "thiZ_is_v&ry_s3cret"
+---
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  name: rdb-instance
+spec:
+  forProvider:
+    name: crossplane-rdb-instance
+    nodeType: DB-DEV-S
+    engine: "PostgreSQL-14"
+    isHaCluster: false
+    disableBackup: true
+    userName: admin
+    passwordSecretRef:
+      key: password
+      name: rdb-instance-secret
+      namespace: default
+  providerConfigRef:
+    name: default
