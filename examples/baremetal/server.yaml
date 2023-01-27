@@ -1,0 +1,36 @@
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: SSHKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: baremetal/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-account-ssh-key
+    publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEEYrzDOZmhItdKaDAEqJQ4ORS2GyBMtBozYsK5kiXXX foo@bar.com
+  providerConfigRef:
+    name: default
+---
+apiVersion: baremetal.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: baremetal/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-baremetal-server
+    zone: fr-par-2
+    offer: EM-B112X-SSD
+    os: 96e5f0f2-d216-4de2-8a15-68730d877885
+    sshKeyIdsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  providerConfigRef:
+    name: default
