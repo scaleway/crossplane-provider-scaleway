@@ -1,0 +1,10 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: SSHKey
+metadata:
+  name: iam-ssh-key
+spec:
+  forProvider:
+    name: crossplane-iam-ssh-key
+    publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEEYrzDOZmhItdKaDAEqJQ4ORS2GyBMtBozYsK5kiXXX foo@bar.com
+  providerConfigRef:
+    name: default

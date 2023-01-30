@@ -1,0 +1,15 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  name: iam-policy
+spec:
+  forProvider:
+    name: crossplane-iam-policy
+    description: an iam policy
+    noPrincipal: true
+    rule:
+      - organizationId: 11111111-1111-1111-1111-111111111111
+        permissionSetNames:
+          - AllProductsFullAccess
+  providerConfigRef:
+    name: default

@@ -13,7 +13,14 @@ import (
 	sshkey "github.com/scaleway/provider-scaleway/internal/controller/account/sshkey"
 	server "github.com/scaleway/provider-scaleway/internal/controller/applesilicon/server"
 	serverbaremetal "github.com/scaleway/provider-scaleway/internal/controller/baremetal/server"
+	record "github.com/scaleway/provider-scaleway/internal/controller/domain/record"
+	zone "github.com/scaleway/provider-scaleway/internal/controller/domain/zone"
 	ip "github.com/scaleway/provider-scaleway/internal/controller/flexibleip/ip"
+	apikey "github.com/scaleway/provider-scaleway/internal/controller/iam/apikey"
+	application "github.com/scaleway/provider-scaleway/internal/controller/iam/application"
+	group "github.com/scaleway/provider-scaleway/internal/controller/iam/group"
+	policy "github.com/scaleway/provider-scaleway/internal/controller/iam/policy"
+	sshkeyiam "github.com/scaleway/provider-scaleway/internal/controller/iam/sshkey"
 	image "github.com/scaleway/provider-scaleway/internal/controller/instance/image"
 	ipinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/ip"
 	placementgroup "github.com/scaleway/provider-scaleway/internal/controller/instance/placementgroup"
@@ -61,7 +68,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sshkey.Setup,
 		server.Setup,
 		serverbaremetal.Setup,
+		record.Setup,
+		zone.Setup,
 		ip.Setup,
+		apikey.Setup,
+		application.Setup,
+		group.Setup,
+		policy.Setup,
+		sshkeyiam.Setup,
 		image.Setup,
 		ipinstance.Setup,
 		placementgroup.Setup,

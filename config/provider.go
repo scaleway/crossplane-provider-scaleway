@@ -13,6 +13,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/baremetal"
 	"github.com/scaleway/provider-scaleway/config/domain"
 	"github.com/scaleway/provider-scaleway/config/flexibleip"
+	"github.com/scaleway/provider-scaleway/config/iam"
 	"github.com/scaleway/provider-scaleway/config/instance"
 	"github.com/scaleway/provider-scaleway/config/iot"
 	"github.com/scaleway/provider-scaleway/config/k8s"
@@ -50,6 +51,7 @@ func GetProvider() *ujconfig.Provider {
 		baremetal.Configure,
 		domain.Configure,
 		flexibleip.Configure,
+		iam.Configure,
 		instance.Configure,
 		iot.Configure,
 		k8s.Configure,

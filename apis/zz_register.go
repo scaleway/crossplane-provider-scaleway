@@ -13,7 +13,9 @@ import (
 	v1alpha1 "github.com/scaleway/provider-scaleway/apis/account/v1alpha1"
 	v1alpha1applesilicon "github.com/scaleway/provider-scaleway/apis/applesilicon/v1alpha1"
 	v1alpha1baremetal "github.com/scaleway/provider-scaleway/apis/baremetal/v1alpha1"
+	v1alpha1domain "github.com/scaleway/provider-scaleway/apis/domain/v1alpha1"
 	v1alpha1flexibleip "github.com/scaleway/provider-scaleway/apis/flexibleip/v1alpha1"
+	v1alpha1iam "github.com/scaleway/provider-scaleway/apis/iam/v1alpha1"
 	v1alpha1instance "github.com/scaleway/provider-scaleway/apis/instance/v1alpha1"
 	v1alpha1iot "github.com/scaleway/provider-scaleway/apis/iot/v1alpha1"
 	v1alpha1k8s "github.com/scaleway/provider-scaleway/apis/k8s/v1alpha1"
@@ -32,7 +34,9 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1applesilicon.SchemeBuilder.AddToScheme,
 		v1alpha1baremetal.SchemeBuilder.AddToScheme,
+		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1flexibleip.SchemeBuilder.AddToScheme,
+		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1instance.SchemeBuilder.AddToScheme,
 		v1alpha1iot.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,

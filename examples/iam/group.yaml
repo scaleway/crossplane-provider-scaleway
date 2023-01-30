@@ -1,0 +1,10 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: Group
+metadata:
+  name: iam-group
+spec:
+  forProvider:
+    name: crossplane-iam-group
+    description: an iam group
+  providerConfigRef:
+    name: default

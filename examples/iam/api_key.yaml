@@ -1,0 +1,22 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: ApiKey
+metadata:
+  name: iam-api-key
+spec:
+  forProvider:
+    name: crossplane-iam-api-key
+    applicationIdRef:
+      name: iam-application
+  providerConfigRef:
+    name: default
+---
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: Application
+metadata:
+  name: iam-application
+spec:
+  forProvider:
+    name: crossplane-iam-application
+    description: an iam application
+  providerConfigRef:
+    name: default
