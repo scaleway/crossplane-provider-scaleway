@@ -51,7 +51,7 @@ import (
 	readreplica "github.com/scaleway/provider-scaleway/internal/controller/rdb/readreplica"
 	user "github.com/scaleway/provider-scaleway/internal/controller/rdb/user"
 	clusterredis "github.com/scaleway/provider-scaleway/internal/controller/redis/cluster"
-	namespace "github.com/scaleway/provider-scaleway/internal/controller/registry/namespace"
+	registrynamespace "github.com/scaleway/provider-scaleway/internal/controller/registry/registrynamespace"
 	gatewaynetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/gatewaynetwork"
 	privatenetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/privatenetwork"
 	publicgateway "github.com/scaleway/provider-scaleway/internal/controller/vpc/publicgateway"
@@ -106,7 +106,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		readreplica.Setup,
 		user.Setup,
 		clusterredis.Setup,
-		namespace.Setup,
+		registrynamespace.Setup,
 		gatewaynetwork.Setup,
 		privatenetwork.Setup,
 		publicgateway.Setup,

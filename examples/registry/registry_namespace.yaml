@@ -1,0 +1,10 @@
+apiVersion: registry.scaleway.upbound.io/v1alpha1
+kind: RegistryNamespace
+metadata:
+  name: registry-namespace
+spec:
+  forProvider:
+    name: crossplane-registry-namespace
+    region: pl-waw
+  providerConfigRef:
+    name: default
