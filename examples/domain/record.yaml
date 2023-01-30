@@ -1,0 +1,15 @@
+apiVersion: domain.scaleway.upbound.io/v1alpha1
+kind: Record
+metadata:
+  name: domain-record
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    dnsZone: example.com
+    type: A
+    data: 127.0.0.1
+    ttl: 3600
+    priority: 0
+  providerConfigRef:
+    name: default
