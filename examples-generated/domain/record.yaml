@@ -1,0 +1,20 @@
+apiVersion: domain.scaleway.upbound.io/v1alpha1
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: domain/v1alpha1/record
+  labels:
+    testing.upbound.io/example-name: www
+  name: www
+spec:
+  forProvider:
+    data: 1.2.3.4
+    dnsZoneSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: www
+    ttl: 3600
+    type: A
+
+---
+

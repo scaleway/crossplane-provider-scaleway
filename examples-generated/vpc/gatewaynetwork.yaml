@@ -1,0 +1,84 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: GatewayNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cleanupDhcp: true
+    dhcpIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dhcp01
+    enableMasquerade: true
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg01
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+spec:
+  forProvider:
+    name: pn_test_network
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: pg01
+  name: pg01
+spec:
+  forProvider:
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gw01
+    name: foobar
+    type: VPC-GW-S
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGatewayDHCP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: dhcp01
+  name: dhcp01
+spec:
+  forProvider:
+    pushDefaultRoute: true
+    subnet: 192.168.1.0/24
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGatewayIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: gw01
+  name: gw01
+spec:
+  forProvider: {}
+
+---
+

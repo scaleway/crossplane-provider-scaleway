@@ -1,0 +1,47 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Token
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: namespace
+  name: namespace
+spec:
+  forProvider:
+    expiresAt: "2022-10-18T11:35:15+02:00"
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: ContainerNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: test-container-token-ns
+
+---
+

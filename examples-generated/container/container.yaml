@@ -1,0 +1,50 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/container
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cpuLimit: 140
+    deploy: true
+    description: environment variables test
+    environmentVariables:
+      foo: var
+    maxConcurrency: 80
+    maxScale: 5
+    memoryLimit: 256
+    minScale: 3
+    name: my-container-02
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    port: 9997
+    privacy: private
+    protocol: h2c
+    registryImage: ${scaleway_container_namespace.main.registry_endpoint}/alpine:test
+    secretEnvironmentVariablesSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    timeout: 600
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: ContainerNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/container
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: test container
+    name: my-ns-test
+
+---
+

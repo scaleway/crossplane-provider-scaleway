@@ -1,0 +1,14 @@
+apiVersion: flexibleip.scaleway.upbound.io/v1alpha1
+kind: Ip
+metadata:
+  annotations:
+    meta.upbound.io/example-id: flexibleip/v1alpha1/ip
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    reverse: my-reverse.com
+
+---
+

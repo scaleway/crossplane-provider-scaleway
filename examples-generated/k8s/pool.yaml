@@ -1,0 +1,41 @@
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Pool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/pool
+  labels:
+    testing.upbound.io/example-name: bill
+  name: bill
+spec:
+  forProvider:
+    autohealing: true
+    autoscaling: true
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: jack
+    containerRuntime: containerd
+    maxSize: 10
+    minSize: 0
+    name: bill
+    nodeType: DEV1-M
+    placementGroupId: 1267e3fd-a51c-49ed-ad12-857092ee3a3d
+    size: 3
+
+---
+
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/pool
+  labels:
+    testing.upbound.io/example-name: jack
+  name: jack
+spec:
+  forProvider:
+    cni: cilium
+    name: jack
+    version: 1.24.3
+
+---
+

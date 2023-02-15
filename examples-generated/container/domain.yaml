@@ -1,0 +1,30 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: app
+  name: app
+spec:
+  forProvider:
+    containerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: app
+    hostname: container.domain.tld
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: app
+  name: app
+spec:
+  forProvider: {}
+
+---
+

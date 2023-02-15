@@ -1,0 +1,35 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGatewayIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewayip
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    reverse: tf.example.com
+
+---
+
+apiVersion: domain.scaleway.upbound.io/v1alpha1
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewayip
+  labels:
+    testing.upbound.io/example-name: tf_A
+  name: tf-a
+spec:
+  forProvider:
+    data: ${scaleway_vpc_public_gateway_ip.main.address}
+    dnsZoneSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: tf
+    priority: 1
+    ttl: 3600
+    type: A
+
+---
+

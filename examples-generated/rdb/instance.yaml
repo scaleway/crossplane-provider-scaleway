@@ -1,0 +1,23 @@
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/instance
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    disableBackup: true
+    engine: PostgreSQL-11
+    isHaCluster: true
+    name: test-rdb
+    nodeType: DB-DEV-S
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    userName: my_initial_user
+
+---
+

@@ -1,0 +1,16 @@
+apiVersion: registry.scaleway.upbound.io/v1alpha1
+kind: RegistryNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: registry/v1alpha1/registrynamespace
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: Main container registry
+    isPublic: false
+    name: main-cr
+
+---
+

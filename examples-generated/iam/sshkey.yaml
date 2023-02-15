@@ -1,0 +1,15 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: SSHKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/sshkey
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: main
+    publicKey: <YOUR-PUBLIC-SSH-KEY>
+
+---
+

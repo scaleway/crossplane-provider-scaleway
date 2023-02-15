@@ -1,0 +1,16 @@
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/volume
+  labels:
+    testing.upbound.io/example-name: server_volume
+  name: server-volume
+spec:
+  forProvider:
+    name: some-volume-name
+    sizeInGb: 20
+    type: l_ssd
+
+---
+

@@ -1,0 +1,32 @@
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/lb
+  labels:
+    testing.upbound.io/example-name: base
+  name: base
+spec:
+  forProvider:
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    type: LB-S
+    zone: ${scaleway_lb_ip.main.zone}
+
+---
+
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/lb
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    zone: fr-par-1
+
+---
+

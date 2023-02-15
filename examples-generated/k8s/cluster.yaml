@@ -1,0 +1,35 @@
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: jack
+  name: jack
+spec:
+  forProvider:
+    cni: cilium
+    name: jack
+    version: 1.24.3
+
+---
+
+apiVersion: k8s.scaleway.upbound.io/v1alpha1
+kind: Pool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: john
+  name: john
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: jack
+    name: john
+    nodeType: DEV1-M
+    size: 1
+
+---
+

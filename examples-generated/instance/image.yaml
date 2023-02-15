@@ -1,0 +1,48 @@
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Image
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/image
+  labels:
+    testing.upbound.io/example-name: volume_image
+  name: volume-image
+spec:
+  forProvider:
+    name: image_from_volume
+    rootVolumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: volume_snapshot
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/image
+  labels:
+    testing.upbound.io/example-name: volume_snapshot
+  name: volume-snapshot
+spec:
+  forProvider:
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: volume
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/image
+  labels:
+    testing.upbound.io/example-name: volume
+  name: volume
+spec:
+  forProvider:
+    sizeInGb: 20
+    type: b_ssd
+
+---
+

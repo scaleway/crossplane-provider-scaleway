@@ -1,0 +1,65 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Cron
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    args: |-
+      ${jsonencode(
+          {
+              address   = {
+                  city    = "Paris"
+                  country = "FR"
+              }
+              age       = 23
+              firstName = "John"
+              isAlive   = true
+              lastName  = "Smith"
+              # minScale: 1
+              # memoryLimit: 256
+              # maxScale: 2
+              # timeout: 20000
+              # Local environment variables - used only in given function
+          }
+          )}
+    containerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    schedule: 5 4 1 * *
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-container-with-cron-tf
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: ContainerNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider: {}
+
+---
+

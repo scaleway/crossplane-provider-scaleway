@@ -1,0 +1,31 @@
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: ApiKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/apikey
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    applicationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    description: a description
+
+---
+
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/apikey
+  labels:
+    testing.upbound.io/example-name: ci_cd
+  name: ci-cd
+spec:
+  forProvider:
+    name: My application
+
+---
+

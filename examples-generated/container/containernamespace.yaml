@@ -1,0 +1,15 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: ContainerNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/containernamespace
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: Main container namespace
+    name: main-container-namespace
+
+---
+

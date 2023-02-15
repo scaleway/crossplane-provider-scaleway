@@ -1,0 +1,45 @@
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: ReadReplica
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/readreplica
+  labels:
+    testing.upbound.io/example-name: replica
+  name: replica
+spec:
+  forProvider:
+    directAccess:
+    - {}
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance
+
+---
+
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/readreplica
+  labels:
+    testing.upbound.io/example-name: instance
+  name: instance
+spec:
+  forProvider:
+    disableBackup: true
+    engine: PostgreSQL-14
+    isHaCluster: false
+    name: test-rdb-rr-update
+    nodeType: db-dev-s
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    tags:
+    - terraform-test
+    - scaleway_rdb_read_replica
+    - minimal
+    userName: my_initial_user
+
+---
+

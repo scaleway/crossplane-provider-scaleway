@@ -1,0 +1,13 @@
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/ip
+  labels:
+    testing.upbound.io/example-name: server_ip
+  name: server-ip
+spec:
+  forProvider: {}
+
+---
+

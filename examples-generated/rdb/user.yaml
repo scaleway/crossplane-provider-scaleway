@@ -1,0 +1,22 @@
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: db_admin
+  name: db-admin
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    isAdmin: true
+    name: titi
+    passwordSecretRef:
+      key: attribute.result
+      name: example-password
+      namespace: upbound-system
+
+---
+
