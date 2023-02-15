@@ -8,7 +8,7 @@ spec:
     visibility: public
     name: crossplane-container
     namespaceIdRef:
-      container-namespace
+      name: container-namespace
   providerConfigRef:
     name: default
 ---

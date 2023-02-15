@@ -8,7 +8,7 @@ spec:
     visibility: public
     name: crossplane-container-cron
     containerIdRef:
-      crossplane-container
+      name: crossplane-container
     schedule: "5 4 * * *" #cron at 04:05
     args: jsonencode({test = "scw"})
   providerConfigRef:
