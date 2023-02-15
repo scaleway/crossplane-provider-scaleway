@@ -11,6 +11,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/account"
 	"github.com/scaleway/provider-scaleway/config/applesilicon"
 	"github.com/scaleway/provider-scaleway/config/baremetal"
+	"github.com/scaleway/provider-scaleway/config/container"
 	"github.com/scaleway/provider-scaleway/config/domain"
 	"github.com/scaleway/provider-scaleway/config/flexibleip"
 	"github.com/scaleway/provider-scaleway/config/iam"
@@ -49,6 +50,7 @@ func GetProvider() *ujconfig.Provider {
 		account.Configure,
 		applesilicon.Configure,
 		baremetal.Configure,
+		container.Configure,
 		domain.Configure,
 		flexibleip.Configure,
 		iam.Configure,

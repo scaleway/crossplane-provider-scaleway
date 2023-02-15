@@ -1,0 +1,41 @@
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Cron
+metadata:
+  name: container-cron
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-container-cron
+    containerIdRef:
+      crossplane-container
+    schedule: "5 4 * * *" #cron at 04:05
+    args: jsonencode({test = "scw"})
+  providerConfigRef:
+    name: default
+---
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: Container
+metadata:
+  name: container
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-container
+    namespaceIdRef:
+      container-namespace
+  providerConfigRef:
+    name: default
+---
+apiVersion: container.scaleway.upbound.io/v1alpha1
+kind: ContainerNamespace
+metadata:
+  name: container-namespace
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-container-namespace
+  providerConfigRef:
+    name: default
