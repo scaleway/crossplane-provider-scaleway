@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RegistryNamespace is the Schema for the RegistryNamespaces API.
-          <no value>
+          Manages Scaleway Container Registries.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,19 +65,27 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the container registry namespace
+                    description: The description of the namespace. The description
+                      of the container registry namespace
                     type: string
                   isPublic:
-                    description: Define the default visibity policy
+                    description: (Defaults to false) Whether the images stored in
+                      the namespace should be downloadable publicly (docker pull).
+                      Define the default visibity policy
                     type: boolean
                   name:
-                    description: The name of the container registry namespace
+                    description: The unique name of the namespace. The name of the
+                      container registry namespace
                     type: string
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: (Defaults to provider project_id) The ID of the project
+                      the namespace is associated with. The project_id you want to
+                      attach the resource to
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region). The region in which
+                      the namespace should be created. The region you want to attach
+                      the resource to
                     type: string
                 required:
                 - name
@@ -259,13 +267,15 @@ spec:
               atProvider:
                 properties:
                   endpoint:
-                    description: The endpoint reachable by docker
+                    description: Endpoint reachable by Docker. The endpoint reachable
+                      by docker
                     type: string
                   id:
+                    description: The ID of the namespace
                     type: string
                   organizationId:
-                    description: The organization_id you want to attach the resource
-                      to
+                    description: The organization ID the namespace is associated with.
+                      The organization_id you want to attach the resource to
                     type: string
                 type: object
               conditions:

@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: GatewayNetwork is the Schema for the GatewayNetworks API. <no
-          value>
+        description: GatewayNetwork is the Schema for the GatewayNetworks API. Manages
+          Scaleway VPC Gateway Networks.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   cleanupDhcp:
-                    description: Remove DHCP config on this network on destroy
+                    description: (Defaults to false) Remove DHCP config on this network
+                      on destroy. It requires DHCP id. Remove DHCP config on this
+                      network on destroy
                     type: boolean
                   dhcpId:
-                    description: The ID of the public gateway DHCP config
+                    description: The ID of the public gateway DHCP config. The ID
+                      of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
                     description: Reference to a PublicGatewayDHCP to populate dhcpId.
@@ -144,13 +147,16 @@ spec:
                         type: object
                     type: object
                   enableDhcp:
-                    description: Enable DHCP config on this network
+                    description: (Defaults to true) Enable DHCP config on this network.
+                      It requires DHCP id. Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
-                    description: Enable masquerade on this network
+                    description: (Defaults to true) Enable masquerade on this network
+                      Enable masquerade on this network
                     type: boolean
                   gatewayId:
-                    description: The ID of the public gateway where connect to
+                    description: The ID of the public gateway. The ID of the public
+                      gateway where connect to
                     type: string
                   gatewayIdRef:
                     description: Reference to a PublicGateway to populate gatewayId.
@@ -226,7 +232,8 @@ spec:
                         type: object
                     type: object
                   privateNetworkId:
-                    description: The ID of the private network where connect to
+                    description: The ID of the private network. The ID of the private
+                      network where connect to
                     type: string
                   privateNetworkIdRef:
                     description: Reference to a PrivateNetwork to populate privateNetworkId.
@@ -302,10 +309,13 @@ spec:
                         type: object
                     type: object
                   staticAddress:
-                    description: The static IP address in CIDR on this network
+                    description: Enable DHCP config on this network The static IP
+                      address in CIDR on this network
                     type: string
                   zone:
-                    description: The zone you want to attach the resource to
+                    description: (Defaults to provider zone) The zone in which the
+                      gateway network should be created. The zone you want to attach
+                      the resource to
                     type: string
                 type: object
               providerConfigRef:
@@ -486,15 +496,18 @@ spec:
                 properties:
                   createdAt:
                     description: The date and time of the creation of the gateway
-                      network
+                      network. The date and time of the creation of the gateway network
                     type: string
                   id:
+                    description: The ID of the gateway network.
                     type: string
                   macAddress:
-                    description: The mac address on this network
+                    description: The mac address of the creation of the gateway network.
+                      The mac address on this network
                     type: string
                   updatedAt:
                     description: The date and time of the last update of the gateway
+                      network. The date and time of the last update of the gateway
                       network
                     type: string
                 type: object

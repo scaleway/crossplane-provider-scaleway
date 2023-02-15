@@ -17,20 +17,26 @@ type ZoneObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Message
+	// Message
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// NameServer list for zone.
 	// NameServer list for zone.
 	Ns []*string `json:"ns,omitempty" tf:"ns,omitempty"`
 
 	// NameServer default list for zone.
+	// NameServer default list for zone.
 	NsDefault []*string `json:"nsDefault,omitempty" tf:"ns_default,omitempty"`
 
+	// NameServer master list for zone.
 	// NameServer master list for zone.
 	NsMaster []*string `json:"nsMaster,omitempty" tf:"ns_master,omitempty"`
 
 	// The domain zone status.
+	// The domain zone status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The date and time of the last update of the DNS zone.
 	// The date and time of the last update of the DNS zone.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -38,13 +44,16 @@ type ZoneObservation struct {
 type ZoneParameters struct {
 
 	// The domain where the DNS zone will be created.
+	// The domain where the DNS zone will be created.
 	// +kubebuilder:validation:Required
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the domain is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The subdomain(zone name) to create in the domain.
 	// The subdomain of the DNS zone to create.
 	// +kubebuilder:validation:Required
 	Subdomain *string `json:"subdomain" tf:"subdomain,omitempty"`
@@ -64,7 +73,7 @@ type ZoneStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Zone is the Schema for the Zones API. <no value>
+// Zone is the Schema for the Zones API. Manages Scaleway Domain zones.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

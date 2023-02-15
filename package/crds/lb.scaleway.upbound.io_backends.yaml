@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Backend is the Schema for the Backends API. <no value>
+        description: Backend is the Schema for the Backends API. Manages Scaleway
+          Load-Balancer Backends.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,76 +66,106 @@ spec:
                 properties:
                   failoverHost:
                     description: "Scaleway S3 bucket website to be served in case
-                      all backend servers are down \n **NOTE** : Only the host part
-                      of the Scaleway S3 bucket website is expected. E.g. 'failover-website.s3-website.fr-par.scw.cloud'
+                      all backend servers are down. ~> Note: Only the host part of
+                      the Scaleway S3 bucket website is expected: e.g. 'failover-website.s3-website.fr-par.scw.cloud'
+                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+                      Scaleway S3 bucket website to be served in case all backend
+                      servers are down \n **NOTE** : Only the host part of the Scaleway
+                      S3 bucket website is expected. E.g. 'failover-website.s3-website.fr-par.scw.cloud'
                       if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'."
                     type: string
                   forwardPort:
                     description: User sessions will be forwarded to this port of backend
+                      servers. User sessions will be forwarded to this port of backend
                       servers
                     type: number
                   forwardPortAlgorithm:
-                    description: Load balancing algorithm
+                    description: '(Default: roundrobin) Load balancing algorithm.
+                      Possible values are: roundrobin, leastconn and first. Load balancing
+                      algorithm'
                     type: string
                   forwardProtocol:
-                    description: Backend protocol
+                    description: 'Backend protocol. Possible values are: tcp or http.
+                      Backend protocol'
                     type: string
                   healthCheckDelay:
-                    description: Interval between two HC requests
+                    description: '(Default: 60s) Interval between two HC requests.
+                      Interval between two HC requests'
                     type: string
                   healthCheckHttp:
+                    description: This block enable HTTP health check. Only one of
+                      health_check_tcp, health_check_http and health_check_https should
+                      be specified.
                     items:
                       properties:
                         code:
-                          description: The expected HTTP status code
+                          description: '(Default: 200) The expected HTTP status code.
+                            The expected HTTP status code'
                           type: number
                         method:
-                          description: The HTTP method to use for HC requests
+                          description: '(Default: GET) The HTTP method to use for
+                            HC requests. The HTTP method to use for HC requests'
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests
+                          description: The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for HC requests
                           type: string
                       required:
                       - uri
                       type: object
                     type: array
                   healthCheckHttps:
+                    description: This block enable HTTPS health check. Only one of
+                      health_check_tcp, health_check_http and health_check_https should
+                      be specified.
                     items:
                       properties:
                         code:
-                          description: The expected HTTP status code
+                          description: '(Default: 200) The expected HTTP status code.
+                            The expected HTTP status code'
                           type: number
                         method:
-                          description: The HTTP method to use for HC requests
+                          description: '(Default: GET) The HTTP method to use for
+                            HC requests. The HTTP method to use for HC requests'
                           type: string
                         uri:
-                          description: The HTTPS endpoint URL to call for HC requests
+                          description: The HTTP endpoint URL to call for HC requests.
+                            The HTTPS endpoint URL to call for HC requests
                           type: string
                       required:
                       - uri
                       type: object
                     type: array
                   healthCheckMaxRetries:
-                    description: Number of allowed failed HC requests before the backend
-                      server is marked down
+                    description: '(Default: 2) Number of allowed failed HC requests
+                      before the backend server is marked down. Number of allowed
+                      failed HC requests before the backend server is marked down'
                     type: number
                   healthCheckPort:
-                    description: Port the HC requests will be send to. Default to
-                      `forward_port`
+                    description: '(Default: forward_port) Port the HC requests will
+                      be send to. Port the HC requests will be send to. Default to
+                      `forward_port`'
                     type: number
                   healthCheckTcp:
+                    description: This block enable TCP health check. Only one of health_check_tcp,
+                      health_check_http and health_check_https should be specified.
                     items:
                       type: object
                     type: array
                   healthCheckTimeout:
-                    description: Timeout before we consider a HC request failed
+                    description: '(Default: 30s) Timeout before we consider a HC request
+                      failed. Timeout before we consider a HC request failed'
                     type: string
                   ignoreSslServerVerify:
-                    description: Specifies whether the Load Balancer should check
-                      the backend server’s certificate before initiating a connection
+                    description: '(Default: false) Specifies whether the Load Balancer
+                      should check the backend server’s certificate before initiating
+                      a connection. Specifies whether the Load Balancer should check
+                      the backend server’s certificate before initiating a connection'
                     type: boolean
                   lbId:
-                    description: The load-balancer ID
+                    description: 'The load-balancer ID this backend is attached to.
+                      ~> Important: Updates to lb_id will recreate the backend. The
+                      load-balancer ID'
                     type: string
                   lbIdRef:
                     description: Reference to a LB to populate lbId.
@@ -210,40 +241,57 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the backend
+                    description: The name of the load-balancer backend. The name of
+                      the backend
                     type: string
                   onMarkedDownAction:
-                    description: Modify what occurs when a backend server is marked
-                      down
+                    description: '(Default: none) Modify what occurs when a backend
+                      server is marked down. Possible values are: none and shutdown_sessions.
+                      Modify what occurs when a backend server is marked down'
                     type: string
                   proxyProtocol:
-                    description: Type of PROXY protocol to enable
+                    description: '(Default: none) Choose the type of PROXY protocol
+                      to enable (none, v1, v2, v2_ssl, v2_ssl_cn) Type of PROXY protocol
+                      to enable'
                     type: string
                   sendProxyV2:
-                    description: Enables PROXY protocol version 2
+                    description: 'DEPRECATED please use proxy_protocol instead - (Default:
+                      false) Enables PROXY protocol version 2. Enables PROXY protocol
+                      version 2'
                     type: boolean
                   serverIps:
-                    description: Backend server IP addresses list (IPv4 or IPv6)
+                    description: List of backend server IP addresses. Addresses can
+                      be either IPv4 or IPv6. Backend server IP addresses list (IPv4
+                      or IPv6)
                     items:
                       type: string
                     type: array
                   sslBridging:
-                    description: Enables SSL between load balancer and backend servers
+                    description: '(Default: false) Enables SSL between load balancer
+                      and backend servers. Enables SSL between load balancer and backend
+                      servers'
                     type: boolean
                   stickySessions:
-                    description: Load balancing algorithm
+                    description: '(Default: none) Load balancing algorithm. Possible
+                      values are: none, cookie and table. Load balancing algorithm'
                     type: string
                   stickySessionsCookieName:
-                    description: Cookie name for for sticky sessions
+                    description: Cookie name for for sticky sessions. Only applicable
+                      when sticky_sessions is set to cookie. Cookie name for for sticky
+                      sessions
                     type: string
                   timeoutConnect:
-                    description: Maximum initial server connection establishment time
+                    description: 'Maximum initial server connection establishment
+                      time. (e.g.: 1s) Maximum initial server connection establishment
+                      time'
                     type: string
                   timeoutServer:
-                    description: Maximum server connection inactivity time
+                    description: 'Maximum server connection inactivity time. (e.g.:
+                      1s) Maximum server connection inactivity time'
                     type: string
                   timeoutTunnel:
-                    description: Maximum tunnel inactivity time
+                    description: 'Maximum tunnel inactivity time. (e.g.: 1s) Maximum
+                      tunnel inactivity time'
                     type: string
                 required:
                 - forwardPort
@@ -426,6 +474,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the loadbalancer backend.
                     type: string
                 type: object
               conditions:

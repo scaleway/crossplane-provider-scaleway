@@ -18,14 +18,17 @@ type ACLObservation struct {
 
 type ACLParameters struct {
 
+	// Action to undertake when an ACL filter matches.
 	// Action to undertake when an ACL filter matches
 	// +kubebuilder:validation:Required
 	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
+	// The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
 	// The ACL match rule
 	// +kubebuilder:validation:Required
 	Match []MatchParameters `json:"match" tf:"match,omitempty"`
 
+	// The ACL name. If not provided it will be randomly generated.
 	// The ACL name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -36,6 +39,7 @@ type ActionObservation struct {
 
 type ActionParameters struct {
 
+	// The action type. Possible values are: allow or deny.
 	// The action type
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -43,18 +47,22 @@ type ActionParameters struct {
 
 type FrontendObservation struct {
 
+	// (Deprecated) first certificate ID used by the frontend.
 	// Certificate ID
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
+	// The ID of the load-balancer frontend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FrontendParameters struct {
 
+	// A list of ACL rules to apply to the load-balancer frontend.  Defined below.
 	// ACL rules
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The load-balancer backend ID this frontend is attached to.
 	// The load-balancer backend ID
 	// +crossplane:generate:reference:type=Backend
 	// +kubebuilder:validation:Optional
@@ -68,18 +76,22 @@ type FrontendParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
+	// List of Certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	// +kubebuilder:validation:Optional
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
+	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
 	// +kubebuilder:validation:Optional
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
 
+	// TCP port to listen on the front side.
 	// TCP port to listen on the front side
 	// +kubebuilder:validation:Required
 	InboundPort *float64 `json:"inboundPort" tf:"inbound_port,omitempty"`
 
+	// The load-balancer ID this frontend is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	// +kubebuilder:validation:Optional
@@ -93,10 +105,12 @@ type FrontendParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
+	// The name of the load-balancer frontend.
 	// The name of the frontend
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Maximum inactivity time on the client side. (e.g.: 1s)
 	// Set the maximum inactivity time on the client side
 	// +kubebuilder:validation:Optional
 	TimeoutClient *string `json:"timeoutClient,omitempty" tf:"timeout_client,omitempty"`
@@ -107,6 +121,9 @@ type MatchObservation struct {
 
 type MatchParameters struct {
 
+	// The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+	// It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+	// Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
 	// The HTTP filter to match
 	// +kubebuilder:validation:Optional
 	HTTPFilter *string `json:"httpFilter,omitempty" tf:"http_filter,omitempty"`
@@ -115,14 +132,18 @@ type MatchParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
+	// A list of possible values to match for the given HTTP filter.
+	// Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
 	// A list of possible values to match for the given HTTP filter
 	// +kubebuilder:validation:Optional
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
+	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	// +kubebuilder:validation:Optional
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
 
+	// If set to true, the condition will be of type "unless".
 	// If set to true, the condition will be of type "unless"
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
@@ -142,7 +163,7 @@ type FrontendStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Frontend is the Schema for the Frontends API. <no value>
+// Frontend is the Schema for the Frontends API. Manages Scaleway Load-Balancer Frontends.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

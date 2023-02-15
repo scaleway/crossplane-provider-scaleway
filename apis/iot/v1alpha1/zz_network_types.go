@@ -15,17 +15,21 @@ import (
 
 type NetworkObservation struct {
 
+	// The date and time the Network was created.
 	// The date and time of the creation of the network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The endpoint to use when interacting with the network.
 	// The endpoint to use when interacting with the network
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The ID of the Network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkParameters struct {
 
+	// The hub ID to which the Network will be attached to.
 	// The ID of the hub on which this network will be created
 	// +crossplane:generate:reference:type=Hub
 	// +kubebuilder:validation:Optional
@@ -39,14 +43,17 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	HubIDSelector *v1.Selector `json:"hubIdSelector,omitempty" tf:"-"`
 
+	// The name of the IoT Network you want to create (e.g. my-net).
 	// The name of the network
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The prefix that will be prepended to all topics for this Network.
 	// The prefix that will be prepended to all topics for this Network
 	// +kubebuilder:validation:Optional
 	TopicPrefix *string `json:"topicPrefix,omitempty" tf:"topic_prefix,omitempty"`
 
+	// The network type to create (e.g. sigfox).
 	// The type of the network
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -66,7 +73,7 @@ type NetworkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Network is the Schema for the Networks API. <no value>
+// Network is the Schema for the Networks API. Manages Scaleway IoT Networks.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

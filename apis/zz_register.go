@@ -13,6 +13,7 @@ import (
 	v1alpha1 "github.com/scaleway/provider-scaleway/apis/account/v1alpha1"
 	v1alpha1applesilicon "github.com/scaleway/provider-scaleway/apis/applesilicon/v1alpha1"
 	v1alpha1baremetal "github.com/scaleway/provider-scaleway/apis/baremetal/v1alpha1"
+	v1alpha1container "github.com/scaleway/provider-scaleway/apis/container/v1alpha1"
 	v1alpha1domain "github.com/scaleway/provider-scaleway/apis/domain/v1alpha1"
 	v1alpha1flexibleip "github.com/scaleway/provider-scaleway/apis/flexibleip/v1alpha1"
 	v1alpha1iam "github.com/scaleway/provider-scaleway/apis/iam/v1alpha1"
@@ -34,6 +35,7 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1applesilicon.SchemeBuilder.AddToScheme,
 		v1alpha1baremetal.SchemeBuilder.AddToScheme,
+		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1flexibleip.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,

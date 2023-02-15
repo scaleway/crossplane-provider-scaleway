@@ -14,45 +14,57 @@ import (
 )
 
 type VolumeObservation struct {
+
+	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the volume is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The id of the associated server.
 	// The server associated with this volume
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type VolumeParameters struct {
 
+	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
 	// Create a volume based on a image
 	// +kubebuilder:validation:Optional
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
 
+	// If set, the new volume will be copied from this volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
 	// Create a copy of an existing volume
 	// +kubebuilder:validation:Optional
 	FromVolumeID *string `json:"fromVolumeId,omitempty" tf:"from_volume_id,omitempty"`
 
+	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the volume is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The size of the volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
 	// The size of the volume in gigabyte
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
+	// A list of tags to apply to the volume.
 	// The tags associated with the volume
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The type of the volume. The possible values are: b_ssd (Block SSD), l_ssd (Local SSD).
 	// The volume type
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -72,7 +84,7 @@ type VolumeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Volume is the Schema for the Volumes API. <no value>
+// Volume is the Schema for the Volumes API. Manages Scaleway Compute Instance Volumes.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

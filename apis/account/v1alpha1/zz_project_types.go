@@ -15,25 +15,30 @@ import (
 
 type ProjectObservation struct {
 
+	// The Project creation time.
 	// The date and time of the creation of the Project (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Project last update time.
 	// The date and time of the last update of the Project (Format ISO 8601)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ProjectParameters struct {
 
+	// The description of the Project.
 	// Description of the project
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the Project.
 	// The name of the project
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
 	// The organization_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -53,7 +58,7 @@ type ProjectStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Project is the Schema for the Projects API. <no value>
+// Project is the Schema for the Projects API. Manages Scaleway Account project.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

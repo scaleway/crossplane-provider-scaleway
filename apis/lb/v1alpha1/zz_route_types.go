@@ -19,6 +19,7 @@ type RouteObservation struct {
 
 type RouteParameters struct {
 
+	// The ID of the backend to which the route is associated.
 	// The backend ID destination of redirection
 	// +crossplane:generate:reference:type=Backend
 	// +kubebuilder:validation:Optional
@@ -32,6 +33,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
+	// :  The ID of the frontend to which the route is associated.
 	// The frontend ID origin of redirection
 	// +crossplane:generate:reference:type=Frontend
 	// +kubebuilder:validation:Optional
@@ -45,6 +47,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 
+	// The SNI to match.
 	// The domain to match against
 	// +kubebuilder:validation:Optional
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
@@ -64,7 +67,7 @@ type RouteStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Route is the Schema for the Routes API. <no value>
+// Route is the Schema for the Routes API. Manages Scaleway Load-Balancer Route.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

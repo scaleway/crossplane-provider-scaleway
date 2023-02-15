@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ApiKey is the Schema for the ApiKeys API. <no value>
+        description: ApiKey is the Schema for the ApiKeys API. Manages Scaleway IAM
+          API Keys.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,9 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: ID of the application attached to the api key
+                    description: ':  ID of the application attached to the api key.
+                      Only one of the application_id and user_id should be specified.
+                      ID of the application attached to the api key'
                     type: string
                   applicationIdRef:
                     description: Reference to a Application to populate applicationId.
@@ -140,17 +143,23 @@ spec:
                         type: object
                     type: object
                   defaultProjectId:
-                    description: The project_id you want to attach the resource to
+                    description: The default project ID to use with object storage.
+                      The project_id you want to attach the resource to
                     type: string
                   description:
-                    description: The description of the iam api key
+                    description: ':  The description of the iam api key. The description
+                      of the iam api key'
                     type: string
                   expiresAt:
                     description: The date and time of the expiration of the iam api
+                      key. Please note that in case of change, the resource will be
+                      recreated. The date and time of the expiration of the iam api
                       key. Cannot be changed afterwards
                     type: string
                   userId:
-                    description: ID of the user attached to the api key
+                    description: ID of the user attached to the api key. Only one
+                      of the application_id and user_id should be specified. ID of
+                      the user attached to the api key
                     type: string
                 type: object
               providerConfigRef:
@@ -330,24 +339,26 @@ spec:
               atProvider:
                 properties:
                   accessKey:
-                    description: The access key of the iam api key
+                    description: The access key of the iam api key. The access key
+                      of the iam api key
                     type: string
                   createdAt:
                     description: The date and time of the creation of the iam api
-                      key
+                      key. The date and time of the creation of the iam api key
                     type: string
                   creationIp:
-                    description: The IPv4 Address of the device which created the
-                      API key
+                    description: The IP Address of the device which created the API
+                      key. The IPv4 Address of the device which created the API key
                     type: string
                   editable:
-                    description: Whether or not the iam api key is editable
+                    description: Whether the iam api key is editable. Whether or not
+                      the iam api key is editable
                     type: boolean
                   id:
                     type: string
                   updatedAt:
                     description: The date and time of the last update of the iam api
-                      key
+                      key. The date and time of the last update of the iam api key
                     type: string
                 type: object
               conditions:

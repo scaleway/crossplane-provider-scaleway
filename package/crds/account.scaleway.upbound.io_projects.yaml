@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Project is the Schema for the Projects API. <no value>
+        description: Project is the Schema for the Projects API. Manages Scaleway
+          Account project.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,16 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the project
+                    description: The description of the Project. Description of the
+                      project
                     type: string
                   name:
-                    description: The name of the project
+                    description: The name of the Project. The name of the project
                     type: string
                   organizationId:
-                    description: The organization_id you want to attach the resource
+                    description: The organization ID the Project is associated with.
+                      Please note that any change in organization_id will recreate
+                      the resource. The organization_id you want to attach the resource
                       to
                     type: string
                 type: object
@@ -251,14 +255,14 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of the creation of the Project
-                      (Format ISO 8601)
+                    description: The Project creation time. The date and time of the
+                      creation of the Project (Format ISO 8601)
                     type: string
                   id:
                     type: string
                   updatedAt:
-                    description: The date and time of the last update of the Project
-                      (Format ISO 8601)
+                    description: The Project last update time. The date and time of
+                      the last update of the Project (Format ISO 8601)
                     type: string
                 type: object
               conditions:

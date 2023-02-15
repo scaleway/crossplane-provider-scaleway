@@ -14,22 +14,28 @@ import (
 )
 
 type SSHKeyObservation struct {
+
+	// The ID of the SSH key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the SSH key is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
 type SSHKeyParameters struct {
 
+	// The name of the SSH key.
 	// The name of the SSH key
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the SSH key is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The public SSH key to be added.
 	// The public SSH key
 	// +kubebuilder:validation:Required
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
@@ -49,7 +55,7 @@ type SSHKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SSHKey is the Schema for the SSHKeys API. <no value>
+// SSHKey is the Schema for the SSHKeys API. Manages Scaleway user SSH keys.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

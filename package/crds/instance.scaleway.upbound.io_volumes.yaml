@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Volume is the Schema for the Volumes API. <no value>
+        description: Volume is the Schema for the Volumes API. Manages Scaleway Compute
+          Instance Volumes.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,30 +65,43 @@ spec:
               forProvider:
                 properties:
                   fromSnapshotId:
-                    description: Create a volume based on a image
+                    description: If set, the new volume will be created from this
+                      snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id
+                      should be specified. Create a volume based on a image
                     type: string
                   fromVolumeId:
-                    description: Create a copy of an existing volume
+                    description: If set, the new volume will be copied from this volume.
+                      Only one of size_in_gb, from_volume_id and from_snapshot_id
+                      should be specified. Create a copy of an existing volume
                     type: string
                   name:
-                    description: The name of the volume
+                    description: The name of the volume. If not provided it will be
+                      randomly generated. The name of the volume
                     type: string
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: (Defaults to provider project_id) The ID of the project
+                      the volume is associated with. The project_id you want to attach
+                      the resource to
                     type: string
                   sizeInGb:
-                    description: The size of the volume in gigabyte
+                    description: The size of the volume. Only one of size_in_gb, from_volume_id
+                      and from_snapshot_id should be specified. The size of the volume
+                      in gigabyte
                     type: number
                   tags:
-                    description: The tags associated with the volume
+                    description: A list of tags to apply to the volume. The tags associated
+                      with the volume
                     items:
                       type: string
                     type: array
                   type:
-                    description: The volume type
+                    description: 'The type of the volume. The possible values are:
+                      b_ssd (Block SSD), l_ssd (Local SSD). The volume type'
                     type: string
                   zone:
-                    description: The zone you want to attach the resource to
+                    description: (Defaults to provider zone) The zone in which the
+                      volume should be created. The zone you want to attach the resource
+                      to
                     type: string
                 required:
                 - type
@@ -269,13 +283,15 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the volume.
                     type: string
                   organizationId:
-                    description: The organization_id you want to attach the resource
-                      to
+                    description: The organization ID the volume is associated with.
+                      The organization_id you want to attach the resource to
                     type: string
                   serverId:
-                    description: The server associated with this volume
+                    description: The id of the associated server. The server associated
+                      with this volume
                     type: string
                 type: object
               conditions:

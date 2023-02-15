@@ -15,24 +15,30 @@ import (
 
 type GatewayNetworkObservation struct {
 
+	// The date and time of the creation of the gateway network.
 	// The date and time of the creation of the gateway network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the gateway network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The mac address of the creation of the gateway network.
 	// The mac address on this network
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The date and time of the last update of the gateway network.
 	// The date and time of the last update of the gateway network
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type GatewayNetworkParameters struct {
 
+	// (Defaults to false) Remove DHCP config on this network on destroy. It requires DHCP id.
 	// Remove DHCP config on this network on destroy
 	// +kubebuilder:validation:Optional
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
+	// The ID of the public gateway DHCP config.
 	// The ID of the public gateway DHCP config
 	// +crossplane:generate:reference:type=PublicGatewayDHCP
 	// +kubebuilder:validation:Optional
@@ -46,14 +52,17 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to true) Enable DHCP config on this network. It requires DHCP id.
 	// Enable DHCP config on this network
 	// +kubebuilder:validation:Optional
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
+	// (Defaults to true) Enable masquerade on this network
 	// Enable masquerade on this network
 	// +kubebuilder:validation:Optional
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
 
+	// The ID of the public gateway.
 	// The ID of the public gateway where connect to
 	// +crossplane:generate:reference:type=PublicGateway
 	// +kubebuilder:validation:Optional
@@ -67,6 +76,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
+	// The ID of the private network.
 	// The ID of the private network where connect to
 	// +crossplane:generate:reference:type=PrivateNetwork
 	// +kubebuilder:validation:Optional
@@ -80,10 +90,12 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
+	// Enable DHCP config on this network
 	// The static IP address in CIDR on this network
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the gateway network should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -103,7 +115,7 @@ type GatewayNetworkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GatewayNetwork is the Schema for the GatewayNetworks API. <no value>
+// GatewayNetwork is the Schema for the GatewayNetworks API. Manages Scaleway VPC Gateway Networks.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

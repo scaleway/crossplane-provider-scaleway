@@ -14,14 +14,19 @@ import (
 )
 
 type LBObservation struct {
+
+	// The ID of the load-balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The load-balance public IP Address
 	// The load-balance public IP address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// The organization ID the load-balancer is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// will recreate the attachment.
 	// List of private network to connect with your load balancer
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -32,10 +37,12 @@ type LBObservation struct {
 
 type LBParameters struct {
 
+	// The description of the load-balancer.
 	// The description of the lb
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the associated LB IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=IP
 	// +kubebuilder:validation:Optional
@@ -49,34 +56,42 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
+	// The name of the load-balancer.
 	// Name of the lb
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// will recreate the attachment.
 	// List of private network to connect with your load balancer
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the load-balancer is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to false) The release_ip allow release the ip address associated with the load-balancers.
 	// Release the IPs related to this load-balancer
 	// +kubebuilder:validation:Optional
 	ReleaseIP *bool `json:"releaseIp,omitempty" tf:"release_ip,omitempty"`
 
+	// Enforces minimal SSL version (in SSL/TLS offloading context). Please check possible values.
 	// Enforces minimal SSL version (in SSL/TLS offloading context)
 	// +kubebuilder:validation:Optional
 	SSLCompatibilityLevel *string `json:"sslCompatibilityLevel,omitempty" tf:"ssl_compatibility_level,omitempty"`
 
+	// The tags associated with the load-balancers.
 	// Array of tags to associate with the load-balancer
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The type of the load-balancer. Please check the migration section to upgrade the type
 	// The type of load-balancer you want to create
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -90,18 +105,22 @@ type PrivateNetworkObservation struct {
 
 type PrivateNetworkParameters struct {
 
+	// Set to true if you want to let DHCP assign IP addresses. See below.
 	// Set to true if you want to let DHCP assign IP addresses
 	// +kubebuilder:validation:Optional
 	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
 
+	// The ID of the Private Network to associate.
 	// The Private Network ID
 	// +kubebuilder:validation:Required
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
 
+	// Define two local ip address of your choice for each load balancer instance. See below.
 	// Define two IP addresses in the subnet of your private network that will be assigned for the principal and standby node of your load balancer.
 	// +kubebuilder:validation:Optional
 	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -121,7 +140,7 @@ type LBStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LB is the Schema for the LBs API. <no value>
+// LB is the Schema for the LBs API. Manages Scaleway Load-Balancers.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

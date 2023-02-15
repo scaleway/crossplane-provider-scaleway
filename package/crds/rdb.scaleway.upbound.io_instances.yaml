@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Instance is the Schema for the Instances API. <no value>
+        description: Instance is the Schema for the Instances API. Manages Scaleway
+          Database Instances.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,37 +66,47 @@ spec:
                 properties:
                   backupSameRegion:
                     description: Boolean to store logical backups in the same region
-                      as the database instance
+                      as the database instance. Boolean to store logical backups in
+                      the same region as the database instance
                     type: boolean
                   backupScheduleFrequency:
-                    description: Backup schedule frequency in hours
+                    description: Backup schedule frequency in hours. Backup schedule
+                      frequency in hours
                     type: number
                   backupScheduleRetention:
-                    description: Backup schedule retention in days
+                    description: Backup schedule retention in days. Backup schedule
+                      retention in days
                     type: number
                   disableBackup:
-                    description: Disable automated backup for the database instance
+                    description: Disable automated backup for the database instance.
+                      Disable automated backup for the database instance
                     type: boolean
                   engine:
-                    description: Database's engine version id
+                    description: Database Instance's engine version (e.g. PostgreSQL-11).
+                      Database's engine version id
                     type: string
                   initSettings:
                     additionalProperties:
                       type: string
                     description: Map of engine settings to be set at database initialisation.
+                      Map of engine settings to be set at database initialisation.
                     type: object
                   isHaCluster:
                     description: Enable or disable high availability for the database
+                      instance. Enable or disable high availability for the database
                       instance
                     type: boolean
                   name:
-                    description: Name of the database instance
+                    description: The name of the Database Instance. Name of the database
+                      instance
                     type: string
                   nodeType:
                     description: The type of database instance you want to create
+                      (e.g. db-dev-s). The type of database instance you want to create
                     type: string
                   passwordSecretRef:
-                    description: Password for the first user of the database instance
+                    description: Password for the first user of the database instance.
+                      Password for the first user of the database instance
                     properties:
                       key:
                         description: The key to select.
@@ -112,29 +123,36 @@ spec:
                     - namespace
                     type: object
                   privateNetwork:
-                    description: List of private network to expose your database instance
+                    description: List of private networks endpoints of the database
+                      instance. List of private network to expose your database instance
                     items:
                       properties:
                         endpointId:
-                          description: The endpoint ID
+                          description: The ID of the endpoint of the load balancer.
+                            The endpoint ID
                           type: string
                         hostname:
-                          description: The hostname of your endpoint
+                          description: Name of the endpoint. The hostname of your
+                            endpoint
                           type: string
                         ip:
-                          description: The IP of your private service
+                          description: IP of the replica. The IP of your private service
                           type: string
                         ipNet:
-                          description: The ip net of your private network
+                          description: The IP network where to con. The ip net of
+                            your private network
                           type: string
                         name:
-                          description: The name of your private service
+                          description: The name of the Database Instance. The name
+                            of your private service
                           type: string
                         pnId:
-                          description: The private network ID
+                          description: The ID of the private network. If not provided
+                            it will be randomly generated. The private network ID
                           type: string
                         port:
-                          description: The port of your private service
+                          description: Port of the replica. The port of your private
+                            service
                           type: number
                         zone:
                           description: The zone you want to attach the resource to
@@ -145,30 +163,40 @@ spec:
                       type: object
                     type: array
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: (Defaults to provider project_id) The ID of the project
+                      the Database Instance is associated with. The project_id you
+                      want to attach the resource to
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region) The region in which
+                      the Database Instance should be created. The region you want
+                      to attach the resource to
                     type: string
                   settings:
                     additionalProperties:
                       type: string
-                    description: Map of engine settings to be set on a running instance.
+                    description: Map of engine settings to be set. Using this option
+                      will override default config. Map of engine settings to be set
+                      on a running instance.
                     type: object
                   tags:
-                    description: List of tags ["tag1", "tag2", ...] attached to a
-                      database instance
+                    description: The tags associated with the Database Instance. List
+                      of tags ["tag1", "tag2", ...] attached to a database instance
                     items:
                       type: string
                     type: array
                   userName:
-                    description: Identifier for the first user of the database instance
+                    description: Identifier for the first user of the database instance.
+                      Identifier for the first user of the database instance
                     type: string
                   volumeSizeInGb:
-                    description: Volume size (in GB) when volume_type is not lssd
+                    description: Volume size (in GB) when volume_type is set to bssd.
+                      Must be a multiple of 5000000000. Volume size (in GB) when volume_type
+                      is not lssd
                     type: number
                   volumeType:
-                    description: Type of volume where data are stored
+                    description: Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored
                     type: string
                 required:
                 - engine
@@ -351,45 +379,59 @@ spec:
               atProvider:
                 properties:
                   certificate:
-                    description: Certificate of the database instance
+                    description: Certificate of the database instance. Certificate
+                      of the database instance
                     type: string
                   endpointIp:
-                    description: Endpoint IP of the database instance
+                    description: (Deprecated) The IP of the Database Instance. Endpoint
+                      IP of the database instance
                     type: string
                   endpointPort:
-                    description: Endpoint port of the database instance
+                    description: (Deprecated) The port of the Database Instance. Endpoint
+                      port of the database instance
                     type: number
                   id:
+                    description: The ID of the Database Instance.
                     type: string
                   loadBalancer:
-                    description: Load balancer of the database instance
+                    description: List of load balancer endpoints of the database instance.
+                      Load balancer of the database instance
                     items:
                       properties:
                         endpointId:
+                          description: The ID of the endpoint of the load balancer.
                           type: string
                         hostname:
+                          description: Name of the endpoint.
                           type: string
                         ip:
+                          description: IP of the replica.
                           type: string
                         name:
+                          description: The name of the Database Instance.
                           type: string
                         port:
+                          description: Port of the replica.
                           type: number
                       type: object
                     type: array
                   organizationId:
-                    description: The organization_id you want to attach the resource
-                      to
+                    description: The organization ID the Database Instance is associated
+                      with. The organization_id you want to attach the resource to
                     type: string
                   readReplicas:
-                    description: Read replicas of the database instance
+                    description: List of read replicas of the database instance. Read
+                      replicas of the database instance
                     items:
                       properties:
                         ip:
+                          description: IP of the replica.
                           type: string
                         name:
+                          description: The name of the Database Instance.
                           type: string
                         port:
+                          description: Port of the replica.
                           type: number
                       type: object
                     type: array

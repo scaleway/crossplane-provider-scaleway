@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Network is the Schema for the Networks API. <no value>
+        description: Network is the Schema for the Networks API. Manages Scaleway
+          IoT Networks.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   hubId:
-                    description: The ID of the hub on which this network will be created
+                    description: The hub ID to which the Network will be attached
+                      to. The ID of the hub on which this network will be created
                     type: string
                   hubIdRef:
                     description: Reference to a Hub to populate hubId.
@@ -140,14 +142,17 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the network
+                    description: The name of the IoT Network you want to create (e.g.
+                      my-net). The name of the network
                     type: string
                   topicPrefix:
                     description: The prefix that will be prepended to all topics for
-                      this Network
+                      this Network. The prefix that will be prepended to all topics
+                      for this Network
                     type: string
                   type:
-                    description: The type of the network
+                    description: The network type to create (e.g. sigfox). The type
+                      of the network
                     type: string
                 required:
                 - name
@@ -330,12 +335,15 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of the creation of the network
+                    description: The date and time the Network was created. The date
+                      and time of the creation of the network
                     type: string
                   endpoint:
-                    description: The endpoint to use when interacting with the network
+                    description: The endpoint to use when interacting with the network.
+                      The endpoint to use when interacting with the network
                     type: string
                   id:
+                    description: The ID of the Network.
                     type: string
                 type: object
               conditions:

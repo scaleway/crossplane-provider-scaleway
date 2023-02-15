@@ -15,14 +15,18 @@ import (
 
 type PublicGatewayObservation struct {
 
+	// The date and time of the creation of the public gateway.
 	// The date and time of the creation of the public gateway
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the public gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the public gateway is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The date and time of the last update of the public gateway.
 	// The date and time of the last update of the public gateway
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -30,17 +34,21 @@ type PublicGatewayObservation struct {
 type PublicGatewayParameters struct {
 
 	// Enable SSH bastion on the gateway
+	// Enable SSH bastion on the gateway
 	// +kubebuilder:validation:Optional
 	BastionEnabled *bool `json:"bastionEnabled,omitempty" tf:"bastion_enabled,omitempty"`
 
+	// The port on which the SSH bastion will listen.
 	// Port of the SSH bastion
 	// +kubebuilder:validation:Optional
 	BastionPort *float64 `json:"bastionPort,omitempty" tf:"bastion_port,omitempty"`
 
 	// Enable SMTP on the gateway
+	// Enable SMTP on the gateway
 	// +kubebuilder:validation:Optional
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
+	// attach an existing flexible IP to the gateway
 	// attach an existing IP to the gateway
 	// +crossplane:generate:reference:type=PublicGatewayIP
 	// +kubebuilder:validation:Optional
@@ -54,26 +62,32 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
+	// The name of the public gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the public gateway is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The tags associated with the public gateway.
 	// The tags associated with public gateway
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The gateway type.
 	// gateway type
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// override the gateway's default recursive DNS servers, if DNS features are enabled.
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	// +kubebuilder:validation:Optional
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the public gateway should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -93,7 +107,7 @@ type PublicGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PublicGateway is the Schema for the PublicGateways API. <no value>
+// PublicGateway is the Schema for the PublicGateways API. Manages Scaleway VPC Public Gateways.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

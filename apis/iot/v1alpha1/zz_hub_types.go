@@ -15,26 +15,34 @@ import (
 
 type HubObservation struct {
 
+	// The current number of connected devices in the Hub.
 	// The current number of connected devices in the Hub
 	ConnectedDeviceCount *float64 `json:"connectedDeviceCount,omitempty" tf:"connected_device_count,omitempty"`
 
+	// The date and time the Hub was created.
 	// The date and time of the creation of the IoT Hub
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The number of registered devices in the Hub.
 	// The number of registered devices in the Hub
 	DeviceCount *float64 `json:"deviceCount,omitempty" tf:"device_count,omitempty"`
 
+	// The MQTT network endpoint to connect MQTT devices to.
 	// The endpoint to connect the devices to
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The ID of the Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the Hub.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The current status of the Hub.
 	// The status of the hub
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The date and time the Hub resource was updated.
 	// The date and time of the last update of the IoT Hub
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -49,6 +57,7 @@ type HubParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableEvents *bool `json:"disableEvents,omitempty" tf:"disable_events,omitempty"`
 
+	// Wether the IoT Hub instance should be enabled or not.
 	// Whether to enable the hub or not
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -65,18 +74,22 @@ type HubParameters struct {
 	// +kubebuilder:validation:Optional
 	HubCAChallenge *string `json:"hubCaChallenge,omitempty" tf:"hub_ca_challenge,omitempty"`
 
+	// The name of the IoT Hub instance you want to create (e.g. my-hub).
 	// The name of the hub
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Product plan to create the hub, see documentation for available product plans (e.g. plan_shared)
 	// The product plan of the hub
 	// +kubebuilder:validation:Required
 	ProductPlan *string `json:"productPlan" tf:"product_plan,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the IoT Hub Instance is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to provider region) The region in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -96,7 +109,7 @@ type HubStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Hub is the Schema for the Hubs API. <no value>
+// Hub is the Schema for the Hubs API. Manages Scaleway IoT Hub instances.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -15,20 +15,25 @@ import (
 
 type PublicGatewayPATRuleObservation struct {
 
+	// The date and time of the creation of the pat rule config.
 	// The date and time of the creation of the PAT rule
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the public gateway DHCP config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the pat rule config is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The date and time of the last update of the pat rule config.
 	// The date and time of the last update of the PAT rule
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type PublicGatewayPATRuleParameters struct {
 
+	// The ID of the public gateway.
 	// The ID of the gateway this PAT rule is applied to
 	// +crossplane:generate:reference:type=PublicGateway
 	// +kubebuilder:validation:Optional
@@ -42,22 +47,27 @@ type PublicGatewayPATRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
+	// The Private IP to forward data to (IP address).
 	// The private IP used in the PAT rule
 	// +kubebuilder:validation:Required
 	PrivateIP *string `json:"privateIp" tf:"private_ip,omitempty"`
 
+	// The Private port to translate to.
 	// The private port used in the PAT rule
 	// +kubebuilder:validation:Required
 	PrivatePort *float64 `json:"privatePort" tf:"private_port,omitempty"`
 
+	// (Defaults to both) The Protocol the rule should apply to. Possible values are both, tcp and udp.
 	// The protocol used in the PAT rule
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The Public port to listen on.
 	// The public port used in the PAT rule
 	// +kubebuilder:validation:Required
 	PublicPort *float64 `json:"publicPort" tf:"public_port,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the public gateway DHCP config should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -77,7 +87,7 @@ type PublicGatewayPATRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PublicGatewayPATRule is the Schema for the PublicGatewayPATRules API. <no value>
+// PublicGatewayPATRule is the Schema for the PublicGatewayPATRules API. Manages Scaleway VPC Public Gateways PAT rules.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

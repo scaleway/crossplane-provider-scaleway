@@ -16,18 +16,22 @@ import (
 type DatabaseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether or not the database is managed or not.
 	// Whether or not the database is managed
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 
+	// The name of the owner of the database.
 	// User that own the database
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Size of the database (in bytes).
 	// Size of the database
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type DatabaseParameters struct {
 
+	// UUID of the instance where to create the database.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -41,6 +45,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Name of the database (e.g. my-new-database).
 	// Database name
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -60,7 +65,7 @@ type DatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Database is the Schema for the Databases API. <no value>
+// Database is the Schema for the Databases API. Manages Scaleway RDB Database.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

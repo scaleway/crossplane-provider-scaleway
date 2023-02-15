@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SSHKey is the Schema for the SSHKeys API. <no value>
+        description: SSHKey is the Schema for the SSHKeys API. Manages Scaleway user
+          SSH keys.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,15 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The name of the SSH key
+                    description: The name of the SSH key. The name of the SSH key
                     type: string
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: (Defaults to provider project_id) The ID of the project
+                      the SSH key is associated with. The project_id you want to attach
+                      the resource to
                     type: string
                   publicKey:
-                    description: The public SSH key
+                    description: The public SSH key to be added. The public SSH key
                     type: string
                 required:
                 - publicKey
@@ -252,10 +255,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the SSH key.
                     type: string
                   organizationId:
-                    description: The organization_id you want to attach the resource
-                      to
+                    description: The organization ID the SSH key is associated with.
+                      The organization_id you want to attach the resource to
                     type: string
                 type: object
               conditions:

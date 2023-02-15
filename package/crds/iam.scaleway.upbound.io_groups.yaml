@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Group is the Schema for the Groups API. <no value>
+        description: Group is the Schema for the Groups API. Manages Scaleway IAM
+          Groups.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   applicationIds:
-                    description: List of IDs of the applications attached to the group
+                    description: The list of IDs of the applications attached to the
+                      group. List of IDs of the applications attached to the group
                     items:
                       type: string
                     type: array
@@ -145,16 +147,20 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the iam group
+                    description: The description of the IAM group. The description
+                      of the iam group
                     type: string
                   name:
-                    description: The name of the iam group
+                    description: The name of the IAM group. The name of the iam group
                     type: string
                   organizationId:
-                    description: ID of organization the resource is associated to.
+                    description: (Defaults to provider organization_id) The ID of
+                      the organization the group is associated with. ID of organization
+                      the resource is associated to.
                     type: string
                   userIds:
-                    description: List of IDs of the users attached to the group
+                    description: The list of IDs of the users attached to the group.
+                      List of IDs of the users attached to the group
                     items:
                       type: string
                     type: array

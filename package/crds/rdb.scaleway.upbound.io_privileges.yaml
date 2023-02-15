@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Privilege is the Schema for the Privileges API. <no value>
+        description: Privilege is the Schema for the Privileges API. Manages Scaleway
+          RDB Database Privilege.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,12 @@ spec:
               forProvider:
                 properties:
                   databaseName:
-                    description: Database name
+                    description: Name of the database (e.g. my-db-name). Database
+                      name
                     type: string
                   instanceId:
-                    description: Instance on which the database is created
+                    description: UUID of the instance where to create the database.
+                      Instance on which the database is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -143,10 +146,11 @@ spec:
                         type: object
                     type: object
                   permission:
-                    description: Privilege
+                    description: Permission to set. Valid values are readonly, readwrite,
+                      all, custom and none. Privilege
                     type: string
                   userName:
-                    description: User name
+                    description: Name of the user (e.g. my-db-user). User name
                     type: string
                 required:
                 - databaseName

@@ -19,6 +19,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
+	// The instance on which to create the user.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -32,14 +33,17 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Grant admin permissions to the Database User.
 	// Grant admin permissions to database user
 	// +kubebuilder:validation:Optional
 	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
 
+	// Database User name.
 	// Database user name
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Database User password.
 	// Database user password
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
@@ -63,7 +67,7 @@ type UserStatus struct {
 
 // +kubebuilder:object:root=true
 
-// User is the Schema for the Users API. <no value>
+// User is the Schema for the Users API. Manages Scaleway Database Users.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

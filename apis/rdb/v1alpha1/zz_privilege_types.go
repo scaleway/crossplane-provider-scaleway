@@ -19,10 +19,12 @@ type PrivilegeObservation struct {
 
 type PrivilegeParameters struct {
 
+	// Name of the database (e.g. my-db-name).
 	// Database name
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// UUID of the instance where to create the database.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -36,10 +38,12 @@ type PrivilegeParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
 	// Privilege
 	// +kubebuilder:validation:Required
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 
+	// Name of the user (e.g. my-db-user).
 	// User name
 	// +kubebuilder:validation:Required
 	UserName *string `json:"userName" tf:"user_name,omitempty"`
@@ -59,7 +63,7 @@ type PrivilegeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Privilege is the Schema for the Privileges API. <no value>
+// Privilege is the Schema for the Privileges API. Manages Scaleway RDB Database Privilege.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

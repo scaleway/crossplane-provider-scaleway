@@ -19,10 +19,12 @@ type ACLObservation struct {
 
 type ACLParameters struct {
 
+	// A list of ACLs (structure is described below)
 	// List of ACL rules to apply
 	// +kubebuilder:validation:Required
 	ACLRules []ACLRulesParameters `json:"aclRules" tf:"acl_rules,omitempty"`
 
+	// The instance on which to create the ACL.
 	// Instance on which the ACL is applied
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -46,10 +48,12 @@ type ACLRulesObservation struct {
 
 type ACLRulesParameters struct {
 
+	// A text describing this rule. Default description: IP allowed
 	// Description of the rule
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ip range to whitelist in CIDR notation
 	// Target IP of the rules
 	// +kubebuilder:validation:Required
 	IP *string `json:"ip" tf:"ip,omitempty"`
@@ -69,7 +73,7 @@ type ACLStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ACL is the Schema for the ACLs API. <no value>
+// ACL is the Schema for the ACLs API. Manages Scaleway Database ACL rules.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

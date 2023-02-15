@@ -14,37 +14,47 @@ import (
 )
 
 type PlacementGroupObservation struct {
+
+	// The ID of the placement group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the placement group is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// Is true when the policy is respected.
 	// Is true when the policy is respected.
 	PolicyRespected *bool `json:"policyRespected,omitempty" tf:"policy_respected,omitempty"`
 }
 
 type PlacementGroupParameters struct {
 
+	// The name of the placement group.
 	// The name of the placement group
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
 	// One of the two policy_mode may be selected: enforced or optional.
 	// +kubebuilder:validation:Optional
 	PolicyMode *string `json:"policyMode,omitempty" tf:"policy_mode,omitempty"`
 
+	// (Defaults to max_availability) The policy type of the placement group. Possible values are: low_latency or max_availability.
 	// The operating mode is selected by a policy_type
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the placement group is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// A list of tags to apply to the placement group.
 	// The tags associated with the placement group
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -64,7 +74,7 @@ type PlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PlacementGroup is the Schema for the PlacementGroups API. <no value>
+// PlacementGroup is the Schema for the PlacementGroups API. Manages Scaleway Compute Instance Placement Groups.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

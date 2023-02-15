@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API. <no value>
+        description: Application is the Schema for the Applications API. Manages Scaleway
+          IAM Applications.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,17 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the iam application
+                    description: The description of the iam application. The description
+                      of the iam application
                     type: string
                   name:
-                    description: The name of the iam application
+                    description: .The name of the iam application. The name of the
+                      iam application
                     type: string
                   organizationId:
-                    description: ID of organization the resource is associated to.
+                    description: (Defaults to provider organization_id) The ID of
+                      the organization the application is associated with. ID of organization
+                      the resource is associated to.
                     type: string
                 type: object
               providerConfigRef:
@@ -250,15 +255,18 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of the creation of the application
+                    description: The date and time of the creation of the application.
+                      The date and time of the creation of the application
                     type: string
                   editable:
-                    description: Whether or not the application is editable.
+                    description: Whether the application is editable. Whether or not
+                      the application is editable.
                     type: boolean
                   id:
                     type: string
                   updatedAt:
-                    description: The date and time of the last update of the application
+                    description: The date and time of the last update of the application.
+                      The date and time of the last update of the application
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Hub is the Schema for the Hubs API. <no value>
+        description: Hub is the Schema for the Hubs API. Manages Scaleway IoT Hub
+          instances.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -71,7 +72,8 @@ spec:
                     description: Whether to enable the hub events or not
                     type: boolean
                   enabled:
-                    description: Whether to enable the hub or not
+                    description: Wether the IoT Hub instance should be enabled or
+                      not. Whether to enable the hub or not
                     type: boolean
                   eventsTopicPrefix:
                     description: Topic prefix for the hub events
@@ -83,16 +85,23 @@ spec:
                     description: Challenge certificate for the user provided hub CA
                     type: string
                   name:
-                    description: The name of the hub
+                    description: The name of the IoT Hub instance you want to create
+                      (e.g. my-hub). The name of the hub
                     type: string
                   productPlan:
-                    description: The product plan of the hub
+                    description: Product plan to create the hub, see documentation
+                      for available product plans (e.g. plan_shared) The product plan
+                      of the hub
                     type: string
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: (Defaults to provider project_id) The ID of the project
+                      the IoT Hub Instance is associated with. The project_id you
+                      want to attach the resource to
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region) The region in which
+                      the Database Instance should be created. The region you want
+                      to attach the resource to
                     type: string
                 required:
                 - name
@@ -275,28 +284,35 @@ spec:
               atProvider:
                 properties:
                   connectedDeviceCount:
-                    description: The current number of connected devices in the Hub
+                    description: The current number of connected devices in the Hub.
+                      The current number of connected devices in the Hub
                     type: number
                   createdAt:
-                    description: The date and time of the creation of the IoT Hub
+                    description: The date and time the Hub was created. The date and
+                      time of the creation of the IoT Hub
                     type: string
                   deviceCount:
-                    description: The number of registered devices in the Hub
+                    description: The number of registered devices in the Hub. The
+                      number of registered devices in the Hub
                     type: number
                   endpoint:
-                    description: The endpoint to connect the devices to
+                    description: The MQTT network endpoint to connect MQTT devices
+                      to. The endpoint to connect the devices to
                     type: string
                   id:
+                    description: The ID of the Hub.
                     type: string
                   organizationId:
-                    description: The organization_id you want to attach the resource
-                      to
+                    description: The ID of the Hub. The organization_id you want to
+                      attach the resource to
                     type: string
                   status:
-                    description: The status of the hub
+                    description: The current status of the Hub. The status of the
+                      hub
                     type: string
                   updatedAt:
-                    description: The date and time of the last update of the IoT Hub
+                    description: The date and time the Hub resource was updated. The
+                      date and time of the last update of the IoT Hub
                     type: string
                 type: object
               conditions:

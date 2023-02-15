@@ -19,10 +19,12 @@ type UserDataObservation struct {
 
 type UserDataParameters struct {
 
+	// Key of the user data.
 	// The key of the user data to set.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// The ID of the server associated with.
 	// The ID of the server
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
@@ -36,10 +38,12 @@ type UserDataParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// Value associated with your key
 	// The value of the user data to set.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -59,7 +63,7 @@ type UserDataStatus struct {
 
 // +kubebuilder:object:root=true
 
-// UserData is the Schema for the UserDatas API. <no value>
+// UserData is the Schema for the UserDatas API. Manages Scaleway Compute Instance User Data.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

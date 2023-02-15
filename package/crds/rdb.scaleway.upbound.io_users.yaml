@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the Users API. <no value>
+        description: User is the Schema for the Users API. Manages Scaleway Database
+          Users.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   instanceId:
-                    description: Instance on which the user is created
+                    description: The instance on which to create the user. Instance
+                      on which the user is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -140,13 +142,14 @@ spec:
                         type: object
                     type: object
                   isAdmin:
-                    description: Grant admin permissions to database user
+                    description: Grant admin permissions to the Database User. Grant
+                      admin permissions to database user
                     type: boolean
                   name:
-                    description: Database user name
+                    description: Database User name. Database user name
                     type: string
                   passwordSecretRef:
-                    description: Database user password
+                    description: Database User password. Database user password
                     properties:
                       key:
                         description: The key to select.

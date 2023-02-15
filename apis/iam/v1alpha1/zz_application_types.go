@@ -15,28 +15,34 @@ import (
 
 type ApplicationObservation struct {
 
+	// The date and time of the creation of the application.
 	// The date and time of the creation of the application
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Whether the application is editable.
 	// Whether or not the application is editable.
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date and time of the last update of the application.
 	// The date and time of the last update of the application
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ApplicationParameters struct {
 
+	// The description of the iam application.
 	// The description of the iam application
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// .The name of the iam application.
 	// The name of the iam application
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider organization_id) The ID of the organization the application is associated with.
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -56,7 +62,7 @@ type ApplicationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Application is the Schema for the Applications API. <no value>
+// Application is the Schema for the Applications API. Manages Scaleway IAM Applications.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

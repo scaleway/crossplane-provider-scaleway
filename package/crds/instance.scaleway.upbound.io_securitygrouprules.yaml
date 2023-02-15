@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SecurityGroupRule is the Schema for the SecurityGroupRules API.
-          <no value>
+          Manages Scaleway Compute Instance security group rules.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,65 +65,104 @@ spec:
               forProvider:
                 properties:
                   inboundRule:
-                    description: Inbound rules for this set of security group rules
+                    description: A list of inbound rule to add to the security group.
+                      (Structure is documented below.) Inbound rules for this set
+                      of security group rules
                     items:
                       properties:
                         action:
-                          description: Action when rule match request (drop or accept)
+                          description: 'The action to take when rule match. Possible
+                            values are: accept or drop. Action when rule match request
+                            (drop or accept)'
                           type: string
                         ip:
-                          description: 'Ip address for this rule (e.g: 1.1.1.1). Only
-                            one of ip or ip_range should be provided'
+                          description: 'The ip this rule apply to. If no ip nor ip_range
+                            are specified, rule will apply to all ip. Only one of
+                            ip and ip_range should be specified. Ip address for this
+                            rule (e.g: 1.1.1.1). Only one of ip or ip_range should
+                            be provided'
                           type: string
                         ipRange:
-                          description: 'Ip range for this rule (e.g: 192.168.1.0/24).
+                          description: 'The ip range (e.g 192.168.1.0/24) this rule
+                            applies to. If no ip nor ip_range are specified, rule
+                            will apply to all ip. Only one of ip and ip_range should
+                            be specified. Ip range for this rule (e.g: 192.168.1.0/24).
                             Only one of ip or ip_range should be provided'
                           type: string
                         port:
-                          description: Network port for this rule
+                          description: The port this rule apply to. If no port is
+                            specified, rule will apply to all port. Network port for
+                            this rule
                           type: number
                         portRange:
-                          description: 'Computed port range for this rule (e.g: 1-1024,
-                            22-22)'
+                          description: '13.0  The port range (e.g 22-23) this rule
+                            applies to. Port range MUST comply the Scaleway-notation:
+                            interval between ports must be a power of 2 2^X-1 number
+                            (e.g 2^13-1=8191 in port_range = "10000-18191"). If no
+                            port nor port_range are specified, rule will apply to
+                            all port. Only one of port and port_range should be specified.
+                            Computed port range for this rule (e.g: 1-1024, 22-22)'
                           type: string
                         protocol:
-                          description: Protocol for this rule (TCP, UDP, ICMP or ANY)
+                          description: '(Defaults to TCP) The protocol this rule apply
+                            to. Possible values are: TCP, UDP, ICMP or ANY. Protocol
+                            for this rule (TCP, UDP, ICMP or ANY)'
                           type: string
                       required:
                       - action
                       type: object
                     type: array
                   outboundRule:
-                    description: Outbound rules for this set of security group rules
+                    description: A list of outbound rule to add to the security group.
+                      (Structure is documented below.) Outbound rules for this set
+                      of security group rules
                     items:
                       properties:
                         action:
-                          description: Action when rule match request (drop or accept)
+                          description: 'The action to take when rule match. Possible
+                            values are: accept or drop. Action when rule match request
+                            (drop or accept)'
                           type: string
                         ip:
-                          description: 'Ip address for this rule (e.g: 1.1.1.1). Only
-                            one of ip or ip_range should be provided'
+                          description: 'The ip this rule apply to. If no ip nor ip_range
+                            are specified, rule will apply to all ip. Only one of
+                            ip and ip_range should be specified. Ip address for this
+                            rule (e.g: 1.1.1.1). Only one of ip or ip_range should
+                            be provided'
                           type: string
                         ipRange:
-                          description: 'Ip range for this rule (e.g: 192.168.1.0/24).
+                          description: 'The ip range (e.g 192.168.1.0/24) this rule
+                            applies to. If no ip nor ip_range are specified, rule
+                            will apply to all ip. Only one of ip and ip_range should
+                            be specified. Ip range for this rule (e.g: 192.168.1.0/24).
                             Only one of ip or ip_range should be provided'
                           type: string
                         port:
-                          description: Network port for this rule
+                          description: The port this rule apply to. If no port is
+                            specified, rule will apply to all port. Network port for
+                            this rule
                           type: number
                         portRange:
-                          description: 'Computed port range for this rule (e.g: 1-1024,
-                            22-22)'
+                          description: '13.0  The port range (e.g 22-23) this rule
+                            applies to. Port range MUST comply the Scaleway-notation:
+                            interval between ports must be a power of 2 2^X-1 number
+                            (e.g 2^13-1=8191 in port_range = "10000-18191"). If no
+                            port nor port_range are specified, rule will apply to
+                            all port. Only one of port and port_range should be specified.
+                            Computed port range for this rule (e.g: 1-1024, 22-22)'
                           type: string
                         protocol:
-                          description: Protocol for this rule (TCP, UDP, ICMP or ANY)
+                          description: '(Defaults to TCP) The protocol this rule apply
+                            to. Possible values are: TCP, UDP, ICMP or ANY. Protocol
+                            for this rule (TCP, UDP, ICMP or ANY)'
                           type: string
                       required:
                       - action
                       type: object
                     type: array
                   securityGroupId:
-                    description: The security group associated with this volume
+                    description: The ID of the security group. The security group
+                      associated with this volume
                     type: string
                   securityGroupIdRef:
                     description: Reference to a SecurityGroup to populate securityGroupId.
@@ -376,6 +415,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the security group.
                     type: string
                 type: object
               conditions:

@@ -13,6 +13,11 @@ import (
 	sshkey "github.com/scaleway/provider-scaleway/internal/controller/account/sshkey"
 	server "github.com/scaleway/provider-scaleway/internal/controller/applesilicon/server"
 	serverbaremetal "github.com/scaleway/provider-scaleway/internal/controller/baremetal/server"
+	container "github.com/scaleway/provider-scaleway/internal/controller/container/container"
+	containernamespace "github.com/scaleway/provider-scaleway/internal/controller/container/containernamespace"
+	cron "github.com/scaleway/provider-scaleway/internal/controller/container/cron"
+	domain "github.com/scaleway/provider-scaleway/internal/controller/container/domain"
+	token "github.com/scaleway/provider-scaleway/internal/controller/container/token"
 	record "github.com/scaleway/provider-scaleway/internal/controller/domain/record"
 	zone "github.com/scaleway/provider-scaleway/internal/controller/domain/zone"
 	ip "github.com/scaleway/provider-scaleway/internal/controller/flexibleip/ip"
@@ -68,6 +73,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sshkey.Setup,
 		server.Setup,
 		serverbaremetal.Setup,
+		container.Setup,
+		containernamespace.Setup,
+		cron.Setup,
+		domain.Setup,
+		token.Setup,
 		record.Setup,
 		zone.Setup,
 		ip.Setup,

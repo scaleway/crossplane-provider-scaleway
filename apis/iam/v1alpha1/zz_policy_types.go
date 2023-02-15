@@ -15,20 +15,24 @@ import (
 
 type PolicyObservation struct {
 
+	// The date and time of the creation of the policy.
 	// The date and time of the creation of the policy
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Whether the policy is editable.
 	// Whether or not the policy is editable.
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The date and time of the last update of the policy.
 	// The date and time of the last update of the policy
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type PolicyParameters struct {
 
+	// ID of the Application the policy will be linked to
 	// Application id
 	// +crossplane:generate:reference:type=Application
 	// +kubebuilder:validation:Optional
@@ -42,10 +46,12 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
+	// The description of the iam policy.
 	// The description of the iam policy
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the Group the policy will be linked to
 	// Group id
 	// +crossplane:generate:reference:type=Group
 	// +kubebuilder:validation:Optional
@@ -59,22 +65,27 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
+	// .The name of the iam policy.
 	// The name of the iam policy
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// If the policy doesn't apply to a principal.
 	// Deactivate policy to a principal
 	// +kubebuilder:validation:Optional
 	NoPrincipal *bool `json:"noPrincipal,omitempty" tf:"no_principal,omitempty"`
 
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// List of rules in the policy.
 	// Rules of the policy to create
 	// +kubebuilder:validation:Required
 	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
 
+	// ID of the User the policy will be linked to
 	// User id
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
@@ -85,14 +96,17 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
 	// ID of organization scoped to the rule. Only one of project_ids and organization_id may be set.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// Names of permission sets bound to the rule.
+	// Names of permission sets bound to the rule.
 	// +kubebuilder:validation:Required
 	PermissionSetNames []*string `json:"permissionSetNames" tf:"permission_set_names,omitempty"`
 
+	// List of project IDs scoped to the rule.
 	// List of project IDs scoped to the rule. Only one of project_ids and organization_id may be set.
 	// +kubebuilder:validation:Optional
 	ProjectIds []*string `json:"projectIds,omitempty" tf:"project_ids,omitempty"`
@@ -112,7 +126,7 @@ type PolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Policy is the Schema for the Policys API. <no value>
+// Policy is the Schema for the Policys API. Manages Scaleway IAM Policies.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

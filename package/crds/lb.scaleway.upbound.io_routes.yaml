@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Route is the Schema for the Routes API. <no value>
+        description: Route is the Schema for the Routes API. Manages Scaleway Load-Balancer
+          Route.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   backendId:
-                    description: The backend ID destination of redirection
+                    description: The ID of the backend to which the route is associated.
+                      The backend ID destination of redirection
                     type: string
                   backendIdRef:
                     description: Reference to a Backend to populate backendId.
@@ -140,7 +142,8 @@ spec:
                         type: object
                     type: object
                   frontendId:
-                    description: The frontend ID origin of redirection
+                    description: ':  The ID of the frontend to which the route is
+                      associated. The frontend ID origin of redirection'
                     type: string
                   frontendIdRef:
                     description: Reference to a Frontend to populate frontendId.
@@ -216,7 +219,7 @@ spec:
                         type: object
                     type: object
                   matchSni:
-                    description: The domain to match against
+                    description: The SNI to match. The domain to match against
                     type: string
                 type: object
               providerConfigRef:

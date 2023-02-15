@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: DatabaseBackup is the Schema for the DatabaseBackups API. <no
-          value>
+        description: DatabaseBackup is the Schema for the DatabaseBackups API. Manages
+          Scaleway RDB Database Backup.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,13 +65,16 @@ spec:
               forProvider:
                 properties:
                   databaseName:
-                    description: Name of the database of this backup.
+                    description: Name of the database (e.g. my-database). Name of
+                      the database of this backup.
                     type: string
                   expiresAt:
-                    description: Expiration date (Format ISO 8601). Cannot be removed.
+                    description: Expiration date (Format ISO 8601). Expiration date
+                      (Format ISO 8601). Cannot be removed.
                     type: string
                   instanceId:
-                    description: Instance on which the user is created
+                    description: UUID of the instance where the database to backup
+                      is. Instance on which the user is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -147,7 +150,8 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Name of the backup.
+                    description: Name of the database (e.g. my-database). Name of
+                      the backup.
                     type: string
                   region:
                     description: The region you want to attach the resource to
@@ -332,18 +336,22 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: Creation date (Format ISO 8601).
+                    description: Creation date (Format ISO 8601). Creation date (Format
+                      ISO 8601).
                     type: string
                   id:
                     type: string
                   instanceName:
-                    description: Name of the instance of the backup.
+                    description: Name of the instance of the backup. Name of the instance
+                      of the backup.
                     type: string
                   size:
-                    description: Size of the backup (in bytes).
+                    description: Size of the backup (in bytes). Size of the backup
+                      (in bytes).
                     type: number
                   updatedAt:
-                    description: Updated date (Format ISO 8601).
+                    description: Updated date (Format ISO 8601). Updated date (Format
+                      ISO 8601).
                     type: string
                 type: object
               conditions:

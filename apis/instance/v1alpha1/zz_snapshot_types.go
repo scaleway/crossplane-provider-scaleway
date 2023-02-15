@@ -18,10 +18,12 @@ type ImportObservation struct {
 
 type ImportParameters struct {
 
+	// Bucket name containing qcow2 to import
 	// Bucket containing qcow
 	// +kubebuilder:validation:Required
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// Key of the object to import
 	// Key of the qcow file in the specified bucket
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
@@ -29,40 +31,52 @@ type ImportParameters struct {
 
 type SnapshotObservation struct {
 
+	// The snapshot creation time.
 	// The date and time of the creation of the snapshot
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The organization ID the snapshot is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The size of the snapshot.
 	// The size of the snapshot in gigabyte
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 }
 
 type SnapshotParameters struct {
 
+	// Import a snapshot from a qcow2 file located in a bucket
 	// Import snapshot from a qcow
 	// +kubebuilder:validation:Optional
 	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
+	// The name of the snapshot. If not provided it will be randomly generated.
 	// The name of the snapshot
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the snapshot is
+	// associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// A list of tags to apply to the snapshot.
 	// The tags associated with the snapshot
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The snapshot's volume type.  The possible values are: b_ssd (Block SSD), l_ssd (Local SSD) and unified.
+	// Updates to this field will recreate a new resource.
 	// The snapshot's volume type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// The ID of the volume to take a snapshot from.
 	// ID of the volume to take a snapshot from
 	// +crossplane:generate:reference:type=Volume
 	// +kubebuilder:validation:Optional
@@ -76,6 +90,8 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to provider zone) The zone in which
+	// the snapshot should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -95,7 +111,7 @@ type SnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Snapshot is the Schema for the Snapshots API. <no value>
+// Snapshot is the Schema for the Snapshots API. Manages Scaleway Instance Snapshots.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

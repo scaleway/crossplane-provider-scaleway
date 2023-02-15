@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ACL is the Schema for the ACLs API. <no value>
+        description: ACL is the Schema for the ACLs API. Manages Scaleway Database
+          ACL rules.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,21 +65,25 @@ spec:
               forProvider:
                 properties:
                   aclRules:
-                    description: List of ACL rules to apply
+                    description: A list of ACLs (structure is described below) List
+                      of ACL rules to apply
                     items:
                       properties:
                         description:
-                          description: Description of the rule
+                          description: 'A text describing this rule. Default description:
+                            IP allowed Description of the rule'
                           type: string
                         ip:
-                          description: Target IP of the rules
+                          description: The ip range to whitelist in CIDR notation
+                            Target IP of the rules
                           type: string
                       required:
                       - ip
                       type: object
                     type: array
                   instanceId:
-                    description: Instance on which the ACL is applied
+                    description: The instance on which to create the ACL. Instance
+                      on which the ACL is applied
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.

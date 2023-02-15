@@ -18,14 +18,17 @@ type IpObservation struct {
 	// The date and time of the creation of the Flexible IP (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the Flexible IP
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IPv4 address of the Flexible IP
 	// The IPv4 address of the flexible IP
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The MAC address of the server associated with this flexible IP
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The organization of the Flexible IP
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
@@ -35,26 +38,32 @@ type IpObservation struct {
 
 type IpParameters struct {
 
+	// :  A description of the flexible IP.
 	// Description of the flexible IP
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The project of the Flexible IP
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The reverse domain associated with this flexible IP.
 	// The reverse DNS for this flexible IP
 	// +kubebuilder:validation:Optional
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
+	// The ID of the associated server
 	// The baremetal server associated with this flexible IP
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// :  A list of tags to apply to the flexible IP.
 	// The tags associated with the flexible IP
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The zone of the Flexible IP
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -74,7 +83,7 @@ type IpStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Ip is the Schema for the Ips API. <no value>
+// Ip is the Schema for the Ips API. Manages Scaleway Flexible IPs.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

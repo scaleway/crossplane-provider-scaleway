@@ -15,16 +15,19 @@ import (
 
 type ACLObservation struct {
 
+	// The UUID of the private network resource.
 	// ID of the rule (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ACLParameters struct {
 
+	// A text describing this rule. Default description: Allow IP
 	// Description of the rule.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ip range to whitelist in CIDR notation
 	// IPv4 network address of the rule (IP network in a CIDR format).
 	// +kubebuilder:validation:Required
 	IP *string `json:"ip" tf:"ip,omitempty"`
@@ -32,18 +35,23 @@ type ACLParameters struct {
 
 type ClusterObservation struct {
 
+	// List of acl rules, this is cluster's authorized IPs.
 	// List of acl rules.
 	// +kubebuilder:validation:Optional
 	ACL []ACLObservation `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The PEM of the certificate used by redis, only when tls_enabled is true
 	// public TLS certificate used by redis cluster, empty if tls is disabled
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
+	// The date and time of creation of the Redis Cluster.
 	// The date and time of the creation of the Redis cluster
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the Database Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Describes the private network you want to connect to your cluster. If not set, a public network will be provided.
 	// Private network specs details
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -52,36 +60,44 @@ type ClusterObservation struct {
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
+	// The date and time of the last update of the Redis Cluster.
 	// The date and time of the last update of the Redis cluster
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ClusterParameters struct {
 
+	// List of acl rules, this is cluster's authorized IPs.
 	// List of acl rules.
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The number of nodes in the Redis Cluster.
 	// Number of nodes for the cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSize *float64 `json:"clusterSize,omitempty" tf:"cluster_size,omitempty"`
 
+	// The name of the Redis Cluster.
 	// Name of the redis cluster
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The type of Redis Cluster you want to create (e.g. RED1-M).
 	// Type of node to use for the cluster
 	// +kubebuilder:validation:Required
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
+	// Password for the first user of the Redis Cluster.
 	// Password of the user
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// Describes the private network you want to connect to your cluster. If not set, a public network will be provided.
 	// Private network specs details
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the Redis Cluster is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -90,26 +106,32 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
+	// Map of settings for redis cluster. Available settings can be found by listing redis versions with scaleway API or CLI
 	// Map of settings to define for the cluster.
 	// +kubebuilder:validation:Optional
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// (Defaults to false) Whether TLS is enabled or not.
 	// Whether or not TLS is enabled.
 	// +kubebuilder:validation:Optional
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
+	// The tags associated with the Redis Cluster.
 	// List of tags ["tag1", "tag2", ...] attached to a redis cluster
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Identifier for the first user of the Redis Cluster.
 	// Name of the user created when the cluster is created
 	// +kubebuilder:validation:Required
 	UserName *string `json:"userName" tf:"user_name,omitempty"`
 
+	// Redis's Cluster version (e.g. 6.2.6).
 	// Redis version of the cluster
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the Redis Cluster should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -117,26 +139,32 @@ type ClusterParameters struct {
 
 type PrivateNetworkObservation struct {
 
+	// The ID of the Database Instance.
 	// UUID of the endpoint to be connected to the cluster
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
 
+	// The UUID of the private network resource.
 	// UUID of the private network to be connected to the cluster
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 
+	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	// +kubebuilder:validation:Required
 	ServiceIps []*string `json:"serviceIps" tf:"service_ips,omitempty"`
 
+	// (Defaults to provider zone) The zone in which the Redis Cluster should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PublicNetworkObservation struct {
+
+	// The UUID of the private network resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
@@ -162,7 +190,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API. <no value>
+// Cluster is the Schema for the Clusters API. Manages Scaleway Redis Clusters.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

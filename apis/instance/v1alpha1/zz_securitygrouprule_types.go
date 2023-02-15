@@ -18,32 +18,43 @@ type SecurityGroupRuleInboundRuleObservation struct {
 
 type SecurityGroupRuleInboundRuleParameters struct {
 
+	// The action to take when rule match. Possible values are: accept or drop.
 	// Action when rule match request (drop or accept)
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// The ip range (e.g 192.168.1.0/24) this rule applies to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip range for this rule (e.g: 192.168.1.0/24). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
 
+	// The port this rule apply to. If no port is specified, rule will apply to all port.
 	// Network port for this rule
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// 13.0  The port range (e.g 22-23) this rule applies to.
+	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
+	// If no port nor port_range are specified, rule will apply to all port.
+	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
 	// +kubebuilder:validation:Optional
 	PortRange *string `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// (Defaults to TCP) The protocol this rule apply to. Possible values are: TCP, UDP, ICMP or ANY.
 	// Protocol for this rule (TCP, UDP, ICMP or ANY)
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type SecurityGroupRuleObservation struct {
+
+	// The ID of the security group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -52,26 +63,35 @@ type SecurityGroupRuleOutboundRuleObservation struct {
 
 type SecurityGroupRuleOutboundRuleParameters struct {
 
+	// The action to take when rule match. Possible values are: accept or drop.
 	// Action when rule match request (drop or accept)
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// The ip range (e.g 192.168.1.0/24) this rule applies to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip range for this rule (e.g: 192.168.1.0/24). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
 
+	// The port this rule apply to. If no port is specified, rule will apply to all port.
 	// Network port for this rule
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// 13.0  The port range (e.g 22-23) this rule applies to.
+	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
+	// If no port nor port_range are specified, rule will apply to all port.
+	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
 	// +kubebuilder:validation:Optional
 	PortRange *string `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
+	// (Defaults to TCP) The protocol this rule apply to. Possible values are: TCP, UDP, ICMP or ANY.
 	// Protocol for this rule (TCP, UDP, ICMP or ANY)
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -79,14 +99,17 @@ type SecurityGroupRuleOutboundRuleParameters struct {
 
 type SecurityGroupRuleParameters struct {
 
+	// A list of inbound rule to add to the security group. (Structure is documented below.)
 	// Inbound rules for this set of security group rules
 	// +kubebuilder:validation:Optional
 	InboundRule []SecurityGroupRuleInboundRuleParameters `json:"inboundRule,omitempty" tf:"inbound_rule,omitempty"`
 
+	// A list of outbound rule to add to the security group. (Structure is documented below.)
 	// Outbound rules for this set of security group rules
 	// +kubebuilder:validation:Optional
 	OutboundRule []SecurityGroupRuleOutboundRuleParameters `json:"outboundRule,omitempty" tf:"outbound_rule,omitempty"`
 
+	// The ID of the security group.
 	// The security group associated with this volume
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +kubebuilder:validation:Optional
@@ -115,7 +138,7 @@ type SecurityGroupRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SecurityGroupRule is the Schema for the SecurityGroupRules API. <no value>
+// SecurityGroupRule is the Schema for the SecurityGroupRules API. Manages Scaleway Compute Instance security group rules.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

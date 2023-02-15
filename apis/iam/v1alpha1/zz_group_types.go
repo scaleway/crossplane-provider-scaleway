@@ -26,6 +26,7 @@ type GroupObservation struct {
 
 type GroupParameters struct {
 
+	// The list of IDs of the applications attached to the group.
 	// List of IDs of the applications attached to the group
 	// +crossplane:generate:reference:type=Application
 	// +kubebuilder:validation:Optional
@@ -39,18 +40,22 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIdsSelector *v1.Selector `json:"applicationIdsSelector,omitempty" tf:"-"`
 
+	// The description of the IAM group.
 	// The description of the iam group
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the IAM group.
 	// The name of the iam group
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider organization_id) The ID of the organization the group is associated with.
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group
 	// +kubebuilder:validation:Optional
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
@@ -70,7 +75,7 @@ type GroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Group is the Schema for the Groups API. <no value>
+// Group is the Schema for the Groups API. Manages Scaleway IAM Groups.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

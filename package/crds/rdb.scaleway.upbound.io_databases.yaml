@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Database is the Schema for the Databases API. <no value>
+        description: Database is the Schema for the Databases API. Manages Scaleway
+          RDB Database.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   instanceId:
-                    description: Instance on which the database is created
+                    description: UUID of the instance where to create the database.
+                      Instance on which the database is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -140,7 +142,8 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Database name
+                    description: Name of the database (e.g. my-new-database). Database
+                      name
                     type: string
                 required:
                 - name
@@ -324,13 +327,15 @@ spec:
                   id:
                     type: string
                   managed:
-                    description: Whether or not the database is managed
+                    description: Whether or not the database is managed or not. Whether
+                      or not the database is managed
                     type: boolean
                   owner:
-                    description: User that own the database
+                    description: The name of the owner of the database. User that
+                      own the database
                     type: string
                   size:
-                    description: Size of the database
+                    description: Size of the database (in bytes). Size of the database
                     type: string
                 type: object
               conditions:

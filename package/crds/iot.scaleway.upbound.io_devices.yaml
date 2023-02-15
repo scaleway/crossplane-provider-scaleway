@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Device is the Schema for the Devices API. <no value>
+        description: Device is the Schema for the Devices API. Manages Scaleway IoT
+          Hub device.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +65,24 @@ spec:
               forProvider:
                 properties:
                   allowInsecure:
-                    description: Allow plain and server-authenticated SSL connections
-                      in addition to mutually-authenticated ones
+                    description: Allow plain and server-authenticated TLS connections
+                      in addition to mutually-authenticated ones. Allow plain and
+                      server-authenticated SSL connections in addition to mutually-authenticated
+                      ones
                     type: boolean
                   allowMultipleConnections:
-                    description: Allow multiple connections
+                    description: Allow more than one simultaneous connection using
+                      the same device credentials. Allow multiple connections
                     type: boolean
                   certificate:
-                    description: Certificate section of the device
+                    description: The certificate bundle of the device. Certificate
+                      section of the device
                     items:
                       properties:
                         crtSecretRef:
-                          description: X509 PEM encoded certificate of the device
+                          description: The certificate of the device, either generated
+                            by Scaleway or provided. X509 PEM encoded certificate
+                            of the device
                           properties:
                             key:
                               description: The key to select.
@@ -94,10 +101,12 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: The description of the device
+                    description: The description of the IoT device (e.g. living room).
+                      The description of the device
                     type: string
                   hubId:
-                    description: The ID of the hub on which this device will be created
+                    description: The ID of the hub on which this device will be created.
+                      The ID of the hub on which this device will be created
                     type: string
                   hubIdRef:
                     description: Reference to a Hub to populate hubId.
@@ -173,35 +182,42 @@ spec:
                         type: object
                     type: object
                   messageFilters:
-                    description: Rules to authorize or deny the device to publish/subscribe
-                      to specific topics
+                    description: Rules that define which messages are authorized or
+                      denied based on their topic. Rules to authorize or deny the
+                      device to publish/subscribe to specific topics
                     items:
                       properties:
                         publish:
-                          description: Rule to restrict topics the device can publish
+                          description: Rules used to restrict topics the device can
+                            publish to. Rule to restrict topics the device can publish
                             to
                           items:
                             properties:
                               policy:
-                                description: Publish message filter policy
+                                description: Filtering policy (eg accept or reject)
+                                  Publish message filter policy
                                 type: string
                               topics:
-                                description: List of topics in the set
+                                description: List of topics to match (eg foo/bar/+/baz/#)
+                                  List of topics in the set
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         subscribe:
-                          description: Rule to restrict topics the device can subscribe
+                          description: Rules used to restrict topics the device can
+                            subscribe to. Rule to restrict topics the device can subscribe
                             to
                           items:
                             properties:
                               policy:
-                                description: Subscribe message filter policy
+                                description: Filtering policy (eg accept or reject)
+                                  Subscribe message filter policy
                                 type: string
                               topics:
-                                description: List of topics in the set
+                                description: List of topics to match (eg foo/bar/+/baz/#)
+                                  List of topics in the set
                                 items:
                                   type: string
                                 type: array
@@ -210,7 +226,8 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the device
+                    description: The name of the IoT device you want to create (e.g.
+                      my-device). The name of the device
                     type: string
                   region:
                     description: The region you want to attach the resource to
@@ -395,21 +412,27 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of the creation of the device
+                    description: The date and time the device was created. The date
+                      and time of the creation of the device
                     type: string
                   id:
+                    description: The ID of the device.
                     type: string
                   isConnected:
-                    description: The MQTT connection status of the device
+                    description: The current connection status of the device. The
+                      MQTT connection status of the device
                     type: boolean
                   lastActivityAt:
-                    description: The date and time of last MQTT activity of the device
+                    description: The last MQTT activity of the device. The date and
+                      time of last MQTT activity of the device
                     type: string
                   status:
-                    description: The status of the device
+                    description: The current status of the device. The status of the
+                      device
                     type: string
                   updatedAt:
-                    description: The date and time of the last update of the device
+                    description: The date and time the device resource was updated.
+                      The date and time of the last update of the device
                     type: string
                 type: object
               conditions:

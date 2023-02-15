@@ -16,30 +16,37 @@ import (
 type DatabaseBackupObservation struct {
 
 	// Creation date (Format ISO 8601).
+	// Creation date (Format ISO 8601).
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the instance of the backup.
+	// Name of the instance of the backup.
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Size of the backup (in bytes).
+	// Size of the backup (in bytes).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// Updated date (Format ISO 8601).
 	// Updated date (Format ISO 8601).
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type DatabaseBackupParameters struct {
 
+	// Name of the database (e.g. my-database).
 	// Name of the database of this backup.
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
+	// Expiration date (Format ISO 8601).
 	// Expiration date (Format ISO 8601). Cannot be removed.
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
+	// UUID of the instance where the database to backup is.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -53,6 +60,7 @@ type DatabaseBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// Name of the database (e.g. my-database).
 	// Name of the backup.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -76,7 +84,7 @@ type DatabaseBackupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DatabaseBackup is the Schema for the DatabaseBackups API. <no value>
+// DatabaseBackup is the Schema for the DatabaseBackups API. Manages Scaleway RDB Database Backup.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

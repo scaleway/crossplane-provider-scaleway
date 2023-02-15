@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API. <no value>
+        description: Certificate is the Schema for the Certificates API. Manages Scaleway
+          Load-Balancer Certificates.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +65,22 @@ spec:
               forProvider:
                 properties:
                   customCertificate:
-                    description: The custom type certificate type configuration
+                    description: Configuration block for custom certificate chain.
+                      Only one of letsencrypt and custom_certificate should be specified.
+                      The custom type certificate type configuration
                     items:
                       properties:
                         certificateChain:
-                          description: The full PEM-formatted certificate chain
+                          description: Full PEM-formatted certificate chain. The full
+                            PEM-formatted certificate chain
                           type: string
                       required:
                       - certificateChain
                       type: object
                     type: array
                   lbId:
-                    description: The load-balancer ID
+                    description: The load-balancer ID this certificate is attached
+                      to. The load-balancer ID
                     type: string
                   lbIdRef:
                     description: Reference to a LB to populate lbId.
@@ -151,14 +156,20 @@ spec:
                         type: object
                     type: object
                   letsencrypt:
-                    description: The Let's Encrypt type certificate configuration
+                    description: Configuration block for Let's Encrypt configuration.
+                      Only one of letsencrypt and custom_certificate should be specified.
+                      The Let's Encrypt type certificate configuration
                     items:
                       properties:
                         commonName:
-                          description: The main domain name of the certificate
+                          description: Main domain of the certificate. A new certificate
+                            will be created if this field is changed. The main domain
+                            name of the certificate
                           type: string
                         subjectAlternativeName:
-                          description: The alternative domain names of the certificate
+                          description: Array of alternative domain names.  A new certificate
+                            will be created if this field is changed. The alternative
+                            domain names of the certificate
                           items:
                             type: string
                           type: array
@@ -167,7 +178,8 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the load-balancer certificate
+                    description: The name of the certificate backend. The name of
+                      the load-balancer certificate
                     type: string
                 type: object
               providerConfigRef:
@@ -347,24 +359,30 @@ spec:
               atProvider:
                 properties:
                   commonName:
-                    description: The main domain name of the certificate
+                    description: Main domain of the certificate The main domain name
+                      of the certificate
                     type: string
                   fingerprint:
-                    description: The identifier (SHA-1) of the certificate
+                    description: The identifier (SHA-1) of the certificate The identifier
+                      (SHA-1) of the certificate
                     type: string
                   id:
+                    description: The ID of the load-balancer certificate.
                     type: string
                   notValidAfter:
-                    description: The not valid after validity bound timestamp
+                    description: The not valid after validity bound timestamp The
+                      not valid after validity bound timestamp
                     type: string
                   notValidBefore:
-                    description: The not valid before validity bound timestamp
+                    description: The not valid before validity bound timestamp The
+                      not valid before validity bound timestamp
                     type: string
                   status:
-                    description: The status of certificate
+                    description: Certificate status The status of certificate
                     type: string
                   subjectAlternativeName:
-                    description: The alternative domain names of the certificate
+                    description: The alternative domain names of the certificate The
+                      alternative domain names of the certificate
                     items:
                       type: string
                     type: array

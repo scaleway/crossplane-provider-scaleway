@@ -15,33 +15,42 @@ import (
 
 type CertificateObservation struct {
 
+	// Main domain of the certificate
 	// The main domain name of the certificate
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
 	// The identifier (SHA-1) of the certificate
+	// The identifier (SHA-1) of the certificate
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
+	// The ID of the load-balancer certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The not valid after validity bound timestamp
 	// The not valid after validity bound timestamp
 	NotValidAfter *string `json:"notValidAfter,omitempty" tf:"not_valid_after,omitempty"`
 
 	// The not valid before validity bound timestamp
+	// The not valid before validity bound timestamp
 	NotValidBefore *string `json:"notValidBefore,omitempty" tf:"not_valid_before,omitempty"`
 
+	// Certificate status
 	// The status of certificate
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The alternative domain names of the certificate
 	// The alternative domain names of the certificate
 	SubjectAlternativeName []*string `json:"subjectAlternativeName,omitempty" tf:"subject_alternative_name,omitempty"`
 }
 
 type CertificateParameters struct {
 
+	// Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
 	// +kubebuilder:validation:Optional
 	CustomCertificate []CustomCertificateParameters `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
 
+	// The load-balancer ID this certificate is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	// +kubebuilder:validation:Optional
@@ -55,10 +64,12 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
+	// Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The Let's Encrypt type certificate configuration
 	// +kubebuilder:validation:Optional
 	Letsencrypt []LetsencryptParameters `json:"letsencrypt,omitempty" tf:"letsencrypt,omitempty"`
 
+	// The name of the certificate backend.
 	// The name of the load-balancer certificate
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -69,6 +80,7 @@ type CustomCertificateObservation struct {
 
 type CustomCertificateParameters struct {
 
+	// Full PEM-formatted certificate chain.
 	// The full PEM-formatted certificate chain
 	// +kubebuilder:validation:Required
 	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
@@ -79,10 +91,12 @@ type LetsencryptObservation struct {
 
 type LetsencryptParameters struct {
 
+	// Main domain of the certificate. A new certificate will be created if this field is changed.
 	// The main domain name of the certificate
 	// +kubebuilder:validation:Required
 	CommonName *string `json:"commonName" tf:"common_name,omitempty"`
 
+	// Array of alternative domain names.  A new certificate will be created if this field is changed.
 	// The alternative domain names of the certificate
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeName []*string `json:"subjectAlternativeName,omitempty" tf:"subject_alternative_name,omitempty"`
@@ -102,7 +116,7 @@ type CertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Certificate is the Schema for the Certificates API. <no value>
+// Certificate is the Schema for the Certificates API. Manages Scaleway Load-Balancer Certificates.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
