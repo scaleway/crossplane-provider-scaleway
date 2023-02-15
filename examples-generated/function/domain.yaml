@@ -1,0 +1,51 @@
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    functionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    hostname: example.com
+
+---
+
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    deploy: true
+    handler: Handle
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    privacy: private
+    runtime: go118
+    zipFile: testfixture/gofunction.zip
+
+---
+
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: FunctionNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider: {}
+
+---
+

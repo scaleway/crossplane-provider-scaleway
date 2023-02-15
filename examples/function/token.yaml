@@ -1,40 +1,43 @@
-apiVersion: container.scaleway.upbound.io/v1alpha1
+apiVersion: function.scaleway.upbound.io/v1alpha1
 kind: Token
 metadata:
-  name: container-token
+  name: function-token
 spec:
   forProvider:
     description: "Managed with Crossplane Github Provider (generated with Upjet)"
     visibility: public
-    name: crossplane-container-token
-    containerIdRef:
-      name: container
+    name: crossplane-function-token
+    functionIdRef:
+      name: function
     expiresAt: "2023-01-05T13:12:46Z"
   providerConfigRef:
     name: default
 ---
-apiVersion: container.scaleway.upbound.io/v1alpha1
-kind: Container
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: Function
 metadata:
-  name: container
+  name: function
 spec:
   forProvider:
     description: "Managed with Crossplane Github Provider (generated with Upjet)"
     visibility: public
-    name: crossplane-container
+    name: crossplane-function
     namespaceIdRef:
-      container-namespace
+      name: function-namespace
+    runtime: node14
+    privacy: private
+    handler: handler.handle
   providerConfigRef:
     name: default
 ---
-apiVersion: container.scaleway.upbound.io/v1alpha1
-kind: ContainerNamespace
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: FunctionNamespace
 metadata:
-  name: container-namespace
+  name: function-namespace
 spec:
   forProvider:
     description: "Managed with Crossplane Github Provider (generated with Upjet)"
     visibility: public
-    name: crossplane-container-namespace
+    name: crossplane-function-namespace
   providerConfigRef:
     name: default

@@ -21,6 +21,11 @@ import (
 	record "github.com/scaleway/provider-scaleway/internal/controller/domain/record"
 	zone "github.com/scaleway/provider-scaleway/internal/controller/domain/zone"
 	ip "github.com/scaleway/provider-scaleway/internal/controller/flexibleip/ip"
+	cronfunction "github.com/scaleway/provider-scaleway/internal/controller/function/cron"
+	domainfunction "github.com/scaleway/provider-scaleway/internal/controller/function/domain"
+	function "github.com/scaleway/provider-scaleway/internal/controller/function/function"
+	functionnamespace "github.com/scaleway/provider-scaleway/internal/controller/function/functionnamespace"
+	tokenfunction "github.com/scaleway/provider-scaleway/internal/controller/function/token"
 	apikey "github.com/scaleway/provider-scaleway/internal/controller/iam/apikey"
 	application "github.com/scaleway/provider-scaleway/internal/controller/iam/application"
 	group "github.com/scaleway/provider-scaleway/internal/controller/iam/group"
@@ -81,6 +86,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		record.Setup,
 		zone.Setup,
 		ip.Setup,
+		cronfunction.Setup,
+		domainfunction.Setup,
+		function.Setup,
+		functionnamespace.Setup,
+		tokenfunction.Setup,
 		apikey.Setup,
 		application.Setup,
 		group.Setup,

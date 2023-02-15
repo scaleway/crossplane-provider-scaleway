@@ -1,0 +1,28 @@
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: Function
+metadata:
+  name: function
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-function
+    namespaceIdRef:
+      name: function-namespace
+    runtime: node14
+    privacy: private
+    handler: handler.handle
+  providerConfigRef:
+    name: default
+---
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: FunctionNamespace
+metadata:
+  name: function-namespace
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-function-namespace
+  providerConfigRef:
+    name: default

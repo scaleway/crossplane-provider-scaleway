@@ -1,0 +1,15 @@
+apiVersion: function.scaleway.upbound.io/v1alpha1
+kind: FunctionNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/functionnamespace
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: Main function namespace
+    name: main-function-namespace
+
+---
+

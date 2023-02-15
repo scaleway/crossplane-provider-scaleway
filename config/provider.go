@@ -14,6 +14,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/container"
 	"github.com/scaleway/provider-scaleway/config/domain"
 	"github.com/scaleway/provider-scaleway/config/flexibleip"
+	"github.com/scaleway/provider-scaleway/config/function"
 	"github.com/scaleway/provider-scaleway/config/iam"
 	"github.com/scaleway/provider-scaleway/config/instance"
 	"github.com/scaleway/provider-scaleway/config/iot"
@@ -53,6 +54,7 @@ func GetProvider() *ujconfig.Provider {
 		container.Configure,
 		domain.Configure,
 		flexibleip.Configure,
+		function.Configure,
 		iam.Configure,
 		instance.Configure,
 		iot.Configure,

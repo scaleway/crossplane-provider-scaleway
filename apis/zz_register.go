@@ -16,6 +16,7 @@ import (
 	v1alpha1container "github.com/scaleway/provider-scaleway/apis/container/v1alpha1"
 	v1alpha1domain "github.com/scaleway/provider-scaleway/apis/domain/v1alpha1"
 	v1alpha1flexibleip "github.com/scaleway/provider-scaleway/apis/flexibleip/v1alpha1"
+	v1alpha1function "github.com/scaleway/provider-scaleway/apis/function/v1alpha1"
 	v1alpha1iam "github.com/scaleway/provider-scaleway/apis/iam/v1alpha1"
 	v1alpha1instance "github.com/scaleway/provider-scaleway/apis/instance/v1alpha1"
 	v1alpha1iot "github.com/scaleway/provider-scaleway/apis/iot/v1alpha1"
@@ -38,6 +39,7 @@ func init() {
 		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1flexibleip.SchemeBuilder.AddToScheme,
+		v1alpha1function.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1instance.SchemeBuilder.AddToScheme,
 		v1alpha1iot.SchemeBuilder.AddToScheme,
