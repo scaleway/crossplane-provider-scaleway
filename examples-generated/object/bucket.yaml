@@ -1,0 +1,17 @@
+apiVersion: object.scaleway.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/bucket
+  labels:
+    testing.upbound.io/example-name: some_bucket
+  name: some-bucket
+spec:
+  forProvider:
+    acl: private
+    name: some-unique-name
+    tags:
+      key: value
+
+---
+

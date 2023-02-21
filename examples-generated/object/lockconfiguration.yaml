@@ -1,0 +1,34 @@
+apiVersion: object.scaleway.upbound.io/v1alpha1
+kind: LockConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/lockconfiguration
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    bucket: some-unique-name
+    rule:
+    - defaultRetention:
+      - days: 1
+        mode: GOVERNANCE
+
+---
+
+apiVersion: object.scaleway.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/lockconfiguration
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    acl: public-read
+    name: MyBucket
+    objectLockEnabled: true
+
+---
+

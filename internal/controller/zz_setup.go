@@ -52,8 +52,14 @@ import (
 	iplb "github.com/scaleway/provider-scaleway/internal/controller/lb/ip"
 	lb "github.com/scaleway/provider-scaleway/internal/controller/lb/lb"
 	routelb "github.com/scaleway/provider-scaleway/internal/controller/lb/route"
+	acl "github.com/scaleway/provider-scaleway/internal/controller/object/acl"
+	bucket "github.com/scaleway/provider-scaleway/internal/controller/object/bucket"
+	lockconfiguration "github.com/scaleway/provider-scaleway/internal/controller/object/lockconfiguration"
+	object "github.com/scaleway/provider-scaleway/internal/controller/object/object"
+	policyobject "github.com/scaleway/provider-scaleway/internal/controller/object/policy"
+	websiteconfiguration "github.com/scaleway/provider-scaleway/internal/controller/object/websiteconfiguration"
 	providerconfig "github.com/scaleway/provider-scaleway/internal/controller/providerconfig"
-	acl "github.com/scaleway/provider-scaleway/internal/controller/rdb/acl"
+	aclrdb "github.com/scaleway/provider-scaleway/internal/controller/rdb/acl"
 	database "github.com/scaleway/provider-scaleway/internal/controller/rdb/database"
 	databasebackup "github.com/scaleway/provider-scaleway/internal/controller/rdb/databasebackup"
 	instance "github.com/scaleway/provider-scaleway/internal/controller/rdb/instance"
@@ -117,8 +123,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iplb.Setup,
 		lb.Setup,
 		routelb.Setup,
-		providerconfig.Setup,
 		acl.Setup,
+		bucket.Setup,
+		lockconfiguration.Setup,
+		object.Setup,
+		policyobject.Setup,
+		websiteconfiguration.Setup,
+		providerconfig.Setup,
+		aclrdb.Setup,
 		database.Setup,
 		databasebackup.Setup,
 		instance.Setup,
