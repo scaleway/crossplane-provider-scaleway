@@ -137,6 +137,11 @@ spec:
                     description: The project ID of the expected bucket owner. The
                       project ID as owner.
                     type: string
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the bucket is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
                   region:
                     description: The region in which the bucket should be created.
                       The region you want to attach the resource to

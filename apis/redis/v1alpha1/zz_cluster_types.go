@@ -15,7 +15,7 @@ import (
 
 type ACLObservation struct {
 
-	// The UUID of the private network resource.
+	// The UUID of the endpoint.
 	// ID of the rule (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -56,6 +56,8 @@ type ClusterObservation struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
+	// Public network details. Only one of private_network and public_network may be set.
+	// ~> The public_network block exports:
 	// Public network specs details
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
@@ -102,6 +104,8 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Public network details. Only one of private_network and public_network may be set.
+	// ~> The public_network block exports:
 	// Public network specs details
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
@@ -164,11 +168,13 @@ type PrivateNetworkParameters struct {
 
 type PublicNetworkObservation struct {
 
-	// The UUID of the private network resource.
+	// The UUID of the endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Lis of IPv4 address of the endpoint (IP address).
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
+	// TCP port of the endpoint.
 	// TCP port of the endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }

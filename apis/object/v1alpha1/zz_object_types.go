@@ -46,6 +46,11 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The Scaleway region this bucket resides in.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

@@ -14,7 +14,17 @@ import (
 )
 
 type RouteObservation struct {
+
+	// The date at which the route was created.
+	// The date at which the route was created (RFC 3339 format)
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The ID of the route
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The date at which the route was last updated.
+	// The date at which the route was last updated (RFC 3339 format)
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type RouteParameters struct {
@@ -33,7 +43,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
-	// :  The ID of the frontend to which the route is associated.
+	// The ID of the frontend to which the route is associated.
 	// The frontend ID origin of redirection
 	// +crossplane:generate:reference:type=Frontend
 	// +kubebuilder:validation:Optional
@@ -47,8 +57,15 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 
-	// The SNI to match.
-	// The domain to match against
+	// The Host request header specifies the host of the server to which the request is being sent.
+	// Only one of match_sni and match_host_header should be specified.
+	// Specifies the host of the server to which the request is being sent
+	// +kubebuilder:validation:Optional
+	MatchHostHeader *string `json:"matchHostHeader,omitempty" tf:"match_host_header,omitempty"`
+
+	// The Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer.
+	// Only one of match_sni and match_host_header should be specified.
+	// Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
 	// +kubebuilder:validation:Optional
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
 }

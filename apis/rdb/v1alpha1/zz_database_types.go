@@ -16,7 +16,7 @@ import (
 type DatabaseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Whether or not the database is managed or not.
+	// Whether the database is managed or not.
 	// Whether or not the database is managed
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 
@@ -31,7 +31,7 @@ type DatabaseObservation struct {
 
 type DatabaseParameters struct {
 
-	// UUID of the instance where to create the database.
+	// UUID of the rdb instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -49,6 +49,11 @@ type DatabaseParameters struct {
 	// Database name
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// (Defaults to provider region) The region in which the resource exists.
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 // DatabaseSpec defines the desired state of Database

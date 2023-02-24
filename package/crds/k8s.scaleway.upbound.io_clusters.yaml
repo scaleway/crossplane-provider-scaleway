@@ -178,10 +178,13 @@ spec:
                       new resource. The CNI plugin of the cluster'
                     type: string
                   deleteAdditionalResources:
-                    description: (Defaults to false) Delete additional resources like
-                      block volumes and loadbalancers that were created in Kubernetes
-                      on cluster deletion. Delete additional resources like block
-                      volumes and loadbalancers on cluster deletion
+                    description: 'Delete additional resources like block volumes,
+                      IPs and loadbalancers that were created in Kubernetes on cluster
+                      deletion. ~> Important: Setting this field to true means that
+                      you will lose all your cluster data and network configuration
+                      when you delete your cluster. If you prefer keeping it, you
+                      should instead set it as false. Delete additional resources
+                      like block volumes and loadbalancers on cluster deletion'
                     type: boolean
                   description:
                     description: A description for the Kubernetes cluster. The description
@@ -267,6 +270,7 @@ spec:
                     type: string
                 required:
                 - cni
+                - deleteAdditionalResources
                 - name
                 - version
                 type: object

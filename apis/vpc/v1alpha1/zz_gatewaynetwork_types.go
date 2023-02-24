@@ -38,7 +38,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
-	// The ID of the public gateway DHCP config.
+	// The ID of the public gateway DHCP config. Only one of dhcp_id and static_address should be specified.
 	// The ID of the public gateway DHCP config
 	// +crossplane:generate:reference:type=PublicGatewayDHCP
 	// +kubebuilder:validation:Optional
@@ -90,7 +90,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// Enable DHCP config on this network
+	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
 	// The static IP address in CIDR on this network
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`

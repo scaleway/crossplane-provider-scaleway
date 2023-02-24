@@ -63,6 +63,15 @@ type WebsiteConfigurationParameters struct {
 	// The name of the index document for the website.
 	// +kubebuilder:validation:Required
 	IndexDocument []IndexDocumentParameters `json:"indexDocument" tf:"index_document,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 // WebsiteConfigurationSpec defines the desired state of WebsiteConfiguration

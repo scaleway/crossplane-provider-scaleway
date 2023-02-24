@@ -24,7 +24,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Required
 	ACLRules []ACLRulesParameters `json:"aclRules" tf:"acl_rules,omitempty"`
 
-	// The instance on which to create the ACL.
+	// UUID of the rdb instance.
 	// Instance on which the ACL is applied
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -38,6 +38,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to provider region) The region in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

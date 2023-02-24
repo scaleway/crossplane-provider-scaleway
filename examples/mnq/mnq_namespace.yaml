@@ -1,0 +1,12 @@
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: MNQNamespace
+metadata:
+  name: mnq-namespace
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-mnq-namespace
+    protocol : nats
+  providerConfigRef:
+    name: default

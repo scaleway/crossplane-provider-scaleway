@@ -69,8 +69,8 @@ spec:
                       name
                     type: string
                   instanceId:
-                    description: UUID of the instance where to create the database.
-                      Instance on which the database is created
+                    description: UUID of the rdb instance. Instance on which the database
+                      is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -148,6 +148,11 @@ spec:
                   permission:
                     description: Permission to set. Valid values are readonly, readwrite,
                       all, custom and none. Privilege
+                    type: string
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the resource exists. The region you want to attach the resource
+                      to
                     type: string
                   userName:
                     description: Name of the user (e.g. my-db-user). User name

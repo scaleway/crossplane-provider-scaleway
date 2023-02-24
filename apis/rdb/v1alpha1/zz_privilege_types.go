@@ -24,7 +24,7 @@ type PrivilegeParameters struct {
 	// +kubebuilder:validation:Required
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// UUID of the instance where to create the database.
+	// UUID of the rdb instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -42,6 +42,11 @@ type PrivilegeParameters struct {
 	// Privilege
 	// +kubebuilder:validation:Required
 	Permission *string `json:"permission" tf:"permission,omitempty"`
+
+	// (Defaults to provider region) The region in which the resource exists.
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Name of the user (e.g. my-db-user).
 	// User name

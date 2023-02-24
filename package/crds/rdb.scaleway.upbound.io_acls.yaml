@@ -82,8 +82,8 @@ spec:
                       type: object
                     type: array
                   instanceId:
-                    description: The instance on which to create the ACL. Instance
-                      on which the ACL is applied
+                    description: UUID of the rdb instance. Instance on which the ACL
+                      is applied
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -159,7 +159,9 @@ spec:
                         type: object
                     type: object
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region) The region in which
+                      the Database Instance should be created. The region you want
+                      to attach the resource to
                     type: string
                 required:
                 - aclRules

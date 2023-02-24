@@ -85,6 +85,11 @@ spec:
                       lowercase Map of object's metadata, only lower case keys are
                       allowed
                     type: object
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the bucket is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
                   region:
                     description: The Scaleway region this bucket resides in. The region
                       you want to attach the resource to

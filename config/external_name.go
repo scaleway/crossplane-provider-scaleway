@@ -53,6 +53,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_lb_certificate":                      config.NameAsIdentifier,
 	"scaleway_lb_frontend":                         config.NameAsIdentifier,
 	"scaleway_lb_route":                            config.NameAsIdentifier,
+	"scaleway_mnq_credential":                      config.NameAsIdentifier,
+	"scaleway_mnq_namespace":                       config.NameAsIdentifier,
 	"scaleway_object":                              config.NameAsIdentifier,
 	"scaleway_object_bucket":                       config.NameAsIdentifier,
 	"scaleway_object_bucket_acl":                   config.NameAsIdentifier,

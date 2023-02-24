@@ -25,7 +25,7 @@ type BucketObservation struct {
 
 type BucketParameters struct {
 
-	// The canned ACL you want to apply to the bucket.
+	// (Deprecated) The canned ACL you want to apply to the bucket.
 	// ACL of the bucket: either 'public-read' or 'private'.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
@@ -52,6 +52,11 @@ type BucketParameters struct {
 	// Enable object lock
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The region in which the bucket should be created.
 	// The region you want to attach the resource to

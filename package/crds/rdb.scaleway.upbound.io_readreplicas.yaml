@@ -72,8 +72,8 @@ spec:
                       type: object
                     type: array
                   instanceId:
-                    description: Id of the rdb instance to replicate. Id of the rdb
-                      instance to replicate
+                    description: UUID of the rdb instance. Id of the rdb instance
+                      to replicate
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.

@@ -14,7 +14,7 @@ spec:
     frontendIdSelector:
       matchLabels:
         testing.upbound.io/example-name: frt01
-    matchSni: scaleway.com
+    matchSni: sni.scaleway.com
 
 ---
 

@@ -142,8 +142,8 @@ spec:
                         type: object
                     type: object
                   frontendId:
-                    description: ':  The ID of the frontend to which the route is
-                      associated. The frontend ID origin of redirection'
+                    description: The ID of the frontend to which the route is associated.
+                      The frontend ID origin of redirection
                     type: string
                   frontendIdRef:
                     description: Reference to a Frontend to populate frontendId.
@@ -218,8 +218,18 @@ spec:
                             type: string
                         type: object
                     type: object
+                  matchHostHeader:
+                    description: The Host request header specifies the host of the
+                      server to which the request is being sent. Only one of match_sni
+                      and match_host_header should be specified. Specifies the host
+                      of the server to which the request is being sent
+                    type: string
                   matchSni:
-                    description: The SNI to match. The domain to match against
+                    description: The Server Name Indication TLS extension field from
+                      an incoming connection made via an SSL/TLS transport layer.
+                      Only one of match_sni and match_host_header should be specified.
+                      Server Name Indication TLS extension field from an incoming
+                      connection made via an SSL/TLS transport layer
                     type: string
                 type: object
               providerConfigRef:
@@ -398,7 +408,16 @@ spec:
             properties:
               atProvider:
                 properties:
+                  createdAt:
+                    description: The date at which the route was created. The date
+                      at which the route was created (RFC 3339 format)
+                    type: string
                   id:
+                    description: The ID of the route
+                    type: string
+                  updatedAt:
+                    description: The date at which the route was last updated. The
+                      date at which the route was last updated (RFC 3339 format)
                     type: string
                 type: object
               conditions:

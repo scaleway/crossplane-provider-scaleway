@@ -73,8 +73,8 @@ spec:
                       (Format ISO 8601). Cannot be removed.
                     type: string
                   instanceId:
-                    description: UUID of the instance where the database to backup
-                      is. Instance on which the user is created
+                    description: UUID of the rdb instance. Instance on which the user
+                      is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -154,7 +154,9 @@ spec:
                       the backup.
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region) The region in which
+                      the resource exists. The region you want to attach the resource
+                      to
                     type: string
                 required:
                 - databaseName

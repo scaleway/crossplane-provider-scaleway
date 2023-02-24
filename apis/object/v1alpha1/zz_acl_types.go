@@ -46,6 +46,11 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The region in which the bucket should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

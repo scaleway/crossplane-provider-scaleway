@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     cni: cilium
+    deleteAdditionalResources: false
     name: jack
     version: 1.24.3
 

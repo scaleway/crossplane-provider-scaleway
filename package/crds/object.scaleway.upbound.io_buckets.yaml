@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   acl:
-                    description: 'The canned ACL you want to apply to the bucket.
-                      ACL of the bucket: either ''public-read'' or ''private''.'
+                    description: '(Deprecated) The canned ACL you want to apply to
+                      the bucket. ACL of the bucket: either ''public-read'' or ''private''.'
                     type: string
                   corsRule:
                     description: A rule of Cross-Origin Resource Sharing (documented
@@ -191,6 +191,11 @@ spec:
                       If a rule is disabled, Scaleway S3 doesn't perform any of the
                       actions defined in the rule. Enable object lock
                     type: boolean
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the bucket is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
                   region:
                     description: The region in which the bucket should be created.
                       The region you want to attach the resource to

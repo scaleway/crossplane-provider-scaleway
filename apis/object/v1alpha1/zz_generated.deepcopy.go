@@ -124,6 +124,11 @@ func (in *ACLParameters) DeepCopyInto(out *ACLParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -345,6 +350,11 @@ func (in *BucketParameters) DeepCopyInto(out *BucketParameters) {
 	if in.ObjectLockEnabled != nil {
 		in, out := &in.ObjectLockEnabled, &out.ObjectLockEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -909,6 +919,16 @@ func (in *LockConfigurationParameters) DeepCopyInto(out *LockConfigurationParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
 		*out = make([]RuleParameters, len(*in))
@@ -1078,6 +1098,11 @@ func (in *ObjectParameters) DeepCopyInto(out *ObjectParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -1284,6 +1309,11 @@ func (in *PolicyParameters) DeepCopyInto(out *PolicyParameters) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
 		**out = **in
 	}
@@ -1560,6 +1590,16 @@ func (in *WebsiteConfigurationParameters) DeepCopyInto(out *WebsiteConfiguration
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
 	}
 }
 

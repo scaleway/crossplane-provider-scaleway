@@ -164,6 +164,11 @@ type HealthCheckHTTPParameters struct {
 	// +kubebuilder:validation:Optional
 	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
 
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	// +kubebuilder:validation:Optional
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
 	// (Default: GET) The HTTP method to use for HC requests.
 	// The HTTP method to use for HC requests
 	// +kubebuilder:validation:Optional
@@ -185,10 +190,20 @@ type HealthCheckHTTPSParameters struct {
 	// +kubebuilder:validation:Optional
 	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
 
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	// +kubebuilder:validation:Optional
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
 	// (Default: GET) The HTTP method to use for HC requests.
 	// The HTTP method to use for HC requests
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The SNI to use for HC requests over SSL.
+	// The SNI to use for HC requests over SSL
+	// +kubebuilder:validation:Optional
+	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
 
 	// The HTTP endpoint URL to call for HC requests.
 	// The HTTPS endpoint URL to call for HC requests

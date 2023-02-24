@@ -46,7 +46,7 @@ type DatabaseBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// UUID of the instance where the database to backup is.
+	// UUID of the rdb instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -65,6 +65,7 @@ type DatabaseBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider region) The region in which the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

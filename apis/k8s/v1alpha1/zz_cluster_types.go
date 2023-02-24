@@ -156,10 +156,12 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Cni *string `json:"cni" tf:"cni,omitempty"`
 
-	// (Defaults to false) Delete additional resources like block volumes and loadbalancers that were created in Kubernetes on cluster deletion.
+	// Delete additional resources like block volumes, IPs and loadbalancers that were created in Kubernetes on cluster deletion.
+	// ~> Important: Setting this field to true means that you will lose all your cluster data and network configuration when you delete your cluster.
+	// If you prefer keeping it, you should instead set it as false.
 	// Delete additional resources like block volumes and loadbalancers on cluster deletion
-	// +kubebuilder:validation:Optional
-	DeleteAdditionalResources *bool `json:"deleteAdditionalResources,omitempty" tf:"delete_additional_resources,omitempty"`
+	// +kubebuilder:validation:Required
+	DeleteAdditionalResources *bool `json:"deleteAdditionalResources" tf:"delete_additional_resources,omitempty"`
 
 	// A description for the Kubernetes cluster.
 	// The description of the cluster

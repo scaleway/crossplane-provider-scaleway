@@ -162,11 +162,10 @@ spec:
                             The Private Network ID
                           type: string
                         staticConfig:
-                          description: Define two local ip address of your choice
-                            for each load balancer instance. See below. Define two
-                            IP addresses in the subnet of your private network that
-                            will be assigned for the principal and standby node of
-                            your load balancer.
+                          description: Define a local ip address of your choice for
+                            the load balancer instance. See below. Define an IP address
+                            in the subnet of your private network that will be assigned
+                            to your load balancer instance
                           items:
                             type: string
                           type: array

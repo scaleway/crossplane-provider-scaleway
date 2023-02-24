@@ -102,6 +102,10 @@ spec:
                           description: '(Default: 200) The expected HTTP status code.
                             The expected HTTP status code'
                           type: number
+                        hostHeader:
+                          description: The HTTP host header to use for HC requests.
+                            The HTTP host header to use for HC requests
+                          type: string
                         method:
                           description: '(Default: GET) The HTTP method to use for
                             HC requests. The HTTP method to use for HC requests'
@@ -124,9 +128,17 @@ spec:
                           description: '(Default: 200) The expected HTTP status code.
                             The expected HTTP status code'
                           type: number
+                        hostHeader:
+                          description: The HTTP host header to use for HC requests.
+                            The HTTP host header to use for HC requests
+                          type: string
                         method:
                           description: '(Default: GET) The HTTP method to use for
                             HC requests. The HTTP method to use for HC requests'
+                          type: string
+                        sni:
+                          description: The SNI to use for HC requests over SSL. The
+                            SNI to use for HC requests over SSL
                           type: string
                         uri:
                           description: The HTTP endpoint URL to call for HC requests.

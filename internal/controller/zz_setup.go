@@ -52,6 +52,8 @@ import (
 	iplb "github.com/scaleway/provider-scaleway/internal/controller/lb/ip"
 	lb "github.com/scaleway/provider-scaleway/internal/controller/lb/lb"
 	routelb "github.com/scaleway/provider-scaleway/internal/controller/lb/route"
+	credential "github.com/scaleway/provider-scaleway/internal/controller/mnq/credential"
+	mnqnamespace "github.com/scaleway/provider-scaleway/internal/controller/mnq/mnqnamespace"
 	acl "github.com/scaleway/provider-scaleway/internal/controller/object/acl"
 	bucket "github.com/scaleway/provider-scaleway/internal/controller/object/bucket"
 	lockconfiguration "github.com/scaleway/provider-scaleway/internal/controller/object/lockconfiguration"
@@ -123,6 +125,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iplb.Setup,
 		lb.Setup,
 		routelb.Setup,
+		credential.Setup,
+		mnqnamespace.Setup,
 		acl.Setup,
 		bucket.Setup,
 		lockconfiguration.Setup,

@@ -19,7 +19,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// The instance on which to create the user.
+	// UUID of the rdb instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -48,6 +48,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// The Scaleway region this resource resides in.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

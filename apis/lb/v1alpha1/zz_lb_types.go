@@ -115,8 +115,8 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Required
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
 
-	// Define two local ip address of your choice for each load balancer instance. See below.
-	// Define two IP addresses in the subnet of your private network that will be assigned for the principal and standby node of your load balancer.
+	// Define a local ip address of your choice for the load balancer instance. See below.
+	// Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
 	// +kubebuilder:validation:Optional
 	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 

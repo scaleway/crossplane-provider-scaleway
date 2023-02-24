@@ -182,6 +182,68 @@ resources:
             vlan: '- The VLAN ID associated to the private network.'
             zone: '- (Defaults to provider zone) The zone in which the server should be created.'
         importStatements: []
+    scaleway_cockpit:
+        subCategory: ""
+        description: Manages Scaleway Cockpits.
+        name: scaleway_cockpit
+        title: scaleway_cockpit
+        examples:
+            - name: main
+              manifest: '{}'
+            - name: main
+              manifest: |-
+                {
+                  "project_id": "11111111-1111-1111-1111-111111111111"
+                }
+        argumentDocs:
+            alertmanager_url: '- The alertmanager URL'
+            endpoints: '- Endpoints'
+            grafana_url: '- The grafana URL'
+            logs_url: '- The logs URL'
+            metrics_url: '- The metrics URL'
+            project_id: '- (Defaults to provider project_id) The ID of the project the cockpit is associated with.'
+        importStatements: []
+    scaleway_cockpit_token:
+        subCategory: ""
+        description: Manages Scaleway Cockpit Tokens.
+        name: scaleway_cockpit_token
+        title: scaleway_cockpit_token
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "name": "my-awesome-token",
+                  "project_id": "${data.scaleway_cockpit.main.project_id}"
+                }
+              references:
+                project_id: data.scaleway_cockpit.main.project_id
+            - name: main
+              manifest: |-
+                {
+                  "name": "my-awesome-token",
+                  "project_id": "${data.scaleway_cockpit.main.project_id}",
+                  "scopes": {
+                    "query_logs": true,
+                    "query_metrics": true,
+                    "write_logs": false,
+                    "write_metrics": false
+                  }
+                }
+              references:
+                project_id: data.scaleway_cockpit.main.project_id
+        argumentDocs:
+            name: '- (Required) The name of the token'
+            project_id: '- (Defaults to provider project_id) The ID of the project the cockpit is associated with.'
+            query_logs: '- (Defaults to false) Query logs'
+            query_metrics: '- (Defaults to false) Query metrics'
+            scopes: '- (Optional) Allowed scopes'
+            secret_key: '- The secret key of the token'
+            setup_alerts: '- (Defaults to false) Setup alerts'
+            setup_logs_rules: '- (Defaults to false) Setup logs rules'
+            setup_metrics_rules: '- (Defaults to false) Setup metrics rules'
+            write_logs: '- (Defaults to true) Write logs'
+            write_metrics: '- (Defaults to true) Write metrics'
+        importStatements: []
     scaleway_container:
         subCategory: ""
         description: Manages Scaleway Containers.
@@ -2116,6 +2178,7 @@ resources:
               manifest: |-
                 {
                   "cni": "cilium",
+                  "delete_additional_resources": false,
                   "name": "jack",
                   "version": "1.24.3"
                 }
@@ -2131,6 +2194,7 @@ resources:
               manifest: |-
                 {
                   "cni": "kilo",
+                  "delete_additional_resources": false,
                   "name": "henry",
                   "type": "multicloud",
                   "version": "1.24.3"
@@ -2159,10 +2223,11 @@ resources:
                     }
                   ],
                   "cni": "calico",
+                  "delete_additional_resources": false,
                   "description": "my awesome cluster",
                   "name": "john",
                   "tags": [
-                    "i'm an awsome tag",
+                    "i'm an awesome tag",
                     "yay"
                   ],
                   "version": "1.24.3"
@@ -2183,6 +2248,7 @@ resources:
               manifest: |-
                 {
                   "cni": "flannel",
+                  "delete_additional_resources": false,
                   "name": "joy",
                   "version": "1.24.3"
                 }
@@ -2209,6 +2275,7 @@ resources:
               manifest: |-
                 {
                   "cni": "flannel",
+                  "delete_additional_resources": false,
                   "name": "joy",
                   "version": "1.24.3"
                 }
@@ -2308,7 +2375,10 @@ resources:
             config_file: '- The raw kubeconfig file.'
             created_at: '- The creation date of the cluster.'
             default_pool: '- (Deprecated) See below.'
-            delete_additional_resources: '- (Defaults to false) Delete additional resources like block volumes and loadbalancers that were created in Kubernetes on cluster deletion.'
+            delete_additional_resources: |-
+                - (Required) Delete additional resources like block volumes, IPs and loadbalancers that were created in Kubernetes on cluster deletion.
+                ~> Important: Setting this field to true means that you will lose all your cluster data and network configuration when you delete your cluster.
+                If you prefer keeping it, you should instead set it as false.
             description: '- (Optional) A description for the Kubernetes cluster.'
             disable_scale_down: '- (Defaults to false) Disables the scale down feature of the autoscaler.'
             enable: |-
@@ -2505,8 +2575,7 @@ resources:
                     {
                       "private_network_id": "${scaleway_vpc_private_network.main.id}",
                       "static_config": [
-                        "172.16.0.100",
-                        "172.16.0.101"
+                        "172.16.0.100"
                       ]
                     },
                     {
@@ -2583,8 +2652,7 @@ resources:
                     {
                       "private_network_id": "${scaleway_vpc_private_network.main.id}",
                       "static_config": [
-                        "172.16.0.100",
-                        "172.16.0.101"
+                        "172.16.0.100"
                       ]
                     }
                   ],
@@ -2613,7 +2681,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the load-balancer is associated with.'
             release_ip: '- (Defaults to false) The release_ip allow release the ip address associated with the load-balancers.'
             ssl_compatibility_level: '- (Optional) Enforces minimal SSL version (in SSL/TLS offloading context). Please check possible values.'
-            static_config: '- (Optional) Define two local ip address of your choice for each load balancer instance. See below.'
+            static_config: '- (Optional) Define a local ip address of your choice for the load balancer instance. See below.'
             tags: '- (Optional) The tags associated with the load-balancers.'
             type: '- (Required) The type of the load-balancer. Please check the migration section to upgrade the type'
             zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
@@ -2665,6 +2733,7 @@ resources:
             health_check_port: '- (Default: forward_port) Port the HC requests will be send to.'
             health_check_tcp: '- (Optional) This block enable TCP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.'
             health_check_timeout: '- (Default: 30s) Timeout before we consider a HC request failed.'
+            host_header: '- (Optional) The HTTP host header to use for HC requests.'
             id: '- The ID of the loadbalancer backend.'
             ignore_ssl_server_verify: '- (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.'
             lb_id: |-
@@ -2676,6 +2745,7 @@ resources:
             proxy_protocol: '- (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)'
             send_proxy_v2: '- DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.'
             server_ips: '- (Optional) List of backend server IP addresses. Addresses can be either IPv4 or IPv6.'
+            sni: '- (Optional) The SNI to use for HC requests over SSL.'
             ssl_bridging: '- (Default: false) Enables SSL between load balancer and backend servers.'
             sticky_sessions: '- (Default: none) Load balancing algorithm. Possible values are: none, cookie and table.'
             sticky_sessions_cookie_name: '- (Optional) Cookie name for for sticky sessions. Only applicable when sticky_sessions is set to cookie.'
@@ -2956,7 +3026,38 @@ resources:
                 {
                   "backend_id": "${scaleway_lb_backend.bkd01.id}",
                   "frontend_id": "${scaleway_lb_frontend.frt01.id}",
-                  "match_sni": "scaleway.com"
+                  "match_sni": "sni.scaleway.com"
+                }
+              references:
+                backend_id: scaleway_lb_backend.bkd01.id
+                frontend_id: scaleway_lb_frontend.frt01.id
+              dependencies:
+                scaleway_lb.lb01: |-
+                    {
+                      "ip_id": "${scaleway_lb_ip.ip01.id}",
+                      "name": "test-lb",
+                      "type": "lb-s"
+                    }
+                scaleway_lb_backend.bkd01: |-
+                    {
+                      "forward_port": 80,
+                      "forward_protocol": "tcp",
+                      "lb_id": "${scaleway_lb.lb01.id}",
+                      "proxy_protocol": "none"
+                    }
+                scaleway_lb_frontend.frt01: |-
+                    {
+                      "backend_id": "${scaleway_lb_backend.bkd01.id}",
+                      "inbound_port": 80,
+                      "lb_id": "${scaleway_lb.lb01.id}"
+                    }
+                scaleway_lb_ip.ip01: '{}'
+            - name: rt01
+              manifest: |-
+                {
+                  "backend_id": "${scaleway_lb_backend.bkd01.id}",
+                  "frontend_id": "${scaleway_lb_frontend.frt01.id}",
+                  "match_host_header": "host.scaleway.com"
                 }
               references:
                 backend_id: scaleway_lb_backend.bkd01.id
@@ -2983,9 +3084,82 @@ resources:
                     }
                 scaleway_lb_ip.ip01: '{}'
         argumentDocs:
-            backend_id: (Required) - The ID of the backend to which the route is associated.
-            frontend_id: ': (Required) The ID of the frontend to which the route is associated.'
-            match_sni: '- (Required) The SNI to match.'
+            backend_id: '- (Required) The ID of the backend to which the route is associated.'
+            created_at: '- The date at which the route was created.'
+            frontend_id: '- (Required) The ID of the frontend to which the route is associated.'
+            id: '- The ID of the route'
+            match_host_header: |-
+                - The Host request header specifies the host of the server to which the request is being sent.
+                Only one of match_sni and match_host_header should be specified.
+            match_sni: |-
+                - The Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer.
+                Only one of match_sni and match_host_header should be specified.
+            updated_at: '- The date at which the route was last updated.'
+        importStatements: []
+    scaleway_mnq_credential:
+        subCategory: ""
+        description: Manages Scaleway Messaging and Queuing Credential.
+        name: scaleway_mnq_credential
+        title: scaleway_mnq_credential
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "name": "creed-ns",
+                  "namespace_id": "${scaleway_mnq_namespace.main.id}"
+                }
+              references:
+                namespace_id: scaleway_mnq_namespace.main.id
+              dependencies:
+                scaleway_mnq_namespace.main: |-
+                    {
+                      "name": "mnq-ns",
+                      "protocol": "nats"
+                    }
+            - name: main
+              manifest: |-
+                {
+                  "name": "your-creed-sns",
+                  "namespace_id": "${scaleway_mnq_namespace.main.id}",
+                  "sqs_sns_credentials": [
+                    {
+                      "permissions": [
+                        {
+                          "can_manage": true,
+                          "can_publish": true,
+                          "can_receive": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                namespace_id: scaleway_mnq_namespace.main.id
+              dependencies:
+                scaleway_mnq_namespace.main: |-
+                    {
+                      "name": "your-namespace",
+                      "protocol": "sqs_sns"
+                    }
+        argumentDocs:
+            access_key: '- The ID of the key.'
+            can_manage: '- (Optional). Defines if user can manage the associated resource(s).'
+            can_publish: '- (Optional). Defines if user can publish messages to the service.'
+            can_receive: '- (Optional). Defines if user can receive messages from the service.'
+            content: '- Raw content of the NATS credentials file.'
+            id: '- The credential ID (UUID format).'
+            name: '- (Optional) The credential name..'
+            namespace_id: '- (Required) The namespace containing the Credential.'
+            nats_credentials: '- Credentials file used to connect to the NATS service. Only one of nats_credentials and sqs_sns_credentials may be set.'
+            permissions: List of permissions associated to this Credential. Only one of permissions may be set.
+            protocol: '- The protocol associated to the Credential. Possible values are nats and sqs_sns.'
+            region: |-
+                - (Defaults to provider region). The region
+                in which the namespace should be created.
+            secret_key: '- The Secret value of the key.'
+            sqs_sns_credentials: |-
+                - Credential used to connect to the SQS/SNS service. Only one of nats_credentials
+                and sqs_sns_credentials may be set.
         importStatements: []
     scaleway_mnq_namespace:
         subCategory: ""
@@ -3044,6 +3218,7 @@ resources:
             id: '- The path of the object, including bucket name.'
             key: '- (Required) The path of the object.'
             metadata: '- (Optional) Map of metadata used for the object, keys must be lowercase'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             region: '- The Scaleway region this bucket resides in.'
             storage_class: '- (Optional) Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.'
             tags: '- (Optional) Map of tags'
@@ -3058,16 +3233,20 @@ resources:
             - name: some_bucket
               manifest: |-
                 {
-                  "acl": "private",
                   "name": "some-unique-name",
                   "tags": {
                     "key": "value"
                   }
                 }
+            - name: some_bucket
+              manifest: |-
+                {
+                  "name": "some-unique-name",
+                  "project_id": "11111111-1111-1111-1111-111111111111"
+                }
             - name: main
               manifest: |-
                 {
-                  "acl": "private",
                   "lifecycle_rule": [
                     {
                       "enabled": true,
@@ -3132,7 +3311,7 @@ resources:
                 }
         argumentDocs:
             abort_incomplete_multipart_upload_days: (Optional) Specifies the number of days after initiating a multipart upload when the multipart upload must be completed.
-            acl: '- (Optional) The canned ACL you want to apply to the bucket.'
+            acl: '- (Optional)(Deprecated) The canned ACL you want to apply to the bucket.'
             allowed_headers: (Optional) Specifies which headers are allowed.
             allowed_methods: (Required) Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
             allowed_origins: (Required) Specifies which origins are allowed.
@@ -3147,6 +3326,7 @@ resources:
             max_age_seconds: (Optional) Specifies time in seconds that browser can cache the response for a preflight request.
             name: '- (Required) The name of the bucket.'
             prefix: '- (Optional) Object key prefix identifying one or more objects to which the rule applies.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             region: '- (Optional) The region in which the bucket should be created.'
             storage_class: (Required) Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
             tags: '- (Optional) A list of tags (key / value) for the bucket.'
@@ -3227,6 +3407,7 @@ resources:
             id: '- The region,bucket and acl separated by (/).'
             owner.display_name: '- (Optional) The display name of the owner.'
             owner.id: '- (Required) The ID of the project owner.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             region: '- (Optional) The region in which the bucket should be created.'
         importStatements: []
     scaleway_object_bucket_lock_configuration:
@@ -3264,6 +3445,7 @@ resources:
             days: '- (Optional) The number of days that you want to specify for the default retention period.'
             default_retention: '- (Required) The default retention for the lock.'
             mode: '- (Required) The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             rule: '- (Optional) Specifies the Object Lock rule for the specified object.'
             years: '- (Optional) The number of years that you want to specify for the default retention period.'
         importStatements: []
@@ -3304,6 +3486,7 @@ resources:
             bucket: '- (Required) The name of the bucket.'
             id: '- The unique name of the bucket.'
             policy: '- (Required) The policy document. This is a JSON formatted string. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             region: '- The Scaleway region this bucket resides in.'
         importStatements: []
     scaleway_object_bucket_website_configuration:
@@ -3362,6 +3545,7 @@ resources:
             index_document.website_domain: '- The domain of the website endpoint. This is used to create DNS alias records.'
             index_document.website_endpoint: '- The website endpoint.'
             key: '- (Required) The object key name to use when a 4XX class error occurs.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
         importStatements: []
     scaleway_rdb_acl:
         subCategory: ""
@@ -3386,7 +3570,8 @@ resources:
             acl_rules: '- A list of ACLs (structure is described below)'
             acl_rules.description: '- (Optional) A text describing this rule. Default description: IP allowed'
             acl_rules.ip: '- (Required) The ip range to whitelist in CIDR notation'
-            instance_id: '- (Required) The instance on which to create the ACL.'
+            instance_id: '- (Required) UUID of the rdb instance.'
+            region: '- (Defaults to provider region) The region in which the Database Instance should be created.'
         importStatements: []
     scaleway_rdb_database:
         subCategory: ""
@@ -3403,10 +3588,11 @@ resources:
               references:
                 instance_id: scaleway_rdb_instance.main.id
         argumentDocs:
-            instance_id: '- (Required) UUID of the instance where to create the database.'
-            managed: '- Whether or not the database is managed or not.'
+            instance_id: '- (Required) UUID of the rdb instance.'
+            managed: '- Whether the database is managed or not.'
             name: '- (Required) Name of the database (e.g. my-new-database).'
             owner: '- The name of the owner of the database.'
+            region: '- (Defaults to provider region) The region in which the resource exists.'
             size: '- Size of the database (in bytes).'
         importStatements: []
     scaleway_rdb_database_backup:
@@ -3437,9 +3623,10 @@ resources:
         argumentDocs:
             created_at: '- Creation date (Format ISO 8601).'
             expires_at: (Optional) Expiration date (Format ISO 8601).
-            instance_id: '- (Required) UUID of the instance where the database to backup is.'
+            instance_id: '- (Required) UUID of the rdb instance.'
             instance_name: '- Name of the instance of the backup.'
             name: '- (Required) Name of the database (e.g. my-database).'
+            region: '- (Defaults to provider region) The region in which the resource exists.'
             size: '- Size of the backup (in bytes).'
             updated_at: '- Updated date (Format ISO 8601).'
         importStatements: []
@@ -3596,7 +3783,7 @@ resources:
         name: scaleway_rdb_privilege
         title: scaleway_rdb_privilege
         examples:
-            - name: priv
+            - name: main
               manifest: |-
                 {
                   "database_name": "my-db-name",
@@ -3604,29 +3791,40 @@ resources:
                     "${scaleway_rdb_user.main}",
                     "${scaleway_rdb_database.main}"
                   ],
-                  "instance_id": "${scaleway_rdb_instance.rdb.id}",
+                  "instance_id": "${scaleway_rdb_instance.main.id}",
                   "permission": "all",
                   "user_name": "my-db-user"
                 }
               references:
-                instance_id: scaleway_rdb_instance.rdb.id
+                instance_id: scaleway_rdb_instance.main.id
               dependencies:
                 scaleway_rdb_database.main: |-
                     {
-                      "instance_id": "${scaleway_rdb_instance.pgsql.id}",
-                      "name": "foobar"
+                      "instance_id": "${scaleway_rdb_instance.main.id}",
+                      "name": "database"
+                    }
+                scaleway_rdb_instance.main: |-
+                    {
+                      "disable_backup": true,
+                      "engine": "PostgreSQL-11",
+                      "is_ha_cluster": true,
+                      "name": "rdb",
+                      "node_type": "DB-DEV-S",
+                      "password": "thiZ_is_v\u0026ry_s3cret",
+                      "user_name": "my_initial_user"
                     }
                 scaleway_rdb_user.main: |-
                     {
-                      "instance_id": "${scaleway_rdb_instance.pgsql.id}",
+                      "instance_id": "${scaleway_rdb_instance.main.id}",
                       "is_admin": false,
                       "name": "foobar",
                       "password": "thiZ_is_v\u0026ry_s3cret"
                     }
         argumentDocs:
             database_name: '- (Required) Name of the database (e.g. my-db-name).'
-            instance_id: '- (Required) UUID of the instance where to create the database.'
+            instance_id: '- (Required) UUID of the rdb instance.'
             permission: '- (Required) Permission to set. Valid values are readonly, readwrite, all, custom and none.'
+            region: '- (Defaults to provider region) The region in which the resource exists.'
             user_name: '- (Required) Name of the user (e.g. my-db-user).'
         importStatements: []
     scaleway_rdb_read_replica:
@@ -3692,7 +3890,7 @@ resources:
             endpoint_id: '- The ID of the endpoint of the read replica.'
             hostname: '- Hostname of the endpoint. Only one of ip and hostname may be set.'
             id: '- The ID of the Database read replica.'
-            instance_id: '- (Required) Id of the rdb instance to replicate.'
+            instance_id: '- (Required) UUID of the rdb instance.'
             ip: '- IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.'
             name: '- Name of the endpoint.'
             port: '- TCP port of the endpoint.'
@@ -3712,7 +3910,7 @@ resources:
                 {
                   "instance_id": "${scaleway_rdb_instance.main.id}",
                   "is_admin": true,
-                  "name": "titi",
+                  "name": "devtools",
                   "password": "${random_password.db_password.result}"
                 }
               references:
@@ -3725,10 +3923,11 @@ resources:
                       "special": true
                     }
         argumentDocs:
-            instance_id: '- (Required) The instance on which to create the user.'
+            instance_id: '- (Required) UUID of the rdb instance.'
             is_admin: '- (Optional) Grant admin permissions to the Database User.'
             name: '- (Required) Database User name.'
             password: '- (Required) Database User password.'
+            region: '- The Scaleway region this resource resides in.'
         importStatements: []
     scaleway_redis_cluster:
         subCategory: ""
@@ -3811,6 +4010,12 @@ resources:
             private_network.id: '- (Required) The UUID of the private network resource.'
             private_network.service_ips: '- (Required) Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.'
             project_id: '- (Defaults to provider project_id) The ID of the project the Redis Cluster is associated with.'
+            public_network: |-
+                - (Optional) Public network details. Only one of private_network and public_network may be set.
+                ~> The public_network block exports:
+            public_network.id: '- (Required) The UUID of the endpoint.'
+            public_network.ips: '- Lis of IPv4 address of the endpoint (IP address).'
+            public_network.port: '- TCP port of the endpoint.'
             settings: '- (Optional) Map of settings for redis cluster. Available settings can be found by listing redis versions with scaleway API or CLI'
             tags: '- (Optional) The tags associated with the Redis Cluster.'
             tls_enabled: '- (Defaults to false) Whether TLS is enabled or not.'
@@ -3905,18 +4110,39 @@ resources:
                       "subnet": "192.168.1.0/24"
                     }
                 scaleway_vpc_public_gateway_ip.gw01: '{}'
+            - name: main
+              manifest: |-
+                {
+                  "enable_dhcp": false,
+                  "enable_masquerade": true,
+                  "gateway_id": "${scaleway_vpc_public_gateway.pg01.id}",
+                  "private_network_id": "${scaleway_vpc_private_network.pn01.id}",
+                  "static_address": "192.168.1.42/24"
+                }
+              references:
+                gateway_id: scaleway_vpc_public_gateway.pg01.id
+                private_network_id: scaleway_vpc_private_network.pn01.id
+              dependencies:
+                scaleway_vpc_private_network.pn01: |-
+                    {
+                      "name": "pn_test_network"
+                    }
+                scaleway_vpc_public_gateway.pg01: |-
+                    {
+                      "name": "foobar",
+                      "type": "VPC-GW-S"
+                    }
         argumentDocs:
             cleanup_dhcp: '- (Defaults to false) Remove DHCP config on this network on destroy. It requires DHCP id.'
             created_at: '- The date and time of the creation of the gateway network.'
-            dhcp_id: '- (Required) The ID of the public gateway DHCP config.'
+            dhcp_id: '- (Required) The ID of the public gateway DHCP config. Only one of dhcp_id and static_address should be specified.'
             enable_dhcp: '- (Defaults to true) Enable DHCP config on this network. It requires DHCP id.'
             enable_masquerade: '- (Defaults to true) Enable masquerade on this network'
             gateway_id: '- (Required) The ID of the public gateway.'
             id: '- The ID of the gateway network.'
             mac_address: '- The mac address of the creation of the gateway network.'
             private_network_id: '- (Required) The ID of the private network.'
-            project_id: '- (Defaults to provider project_id) The ID of the project the gateway network is associated with.'
-            static_address: '- Enable DHCP config on this network'
+            static_address: '- Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.'
             updated_at: '- The date and time of the last update of the gateway network.'
             zone: '- (Defaults to provider zone) The zone in which the gateway network should be created.'
         importStatements: []
@@ -4104,6 +4330,37 @@ resources:
             tags: '- (Optional) The tags associated with the public gateway IP.'
             updated_at: '- The date and time of the last update of the public gateway ip.'
             zone: '- (Defaults to provider zone) The zone in which the public gateway ip should be created.'
+        importStatements: []
+    scaleway_vpc_public_gateway_ip_reverse_dns:
+        subCategory: ""
+        description: Manages Scaleway VPC Public Gateways IPs reverse DNS.
+        name: scaleway_vpc_public_gateway_ip_reverse_dns
+        title: scaleway_vpc_public_gateway_ip_reverse_dns
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "gateway_ip_id": "${scaleway_vpc_public_gateway_ip.main.id}",
+                  "reverse": "tf.example.com"
+                }
+              references:
+                gateway_ip_id: scaleway_vpc_public_gateway_ip.main.id
+              dependencies:
+                scaleway_domain_record.tf_A: |-
+                    {
+                      "data": "${scaleway_vpc_public_gateway_ip.main.address}",
+                      "dns_zone": "example.com",
+                      "name": "tf",
+                      "priority": 1,
+                      "ttl": 3600,
+                      "type": "A"
+                    }
+                scaleway_vpc_public_gateway_ip.main: '{}'
+        argumentDocs:
+            gateway_ip_id: '- (Required) The public gateway IP ID'
+            id: '- The ID of the public gateway ip.'
+            reverse: '- (Optional) The reverse domain name for this IP address'
+            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_vpc_public_gateway_pat_rule:
         subCategory: ""

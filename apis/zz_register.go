@@ -22,6 +22,7 @@ import (
 	v1alpha1iot "github.com/scaleway/provider-scaleway/apis/iot/v1alpha1"
 	v1alpha1k8s "github.com/scaleway/provider-scaleway/apis/k8s/v1alpha1"
 	v1alpha1lb "github.com/scaleway/provider-scaleway/apis/lb/v1alpha1"
+	v1alpha1mnq "github.com/scaleway/provider-scaleway/apis/mnq/v1alpha1"
 	v1alpha1object "github.com/scaleway/provider-scaleway/apis/object/v1alpha1"
 	v1alpha1rdb "github.com/scaleway/provider-scaleway/apis/rdb/v1alpha1"
 	v1alpha1redis "github.com/scaleway/provider-scaleway/apis/redis/v1alpha1"
@@ -46,6 +47,7 @@ func init() {
 		v1alpha1iot.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
+		v1alpha1mnq.SchemeBuilder.AddToScheme,
 		v1alpha1object.SchemeBuilder.AddToScheme,
 		v1alpha1rdb.SchemeBuilder.AddToScheme,
 		v1alpha1redis.SchemeBuilder.AddToScheme,

@@ -45,6 +45,15 @@ type LockConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Specifies the Object Lock rule for the specified object.
 	// Specifies the Object Lock rule for the specified object.
 	// +kubebuilder:validation:Required

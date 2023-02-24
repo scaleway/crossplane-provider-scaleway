@@ -62,7 +62,7 @@ type ReadReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectAccess []DirectAccessParameters `json:"directAccess,omitempty" tf:"direct_access,omitempty"`
 
-	// Id of the rdb instance to replicate.
+	// UUID of the rdb instance.
 	// Id of the rdb instance to replicate
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional

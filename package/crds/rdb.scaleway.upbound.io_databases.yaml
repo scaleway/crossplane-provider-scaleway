@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   instanceId:
-                    description: UUID of the instance where to create the database.
-                      Instance on which the database is created
+                    description: UUID of the rdb instance. Instance on which the database
+                      is created
                     type: string
                   instanceIdRef:
                     description: Reference to a Instance to populate instanceId.
@@ -144,6 +144,11 @@ spec:
                   name:
                     description: Name of the database (e.g. my-new-database). Database
                       name
+                    type: string
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the resource exists. The region you want to attach the resource
+                      to
                     type: string
                 required:
                 - name
@@ -327,8 +332,8 @@ spec:
                   id:
                     type: string
                   managed:
-                    description: Whether or not the database is managed or not. Whether
-                      or not the database is managed
+                    description: Whether the database is managed or not. Whether or
+                      not the database is managed
                     type: boolean
                   owner:
                     description: The name of the owner of the database. User that

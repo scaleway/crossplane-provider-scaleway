@@ -145,7 +145,9 @@ spec:
                       to attach the resource to
                     type: string
                   publicNetwork:
-                    description: Public network specs details
+                    description: 'Public network details. Only one of private_network
+                      and public_network may be set. ~> The public_network block exports:
+                      Public network specs details'
                     items:
                       type: object
                     type: array
@@ -367,8 +369,8 @@ spec:
                     items:
                       properties:
                         id:
-                          description: The UUID of the private network resource. ID
-                            of the rule (UUID format).
+                          description: The UUID of the endpoint. ID of the rule (UUID
+                            format).
                           type: string
                       type: object
                     type: array
@@ -397,18 +399,21 @@ spec:
                       type: object
                     type: array
                   publicNetwork:
-                    description: Public network specs details
+                    description: 'Public network details. Only one of private_network
+                      and public_network may be set. ~> The public_network block exports:
+                      Public network specs details'
                     items:
                       properties:
                         id:
-                          description: The UUID of the private network resource.
+                          description: The UUID of the endpoint.
                           type: string
                         ips:
+                          description: Lis of IPv4 address of the endpoint (IP address).
                           items:
                             type: string
                           type: array
                         port:
-                          description: TCP port of the endpoint
+                          description: TCP port of the endpoint. TCP port of the endpoint
                           type: number
                       type: object
                     type: array
