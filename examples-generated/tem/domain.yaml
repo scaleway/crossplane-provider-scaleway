@@ -1,0 +1,14 @@
+apiVersion: tem.scaleway.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tem/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: example.com
+
+---
+

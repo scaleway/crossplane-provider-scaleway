@@ -25,6 +25,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/rdb"
 	"github.com/scaleway/provider-scaleway/config/redis"
 	"github.com/scaleway/provider-scaleway/config/registry"
+	"github.com/scaleway/provider-scaleway/config/tem"
 	"github.com/scaleway/provider-scaleway/config/vpc"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
@@ -67,6 +68,7 @@ func GetProvider() *ujconfig.Provider {
 		rdb.Configure,
 		redis.Configure,
 		registry.Configure,
+		tem.Configure,
 		vpc.Configure,
 	} {
 		configure(pc)
