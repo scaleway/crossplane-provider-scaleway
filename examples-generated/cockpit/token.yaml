@@ -1,0 +1,17 @@
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: Token
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-awesome-token
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scaleway_cockpit
+
+---
+

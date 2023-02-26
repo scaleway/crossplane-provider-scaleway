@@ -1,0 +1,32 @@
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/cockpit
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-account-project
+  providerConfigRef:
+    name: default
+---
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: Cockpit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/cockpit
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: "Managed with Crossplane Github Provider (generated with Upjet)"
+    visibility: public
+    name: crossplane-cockpit
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  providerConfigRef:
+    name: default

@@ -14,6 +14,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_account_ssh_key":                     config.NameAsIdentifier,
 	"scaleway_apple_silicon_server":                config.NameAsIdentifier,
 	"scaleway_baremetal_server":                    config.NameAsIdentifier,
+	"scaleway_cockpit":                             config.NameAsIdentifier,
+	"scaleway_cockpit_token":                       config.NameAsIdentifier,
 	"scaleway_container":                           config.NameAsIdentifier,
 	"scaleway_container_cron":                      config.NameAsIdentifier,
 	"scaleway_container_domain":                    config.NameAsIdentifier,
