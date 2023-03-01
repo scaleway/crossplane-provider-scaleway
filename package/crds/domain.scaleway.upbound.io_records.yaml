@@ -241,7 +241,8 @@ spec:
                       record) The priority of the record
                     type: number
                   projectId:
-                    description: The project_id you want to attach the resource to
+                    description: The ID of the record. The project_id you want to
+                      attach the resource to
                     type: string
                   ttl:
                     description: Time To Live of the record in seconds. The ttl of
@@ -471,6 +472,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the record.
                     type: string
                   rootZone:
                     description: Does the DNS zone is the root zone or not

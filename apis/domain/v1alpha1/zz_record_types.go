@@ -77,6 +77,8 @@ type MatchesParameters struct {
 }
 
 type RecordObservation struct {
+
+	// The ID of the record.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Does the DNS zone is the root zone or not
@@ -129,6 +131,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// The ID of the record.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`

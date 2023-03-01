@@ -91,7 +91,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the IP should be reserved.
+	// (Defaults to provider zone) The zone of the load-balancer.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -120,7 +120,7 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the IP should be reserved.
+	// (Defaults to provider zone) The zone of the load-balancer.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

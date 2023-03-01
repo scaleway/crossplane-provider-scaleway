@@ -255,7 +255,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the SSH key.
+                    description: The ID of the SSH key (UUID format).
                     type: string
                   organizationId:
                     description: The organization ID the SSH key is associated with.

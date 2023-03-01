@@ -19,7 +19,7 @@ type PublicGatewayPATRuleObservation struct {
 	// The date and time of the creation of the PAT rule
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the public gateway DHCP config.
+	// The ID of the public gateway PAT rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID the pat rule config is associated with.

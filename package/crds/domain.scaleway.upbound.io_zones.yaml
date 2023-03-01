@@ -258,6 +258,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the zone, which is of the form {subdomain}.{domain}
                     type: string
                   message:
                     description: Message Message

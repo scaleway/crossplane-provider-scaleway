@@ -103,24 +103,6 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.PlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PlacementGroupIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.RootVolume); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RootVolume[i3].VolumeID),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.RootVolume[i3].VolumeIDRef,
-			Selector:     mg.Spec.ForProvider.RootVolume[i3].VolumeIDSelector,
-			To: reference.To{
-				List:    &VolumeList{},
-				Managed: &Volume{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.RootVolume[i3].VolumeID")
-		}
-		mg.Spec.ForProvider.RootVolume[i3].VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.RootVolume[i3].VolumeIDRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityGroupID),
 		Extract:      reference.ExternalName(),

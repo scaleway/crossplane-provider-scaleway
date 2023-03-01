@@ -14,6 +14,8 @@ import (
 )
 
 type UserDataObservation struct {
+
+	// The ID of the instance's user data.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

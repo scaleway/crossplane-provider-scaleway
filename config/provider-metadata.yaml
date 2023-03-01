@@ -14,6 +14,7 @@ resources:
         argumentDocs:
             created_at: '- The Project creation time.'
             description: '- (Optional) The description of the Project.'
+            id: '- The ID of the project (UUID format).'
             name: '- (Optional) The name of the Project.'
             organization_id: '- (Optional. Defaults to provider organization_id)The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.'
             updated_at: '- The Project last update time.'
@@ -31,7 +32,7 @@ resources:
                   "public_key": "\u003cYOUR-PUBLIC-SSH-KEY\u003e"
                 }
         argumentDocs:
-            id: '- The ID of the SSH key.'
+            id: '- The ID of the SSH key (UUID format).'
             name: '- (Required) The name of the SSH key.'
             organization_id: '- The organization ID the SSH key is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the SSH key is associated with.'
@@ -176,9 +177,9 @@ resources:
             ssh_key_ids: '- (Required) List of SSH keys allowed to connect to the server.'
             status: '- The private network status.'
             tags: '- (Optional) The tags associated with the server.'
-            type: '- The type of the IP.'
             updated_at: '- The date and time of the last update of the private network.'
             user: '- (Optional) User used for the installation.'
+            version: '- The type of the IP.'
             vlan: '- The VLAN ID associated to the private network.'
             zone: '- (Defaults to provider zone) The zone in which the server should be created.'
         importStatements: []
@@ -202,6 +203,27 @@ resources:
             logs_url: '- The logs URL'
             metrics_url: '- The metrics URL'
             project_id: '- (Defaults to provider project_id) The ID of the project the cockpit is associated with.'
+        importStatements: []
+    scaleway_cockpit_grafana_user:
+        subCategory: ""
+        description: Manages Scaleway Cockpit Grafana Users.
+        name: scaleway_cockpit_grafana_user
+        title: scaleway_cockpit_grafana_user
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "login": "my-awesome-user",
+                  "project_id": "${data.scaleway_cockpit.main.project_id}",
+                  "role": "editor"
+                }
+              references:
+                project_id: data.scaleway_cockpit.main.project_id
+        argumentDocs:
+            login: '- (Required) The login of the grafana user.'
+            password: '- The password of the grafana user'
+            project_id: '- (Defaults to provider project_id) The ID of the project the cockpit is associated with.'
+            role: '- (Required) The role of the grafana user. Must be editor or viewer.'
         importStatements: []
     scaleway_cockpit_token:
         subCategory: ""
@@ -292,6 +314,7 @@ resources:
             error_message: '- The error message of the container.'
             h2c: ': HTTP/2 over TCP.'
             http1: ': Hypertext Transfer Protocol.'
+            id: '- The container''s ID.'
             max_concurrency: '- (Optional) The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.'
             max_scale: '- (Optional) The maximum of number of instances this container can scale to. Default to 20.'
             memory_limit: '- (Optional) The memory computing resources in MB to allocate to each container. Defaults to 128.'
@@ -334,6 +357,7 @@ resources:
                 - (Required) The key-value mapping to define arguments that will be passed to your container’s event object
                 during
             container_id: '- (Required) The container ID to link with your cron.'
+            id: '- The container CRON''s ID.'
             region: |-
                 - (Defaults to provider region) The region
                 in where the job was created.
@@ -399,6 +423,7 @@ resources:
         argumentDocs:
             container_id: '- (Required) The ID of the container.'
             hostname: '- (Required) The hostname with a CNAME record.'
+            id: '- The container domain''s ID.'
             region: '- (Defaults to provider region) The region in which the container exists'
             url: '- The URL used to query the container'
         importStatements: []
@@ -712,6 +737,7 @@ resources:
             dns_zone: '- (Required) The DNS Zone of the domain. If the DNS zone doesn''t exist, it will be automatically created.'
             geo_ip: '- (Optional) The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example'
             http_service: '- (Optional) The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs by excluding the ones not responding to the given string to check. Documentation and usage example'
+            id: '- The ID of the record.'
             ip: '- (Required) The weighted IP'
             ips: '- (Required) List of IPs to check'
             keep_empty_zone: '- (Optional, default: false) When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Please note, each zone not deleted will cost you money'
@@ -743,6 +769,7 @@ resources:
                 }
         argumentDocs:
             domain: '- (Required) The domain where the DNS zone will be created.'
+            id: '- The ID of the zone, which is of the form {subdomain}.{domain}'
             message: '- Message'
             ns: '- NameServer list for zone.'
             ns_default: '- NameServer default list for zone.'
@@ -919,6 +946,7 @@ resources:
                 - (Required) The key-value mapping to define arguments that will be passed to your function’s event object
                 during
             function_id: '- (Required) The function ID to link with your cron.'
+            id: '- The function CRON''s ID.'
             region: |-
                 - (Defaults to provider region) The region
                 in where the job was created.
@@ -960,6 +988,8 @@ resources:
             hostname: |-
                 - (Required) The hostname that should resolve to your function id native domain.
                 You should use a CNAME domain record that point to your native function domain_name for it.
+            id: '- The function domain''s ID.'
+            region: '- (Defaults to provider region) The region in where the domain was created.'
             url: '- The URL that triggers the function'
         importStatements: []
     scaleway_function_namespace:
@@ -1072,6 +1102,7 @@ resources:
             expires_at: |-
                 - (Optional) The date and time of the expiration of the iam api key. Please note that in case of change,
                 the resource will be recreated.
+            id: '- The ID of the API key, which is the access key.'
             secret_key: ': The secret Key of the iam api key.'
             updated_at: '- The date and time of the last update of the iam api key.'
             user_id: |-
@@ -1094,6 +1125,7 @@ resources:
             created_at: '- The date and time of the creation of the application.'
             description: '- The description of the iam application.'
             editable: '- Whether the application is editable.'
+            id: '- The ID of the application.'
             name: '- .The name of the iam application.'
             organization_id: '- (Defaults to provider organization_id) The ID of the organization the application is associated with.'
             updated_at: '- The date and time of the last update of the application.'
@@ -1197,6 +1229,7 @@ resources:
             description: '- The description of the iam policy.'
             editable: '- Whether the policy is editable.'
             group_id: '- ID of the Group the policy will be linked to'
+            id: '- The ID of the policy.'
             name: '- .The name of the iam policy.'
             no_principal: '- If the policy doesn''t apply to a principal.'
             organization_id: '- (Defaults to provider organization_id) The ID of the organization the policy is associated with.'
@@ -1372,7 +1405,7 @@ resources:
               dependencies:
                 scaleway_domain_record.tf_A: |-
                     {
-                      "data": "",
+                      "data": "${scaleway_instance_ip.server_ip.address}",
                       "dns_zone": "scaleway.com",
                       "name": "www",
                       "priority": 1,
@@ -1381,7 +1414,7 @@ resources:
                     }
                 scaleway_instance_ip.server_ip: '{}'
         argumentDocs:
-            id: '- The ID of the IP.'
+            id: '- The ID of the IP for which the reverse DNS is configured.'
             ip_id: '- (Required) The IP ID'
             reverse: '- (Required) The reverse DNS for this IP.'
             zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
@@ -1989,6 +2022,7 @@ resources:
                       "type": "DEV1-S"
                     }
         argumentDocs:
+            id: '- The ID of the instance''s user data.'
             key: '- (Required) Key of the user data.'
             server_id: '- (Required) The ID of the server associated with.'
             value: '- (Required) Value associated with your key'
@@ -2684,7 +2718,7 @@ resources:
             static_config: '- (Optional) Define a local ip address of your choice for the load balancer instance. See below.'
             tags: '- (Optional) The tags associated with the load-balancers.'
             type: '- (Required) The type of the load-balancer. Please check the migration section to upgrade the type'
-            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
+            zone: '- (Defaults to provider zone) The zone of the load-balancer.'
         importStatements: []
     scaleway_lb_backend:
         subCategory: ""
@@ -2753,6 +2787,7 @@ resources:
             timeout_server: '- (Optional) Maximum server connection inactivity time. (e.g.: 1s)'
             timeout_tunnel: '- (Optional) Maximum tunnel inactivity time. (e.g.: 1s)'
             uri: '- (Required) The HTTP endpoint URL to call for HC requests.'
+            zone: '- (Defaults to provider zone) The zone in which the load-balancer was created.'
         importStatements: []
     scaleway_lb_certificate:
         subCategory: ""
@@ -2815,6 +2850,7 @@ resources:
             not_valid_before: '- The not valid before validity bound timestamp'
             status: '- Certificate status'
             subject_alternative_name: '- The alternative domain names of the certificate'
+            zone: '- (Defaults to provider zone) The zone of the certificate.'
         importStatements: []
     scaleway_lb_frontend:
         subCategory: ""
@@ -2995,6 +3031,7 @@ resources:
             name: '- (Optional) The name of the load-balancer frontend.'
             timeout_client: '- (Optional) Maximum inactivity time on the client side. (e.g.: 1s)'
             type: '- (Required) The action type. Possible values are: allow or deny.'
+            zone: '- (Defaults to provider zone) The zone in which the load-balancer was created.'
         importStatements: []
     scaleway_lb_ip:
         subCategory: ""
@@ -3095,6 +3132,7 @@ resources:
                 - The Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer.
                 Only one of match_sni and match_host_header should be specified.
             updated_at: '- The date at which the route was last updated.'
+            zone: '- (Defaults to provider zone) The zone in which the load-balancer was created.'
         importStatements: []
     scaleway_mnq_credential:
         subCategory: ""
@@ -3147,7 +3185,7 @@ resources:
             can_publish: '- (Optional). Defines if user can publish messages to the service.'
             can_receive: '- (Optional). Defines if user can receive messages from the service.'
             content: '- Raw content of the NATS credentials file.'
-            id: '- The credential ID (UUID format).'
+            id: '- The credential ID.'
             name: '- (Optional) The credential name..'
             namespace_id: '- (Required) The namespace containing the Credential.'
             nats_credentials: '- Credentials file used to connect to the NATS service. Only one of nats_credentials and sqs_sns_credentials may be set.'
@@ -3444,6 +3482,7 @@ resources:
             bucket: '- (Required, Forces new resource) The name of the bucket.'
             days: '- (Optional) The number of days that you want to specify for the default retention period.'
             default_retention: '- (Required) The default retention for the lock.'
+            id: '- The ID of the Object bucket lock configuration.'
             mode: '- (Required) The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.'
             project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             rule: '- (Optional) Specifies the Object Lock rule for the specified object.'
@@ -3484,7 +3523,7 @@ resources:
                 policy: data.aws_iam_policy_document.policy.json
         argumentDocs:
             bucket: '- (Required) The name of the bucket.'
-            id: '- The unique name of the bucket.'
+            id: '- The ID of the policy, which is the ID of the bucket.'
             policy: '- (Required) The policy document. This is a JSON formatted string. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.'
             project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
             region: '- The Scaleway region this bucket resides in.'
@@ -3540,7 +3579,7 @@ resources:
             bucket: '- (Required, Forces new resource) The name of the bucket.'
             error_document: '- (Optional) The name of the error document for the website detailed below.'
             index_document: '- (Required) The name of the index document for the website detailed below.'
-            index_document.id: '- The bucket and region separated by a slash (/)'
+            index_document.id: '- The region and bucket separated by a slash (/)'
             index_document.suffix: '- (Required) A suffix that is appended to a request that is for a directory on the website endpoint.'
             index_document.website_domain: '- The domain of the website endpoint. This is used to create DNS alias records.'
             index_document.website_endpoint: '- The website endpoint.'
@@ -3588,6 +3627,7 @@ resources:
               references:
                 instance_id: scaleway_rdb_instance.main.id
         argumentDocs:
+            id: '- The ID of the database, which is of the form {region}/{id}/{DBNAME} e.g. fr-par/11111111-1111-1111-1111-111111111111/mydb'
             instance_id: '- (Required) UUID of the rdb instance.'
             managed: '- Whether the database is managed or not.'
             name: '- (Required) Name of the database (e.g. my-new-database).'
@@ -3623,6 +3663,7 @@ resources:
         argumentDocs:
             created_at: '- Creation date (Format ISO 8601).'
             expires_at: (Optional) Expiration date (Format ISO 8601).
+            id: '- The ID of the backup, which is of the form {region}/{id}, e.g. fr-par/11111111-1111-1111-1111-111111111111'
             instance_id: '- (Required) UUID of the rdb instance.'
             instance_name: '- Name of the instance of the backup.'
             name: '- (Required) Name of the database (e.g. my-database).'
@@ -3822,6 +3863,7 @@ resources:
                     }
         argumentDocs:
             database_name: '- (Required) Name of the database (e.g. my-db-name).'
+            id: '- The ID of the user privileges, which is of the form {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo'
             instance_id: '- (Required) UUID of the rdb instance.'
             permission: '- (Required) Permission to set. Valid values are readonly, readwrite, all, custom and none.'
             region: '- (Defaults to provider region) The region in which the resource exists.'
@@ -3923,6 +3965,7 @@ resources:
                       "special": true
                     }
         argumentDocs:
+            id: '- The ID of the user, which is of the form {region}/{instance_id}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/admin'
             instance_id: '- (Required) UUID of the rdb instance.'
             is_admin: '- (Optional) Grant admin permissions to the Database User.'
             name: '- (Required) Database User name.'
@@ -4002,7 +4045,7 @@ resources:
             certificate: '- The PEM of the certificate used by redis, only when tls_enabled is true'
             cluster_size: '- (Optional) The number of nodes in the Redis Cluster.'
             created_at: '- The date and time of creation of the Redis Cluster.'
-            id: '- The ID of the Database Instance.'
+            id: '- The ID of the Redis cluster.'
             name: '- (Optional) The name of the Redis Cluster.'
             node_type: '- (Required) The type of Redis Cluster you want to create (e.g. RED1-M).'
             password: '- (Required) Password for the first user of the Redis Cluster.'
@@ -4046,6 +4089,35 @@ resources:
             organization_id: '- The organization ID the namespace is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the namespace is associated with.'
             region: '- (Defaults to provider region). The region in which the namespace should be created.'
+        importStatements: []
+    scaleway_secret:
+        subCategory: ""
+        description: Manages Scaleway Secrets.
+        name: scaleway_secret
+        title: scaleway_secret
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "description": "barr",
+                  "name": "foo",
+                  "tags": [
+                    "foo",
+                    "terraform"
+                  ]
+                }
+        argumentDocs:
+            created_at: '- Date and time of secret''s creation (RFC 3339 format).'
+            description: '- (Optional) Description of the secret (e.g. my-new-description).'
+            name: '- (Required) Name of the secret (e.g. my-secret).'
+            project_id: '- (Optional) The project ID containing is the secret.'
+            region: |-
+                - (Defaults to provider region) The region
+                in which the resource exists.
+            status: '- The status of the Secret.'
+            tags: '- (Optional) Tags of the secret (e.g. ["tag", "secret"]).'
+            updated_at: '- Date and time of secret''s last update (RFC 3339 format).'
+            version_count: '- The number of versions for this Secret.'
         importStatements: []
     scaleway_tem_domain:
         subCategory: ""
@@ -4323,7 +4395,7 @@ resources:
         argumentDocs:
             address: '- The IP address itself.'
             created_at: '- The date and time of the creation of the public gateway ip.'
-            id: '- The ID of the public gateway ip.'
+            id: '- The ID of the public gateway IP.'
             organization_id: '- The organization ID the public gateway ip is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.'
             reverse: '- (Optional) The reverse domain name for the IP address'
@@ -4358,7 +4430,7 @@ resources:
                 scaleway_vpc_public_gateway_ip.main: '{}'
         argumentDocs:
             gateway_ip_id: '- (Required) The public gateway IP ID'
-            id: '- The ID of the public gateway ip.'
+            id: '- The ID of the public gateway IP for which the reverse DNS is configured.'
             reverse: '- (Optional) The reverse domain name for this IP address'
             zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
@@ -4407,7 +4479,7 @@ resources:
         argumentDocs:
             created_at: '- The date and time of the creation of the pat rule config.'
             gateway_id: '- (Required) The ID of the public gateway.'
-            id: '- The ID of the public gateway DHCP config.'
+            id: '- The ID of the public gateway PAT rule.'
             organization_id: '- The organization ID the pat rule config is associated with.'
             private_ip: '- (Required) The Private IP to forward data to (IP address).'
             private_port: '- (Required) The Private port to translate to.'

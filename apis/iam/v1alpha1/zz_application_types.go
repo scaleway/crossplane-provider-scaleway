@@ -23,6 +23,7 @@ type ApplicationObservation struct {
 	// Whether or not the application is editable.
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
+	// The ID of the application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time of the last update of the application.

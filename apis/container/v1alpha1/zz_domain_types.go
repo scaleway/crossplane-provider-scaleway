@@ -14,6 +14,8 @@ import (
 )
 
 type DomainObservation struct {
+
+	// The container domain's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The URL used to query the container

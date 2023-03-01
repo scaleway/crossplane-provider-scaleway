@@ -14,6 +14,8 @@ import (
 )
 
 type UserObservation struct {
+
+	// The ID of the user, which is of the form {region}/{instance_id}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/admin
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

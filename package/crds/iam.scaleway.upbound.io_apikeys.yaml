@@ -355,6 +355,7 @@ spec:
                       the iam api key is editable
                     type: boolean
                   id:
+                    description: The ID of the API key, which is the access key.
                     type: string
                   updatedAt:
                     description: The date and time of the last update of the iam api

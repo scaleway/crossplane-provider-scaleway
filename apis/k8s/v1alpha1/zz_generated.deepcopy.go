@@ -216,13 +216,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Kubeconfig != nil {
-		in, out := &in.Kubeconfig, &out.Kubeconfig
-		*out = make([]KubeconfigObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
-	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
 		*out = new(string)

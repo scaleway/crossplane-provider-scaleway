@@ -261,7 +261,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The unique name of the bucket.
+                    description: The ID of the policy, which is the ID of the bucket.
                     type: string
                 type: object
               conditions:

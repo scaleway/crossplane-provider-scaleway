@@ -14,6 +14,8 @@ import (
 )
 
 type CronObservation struct {
+
+	// The function CRON's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The cron status.

@@ -20,7 +20,7 @@ func (mg *Cluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Cluster
 func (tr *Cluster) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"kubeconfig[*]": "status.atProvider.kubeconfig[*]"}
 }
 
 // GetObservation of this Cluster

@@ -15,7 +15,7 @@ import (
 
 type CredentialObservation struct {
 
-	// The credential ID (UUID format).
+	// The credential ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The protocol associated to the Credential. Possible values are nats and sqs_sns.

@@ -943,16 +943,6 @@ func (in *RootVolumeParameters) DeepCopyInto(out *RootVolumeParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.VolumeIDRef != nil {
-		in, out := &in.VolumeIDRef, &out.VolumeIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.VolumeIDSelector != nil {
-		in, out := &in.VolumeIDSelector, &out.VolumeIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.VolumeType != nil {
 		in, out := &in.VolumeType, &out.VolumeType
 		*out = new(string)

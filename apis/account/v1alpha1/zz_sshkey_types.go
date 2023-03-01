@@ -15,7 +15,7 @@ import (
 
 type SSHKeyObservation struct {
 
-	// The ID of the SSH key.
+	// The ID of the SSH key (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID the SSH key is associated with.

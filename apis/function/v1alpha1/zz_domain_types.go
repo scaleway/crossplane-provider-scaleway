@@ -14,6 +14,8 @@ import (
 )
 
 type DomainObservation struct {
+
+	// The function domain's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The URL that triggers the function
@@ -43,6 +45,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Required
 	Hostname *string `json:"hostname" tf:"hostname,omitempty"`
 
+	// (Defaults to provider region) The region in where the domain was created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

@@ -104,9 +104,6 @@ type ClusterObservation struct {
 	// The ID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The kubeconfig configuration file of the Kubernetes cluster
-	Kubeconfig []KubeconfigObservation `json:"kubeconfig,omitempty" tf:"kubeconfig,omitempty"`
-
 	// The organization ID the cluster is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`

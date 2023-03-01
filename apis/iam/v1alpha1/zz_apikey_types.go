@@ -31,6 +31,7 @@ type ApiKeyObservation struct {
 	// Whether or not the iam api key is editable
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
+	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time of the last update of the iam api key.

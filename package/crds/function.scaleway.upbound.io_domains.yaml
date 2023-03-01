@@ -148,7 +148,9 @@ spec:
                       that should be redirected to the function
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: (Defaults to provider region) The region in where
+                      the domain was created. The region you want to attach the resource
+                      to
                     type: string
                 required:
                 - hostname
@@ -330,6 +332,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The function domain's ID.
                     type: string
                   url:
                     description: The URL that triggers the function URL to use to

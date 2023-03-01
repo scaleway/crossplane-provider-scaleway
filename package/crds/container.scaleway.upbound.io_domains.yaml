@@ -329,6 +329,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The container domain's ID.
                     type: string
                   url:
                     description: The URL used to query the container URL used to query

@@ -423,6 +423,7 @@ spec:
                     description: The error message of the container. The error description
                     type: string
                   id:
+                    description: The container's ID.
                     type: string
                   region:
                     description: (Defaults to provider region) The region in which

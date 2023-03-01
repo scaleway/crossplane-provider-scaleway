@@ -335,6 +335,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the instance's user data.
                     type: string
                 type: object
               conditions:

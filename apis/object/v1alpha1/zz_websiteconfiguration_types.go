@@ -35,7 +35,7 @@ type IndexDocumentParameters struct {
 
 type WebsiteConfigurationObservation struct {
 
-	// The bucket and region separated by a slash (/)
+	// The region and bucket separated by a slash (/)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The domain of the website endpoint. This is used to create DNS alias records.

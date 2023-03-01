@@ -455,6 +455,7 @@ spec:
                       policy is editable.
                     type: boolean
                   id:
+                    description: The ID of the policy.
                     type: string
                   updatedAt:
                     description: The date and time of the last update of the policy.

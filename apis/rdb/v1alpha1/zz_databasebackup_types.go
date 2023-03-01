@@ -19,6 +19,7 @@ type DatabaseBackupObservation struct {
 	// Creation date (Format ISO 8601).
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the backup, which is of the form {region}/{id}, e.g. fr-par/11111111-1111-1111-1111-111111111111
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the instance of the backup.

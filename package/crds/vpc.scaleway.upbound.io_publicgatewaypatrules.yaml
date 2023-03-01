@@ -350,7 +350,7 @@ spec:
                       config. The date and time of the creation of the PAT rule
                     type: string
                   id:
-                    description: The ID of the public gateway DHCP config.
+                    description: The ID of the public gateway PAT rule.
                     type: string
                   organizationId:
                     description: The organization ID the pat rule config is associated

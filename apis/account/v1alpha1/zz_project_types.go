@@ -19,6 +19,7 @@ type ProjectObservation struct {
 	// The date and time of the creation of the Project (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The ID of the project (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Project last update time.

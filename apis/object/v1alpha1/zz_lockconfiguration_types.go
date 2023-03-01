@@ -35,6 +35,8 @@ type DefaultRetentionParameters struct {
 }
 
 type LockConfigurationObservation struct {
+
+	// The ID of the Object bucket lock configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

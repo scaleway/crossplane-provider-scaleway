@@ -23,7 +23,7 @@ type PublicGatewayIPObservation struct {
 	// The date and time of the creation of the public gateway IP
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the public gateway ip.
+	// The ID of the public gateway IP.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID the public gateway ip is associated with.

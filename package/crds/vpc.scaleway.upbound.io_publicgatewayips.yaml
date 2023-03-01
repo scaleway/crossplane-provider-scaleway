@@ -270,7 +270,7 @@ spec:
                       IP
                     type: string
                   id:
-                    description: The ID of the public gateway ip.
+                    description: The ID of the public gateway IP.
                     type: string
                   organizationId:
                     description: The organization ID the public gateway ip is associated

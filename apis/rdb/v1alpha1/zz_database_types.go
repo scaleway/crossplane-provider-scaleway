@@ -14,6 +14,8 @@ import (
 )
 
 type DatabaseObservation struct {
+
+	// The ID of the database, which is of the form {region}/{id}/{DBNAME} e.g. fr-par/11111111-1111-1111-1111-111111111111/mydb
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether the database is managed or not.

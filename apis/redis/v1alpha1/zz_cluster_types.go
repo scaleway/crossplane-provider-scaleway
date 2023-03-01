@@ -48,7 +48,7 @@ type ClusterObservation struct {
 	// The date and time of the creation of the Redis cluster
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the Database Instance.
+	// The ID of the Redis cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Describes the private network you want to connect to your cluster. If not set, a public network will be provided.
@@ -143,7 +143,7 @@ type ClusterParameters struct {
 
 type PrivateNetworkObservation struct {
 
-	// The ID of the Database Instance.
+	// The ID of the Redis cluster.
 	// UUID of the endpoint to be connected to the cluster
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 }

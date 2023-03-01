@@ -27,6 +27,7 @@ type ContainerObservation struct {
 	// The error description
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 
+	// The container's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Defaults to provider region) The region in which the container was created.

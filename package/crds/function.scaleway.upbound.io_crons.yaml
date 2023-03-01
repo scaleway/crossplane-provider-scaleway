@@ -338,6 +338,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The function CRON's ID.
                     type: string
                   status:
                     description: The cron status. Cron job status.

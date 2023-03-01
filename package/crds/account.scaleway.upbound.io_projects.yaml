@@ -259,6 +259,7 @@ spec:
                       creation of the Project (Format ISO 8601)
                     type: string
                   id:
+                    description: The ID of the project (UUID format).
                     type: string
                   updatedAt:
                     description: The Project last update time. The date and time of

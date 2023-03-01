@@ -14,6 +14,8 @@ import (
 )
 
 type PrivilegeObservation struct {
+
+	// The ID of the user privileges, which is of the form {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

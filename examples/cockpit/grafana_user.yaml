@@ -1,0 +1,49 @@
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: GrafanaUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-grafana-
+    login: testuser
+    role: editor
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  providerConfigRef:
+    name: default
+---
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-account-project
+  providerConfigRef:
+    name: default
+---
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: Cockpit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/cockpit
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-cockpit
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  providerConfigRef:
+    name: default

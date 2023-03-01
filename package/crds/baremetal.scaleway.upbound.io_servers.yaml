@@ -474,6 +474,7 @@ spec:
                           description: The reverse of the IP.
                           type: string
                         version:
+                          description: The type of the IP.
                           type: string
                       type: object
                     type: array

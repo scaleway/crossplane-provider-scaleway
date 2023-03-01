@@ -14,6 +14,7 @@ import (
 	server "github.com/scaleway/provider-scaleway/internal/controller/applesilicon/server"
 	serverbaremetal "github.com/scaleway/provider-scaleway/internal/controller/baremetal/server"
 	cockpit "github.com/scaleway/provider-scaleway/internal/controller/cockpit/cockpit"
+	grafanauser "github.com/scaleway/provider-scaleway/internal/controller/cockpit/grafanauser"
 	token "github.com/scaleway/provider-scaleway/internal/controller/cockpit/token"
 	container "github.com/scaleway/provider-scaleway/internal/controller/container/container"
 	containernamespace "github.com/scaleway/provider-scaleway/internal/controller/container/containernamespace"
@@ -90,6 +91,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		server.Setup,
 		serverbaremetal.Setup,
 		cockpit.Setup,
+		grafanauser.Setup,
 		token.Setup,
 		container.Setup,
 		containernamespace.Setup,

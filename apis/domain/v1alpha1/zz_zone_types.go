@@ -14,6 +14,8 @@ import (
 )
 
 type ZoneObservation struct {
+
+	// The ID of the zone, which is of the form {subdomain}.{domain}
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Message

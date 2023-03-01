@@ -384,7 +384,7 @@ spec:
                       The date and time of the creation of the Redis cluster
                     type: string
                   id:
-                    description: The ID of the Database Instance.
+                    description: The ID of the Redis cluster.
                     type: string
                   privateNetwork:
                     description: Describes the private network you want to connect
@@ -393,8 +393,8 @@ spec:
                     items:
                       properties:
                         endpointId:
-                          description: The ID of the Database Instance. UUID of the
-                            endpoint to be connected to the cluster
+                          description: The ID of the Redis cluster. UUID of the endpoint
+                            to be connected to the cluster
                           type: string
                       type: object
                     type: array

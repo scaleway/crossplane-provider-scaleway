@@ -23,6 +23,7 @@ type PolicyObservation struct {
 	// Whether or not the policy is editable.
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
+	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time of the last update of the policy.

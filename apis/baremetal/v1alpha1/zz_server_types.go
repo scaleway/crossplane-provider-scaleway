@@ -24,6 +24,7 @@ type IpsObservation struct {
 	// The reverse of the IP.
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
+	// The type of the IP.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 

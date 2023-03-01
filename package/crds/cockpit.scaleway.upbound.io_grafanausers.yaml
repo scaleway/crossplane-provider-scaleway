@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: lockconfigurations.object.scaleway.upbound.io
+  name: grafanausers.cockpit.scaleway.upbound.io
 spec:
-  group: object.scaleway.upbound.io
+  group: cockpit.scaleway.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - scaleway
-    kind: LockConfiguration
-    listKind: LockConfigurationList
-    plural: lockconfigurations
-    singular: lockconfiguration
+    kind: GrafanaUser
+    listKind: GrafanaUserList
+    plural: grafanausers
+    singular: grafanauser
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: LockConfiguration is the Schema for the LockConfigurations API.
-          Manages Scaleway lock on object storage buckets.
+        description: GrafanaUser is the Schema for the GrafanaUsers API. Manages Scaleway
+          Cockpit Grafana Users.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: LockConfigurationSpec defines the desired state of LockConfiguration
+            description: GrafanaUserSpec defines the desired state of GrafanaUser
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,58 +64,95 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  bucket:
-                    description: The name of the bucket. The bucket name.
+                  login:
+                    description: The login of the grafana user. The login of the Grafana
+                      user
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
-                      the bucket is associated with. The project_id you want to attach
+                      the cockpit is associated with. The project_id you want to attach
                       the resource to
                     type: string
-                  region:
-                    description: The region you want to attach the resource to
+                  projectIdRef:
+                    description: Reference to a Project in account to populate projectId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: Selector for a Project in account to populate projectId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  role:
+                    description: The role of the grafana user. Must be editor or viewer.
+                      The role of the Grafana user
                     type: string
-                  rule:
-                    description: Specifies the Object Lock rule for the specified
-                      object. Specifies the Object Lock rule for the specified object.
-                    items:
-                      properties:
-                        defaultRetention:
-                          description: The default retention for the lock.
-                          items:
-                            properties:
-                              days:
-                                description: The number of days that you want to specify
-                                  for the default retention period. The number of
-                                  days that you want to specify for the default retention
-                                  period.
-                                type: number
-                              mode:
-                                description: The default Object Lock retention mode
-                                  you want to apply to new objects placed in the specified
-                                  bucket. Valid values are GOVERNANCE or COMPLIANCE.
-                                  To learn more about the difference between these
-                                  modes, see Object Lock retention modes. The default
-                                  Object Lock retention mode you want to apply to
-                                  new objects placed in the specified bucket.
-                                type: string
-                              years:
-                                description: The number of years that you want to
-                                  specify for the default retention period. The number
-                                  of years that you want to specify for the default
-                                  retention period.
-                                type: number
-                            required:
-                            - mode
-                            type: object
-                          type: array
-                      required:
-                      - defaultRetention
-                      type: object
-                    type: array
                 required:
-                - bucket
-                - rule
+                - login
+                - role
                 type: object
               providerConfigRef:
                 default:
@@ -289,12 +326,11 @@ spec:
             - forProvider
             type: object
           status:
-            description: LockConfigurationStatus defines the observed state of LockConfiguration.
+            description: GrafanaUserStatus defines the observed state of GrafanaUser.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Object bucket lock configuration.
                     type: string
                 type: object
               conditions:

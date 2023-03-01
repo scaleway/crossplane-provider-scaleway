@@ -283,7 +283,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The bucket and region separated by a slash (/)
+                    description: The region and bucket separated by a slash (/)
                     type: string
                   websiteDomain:
                     description: The domain of the website endpoint. This is used

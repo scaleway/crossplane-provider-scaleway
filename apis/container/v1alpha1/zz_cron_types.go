@@ -14,6 +14,8 @@ import (
 )
 
 type CronObservation struct {
+
+	// The container CRON's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Defaults to provider region) The region

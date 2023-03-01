@@ -15,7 +15,7 @@ import (
 
 type PolicyObservation struct {
 
-	// The unique name of the bucket.
+	// The ID of the policy, which is the ID of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

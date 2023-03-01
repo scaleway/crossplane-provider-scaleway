@@ -333,6 +333,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The container CRON's ID.
                     type: string
                   region:
                     description: (Defaults to provider region) The region in where
