@@ -7,6 +7,6 @@ spec:
   visibility: public
   forProvider:
     name: crossplane-security-group
-    inbound_default_policy: "drop"
+    inboundDefaultPolicy: "drop"
   providerConfigRef:
     name: default
