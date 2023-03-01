@@ -4,8 +4,6 @@ metadata:
   name: iot-device
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-device
     hubIdRef:
       name: iot-hub
@@ -18,8 +16,6 @@ metadata:
   name: iot-hub
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-hub
     productPlan: plan_shared
   providerConfigRef:

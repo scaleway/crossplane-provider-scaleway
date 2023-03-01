@@ -3,8 +3,6 @@ kind: Server
 metadata:
   name: applesilicon-server
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-applesilicon-server
     type: M1-M

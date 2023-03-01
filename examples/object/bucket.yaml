@@ -4,8 +4,6 @@ metadata:
   name: object-bucket
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-object-bucket
   providerConfigRef:
     name: default

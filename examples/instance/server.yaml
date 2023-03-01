@@ -3,8 +3,6 @@ kind: Server
 metadata:
   name: instance-server
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-instance-server
     image: "ubuntu_focal"

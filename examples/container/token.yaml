@@ -4,8 +4,6 @@ metadata:
   name: container-token
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-container-token
     containerIdRef:
       name: container
@@ -19,8 +17,6 @@ metadata:
   name: container
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-container
     namespaceIdRef:
       container-namespace
@@ -33,8 +29,6 @@ metadata:
   name: container-namespace
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-container-namespace
   providerConfigRef:
     name: default

@@ -23,8 +23,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-baremetal-server
     zone: fr-par-2
     offer: EM-B112X-SSD

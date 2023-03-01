@@ -3,8 +3,6 @@ kind: Frontend
 metadata:
   name: lb-frontend
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-lb-frontend
     lbIdRef:
@@ -20,8 +18,6 @@ kind: Backend
 metadata:
   name: lb-backend
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-lb-backend
     lbIdRef:
@@ -36,8 +32,6 @@ kind: LB
 metadata:
   name: lb-instance
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-lb-instance
     type: LB-S
@@ -51,8 +45,6 @@ kind: IP
 metadata:
   name: lb-ip
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider: {}
   providerConfigRef:
     name: default

@@ -3,8 +3,6 @@ kind: PlacementGroup
 metadata:
   name: instance-placement-group
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-placement-group
     policyMode: enforced

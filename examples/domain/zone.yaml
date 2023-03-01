@@ -4,8 +4,6 @@ metadata:
   name: domain-zone
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-domain-zone
     domain: "example.com"
     subdomain: "test"

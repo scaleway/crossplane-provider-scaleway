@@ -4,8 +4,6 @@ metadata:
   name: function-cron
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-function-cron
     functionIdRef:
       name: function
@@ -20,8 +18,6 @@ metadata:
   name: function
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-function
     namespaceIdRef:
       name: function-namespace
@@ -37,8 +33,6 @@ metadata:
   name: function-namespace
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-function-namespace
   providerConfigRef:
     name: default

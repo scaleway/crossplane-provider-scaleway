@@ -3,8 +3,6 @@ kind: SecurityGroup
 metadata:
   name: instance-security-group
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-security-group
     inboundDefaultPolicy: "drop"

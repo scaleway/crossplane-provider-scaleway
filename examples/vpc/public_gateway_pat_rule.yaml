@@ -4,8 +4,6 @@ metadata:
   name: vpc-public-gateway-pat-rule
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     privatePort: 42
     publicPort: 42
     protocol: both
@@ -21,8 +19,6 @@ metadata:
   name: vpc-gateway-network
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     gatewayIdRef:
       name: vpc-public-gateway
     dhcpIdRef:
@@ -37,8 +33,6 @@ kind: PrivateNetwork
 metadata:
   name: vpc-private-network
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider:
     name: crossplane-private-network
 providerConfigRef:
@@ -50,8 +44,6 @@ metadata:
   name: vpc-public-gateway
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     name: crossplane-public-gateway
     type: VPC-GW-S
     ipIdRef:
@@ -65,8 +57,6 @@ metadata:
   name: vpc-public-gateway-dhcp
 spec:
   forProvider:
-    description: "Managed with Crossplane Github Provider (generated with Upjet)"
-    visibility: public
     subnet: "192.168.1.0/24"
 providerConfigRef:
   name: default
@@ -76,8 +66,6 @@ kind: PublicGatewayIP
 metadata:
   name: vpc-public-gateway-ip
 spec:
-  description: "Managed with Crossplane Github Provider (generated with Upjet)"
-  visibility: public
   forProvider: {}
 providerConfigRef:
   name: default
