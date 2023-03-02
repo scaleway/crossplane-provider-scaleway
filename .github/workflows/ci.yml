@@ -133,7 +133,7 @@ jobs:
           submodules: true
 
       - name: Fetch History
-        run: git fetch --prune --unshallow
+        run: git fetch --prune --unshallow --recurse-submodules
 
       - name: Setup Go
         uses: actions/setup-go@v2
@@ -182,7 +182,7 @@ jobs:
           submodules: true
 
       - name: Fetch History
-        run: git fetch --prune --unshallow
+        run: git fetch --prune --unshallow --recurse-submodules
 
       - name: Setup Go
         uses: actions/setup-go@v2
@@ -244,7 +244,7 @@ jobs:
           submodules: true
 
       - name: Fetch History
-        run: git fetch --prune --unshallow
+        run: git fetch --prune --unshallow --recurse-submodules
 
       - name: Setup Go
         uses: actions/setup-go@v2
