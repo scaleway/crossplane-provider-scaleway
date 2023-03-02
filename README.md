@@ -79,7 +79,7 @@ field is empty.
 ```shell
 $ kubectl get providers
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
-provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:latest      76s
+provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.1      76s
 ```
 
 Use `kubectl describe providers` for more information.
