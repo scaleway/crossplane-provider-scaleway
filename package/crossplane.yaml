@@ -2,3 +2,14 @@ apiVersion: meta.pkg.crossplane.io/v1alpha1
 kind: Provider
 metadata:
   name: provider-scaleway
+  annotations:
+    meta.crossplane.io/maintainer: github.com/scaleway/crossplane-provider-scaleway
+    meta.crossplane.io/source: github.com/scaleway/crossplane-provider-scaleway
+    meta.crossplane.io/description: |
+      Scaleway's official Crossplane provider to manage Scaleway cloud
+      resources in Kubernetes.
+    meta.crossplane.io/readme: |
+      Provider Scaleway is a Crossplane provider for [Scaleway](https://scaleway.com/)
+      developed and supported by Scaleway.
+      If you encounter an issue please reach out on github at github.com/scaleway/crossplane-provider-scaleway
+    friendly-name.meta.crossplane.io: Provider Scaleway
