@@ -4,7 +4,6 @@ metadata:
   name: container-token
 spec:
   forProvider:
-    name: crossplane-container-token
     containerIdRef:
       name: container
     expiresAt: "2023-01-05T13:12:46Z"
