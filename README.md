@@ -118,8 +118,8 @@ stringData:
 
 | Provider Argument | Description                                                                                                                                                      |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `access_key`      | [Scaleway access key](https://console.scaleway.com/project/credentials)                                                                                          |
-| `secret_key`      | [Scaleway secret key](https://console.scaleway.com/project/credentials)                                                                                          |
+| `access_key`      | [Scaleway access key](https://console.scaleway.com/iam/api-keys)                                                                                          |
+| `secret_key`      | [Scaleway secret key](https://console.scaleway.com/iam/api-keys)                                                                                          |
 | `project_id`      | The [project ID](https://console.scaleway.com/project/settings) that will be used as default value for project-scoped resources.                                 |
 | `region`          | The [region](https://developers.scaleway.com/en/quickstart/#region-and-zone)  that will be used as default value for all resources. (`fr-par` if none specified) |
 | `zone`            | The [zone](https://developers.scaleway.com/en/quickstart/#region-and-zone) that will be used as default value for all resources. (`fr-par-1` if none specified)  |
