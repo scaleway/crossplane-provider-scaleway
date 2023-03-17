@@ -238,6 +238,9 @@ jobs:
         with:
           submodules: true
 
+      - name: Fetch History
+        run: git fetch --prune --unshallow --no-recurse-submodules
+
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
