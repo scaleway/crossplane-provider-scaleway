@@ -5,51 +5,47 @@ is built using [Upjet](https://github.com/upbound/upjet) code
 generation tools and exposes XRM-conformant managed resources for
 [Scaleway](https://www.scaleway.com/).
 
-To install and use this provider:
+Complete the following steps to: 
 * Install Upbound Universal Crossplane (UXP) into your Kubernetes cluster.
 * Install the `Provider` and apply a `ProviderConfig`.
 * Create a *managed resource* in Scaleway with Kubernetes.
 
 ## Prerequisites
-This quickstart requires:
-* a Kubernetes cluster with permissions to create pods and secrets
-* a host with `kubectl` installed and configured to access the Kubernetes
+To perform the following steps, make sure you have:
+* Your Scaleway [credentials](https://console.scaleway.com/project/credentials)
+* A Kubernetes cluster with permissions to create pods and secrets
+* A host with `kubectl` installed and configured to access the Kubernetes
   cluster
-* your Scaleway [credentials](https://console.scaleway.com/project/credentials)
 
 ## Getting started
 
-Run each command individually or copy to a local to prevent issues
-running the commands in the terminal.
+You can run each command individually or copy them to a local to avoid issues related to running commands in a terminal.
 
-_Note:_ all commands use the current `kubeconfig` context and configuration.
+_Note:_ All commands use the current `kubeconfig` context and configuration.
 
 ### Install the Up command-line
-Download and install the Upbound `up` command-line.
+
+Run the following command to download and install the Upbound `up` command-line.
+_Note:_ To learn more about the Up command-line, refer to the [official dedicated documentation](https://docs.upbound.io/cli/).
 
 ```shell
 curl -sL "https://cli.upbound.io" | sh
 sudo mv up /usr/local/bin/
 ```
 
-More information about the Up command-line is available in the [Upbound Up
-documentation](https://docs.upbound.io/cli/).
-
 ### Install Upbound Universal Crossplane
-Install Upbound Universal Crossplane (UXP) with the Up command-line `up uxp
-install` command.
+
+Run the Up command-line `up uxp install` to install Upbound Universal Crossplane (UXP).
+_Note:_ To learn more about Upbound Universal Crossplane (UXP), refer to the [official dedicated documentation](https://docs.upbound.io/uxp/).
 
 ```shell
 $ up uxp install
 UXP 1.9.0-up.3 installed
 ```
 
-Find more information in the [Upbound UXP
-documentation](https://docs.upbound.io/uxp/).
-
 ### Install the provider
 
-Install the provider into the Kubernetes cluster with a Kubernetes
+1. Install the provider into the Kubernetes cluster with a Kubernetes
 configuration file.
 
 ```yaml
@@ -63,18 +59,19 @@ spec:
 EOF
 ```
 
-Verify the provider installed with `kubectl get providers`.
+2. Run `kubectl get providers` to verify the installed provider. The `INSTALLED` value should return as `True`. 
 
-The `INSTALLED` value should be `True`. It may take up to 5 minutes for
-`HEALTHY` to report true.
+_Note:_  The procedure may take up to 5 minutes for `HEALTHY` to report true.
+
+You should get an output similar to the following one, providing details about the provider.
+
 ```shell
 $ kubectl get provider
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
 provider-scaleway   True        True   xpkg.upbound.io/scaleway/provider-scaleway:v0.1        11s
 ```
 
-If there are issues downloading and installing the provider the `INSTALLED`
-field is empty.
+If there are any issue during the process of downloading and installing the provider, the `INSTALLED` field will return as empty. In that case, run `kubectl describe providers` to get more information.
 
 ```shell
 $ kubectl get providers
@@ -82,19 +79,13 @@ NAME                INSTALLED   HEALTHY   PACKAGE                               
 provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.1      76s
 ```
 
-Use `kubectl describe providers` for more information.
-
 ### Create a Kubernetes secret resource for Scaleway
+
 The provider requires credentials to create and manage Scaleway resources.
 
-In a new folder, create a `secret.yaml` file and adapt it to your credentials.
+1. In a new folder, create a `secret.yaml` file. 
 
-Create `crossplane-system` namespace if not exists
-```shell
-$ kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl apply -f -
-```
-
-Create a `secret.yaml` file
+Modify the values in the example according to your needs, using the information in the Configuration reference table to help.
 
 ```yaml
 apiVersion: v1
@@ -114,6 +105,12 @@ stringData:
     }
 ```
 
+2. If it does not already exist, run the following command to create a `crossplane-system` namespace:
+
+```shell
+$ kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl apply -f -
+```
+
 #### Configuration reference
 
 | Provider Argument | Description                                                                                                                                                      |
@@ -125,8 +122,10 @@ stringData:
 | `zone`            | The [zone](https://developers.scaleway.com/en/quickstart/#region-and-zone) that will be used as default value for all resources. (`fr-par-1` if none specified)  |
 
 ### Create a ProviderConfig
-Create a `ProviderConfig` Kubernetes configuration file to attach your Scaleway
-credentials to the installed provider.
+
+1. Create a `ProviderConfig` Kubernetes configuration file to attach your Scaleway credentials to the previously installed provider.
+
+Modify the values in the example according to your needs. Refer to the configuration reference information to understand the requested values.
 
 ```yaml
 apiVersion: scaleway.upbound.io/v1beta1
@@ -142,19 +141,22 @@ spec:
       key: credentials
 ```
 
+2. Run `kubectl apply -f your-folder/` to apply this configuration with the secret.
+
+3. Run `kubectl describe providerconfigs` to verify the `ProviderConfig`.
+
+#### Configuration reference 
+
 The `spec.secretRef` describes the parameters of the secret to use.
 * `namespace` is the Kubernetes namespace the secret is in.
 * `name` is the name of the Kubernetes `secret` object.
 * `key` is the `Data` field from `kubectl describe secret`.
 
-Apply this configuration with the secret `kubectl apply -f your-folder/`.
-
-You can verify the `ProviderConfig` with `kubectl describe providerconfigs`.
-
 ### Create a managed resource
-Create a managed resource to verify the provider is functioning.
 
-This example creates a Scaleway Object Storage Bucket.
+1. Create a managed resource to see if the provider is properly functioning.
+
+The following example creates a Scaleway Object Storage bucket.
 
 ```yaml
 apiVersion: object.scaleway.upbound.io/v1alpha1
@@ -168,7 +170,9 @@ spec:
     name: default
 ```
 
-Use `kubectl get buckets` to verify bucket creation.
+2. Run `kubectl get buckets` to get details on the bucket's creation.
+
+You should get an output similar to the following one, providing details about the bucket.
 
 ```shell
 $ kubectl get buckets
@@ -176,14 +180,17 @@ NAME                           READY   SYNCED   EXTERNAL-NAME                   
 object-bucket                  True    True     fr-par/crossplane-object-bucket   9s
 ```
 
-Upbound created the bucket when the values `READY` and `SYNCED` are `True`.
+The bucket is successfully created when both the values for `READY` and `SYNCED` are `True`.
 
-If the `READY` or `SYNCED` are blank or `False` use `kubectl describe` to
-understand why.
+3. If there are any issue during the bucket creation process, the `READY` and/or `SYNCED` fields will return as empty. In that case, run `kubectl describe` to get more information.
 
 ### Delete the managed resource
-Remove the managed resource by using `kubectl delete -f` with the same `Bucket`
-object file. Verify removal of the bucket with `kubectl get buckets`
+
+1. Run `kubectl delete -f` (with the same `Bucket` file) to remove the managed resource.
+
+2. Run `kubectl get buckets` to verify whether the bucket was properly removed.
+
+You should get an output similar to this, providing details about the status of the bucket.
 
 ```shell
 $ kubectl delete -f bucket.yml
@@ -195,24 +202,25 @@ No resources found
 
 ## Developing
 
-Run code-generation pipeline:
+- To run code-generation pipeline:
+
 ```console
 go run cmd/generator/main.go "$PWD"
 ```
 
-Run against a Kubernetes cluster:
+- To run against a Kubernetes cluster:
 
 ```console
 make run
 ```
 
-Build, push, and install:
+- To build, push, and install:
 
 ```console
 make all
 ```
 
-Build binary:
+- To build binary:
 
 ```console
 make build
@@ -220,5 +228,4 @@ make build
 
 ## Report a Bug
 
-For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/scaleway/crossplane-provider-scaleway/issues).
+To file bugs, suggest improvements, or request new features, please open an [issue](https://github.com/scaleway/crossplane-provider-scaleway/issues).
