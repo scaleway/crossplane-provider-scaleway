@@ -73,6 +73,8 @@ import (
 	user "github.com/scaleway/provider-scaleway/internal/controller/rdb/user"
 	clusterredis "github.com/scaleway/provider-scaleway/internal/controller/redis/cluster"
 	registrynamespace "github.com/scaleway/provider-scaleway/internal/controller/registry/registrynamespace"
+	secret "github.com/scaleway/provider-scaleway/internal/controller/secret/secret"
+	version "github.com/scaleway/provider-scaleway/internal/controller/secret/version"
 	domaintem "github.com/scaleway/provider-scaleway/internal/controller/tem/domain"
 	gatewaynetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/gatewaynetwork"
 	privatenetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/privatenetwork"
@@ -150,6 +152,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		user.Setup,
 		clusterredis.Setup,
 		registrynamespace.Setup,
+		secret.Setup,
+		version.Setup,
 		domaintem.Setup,
 		gatewaynetwork.Setup,
 		privatenetwork.Setup,
