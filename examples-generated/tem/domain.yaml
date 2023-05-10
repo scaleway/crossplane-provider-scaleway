@@ -8,6 +8,7 @@ metadata:
   name: main
 spec:
   forProvider:
+    acceptTos: true
     name: example.com
 
 ---

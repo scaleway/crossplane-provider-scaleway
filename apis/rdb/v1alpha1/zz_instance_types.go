@@ -100,12 +100,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the Database Instance is associated with.
+	// (Defaults to provider project_id) The ID of the project the Database
+	// Instance is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// (Defaults to provider region) The region
+	// in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -125,7 +127,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Volume size (in GB) when volume_type is set to bssd. Must be a multiple of 5000000000.
+	// Volume size (in GB) when volume_type is set to bssd.
 	// Volume size (in GB) when volume_type is not lssd
 	// +kubebuilder:validation:Optional
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
@@ -177,17 +179,19 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The IP network where to con.
-	// The ip net of your private network
-	// +kubebuilder:validation:Required
-	IPNet *string `json:"ipNet" tf:"ip_net,omitempty"`
+	// The IP network address within the private subnet. This must be an IPv4 address with a
+	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
+	// service if not set.
+	// The IP network address within the private subnet
+	// +kubebuilder:validation:Optional
+	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`
 
 	// The name of the Database Instance.
 	// The name of your private service
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the private network. If not provided it will be randomly generated.
+	// The ID of the private network.
 	// The private network ID
 	// +kubebuilder:validation:Required
 	PnID *string `json:"pnId" tf:"pn_id,omitempty"`
@@ -231,7 +235,7 @@ type InstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Instance is the Schema for the Instances API. Manages Scaleway Database Instances.
+// Instance is the Schema for the Instances API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

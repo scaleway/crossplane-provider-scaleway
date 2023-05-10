@@ -74,7 +74,7 @@ type PlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PlacementGroup is the Schema for the PlacementGroups API. Manages Scaleway Compute Instance Placement Groups.
+// PlacementGroup is the Schema for the PlacementGroups API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

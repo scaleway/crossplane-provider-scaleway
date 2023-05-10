@@ -36,7 +36,6 @@ spec:
     schema:
       openAPIV3Schema:
         description: LockConfiguration is the Schema for the LockConfigurations API.
-          Manages Scaleway lock on object storage buckets.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -93,7 +93,7 @@ type ApiKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ApiKey is the Schema for the ApiKeys API. Manages Scaleway IAM API Keys.
+// ApiKey is the Schema for the ApiKeys API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

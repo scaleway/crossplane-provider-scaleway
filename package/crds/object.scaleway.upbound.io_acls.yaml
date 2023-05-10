@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ACL is the Schema for the ACLs API. Manages Scaleway object storage
-          bucket ACL resource.
+        description: ACL is the Schema for the ACLs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

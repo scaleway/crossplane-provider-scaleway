@@ -38,7 +38,6 @@ type ContainerNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Defaults to false). Destroy linked container registry on deletion.
 	// Destroy registry on deletion
 	// +kubebuilder:validation:Optional
 	DestroyRegistry *bool `json:"destroyRegistry,omitempty" tf:"destroy_registry,omitempty"`
@@ -83,7 +82,7 @@ type ContainerNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ContainerNamespace is the Schema for the ContainerNamespaces API. Manages Scaleway Container Namespaces.
+// ContainerNamespace is the Schema for the ContainerNamespaces API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

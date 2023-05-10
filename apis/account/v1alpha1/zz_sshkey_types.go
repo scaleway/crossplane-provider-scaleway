@@ -15,18 +15,31 @@ import (
 
 type SSHKeyObservation struct {
 
+	// The date and time of the creation of the iam SSH Key
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The fingerprint of the iam SSH key
+	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
+
 	// The ID of the SSH key (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID the SSH key is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The date and time of the last update of the iam SSH Key
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type SSHKeyParameters struct {
 
+	// The SSH key status
+	// +kubebuilder:validation:Optional
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
 	// The name of the SSH key.
-	// The name of the SSH key
+	// The name of the iam SSH key
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -55,7 +68,7 @@ type SSHKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SSHKey is the Schema for the SSHKeys API. Manages Scaleway user SSH keys.
+// SSHKey is the Schema for the SSHKeys API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Domain is the Schema for the Domains API. Manages Scaleway Transactional
-          Email Domains.
+        description: Domain is the Schema for the Domains API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +63,15 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  acceptTos:
+                    description: 'Acceptation of the Term of Service. ~> Important:  This
+                      attribute must be set to true. Accept the Scaleway Terms of
+                      Service'
+                    type: boolean
                   name:
-                    description: The domain name, must not be used in another Transactional
-                      Email Domain. ~> Important Updates to name will recreate the
-                      domain. The domain name used when sending emails
+                    description: 'The domain name, must not be used in another Transactional
+                      Email Domain. ~> Important: Updates to name will recreate the
+                      domain. The domain name used when sending emails'
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
@@ -80,6 +84,7 @@ spec:
                       the resource to
                     type: string
                 required:
+                - acceptTos
                 - name
                 type: object
               providerConfigRef:
@@ -290,6 +295,26 @@ spec:
                       (RFC 3339 format). Date and time of the revocation of the domain
                       (RFC 3339 format)
                     type: string
+                  smtpHost:
+                    description: SMTP host to use to send emails
+                    type: string
+                  smtpPort:
+                    description: SMTP port to use to send emails over TLS. (Port 587)
+                    type: number
+                  smtpPortAlternative:
+                    description: SMTP port to use to send emails over TLS. (Port 2587)
+                    type: number
+                  smtpPortUnsecure:
+                    description: SMTP port to use to send emails. (Port 25)
+                    type: number
+                  smtpsPort:
+                    description: SMTPS port to use to send emails over TLS Wrapper.
+                      (Port 465)
+                    type: number
+                  smtpsPortAlternative:
+                    description: SMTPS port to use to send emails over TLS Wrapper.
+                      (Port 2465)
+                    type: number
                   spfConfig:
                     description: The snippet of the SPF record that should be registered
                       in the DNS zone. Snippet of the SPF record that should be registered

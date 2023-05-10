@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Route is the Schema for the Routes API. Manages Scaleway Load-Balancer
-          Route.
+        description: Route is the Schema for the Routes API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

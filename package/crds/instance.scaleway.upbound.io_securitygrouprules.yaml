@@ -36,7 +36,6 @@ spec:
     schema:
       openAPIV3Schema:
         description: SecurityGroupRule is the Schema for the SecurityGroupRules API.
-          Manages Scaleway Compute Instance security group rules.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

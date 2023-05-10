@@ -42,6 +42,24 @@ type DomainObservation struct {
 	// Date and time of the revocation of the domain (RFC 3339 format)
 	RevokedAt *string `json:"revokedAt,omitempty" tf:"revoked_at,omitempty"`
 
+	// SMTP host to use to send emails
+	SMTPHost *string `json:"smtpHost,omitempty" tf:"smtp_host,omitempty"`
+
+	// SMTP port to use to send emails over TLS. (Port 587)
+	SMTPPort *float64 `json:"smtpPort,omitempty" tf:"smtp_port,omitempty"`
+
+	// SMTP port to use to send emails over TLS. (Port 2587)
+	SMTPPortAlternative *float64 `json:"smtpPortAlternative,omitempty" tf:"smtp_port_alternative,omitempty"`
+
+	// SMTP port to use to send emails. (Port 25)
+	SMTPPortUnsecure *float64 `json:"smtpPortUnsecure,omitempty" tf:"smtp_port_unsecure,omitempty"`
+
+	// SMTPS port to use to send emails over TLS Wrapper. (Port 465)
+	SmtpsPort *float64 `json:"smtpsPort,omitempty" tf:"smtps_port,omitempty"`
+
+	// SMTPS port to use to send emails over TLS Wrapper. (Port 2465)
+	SmtpsPortAlternative *float64 `json:"smtpsPortAlternative,omitempty" tf:"smtps_port_alternative,omitempty"`
+
 	// The snippet of the SPF record that should be registered in the DNS zone.
 	// Snippet of the SPF record that should be registered in the DNS zone
 	SpfConfig *string `json:"spfConfig,omitempty" tf:"spf_config,omitempty"`
@@ -53,8 +71,14 @@ type DomainObservation struct {
 
 type DomainParameters struct {
 
+	// Acceptation of the Term of Service.
+	// ~> Important:  This attribute must be set to true.
+	// Accept the Scaleway Terms of Service
+	// +kubebuilder:validation:Required
+	AcceptTos *bool `json:"acceptTos" tf:"accept_tos,omitempty"`
+
 	// The domain name, must not be used in another Transactional Email Domain.
-	// ~> Important Updates to name will recreate the domain.
+	// ~> Important: Updates to name will recreate the domain.
 	// The domain name used when sending emails
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -84,7 +108,7 @@ type DomainStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Domain is the Schema for the Domains API. Manages Scaleway Transactional Email Domains.
+// Domain is the Schema for the Domains API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

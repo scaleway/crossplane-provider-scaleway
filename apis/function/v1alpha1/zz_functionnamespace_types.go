@@ -78,7 +78,7 @@ type FunctionNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FunctionNamespace is the Schema for the FunctionNamespaces API. Manages Scaleway Function Namespaces.
+// FunctionNamespace is the Schema for the FunctionNamespaces API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

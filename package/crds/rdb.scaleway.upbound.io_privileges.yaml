@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Privilege is the Schema for the Privileges API. Manages Scaleway
-          RDB Database Privilege.
+        description: Privilege is the Schema for the Privileges API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Server is the Schema for the Servers API. Manages Scaleway Compute
-          Baremetal servers.
+        description: Server is the Schema for the Servers API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -481,6 +480,9 @@ spec:
                   offerId:
                     description: The ID of the offer. ID of the server offer
                     type: string
+                  offerName:
+                    description: The name of the offer. Name of the server offer
+                    type: string
                   options:
                     description: 'The options to enable on the server. ~> The options
                       block supports: The options to enable on server'
@@ -495,8 +497,8 @@ spec:
                     description: The organization ID the server is associated with.
                       The organization_id you want to attach the resource to
                     type: string
-                  osId:
-                    description: The ID of the os. The base image ID of the server
+                  osName:
+                    description: The name of the os. The base image name of the server
                     type: string
                   privateNetwork:
                     description: The private networks to attach to the server. For

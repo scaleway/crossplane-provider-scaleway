@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Bucket is the Schema for the Buckets API. Manages Scaleway object
-          storage buckets.
+        description: Bucket is the Schema for the Buckets API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

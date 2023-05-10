@@ -63,7 +63,7 @@ type ApplicationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Application is the Schema for the Applications API. Manages Scaleway IAM Applications.
+// Application is the Schema for the Applications API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -248,6 +248,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OfferName != nil {
+		in, out := &in.OfferName, &out.OfferName
+		*out = new(string)
+		**out = **in
+	}
 	if in.Options != nil {
 		in, out := &in.Options, &out.Options
 		*out = make([]OptionsObservation, len(*in))
@@ -260,8 +265,8 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.OsID != nil {
-		in, out := &in.OsID, &out.OsID
+	if in.OsName != nil {
+		in, out := &in.OsName, &out.OsName
 		*out = new(string)
 		**out = **in
 	}

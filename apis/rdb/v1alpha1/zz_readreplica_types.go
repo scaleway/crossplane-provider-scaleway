@@ -81,7 +81,8 @@ type ReadReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []ReadReplicaPrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the Database read replica should be created.
+	// (Defaults to provider region) The region
+	// in which the Database read replica should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -94,36 +95,38 @@ type ReadReplicaPrivateNetworkObservation struct {
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// Hostname of the endpoint. Only one of ip and hostname may be set.
-	// Hostname of the endpoint. Only one of ip and hostname may be set.
+	// Hostname of the endpoint. Only one of ip and hostname may be set
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
-	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// Name of the endpoint.
-	// Name of the endpoint.
+	// Name of the endpoints
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// TCP port of the endpoint.
-	// TCP port of the endpoint.
+	// TCP port of the endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Private network zone.
+	// Private network zone
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type ReadReplicaPrivateNetworkParameters struct {
 
 	// UUID of the private network to be connected to the read replica.
-	// UUID of the private network to be connected to the read replica (UUID format).
+	// UUID of the private network to be connected to the read replica (UUID format)
 	// +kubebuilder:validation:Required
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
 
-	// Endpoint IPv4 address with a CIDR notation. Check documentation about IP and subnet limitations. (IP network).
-	// Endpoint IPv4 address with a CIDR notation. Check documentation about IP and subnet limitations. (IP network).
-	// +kubebuilder:validation:Required
-	ServiceIP *string `json:"serviceIp" tf:"service_ip,omitempty"`
+	// The IP network address within the private subnet. This must be an IPv4 address with a
+	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
+	// service if not set.
+	// The IP network address within the private subnet
+	// +kubebuilder:validation:Optional
+	ServiceIP *string `json:"serviceIp,omitempty" tf:"service_ip,omitempty"`
 }
 
 // ReadReplicaSpec defines the desired state of ReadReplica
@@ -140,7 +143,7 @@ type ReadReplicaStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ReadReplica is the Schema for the ReadReplicas API. Manages Scaleway Database read replicas.
+// ReadReplica is the Schema for the ReadReplicas API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

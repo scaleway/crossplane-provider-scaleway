@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Pool is the Schema for the Pools API. Manages Scaleway Kubernetes
-          cluster pools.
+        description: Pool is the Schema for the Pools API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

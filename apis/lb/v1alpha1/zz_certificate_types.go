@@ -116,7 +116,7 @@ type CertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Certificate is the Schema for the Certificates API. Manages Scaleway Load-Balancer Certificates.
+// Certificate is the Schema for the Certificates API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

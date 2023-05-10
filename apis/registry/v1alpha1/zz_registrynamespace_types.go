@@ -69,7 +69,7 @@ type RegistryNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RegistryNamespace is the Schema for the RegistryNamespaces API. Manages Scaleway Container Registries.
+// RegistryNamespace is the Schema for the RegistryNamespaces API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

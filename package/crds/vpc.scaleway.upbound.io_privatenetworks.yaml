@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PrivateNetwork is the Schema for the PrivateNetworks API. Manages
-          Scaleway VPC Private Networks.
+        description: PrivateNetwork is the Schema for the PrivateNetworks API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

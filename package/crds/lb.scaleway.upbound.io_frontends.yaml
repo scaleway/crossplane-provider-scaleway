@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Frontend is the Schema for the Frontends API. Manages Scaleway
-          Load-Balancer Frontends.
+        description: Frontend is the Schema for the Frontends API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -74,9 +73,35 @@ spec:
                             Action to undertake when an ACL filter matches
                           items:
                             properties:
+                              redirect:
+                                description: Redirect parameters when using an ACL
+                                  with redirect action. Redirect parameters when using
+                                  an ACL with `redirect` action
+                                items:
+                                  properties:
+                                    code:
+                                      description: The HTTP redirect code to use.
+                                        Valid values are 301, 302, 303, 307 and 308.
+                                        The HTTP redirect code to use
+                                      type: number
+                                    target:
+                                      description: An URL can be used in case of a
+                                        location redirect (e.g. https://scaleway.com
+                                        will redirect to this same URL). A scheme
+                                        name (e.g. https, http, ftp, git) will replace
+                                        the request's original scheme. An URL can
+                                        be used in case of a location redirect
+                                      type: string
+                                    type:
+                                      description: 'The action type. Possible values
+                                        are: allow or deny or redirect. The redirect
+                                        type'
+                                      type: string
+                                  type: object
+                                type: array
                               type:
                                 description: 'The action type. Possible values are:
-                                  allow or deny. The action type'
+                                  allow or deny or redirect. The action type'
                                 type: string
                             required:
                             - type

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Image is the Schema for the Images API. Manages Scaleway Instance
-          Images.
+        description: Image is the Schema for the Images API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -72,7 +72,7 @@ type DatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Database is the Schema for the Databases API. Manages Scaleway RDB Database.
+// Database is the Schema for the Databases API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

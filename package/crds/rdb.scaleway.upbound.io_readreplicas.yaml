@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ReadReplica is the Schema for the ReadReplicas API. Manages Scaleway
-          Database read replicas.
+        description: ReadReplica is the Schema for the ReadReplicas API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -156,18 +155,17 @@ spec:
                         privateNetworkId:
                           description: UUID of the private network to be connected
                             to the read replica. UUID of the private network to be
-                            connected to the read replica (UUID format).
+                            connected to the read replica (UUID format)
                           type: string
                         serviceIp:
-                          description: Endpoint IPv4 address with a CIDR notation.
-                            Check documentation about IP and subnet limitations. (IP
-                            network). Endpoint IPv4 address with a CIDR notation.
-                            Check documentation about IP and subnet limitations. (IP
-                            network).
+                          description: The IP network address within the private subnet.
+                            This must be an IPv4 address with a CIDR notation. The
+                            IP network address within the private subnet is determined
+                            by the IP Address Management (IPAM) service if not set.
+                            The IP network address within the private subnet
                           type: string
                       required:
                       - privateNetworkId
-                      - serviceIp
                       type: object
                     type: array
                   region:
@@ -396,22 +394,22 @@ spec:
                         hostname:
                           description: Hostname of the endpoint. Only one of ip and
                             hostname may be set. Hostname of the endpoint. Only one
-                            of ip and hostname may be set.
+                            of ip and hostname may be set
                           type: string
                         ip:
                           description: IPv4 address of the endpoint (IP address).
                             Only one of ip and hostname may be set. IPv4 address of
                             the endpoint (IP address). Only one of ip and hostname
-                            may be set.
+                            may be set
                           type: string
                         name:
-                          description: Name of the endpoint. Name of the endpoint.
+                          description: Name of the endpoint. Name of the endpoints
                           type: string
                         port:
-                          description: TCP port of the endpoint. TCP port of the endpoint.
+                          description: TCP port of the endpoint. TCP port of the endpoint
                           type: number
                         zone:
-                          description: Private network zone.
+                          description: Private network zone
                           type: string
                       type: object
                     type: array

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API. Manages Scaleway
-          Load-Balancer Certificates.
+        description: Certificate is the Schema for the Certificates API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Snapshot is the Schema for the Snapshots API. Manages Scaleway
-          Instance Snapshots.
+        description: Snapshot is the Schema for the Snapshots API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

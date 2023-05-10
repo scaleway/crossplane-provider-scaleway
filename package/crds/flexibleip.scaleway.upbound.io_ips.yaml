@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Ip is the Schema for the Ips API. Manages Scaleway Flexible IPs.
+        description: Ip is the Schema for the Ips API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

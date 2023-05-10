@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Application is the Schema for the Applications API. Manages Scaleway
-          IAM Applications.
+        description: Application is the Schema for the Applications API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

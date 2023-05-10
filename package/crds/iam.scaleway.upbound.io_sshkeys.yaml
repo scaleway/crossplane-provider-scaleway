@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SSHKey is the Schema for the SSHKeys API. Manages Scaleway IAM
-          SSH Keys.
+        description: SSHKey is the Schema for the SSHKeys API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

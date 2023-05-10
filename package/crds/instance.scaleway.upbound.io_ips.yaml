@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: IP is the Schema for the IPs API. Manages Scaleway Compute Instance
-          IPs.
+        description: IP is the Schema for the IPs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

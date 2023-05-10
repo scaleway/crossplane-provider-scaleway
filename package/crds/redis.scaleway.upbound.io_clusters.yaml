@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API. Manages Scaleway
-          Redis Clusters.
+        description: Cluster is the Schema for the Clusters API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,7 +65,7 @@ spec:
                 properties:
                   acl:
                     description: List of acl rules, this is cluster's authorized IPs.
-                      List of acl rules.
+                      More details on the ACL section. List of acl rules.
                     items:
                       properties:
                         description:
@@ -115,7 +114,8 @@ spec:
                   privateNetwork:
                     description: Describes the private network you want to connect
                       to your cluster. If not set, a public network will be provided.
-                      Private network specs details
+                      More details on the Private Network section Private network
+                      specs details
                     items:
                       properties:
                         id:
@@ -365,7 +365,7 @@ spec:
                 properties:
                   acl:
                     description: List of acl rules, this is cluster's authorized IPs.
-                      List of acl rules.
+                      More details on the ACL section. List of acl rules.
                     items:
                       properties:
                         id:
@@ -389,7 +389,8 @@ spec:
                   privateNetwork:
                     description: Describes the private network you want to connect
                       to your cluster. If not set, a public network will be provided.
-                      Private network specs details
+                      More details on the Private Network section Private network
+                      specs details
                     items:
                       properties:
                         endpointId:

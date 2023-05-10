@@ -330,6 +330,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PrivateNetworkID != nil {
+		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API. Manages Scaleway
-          Kubernetes clusters.
+        description: Cluster is the Schema for the Clusters API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -244,6 +243,10 @@ spec:
                       - issuerUrl
                       type: object
                     type: array
+                  privateNetworkId:
+                    description: The ID of the private network of the cluster. The
+                      ID of the cluster's private network
+                    type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
                       the cluster is associated with. The project_id you want to attach

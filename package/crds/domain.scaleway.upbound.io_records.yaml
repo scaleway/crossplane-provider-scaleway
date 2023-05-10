@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Record is the Schema for the Records API. Manages Scaleway Domain
-          records.
+        description: Record is the Schema for the Records API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

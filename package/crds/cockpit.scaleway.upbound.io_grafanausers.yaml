@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: GrafanaUser is the Schema for the GrafanaUsers API. Manages Scaleway
-          Cockpit Grafana Users.
+        description: GrafanaUser is the Schema for the GrafanaUsers API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

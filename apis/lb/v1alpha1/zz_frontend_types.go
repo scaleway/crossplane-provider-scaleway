@@ -39,7 +39,12 @@ type ActionObservation struct {
 
 type ActionParameters struct {
 
-	// The action type. Possible values are: allow or deny.
+	// Redirect parameters when using an ACL with redirect action.
+	// Redirect parameters when using an ACL with `redirect` action
+	// +kubebuilder:validation:Optional
+	Redirect []RedirectParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// The action type. Possible values are: allow or deny or redirect.
 	// The action type
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -149,6 +154,27 @@ type MatchParameters struct {
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 }
 
+type RedirectObservation struct {
+}
+
+type RedirectParameters struct {
+
+	// The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
+	// The HTTP redirect code to use
+	// +kubebuilder:validation:Optional
+	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
+
+	// An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+	// An URL can be used in case of a location redirect
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// The action type. Possible values are: allow or deny or redirect.
+	// The redirect type
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 // FrontendSpec defines the desired state of Frontend
 type FrontendSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -163,7 +189,7 @@ type FrontendStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Frontend is the Schema for the Frontends API. Manages Scaleway Load-Balancer Frontends.
+// Frontend is the Schema for the Frontends API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

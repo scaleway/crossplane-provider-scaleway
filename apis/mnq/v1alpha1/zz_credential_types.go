@@ -22,8 +22,7 @@ type CredentialObservation struct {
 	// The Namespace protocol
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Credential used to connect to the SQS/SNS service. Only one of nats_credentials
-	// and sqs_sns_credentials may be set.
+	// Credential used to connect to the SQS/SNS service.
 	// The credential used to connect to the SQS/SNS service
 	// +kubebuilder:validation:Optional
 	SqsSnsCredentials []SqsSnsCredentialsObservation `json:"sqsSnsCredentials,omitempty" tf:"sqs_sns_credentials,omitempty"`
@@ -50,7 +49,7 @@ type CredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// Credentials file used to connect to the NATS service. Only one of nats_credentials and sqs_sns_credentials may be set.
+	// Credentials file used to connect to the NATS service.
 	// credential for NATS protocol
 	// +kubebuilder:validation:Optional
 	NatsCredentials []NatsCredentialsParameters `json:"natsCredentials,omitempty" tf:"nats_credentials,omitempty"`
@@ -61,8 +60,7 @@ type CredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Credential used to connect to the SQS/SNS service. Only one of nats_credentials
-	// and sqs_sns_credentials may be set.
+	// Credential used to connect to the SQS/SNS service.
 	// The credential used to connect to the SQS/SNS service
 	// +kubebuilder:validation:Optional
 	SqsSnsCredentials []SqsSnsCredentialsParameters `json:"sqsSnsCredentials,omitempty" tf:"sqs_sns_credentials,omitempty"`
@@ -124,7 +122,7 @@ type CredentialStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Credential is the Schema for the Credentials API. Manages Scaleway Messaging and Queuing Credential.
+// Credential is the Schema for the Credentials API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

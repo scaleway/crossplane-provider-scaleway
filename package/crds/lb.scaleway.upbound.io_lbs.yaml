@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: LB is the Schema for the LBs API. Manages Scaleway Load-Balancers.
+        description: LB is the Schema for the LBs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

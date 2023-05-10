@@ -36,7 +36,6 @@ spec:
     schema:
       openAPIV3Schema:
         description: FunctionNamespace is the Schema for the FunctionNamespaces API.
-          Manages Scaleway Function Namespaces.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

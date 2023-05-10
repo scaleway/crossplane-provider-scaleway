@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Project is the Schema for the Projects API. Manages Scaleway
-          Account project.
+        description: Project is the Schema for the Projects API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

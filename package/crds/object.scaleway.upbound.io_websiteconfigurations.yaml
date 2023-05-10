@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: WebsiteConfiguration is the Schema for the WebsiteConfigurations
-          API. Manages Scaleway website on object storage buckets.
+          API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

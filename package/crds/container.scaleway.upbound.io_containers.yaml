@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Container is the Schema for the Containers API. Manages Scaleway
-          Containers.
+        description: Container is the Schema for the Containers API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

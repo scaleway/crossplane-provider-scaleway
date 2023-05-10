@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Function is the Schema for the Functions API. Manages Scaleway
-          Functions.
+        description: Function is the Schema for the Functions API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PublicGateway is the Schema for the PublicGateways API. Manages
-          Scaleway VPC Public Gateways.
+        description: PublicGateway is the Schema for the PublicGateways API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

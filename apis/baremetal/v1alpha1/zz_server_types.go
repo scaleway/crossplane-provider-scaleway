@@ -93,6 +93,10 @@ type ServerObservation struct {
 	// ID of the server offer
 	OfferID *string `json:"offerId,omitempty" tf:"offer_id,omitempty"`
 
+	// The name of the offer.
+	// Name of the server offer
+	OfferName *string `json:"offerName,omitempty" tf:"offer_name,omitempty"`
+
 	// The options to enable on the server.
 	// ~> The options block supports:
 	// The options to enable on server
@@ -103,9 +107,9 @@ type ServerObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The ID of the os.
-	// The base image ID of the server
-	OsID *string `json:"osId,omitempty" tf:"os_id,omitempty"`
+	// The name of the os.
+	// The base image name of the server
+	OsName *string `json:"osName,omitempty" tf:"os_name,omitempty"`
 
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
@@ -227,7 +231,7 @@ type ServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Server is the Schema for the Servers API. Manages Scaleway Compute Baremetal servers.
+// Server is the Schema for the Servers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

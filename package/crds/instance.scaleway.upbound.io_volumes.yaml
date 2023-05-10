@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Volume is the Schema for the Volumes API. Manages Scaleway Compute
-          Instance Volumes.
+        description: Volume is the Schema for the Volumes API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

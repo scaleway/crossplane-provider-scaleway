@@ -154,7 +154,7 @@ type ContainerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Container is the Schema for the Containers API. Manages Scaleway Containers.
+// Container is the Schema for the Containers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

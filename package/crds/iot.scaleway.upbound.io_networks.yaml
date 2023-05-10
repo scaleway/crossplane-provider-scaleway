@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Network is the Schema for the Networks API. Manages Scaleway
-          IoT Networks.
+        description: Network is the Schema for the Networks API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

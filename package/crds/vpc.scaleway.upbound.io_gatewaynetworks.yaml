@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: GatewayNetwork is the Schema for the GatewayNetworks API. Manages
-          Scaleway VPC Gateway Networks.
+        description: GatewayNetwork is the Schema for the GatewayNetworks API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

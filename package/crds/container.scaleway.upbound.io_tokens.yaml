@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Token is the Schema for the Tokens API. Manages Scaleway Container
-          Tokens.
+        description: Token is the Schema for the Tokens API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: UserData is the Schema for the UserDatas API. Manages Scaleway
-          Compute Instance User Data.
+        description: UserData is the Schema for the UserDatas API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

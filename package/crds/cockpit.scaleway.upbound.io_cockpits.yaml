@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cockpit is the Schema for the Cockpits API. Manages Scaleway
-          Cockpits.
+        description: Cockpit is the Schema for the Cockpits API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

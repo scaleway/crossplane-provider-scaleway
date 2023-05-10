@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ContainerNamespace is the Schema for the ContainerNamespaces
-          API. Manages Scaleway Container Namespaces.
+          API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -69,8 +69,7 @@ spec:
                       of the container namespace
                     type: string
                   destroyRegistry:
-                    description: (Defaults to false). Destroy linked container registry
-                      on deletion. Destroy registry on deletion
+                    description: Destroy registry on deletion
                     type: boolean
                   environmentVariables:
                     additionalProperties:

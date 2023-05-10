@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PlacementGroup is the Schema for the PlacementGroups API. Manages
-          Scaleway Compute Instance Placement Groups.
+        description: PlacementGroup is the Schema for the PlacementGroups API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

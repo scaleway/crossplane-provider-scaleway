@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cron is the Schema for the Crons API. Manages Scaleway Containers
-          Triggers.
+        description: Cron is the Schema for the Crons API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

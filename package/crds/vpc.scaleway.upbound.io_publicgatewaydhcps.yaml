@@ -36,7 +36,6 @@ spec:
     schema:
       openAPIV3Schema:
         description: PublicGatewayDHCP is the Schema for the PublicGatewayDHCPs API.
-          Manages Scaleway VPC Public Gateways IP.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
