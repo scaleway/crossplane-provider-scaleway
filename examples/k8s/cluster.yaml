@@ -8,5 +8,6 @@ spec:
     name: crossplane-k8s-cluster
     version: 1.24.7
     cni: cilium
+    deleteAdditionalResources: true
   providerConfigRef:
     name: default
