@@ -13,16 +13,40 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ACLInitParameters struct {
+
+	// A list of ACLs (structure is described below)
+	// List of ACL rules to apply
+	ACLRules []ACLRulesInitParameters `json:"aclRules,omitempty" tf:"acl_rules,omitempty"`
+
+	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
 type ACLObservation struct {
+
+	// A list of ACLs (structure is described below)
+	// List of ACL rules to apply
+	ACLRules []ACLRulesObservation `json:"aclRules,omitempty" tf:"acl_rules,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// UUID of the rdb instance.
+	// Instance on which the ACL is applied
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ACLParameters struct {
 
 	// A list of ACLs (structure is described below)
 	// List of ACL rules to apply
-	// +kubebuilder:validation:Required
-	ACLRules []ACLRulesParameters `json:"aclRules" tf:"acl_rules,omitempty"`
+	// +kubebuilder:validation:Optional
+	ACLRules []ACLRulesParameters `json:"aclRules,omitempty" tf:"acl_rules,omitempty"`
 
 	// UUID of the rdb instance.
 	// Instance on which the ACL is applied
@@ -44,7 +68,26 @@ type ACLParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
+type ACLRulesInitParameters struct {
+
+	// A text describing this rule. Default description: IP allowed
+	// Description of the rule
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ip range to whitelist in CIDR notation
+	// Target IP of the rules
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+}
+
 type ACLRulesObservation struct {
+
+	// A text describing this rule. Default description: IP allowed
+	// Description of the rule
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ip range to whitelist in CIDR notation
+	// Target IP of the rules
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
 
 type ACLRulesParameters struct {
@@ -56,7 +99,7 @@ type ACLRulesParameters struct {
 
 	// The ip range to whitelist in CIDR notation
 	// Target IP of the rules
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	IP *string `json:"ip" tf:"ip,omitempty"`
 }
 
@@ -64,6 +107,18 @@ type ACLRulesParameters struct {
 type ACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // ACLStatus defines the observed state of ACL.
@@ -74,7 +129,7 @@ type ACLStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ACL is the Schema for the ACLs API. Manages Scaleway Database ACL rules.
+// ACL is the Schema for the ACLs API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -84,8 +139,9 @@ type ACLStatus struct {
 type ACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ACLSpec   `json:"spec"`
-	Status            ACLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.aclRules) || (has(self.initProvider) && has(self.initProvider.aclRules))",message="spec.forProvider.aclRules is a required parameter"
+	Spec   ACLSpec   `json:"spec"`
+	Status ACLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

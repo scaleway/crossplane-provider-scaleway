@@ -79,6 +79,3 @@ metadata:
   name: gw01
 spec:
   forProvider: {}
-
----
-

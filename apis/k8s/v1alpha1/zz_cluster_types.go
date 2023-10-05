@@ -13,7 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoUpgradeInitParameters struct {
+
+	// Set to true to enable Kubernetes patch version auto upgrades.
+	// ~> Important: When enabling auto upgrades, the version field take a minor version like x.y (ie 1.18).
+	// Enables the Kubernetes patch version auto upgrade
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The day of the auto upgrade maintenance window (monday to sunday, or any).
+	// Day of the maintenance window
+	MaintenanceWindowDay *string `json:"maintenanceWindowDay,omitempty" tf:"maintenance_window_day,omitempty"`
+
+	// The start hour (UTC) of the 2-hour auto upgrade maintenance window (0 to 23).
+	// Start hour of the 2-hour maintenance window
+	MaintenanceWindowStartHour *float64 `json:"maintenanceWindowStartHour,omitempty" tf:"maintenance_window_start_hour,omitempty"`
+}
+
 type AutoUpgradeObservation struct {
+
+	// Set to true to enable Kubernetes patch version auto upgrades.
+	// ~> Important: When enabling auto upgrades, the version field take a minor version like x.y (ie 1.18).
+	// Enables the Kubernetes patch version auto upgrade
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The day of the auto upgrade maintenance window (monday to sunday, or any).
+	// Day of the maintenance window
+	MaintenanceWindowDay *string `json:"maintenanceWindowDay,omitempty" tf:"maintenance_window_day,omitempty"`
+
+	// The start hour (UTC) of the 2-hour auto upgrade maintenance window (0 to 23).
+	// Start hour of the 2-hour maintenance window
+	MaintenanceWindowStartHour *float64 `json:"maintenanceWindowStartHour,omitempty" tf:"maintenance_window_start_hour,omitempty"`
 }
 
 type AutoUpgradeParameters struct {
@@ -21,21 +50,104 @@ type AutoUpgradeParameters struct {
 	// Set to true to enable Kubernetes patch version auto upgrades.
 	// ~> Important: When enabling auto upgrades, the version field take a minor version like x.y (ie 1.18).
 	// Enables the Kubernetes patch version auto upgrade
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
 	// The day of the auto upgrade maintenance window (monday to sunday, or any).
 	// Day of the maintenance window
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	MaintenanceWindowDay *string `json:"maintenanceWindowDay" tf:"maintenance_window_day,omitempty"`
 
 	// The start hour (UTC) of the 2-hour auto upgrade maintenance window (0 to 23).
 	// Start hour of the 2-hour maintenance window
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	MaintenanceWindowStartHour *float64 `json:"maintenanceWindowStartHour" tf:"maintenance_window_start_hour,omitempty"`
 }
 
+type AutoscalerConfigInitParameters struct {
+
+	// (Defaults to false) Detect similar node groups and balance the number of nodes between them.
+	// Detect similar node groups and balance the number of nodes between them
+	BalanceSimilarNodeGroups *bool `json:"balanceSimilarNodeGroups,omitempty" tf:"balance_similar_node_groups,omitempty"`
+
+	// (Defaults to false) Disables the scale down feature of the autoscaler.
+	// Disable the scale down feature of the autoscaler
+	DisableScaleDown *bool `json:"disableScaleDown,omitempty" tf:"disable_scale_down,omitempty"`
+
+	// (Defaults to binpacking) Type of resource estimator to be used in scale up.
+	// Type of resource estimator to be used in scale up
+	Estimator *string `json:"estimator,omitempty" tf:"estimator,omitempty"`
+
+	// (Default to random) Type of node group expander to be used in scale up.
+	// Type of node group expander to be used in scale up
+	Expander *string `json:"expander,omitempty" tf:"expander,omitempty"`
+
+	// (Defaults to -10) Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they don't cause scale up. Pods with null priority (PodPriority disabled) are non expendable.
+	// Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they don't cause scale up. Pods with null priority (PodPriority disabled) are non expendable
+	ExpendablePodsPriorityCutoff *float64 `json:"expendablePodsPriorityCutoff,omitempty" tf:"expendable_pods_priority_cutoff,omitempty"`
+
+	// (Defaults to false) Ignore DaemonSet pods when calculating resource utilization for scaling down.
+	// Ignore DaemonSet pods when calculating resource utilization for scaling down
+	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
+
+	// (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
+	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
+	MaxGracefulTerminationSec *float64 `json:"maxGracefulTerminationSec,omitempty" tf:"max_graceful_termination_sec,omitempty"`
+
+	// (Defaults to 10m) How long after scale up that scale down evaluation resumes.
+	// How long after scale up that scale down evaluation resumes
+	ScaleDownDelayAfterAdd *string `json:"scaleDownDelayAfterAdd,omitempty" tf:"scale_down_delay_after_add,omitempty"`
+
+	// (Default to 10m) How long a node should be unneeded before it is eligible for scale down.
+	// How long a node should be unneeded before it is eligible for scale down
+	ScaleDownUnneededTime *string `json:"scaleDownUnneededTime,omitempty" tf:"scale_down_unneeded_time,omitempty"`
+
+	// (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
+	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
+	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
+}
+
 type AutoscalerConfigObservation struct {
+
+	// (Defaults to false) Detect similar node groups and balance the number of nodes between them.
+	// Detect similar node groups and balance the number of nodes between them
+	BalanceSimilarNodeGroups *bool `json:"balanceSimilarNodeGroups,omitempty" tf:"balance_similar_node_groups,omitempty"`
+
+	// (Defaults to false) Disables the scale down feature of the autoscaler.
+	// Disable the scale down feature of the autoscaler
+	DisableScaleDown *bool `json:"disableScaleDown,omitempty" tf:"disable_scale_down,omitempty"`
+
+	// (Defaults to binpacking) Type of resource estimator to be used in scale up.
+	// Type of resource estimator to be used in scale up
+	Estimator *string `json:"estimator,omitempty" tf:"estimator,omitempty"`
+
+	// (Default to random) Type of node group expander to be used in scale up.
+	// Type of node group expander to be used in scale up
+	Expander *string `json:"expander,omitempty" tf:"expander,omitempty"`
+
+	// (Defaults to -10) Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they don't cause scale up. Pods with null priority (PodPriority disabled) are non expendable.
+	// Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they don't cause scale up. Pods with null priority (PodPriority disabled) are non expendable
+	ExpendablePodsPriorityCutoff *float64 `json:"expendablePodsPriorityCutoff,omitempty" tf:"expendable_pods_priority_cutoff,omitempty"`
+
+	// (Defaults to false) Ignore DaemonSet pods when calculating resource utilization for scaling down.
+	// Ignore DaemonSet pods when calculating resource utilization for scaling down
+	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
+
+	// (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
+	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
+	MaxGracefulTerminationSec *float64 `json:"maxGracefulTerminationSec,omitempty" tf:"max_graceful_termination_sec,omitempty"`
+
+	// (Defaults to 10m) How long after scale up that scale down evaluation resumes.
+	// How long after scale up that scale down evaluation resumes
+	ScaleDownDelayAfterAdd *string `json:"scaleDownDelayAfterAdd,omitempty" tf:"scale_down_delay_after_add,omitempty"`
+
+	// (Default to 10m) How long a node should be unneeded before it is eligible for scale down.
+	// How long a node should be unneeded before it is eligible for scale down
+	ScaleDownUnneededTime *string `json:"scaleDownUnneededTime,omitempty" tf:"scale_down_unneeded_time,omitempty"`
+
+	// (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
+	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
+	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 }
 
 type AutoscalerConfigParameters struct {
@@ -91,26 +203,159 @@ type AutoscalerConfigParameters struct {
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 }
 
+type ClusterInitParameters struct {
+
+	// The list of admission plugins to enable on the cluster.
+	// The list of admission plugins to enable on the cluster
+	AdmissionPlugins []*string `json:"admissionPlugins,omitempty" tf:"admission_plugins,omitempty"`
+
+	// Additional Subject Alternative Names for the Kubernetes API server certificate
+	// Additional Subject Alternative Names for the Kubernetes API server certificate
+	ApiserverCertSans []*string `json:"apiserverCertSans,omitempty" tf:"apiserver_cert_sans,omitempty"`
+
+	// The auto upgrade configuration.
+	// The auto upgrade configuration for the cluster
+	AutoUpgrade []AutoUpgradeInitParameters `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty"`
+
+	// The configuration options for the Kubernetes cluster autoscaler.
+	// The autoscaler configuration for the cluster
+	AutoscalerConfig []AutoscalerConfigInitParameters `json:"autoscalerConfig,omitempty" tf:"autoscaler_config,omitempty"`
+
+	// The Container Network Interface (CNI) for the Kubernetes cluster.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The CNI plugin of the cluster
+	Cni *string `json:"cni,omitempty" tf:"cni,omitempty"`
+
+	// Delete additional resources like block volumes, loadbalancers and the cluster private network (if empty) that were created in Kubernetes on cluster deletion.
+	// ~> Important: Setting this field to true means that you will lose all your cluster data and network configuration when you delete your cluster.
+	// If you prefer keeping it, you should instead set it as false.
+	// Delete additional resources like block volumes and loadbalancers on cluster deletion
+	DeleteAdditionalResources *bool `json:"deleteAdditionalResources,omitempty" tf:"delete_additional_resources,omitempty"`
+
+	// A description for the Kubernetes cluster.
+	// The description of the cluster
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The list of feature gates to enable on the cluster.
+	// The list of feature gates to enable on the cluster
+	FeatureGates []*string `json:"featureGates,omitempty" tf:"feature_gates,omitempty"`
+
+	// The name for the Kubernetes cluster.
+	// The name of the cluster
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The OpenID Connect configuration of the cluster
+	// The OpenID Connect configuration of the cluster
+	OpenIDConnectConfig []OpenIDConnectConfigInitParameters `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
+
+	// The ID of the private network of the cluster.
+	// The ID of the cluster's private network
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the cluster is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// (Defaults to provider region) The region in which the cluster should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The tags associated with the Kubernetes cluster.
+	// The tags associated with the cluster
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of Kubernetes cluster. Possible values are:
+	// The type of cluster
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The version of the Kubernetes cluster.
+	// The version of the cluster
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type ClusterObservation struct {
+
+	// The list of admission plugins to enable on the cluster.
+	// The list of admission plugins to enable on the cluster
+	AdmissionPlugins []*string `json:"admissionPlugins,omitempty" tf:"admission_plugins,omitempty"`
+
+	// Additional Subject Alternative Names for the Kubernetes API server certificate
+	// Additional Subject Alternative Names for the Kubernetes API server certificate
+	ApiserverCertSans []*string `json:"apiserverCertSans,omitempty" tf:"apiserver_cert_sans,omitempty"`
 
 	// The URL of the Kubernetes API server.
 	// Kubernetes API server URL
 	ApiserverURL *string `json:"apiserverUrl,omitempty" tf:"apiserver_url,omitempty"`
 
+	// The auto upgrade configuration.
+	// The auto upgrade configuration for the cluster
+	AutoUpgrade []AutoUpgradeObservation `json:"autoUpgrade,omitempty" tf:"auto_upgrade,omitempty"`
+
+	// The configuration options for the Kubernetes cluster autoscaler.
+	// The autoscaler configuration for the cluster
+	AutoscalerConfig []AutoscalerConfigObservation `json:"autoscalerConfig,omitempty" tf:"autoscaler_config,omitempty"`
+
+	// The Container Network Interface (CNI) for the Kubernetes cluster.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The CNI plugin of the cluster
+	Cni *string `json:"cni,omitempty" tf:"cni,omitempty"`
+
 	// The creation date of the cluster.
 	// The date and time of the creation of the Kubernetes cluster
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Delete additional resources like block volumes, loadbalancers and the cluster private network (if empty) that were created in Kubernetes on cluster deletion.
+	// ~> Important: Setting this field to true means that you will lose all your cluster data and network configuration when you delete your cluster.
+	// If you prefer keeping it, you should instead set it as false.
+	// Delete additional resources like block volumes and loadbalancers on cluster deletion
+	DeleteAdditionalResources *bool `json:"deleteAdditionalResources,omitempty" tf:"delete_additional_resources,omitempty"`
+
+	// A description for the Kubernetes cluster.
+	// The description of the cluster
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The list of feature gates to enable on the cluster.
+	// The list of feature gates to enable on the cluster
+	FeatureGates []*string `json:"featureGates,omitempty" tf:"feature_gates,omitempty"`
+
 	// The ID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name for the Kubernetes cluster.
+	// The name of the cluster
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The OpenID Connect configuration of the cluster
+	// The OpenID Connect configuration of the cluster
+	OpenIDConnectConfig []OpenIDConnectConfigObservation `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
 
 	// The organization ID the cluster is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The ID of the private network of the cluster.
+	// The ID of the cluster's private network
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the cluster is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// (Defaults to provider region) The region in which the cluster should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The status of the Kubernetes cluster.
 	// The status of the cluster
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The tags associated with the Kubernetes cluster.
+	// The tags associated with the cluster
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of Kubernetes cluster. Possible values are:
+	// The type of cluster
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The last update date of the cluster.
 	// The date and time of the last update of the Kubernetes cluster
@@ -119,6 +364,10 @@ type ClusterObservation struct {
 	// Set to true if a newer Kubernetes version is available.
 	// True if an upgrade is available
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty" tf:"upgrade_available,omitempty"`
+
+	// The version of the Kubernetes cluster.
+	// The version of the cluster
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// The DNS wildcard that points to all ready nodes.
 	// Wildcard DNS pointing to all the ready nodes
@@ -150,15 +399,15 @@ type ClusterParameters struct {
 	// The Container Network Interface (CNI) for the Kubernetes cluster.
 	// ~> Important: Updates to this field will recreate a new resource.
 	// The CNI plugin of the cluster
-	// +kubebuilder:validation:Required
-	Cni *string `json:"cni" tf:"cni,omitempty"`
+	// +kubebuilder:validation:Optional
+	Cni *string `json:"cni,omitempty" tf:"cni,omitempty"`
 
-	// Delete additional resources like block volumes, IPs and loadbalancers that were created in Kubernetes on cluster deletion.
+	// Delete additional resources like block volumes, loadbalancers and the cluster private network (if empty) that were created in Kubernetes on cluster deletion.
 	// ~> Important: Setting this field to true means that you will lose all your cluster data and network configuration when you delete your cluster.
 	// If you prefer keeping it, you should instead set it as false.
 	// Delete additional resources like block volumes and loadbalancers on cluster deletion
-	// +kubebuilder:validation:Required
-	DeleteAdditionalResources *bool `json:"deleteAdditionalResources" tf:"delete_additional_resources,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeleteAdditionalResources *bool `json:"deleteAdditionalResources,omitempty" tf:"delete_additional_resources,omitempty"`
 
 	// A description for the Kubernetes cluster.
 	// The description of the cluster
@@ -172,13 +421,18 @@ type ClusterParameters struct {
 
 	// The name for the Kubernetes cluster.
 	// The name of the cluster
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The OpenID Connect configuration of the cluster
 	// The OpenID Connect configuration of the cluster
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig []OpenIDConnectConfigParameters `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
+
+	// The ID of the private network of the cluster.
+	// The ID of the cluster's private network
+	// +kubebuilder:validation:Optional
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the cluster is associated with.
 	// The project_id you want to attach the resource to
@@ -195,15 +449,18 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of Kubernetes cluster. Possible values are: kapsule or multicloud.
+	// The type of Kubernetes cluster. Possible values are:
 	// The type of cluster
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The version of the Kubernetes cluster.
 	// The version of the cluster
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type KubeconfigInitParameters struct {
 }
 
 type KubeconfigObservation struct {
@@ -224,14 +481,73 @@ type KubeconfigObservation struct {
 type KubeconfigParameters struct {
 }
 
+type OpenIDConnectConfigInitParameters struct {
+
+	// A client id that all tokens must be issued for
+	// A client id that all tokens must be issued for
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// JWT claim to use as the user's group
+	// JWT claim to use as the user's group
+	GroupsClaim []*string `json:"groupsClaim,omitempty" tf:"groups_claim,omitempty"`
+
+	// Prefix prepended to group claims
+	// Prefix prepended to group claims
+	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// URL of the provider which allows the API server to discover public signing keys
+	// URL of the provider which allows the API server to discover public signing keys
+	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
+
+	// Multiple key=value pairs that describes a required claim in the ID Token
+	// Multiple key=value pairs that describes a required claim in the ID Token
+	RequiredClaim []*string `json:"requiredClaim,omitempty" tf:"required_claim,omitempty"`
+
+	// JWT claim to use as the user name
+	// JWT claim to use as the user name
+	UsernameClaim *string `json:"usernameClaim,omitempty" tf:"username_claim,omitempty"`
+
+	// Prefix prepended to username
+	// Prefix prepended to username
+	UsernamePrefix *string `json:"usernamePrefix,omitempty" tf:"username_prefix,omitempty"`
+}
+
 type OpenIDConnectConfigObservation struct {
+
+	// A client id that all tokens must be issued for
+	// A client id that all tokens must be issued for
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// JWT claim to use as the user's group
+	// JWT claim to use as the user's group
+	GroupsClaim []*string `json:"groupsClaim,omitempty" tf:"groups_claim,omitempty"`
+
+	// Prefix prepended to group claims
+	// Prefix prepended to group claims
+	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// URL of the provider which allows the API server to discover public signing keys
+	// URL of the provider which allows the API server to discover public signing keys
+	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
+
+	// Multiple key=value pairs that describes a required claim in the ID Token
+	// Multiple key=value pairs that describes a required claim in the ID Token
+	RequiredClaim []*string `json:"requiredClaim,omitempty" tf:"required_claim,omitempty"`
+
+	// JWT claim to use as the user name
+	// JWT claim to use as the user name
+	UsernameClaim *string `json:"usernameClaim,omitempty" tf:"username_claim,omitempty"`
+
+	// Prefix prepended to username
+	// Prefix prepended to username
+	UsernamePrefix *string `json:"usernamePrefix,omitempty" tf:"username_prefix,omitempty"`
 }
 
 type OpenIDConnectConfigParameters struct {
 
 	// A client id that all tokens must be issued for
 	// A client id that all tokens must be issued for
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// JWT claim to use as the user's group
@@ -246,7 +562,7 @@ type OpenIDConnectConfigParameters struct {
 
 	// URL of the provider which allows the API server to discover public signing keys
 	// URL of the provider which allows the API server to discover public signing keys
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	IssuerURL *string `json:"issuerUrl" tf:"issuer_url,omitempty"`
 
 	// Multiple key=value pairs that describes a required claim in the ID Token
@@ -269,6 +585,18 @@ type OpenIDConnectConfigParameters struct {
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.
@@ -279,7 +607,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API. Manages Scaleway Kubernetes clusters.
+// Cluster is the Schema for the Clusters API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -289,8 +617,12 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cni) || (has(self.initProvider) && has(self.initProvider.cni))",message="spec.forProvider.cni is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deleteAdditionalResources) || (has(self.initProvider) && has(self.initProvider.deleteAdditionalResources))",message="spec.forProvider.deleteAdditionalResources is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || (has(self.initProvider) && has(self.initProvider.version))",message="spec.forProvider.version is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

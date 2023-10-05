@@ -9,6 +9,3 @@ metadata:
 spec:
   forProvider:
     reverse: my-reverse.com
-
----
-

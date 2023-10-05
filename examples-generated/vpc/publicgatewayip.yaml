@@ -30,6 +30,3 @@ spec:
     priority: 1
     ttl: 3600
     type: A
-
----
-

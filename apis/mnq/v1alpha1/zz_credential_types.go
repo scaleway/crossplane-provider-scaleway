@@ -13,19 +13,54 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CredentialInitParameters struct {
+
+	// The credential name..
+	// The name of the Credential
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Credentials file used to connect to the NATS service.
+	// credential for NATS protocol
+	NatsCredentials []NatsCredentialsInitParameters `json:"natsCredentials,omitempty" tf:"nats_credentials,omitempty"`
+
+	// (Defaults to provider region). The region
+	// in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Credential used to connect to the SQS/SNS service.
+	// The credential used to connect to the SQS/SNS service
+	SqsSnsCredentials []SqsSnsCredentialsInitParameters `json:"sqsSnsCredentials,omitempty" tf:"sqs_sns_credentials,omitempty"`
+}
+
 type CredentialObservation struct {
 
 	// The credential ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The credential name..
+	// The name of the Credential
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The namespace containing the Credential.
+	// The ID of the Namespace associated to
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Credentials file used to connect to the NATS service.
+	// credential for NATS protocol
+	NatsCredentials []NatsCredentialsParameters `json:"natsCredentials,omitempty" tf:"nats_credentials,omitempty"`
+
 	// The protocol associated to the Credential. Possible values are nats and sqs_sns.
 	// The Namespace protocol
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Credential used to connect to the SQS/SNS service. Only one of nats_credentials
-	// and sqs_sns_credentials may be set.
+	// (Defaults to provider region). The region
+	// in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Credential used to connect to the SQS/SNS service.
 	// The credential used to connect to the SQS/SNS service
-	// +kubebuilder:validation:Optional
 	SqsSnsCredentials []SqsSnsCredentialsObservation `json:"sqsSnsCredentials,omitempty" tf:"sqs_sns_credentials,omitempty"`
 }
 
@@ -50,7 +85,7 @@ type CredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// Credentials file used to connect to the NATS service. Only one of nats_credentials and sqs_sns_credentials may be set.
+	// Credentials file used to connect to the NATS service.
 	// credential for NATS protocol
 	// +kubebuilder:validation:Optional
 	NatsCredentials []NatsCredentialsParameters `json:"natsCredentials,omitempty" tf:"nats_credentials,omitempty"`
@@ -61,11 +96,13 @@ type CredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Credential used to connect to the SQS/SNS service. Only one of nats_credentials
-	// and sqs_sns_credentials may be set.
+	// Credential used to connect to the SQS/SNS service.
 	// The credential used to connect to the SQS/SNS service
 	// +kubebuilder:validation:Optional
 	SqsSnsCredentials []SqsSnsCredentialsParameters `json:"sqsSnsCredentials,omitempty" tf:"sqs_sns_credentials,omitempty"`
+}
+
+type NatsCredentialsInitParameters struct {
 }
 
 type NatsCredentialsObservation struct {
@@ -74,7 +111,34 @@ type NatsCredentialsObservation struct {
 type NatsCredentialsParameters struct {
 }
 
+type PermissionsInitParameters struct {
+
+	// . Defines if user can manage the associated resource(s).
+	// Allow manage the associated resource
+	CanManage *bool `json:"canManage,omitempty" tf:"can_manage,omitempty"`
+
+	// . Defines if user can publish messages to the service.
+	// Allow publish messages to the service
+	CanPublish *bool `json:"canPublish,omitempty" tf:"can_publish,omitempty"`
+
+	// . Defines if user can receive messages from the service.
+	// Allow receive messages from the service
+	CanReceive *bool `json:"canReceive,omitempty" tf:"can_receive,omitempty"`
+}
+
 type PermissionsObservation struct {
+
+	// . Defines if user can manage the associated resource(s).
+	// Allow manage the associated resource
+	CanManage *bool `json:"canManage,omitempty" tf:"can_manage,omitempty"`
+
+	// . Defines if user can publish messages to the service.
+	// Allow publish messages to the service
+	CanPublish *bool `json:"canPublish,omitempty" tf:"can_publish,omitempty"`
+
+	// . Defines if user can receive messages from the service.
+	// Allow receive messages from the service
+	CanReceive *bool `json:"canReceive,omitempty" tf:"can_receive,omitempty"`
 }
 
 type PermissionsParameters struct {
@@ -95,11 +159,22 @@ type PermissionsParameters struct {
 	CanReceive *bool `json:"canReceive,omitempty" tf:"can_receive,omitempty"`
 }
 
+type SqsSnsCredentialsInitParameters struct {
+
+	// List of permissions associated to this Credential. Only one of permissions may be set.
+	// The permission associated to this credential.
+	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
+}
+
 type SqsSnsCredentialsObservation struct {
 
 	// The ID of the key.
 	// The key of the credential
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+
+	// List of permissions associated to this Credential. Only one of permissions may be set.
+	// The permission associated to this credential.
+	Permissions []PermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
 }
 
 type SqsSnsCredentialsParameters struct {
@@ -114,6 +189,18 @@ type SqsSnsCredentialsParameters struct {
 type CredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CredentialParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // CredentialStatus defines the observed state of Credential.
@@ -124,7 +211,7 @@ type CredentialStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Credential is the Schema for the Credentials API. Manages Scaleway Messaging and Queuing Credential.
+// Credential is the Schema for the Credentials API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

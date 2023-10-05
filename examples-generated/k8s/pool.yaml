@@ -36,6 +36,3 @@ spec:
     cni: cilium
     name: jack
     version: 1.24.3
-
----
-

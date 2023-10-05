@@ -13,11 +13,54 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GatewayNetworkInitParameters struct {
+
+	// (Defaults to false) Remove DHCP config on this network on destroy. It requires DHCP id.
+	// Remove DHCP config on this network on destroy
+	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
+
+	// (Defaults to true) Enable DHCP config on this network. It requires DHCP id.
+	// Enable DHCP config on this network
+	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
+
+	// (Defaults to true) Enable masquerade on this network
+	// Enable masquerade on this network
+	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
+
+	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
+	// The static IP address in CIDR on this network
+	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the gateway network should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type GatewayNetworkObservation struct {
+
+	// (Defaults to false) Remove DHCP config on this network on destroy. It requires DHCP id.
+	// Remove DHCP config on this network on destroy
+	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
 	// The date and time of the creation of the gateway network.
 	// The date and time of the creation of the gateway network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The ID of the public gateway DHCP config. Only one of dhcp_id and static_address should be specified.
+	// The ID of the public gateway DHCP config
+	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
+
+	// (Defaults to true) Enable DHCP config on this network. It requires DHCP id.
+	// Enable DHCP config on this network
+	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
+
+	// (Defaults to true) Enable masquerade on this network
+	// Enable masquerade on this network
+	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
+
+	// The ID of the public gateway.
+	// The ID of the public gateway where connect to
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// The ID of the gateway network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -26,9 +69,21 @@ type GatewayNetworkObservation struct {
 	// The mac address on this network
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The ID of the private network.
+	// The ID of the private network where connect to
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
+	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
+	// The static IP address in CIDR on this network
+	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
+
 	// The date and time of the last update of the gateway network.
 	// The date and time of the last update of the gateway network
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the gateway network should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type GatewayNetworkParameters struct {
@@ -105,6 +160,18 @@ type GatewayNetworkParameters struct {
 type GatewayNetworkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GatewayNetworkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GatewayNetworkInitParameters `json:"initProvider,omitempty"`
 }
 
 // GatewayNetworkStatus defines the observed state of GatewayNetwork.
@@ -115,7 +182,7 @@ type GatewayNetworkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GatewayNetwork is the Schema for the GatewayNetworks API. Manages Scaleway VPC Gateway Networks.
+// GatewayNetwork is the Schema for the GatewayNetworks API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

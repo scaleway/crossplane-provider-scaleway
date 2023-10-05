@@ -17,17 +17,14 @@ func (mg *GatewayNetwork) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this GatewayNetwork.
+func (mg *GatewayNetwork) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this GatewayNetwork.
 func (mg *GatewayNetwork) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this GatewayNetwork.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *GatewayNetwork) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this GatewayNetwork.
@@ -50,17 +47,14 @@ func (mg *GatewayNetwork) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this GatewayNetwork.
+func (mg *GatewayNetwork) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this GatewayNetwork.
 func (mg *GatewayNetwork) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this GatewayNetwork.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *GatewayNetwork) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this GatewayNetwork.
@@ -83,17 +77,14 @@ func (mg *PrivateNetwork) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this PrivateNetwork.
+func (mg *PrivateNetwork) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this PrivateNetwork.
 func (mg *PrivateNetwork) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PrivateNetwork.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PrivateNetwork) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PrivateNetwork.
@@ -116,17 +107,14 @@ func (mg *PrivateNetwork) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this PrivateNetwork.
+func (mg *PrivateNetwork) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this PrivateNetwork.
 func (mg *PrivateNetwork) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PrivateNetwork.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PrivateNetwork) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PrivateNetwork.
@@ -149,17 +137,14 @@ func (mg *PublicGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this PublicGateway.
+func (mg *PublicGateway) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this PublicGateway.
 func (mg *PublicGateway) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PublicGateway.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PublicGateway) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PublicGateway.
@@ -182,17 +167,14 @@ func (mg *PublicGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this PublicGateway.
+func (mg *PublicGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this PublicGateway.
 func (mg *PublicGateway) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PublicGateway.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PublicGateway) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PublicGateway.
@@ -215,17 +197,14 @@ func (mg *PublicGatewayDHCP) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this PublicGatewayDHCP.
+func (mg *PublicGatewayDHCP) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this PublicGatewayDHCP.
 func (mg *PublicGatewayDHCP) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PublicGatewayDHCP.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PublicGatewayDHCP) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PublicGatewayDHCP.
@@ -248,17 +227,14 @@ func (mg *PublicGatewayDHCP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this PublicGatewayDHCP.
+func (mg *PublicGatewayDHCP) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this PublicGatewayDHCP.
 func (mg *PublicGatewayDHCP) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PublicGatewayDHCP.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PublicGatewayDHCP) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PublicGatewayDHCP.
@@ -281,17 +257,14 @@ func (mg *PublicGatewayIP) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this PublicGatewayIP.
+func (mg *PublicGatewayIP) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this PublicGatewayIP.
 func (mg *PublicGatewayIP) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PublicGatewayIP.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PublicGatewayIP) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PublicGatewayIP.
@@ -314,17 +287,14 @@ func (mg *PublicGatewayIP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this PublicGatewayIP.
+func (mg *PublicGatewayIP) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this PublicGatewayIP.
 func (mg *PublicGatewayIP) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PublicGatewayIP.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PublicGatewayIP) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PublicGatewayIP.
@@ -347,17 +317,14 @@ func (mg *PublicGatewayPATRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicies of this PublicGatewayPATRule.
+func (mg *PublicGatewayPATRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
 // GetProviderConfigReference of this PublicGatewayPATRule.
 func (mg *PublicGatewayPATRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PublicGatewayPATRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PublicGatewayPATRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PublicGatewayPATRule.
@@ -380,17 +347,14 @@ func (mg *PublicGatewayPATRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicies of this PublicGatewayPATRule.
+func (mg *PublicGatewayPATRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
 // SetProviderConfigReference of this PublicGatewayPATRule.
 func (mg *PublicGatewayPATRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PublicGatewayPATRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PublicGatewayPATRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PublicGatewayPATRule.

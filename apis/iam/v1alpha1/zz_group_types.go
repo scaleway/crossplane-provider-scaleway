@@ -13,15 +13,62 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GroupInitParameters struct {
+
+	// The description of the IAM group.
+	// The description of the iam group
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Manage membership externally. This make the resource ignore user_ids and application_ids. Should be used when using iam_group_membership
+	// Handle user and application memberships externally
+	ExternalMembership *bool `json:"externalMembership,omitempty" tf:"external_membership,omitempty"`
+
+	// The name of the IAM group.
+	// The name of the iam group
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the group is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The list of IDs of the users attached to the group.
+	// List of IDs of the users attached to the group
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
+}
+
 type GroupObservation struct {
+
+	// The list of IDs of the applications attached to the group.
+	// List of IDs of the applications attached to the group
+	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
 	// The date and time of the creation of the group
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The description of the IAM group.
+	// The description of the iam group
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Manage membership externally. This make the resource ignore user_ids and application_ids. Should be used when using iam_group_membership
+	// Handle user and application memberships externally
+	ExternalMembership *bool `json:"externalMembership,omitempty" tf:"external_membership,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IAM group.
+	// The name of the iam group
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the group is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// The date and time of the last update of the group
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// The list of IDs of the users attached to the group.
+	// List of IDs of the users attached to the group
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type GroupParameters struct {
@@ -45,6 +92,11 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Manage membership externally. This make the resource ignore user_ids and application_ids. Should be used when using iam_group_membership
+	// Handle user and application memberships externally
+	// +kubebuilder:validation:Optional
+	ExternalMembership *bool `json:"externalMembership,omitempty" tf:"external_membership,omitempty"`
+
 	// The name of the IAM group.
 	// The name of the iam group
 	// +kubebuilder:validation:Optional
@@ -65,6 +117,18 @@ type GroupParameters struct {
 type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupStatus defines the observed state of Group.
@@ -75,7 +139,7 @@ type GroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Group is the Schema for the Groups API. Manages Scaleway IAM Groups.
+// Group is the Schema for the Groups API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

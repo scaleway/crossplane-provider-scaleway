@@ -28,6 +28,3 @@ spec:
   forProvider:
     name: main
     productPlan: plan_shared
-
----
-

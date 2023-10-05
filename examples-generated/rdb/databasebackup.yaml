@@ -12,6 +12,3 @@ spec:
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: scaleway_rdb_instance
-
----
-

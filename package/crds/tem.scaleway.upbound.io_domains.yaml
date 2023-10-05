@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: domains.tem.scaleway.upbound.io
 spec:
   group: tem.scaleway.upbound.io
@@ -35,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Domain is the Schema for the Domains API. Manages Scaleway Transactional
-          Email Domains.
+        description: Domain is the Schema for the Domains API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -55,19 +53,28 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
                 type: string
               forProvider:
                 properties:
+                  acceptTos:
+                    description: 'Acceptation of the Term of Service. ~> Important:  This
+                      attribute must be set to true. Accept the Scaleway Terms of
+                      Service'
+                    type: boolean
                   name:
-                    description: The domain name, must not be used in another Transactional
-                      Email Domain. ~> Important Updates to name will recreate the
-                      domain. The domain name used when sending emails
+                    description: 'The domain name, must not be used in another Transactional
+                      Email Domain. ~> Important: Updates to name will recreate the
+                      domain. The domain name used when sending emails'
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
@@ -79,51 +86,73 @@ spec:
                       the domain should be created. The region you want to attach
                       the resource to
                     type: string
-                required:
-                - name
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  acceptTos:
+                    description: 'Acceptation of the Term of Service. ~> Important:  This
+                      attribute must be set to true. Accept the Scaleway Terms of
+                      Service'
+                    type: boolean
+                  name:
+                    description: 'The domain name, must not be used in another Transactional
+                      Email Domain. ~> Important: Updates to name will recreate the
+                      domain. The domain name used when sending emails'
+                    type: string
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the domain is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
+                  region:
+                    description: (Defaults to provider region). The region in which
+                      the domain should be created. The region you want to attach
+                      the resource to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
                 description: ProviderConfigReference specifies how the provider that
                   will be used to create, observe, update, and delete this managed
                   resource should be configured.
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -253,11 +282,25 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.acceptTos is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.acceptTos)
+                || (has(self.initProvider) && has(self.initProvider.acceptTos))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: DomainStatus defines the observed state of Domain.
             properties:
               atProvider:
                 properties:
+                  acceptTos:
+                    description: 'Acceptation of the Term of Service. ~> Important:  This
+                      attribute must be set to true. Accept the Scaleway Terms of
+                      Service'
+                    type: boolean
                   createdAt:
                     description: The date and time of the Transaction Email Domain's
                       creation (RFC 3339 format). Date and time of domain's creation
@@ -280,16 +323,51 @@ spec:
                       valid (RFC 3339 format). Date and time the domain was last found
                       to be valid (RFC 3339 format)
                     type: string
+                  name:
+                    description: 'The domain name, must not be used in another Transactional
+                      Email Domain. ~> Important: Updates to name will recreate the
+                      domain. The domain name used when sending emails'
+                    type: string
                   nextCheckAt:
                     description: The date and time of the next scheduled check (RFC
                       3339 format). Date and time of the next scheduled check (RFC
                       3339 format)
+                    type: string
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the domain is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
+                  region:
+                    description: (Defaults to provider region). The region in which
+                      the domain should be created. The region you want to attach
+                      the resource to
                     type: string
                   revokedAt:
                     description: The date and time of the revocation of the domain
                       (RFC 3339 format). Date and time of the revocation of the domain
                       (RFC 3339 format)
                     type: string
+                  smtpHost:
+                    description: SMTP host to use to send emails
+                    type: string
+                  smtpPort:
+                    description: SMTP port to use to send emails over TLS. (Port 587)
+                    type: number
+                  smtpPortAlternative:
+                    description: SMTP port to use to send emails over TLS. (Port 2587)
+                    type: number
+                  smtpPortUnsecure:
+                    description: SMTP port to use to send emails. (Port 25)
+                    type: number
+                  smtpsPort:
+                    description: SMTPS port to use to send emails over TLS Wrapper.
+                      (Port 465)
+                    type: number
+                  smtpsPortAlternative:
+                    description: SMTPS port to use to send emails over TLS Wrapper.
+                      (Port 2465)
+                    type: number
                   spfConfig:
                     description: The snippet of the SPF record that should be registered
                       in the DNS zone. Snippet of the SPF record that should be registered

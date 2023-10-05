@@ -27,6 +27,3 @@ spec:
   forProvider:
     name: test-iot
     productPlan: plan_shared
-
----
-

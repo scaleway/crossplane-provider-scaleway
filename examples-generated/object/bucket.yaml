@@ -11,6 +11,3 @@ spec:
     name: some-unique-name
     tags:
       key: value
-
----
-

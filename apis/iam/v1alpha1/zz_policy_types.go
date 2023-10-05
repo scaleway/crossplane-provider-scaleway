@@ -13,22 +13,81 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PolicyInitParameters struct {
+
+	// The description of the iam policy.
+	// The description of the iam policy
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// .The name of the iam policy.
+	// The name of the iam policy
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// If the policy doesn't apply to a principal.
+	// Deactivate policy to a principal
+	NoPrincipal *bool `json:"noPrincipal,omitempty" tf:"no_principal,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// List of rules in the policy.
+	// Rules of the policy to create
+	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// ID of the User the policy will be linked to
+	// User id
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+}
+
 type PolicyObservation struct {
+
+	// ID of the Application the policy will be linked to
+	// Application id
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// The date and time of the creation of the policy.
 	// The date and time of the creation of the policy
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The description of the iam policy.
+	// The description of the iam policy
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Whether the policy is editable.
 	// Whether or not the policy is editable.
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
+	// ID of the Group the policy will be linked to
+	// Group id
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// .The name of the iam policy.
+	// The name of the iam policy
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// If the policy doesn't apply to a principal.
+	// Deactivate policy to a principal
+	NoPrincipal *bool `json:"noPrincipal,omitempty" tf:"no_principal,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// List of rules in the policy.
+	// Rules of the policy to create
+	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// The date and time of the last update of the policy.
 	// The date and time of the last update of the policy
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// ID of the User the policy will be linked to
+	// User id
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type PolicyParameters struct {
@@ -83,8 +142,8 @@ type PolicyParameters struct {
 
 	// List of rules in the policy.
 	// Rules of the policy to create
-	// +kubebuilder:validation:Required
-	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ID of the User the policy will be linked to
 	// User id
@@ -92,7 +151,34 @@ type PolicyParameters struct {
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
+type RuleInitParameters struct {
+
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
+	// ID of organization scoped to the rule. Only one of project_ids and organization_id may be set.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// Names of permission sets bound to the rule.
+	// Names of permission sets bound to the rule.
+	PermissionSetNames []*string `json:"permissionSetNames,omitempty" tf:"permission_set_names,omitempty"`
+
+	// List of project IDs scoped to the rule.
+	// List of project IDs scoped to the rule. Only one of project_ids and organization_id may be set.
+	ProjectIds []*string `json:"projectIds,omitempty" tf:"project_ids,omitempty"`
+}
+
 type RuleObservation struct {
+
+	// (Defaults to provider organization_id) The ID of the organization the policy is associated with.
+	// ID of organization scoped to the rule. Only one of project_ids and organization_id may be set.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// Names of permission sets bound to the rule.
+	// Names of permission sets bound to the rule.
+	PermissionSetNames []*string `json:"permissionSetNames,omitempty" tf:"permission_set_names,omitempty"`
+
+	// List of project IDs scoped to the rule.
+	// List of project IDs scoped to the rule. Only one of project_ids and organization_id may be set.
+	ProjectIds []*string `json:"projectIds,omitempty" tf:"project_ids,omitempty"`
 }
 
 type RuleParameters struct {
@@ -104,7 +190,7 @@ type RuleParameters struct {
 
 	// Names of permission sets bound to the rule.
 	// Names of permission sets bound to the rule.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PermissionSetNames []*string `json:"permissionSetNames" tf:"permission_set_names,omitempty"`
 
 	// List of project IDs scoped to the rule.
@@ -117,6 +203,18 @@ type RuleParameters struct {
 type PolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PolicyStatus defines the observed state of Policy.
@@ -127,7 +225,7 @@ type PolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Policy is the Schema for the Policys API. Manages Scaleway IAM Policies.
+// Policy is the Schema for the Policys API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -137,8 +235,9 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySpec   `json:"spec"`
-	Status            PolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || (has(self.initProvider) && has(self.initProvider.rule))",message="spec.forProvider.rule is a required parameter"
+	Spec   PolicySpec   `json:"spec"`
+	Status PolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

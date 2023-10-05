@@ -13,30 +13,89 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ErrorDocumentInitParameters struct {
+
+	// The object key name to use when a 4XX class error occurs.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
 type ErrorDocumentObservation struct {
+
+	// The object key name to use when a 4XX class error occurs.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ErrorDocumentParameters struct {
 
 	// The object key name to use when a 4XX class error occurs.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 }
 
+type IndexDocumentInitParameters struct {
+
+	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
+}
+
 type IndexDocumentObservation struct {
+
+	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentParameters struct {
 
 	// A suffix that is appended to a request that is for a directory on the website endpoint.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
+}
+
+type WebsiteConfigurationInitParameters struct {
+
+	// The name of the bucket.
+	// The bucket name.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The name of the error document for the website detailed below.
+	// The name of the error document for the website.
+	ErrorDocument []ErrorDocumentInitParameters `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
+
+	// The name of the index document for the website detailed below.
+	// The name of the index document for the website.
+	IndexDocument []IndexDocumentInitParameters `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type WebsiteConfigurationObservation struct {
 
+	// The name of the bucket.
+	// The bucket name.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The name of the error document for the website detailed below.
+	// The name of the error document for the website.
+	ErrorDocument []ErrorDocumentObservation `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
+
 	// The region and bucket separated by a slash (/)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the index document for the website detailed below.
+	// The name of the index document for the website.
+	IndexDocument []IndexDocumentObservation `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The domain of the website endpoint. This is used to create DNS alias records.
 	// The website endpoint.
@@ -51,8 +110,8 @@ type WebsiteConfigurationParameters struct {
 
 	// The name of the bucket.
 	// The bucket name.
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The name of the error document for the website detailed below.
 	// The name of the error document for the website.
@@ -61,8 +120,8 @@ type WebsiteConfigurationParameters struct {
 
 	// The name of the index document for the website detailed below.
 	// The name of the index document for the website.
-	// +kubebuilder:validation:Required
-	IndexDocument []IndexDocumentParameters `json:"indexDocument" tf:"index_document,omitempty"`
+	// +kubebuilder:validation:Optional
+	IndexDocument []IndexDocumentParameters `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
 	// The project_id you want to attach the resource to
@@ -78,6 +137,18 @@ type WebsiteConfigurationParameters struct {
 type WebsiteConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebsiteConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider WebsiteConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebsiteConfigurationStatus defines the observed state of WebsiteConfiguration.
@@ -88,7 +159,7 @@ type WebsiteConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// WebsiteConfiguration is the Schema for the WebsiteConfigurations API. Manages Scaleway website on object storage buckets.
+// WebsiteConfiguration is the Schema for the WebsiteConfigurations API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -98,8 +169,10 @@ type WebsiteConfigurationStatus struct {
 type WebsiteConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebsiteConfigurationSpec   `json:"spec"`
-	Status            WebsiteConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bucket) || (has(self.initProvider) && has(self.initProvider.bucket))",message="spec.forProvider.bucket is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.indexDocument) || (has(self.initProvider) && has(self.initProvider.indexDocument))",message="spec.forProvider.indexDocument is a required parameter"
+	Spec   WebsiteConfigurationSpec   `json:"spec"`
+	Status WebsiteConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

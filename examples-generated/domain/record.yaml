@@ -15,6 +15,3 @@ spec:
     name: www
     ttl: 3600
     type: A
-
----
-

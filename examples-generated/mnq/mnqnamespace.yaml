@@ -11,6 +11,3 @@ spec:
     name: mnq-ns
     protocol: nats
     region: fr-par
-
----
-

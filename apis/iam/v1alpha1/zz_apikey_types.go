@@ -13,11 +13,37 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApiKeyInitParameters struct {
+
+	// The default project ID to use with object storage.
+	// The project_id you want to attach the resource to
+	DefaultProjectID *string `json:"defaultProjectId,omitempty" tf:"default_project_id,omitempty"`
+
+	// :  The description of the iam api key.
+	// The description of the iam api key
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The date and time of the expiration of the iam api key. Please note that in case of change,
+	// the resource will be recreated.
+	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
+	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
+
+	// ID of the user attached to the api key.
+	// Only one of the application_id and user_id should be specified.
+	// ID of the user attached to the api key
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+}
+
 type ApiKeyObservation struct {
 
 	// The access key of the iam api key.
 	// The access key of the iam api key
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+
+	// :  ID of the application attached to the api key.
+	// Only one of the application_id and user_id should be specified.
+	// ID of the application attached to the api key
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// The date and time of the creation of the iam api key.
 	// The date and time of the creation of the iam api key
@@ -27,9 +53,22 @@ type ApiKeyObservation struct {
 	// The IPv4 Address of the device which created the API key
 	CreationIP *string `json:"creationIp,omitempty" tf:"creation_ip,omitempty"`
 
+	// The default project ID to use with object storage.
+	// The project_id you want to attach the resource to
+	DefaultProjectID *string `json:"defaultProjectId,omitempty" tf:"default_project_id,omitempty"`
+
+	// :  The description of the iam api key.
+	// The description of the iam api key
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Whether the iam api key is editable.
 	// Whether or not the iam api key is editable
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
+
+	// The date and time of the expiration of the iam api key. Please note that in case of change,
+	// the resource will be recreated.
+	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
+	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -37,6 +76,11 @@ type ApiKeyObservation struct {
 	// The date and time of the last update of the iam api key.
 	// The date and time of the last update of the iam api key
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// ID of the user attached to the api key.
+	// Only one of the application_id and user_id should be specified.
+	// ID of the user attached to the api key
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type ApiKeyParameters struct {
@@ -83,6 +127,18 @@ type ApiKeyParameters struct {
 type ApiKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApiKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ApiKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApiKeyStatus defines the observed state of ApiKey.
@@ -93,7 +149,7 @@ type ApiKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ApiKey is the Schema for the ApiKeys API. Manages Scaleway IAM API Keys.
+// ApiKey is the Schema for the ApiKeys API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

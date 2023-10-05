@@ -13,7 +13,66 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ScopesInitParameters struct {
+
+	// (Defaults to false) Query logs
+	// Query logs
+	QueryLogs *bool `json:"queryLogs,omitempty" tf:"query_logs,omitempty"`
+
+	// (Defaults to false) Query metrics
+	// Query metrics
+	QueryMetrics *bool `json:"queryMetrics,omitempty" tf:"query_metrics,omitempty"`
+
+	// (Defaults to false) Setup alerts
+	// Setup alerts
+	SetupAlerts *bool `json:"setupAlerts,omitempty" tf:"setup_alerts,omitempty"`
+
+	// (Defaults to false) Setup logs rules
+	// Setup logs rules
+	SetupLogsRules *bool `json:"setupLogsRules,omitempty" tf:"setup_logs_rules,omitempty"`
+
+	// (Defaults to false) Setup metrics rules
+	// Setup metrics rules
+	SetupMetricsRules *bool `json:"setupMetricsRules,omitempty" tf:"setup_metrics_rules,omitempty"`
+
+	// (Defaults to true) Write logs
+	// Write logs
+	WriteLogs *bool `json:"writeLogs,omitempty" tf:"write_logs,omitempty"`
+
+	// (Defaults to true) Write metrics
+	// Write metrics
+	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
+}
+
 type ScopesObservation struct {
+
+	// (Defaults to false) Query logs
+	// Query logs
+	QueryLogs *bool `json:"queryLogs,omitempty" tf:"query_logs,omitempty"`
+
+	// (Defaults to false) Query metrics
+	// Query metrics
+	QueryMetrics *bool `json:"queryMetrics,omitempty" tf:"query_metrics,omitempty"`
+
+	// (Defaults to false) Setup alerts
+	// Setup alerts
+	SetupAlerts *bool `json:"setupAlerts,omitempty" tf:"setup_alerts,omitempty"`
+
+	// (Defaults to false) Setup logs rules
+	// Setup logs rules
+	SetupLogsRules *bool `json:"setupLogsRules,omitempty" tf:"setup_logs_rules,omitempty"`
+
+	// (Defaults to false) Setup metrics rules
+	// Setup metrics rules
+	SetupMetricsRules *bool `json:"setupMetricsRules,omitempty" tf:"setup_metrics_rules,omitempty"`
+
+	// (Defaults to true) Write logs
+	// Write logs
+	WriteLogs *bool `json:"writeLogs,omitempty" tf:"write_logs,omitempty"`
+
+	// (Defaults to true) Write metrics
+	// Write metrics
+	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
 }
 
 type ScopesParameters struct {
@@ -54,16 +113,39 @@ type ScopesParameters struct {
 	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
 }
 
+type TokenInitParameters struct {
+
+	// The name of the token
+	// The name of the token
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Allowed scopes
+	// Endpoints
+	Scopes []ScopesInitParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`
+}
+
 type TokenObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the token
+	// The name of the token
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Allowed scopes
+	// Endpoints
+	Scopes []ScopesObservation `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
 type TokenParameters struct {
 
 	// The name of the token
 	// The name of the token
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
 	// The project_id you want to attach the resource to
@@ -89,6 +171,18 @@ type TokenParameters struct {
 type TokenSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TokenParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TokenInitParameters `json:"initProvider,omitempty"`
 }
 
 // TokenStatus defines the observed state of Token.
@@ -99,7 +193,7 @@ type TokenStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Token is the Schema for the Tokens API. Manages Scaleway Cockpit Tokens.
+// Token is the Schema for the Tokens API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -109,8 +203,9 @@ type TokenStatus struct {
 type Token struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TokenSpec   `json:"spec"`
-	Status            TokenStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   TokenSpec   `json:"spec"`
+	Status TokenStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -11,6 +11,3 @@ spec:
     name: some-volume-name
     sizeInGb: 20
     type: l_ssd
-
----
-

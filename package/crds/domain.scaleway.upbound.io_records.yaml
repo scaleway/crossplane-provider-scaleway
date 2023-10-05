@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: records.domain.scaleway.upbound.io
 spec:
   group: domain.scaleway.upbound.io
@@ -35,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Record is the Schema for the Records API. Manages Scaleway Domain
-          records.
+        description: Record is the Schema for the Records API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -55,9 +53,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -182,12 +184,8 @@ spec:
                                   an A, a string for a TXT...). The data of the match
                                   result
                                 type: string
-                            required:
-                            - data
                             type: object
                           type: array
-                      required:
-                      - matches
                       type: object
                     type: array
                   httpService:
@@ -219,11 +217,6 @@ spec:
                           description: User-agent used when checking the URL User-agent
                             used when checking the URL
                           type: string
-                      required:
-                      - ips
-                      - mustContain
-                      - strategy
-                      - url
                       type: object
                     type: array
                   keepEmptyZone:
@@ -265,9 +258,6 @@ spec:
                         subnet:
                           description: The subnet of the view The subnet of the view
                           type: string
-                      required:
-                      - data
-                      - subnet
                       type: object
                     type: array
                   weighted:
@@ -286,57 +276,189 @@ spec:
                           description: The weight of the IP as an integer UInt32.
                             The weight of the IP
                           type: number
-                      required:
-                      - ip
-                      - weight
                       type: object
                     type: array
-                required:
-                - data
-                - type
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  data:
+                    description: The content of the record (an IPv4 for an A, a string
+                      for a TXT...). The data of the record
+                    type: string
+                  geoIp:
+                    description: The Geo IP feature provides DNS resolution, based
+                      on the user’s geographical location. You can define a default
+                      IP that resolves if no Geo IP rule matches, and specify IPs
+                      for each geographical zone. Documentation and usage example
+                      Return record based on client localisation
+                    items:
+                      properties:
+                        matches:
+                          description: The list of matches. (Can be more than 1) The
+                            list of matches
+                          items:
+                            properties:
+                              continents:
+                                description: 'List of continents (eg: EU for Europe,
+                                  NA for North America, AS for Asia...). List of all
+                                  continents code List of continents (eg: EU for Europe,
+                                  NA for North America, AS for Asia...). List of all
+                                  continents code: https://api.scaleway.com/domain-private/v2beta1/continents'
+                                items:
+                                  type: string
+                                type: array
+                              countries:
+                                description: 'List of countries (eg: FR for France,
+                                  US for the United States, GB for Great Britain...).
+                                  List of all countries code List of countries (eg:
+                                  FR for France, US for the United States, GB for
+                                  Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries'
+                                items:
+                                  type: string
+                                type: array
+                              data:
+                                description: The content of the record (an IPv4 for
+                                  an A, a string for a TXT...). The data of the match
+                                  result
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  httpService:
+                    description: The DNS service checks the provided URL on the configured
+                      IPs and resolves the request to one of the IPs by excluding
+                      the ones not responding to the given string to check. Documentation
+                      and usage example Return record based on client localisation
+                    items:
+                      properties:
+                        ips:
+                          description: List of IPs to check IPs to check
+                          items:
+                            type: string
+                          type: array
+                        mustContain:
+                          description: Text to search Text to search
+                          type: string
+                        strategy:
+                          description: Strategy to return an IP from the IPs list.
+                            Can be random or hashed Strategy to return an IP from
+                            the IPs list
+                          type: string
+                        url:
+                          description: URL to match the must_contain text to validate
+                            an IP URL to match the must_contain text to validate an
+                            IP
+                          type: string
+                        userAgent:
+                          description: User-agent used when checking the URL User-agent
+                            used when checking the URL
+                          type: string
+                      type: object
+                    type: array
+                  keepEmptyZone:
+                    description: When destroying a resource, if only NS records remain
+                      and this is set to false, the zone will be deleted. Please note,
+                      each zone not deleted will cost you money When destroy a resource
+                      record, if a zone have only NS, delete the zone
+                    type: boolean
+                  name:
+                    description: The name of the record (can be an empty string for
+                      a root record). The name of the record
+                    type: string
+                  priority:
+                    description: The priority of the record (mostly used with an MX
+                      record) The priority of the record
+                    type: number
+                  projectId:
+                    description: The ID of the record. The project_id you want to
+                      attach the resource to
+                    type: string
+                  ttl:
+                    description: Time To Live of the record in seconds. The ttl of
+                      the record
+                    type: number
+                  type:
+                    description: The type of the record (A, AAAA, MX, CNAME, DNAME,
+                      ALIAS, NS, PTR, SRV, TXT, TLSA, or CAA). The type of the record
+                    type: string
+                  view:
+                    description: The answer to a DNS request is based on the client’s
+                      (resolver) subnet. (Can be more than 1) Documentation and usage
+                      example Return record based on client subnet
+                    items:
+                      properties:
+                        data:
+                          description: The content of the record (an IPv4 for an A,
+                            a string for a TXT...). The data of the view record
+                          type: string
+                        subnet:
+                          description: The subnet of the view The subnet of the view
+                          type: string
+                      type: object
+                    type: array
+                  weighted:
+                    description: You provide a list of IPs with their corresponding
+                      weights. These weights are used to proportionally direct requests
+                      to each IP. Depending on the weight of a record more or fewer
+                      requests are answered with its related IP compared to the others
+                      in the list. (Can be more than 1) Documentation and usage example
+                      Return record based on weight
+                    items:
+                      properties:
+                        ip:
+                          description: The weighted IP The weighted IP
+                          type: string
+                        weight:
+                          description: The weight of the IP as an integer UInt32.
+                            The weight of the IP
+                          type: number
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
                 description: ProviderConfigReference specifies how the provider that
                   will be used to create, observe, update, and delete this managed
                   resource should be configured.
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -466,17 +588,165 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.data is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.data)
+                || (has(self.initProvider) && has(self.initProvider.data))'
+            - message: spec.forProvider.type is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: RecordStatus defines the observed state of Record.
             properties:
               atProvider:
                 properties:
+                  data:
+                    description: The content of the record (an IPv4 for an A, a string
+                      for a TXT...). The data of the record
+                    type: string
+                  dnsZone:
+                    description: The DNS Zone of the domain. If the DNS zone doesn't
+                      exist, it will be automatically created. The zone you want to
+                      add the record in
+                    type: string
+                  geoIp:
+                    description: The Geo IP feature provides DNS resolution, based
+                      on the user’s geographical location. You can define a default
+                      IP that resolves if no Geo IP rule matches, and specify IPs
+                      for each geographical zone. Documentation and usage example
+                      Return record based on client localisation
+                    items:
+                      properties:
+                        matches:
+                          description: The list of matches. (Can be more than 1) The
+                            list of matches
+                          items:
+                            properties:
+                              continents:
+                                description: 'List of continents (eg: EU for Europe,
+                                  NA for North America, AS for Asia...). List of all
+                                  continents code List of continents (eg: EU for Europe,
+                                  NA for North America, AS for Asia...). List of all
+                                  continents code: https://api.scaleway.com/domain-private/v2beta1/continents'
+                                items:
+                                  type: string
+                                type: array
+                              countries:
+                                description: 'List of countries (eg: FR for France,
+                                  US for the United States, GB for Great Britain...).
+                                  List of all countries code List of countries (eg:
+                                  FR for France, US for the United States, GB for
+                                  Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries'
+                                items:
+                                  type: string
+                                type: array
+                              data:
+                                description: The content of the record (an IPv4 for
+                                  an A, a string for a TXT...). The data of the match
+                                  result
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  httpService:
+                    description: The DNS service checks the provided URL on the configured
+                      IPs and resolves the request to one of the IPs by excluding
+                      the ones not responding to the given string to check. Documentation
+                      and usage example Return record based on client localisation
+                    items:
+                      properties:
+                        ips:
+                          description: List of IPs to check IPs to check
+                          items:
+                            type: string
+                          type: array
+                        mustContain:
+                          description: Text to search Text to search
+                          type: string
+                        strategy:
+                          description: Strategy to return an IP from the IPs list.
+                            Can be random or hashed Strategy to return an IP from
+                            the IPs list
+                          type: string
+                        url:
+                          description: URL to match the must_contain text to validate
+                            an IP URL to match the must_contain text to validate an
+                            IP
+                          type: string
+                        userAgent:
+                          description: User-agent used when checking the URL User-agent
+                            used when checking the URL
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the record.
+                    type: string
+                  keepEmptyZone:
+                    description: When destroying a resource, if only NS records remain
+                      and this is set to false, the zone will be deleted. Please note,
+                      each zone not deleted will cost you money When destroy a resource
+                      record, if a zone have only NS, delete the zone
+                    type: boolean
+                  name:
+                    description: The name of the record (can be an empty string for
+                      a root record). The name of the record
+                    type: string
+                  priority:
+                    description: The priority of the record (mostly used with an MX
+                      record) The priority of the record
+                    type: number
+                  projectId:
+                    description: The ID of the record. The project_id you want to
+                      attach the resource to
                     type: string
                   rootZone:
                     description: Does the DNS zone is the root zone or not
                     type: boolean
+                  ttl:
+                    description: Time To Live of the record in seconds. The ttl of
+                      the record
+                    type: number
+                  type:
+                    description: The type of the record (A, AAAA, MX, CNAME, DNAME,
+                      ALIAS, NS, PTR, SRV, TXT, TLSA, or CAA). The type of the record
+                    type: string
+                  view:
+                    description: The answer to a DNS request is based on the client’s
+                      (resolver) subnet. (Can be more than 1) Documentation and usage
+                      example Return record based on client subnet
+                    items:
+                      properties:
+                        data:
+                          description: The content of the record (an IPv4 for an A,
+                            a string for a TXT...). The data of the view record
+                          type: string
+                        subnet:
+                          description: The subnet of the view The subnet of the view
+                          type: string
+                      type: object
+                    type: array
+                  weighted:
+                    description: You provide a list of IPs with their corresponding
+                      weights. These weights are used to proportionally direct requests
+                      to each IP. Depending on the weight of a record more or fewer
+                      requests are answered with its related IP compared to the others
+                      in the list. (Can be more than 1) Documentation and usage example
+                      Return record based on weight
+                    items:
+                      properties:
+                        ip:
+                          description: The weighted IP The weighted IP
+                          type: string
+                        weight:
+                          description: The weight of the IP as an integer UInt32.
+                            The weight of the IP
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -18,6 +18,3 @@ spec:
       name: example-secret
       namespace: upbound-system
     userName: my_initial_user
-
----
-

@@ -13,14 +13,93 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketInitParameters struct {
+
+	// (Deprecated) The canned ACL you want to apply to the bucket.
+	// ACL of the bucket: either 'public-read' or 'private'.
+	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
+
+	// A rule of Cross-Origin Resource Sharing (documented below).
+	CorsRule []CorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+
+	// Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Delete objects in bucket
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
+	LifecycleRule []LifecycleRuleInitParameters `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
+
+	// The name of the bucket.
+	// The name of the bucket
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable object lock
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region in which the bucket should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A list of tags (key / value) for the bucket.
+	// The tags associated with this bucket
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A state of versioning (documented below)
+	// Allow multiple versions of an object in the same bucket
+	Versioning []VersioningInitParameters `json:"versioning,omitempty" tf:"versioning,omitempty"`
+}
+
 type BucketObservation struct {
+
+	// (Deprecated) The canned ACL you want to apply to the bucket.
+	// ACL of the bucket: either 'public-read' or 'private'.
+	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
+
+	// A rule of Cross-Origin Resource Sharing (documented below).
+	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
 	// The endpoint URL of the bucket
 	// Endpoint of the bucket
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Delete objects in bucket
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
+	LifecycleRule []LifecycleRuleObservation `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
+
+	// The name of the bucket.
+	// The name of the bucket
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable object lock
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The region in which the bucket should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A list of tags (key / value) for the bucket.
+	// The tags associated with this bucket
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A state of versioning (documented below)
+	// Allow multiple versions of an object in the same bucket
+	Versioning []VersioningObservation `json:"versioning,omitempty" tf:"versioning,omitempty"`
 }
 
 type BucketParameters struct {
@@ -45,8 +124,8 @@ type BucketParameters struct {
 
 	// The name of the bucket.
 	// The name of the bucket
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
 	// Enable object lock
@@ -74,7 +153,40 @@ type BucketParameters struct {
 	Versioning []VersioningParameters `json:"versioning,omitempty" tf:"versioning,omitempty"`
 }
 
+type CorsRuleInitParameters struct {
+
+	// Specifies which headers are allowed.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Specifies which origins are allowed.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Specifies expose header in the response.
+	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
+
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
+}
+
 type CorsRuleObservation struct {
+
+	// Specifies which headers are allowed.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Specifies which origins are allowed.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Specifies expose header in the response.
+	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
+
+	// Specifies time in seconds that browser can cache the response for a preflight request.
+	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type CorsRuleParameters struct {
@@ -84,11 +196,11 @@ type CorsRuleParameters struct {
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Specifies expose header in the response.
@@ -100,18 +212,88 @@ type CorsRuleParameters struct {
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
+type ExpirationInitParameters struct {
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Specifies the number of days after object creation when the specific rule action takes effect
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+}
+
 type ExpirationObservation struct {
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Specifies the number of days after object creation when the specific rule action takes effect
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type ExpirationParameters struct {
 
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days" tf:"days,omitempty"`
 }
 
+type LifecycleRuleInitParameters struct {
+
+	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed.
+	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed
+	AbortIncompleteMultipartUploadDays *float64 `json:"abortIncompleteMultipartUploadDays,omitempty" tf:"abort_incomplete_multipart_upload_days,omitempty"`
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Specifies if the configuration rule is Enabled or Disabled
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies a period in the object's expire (documented below).
+	// Specifies a period in the object's expire
+	Expiration []ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
+
+	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Unique identifier for the rule
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	// The prefix identifying one or more objects to which the rule applies
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// A list of tags (key / value) for the bucket.
+	// The tags associated with the bucket lifecycle
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a period in the object's transitions (documented below).
+	// Define when objects transition to another storage class
+	Transition []TransitionInitParameters `json:"transition,omitempty" tf:"transition,omitempty"`
+}
+
 type LifecycleRuleObservation struct {
+
+	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed.
+	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed
+	AbortIncompleteMultipartUploadDays *float64 `json:"abortIncompleteMultipartUploadDays,omitempty" tf:"abort_incomplete_multipart_upload_days,omitempty"`
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Specifies if the configuration rule is Enabled or Disabled
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies a period in the object's expire (documented below).
+	// Specifies a period in the object's expire
+	Expiration []ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
+
+	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Unique identifier for the rule
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	// The prefix identifying one or more objects to which the rule applies
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// A list of tags (key / value) for the bucket.
+	// The tags associated with the bucket lifecycle
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a period in the object's transitions (documented below).
+	// Define when objects transition to another storage class
+	Transition []TransitionObservation `json:"transition,omitempty" tf:"transition,omitempty"`
 }
 
 type LifecycleRuleParameters struct {
@@ -123,7 +305,7 @@ type LifecycleRuleParameters struct {
 
 	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
 	// Specifies if the configuration rule is Enabled or Disabled
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Specifies a period in the object's expire (documented below).
@@ -152,7 +334,26 @@ type LifecycleRuleParameters struct {
 	Transition []TransitionParameters `json:"transition,omitempty" tf:"transition,omitempty"`
 }
 
+type TransitionInitParameters struct {
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Specifies the number of days after object creation when the specific rule action takes effect
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+}
+
 type TransitionObservation struct {
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Specifies the number of days after object creation when the specific rule action takes effect
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
 type TransitionParameters struct {
@@ -164,11 +365,22 @@ type TransitionParameters struct {
 
 	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }
 
+type VersioningInitParameters struct {
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type VersioningObservation struct {
+
+	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type VersioningParameters struct {
@@ -183,6 +395,18 @@ type VersioningParameters struct {
 type BucketSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketStatus defines the observed state of Bucket.
@@ -193,7 +417,7 @@ type BucketStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Bucket is the Schema for the Buckets API. Manages Scaleway object storage buckets.
+// Bucket is the Schema for the Buckets API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -203,8 +427,9 @@ type BucketStatus struct {
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketSpec   `json:"spec"`
-	Status            BucketStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   BucketSpec   `json:"spec"`
+	Status BucketStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

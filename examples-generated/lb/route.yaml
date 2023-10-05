@@ -85,6 +85,3 @@ metadata:
   name: ip01
 spec:
   forProvider: {}
-
----
-

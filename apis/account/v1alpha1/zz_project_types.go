@@ -13,14 +13,41 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProjectInitParameters struct {
+
+	// The description of the Project.
+	// Description of the project
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the Project.
+	// The name of the project
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
+	// The organization_id you want to attach the resource to
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+}
+
 type ProjectObservation struct {
 
 	// The Project creation time.
 	// The date and time of the creation of the Project (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The description of the Project.
+	// Description of the project
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the project (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Project.
+	// The name of the project
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
+	// The organization_id you want to attach the resource to
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// The Project last update time.
 	// The date and time of the last update of the Project (Format ISO 8601)
@@ -49,6 +76,18 @@ type ProjectParameters struct {
 type ProjectSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProjectParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ProjectInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProjectStatus defines the observed state of Project.
@@ -59,7 +98,7 @@ type ProjectStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Project is the Schema for the Projects API. Manages Scaleway Account project.
+// Project is the Schema for the Projects API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
