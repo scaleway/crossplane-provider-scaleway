@@ -43,6 +43,3 @@ spec:
   forProvider:
     sizeInGb: 20
     type: b_ssd
-
----
-

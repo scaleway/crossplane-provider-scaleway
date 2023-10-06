@@ -45,6 +45,3 @@ spec:
   forProvider:
     description: test container
     name: my-ns-test
-
----
-

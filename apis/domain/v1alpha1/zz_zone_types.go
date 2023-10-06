@@ -13,7 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ZoneInitParameters struct {
+
+	// The domain where the DNS zone will be created.
+	// The domain where the DNS zone will be created.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the domain is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The subdomain(zone name) to create in the domain.
+	// The subdomain of the DNS zone to create.
+	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
+}
+
 type ZoneObservation struct {
+
+	// The domain where the DNS zone will be created.
+	// The domain where the DNS zone will be created.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// The ID of the zone, which is of the form {subdomain}.{domain}
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -34,9 +53,17 @@ type ZoneObservation struct {
 	// NameServer master list for zone.
 	NsMaster []*string `json:"nsMaster,omitempty" tf:"ns_master,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the domain is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The domain zone status.
 	// The domain zone status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The subdomain(zone name) to create in the domain.
+	// The subdomain of the DNS zone to create.
+	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
 	// The date and time of the last update of the DNS zone.
 	// The date and time of the last update of the DNS zone.
@@ -47,8 +74,8 @@ type ZoneParameters struct {
 
 	// The domain where the DNS zone will be created.
 	// The domain where the DNS zone will be created.
-	// +kubebuilder:validation:Required
-	Domain *string `json:"domain" tf:"domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the domain is associated with.
 	// The project_id you want to attach the resource to
@@ -57,14 +84,26 @@ type ZoneParameters struct {
 
 	// The subdomain(zone name) to create in the domain.
 	// The subdomain of the DNS zone to create.
-	// +kubebuilder:validation:Required
-	Subdomain *string `json:"subdomain" tf:"subdomain,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 }
 
 // ZoneSpec defines the desired state of Zone
 type ZoneSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ZoneParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ZoneInitParameters `json:"initProvider,omitempty"`
 }
 
 // ZoneStatus defines the observed state of Zone.
@@ -75,7 +114,7 @@ type ZoneStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Zone is the Schema for the Zones API. Manages Scaleway Domain zones.
+// Zone is the Schema for the Zones API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -85,8 +124,10 @@ type ZoneStatus struct {
 type Zone struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ZoneSpec   `json:"spec"`
-	Status            ZoneStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain) || (has(self.initProvider) && has(self.initProvider.domain))",message="spec.forProvider.domain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subdomain) || (has(self.initProvider) && has(self.initProvider.subdomain))",message="spec.forProvider.subdomain is a required parameter"
+	Spec   ZoneSpec   `json:"spec"`
+	Status ZoneStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -12,6 +12,3 @@ spec:
     projectIdSelector:
       matchLabels:
         testing.upbound.io/example-name: scaleway_cockpit
-
----
-

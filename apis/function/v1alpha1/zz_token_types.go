@@ -13,10 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TokenInitParameters struct {
+
+	// The description of the token.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The expiration date of the token.
+	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
+
+	// (Defaults to provider region). The region in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
 type TokenObservation struct {
+
+	// The description of the token.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The expiration date of the token.
+	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
+
+	// The ID of the function.
+	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// The ID of the token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the function namespace.
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// (Defaults to provider region). The region in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TokenParameters struct {
@@ -65,6 +94,18 @@ type TokenParameters struct {
 type TokenSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TokenParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TokenInitParameters `json:"initProvider,omitempty"`
 }
 
 // TokenStatus defines the observed state of Token.
@@ -75,7 +116,7 @@ type TokenStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Token is the Schema for the Tokens API. Manages Scaleway Function Tokens.
+// Token is the Schema for the Tokens API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

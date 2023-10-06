@@ -10,6 +10,3 @@ spec:
   forProvider:
     description: Main container namespace
     name: main-container-namespace
-
----
-

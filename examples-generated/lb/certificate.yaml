@@ -17,6 +17,3 @@ spec:
       - sub1.example.com
       - sub2.example.com
     name: cert1
-
----
-

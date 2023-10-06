@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateInitParameters struct {
+}
+
 type CertificateObservation struct {
 }
 
@@ -24,11 +27,61 @@ type CertificateParameters struct {
 	CrtSecretRef *v1.SecretKeySelector `json:"crtSecretRef,omitempty" tf:"-"`
 }
 
+type DeviceInitParameters struct {
+
+	// Allow plain and server-authenticated TLS connections in addition to mutually-authenticated ones.
+	// Allow plain and server-authenticated SSL connections in addition to mutually-authenticated ones
+	AllowInsecure *bool `json:"allowInsecure,omitempty" tf:"allow_insecure,omitempty"`
+
+	// Allow more than one simultaneous connection using the same device credentials.
+	// Allow multiple connections
+	AllowMultipleConnections *bool `json:"allowMultipleConnections,omitempty" tf:"allow_multiple_connections,omitempty"`
+
+	// The certificate bundle of the device.
+	// Certificate section of the device
+	Certificate []CertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// The description of the IoT device (e.g. living room).
+	// The description of the device
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Rules that define which messages are authorized or denied based on their topic.
+	// Rules to authorize or deny the device to publish/subscribe to specific topics
+	MessageFilters []MessageFiltersInitParameters `json:"messageFilters,omitempty" tf:"message_filters,omitempty"`
+
+	// The name of the IoT device you want to create (e.g. my-device).
+	// The name of the device
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
 type DeviceObservation struct {
+
+	// Allow plain and server-authenticated TLS connections in addition to mutually-authenticated ones.
+	// Allow plain and server-authenticated SSL connections in addition to mutually-authenticated ones
+	AllowInsecure *bool `json:"allowInsecure,omitempty" tf:"allow_insecure,omitempty"`
+
+	// Allow more than one simultaneous connection using the same device credentials.
+	// Allow multiple connections
+	AllowMultipleConnections *bool `json:"allowMultipleConnections,omitempty" tf:"allow_multiple_connections,omitempty"`
+
+	// The certificate bundle of the device.
+	// Certificate section of the device
+	Certificate []CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// The date and time the device was created.
 	// The date and time of the creation of the device
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The description of the IoT device (e.g. living room).
+	// The description of the device
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the hub on which this device will be created.
+	// The ID of the hub on which this device will be created
+	HubID *string `json:"hubId,omitempty" tf:"hub_id,omitempty"`
 
 	// The ID of the device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -40,6 +93,17 @@ type DeviceObservation struct {
 	// The last MQTT activity of the device.
 	// The date and time of last MQTT activity of the device
 	LastActivityAt *string `json:"lastActivityAt,omitempty" tf:"last_activity_at,omitempty"`
+
+	// Rules that define which messages are authorized or denied based on their topic.
+	// Rules to authorize or deny the device to publish/subscribe to specific topics
+	MessageFilters []MessageFiltersObservation `json:"messageFilters,omitempty" tf:"message_filters,omitempty"`
+
+	// The name of the IoT device you want to create (e.g. my-device).
+	// The name of the device
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The current status of the device.
 	// The status of the device
@@ -93,15 +157,34 @@ type DeviceParameters struct {
 
 	// The name of the IoT device you want to create (e.g. my-device).
 	// The name of the device
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
+type MessageFiltersInitParameters struct {
+
+	// Rules used to restrict topics the device can publish to.
+	// Rule to restrict topics the device can publish to
+	Publish []PublishInitParameters `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Rules used to restrict topics the device can subscribe to.
+	// Rule to restrict topics the device can subscribe to
+	Subscribe []SubscribeInitParameters `json:"subscribe,omitempty" tf:"subscribe,omitempty"`
+}
+
 type MessageFiltersObservation struct {
+
+	// Rules used to restrict topics the device can publish to.
+	// Rule to restrict topics the device can publish to
+	Publish []PublishObservation `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Rules used to restrict topics the device can subscribe to.
+	// Rule to restrict topics the device can subscribe to
+	Subscribe []SubscribeObservation `json:"subscribe,omitempty" tf:"subscribe,omitempty"`
 }
 
 type MessageFiltersParameters struct {
@@ -117,7 +200,26 @@ type MessageFiltersParameters struct {
 	Subscribe []SubscribeParameters `json:"subscribe,omitempty" tf:"subscribe,omitempty"`
 }
 
+type PublishInitParameters struct {
+
+	// Filtering policy (eg accept or reject)
+	// Publish message filter policy
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// List of topics to match (eg foo/bar/+/baz/#)
+	// List of topics in the set
+	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
+}
+
 type PublishObservation struct {
+
+	// Filtering policy (eg accept or reject)
+	// Publish message filter policy
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// List of topics to match (eg foo/bar/+/baz/#)
+	// List of topics in the set
+	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 }
 
 type PublishParameters struct {
@@ -133,7 +235,26 @@ type PublishParameters struct {
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 }
 
+type SubscribeInitParameters struct {
+
+	// Filtering policy (eg accept or reject)
+	// Subscribe message filter policy
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// List of topics to match (eg foo/bar/+/baz/#)
+	// List of topics in the set
+	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
+}
+
 type SubscribeObservation struct {
+
+	// Filtering policy (eg accept or reject)
+	// Subscribe message filter policy
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// List of topics to match (eg foo/bar/+/baz/#)
+	// List of topics in the set
+	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 }
 
 type SubscribeParameters struct {
@@ -153,6 +274,18 @@ type SubscribeParameters struct {
 type DeviceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeviceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DeviceInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeviceStatus defines the observed state of Device.
@@ -163,7 +296,7 @@ type DeviceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Device is the Schema for the Devices API. Manages Scaleway IoT Hub device.
+// Device is the Schema for the Devices API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -173,8 +306,9 @@ type DeviceStatus struct {
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceSpec   `json:"spec"`
-	Status            DeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   DeviceSpec   `json:"spec"`
+	Status DeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

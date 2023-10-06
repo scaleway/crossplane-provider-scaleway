@@ -27,6 +27,3 @@ metadata:
 spec:
   forProvider:
     zone: fr-par-1
-
----
-

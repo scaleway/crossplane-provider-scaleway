@@ -17,6 +17,3 @@ spec:
       key: attribute.result
       name: example-password
       namespace: upbound-system
-
----
-

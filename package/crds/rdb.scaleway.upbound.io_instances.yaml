@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: instances.rdb.scaleway.upbound.io
 spec:
   group: rdb.scaleway.upbound.io
@@ -35,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Instance is the Schema for the Instances API. Manages Scaleway
-          Database Instances.
+        description: Instance is the Schema for the Instances API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -55,9 +53,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -127,28 +129,16 @@ spec:
                       instance. List of private network to expose your database instance
                     items:
                       properties:
-                        endpointId:
-                          description: The ID of the endpoint of the load balancer.
-                            The endpoint ID
-                          type: string
-                        hostname:
-                          description: Name of the endpoint. The hostname of your
-                            endpoint
-                          type: string
-                        ip:
-                          description: IP of the replica. The IP of your private service
-                          type: string
                         ipNet:
-                          description: The IP network where to con. The ip net of
-                            your private network
-                          type: string
-                        name:
-                          description: The name of the Database Instance. The name
-                            of your private service
+                          description: The IP network address within the private subnet.
+                            This must be an IPv4 address with a CIDR notation. The
+                            IP network address within the private subnet is determined
+                            by the IP Address Management (IPAM) service if not set.
+                            The IP with the given mask within the private subnet
                           type: string
                         pnId:
-                          description: The ID of the private network. If not provided
-                            it will be randomly generated. The private network ID
+                          description: The ID of the private network. The private
+                            network ID
                           type: string
                         port:
                           description: Port of the replica. The port of your private
@@ -157,9 +147,6 @@ spec:
                         zone:
                           description: The zone you want to attach the resource to
                           type: string
-                      required:
-                      - ipNet
-                      - pnId
                       type: object
                     type: array
                   projectId:
@@ -191,59 +178,159 @@ spec:
                     type: string
                   volumeSizeInGb:
                     description: Volume size (in GB) when volume_type is set to bssd.
-                      Must be a multiple of 5000000000. Volume size (in GB) when volume_type
-                      is not lssd
+                      Volume size (in GB) when volume_type is not lssd
                     type: number
                   volumeType:
                     description: Type of volume where data are stored (bssd or lssd).
                       Type of volume where data are stored
                     type: string
-                required:
-                - engine
-                - nodeType
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  backupSameRegion:
+                    description: Boolean to store logical backups in the same region
+                      as the database instance. Boolean to store logical backups in
+                      the same region as the database instance
+                    type: boolean
+                  backupScheduleFrequency:
+                    description: Backup schedule frequency in hours. Backup schedule
+                      frequency in hours
+                    type: number
+                  backupScheduleRetention:
+                    description: Backup schedule retention in days. Backup schedule
+                      retention in days
+                    type: number
+                  disableBackup:
+                    description: Disable automated backup for the database instance.
+                      Disable automated backup for the database instance
+                    type: boolean
+                  engine:
+                    description: Database Instance's engine version (e.g. PostgreSQL-11).
+                      Database's engine version id
+                    type: string
+                  initSettings:
+                    additionalProperties:
+                      type: string
+                    description: Map of engine settings to be set at database initialisation.
+                      Map of engine settings to be set at database initialisation.
+                    type: object
+                  isHaCluster:
+                    description: Enable or disable high availability for the database
+                      instance. Enable or disable high availability for the database
+                      instance
+                    type: boolean
+                  name:
+                    description: The name of the Database Instance. Name of the database
+                      instance
+                    type: string
+                  nodeType:
+                    description: The type of database instance you want to create
+                      (e.g. db-dev-s). The type of database instance you want to create
+                    type: string
+                  privateNetwork:
+                    description: List of private networks endpoints of the database
+                      instance. List of private network to expose your database instance
+                    items:
+                      properties:
+                        ipNet:
+                          description: The IP network address within the private subnet.
+                            This must be an IPv4 address with a CIDR notation. The
+                            IP network address within the private subnet is determined
+                            by the IP Address Management (IPAM) service if not set.
+                            The IP with the given mask within the private subnet
+                          type: string
+                        pnId:
+                          description: The ID of the private network. The private
+                            network ID
+                          type: string
+                        port:
+                          description: Port of the replica. The port of your private
+                            service
+                          type: number
+                        zone:
+                          description: The zone you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the Database Instance is associated with. The project_id you
+                      want to attach the resource to
+                    type: string
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the Database Instance should be created. The region you want
+                      to attach the resource to
+                    type: string
+                  settings:
+                    additionalProperties:
+                      type: string
+                    description: Map of engine settings to be set. Using this option
+                      will override default config. Map of engine settings to be set
+                      on a running instance.
+                    type: object
+                  tags:
+                    description: The tags associated with the Database Instance. List
+                      of tags ["tag1", "tag2", ...] attached to a database instance
+                    items:
+                      type: string
+                    type: array
+                  userName:
+                    description: Identifier for the first user of the database instance.
+                      Identifier for the first user of the database instance
+                    type: string
+                  volumeSizeInGb:
+                    description: Volume size (in GB) when volume_type is set to bssd.
+                      Volume size (in GB) when volume_type is not lssd
+                    type: number
+                  volumeType:
+                    description: Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
                 description: ProviderConfigReference specifies how the provider that
                   will be used to create, observe, update, and delete this managed
                   resource should be configured.
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -373,15 +460,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.engine is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
+                || (has(self.initProvider) && has(self.initProvider.engine))'
+            - message: spec.forProvider.nodeType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || (has(self.initProvider) && has(self.initProvider.nodeType))'
           status:
             description: InstanceStatus defines the observed state of Instance.
             properties:
               atProvider:
                 properties:
+                  backupSameRegion:
+                    description: Boolean to store logical backups in the same region
+                      as the database instance. Boolean to store logical backups in
+                      the same region as the database instance
+                    type: boolean
+                  backupScheduleFrequency:
+                    description: Backup schedule frequency in hours. Backup schedule
+                      frequency in hours
+                    type: number
+                  backupScheduleRetention:
+                    description: Backup schedule retention in days. Backup schedule
+                      retention in days
+                    type: number
                   certificate:
                     description: Certificate of the database instance. Certificate
                       of the database instance
                     type: string
+                  disableBackup:
+                    description: Disable automated backup for the database instance.
+                      Disable automated backup for the database instance
+                    type: boolean
                   endpointIp:
                     description: (Deprecated) The IP of the Database Instance. Endpoint
                       IP of the database instance
@@ -390,9 +503,24 @@ spec:
                     description: (Deprecated) The port of the Database Instance. Endpoint
                       port of the database instance
                     type: number
+                  engine:
+                    description: Database Instance's engine version (e.g. PostgreSQL-11).
+                      Database's engine version id
+                    type: string
                   id:
                     description: The ID of the Database Instance.
                     type: string
+                  initSettings:
+                    additionalProperties:
+                      type: string
+                    description: Map of engine settings to be set at database initialisation.
+                      Map of engine settings to be set at database initialisation.
+                    type: object
+                  isHaCluster:
+                    description: Enable or disable high availability for the database
+                      instance. Enable or disable high availability for the database
+                      instance
+                    type: boolean
                   loadBalancer:
                     description: List of load balancer endpoints of the database instance.
                       Load balancer of the database instance
@@ -415,9 +543,63 @@ spec:
                           type: number
                       type: object
                     type: array
+                  name:
+                    description: The name of the Database Instance. Name of the database
+                      instance
+                    type: string
+                  nodeType:
+                    description: The type of database instance you want to create
+                      (e.g. db-dev-s). The type of database instance you want to create
+                    type: string
                   organizationId:
                     description: The organization ID the Database Instance is associated
                       with. The organization_id you want to attach the resource to
+                    type: string
+                  privateNetwork:
+                    description: List of private networks endpoints of the database
+                      instance. List of private network to expose your database instance
+                    items:
+                      properties:
+                        endpointId:
+                          description: The ID of the endpoint of the load balancer.
+                            The endpoint ID
+                          type: string
+                        hostname:
+                          description: Name of the endpoint. The hostname of your
+                            endpoint
+                          type: string
+                        ip:
+                          description: IP of the replica. The IP of your Instance
+                            within the private service
+                          type: string
+                        ipNet:
+                          description: The IP network address within the private subnet.
+                            This must be an IPv4 address with a CIDR notation. The
+                            IP network address within the private subnet is determined
+                            by the IP Address Management (IPAM) service if not set.
+                            The IP with the given mask within the private subnet
+                          type: string
+                        name:
+                          description: The name of the Database Instance. The name
+                            of your private service
+                          type: string
+                        pnId:
+                          description: The ID of the private network. The private
+                            network ID
+                          type: string
+                        port:
+                          description: Port of the replica. The port of your private
+                            service
+                          type: number
+                        zone:
+                          description: The zone you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the Database Instance is associated with. The project_id you
+                      want to attach the resource to
                     type: string
                   readReplicas:
                     description: List of read replicas of the database instance. Read
@@ -435,6 +617,36 @@ spec:
                           type: number
                       type: object
                     type: array
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the Database Instance should be created. The region you want
+                      to attach the resource to
+                    type: string
+                  settings:
+                    additionalProperties:
+                      type: string
+                    description: Map of engine settings to be set. Using this option
+                      will override default config. Map of engine settings to be set
+                      on a running instance.
+                    type: object
+                  tags:
+                    description: The tags associated with the Database Instance. List
+                      of tags ["tag1", "tag2", ...] attached to a database instance
+                    items:
+                      type: string
+                    type: array
+                  userName:
+                    description: Identifier for the first user of the database instance.
+                      Identifier for the first user of the database instance
+                    type: string
+                  volumeSizeInGb:
+                    description: Volume size (in GB) when volume_type is set to bssd.
+                      Volume size (in GB) when volume_type is not lssd
+                    type: number
+                  volumeType:
+                    description: Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

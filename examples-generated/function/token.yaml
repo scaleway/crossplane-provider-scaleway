@@ -45,6 +45,3 @@ metadata:
 spec:
   forProvider:
     name: test-function-token-ns
-
----
-

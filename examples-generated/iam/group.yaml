@@ -12,6 +12,3 @@ spec:
     description: basic description
     name: iam_group_basic
     userIds: []
-
----
-

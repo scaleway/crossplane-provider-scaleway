@@ -13,11 +13,38 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PublicGatewayPATRuleInitParameters struct {
+
+	// The Private IP to forward data to (IP address).
+	// The private IP used in the PAT rule
+	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// The Private port to translate to.
+	// The private port used in the PAT rule
+	PrivatePort *float64 `json:"privatePort,omitempty" tf:"private_port,omitempty"`
+
+	// (Defaults to both) The Protocol the rule should apply to. Possible values are both, tcp and udp.
+	// The protocol used in the PAT rule
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The Public port to listen on.
+	// The public port used in the PAT rule
+	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the public gateway DHCP config should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type PublicGatewayPATRuleObservation struct {
 
 	// The date and time of the creation of the pat rule config.
 	// The date and time of the creation of the PAT rule
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The ID of the public gateway.
+	// The ID of the gateway this PAT rule is applied to
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// The ID of the public gateway PAT rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -26,9 +53,29 @@ type PublicGatewayPATRuleObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The Private IP to forward data to (IP address).
+	// The private IP used in the PAT rule
+	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// The Private port to translate to.
+	// The private port used in the PAT rule
+	PrivatePort *float64 `json:"privatePort,omitempty" tf:"private_port,omitempty"`
+
+	// (Defaults to both) The Protocol the rule should apply to. Possible values are both, tcp and udp.
+	// The protocol used in the PAT rule
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The Public port to listen on.
+	// The public port used in the PAT rule
+	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
+
 	// The date and time of the last update of the pat rule config.
 	// The date and time of the last update of the PAT rule
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the public gateway DHCP config should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PublicGatewayPATRuleParameters struct {
@@ -49,13 +96,13 @@ type PublicGatewayPATRuleParameters struct {
 
 	// The Private IP to forward data to (IP address).
 	// The private IP used in the PAT rule
-	// +kubebuilder:validation:Required
-	PrivateIP *string `json:"privateIp" tf:"private_ip,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// The Private port to translate to.
 	// The private port used in the PAT rule
-	// +kubebuilder:validation:Required
-	PrivatePort *float64 `json:"privatePort" tf:"private_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrivatePort *float64 `json:"privatePort,omitempty" tf:"private_port,omitempty"`
 
 	// (Defaults to both) The Protocol the rule should apply to. Possible values are both, tcp and udp.
 	// The protocol used in the PAT rule
@@ -64,8 +111,8 @@ type PublicGatewayPATRuleParameters struct {
 
 	// The Public port to listen on.
 	// The public port used in the PAT rule
-	// +kubebuilder:validation:Required
-	PublicPort *float64 `json:"publicPort" tf:"public_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the public gateway DHCP config should be created.
 	// The zone you want to attach the resource to
@@ -77,6 +124,18 @@ type PublicGatewayPATRuleParameters struct {
 type PublicGatewayPATRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicGatewayPATRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PublicGatewayPATRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // PublicGatewayPATRuleStatus defines the observed state of PublicGatewayPATRule.
@@ -87,7 +146,7 @@ type PublicGatewayPATRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PublicGatewayPATRule is the Schema for the PublicGatewayPATRules API. Manages Scaleway VPC Public Gateways PAT rules.
+// PublicGatewayPATRule is the Schema for the PublicGatewayPATRules API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -97,8 +156,11 @@ type PublicGatewayPATRuleStatus struct {
 type PublicGatewayPATRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PublicGatewayPATRuleSpec   `json:"spec"`
-	Status            PublicGatewayPATRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.privateIp) || (has(self.initProvider) && has(self.initProvider.privateIp))",message="spec.forProvider.privateIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.privatePort) || (has(self.initProvider) && has(self.initProvider.privatePort))",message="spec.forProvider.privatePort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicPort) || (has(self.initProvider) && has(self.initProvider.publicPort))",message="spec.forProvider.publicPort is a required parameter"
+	Spec   PublicGatewayPATRuleSpec   `json:"spec"`
+	Status PublicGatewayPATRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

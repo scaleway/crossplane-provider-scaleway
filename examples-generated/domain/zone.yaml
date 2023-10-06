@@ -10,6 +10,3 @@ spec:
   forProvider:
     domain: scaleway-terraform.com
     subdomain: test
-
----
-

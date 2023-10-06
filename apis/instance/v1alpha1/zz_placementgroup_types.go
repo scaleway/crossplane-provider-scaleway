@@ -13,18 +13,69 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PlacementGroupInitParameters struct {
+
+	// The name of the placement group.
+	// The name of the placement group
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
+	// One of the two policy_mode may be selected: enforced or optional.
+	PolicyMode *string `json:"policyMode,omitempty" tf:"policy_mode,omitempty"`
+
+	// (Defaults to max_availability) The policy type of the placement group. Possible values are: low_latency or max_availability.
+	// The operating mode is selected by a policy_type
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the placement group is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// A list of tags to apply to the placement group.
+	// The tags associated with the placement group
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the placement group should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type PlacementGroupObservation struct {
 
 	// The ID of the placement group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the placement group.
+	// The name of the placement group
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The organization ID the placement group is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
+	// One of the two policy_mode may be selected: enforced or optional.
+	PolicyMode *string `json:"policyMode,omitempty" tf:"policy_mode,omitempty"`
+
 	// Is true when the policy is respected.
 	// Is true when the policy is respected.
 	PolicyRespected *bool `json:"policyRespected,omitempty" tf:"policy_respected,omitempty"`
+
+	// (Defaults to max_availability) The policy type of the placement group. Possible values are: low_latency or max_availability.
+	// The operating mode is selected by a policy_type
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the placement group is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// A list of tags to apply to the placement group.
+	// The tags associated with the placement group
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the placement group should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PlacementGroupParameters struct {
@@ -64,6 +115,18 @@ type PlacementGroupParameters struct {
 type PlacementGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PlacementGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PlacementGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // PlacementGroupStatus defines the observed state of PlacementGroup.
@@ -74,7 +137,7 @@ type PlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PlacementGroup is the Schema for the PlacementGroups API. Manages Scaleway Compute Instance Placement Groups.
+// PlacementGroup is the Schema for the PlacementGroups API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

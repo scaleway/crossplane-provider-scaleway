@@ -8,6 +8,3 @@ metadata:
   name: availability-group
 spec:
   forProvider: {}
-
----
-

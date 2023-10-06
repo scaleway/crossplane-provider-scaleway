@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdditionalVolumesInitParameters struct {
+}
+
 type AdditionalVolumesObservation struct {
 
 	// Date of the volume creation.
@@ -58,11 +61,50 @@ type AdditionalVolumesObservation struct {
 type AdditionalVolumesParameters struct {
 }
 
+type ImageInitParameters struct {
+
+	// List of IDs of the snapshots of the additional volumes to be attached to the image.
+	// The IDs of the additional volumes attached to the image
+	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
+
+	// The architecture the image is compatible with. Possible values are: x86_64 or arm.
+	// Architecture of the image (default = x86_64)
+	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
+
+	// The name of the image. If not provided it will be randomly generated.
+	// The name of the image
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the image is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true if the image is public.
+	// If true, the image will be public
+	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
+
+	// A list of tags to apply to the image.
+	// List of tags ["tag1", "tag2", ...] attached to the image
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the image should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type ImageObservation struct {
+
+	// List of IDs of the snapshots of the additional volumes to be attached to the image.
+	// The IDs of the additional volumes attached to the image
+	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
 
 	// The description of the extra volumes attached to the image.
 	// Specs of the additional volumes attached to the image
 	AdditionalVolumes []AdditionalVolumesObservation `json:"additionalVolumes,omitempty" tf:"additional_volumes,omitempty"`
+
+	// The architecture the image is compatible with. Possible values are: x86_64 or arm.
+	// Architecture of the image (default = x86_64)
+	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
 	// Date of the image creation.
 	// The date and time of the creation of the image
@@ -79,13 +121,37 @@ type ImageObservation struct {
 	// The date and time of the last modification of the Redis cluster
 	ModificationDate *string `json:"modificationDate,omitempty" tf:"modification_date,omitempty"`
 
+	// The name of the image. If not provided it will be randomly generated.
+	// The name of the image
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The organization ID the image is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// (Defaults to provider project_id) The ID of the project the image is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true if the image is public.
+	// If true, the image will be public
+	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
+
+	// The ID of the snapshot of the volume to be used as root in the image.
+	// UUID of the snapshot from which the image is to be created
+	RootVolumeID *string `json:"rootVolumeId,omitempty" tf:"root_volume_id,omitempty"`
+
 	// State of the image. Possible values are: available, creating or error.
 	// The state of the image [ available | creating | error ]
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// A list of tags to apply to the image.
+	// List of tags ["tag1", "tag2", ...] attached to the image
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the image should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type ImageParameters struct {
@@ -144,6 +210,18 @@ type ImageParameters struct {
 type ImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ImageInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageStatus defines the observed state of Image.
@@ -154,7 +232,7 @@ type ImageStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Image is the Schema for the Images API. Manages Scaleway Instance Images.
+// Image is the Schema for the Images API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

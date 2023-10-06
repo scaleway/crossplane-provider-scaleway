@@ -69,6 +69,16 @@ func (tr *GatewayNetwork) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this GatewayNetwork
+func (tr *GatewayNetwork) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this GatewayNetwork using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GatewayNetwork) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *PrivateNetwork) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this PrivateNetwork
+func (tr *PrivateNetwork) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this PrivateNetwork using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PrivateNetwork) LateInitialize(attrs []byte) (bool, error) {
@@ -158,7 +178,7 @@ func (tr *PrivateNetwork) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *PrivateNetwork) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this PublicGateway
@@ -215,6 +235,16 @@ func (tr *PublicGateway) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this PublicGateway
+func (tr *PublicGateway) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this PublicGateway using its observed tfState.
@@ -291,6 +321,16 @@ func (tr *PublicGatewayDHCP) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this PublicGatewayDHCP
+func (tr *PublicGatewayDHCP) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this PublicGatewayDHCP using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PublicGatewayDHCP) LateInitialize(attrs []byte) (bool, error) {
@@ -365,6 +405,16 @@ func (tr *PublicGatewayIP) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this PublicGatewayIP
+func (tr *PublicGatewayIP) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this PublicGatewayIP using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PublicGatewayIP) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *PublicGatewayPATRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this PublicGatewayPATRule
+func (tr *PublicGatewayPATRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this PublicGatewayPATRule using its observed tfState.

@@ -4,11 +4,23 @@ metadata:
   annotations:
     meta.upbound.io/example-id: object/v1alpha1/policy
   labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    bucket: some-unique-name
+    policy: some-unique-name
+
+---
+
+apiVersion: object.scaleway.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/policy
+  labels:
     testing.upbound.io/example-name: bucket
   name: bucket
 spec:
   forProvider:
     name: some-unique-name
-
----
-

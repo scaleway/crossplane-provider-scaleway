@@ -28,6 +28,3 @@ spec:
   forProvider:
     image: ubuntu_focal
     type: DEV1-S
-
----
-

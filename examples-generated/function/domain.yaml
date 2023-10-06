@@ -46,6 +46,3 @@ metadata:
   name: main
 spec:
   forProvider: {}
-
----
-

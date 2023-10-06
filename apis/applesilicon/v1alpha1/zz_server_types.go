@@ -13,6 +13,29 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ServerInitParameters struct {
+
+	// The name of the server.
+	// Name of the server
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the server is
+	// associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The commercial type of the server. You find all the available types on
+	// the pricing page. Updates to this field will recreate a new
+	// resource.
+	// Type of the server
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// (Defaults to provider zone) The zone in which
+	// the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type ServerObservation struct {
 
 	// The date and time of the creation of the Apple Silicon server.
@@ -29,14 +52,29 @@ type ServerObservation struct {
 	// IPv4 address of the server
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// The name of the server.
+	// Name of the server
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The organization ID the server is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the server is
+	// associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The state of the server. Check the possible values on
 	// our sdk.
 	// The state of the server
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// The commercial type of the server. You find all the available types on
+	// the pricing page. Updates to this field will recreate a new
+	// resource.
+	// Type of the server
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The date and time of the last update of the Apple Silicon server.
 	// The date and time of the last update of the server
@@ -45,6 +83,11 @@ type ServerObservation struct {
 	// URL of the VNC.
 	// VNC url use to connect remotely to the desktop GUI
 	VncURL *string `json:"vncUrl,omitempty" tf:"vnc_url,omitempty"`
+
+	// (Defaults to provider zone) The zone in which
+	// the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type ServerParameters struct {
@@ -64,8 +107,8 @@ type ServerParameters struct {
 	// the pricing page. Updates to this field will recreate a new
 	// resource.
 	// Type of the server
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// (Defaults to provider zone) The zone in which
 	// the server should be created.
@@ -78,6 +121,18 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServerStatus defines the observed state of Server.
@@ -88,7 +143,7 @@ type ServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Server is the Schema for the Servers API. Manages Scaleway Apple silicon M1 as-a-Service.
+// Server is the Schema for the Servers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -98,8 +153,9 @@ type ServerStatus struct {
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServerSpec   `json:"spec"`
-	Status            ServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
+	Spec   ServerSpec   `json:"spec"`
+	Status ServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

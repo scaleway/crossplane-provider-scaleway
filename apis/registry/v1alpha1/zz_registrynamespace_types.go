@@ -13,7 +13,34 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RegistryNamespaceInitParameters struct {
+
+	// The description of the namespace.
+	// The description of the container registry namespace
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
+	// Define the default visibity policy
+	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+
+	// The unique name of the namespace.
+	// The name of the container registry namespace
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// (Defaults to provider region). The region in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
 type RegistryNamespaceObservation struct {
+
+	// The description of the namespace.
+	// The description of the container registry namespace
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Endpoint reachable by Docker.
 	// The endpoint reachable by docker
@@ -22,9 +49,25 @@ type RegistryNamespaceObservation struct {
 	// The ID of the namespace
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
+	// Define the default visibity policy
+	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+
+	// The unique name of the namespace.
+	// The name of the container registry namespace
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The organization ID the namespace is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// (Defaults to provider region). The region in which the namespace should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegistryNamespaceParameters struct {
@@ -41,8 +84,8 @@ type RegistryNamespaceParameters struct {
 
 	// The unique name of the namespace.
 	// The name of the container registry namespace
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
 	// The project_id you want to attach the resource to
@@ -59,6 +102,18 @@ type RegistryNamespaceParameters struct {
 type RegistryNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegistryNamespaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RegistryNamespaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegistryNamespaceStatus defines the observed state of RegistryNamespace.
@@ -69,7 +124,7 @@ type RegistryNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RegistryNamespace is the Schema for the RegistryNamespaces API. Manages Scaleway Container Registries.
+// RegistryNamespace is the Schema for the RegistryNamespaces API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -79,8 +134,9 @@ type RegistryNamespaceStatus struct {
 type RegistryNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RegistryNamespaceSpec   `json:"spec"`
-	Status            RegistryNamespaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   RegistryNamespaceSpec   `json:"spec"`
+	Status RegistryNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

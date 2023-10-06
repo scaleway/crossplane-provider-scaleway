@@ -69,6 +69,16 @@ func (tr *Cockpit) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Cockpit
+func (tr *Cockpit) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Cockpit using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Cockpit) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *GrafanaUser) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this GrafanaUser
+func (tr *GrafanaUser) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this GrafanaUser using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GrafanaUser) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *Token) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Token
+func (tr *Token) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Token using its observed tfState.

@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: pools.k8s.scaleway.upbound.io
 spec:
   group: k8s.scaleway.upbound.io
@@ -35,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Pool is the Schema for the Pools API. Manages Scaleway Kubernetes
-          cluster pools.
+        description: Pool is the Schema for the Pools API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -55,9 +53,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -236,53 +238,147 @@ spec:
                       will recreate a new resource. The zone you want to attach the
                       resource to'
                     type: string
-                required:
-                - name
-                - nodeType
-                - size
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  autohealing:
+                    description: (Defaults to false) Enables the autohealing feature
+                      for this pool. Enable the autohealing on the pool
+                    type: boolean
+                  autoscaling:
+                    description: '(Defaults to false) Enables the autoscaling feature
+                      for this pool. ~> Important: When enabled, an update of the
+                      size will not be taken into account. Enable the autoscaling
+                      on the pool'
+                    type: boolean
+                  containerRuntime:
+                    description: '(Defaults to containerd) The container runtime of
+                      the pool. ~> Important: Updates to this field will recreate
+                      a new resource. Container runtime for the pool'
+                    type: string
+                  kubeletArgs:
+                    additionalProperties:
+                      type: string
+                    description: The Kubelet arguments to be used by this pool The
+                      Kubelet arguments to be used by this pool
+                    type: object
+                  maxSize:
+                    description: (Defaults to size) The maximum size of the pool,
+                      used by the autoscaling feature. Maximum size of the pool
+                    type: number
+                  minSize:
+                    description: (Defaults to 1) The minimum size of the pool, used
+                      by the autoscaling feature. Minimum size of the pool
+                    type: number
+                  name:
+                    description: 'The name for the pool. ~> Important: Updates to
+                      this field will recreate a new resource. The name of the cluster'
+                    type: string
+                  nodeType:
+                    description: The commercial type of the pool instances. Instances
+                      with insufficient memory are not eligible (DEV1-S, PLAY2-PICO,
+                      STARDUST). external is a special node type used to provision
+                      from other Cloud providers. Server type of the pool servers
+                    type: string
+                  placementGroupId:
+                    description: 'The placement group the nodes of the pool will be
+                      attached to. ~> Important: Updates to this field will recreate
+                      a new resource. ID of the placement group'
+                    type: string
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the pool should be created. The region you want to attach the
+                      resource to
+                    type: string
+                  rootVolumeSizeInGb:
+                    description: The size of the system volume of the nodes in gigabyte
+                      The size of the system volume of the nodes in gigabyte
+                    type: number
+                  rootVolumeType:
+                    description: System volume type of the nodes composing the pool
+                      System volume type of the nodes composing the pool
+                    type: string
+                  size:
+                    description: 'The size of the pool. ~> Important: This field will
+                      only be used at creation if autoscaling is enabled. Size of
+                      the pool'
+                    type: number
+                  tags:
+                    description: The tags associated with the pool. The tags associated
+                      with the pool
+                    items:
+                      type: string
+                    type: array
+                  upgradePolicy:
+                    description: The Pool upgrade policy The Pool upgrade policy
+                    items:
+                      properties:
+                        maxSurge:
+                          description: (Defaults to 0) The maximum number of nodes
+                            to be created during the upgrade The maximum number of
+                            nodes to be created during the upgrade
+                          type: number
+                        maxUnavailable:
+                          description: (Defaults to 1) The maximum number of nodes
+                            that can be not ready at the same time The maximum number
+                            of nodes that can be not ready at the same time
+                          type: number
+                      type: object
+                    type: array
+                  waitForPoolReady:
+                    description: (Default to false) Whether to wait for the pool to
+                      be ready. Whether to wait for the pool to be ready
+                    type: boolean
+                  zone:
+                    description: '(Defaults to provider zone) The zone in which the
+                      pool should be created. ~> Important: Updates to this field
+                      will recreate a new resource. The zone you want to attach the
+                      resource to'
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
                 description: ProviderConfigReference specifies how the provider that
                   will be used to create, observe, update, and delete this managed
                   resource should be configured.
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -412,11 +508,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.nodeType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || (has(self.initProvider) && has(self.initProvider.nodeType))'
+            - message: spec.forProvider.size is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.size)
+                || (has(self.initProvider) && has(self.initProvider.size))'
           status:
             description: PoolStatus defines the observed state of Pool.
             properties:
               atProvider:
                 properties:
+                  autohealing:
+                    description: (Defaults to false) Enables the autohealing feature
+                      for this pool. Enable the autohealing on the pool
+                    type: boolean
+                  autoscaling:
+                    description: '(Defaults to false) Enables the autoscaling feature
+                      for this pool. ~> Important: When enabled, an update of the
+                      size will not be taken into account. Enable the autoscaling
+                      on the pool'
+                    type: boolean
+                  clusterId:
+                    description: The ID of the Kubernetes cluster on which this pool
+                      will be created. The ID of the cluster on which this pool will
+                      be created
+                    type: string
+                  containerRuntime:
+                    description: '(Defaults to containerd) The container runtime of
+                      the pool. ~> Important: Updates to this field will recreate
+                      a new resource. Container runtime for the pool'
+                    type: string
                   createdAt:
                     description: The creation date of the pool. The date and time
                       of the creation of the pool
@@ -426,6 +555,30 @@ spec:
                     type: number
                   id:
                     description: The ID of the pool.
+                    type: string
+                  kubeletArgs:
+                    additionalProperties:
+                      type: string
+                    description: The Kubelet arguments to be used by this pool The
+                      Kubelet arguments to be used by this pool
+                    type: object
+                  maxSize:
+                    description: (Defaults to size) The maximum size of the pool,
+                      used by the autoscaling feature. Maximum size of the pool
+                    type: number
+                  minSize:
+                    description: (Defaults to 1) The minimum size of the pool, used
+                      by the autoscaling feature. Minimum size of the pool
+                    type: number
+                  name:
+                    description: 'The name for the pool. ~> Important: Updates to
+                      this field will recreate a new resource. The name of the cluster'
+                    type: string
+                  nodeType:
+                    description: The commercial type of the pool instances. Instances
+                      with insufficient memory are not eligible (DEV1-S, PLAY2-PICO,
+                      STARDUST). external is a special node type used to provision
+                      from other Cloud providers. Server type of the pool servers
                     type: string
                   nodes:
                     description: (List of) The nodes in the default pool.
@@ -446,16 +599,71 @@ spec:
                           type: string
                       type: object
                     type: array
+                  placementGroupId:
+                    description: 'The placement group the nodes of the pool will be
+                      attached to. ~> Important: Updates to this field will recreate
+                      a new resource. ID of the placement group'
+                    type: string
+                  region:
+                    description: (Defaults to provider region) The region in which
+                      the pool should be created. The region you want to attach the
+                      resource to
+                    type: string
+                  rootVolumeSizeInGb:
+                    description: The size of the system volume of the nodes in gigabyte
+                      The size of the system volume of the nodes in gigabyte
+                    type: number
+                  rootVolumeType:
+                    description: System volume type of the nodes composing the pool
+                      System volume type of the nodes composing the pool
+                    type: string
+                  size:
+                    description: 'The size of the pool. ~> Important: This field will
+                      only be used at creation if autoscaling is enabled. Size of
+                      the pool'
+                    type: number
                   status:
                     description: The status of the pool. The status of the pool
                     type: string
+                  tags:
+                    description: The tags associated with the pool. The tags associated
+                      with the pool
+                    items:
+                      type: string
+                    type: array
                   updatedAt:
                     description: The last update date of the pool. The date and time
                       of the last update of the pool
                     type: string
+                  upgradePolicy:
+                    description: The Pool upgrade policy The Pool upgrade policy
+                    items:
+                      properties:
+                        maxSurge:
+                          description: (Defaults to 0) The maximum number of nodes
+                            to be created during the upgrade The maximum number of
+                            nodes to be created during the upgrade
+                          type: number
+                        maxUnavailable:
+                          description: (Defaults to 1) The maximum number of nodes
+                            that can be not ready at the same time The maximum number
+                            of nodes that can be not ready at the same time
+                          type: number
+                      type: object
+                    type: array
                   version:
                     description: The version of the pool. The Kubernetes version of
                       the pool
+                    type: string
+                  waitForPoolReady:
+                    description: (Default to false) Whether to wait for the pool to
+                      be ready. Whether to wait for the pool to be ready
+                    type: boolean
+                  zone:
+                    description: '(Defaults to provider zone) The zone in which the
+                      pool should be created. ~> Important: Updates to this field
+                      will recreate a new resource. The zone you want to attach the
+                      resource to'
                     type: string
                 type: object
               conditions:

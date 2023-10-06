@@ -13,21 +13,130 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ObjectInitParameters struct {
+
+	// The name of the bucket.
+	// The name of the bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload, should be base64 encoded
+	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
+
+	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// Path of the file to upload, defaults to an empty file
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	// Hash of the file, used to trigger upload on file change
+	// File hash to trigger upload
+	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The path of the object.
+	// Key of the object
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Map of metadata used for the object, keys must be lowercase
+	// Map of object's metadata, only lower case keys are allowed
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The Scaleway region this bucket resides in.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+
+	// Map of tags
+	// Map of object's tags
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Visibility of the object, public-read or private
+	// Visibility of the object, public-read or private
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
+}
+
 type ObjectObservation struct {
+
+	// The name of the bucket.
+	// The name of the bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload, should be base64 encoded
+	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
+
+	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// Path of the file to upload, defaults to an empty file
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	// Hash of the file, used to trigger upload on file change
+	// File hash to trigger upload
+	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 
 	// The path of the object, including bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The path of the object.
+	// Key of the object
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Map of metadata used for the object, keys must be lowercase
+	// Map of object's metadata, only lower case keys are allowed
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The Scaleway region this bucket resides in.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+
+	// Map of tags
+	// Map of object's tags
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Visibility of the object, public-read or private
+	// Visibility of the object, public-read or private
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 }
 
 type ObjectParameters struct {
 
 	// The name of the bucket.
 	// The name of the bucket
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the file to upload, defaults to an empty file
-	// File to upload, defaults to an empty file
+	// The content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
+	// Content of the file to upload, should be base64 encoded
+	// +kubebuilder:validation:Optional
+	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
+
+	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// Path of the file to upload, defaults to an empty file
 	// +kubebuilder:validation:Optional
 	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
@@ -38,8 +147,8 @@ type ObjectParameters struct {
 
 	// The path of the object.
 	// Key of the object
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of metadata used for the object, keys must be lowercase
 	// Map of object's metadata, only lower case keys are allowed
@@ -76,6 +185,18 @@ type ObjectParameters struct {
 type ObjectSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ObjectParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ObjectInitParameters `json:"initProvider,omitempty"`
 }
 
 // ObjectStatus defines the observed state of Object.
@@ -86,7 +207,7 @@ type ObjectStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Object is the Schema for the Objects API. Manages Scaleway object storage objects.
+// Object is the Schema for the Objects API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -96,8 +217,10 @@ type ObjectStatus struct {
 type Object struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ObjectSpec   `json:"spec"`
-	Status            ObjectStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bucket) || (has(self.initProvider) && has(self.initProvider.bucket))",message="spec.forProvider.bucket is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key) || (has(self.initProvider) && has(self.initProvider.key))",message="spec.forProvider.key is a required parameter"
+	Spec   ObjectSpec   `json:"spec"`
+	Status ObjectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

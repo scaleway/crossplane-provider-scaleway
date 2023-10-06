@@ -8,6 +8,3 @@ metadata:
   name: allow-all
 spec:
   forProvider: {}
-
----
-

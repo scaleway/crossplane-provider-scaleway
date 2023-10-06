@@ -10,6 +10,3 @@ spec:
   forProvider:
     name: main
     publicKey: <YOUR-PUBLIC-SSH-KEY>
-
----
-

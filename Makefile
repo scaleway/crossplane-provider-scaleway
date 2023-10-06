@@ -8,9 +8,9 @@ export TERRAFORM_VERSION := 1.3.3
 
 export TERRAFORM_PROVIDER_SOURCE := scaleway/scaleway
 export TERRAFORM_PROVIDER_REPO := https://github.com/scaleway/terraform-provider-scaleway
-export TERRAFORM_PROVIDER_VERSION := 2.12.0
+export TERRAFORM_PROVIDER_VERSION := 2.28.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-scaleway
-export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-scaleway_v2.12.0
+export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-scaleway_v2.28.0
 export TERRAFORM_DOCS_PATH := docs/resources
 
 PLATFORMS ?= linux_amd64 linux_arm64
@@ -156,7 +156,7 @@ submodules:
 run: go.build
 	@$(INFO) Running Crossplane locally out-of-cluster . . .
 	@# To see other arguments that can be provided, run the command with --help instead
-	UPBOUND_CONTEXT="local" $(GO_OUT_DIR)/provider --debug
+	UPBOUND_CONTEXT="local" $(GO_OUT_DIR)/provider --debug --enable-management-policies
 
 # ====================================================================================
 # End to End Testing

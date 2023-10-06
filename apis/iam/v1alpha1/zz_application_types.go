@@ -13,11 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationInitParameters struct {
+
+	// The description of the iam application.
+	// The description of the iam application
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// .The name of the iam application.
+	// The name of the iam application
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the application is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+}
+
 type ApplicationObservation struct {
 
 	// The date and time of the creation of the application.
 	// The date and time of the creation of the application
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The description of the iam application.
+	// The description of the iam application
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether the application is editable.
 	// Whether or not the application is editable.
@@ -25,6 +44,14 @@ type ApplicationObservation struct {
 
 	// The ID of the application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// .The name of the iam application.
+	// The name of the iam application
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Defaults to provider organization_id) The ID of the organization the application is associated with.
+	// ID of organization the resource is associated to.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// The date and time of the last update of the application.
 	// The date and time of the last update of the application
@@ -53,6 +80,18 @@ type ApplicationParameters struct {
 type ApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationStatus defines the observed state of Application.
@@ -63,7 +102,7 @@ type ApplicationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Application is the Schema for the Applications API. Manages Scaleway IAM Applications.
+// Application is the Schema for the Applications API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NodesInitParameters struct {
+}
+
 type NodesObservation struct {
 
 	// The name for the pool.
@@ -32,7 +35,102 @@ type NodesObservation struct {
 type NodesParameters struct {
 }
 
+type PoolInitParameters struct {
+
+	// (Defaults to false) Enables the autohealing feature for this pool.
+	// Enable the autohealing on the pool
+	Autohealing *bool `json:"autohealing,omitempty" tf:"autohealing,omitempty"`
+
+	// (Defaults to false) Enables the autoscaling feature for this pool.
+	// ~> Important: When enabled, an update of the size will not be taken into account.
+	// Enable the autoscaling on the pool
+	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
+
+	// (Defaults to containerd) The container runtime of the pool.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// Container runtime for the pool
+	ContainerRuntime *string `json:"containerRuntime,omitempty" tf:"container_runtime,omitempty"`
+
+	// The Kubelet arguments to be used by this pool
+	// The Kubelet arguments to be used by this pool
+	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
+
+	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
+	// Maximum size of the pool
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+	// Minimum size of the pool
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// The name for the pool.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The name of the cluster
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.
+	// Server type of the pool servers
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// The placement group the nodes of the pool will be attached to.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// ID of the placement group
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// (Defaults to provider region) The region in which the pool should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The size of the system volume of the nodes in gigabyte
+	// The size of the system volume of the nodes in gigabyte
+	RootVolumeSizeInGb *float64 `json:"rootVolumeSizeInGb,omitempty" tf:"root_volume_size_in_gb,omitempty"`
+
+	// System volume type of the nodes composing the pool
+	// System volume type of the nodes composing the pool
+	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
+
+	// The size of the pool.
+	// ~> Important: This field will only be used at creation if autoscaling is enabled.
+	// Size of the pool
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The tags associated with the pool.
+	// The tags associated with the pool
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Pool upgrade policy
+	// The Pool upgrade policy
+	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// (Default to false) Whether to wait for the pool to be ready.
+	// Whether to wait for the pool to be ready
+	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the pool should be created.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type PoolObservation struct {
+
+	// (Defaults to false) Enables the autohealing feature for this pool.
+	// Enable the autohealing on the pool
+	Autohealing *bool `json:"autohealing,omitempty" tf:"autohealing,omitempty"`
+
+	// (Defaults to false) Enables the autoscaling feature for this pool.
+	// ~> Important: When enabled, an update of the size will not be taken into account.
+	// Enable the autoscaling on the pool
+	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
+
+	// The ID of the Kubernetes cluster on which this pool will be created.
+	// The ID of the cluster on which this pool will be created
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// (Defaults to containerd) The container runtime of the pool.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// Container runtime for the pool
+	ContainerRuntime *string `json:"containerRuntime,omitempty" tf:"container_runtime,omitempty"`
 
 	// The creation date of the pool.
 	// The date and time of the creation of the pool
@@ -44,20 +142,80 @@ type PoolObservation struct {
 	// The ID of the pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Kubelet arguments to be used by this pool
+	// The Kubelet arguments to be used by this pool
+	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
+
+	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
+	// Maximum size of the pool
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+	// Minimum size of the pool
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// The name for the pool.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The name of the cluster
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.
+	// Server type of the pool servers
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
 	// (List of) The nodes in the default pool.
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
+
+	// The placement group the nodes of the pool will be attached to.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// ID of the placement group
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// (Defaults to provider region) The region in which the pool should be created.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The size of the system volume of the nodes in gigabyte
+	// The size of the system volume of the nodes in gigabyte
+	RootVolumeSizeInGb *float64 `json:"rootVolumeSizeInGb,omitempty" tf:"root_volume_size_in_gb,omitempty"`
+
+	// System volume type of the nodes composing the pool
+	// System volume type of the nodes composing the pool
+	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
+
+	// The size of the pool.
+	// ~> Important: This field will only be used at creation if autoscaling is enabled.
+	// Size of the pool
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The status of the pool.
 	// The status of the pool
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The tags associated with the pool.
+	// The tags associated with the pool
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The last update date of the pool.
 	// The date and time of the last update of the pool
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
+	// The Pool upgrade policy
+	// The Pool upgrade policy
+	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
 	// The version of the pool.
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// (Default to false) Whether to wait for the pool to be ready.
+	// Whether to wait for the pool to be ready
+	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the pool should be created.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PoolParameters struct {
@@ -111,13 +269,13 @@ type PoolParameters struct {
 	// The name for the pool.
 	// ~> Important: Updates to this field will recreate a new resource.
 	// The name of the cluster
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.
 	// Server type of the pool servers
-	// +kubebuilder:validation:Required
-	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The placement group the nodes of the pool will be attached to.
 	// ~> Important: Updates to this field will recreate a new resource.
@@ -143,8 +301,8 @@ type PoolParameters struct {
 	// The size of the pool.
 	// ~> Important: This field will only be used at creation if autoscaling is enabled.
 	// Size of the pool
-	// +kubebuilder:validation:Required
-	Size *float64 `json:"size" tf:"size,omitempty"`
+	// +kubebuilder:validation:Optional
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The tags associated with the pool.
 	// The tags associated with the pool
@@ -168,7 +326,26 @@ type PoolParameters struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
+type UpgradePolicyInitParameters struct {
+
+	// (Defaults to 0) The maximum number of nodes to be created during the upgrade
+	// The maximum number of nodes to be created during the upgrade
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// (Defaults to 1) The maximum number of nodes that can be not ready at the same time
+	// The maximum number of nodes that can be not ready at the same time
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+}
+
 type UpgradePolicyObservation struct {
+
+	// (Defaults to 0) The maximum number of nodes to be created during the upgrade
+	// The maximum number of nodes to be created during the upgrade
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// (Defaults to 1) The maximum number of nodes that can be not ready at the same time
+	// The maximum number of nodes that can be not ready at the same time
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type UpgradePolicyParameters struct {
@@ -188,6 +365,18 @@ type UpgradePolicyParameters struct {
 type PoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // PoolStatus defines the observed state of Pool.
@@ -198,7 +387,7 @@ type PoolStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Pool is the Schema for the Pools API. Manages Scaleway Kubernetes cluster pools.
+// Pool is the Schema for the Pools API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -208,8 +397,11 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PoolSpec   `json:"spec"`
-	Status            PoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"
+	Spec   PoolSpec   `json:"spec"`
+	Status PoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

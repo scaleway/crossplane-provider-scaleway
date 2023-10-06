@@ -10,6 +10,3 @@ spec:
   forProvider:
     description: a description
     name: My application
-
----
-

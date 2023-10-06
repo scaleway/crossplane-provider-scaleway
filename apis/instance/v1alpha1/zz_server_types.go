@@ -13,22 +13,41 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateNetworkInitParameters struct {
+
+	// The private network ID where to connect.
+	// The Private Network ID
+	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type PrivateNetworkObservation struct {
 
 	// The private NIC MAC address.
 	// MAC address of the NIC
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The private network ID where to connect.
+	// The Private Network ID
+	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+
 	// The private NIC state.
 	// The private NIC state
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
 
 	// The private network ID where to connect.
 	// The Private Network ID
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PnID *string `json:"pnId" tf:"pn_id,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the server should be created.
@@ -37,11 +56,75 @@ type PrivateNetworkParameters struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
+type PublicIpsInitParameters struct {
+}
+
+type PublicIpsObservation struct {
+
+	// The address of the IP
+	// IP Address
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the server.
+	// ID of the IP
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PublicIpsParameters struct {
+}
+
+type RootVolumeInitParameters struct {
+
+	// Set the volume where the boot the server
+	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
+
+	// (Defaults to true) Forces deletion of the root volume on instance termination.
+	// Force deletion of the root volume on instance termination
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Size of the root volume in gigabytes.
+	// To find the right size use this endpoint and
+	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+	// Updates to this field will recreate a new resource.
+	// Size of the root volume in gigabytes
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+	// Volume ID of the root volume
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+	// Volume type of the root volume
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
 type RootVolumeObservation struct {
+
+	// Set the volume where the boot the server
+	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
+
+	// (Defaults to true) Forces deletion of the root volume on instance termination.
+	// Force deletion of the root volume on instance termination
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// The name of the server.
 	// Name of the root volume
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Size of the root volume in gigabytes.
+	// To find the right size use this endpoint and
+	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+	// Updates to this field will recreate a new resource.
+	// Size of the root volume in gigabytes
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+	// Volume ID of the root volume
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+	// Volume type of the root volume
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type RootVolumeParameters struct {
@@ -74,10 +157,130 @@ type RootVolumeParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type ServerInitParameters struct {
+
+	// The additional volumes
+	// attached to the server. Updates to this field will trigger a stop/start of the server.
+	// The additional volumes attached to the server
+	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
+
+	// The boot Type of the server. Possible values are: local, bootscript or rescue.
+	// The boot type of the server
+	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
+
+	// The ID of the bootscript to use  (set boot_type to bootscript).
+	// ID of the target bootscript (set boot_type to bootscript)
+	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
+
+	// The cloud init script associated with this server
+	CloudInit *string `json:"cloudInit,omitempty" tf:"cloud_init,omitempty"`
+
+	// (Defaults to false) If true a dynamic IP will be attached to the server.
+	// Enable dynamic IP on the server
+	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
+
+	// (Defaults to false) Determines if IPv6 is enabled for the server.
+	// Determines if IPv6 is enabled for the server
+	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
+
+	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
+
+	// The UUID or the label of the base image used by the server. You can use this endpoint
+	// to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
+	// The UUID or the label of the base image used by the server
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The name of the server.
+	// The name of the server
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The private network associated with the server.
+	// Use the pn_id key to attach a private_network on your instance.
+	// List of private network to connect with your instance
+	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
+
+	// (Defaults to provider project_id) The ID of the project the server is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The list of public IPs of the server.
+	// List of public IPs attached to your instance
+	PublicIps []PublicIpsInitParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
+
+	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+	// Delete and re-create server if type change
+	ReplaceOnTypeChange *bool `json:"replaceOnTypeChange,omitempty" tf:"replace_on_type_change,omitempty"`
+
+	// Root volume attached to the server on creation.
+	// Root volume attached to the server on creation
+	RootVolume []RootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+
+	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// If server supports routed IPs, default to true if public_ips is used
+	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
+
+	// (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
+	// The state of the server should be: started, stopped, standby
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// The tags associated with the server.
+	// The tags associated with the server
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The commercial type of the server.
+	// You find all the available types on the pricing page.
+	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
+	// Use replace_on_type_change to trigger replacement instead of migration.
+	// The instance type of the server
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The user data associated with the server.
+	// Use the cloud-init key to use cloud-init on your instance.
+	// You can define values using:
+	// The user data associated with the server
+	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type ServerObservation struct {
+
+	// The additional volumes
+	// attached to the server. Updates to this field will trigger a stop/start of the server.
+	// The additional volumes attached to the server
+	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
+
+	// The boot Type of the server. Possible values are: local, bootscript or rescue.
+	// The boot type of the server
+	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
+
+	// The ID of the bootscript to use  (set boot_type to bootscript).
+	// ID of the target bootscript (set boot_type to bootscript)
+	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
+
+	// The cloud init script associated with this server
+	CloudInit *string `json:"cloudInit,omitempty" tf:"cloud_init,omitempty"`
+
+	// (Defaults to false) If true a dynamic IP will be attached to the server.
+	// Enable dynamic IP on the server
+	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
+
+	// (Defaults to false) Determines if IPv6 is enabled for the server.
+	// Determines if IPv6 is enabled for the server
+	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
 	// The ID of the server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the reserved IP that is attached to the server.
+	// The ID of the reserved IP for the server
+	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The default ipv6 address routed to the server. ( Only set when enable_ipv6 is set to true )
 	// The default public IPv6 address routed to the server.
@@ -91,9 +294,22 @@ type ServerObservation struct {
 	// The IPv6 prefix length routed to the server.
 	IPv6PrefixLength *float64 `json:"ipv6PrefixLength,omitempty" tf:"ipv6_prefix_length,omitempty"`
 
+	// The UUID or the label of the base image used by the server. You can use this endpoint
+	// to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
+	// The UUID or the label of the base image used by the server
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The name of the server.
+	// The name of the server
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The organization ID the server is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The placement group the server is attached to.
+	// The placement group the server is attached to
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// True when the placement group policy is respected.
 	// True when the placement group policy is respected
@@ -106,17 +322,60 @@ type ServerObservation struct {
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
 	// List of private network to connect with your instance
-	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// The public IPv4 address of the server.
+	// (Defaults to provider project_id) The ID of the project the server is associated with.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The public IP address of the server.
 	// The public IPv4 address of the server
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// The list of public IPs of the server.
+	// List of public IPs attached to your instance
+	PublicIps []PublicIpsObservation `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
+
+	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+	// Delete and re-create server if type change
+	ReplaceOnTypeChange *bool `json:"replaceOnTypeChange,omitempty" tf:"replace_on_type_change,omitempty"`
+
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
-	// +kubebuilder:validation:Optional
 	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+
+	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// If server supports routed IPs, default to true if public_ips is used
+	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
+
+	// The security group the server is attached to.
+	// The security group the server is attached to
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
+	// The state of the server should be: started, stopped, standby
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// The tags associated with the server.
+	// The tags associated with the server
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The commercial type of the server.
+	// You find all the available types on the pricing page.
+	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
+	// Use replace_on_type_change to trigger replacement instead of migration.
+	// The instance type of the server
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The user data associated with the server.
+	// Use the cloud-init key to use cloud-init on your instance.
+	// You can define values using:
+	// The user data associated with the server
+	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type ServerParameters struct {
@@ -151,7 +410,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
-	// =  The ID of the reserved IP that is attached to the server.
+	// The ID of the reserved IP that is attached to the server.
 	// The ID of the reserved IP for the server
 	// +crossplane:generate:reference:type=IP
 	// +kubebuilder:validation:Optional
@@ -164,6 +423,10 @@ type ServerParameters struct {
 	// Selector for a IP to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
+
+	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	// +kubebuilder:validation:Optional
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The UUID or the label of the base image used by the server. You can use this endpoint
 	// to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
@@ -201,10 +464,25 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The list of public IPs of the server.
+	// List of public IPs attached to your instance
+	// +kubebuilder:validation:Optional
+	PublicIps []PublicIpsParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
+
+	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+	// Delete and re-create server if type change
+	// +kubebuilder:validation:Optional
+	ReplaceOnTypeChange *bool `json:"replaceOnTypeChange,omitempty" tf:"replace_on_type_change,omitempty"`
+
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
 	// +kubebuilder:validation:Optional
 	RootVolume []RootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+
+	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// If server supports routed IPs, default to true if public_ips is used
+	// +kubebuilder:validation:Optional
+	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -232,10 +510,11 @@ type ServerParameters struct {
 
 	// The commercial type of the server.
 	// You find all the available types on the pricing page.
-	// Updates to this field will recreate a new resource.
+	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
+	// Use replace_on_type_change to trigger replacement instead of migration.
 	// The instance type of the server
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The user data associated with the server.
 	// Use the cloud-init key to use cloud-init on your instance.
@@ -254,6 +533,18 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServerStatus defines the observed state of Server.
@@ -264,7 +555,7 @@ type ServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Server is the Schema for the Servers API. Manages Scaleway Compute Instance servers.
+// Server is the Schema for the Servers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -274,8 +565,9 @@ type ServerStatus struct {
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServerSpec   `json:"spec"`
-	Status            ServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
+	Spec   ServerSpec   `json:"spec"`
+	Status ServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -13,10 +13,254 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackendInitParameters struct {
+
+	// Scaleway S3 bucket website to be served in case all backend servers are down.
+	// ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
+	// e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+	// Scaleway S3 bucket website to be served in case all backend servers are down
+	//
+	// **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
+	// E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+	FailoverHost *string `json:"failoverHost,omitempty" tf:"failover_host,omitempty"`
+
+	// User sessions will be forwarded to this port of backend servers.
+	// User sessions will be forwarded to this port of backend servers
+	ForwardPort *float64 `json:"forwardPort,omitempty" tf:"forward_port,omitempty"`
+
+	// (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
+	// Load balancing algorithm
+	ForwardPortAlgorithm *string `json:"forwardPortAlgorithm,omitempty" tf:"forward_port_algorithm,omitempty"`
+
+	// Backend protocol. Possible values are: tcp or http.
+	// Backend protocol
+	ForwardProtocol *string `json:"forwardProtocol,omitempty" tf:"forward_protocol,omitempty"`
+
+	// (Default: 60s) Interval between two HC requests.
+	// Interval between two HC requests
+	HealthCheckDelay *string `json:"healthCheckDelay,omitempty" tf:"health_check_delay,omitempty"`
+
+	// This block enable HTTP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckHTTP []HealthCheckHTTPInitParameters `json:"healthCheckHttp,omitempty" tf:"health_check_http,omitempty"`
+
+	// This block enable HTTPS health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckHTTPS []HealthCheckHTTPSInitParameters `json:"healthCheckHttps,omitempty" tf:"health_check_https,omitempty"`
+
+	// (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+	// Number of allowed failed HC requests before the backend server is marked down
+	HealthCheckMaxRetries *float64 `json:"healthCheckMaxRetries,omitempty" tf:"health_check_max_retries,omitempty"`
+
+	// (Default: forward_port) Port the HC requests will be send to.
+	// Port the HC requests will be send to. Default to `forward_port`
+	HealthCheckPort *float64 `json:"healthCheckPort,omitempty" tf:"health_check_port,omitempty"`
+
+	// (Default: false) Defines whether proxy protocol should be activated for the health check.
+	// Defines whether proxy protocol should be activated for the health check
+	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
+
+	// This block enable TCP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckTCP []HealthCheckTCPInitParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
+
+	// (Default: 30s) Timeout before we consider a HC request failed.
+	// Timeout before we consider a HC request failed
+	HealthCheckTimeout *string `json:"healthCheckTimeout,omitempty" tf:"health_check_timeout,omitempty"`
+
+	// (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+	// Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
+	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
+
+	// (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
+	// Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
+	IgnoreSSLServerVerify *bool `json:"ignoreSslServerVerify,omitempty" tf:"ignore_ssl_server_verify,omitempty"`
+
+	// Maximum number of connections allowed per backend server.
+	// Maximum number of connections allowed per backend server
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+
+	// Number of retries when a backend server connection failed.
+	// Number of retries when a backend server connection failed
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// The name of the load-balancer backend.
+	// The name of the backend
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+	// Modify what occurs when a backend server is marked down
+	OnMarkedDownAction *string `json:"onMarkedDownAction,omitempty" tf:"on_marked_down_action,omitempty"`
+
+	// (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+	// Type of PROXY protocol to enable
+	ProxyProtocol *string `json:"proxyProtocol,omitempty" tf:"proxy_protocol,omitempty"`
+
+	// Whether to use another backend server on each attempt.
+	// Whether to use another backend server on each attempt
+	RedispatchAttemptCount *float64 `json:"redispatchAttemptCount,omitempty" tf:"redispatch_attempt_count,omitempty"`
+
+	// (Default: false) Enables SSL between load balancer and backend servers.
+	// Enables SSL between load balancer and backend servers
+	SSLBridging *bool `json:"sslBridging,omitempty" tf:"ssl_bridging,omitempty"`
+
+	// DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.
+	// Enables PROXY protocol version 2
+	SendProxyV2 *bool `json:"sendProxyV2,omitempty" tf:"send_proxy_v2,omitempty"`
+
+	// List of backend server IP addresses. Addresses can be either IPv4 or IPv6.
+	// Backend server IP addresses list (IPv4 or IPv6)
+	ServerIps []*string `json:"serverIps,omitempty" tf:"server_ips,omitempty"`
+
+	// (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+	// The type of sticky sessions
+	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
+
+	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+	// Cookie name for for sticky sessions
+	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
+
+	// Maximum initial server connection establishment time. (e.g.: 1s)
+	// Maximum initial server connection establishment time
+	TimeoutConnect *string `json:"timeoutConnect,omitempty" tf:"timeout_connect,omitempty"`
+
+	// Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+	// Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
+	TimeoutQueue *string `json:"timeoutQueue,omitempty" tf:"timeout_queue,omitempty"`
+
+	// Maximum server connection inactivity time. (e.g.: 1s)
+	// Maximum server connection inactivity time
+	TimeoutServer *string `json:"timeoutServer,omitempty" tf:"timeout_server,omitempty"`
+
+	// Maximum tunnel inactivity time. (e.g.: 1s)
+	// Maximum tunnel inactivity time
+	TimeoutTunnel *string `json:"timeoutTunnel,omitempty" tf:"timeout_tunnel,omitempty"`
+}
+
 type BackendObservation struct {
+
+	// Scaleway S3 bucket website to be served in case all backend servers are down.
+	// ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
+	// e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+	// Scaleway S3 bucket website to be served in case all backend servers are down
+	//
+	// **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
+	// E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+	FailoverHost *string `json:"failoverHost,omitempty" tf:"failover_host,omitempty"`
+
+	// User sessions will be forwarded to this port of backend servers.
+	// User sessions will be forwarded to this port of backend servers
+	ForwardPort *float64 `json:"forwardPort,omitempty" tf:"forward_port,omitempty"`
+
+	// (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
+	// Load balancing algorithm
+	ForwardPortAlgorithm *string `json:"forwardPortAlgorithm,omitempty" tf:"forward_port_algorithm,omitempty"`
+
+	// Backend protocol. Possible values are: tcp or http.
+	// Backend protocol
+	ForwardProtocol *string `json:"forwardProtocol,omitempty" tf:"forward_protocol,omitempty"`
+
+	// (Default: 60s) Interval between two HC requests.
+	// Interval between two HC requests
+	HealthCheckDelay *string `json:"healthCheckDelay,omitempty" tf:"health_check_delay,omitempty"`
+
+	// This block enable HTTP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckHTTP []HealthCheckHTTPObservation `json:"healthCheckHttp,omitempty" tf:"health_check_http,omitempty"`
+
+	// This block enable HTTPS health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckHTTPS []HealthCheckHTTPSObservation `json:"healthCheckHttps,omitempty" tf:"health_check_https,omitempty"`
+
+	// (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+	// Number of allowed failed HC requests before the backend server is marked down
+	HealthCheckMaxRetries *float64 `json:"healthCheckMaxRetries,omitempty" tf:"health_check_max_retries,omitempty"`
+
+	// (Default: forward_port) Port the HC requests will be send to.
+	// Port the HC requests will be send to. Default to `forward_port`
+	HealthCheckPort *float64 `json:"healthCheckPort,omitempty" tf:"health_check_port,omitempty"`
+
+	// (Default: false) Defines whether proxy protocol should be activated for the health check.
+	// Defines whether proxy protocol should be activated for the health check
+	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
+
+	// This block enable TCP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	HealthCheckTCP []HealthCheckTCPParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
+
+	// (Default: 30s) Timeout before we consider a HC request failed.
+	// Timeout before we consider a HC request failed
+	HealthCheckTimeout *string `json:"healthCheckTimeout,omitempty" tf:"health_check_timeout,omitempty"`
+
+	// (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+	// Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
+	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
 
 	// The ID of the loadbalancer backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
+	// Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
+	IgnoreSSLServerVerify *bool `json:"ignoreSslServerVerify,omitempty" tf:"ignore_ssl_server_verify,omitempty"`
+
+	// The load-balancer ID this backend is attached to.
+	// ~> Important: Updates to lb_id will recreate the backend.
+	// The load-balancer ID
+	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
+
+	// Maximum number of connections allowed per backend server.
+	// Maximum number of connections allowed per backend server
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+
+	// Number of retries when a backend server connection failed.
+	// Number of retries when a backend server connection failed
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// The name of the load-balancer backend.
+	// The name of the backend
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+	// Modify what occurs when a backend server is marked down
+	OnMarkedDownAction *string `json:"onMarkedDownAction,omitempty" tf:"on_marked_down_action,omitempty"`
+
+	// (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+	// Type of PROXY protocol to enable
+	ProxyProtocol *string `json:"proxyProtocol,omitempty" tf:"proxy_protocol,omitempty"`
+
+	// Whether to use another backend server on each attempt.
+	// Whether to use another backend server on each attempt
+	RedispatchAttemptCount *float64 `json:"redispatchAttemptCount,omitempty" tf:"redispatch_attempt_count,omitempty"`
+
+	// (Default: false) Enables SSL between load balancer and backend servers.
+	// Enables SSL between load balancer and backend servers
+	SSLBridging *bool `json:"sslBridging,omitempty" tf:"ssl_bridging,omitempty"`
+
+	// DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.
+	// Enables PROXY protocol version 2
+	SendProxyV2 *bool `json:"sendProxyV2,omitempty" tf:"send_proxy_v2,omitempty"`
+
+	// List of backend server IP addresses. Addresses can be either IPv4 or IPv6.
+	// Backend server IP addresses list (IPv4 or IPv6)
+	ServerIps []*string `json:"serverIps,omitempty" tf:"server_ips,omitempty"`
+
+	// (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+	// The type of sticky sessions
+	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
+
+	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+	// Cookie name for for sticky sessions
+	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
+
+	// Maximum initial server connection establishment time. (e.g.: 1s)
+	// Maximum initial server connection establishment time
+	TimeoutConnect *string `json:"timeoutConnect,omitempty" tf:"timeout_connect,omitempty"`
+
+	// Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+	// Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
+	TimeoutQueue *string `json:"timeoutQueue,omitempty" tf:"timeout_queue,omitempty"`
+
+	// Maximum server connection inactivity time. (e.g.: 1s)
+	// Maximum server connection inactivity time
+	TimeoutServer *string `json:"timeoutServer,omitempty" tf:"timeout_server,omitempty"`
+
+	// Maximum tunnel inactivity time. (e.g.: 1s)
+	// Maximum tunnel inactivity time
+	TimeoutTunnel *string `json:"timeoutTunnel,omitempty" tf:"timeout_tunnel,omitempty"`
 }
 
 type BackendParameters struct {
@@ -33,8 +277,8 @@ type BackendParameters struct {
 
 	// User sessions will be forwarded to this port of backend servers.
 	// User sessions will be forwarded to this port of backend servers
-	// +kubebuilder:validation:Required
-	ForwardPort *float64 `json:"forwardPort" tf:"forward_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	ForwardPort *float64 `json:"forwardPort,omitempty" tf:"forward_port,omitempty"`
 
 	// (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
 	// Load balancing algorithm
@@ -43,8 +287,8 @@ type BackendParameters struct {
 
 	// Backend protocol. Possible values are: tcp or http.
 	// Backend protocol
-	// +kubebuilder:validation:Required
-	ForwardProtocol *string `json:"forwardProtocol" tf:"forward_protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	ForwardProtocol *string `json:"forwardProtocol,omitempty" tf:"forward_protocol,omitempty"`
 
 	// (Default: 60s) Interval between two HC requests.
 	// Interval between two HC requests
@@ -69,6 +313,11 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckPort *float64 `json:"healthCheckPort,omitempty" tf:"health_check_port,omitempty"`
 
+	// (Default: false) Defines whether proxy protocol should be activated for the health check.
+	// Defines whether proxy protocol should be activated for the health check
+	// +kubebuilder:validation:Optional
+	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
+
 	// This block enable TCP health check. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
 	// +kubebuilder:validation:Optional
 	HealthCheckTCP []HealthCheckTCPParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
@@ -77,6 +326,11 @@ type BackendParameters struct {
 	// Timeout before we consider a HC request failed
 	// +kubebuilder:validation:Optional
 	HealthCheckTimeout *string `json:"healthCheckTimeout,omitempty" tf:"health_check_timeout,omitempty"`
+
+	// (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+	// Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
+	// +kubebuilder:validation:Optional
+	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
 
 	// (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
 	// Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
@@ -98,6 +352,16 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
+	// Maximum number of connections allowed per backend server.
+	// Maximum number of connections allowed per backend server
+	// +kubebuilder:validation:Optional
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+
+	// Number of retries when a backend server connection failed.
+	// Number of retries when a backend server connection failed
+	// +kubebuilder:validation:Optional
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
 	// The name of the load-balancer backend.
 	// The name of the backend
 	// +kubebuilder:validation:Optional
@@ -112,6 +376,11 @@ type BackendParameters struct {
 	// Type of PROXY protocol to enable
 	// +kubebuilder:validation:Optional
 	ProxyProtocol *string `json:"proxyProtocol,omitempty" tf:"proxy_protocol,omitempty"`
+
+	// Whether to use another backend server on each attempt.
+	// Whether to use another backend server on each attempt
+	// +kubebuilder:validation:Optional
+	RedispatchAttemptCount *float64 `json:"redispatchAttemptCount,omitempty" tf:"redispatch_attempt_count,omitempty"`
 
 	// (Default: false) Enables SSL between load balancer and backend servers.
 	// Enables SSL between load balancer and backend servers
@@ -128,12 +397,12 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIps []*string `json:"serverIps,omitempty" tf:"server_ips,omitempty"`
 
-	// (Default: none) Load balancing algorithm. Possible values are: none, cookie and table.
-	// Load balancing algorithm
+	// (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+	// The type of sticky sessions
 	// +kubebuilder:validation:Optional
 	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
 
-	// Cookie name for for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
 	// Cookie name for for sticky sessions
 	// +kubebuilder:validation:Optional
 	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
@@ -142,6 +411,11 @@ type BackendParameters struct {
 	// Maximum initial server connection establishment time
 	// +kubebuilder:validation:Optional
 	TimeoutConnect *string `json:"timeoutConnect,omitempty" tf:"timeout_connect,omitempty"`
+
+	// Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+	// Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
+	// +kubebuilder:validation:Optional
+	TimeoutQueue *string `json:"timeoutQueue,omitempty" tf:"timeout_queue,omitempty"`
 
 	// Maximum server connection inactivity time. (e.g.: 1s)
 	// Maximum server connection inactivity time
@@ -154,7 +428,42 @@ type BackendParameters struct {
 	TimeoutTunnel *string `json:"timeoutTunnel,omitempty" tf:"timeout_tunnel,omitempty"`
 }
 
+type HealthCheckHTTPInitParameters struct {
+
+	// (Default: 200) The expected HTTP status code.
+	// The expected HTTP status code
+	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
+
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// (Default: GET) The HTTP method to use for HC requests.
+	// The HTTP method to use for HC requests
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The HTTP endpoint URL to call for HC requests.
+	// The HTTP endpoint URL to call for HC requests
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type HealthCheckHTTPObservation struct {
+
+	// (Default: 200) The expected HTTP status code.
+	// The expected HTTP status code
+	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
+
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// (Default: GET) The HTTP method to use for HC requests.
+	// The HTTP method to use for HC requests
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The HTTP endpoint URL to call for HC requests.
+	// The HTTP endpoint URL to call for HC requests
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type HealthCheckHTTPParameters struct {
@@ -176,11 +485,54 @@ type HealthCheckHTTPParameters struct {
 
 	// The HTTP endpoint URL to call for HC requests.
 	// The HTTP endpoint URL to call for HC requests
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
+type HealthCheckHTTPSInitParameters struct {
+
+	// (Default: 200) The expected HTTP status code.
+	// The expected HTTP status code
+	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
+
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// (Default: GET) The HTTP method to use for HC requests.
+	// The HTTP method to use for HC requests
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The SNI to use for HC requests over SSL.
+	// The SNI to use for HC requests over SSL
+	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
+
+	// The HTTP endpoint URL to call for HC requests.
+	// The HTTPS endpoint URL to call for HC requests
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type HealthCheckHTTPSObservation struct {
+
+	// (Default: 200) The expected HTTP status code.
+	// The expected HTTP status code
+	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
+
+	// The HTTP host header to use for HC requests.
+	// The HTTP host header to use for HC requests
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// (Default: GET) The HTTP method to use for HC requests.
+	// The HTTP method to use for HC requests
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The SNI to use for HC requests over SSL.
+	// The SNI to use for HC requests over SSL
+	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
+
+	// The HTTP endpoint URL to call for HC requests.
+	// The HTTPS endpoint URL to call for HC requests
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type HealthCheckHTTPSParameters struct {
@@ -207,8 +559,11 @@ type HealthCheckHTTPSParameters struct {
 
 	// The HTTP endpoint URL to call for HC requests.
 	// The HTTPS endpoint URL to call for HC requests
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
+}
+
+type HealthCheckTCPInitParameters struct {
 }
 
 type HealthCheckTCPObservation struct {
@@ -221,6 +576,18 @@ type HealthCheckTCPParameters struct {
 type BackendSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackendParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BackendInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackendStatus defines the observed state of Backend.
@@ -231,7 +598,7 @@ type BackendStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Backend is the Schema for the Backends API. Manages Scaleway Load-Balancer Backends.
+// Backend is the Schema for the Backends API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -241,8 +608,10 @@ type BackendStatus struct {
 type Backend struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackendSpec   `json:"spec"`
-	Status            BackendStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.forwardPort) || (has(self.initProvider) && has(self.initProvider.forwardPort))",message="spec.forProvider.forwardPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.forwardProtocol) || (has(self.initProvider) && has(self.initProvider.forwardProtocol))",message="spec.forProvider.forwardProtocol is a required parameter"
+	Spec   BackendSpec   `json:"spec"`
+	Status BackendStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

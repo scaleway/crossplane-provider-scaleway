@@ -29,6 +29,3 @@ spec:
     acl: public-read
     name: MyBucket
     objectLockEnabled: true
-
----
-

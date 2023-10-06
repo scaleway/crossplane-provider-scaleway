@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: servers.instance.scaleway.upbound.io
 spec:
   group: instance.scaleway.upbound.io
@@ -35,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Server is the Schema for the Servers API. Manages Scaleway Compute
-          Instance servers.
+        description: Server is the Schema for the Servers API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -55,9 +53,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -98,8 +100,8 @@ spec:
                       or the label of the base image used by the server
                     type: string
                   ipId:
-                    description: =  The ID of the reserved IP that is attached to
-                      the server. The ID of the reserved IP for the server
+                    description: The ID of the reserved IP that is attached to the
+                      server. The ID of the reserved IP for the server
                     type: string
                   ipIdRef:
                     description: Reference to a IP to populate ipId.
@@ -174,6 +176,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipIds:
+                    description: List of ID of reserved IPs that are attached to the
+                      server. Cannot be used with ip_id.
+                    items:
+                      type: string
+                    type: array
                   name:
                     description: The name of the server. The name of the server
                     type: string
@@ -269,8 +277,6 @@ spec:
                             the server should be created. The zone you want to attach
                             the resource to
                           type: string
-                      required:
-                      - pnId
                       type: object
                     type: array
                   projectId:
@@ -278,6 +284,17 @@ spec:
                       the server is associated with. The project_id you want to attach
                       the resource to
                     type: string
+                  publicIps:
+                    description: The list of public IPs of the server. List of public
+                      IPs attached to your instance
+                    items:
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: (Defaults to false) If true, the server will be replaced
+                      if type is changed. Otherwise, the server will migrate. Delete
+                      and re-create server if type change
+                    type: boolean
                   rootVolume:
                     description: Root volume attached to the server on creation. Root
                       volume attached to the server on creation
@@ -311,6 +328,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  routedIpEnabled:
+                    description: (Defaults to false) If true, the server will support
+                      routed ips only. Changing it to true will migrate the server
+                      and its IP to routed type. If server supports routed IPs, default
+                      to true if public_ips is used
+                    type: boolean
                   securityGroupId:
                     description: The security group the server is attached to. The
                       security group the server is attached to
@@ -402,7 +425,9 @@ spec:
                   type:
                     description: The commercial type of the server. You find all the
                       available types on the pricing page. Updates to this field will
-                      recreate a new resource. The instance type of the server
+                      migrate the server, local storage constraint must be respected.
+                      More info. Use replace_on_type_change to trigger replacement
+                      instead of migration. The instance type of the server
                     type: string
                   userData:
                     additionalProperties:
@@ -416,51 +441,197 @@ spec:
                       server should be created. The zone you want to attach the resource
                       to
                     type: string
-                required:
-                - type
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  additionalVolumeIds:
+                    description: The additional volumes attached to the server. Updates
+                      to this field will trigger a stop/start of the server. The additional
+                      volumes attached to the server
+                    items:
+                      type: string
+                    type: array
+                  bootType:
+                    description: 'The boot Type of the server. Possible values are:
+                      local, bootscript or rescue. The boot type of the server'
+                    type: string
+                  bootscriptId:
+                    description: The ID of the bootscript to use  (set boot_type to
+                      bootscript). ID of the target bootscript (set boot_type to bootscript)
+                    type: string
+                  cloudInit:
+                    description: The cloud init script associated with this server
+                    type: string
+                  enableDynamicIp:
+                    description: (Defaults to false) If true a dynamic IP will be
+                      attached to the server. Enable dynamic IP on the server
+                    type: boolean
+                  enableIpv6:
+                    description: (Defaults to false) Determines if IPv6 is enabled
+                      for the server. Determines if IPv6 is enabled for the server
+                    type: boolean
+                  image:
+                    description: The UUID or the label of the base image used by the
+                      server. You can use this endpoint to find either the right label
+                      or the right local image ID for a given type. Optional when
+                      creating an instance with an existing root volume. The UUID
+                      or the label of the base image used by the server
+                    type: string
+                  ipIds:
+                    description: List of ID of reserved IPs that are attached to the
+                      server. Cannot be used with ip_id.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the server. The name of the server
+                    type: string
+                  privateNetwork:
+                    description: The private network associated with the server. Use
+                      the pn_id key to attach a private_network on your instance.
+                      List of private network to connect with your instance
+                    items:
+                      properties:
+                        pnId:
+                          description: The private network ID where to connect. The
+                            Private Network ID
+                          type: string
+                        zone:
+                          description: (Defaults to provider zone) The zone in which
+                            the server should be created. The zone you want to attach
+                            the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the server is associated with. The project_id you want to attach
+                      the resource to
+                    type: string
+                  publicIps:
+                    description: The list of public IPs of the server. List of public
+                      IPs attached to your instance
+                    items:
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: (Defaults to false) If true, the server will be replaced
+                      if type is changed. Otherwise, the server will migrate. Delete
+                      and re-create server if type change
+                    type: boolean
+                  rootVolume:
+                    description: Root volume attached to the server on creation. Root
+                      volume attached to the server on creation
+                    items:
+                      properties:
+                        boot:
+                          description: Set the volume where the boot the server
+                          type: boolean
+                        deleteOnTermination:
+                          description: (Defaults to true) Forces deletion of the root
+                            volume on instance termination. Force deletion of the
+                            root volume on instance termination
+                          type: boolean
+                        sizeInGb:
+                          description: Size of the root volume in gigabytes. To find
+                            the right size use this endpoint and check the volumes_constraint.{min|max}_size
+                            (in bytes) for your commercial_type. Updates to this field
+                            will recreate a new resource. Size of the root volume
+                            in gigabytes
+                          type: number
+                        volumeId:
+                          description: The volume ID of the root volume of the server,
+                            allows you to create server with an existing volume. If
+                            empty, will be computed to a created volume ID. Volume
+                            ID of the root volume
+                          type: string
+                        volumeType:
+                          description: Volume type of root volume, can be b_ssd or
+                            l_ssd, default value depends on server type Volume type
+                            of the root volume
+                          type: string
+                      type: object
+                    type: array
+                  routedIpEnabled:
+                    description: (Defaults to false) If true, the server will support
+                      routed ips only. Changing it to true will migrate the server
+                      and its IP to routed type. If server supports routed IPs, default
+                      to true if public_ips is used
+                    type: boolean
+                  state:
+                    description: '(Defaults to started) The state of the server. Possible
+                      values are: started, stopped or standby. The state of the server
+                      should be: started, stopped, standby'
+                    type: string
+                  tags:
+                    description: The tags associated with the server. The tags associated
+                      with the server
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: The commercial type of the server. You find all the
+                      available types on the pricing page. Updates to this field will
+                      migrate the server, local storage constraint must be respected.
+                      More info. Use replace_on_type_change to trigger replacement
+                      instead of migration. The instance type of the server
+                    type: string
+                  userData:
+                    additionalProperties:
+                      type: string
+                    description: 'The user data associated with the server. Use the
+                      cloud-init key to use cloud-init on your instance. You can define
+                      values using: The user data associated with the server'
+                    type: object
+                  zone:
+                    description: (Defaults to provider zone) The zone in which the
+                      server should be created. The zone you want to attach the resource
+                      to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
                 description: ProviderConfigReference specifies how the provider that
                   will be used to create, observe, update, and delete this managed
                   resource should be configured.
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -590,14 +761,62 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.type is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: ServerStatus defines the observed state of Server.
             properties:
               atProvider:
                 properties:
+                  additionalVolumeIds:
+                    description: The additional volumes attached to the server. Updates
+                      to this field will trigger a stop/start of the server. The additional
+                      volumes attached to the server
+                    items:
+                      type: string
+                    type: array
+                  bootType:
+                    description: 'The boot Type of the server. Possible values are:
+                      local, bootscript or rescue. The boot type of the server'
+                    type: string
+                  bootscriptId:
+                    description: The ID of the bootscript to use  (set boot_type to
+                      bootscript). ID of the target bootscript (set boot_type to bootscript)
+                    type: string
+                  cloudInit:
+                    description: The cloud init script associated with this server
+                    type: string
+                  enableDynamicIp:
+                    description: (Defaults to false) If true a dynamic IP will be
+                      attached to the server. Enable dynamic IP on the server
+                    type: boolean
+                  enableIpv6:
+                    description: (Defaults to false) Determines if IPv6 is enabled
+                      for the server. Determines if IPv6 is enabled for the server
+                    type: boolean
                   id:
                     description: The ID of the server.
                     type: string
+                  image:
+                    description: The UUID or the label of the base image used by the
+                      server. You can use this endpoint to find either the right label
+                      or the right local image ID for a given type. Optional when
+                      creating an instance with an existing root volume. The UUID
+                      or the label of the base image used by the server
+                    type: string
+                  ipId:
+                    description: The ID of the reserved IP that is attached to the
+                      server. The ID of the reserved IP for the server
+                    type: string
+                  ipIds:
+                    description: List of ID of reserved IPs that are attached to the
+                      server. Cannot be used with ip_id.
+                    items:
+                      type: string
+                    type: array
                   ipv6Address:
                     description: The default ipv6 address routed to the server. (
                       Only set when enable_ipv6 is set to true ) The default public
@@ -612,9 +831,16 @@ spec:
                       server. ( Only set when enable_ipv6 is set to true ) The IPv6
                       prefix length routed to the server.
                     type: number
+                  name:
+                    description: The name of the server. The name of the server
+                    type: string
                   organizationId:
                     description: The organization ID the server is associated with.
                       The organization_id you want to attach the resource to
+                    type: string
+                  placementGroupId:
+                    description: The placement group the server is attached to. The
+                      placement group the server is attached to
                     type: string
                   placementGroupPolicyRespected:
                     description: True when the placement group policy is respected.
@@ -634,25 +860,123 @@ spec:
                           description: The private NIC MAC address. MAC address of
                             the NIC
                           type: string
+                        pnId:
+                          description: The private network ID where to connect. The
+                            Private Network ID
+                          type: string
                         status:
                           description: The private NIC state. The private NIC state
                           type: string
+                        zone:
+                          description: (Defaults to provider zone) The zone in which
+                            the server should be created. The zone you want to attach
+                            the resource to
+                          type: string
                       type: object
                     type: array
-                  publicIp:
-                    description: The public IPv4 address of the server. The public
-                      IPv4 address of the server
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the server is associated with. The project_id you want to attach
+                      the resource to
                     type: string
+                  publicIp:
+                    description: The public IP address of the server. The public IPv4
+                      address of the server
+                    type: string
+                  publicIps:
+                    description: The list of public IPs of the server. List of public
+                      IPs attached to your instance
+                    items:
+                      properties:
+                        address:
+                          description: The address of the IP IP Address
+                          type: string
+                        id:
+                          description: The ID of the server. ID of the IP
+                          type: string
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: (Defaults to false) If true, the server will be replaced
+                      if type is changed. Otherwise, the server will migrate. Delete
+                      and re-create server if type change
+                    type: boolean
                   rootVolume:
                     description: Root volume attached to the server on creation. Root
                       volume attached to the server on creation
                     items:
                       properties:
+                        boot:
+                          description: Set the volume where the boot the server
+                          type: boolean
+                        deleteOnTermination:
+                          description: (Defaults to true) Forces deletion of the root
+                            volume on instance termination. Force deletion of the
+                            root volume on instance termination
+                          type: boolean
                         name:
                           description: The name of the server. Name of the root volume
                           type: string
+                        sizeInGb:
+                          description: Size of the root volume in gigabytes. To find
+                            the right size use this endpoint and check the volumes_constraint.{min|max}_size
+                            (in bytes) for your commercial_type. Updates to this field
+                            will recreate a new resource. Size of the root volume
+                            in gigabytes
+                          type: number
+                        volumeId:
+                          description: The volume ID of the root volume of the server,
+                            allows you to create server with an existing volume. If
+                            empty, will be computed to a created volume ID. Volume
+                            ID of the root volume
+                          type: string
+                        volumeType:
+                          description: Volume type of root volume, can be b_ssd or
+                            l_ssd, default value depends on server type Volume type
+                            of the root volume
+                          type: string
                       type: object
                     type: array
+                  routedIpEnabled:
+                    description: (Defaults to false) If true, the server will support
+                      routed ips only. Changing it to true will migrate the server
+                      and its IP to routed type. If server supports routed IPs, default
+                      to true if public_ips is used
+                    type: boolean
+                  securityGroupId:
+                    description: The security group the server is attached to. The
+                      security group the server is attached to
+                    type: string
+                  state:
+                    description: '(Defaults to started) The state of the server. Possible
+                      values are: started, stopped or standby. The state of the server
+                      should be: started, stopped, standby'
+                    type: string
+                  tags:
+                    description: The tags associated with the server. The tags associated
+                      with the server
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: The commercial type of the server. You find all the
+                      available types on the pricing page. Updates to this field will
+                      migrate the server, local storage constraint must be respected.
+                      More info. Use replace_on_type_change to trigger replacement
+                      instead of migration. The instance type of the server
+                    type: string
+                  userData:
+                    additionalProperties:
+                      type: string
+                    description: 'The user data associated with the server. Use the
+                      cloud-init key to use cloud-init on your instance. You can define
+                      values using: The user data associated with the server'
+                    type: object
+                  zone:
+                    description: (Defaults to provider zone) The zone in which the
+                      server should be created. The zone you want to attach the resource
+                      to
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -26,6 +26,3 @@ spec:
   forProvider:
     acl: public-read
     name: MyBucket
-
----
-

@@ -13,18 +13,57 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivilegeInitParameters struct {
+
+	// Name of the database (e.g. my-db-name).
+	// Database name
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
+	// Privilege
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+
+	// (Defaults to provider region) The region in which the resource exists.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Name of the user (e.g. my-db-user).
+	// User name
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
+}
+
 type PrivilegeObservation struct {
+
+	// Name of the database (e.g. my-db-name).
+	// Database name
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The ID of the user privileges, which is of the form {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// UUID of the rdb instance.
+	// Instance on which the database is created
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
+	// Privilege
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+
+	// (Defaults to provider region) The region in which the resource exists.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Name of the user (e.g. my-db-user).
+	// User name
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type PrivilegeParameters struct {
 
 	// Name of the database (e.g. my-db-name).
 	// Database name
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// UUID of the rdb instance.
 	// Instance on which the database is created
@@ -42,8 +81,8 @@ type PrivilegeParameters struct {
 
 	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
 	// Privilege
-	// +kubebuilder:validation:Required
-	Permission *string `json:"permission" tf:"permission,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// (Defaults to provider region) The region in which the resource exists.
 	// The region you want to attach the resource to
@@ -52,14 +91,26 @@ type PrivilegeParameters struct {
 
 	// Name of the user (e.g. my-db-user).
 	// User name
-	// +kubebuilder:validation:Required
-	UserName *string `json:"userName" tf:"user_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 // PrivilegeSpec defines the desired state of Privilege
 type PrivilegeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivilegeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PrivilegeInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivilegeStatus defines the observed state of Privilege.
@@ -70,7 +121,7 @@ type PrivilegeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Privilege is the Schema for the Privileges API. Manages Scaleway RDB Database Privilege.
+// Privilege is the Schema for the Privileges API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -80,8 +131,11 @@ type PrivilegeStatus struct {
 type Privilege struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivilegeSpec   `json:"spec"`
-	Status            PrivilegeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.databaseName) || (has(self.initProvider) && has(self.initProvider.databaseName))",message="spec.forProvider.databaseName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permission) || (has(self.initProvider) && has(self.initProvider.permission))",message="spec.forProvider.permission is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userName) || (has(self.initProvider) && has(self.initProvider.userName))",message="spec.forProvider.userName is a required parameter"
+	Spec   PrivilegeSpec   `json:"spec"`
+	Status PrivilegeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

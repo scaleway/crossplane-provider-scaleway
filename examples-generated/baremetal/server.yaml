@@ -13,6 +13,3 @@ spec:
     sshKeyIdsRefs:
     - name: scaleway_account_ssh_key
     zone: fr-par-2
-
----
-

@@ -10,6 +10,3 @@ spec:
   forProvider:
     name: test-m1
     type: M1-M
-
----
-

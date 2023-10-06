@@ -13,37 +13,104 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IpInitParameters struct {
+
+	// A description of the flexible IP.
+	// Description of the flexible IP
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Defines whether the flexible IP has an IPv6 address.
+	// Defines whether the flexible IP has an IPv6 address
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
+
+	// The project of the Flexible IP.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The reverse domain associated with this flexible IP.
+	// The reverse DNS for this flexible IP
+	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
+
+	// The ID of the associated server.
+	// The baremetal server associated with this flexible IP
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// A list of tags to apply to the flexible IP.
+	// The tags associated with the flexible IP
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The zone of the Flexible IP.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type IpObservation struct {
 
+	// The date and time of the creation of the Flexible IP (Format ISO 8601).
 	// The date and time of the creation of the Flexible IP (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// A description of the flexible IP.
+	// Description of the flexible IP
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the Flexible IP
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IPv4 address of the Flexible IP
-	// The IPv4 address of the flexible IP
+	// The IP address of the Flexible IP.
+	// The IP address of the flexible IP
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The MAC address of the server associated with this flexible IP
-	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+	// Defines whether the flexible IP has an IPv6 address.
+	// Defines whether the flexible IP has an IPv6 address
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// The organization of the Flexible IP
+	// The organization of the Flexible IP.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The project of the Flexible IP.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// The reverse domain associated with this flexible IP.
+	// The reverse DNS for this flexible IP
+	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
+
+	// The ID of the associated server.
+	// The baremetal server associated with this flexible IP
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// The status of the flexible IP.
+	// The status of the flexible IP
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// A list of tags to apply to the flexible IP.
+	// The tags associated with the flexible IP
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The date and time of the last update of the Flexible IP (Format ISO 8601).
 	// The date and time of the last update of the Flexible IP (Format ISO 8601)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// The zone of the Flexible IP.
+	// The zone you want to attach the resource to
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type IpParameters struct {
 
-	// :  A description of the flexible IP.
+	// A description of the flexible IP.
 	// Description of the flexible IP
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The project of the Flexible IP
+	// Defines whether the flexible IP has an IPv6 address.
+	// Defines whether the flexible IP has an IPv6 address
+	// +kubebuilder:validation:Optional
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
+
+	// The project of the Flexible IP.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -53,17 +120,17 @@ type IpParameters struct {
 	// +kubebuilder:validation:Optional
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
-	// The ID of the associated server
+	// The ID of the associated server.
 	// The baremetal server associated with this flexible IP
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// :  A list of tags to apply to the flexible IP.
+	// A list of tags to apply to the flexible IP.
 	// The tags associated with the flexible IP
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The zone of the Flexible IP
+	// The zone of the Flexible IP.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -73,6 +140,18 @@ type IpParameters struct {
 type IpSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IpParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IpInitParameters `json:"initProvider,omitempty"`
 }
 
 // IpStatus defines the observed state of Ip.
@@ -83,7 +162,7 @@ type IpStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Ip is the Schema for the Ips API. Manages Scaleway Flexible IPs.
+// Ip is the Schema for the Ips API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

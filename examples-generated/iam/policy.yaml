@@ -32,6 +32,3 @@ metadata:
 spec:
   forProvider:
     name: my app
-
----
-
