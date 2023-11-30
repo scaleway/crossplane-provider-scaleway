@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: credentials.mnq.scaleway.upbound.io
+  name: vpcs.vpc.scaleway.upbound.io
 spec:
-  group: mnq.scaleway.upbound.io
+  group: vpc.scaleway.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - scaleway
-    kind: Credential
-    listKind: CredentialList
-    plural: credentials
-    singular: credential
+    kind: VPC
+    listKind: VPCList
+    plural: vpcs
+    singular: vpc
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Credential is the Schema for the Credentials API.
+        description: VPC is the Schema for the VPCs API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: CredentialSpec defines the desired state of Credential
+            description: VPCSpec defines the desired state of VPC
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,123 +67,23 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The credential name.. The name of the Credential
+                    description: The name of the VPC. If not provided it will be randomly
+                      generated. The name of the VPC
                     type: string
-                  namespaceId:
-                    description: The namespace containing the Credential. The ID of
-                      the Namespace associated to
-                    type: string
-                  namespaceIdRef:
-                    description: Reference to a MNQNamespace to populate namespaceId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  namespaceIdSelector:
-                    description: Selector for a MNQNamespace to populate namespaceId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  natsCredentials:
-                    description: Credentials file used to connect to the NATS service.
-                      credential for NATS protocol
-                    items:
-                      type: object
-                    type: array
-                  region:
-                    description: (Defaults to provider region). The region in which
-                      the namespace should be created. The region you want to attach
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the VPC is associated with. The project_id you want to attach
                       the resource to
                     type: string
-                  sqsSnsCredentials:
-                    description: Credential used to connect to the SQS/SNS service.
-                      The credential used to connect to the SQS/SNS service
+                  region:
+                    description: (Defaults to provider region) The region of the VPC.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: The tags associated with the VPC. The tags associated
+                      with the VPC
                     items:
-                      properties:
-                        permissions:
-                          description: List of permissions associated to this Credential.
-                            Only one of permissions may be set. The permission associated
-                            to this credential.
-                          items:
-                            properties:
-                              canManage:
-                                description: . Defines if user can manage the associated
-                                  resource(s). Allow manage the associated resource
-                                type: boolean
-                              canPublish:
-                                description: . Defines if user can publish messages
-                                  to the service. Allow publish messages to the service
-                                type: boolean
-                              canReceive:
-                                description: . Defines if user can receive messages
-                                  from the service. Allow receive messages from the
-                                  service
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
+                      type: string
                     type: array
                 type: object
               initProvider:
@@ -200,46 +100,23 @@ spec:
                   them, like an autoscaler.
                 properties:
                   name:
-                    description: The credential name.. The name of the Credential
+                    description: The name of the VPC. If not provided it will be randomly
+                      generated. The name of the VPC
                     type: string
-                  natsCredentials:
-                    description: Credentials file used to connect to the NATS service.
-                      credential for NATS protocol
-                    items:
-                      type: object
-                    type: array
-                  region:
-                    description: (Defaults to provider region). The region in which
-                      the namespace should be created. The region you want to attach
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the VPC is associated with. The project_id you want to attach
                       the resource to
                     type: string
-                  sqsSnsCredentials:
-                    description: Credential used to connect to the SQS/SNS service.
-                      The credential used to connect to the SQS/SNS service
+                  region:
+                    description: (Defaults to provider region) The region of the VPC.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: The tags associated with the VPC. The tags associated
+                      with the VPC
                     items:
-                      properties:
-                        permissions:
-                          description: List of permissions associated to this Credential.
-                            Only one of permissions may be set. The permission associated
-                            to this credential.
-                          items:
-                            properties:
-                              canManage:
-                                description: . Defines if user can manage the associated
-                                  resource(s). Allow manage the associated resource
-                                type: boolean
-                              canPublish:
-                                description: . Defines if user can publish messages
-                                  to the service. Allow publish messages to the service
-                                type: boolean
-                              canReceive:
-                                description: . Defines if user can receive messages
-                                  from the service. Allow receive messages from the
-                                  service
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
+                      type: string
                     type: array
                 type: object
               managementPolicies:
@@ -404,66 +281,49 @@ spec:
             - forProvider
             type: object
           status:
-            description: CredentialStatus defines the observed state of Credential.
+            description: VPCStatus defines the observed state of VPC.
             properties:
               atProvider:
                 properties:
+                  createdAt:
+                    description: Date and time of VPC's creation (RFC 3339 format).
+                      The date and time of the creation of the private network
+                    type: string
                   id:
-                    description: The credential ID.
+                    description: The ID of the VPC.
                     type: string
+                  isDefault:
+                    description: Defines whether the VPC is the default one for its
+                      Project. Defines whether the VPC is the default one for its
+                      Project
+                    type: boolean
                   name:
-                    description: The credential name.. The name of the Credential
+                    description: The name of the VPC. If not provided it will be randomly
+                      generated. The name of the VPC
                     type: string
-                  namespaceId:
-                    description: The namespace containing the Credential. The ID of
-                      the Namespace associated to
+                  organizationId:
+                    description: The organization ID the VPC is associated with. The
+                      organization_id you want to attach the resource to
                     type: string
-                  natsCredentials:
-                    description: Credentials file used to connect to the NATS service.
-                      credential for NATS protocol
-                    items:
-                      type: object
-                    type: array
-                  protocol:
-                    description: The protocol associated to the Credential. Possible
-                      values are nats and sqs_sns. The Namespace protocol
-                    type: string
-                  region:
-                    description: (Defaults to provider region). The region in which
-                      the namespace should be created. The region you want to attach
+                  projectId:
+                    description: (Defaults to provider project_id) The ID of the project
+                      the VPC is associated with. The project_id you want to attach
                       the resource to
                     type: string
-                  sqsSnsCredentials:
-                    description: Credential used to connect to the SQS/SNS service.
-                      The credential used to connect to the SQS/SNS service
+                  region:
+                    description: (Defaults to provider region) The region of the VPC.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: The tags associated with the VPC. The tags associated
+                      with the VPC
                     items:
-                      properties:
-                        accessKey:
-                          description: The ID of the key. The key of the credential
-                          type: string
-                        permissions:
-                          description: List of permissions associated to this Credential.
-                            Only one of permissions may be set. The permission associated
-                            to this credential.
-                          items:
-                            properties:
-                              canManage:
-                                description: . Defines if user can manage the associated
-                                  resource(s). Allow manage the associated resource
-                                type: boolean
-                              canPublish:
-                                description: . Defines if user can publish messages
-                                  to the service. Allow publish messages to the service
-                                type: boolean
-                              canReceive:
-                                description: . Defines if user can receive messages
-                                  from the service. Allow receive messages from the
-                                  service
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
+                      type: string
                     type: array
+                  updatedAt:
+                    description: Date and time of VPC's last update (RFC 3339 format).
+                      The date and time of the last update of the private network
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

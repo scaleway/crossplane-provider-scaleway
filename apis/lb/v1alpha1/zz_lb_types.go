@@ -15,6 +15,10 @@ import (
 
 type LBInitParameters struct {
 
+	// Defines whether to automatically assign a flexible public IP to the load-balancer.
+	// Defines whether to automatically assign a flexible public IP to the load balancer
+	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
+
 	// The description of the load-balancer.
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -43,7 +47,7 @@ type LBInitParameters struct {
 	// Array of tags to associate with the load-balancer
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the load-balancer. Please check the migration section to upgrade the type
+	// The type of the load-balancer. Please check the migration section to upgrade the type.
 	// The type of load-balancer you want to create
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -53,6 +57,10 @@ type LBInitParameters struct {
 }
 
 type LBObservation struct {
+
+	// Defines whether to automatically assign a flexible public IP to the load-balancer.
+	// Defines whether to automatically assign a flexible public IP to the load balancer
+	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
 
 	// The description of the load-balancer.
 	// The description of the lb
@@ -100,7 +108,7 @@ type LBObservation struct {
 	// Array of tags to associate with the load-balancer
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the load-balancer. Please check the migration section to upgrade the type
+	// The type of the load-balancer. Please check the migration section to upgrade the type.
 	// The type of load-balancer you want to create
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -110,6 +118,11 @@ type LBObservation struct {
 }
 
 type LBParameters struct {
+
+	// Defines whether to automatically assign a flexible public IP to the load-balancer.
+	// Defines whether to automatically assign a flexible public IP to the load balancer
+	// +kubebuilder:validation:Optional
+	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
 
 	// The description of the load-balancer.
 	// The description of the lb
@@ -160,7 +173,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the load-balancer. Please check the migration section to upgrade the type
+	// The type of the load-balancer. Please check the migration section to upgrade the type.
 	// The type of load-balancer you want to create
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

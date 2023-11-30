@@ -166,6 +166,12 @@ spec:
                       the organization the group is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the group. The tags associated
+                      with the application
+                    items:
+                      type: string
+                    type: array
                   userIds:
                     description: The list of IDs of the users attached to the group.
                       List of IDs of the users attached to the group
@@ -204,6 +210,12 @@ spec:
                       the organization the group is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the group. The tags associated
+                      with the application
+                    items:
+                      type: string
+                    type: array
                   userIds:
                     description: The list of IDs of the users attached to the group.
                       List of IDs of the users attached to the group
@@ -406,6 +418,12 @@ spec:
                       the organization the group is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the group. The tags associated
+                      with the application
+                    items:
+                      type: string
+                    type: array
                   updatedAt:
                     description: The date and time of the last update of the group
                     type: string

@@ -45,7 +45,7 @@ type HTTPServiceInitParameters struct {
 	// Text to search
 	MustContain *string `json:"mustContain,omitempty" tf:"must_contain,omitempty"`
 
-	// Strategy to return an IP from the IPs list. Can be random or hashed
+	// Strategy to return an IP from the IPs list. Can be random, hashed or all
 	// Strategy to return an IP from the IPs list
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
@@ -68,7 +68,7 @@ type HTTPServiceObservation struct {
 	// Text to search
 	MustContain *string `json:"mustContain,omitempty" tf:"must_contain,omitempty"`
 
-	// Strategy to return an IP from the IPs list. Can be random or hashed
+	// Strategy to return an IP from the IPs list. Can be random, hashed or all
 	// Strategy to return an IP from the IPs list
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
@@ -93,7 +93,7 @@ type HTTPServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	MustContain *string `json:"mustContain" tf:"must_contain,omitempty"`
 
-	// Strategy to return an IP from the IPs list. Can be random or hashed
+	// Strategy to return an IP from the IPs list. Can be random, hashed or all
 	// Strategy to return an IP from the IPs list
 	// +kubebuilder:validation:Optional
 	Strategy *string `json:"strategy" tf:"strategy,omitempty"`

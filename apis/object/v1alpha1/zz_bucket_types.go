@@ -60,6 +60,10 @@ type BucketObservation struct {
 	// ACL of the bucket: either 'public-read' or 'private'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The endpoint URL of the bucket
+	// API URL of the bucket
+	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
+
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 

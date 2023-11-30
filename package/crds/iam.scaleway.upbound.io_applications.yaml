@@ -71,7 +71,7 @@ spec:
                       of the iam application
                     type: string
                   name:
-                    description: .The name of the iam application. The name of the
+                    description: The name of the iam application. The name of the
                       iam application
                     type: string
                   organizationId:
@@ -79,6 +79,12 @@ spec:
                       the organization the application is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the application. The tags
+                      associated with the application
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -98,7 +104,7 @@ spec:
                       of the iam application
                     type: string
                   name:
-                    description: .The name of the iam application. The name of the
+                    description: The name of the iam application. The name of the
                       iam application
                     type: string
                   organizationId:
@@ -106,6 +112,12 @@ spec:
                       the organization the application is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the application. The tags
+                      associated with the application
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -289,7 +301,7 @@ spec:
                     description: The ID of the application.
                     type: string
                   name:
-                    description: .The name of the iam application. The name of the
+                    description: The name of the iam application. The name of the
                       iam application
                     type: string
                   organizationId:
@@ -297,6 +309,12 @@ spec:
                       the organization the application is associated with. ID of organization
                       the resource is associated to.
                     type: string
+                  tags:
+                    description: The tags associated with the application. The tags
+                      associated with the application
+                    items:
+                      type: string
+                    type: array
                   updatedAt:
                     description: The date and time of the last update of the application.
                       The date and time of the last update of the application

@@ -15,111 +15,137 @@ import (
 
 type ScopesInitParameters struct {
 
-	// (Defaults to false) Query logs
+	// (Defaults to false) Query logs.
 	// Query logs
 	QueryLogs *bool `json:"queryLogs,omitempty" tf:"query_logs,omitempty"`
 
-	// (Defaults to false) Query metrics
+	// (Defaults to false) Query metrics.
 	// Query metrics
 	QueryMetrics *bool `json:"queryMetrics,omitempty" tf:"query_metrics,omitempty"`
 
-	// (Defaults to false) Setup alerts
+	// (Defaults to false) Query traces.
+	// Query traces
+	QueryTraces *bool `json:"queryTraces,omitempty" tf:"query_traces,omitempty"`
+
+	// (Defaults to false) Setup alerts.
 	// Setup alerts
 	SetupAlerts *bool `json:"setupAlerts,omitempty" tf:"setup_alerts,omitempty"`
 
-	// (Defaults to false) Setup logs rules
+	// (Defaults to false) Setup logs rules.
 	// Setup logs rules
 	SetupLogsRules *bool `json:"setupLogsRules,omitempty" tf:"setup_logs_rules,omitempty"`
 
-	// (Defaults to false) Setup metrics rules
+	// (Defaults to false) Setup metrics rules.
 	// Setup metrics rules
 	SetupMetricsRules *bool `json:"setupMetricsRules,omitempty" tf:"setup_metrics_rules,omitempty"`
 
-	// (Defaults to true) Write logs
+	// (Defaults to true) Write logs.
 	// Write logs
 	WriteLogs *bool `json:"writeLogs,omitempty" tf:"write_logs,omitempty"`
 
-	// (Defaults to true) Write metrics
+	// (Defaults to true) Write metrics.
 	// Write metrics
 	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
+
+	// (Defaults to false) Write traces.
+	// Write traces
+	WriteTraces *bool `json:"writeTraces,omitempty" tf:"write_traces,omitempty"`
 }
 
 type ScopesObservation struct {
 
-	// (Defaults to false) Query logs
+	// (Defaults to false) Query logs.
 	// Query logs
 	QueryLogs *bool `json:"queryLogs,omitempty" tf:"query_logs,omitempty"`
 
-	// (Defaults to false) Query metrics
+	// (Defaults to false) Query metrics.
 	// Query metrics
 	QueryMetrics *bool `json:"queryMetrics,omitempty" tf:"query_metrics,omitempty"`
 
-	// (Defaults to false) Setup alerts
+	// (Defaults to false) Query traces.
+	// Query traces
+	QueryTraces *bool `json:"queryTraces,omitempty" tf:"query_traces,omitempty"`
+
+	// (Defaults to false) Setup alerts.
 	// Setup alerts
 	SetupAlerts *bool `json:"setupAlerts,omitempty" tf:"setup_alerts,omitempty"`
 
-	// (Defaults to false) Setup logs rules
+	// (Defaults to false) Setup logs rules.
 	// Setup logs rules
 	SetupLogsRules *bool `json:"setupLogsRules,omitempty" tf:"setup_logs_rules,omitempty"`
 
-	// (Defaults to false) Setup metrics rules
+	// (Defaults to false) Setup metrics rules.
 	// Setup metrics rules
 	SetupMetricsRules *bool `json:"setupMetricsRules,omitempty" tf:"setup_metrics_rules,omitempty"`
 
-	// (Defaults to true) Write logs
+	// (Defaults to true) Write logs.
 	// Write logs
 	WriteLogs *bool `json:"writeLogs,omitempty" tf:"write_logs,omitempty"`
 
-	// (Defaults to true) Write metrics
+	// (Defaults to true) Write metrics.
 	// Write metrics
 	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
+
+	// (Defaults to false) Write traces.
+	// Write traces
+	WriteTraces *bool `json:"writeTraces,omitempty" tf:"write_traces,omitempty"`
 }
 
 type ScopesParameters struct {
 
-	// (Defaults to false) Query logs
+	// (Defaults to false) Query logs.
 	// Query logs
 	// +kubebuilder:validation:Optional
 	QueryLogs *bool `json:"queryLogs,omitempty" tf:"query_logs,omitempty"`
 
-	// (Defaults to false) Query metrics
+	// (Defaults to false) Query metrics.
 	// Query metrics
 	// +kubebuilder:validation:Optional
 	QueryMetrics *bool `json:"queryMetrics,omitempty" tf:"query_metrics,omitempty"`
 
-	// (Defaults to false) Setup alerts
+	// (Defaults to false) Query traces.
+	// Query traces
+	// +kubebuilder:validation:Optional
+	QueryTraces *bool `json:"queryTraces,omitempty" tf:"query_traces,omitempty"`
+
+	// (Defaults to false) Setup alerts.
 	// Setup alerts
 	// +kubebuilder:validation:Optional
 	SetupAlerts *bool `json:"setupAlerts,omitempty" tf:"setup_alerts,omitempty"`
 
-	// (Defaults to false) Setup logs rules
+	// (Defaults to false) Setup logs rules.
 	// Setup logs rules
 	// +kubebuilder:validation:Optional
 	SetupLogsRules *bool `json:"setupLogsRules,omitempty" tf:"setup_logs_rules,omitempty"`
 
-	// (Defaults to false) Setup metrics rules
+	// (Defaults to false) Setup metrics rules.
 	// Setup metrics rules
 	// +kubebuilder:validation:Optional
 	SetupMetricsRules *bool `json:"setupMetricsRules,omitempty" tf:"setup_metrics_rules,omitempty"`
 
-	// (Defaults to true) Write logs
+	// (Defaults to true) Write logs.
 	// Write logs
 	// +kubebuilder:validation:Optional
 	WriteLogs *bool `json:"writeLogs,omitempty" tf:"write_logs,omitempty"`
 
-	// (Defaults to true) Write metrics
+	// (Defaults to true) Write metrics.
 	// Write metrics
 	// +kubebuilder:validation:Optional
 	WriteMetrics *bool `json:"writeMetrics,omitempty" tf:"write_metrics,omitempty"`
+
+	// (Defaults to false) Write traces.
+	// Write traces
+	// +kubebuilder:validation:Optional
+	WriteTraces *bool `json:"writeTraces,omitempty" tf:"write_traces,omitempty"`
 }
 
 type TokenInitParameters struct {
 
-	// The name of the token
+	// The name of the token.
 	// The name of the token
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Allowed scopes
+	// Allowed scopes.
 	// Endpoints
 	Scopes []ScopesInitParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
@@ -127,7 +153,7 @@ type TokenInitParameters struct {
 type TokenObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the token
+	// The name of the token.
 	// The name of the token
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -135,14 +161,14 @@ type TokenObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Allowed scopes
+	// Allowed scopes.
 	// Endpoints
 	Scopes []ScopesObservation `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
 type TokenParameters struct {
 
-	// The name of the token
+	// The name of the token.
 	// The name of the token
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -161,7 +187,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// Allowed scopes
+	// Allowed scopes.
 	// Endpoints
 	// +kubebuilder:validation:Optional
 	Scopes []ScopesParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`

@@ -3608,11 +3608,6 @@ func (in *VolumeInitParameters) DeepCopyInto(out *VolumeInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.FromVolumeID != nil {
-		in, out := &in.FromVolumeID, &out.FromVolumeID
-		*out = new(string)
-		**out = **in
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -3701,11 +3696,6 @@ func (in *VolumeObservation) DeepCopyInto(out *VolumeObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.FromVolumeID != nil {
-		in, out := &in.FromVolumeID, &out.FromVolumeID
-		*out = new(string)
-		**out = **in
-	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -3774,11 +3764,6 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	*out = *in
 	if in.FromSnapshotID != nil {
 		in, out := &in.FromSnapshotID, &out.FromSnapshotID
-		*out = new(string)
-		**out = **in
-	}
-	if in.FromVolumeID != nil {
-		in, out := &in.FromVolumeID, &out.FromVolumeID
 		*out = new(string)
 		**out = **in
 	}

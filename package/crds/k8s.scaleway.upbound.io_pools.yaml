@@ -188,6 +188,13 @@ spec:
                       attached to. ~> Important: Updates to this field will recreate
                       a new resource. ID of the placement group'
                     type: string
+                  publicIpDisabled:
+                    description: '(Defaults to false) Defines if the public IP should
+                      be removed from Nodes. To use this feature, your Cluster must
+                      have an attached Private Network set up with a Public Gateway.
+                      ~> Important: Updates to this field will recreate a new resource.
+                      Defines if the public IP should be removed from the nodes.'
+                    type: boolean
                   region:
                     description: (Defaults to provider region) The region in which
                       the pool should be created. The region you want to attach the
@@ -229,8 +236,8 @@ spec:
                       type: object
                     type: array
                   waitForPoolReady:
-                    description: (Default to false) Whether to wait for the pool to
-                      be ready. Whether to wait for the pool to be ready
+                    description: (Defaults to false) Whether to wait for the pool
+                      to be ready. Whether to wait for the pool to be ready
                     type: boolean
                   zone:
                     description: '(Defaults to provider zone) The zone in which the
@@ -296,6 +303,13 @@ spec:
                       attached to. ~> Important: Updates to this field will recreate
                       a new resource. ID of the placement group'
                     type: string
+                  publicIpDisabled:
+                    description: '(Defaults to false) Defines if the public IP should
+                      be removed from Nodes. To use this feature, your Cluster must
+                      have an attached Private Network set up with a Public Gateway.
+                      ~> Important: Updates to this field will recreate a new resource.
+                      Defines if the public IP should be removed from the nodes.'
+                    type: boolean
                   region:
                     description: (Defaults to provider region) The region in which
                       the pool should be created. The region you want to attach the
@@ -337,8 +351,8 @@ spec:
                       type: object
                     type: array
                   waitForPoolReady:
-                    description: (Default to false) Whether to wait for the pool to
-                      be ready. Whether to wait for the pool to be ready
+                    description: (Defaults to false) Whether to wait for the pool
+                      to be ready. Whether to wait for the pool to be ready
                     type: boolean
                   zone:
                     description: '(Defaults to provider zone) The zone in which the
@@ -604,6 +618,13 @@ spec:
                       attached to. ~> Important: Updates to this field will recreate
                       a new resource. ID of the placement group'
                     type: string
+                  publicIpDisabled:
+                    description: '(Defaults to false) Defines if the public IP should
+                      be removed from Nodes. To use this feature, your Cluster must
+                      have an attached Private Network set up with a Public Gateway.
+                      ~> Important: Updates to this field will recreate a new resource.
+                      Defines if the public IP should be removed from the nodes.'
+                    type: boolean
                   region:
                     description: (Defaults to provider region) The region in which
                       the pool should be created. The region you want to attach the
@@ -656,8 +677,8 @@ spec:
                       the pool
                     type: string
                   waitForPoolReady:
-                    description: (Default to false) Whether to wait for the pool to
-                      be ready. Whether to wait for the pool to be ready
+                    description: (Defaults to false) Whether to wait for the pool
+                      to be ready. Whether to wait for the pool to be ready
                     type: boolean
                   zone:
                     description: '(Defaults to provider zone) The zone in which the

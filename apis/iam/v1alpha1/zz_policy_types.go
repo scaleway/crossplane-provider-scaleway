@@ -19,7 +19,7 @@ type PolicyInitParameters struct {
 	// The description of the iam policy
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// .The name of the iam policy.
+	// The name of the iam policy.
 	// The name of the iam policy
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -34,6 +34,10 @@ type PolicyInitParameters struct {
 	// List of rules in the policy.
 	// Rules of the policy to create
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The tags associated with the iam policy.
+	// The tags associated with the policy
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the User the policy will be linked to
 	// User id
@@ -65,7 +69,7 @@ type PolicyObservation struct {
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// .The name of the iam policy.
+	// The name of the iam policy.
 	// The name of the iam policy
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -80,6 +84,10 @@ type PolicyObservation struct {
 	// List of rules in the policy.
 	// Rules of the policy to create
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The tags associated with the iam policy.
+	// The tags associated with the policy
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The date and time of the last update of the policy.
 	// The date and time of the last update of the policy
@@ -125,7 +133,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
-	// .The name of the iam policy.
+	// The name of the iam policy.
 	// The name of the iam policy
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -144,6 +152,11 @@ type PolicyParameters struct {
 	// Rules of the policy to create
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The tags associated with the iam policy.
+	// The tags associated with the policy
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the User the policy will be linked to
 	// User id

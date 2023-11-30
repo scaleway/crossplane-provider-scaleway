@@ -15,13 +15,9 @@ import (
 
 type VolumeInitParameters struct {
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot. Only one of size_in_gb and from_snapshot_id should be specified.
 	// Create a volume based on a image
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
-
-	// If set, the new volume will be copied from this volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
-	// Create a copy of an existing volume
-	FromVolumeID *string `json:"fromVolumeId,omitempty" tf:"from_volume_id,omitempty"`
 
 	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume
@@ -31,7 +27,7 @@ type VolumeInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.
 	// The size of the volume in gigabyte
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -50,13 +46,9 @@ type VolumeInitParameters struct {
 
 type VolumeObservation struct {
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot. Only one of size_in_gb and from_snapshot_id should be specified.
 	// Create a volume based on a image
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
-
-	// If set, the new volume will be copied from this volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
-	// Create a copy of an existing volume
-	FromVolumeID *string `json:"fromVolumeId,omitempty" tf:"from_volume_id,omitempty"`
 
 	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -77,7 +69,7 @@ type VolumeObservation struct {
 	// The server associated with this volume
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.
 	// The size of the volume in gigabyte
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -96,15 +88,10 @@ type VolumeObservation struct {
 
 type VolumeParameters struct {
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot. Only one of size_in_gb and from_snapshot_id should be specified.
 	// Create a volume based on a image
 	// +kubebuilder:validation:Optional
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
-
-	// If set, the new volume will be copied from this volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
-	// Create a copy of an existing volume
-	// +kubebuilder:validation:Optional
-	FromVolumeID *string `json:"fromVolumeId,omitempty" tf:"from_volume_id,omitempty"`
 
 	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume
@@ -116,7 +103,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, from_volume_id and from_snapshot_id should be specified.
+	// The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.
 	// The size of the volume in gigabyte
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`

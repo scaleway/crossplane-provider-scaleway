@@ -1,9 +1,9 @@
 apiVersion: vpc.scaleway.upbound.io/v1alpha1
-kind: PrivateNetwork
+kind: VPC
 metadata:
-  name: vpc-private-network
+  name: vpc
 spec:
   forProvider:
-    name: crossplane-private-network
+    name: crossplane-vpc
   providerConfigRef:
     name: default

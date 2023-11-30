@@ -66,6 +66,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  assignFlexibleIp:
+                    description: Defines whether to automatically assign a flexible
+                      public IP to the load-balancer. Defines whether to automatically
+                      assign a flexible public IP to the load balancer
+                    type: boolean
                   description:
                     description: The description of the load-balancer. The description
                       of the lb
@@ -197,7 +202,7 @@ spec:
                     type: array
                   type:
                     description: The type of the load-balancer. Please check the migration
-                      section to upgrade the type The type of load-balancer you want
+                      section to upgrade the type. The type of load-balancer you want
                       to create
                     type: string
                   zone:
@@ -218,6 +223,11 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
+                  assignFlexibleIp:
+                    description: Defines whether to automatically assign a flexible
+                      public IP to the load-balancer. Defines whether to automatically
+                      assign a flexible public IP to the load balancer
+                    type: boolean
                   description:
                     description: The description of the load-balancer. The description
                       of the lb
@@ -272,7 +282,7 @@ spec:
                     type: array
                   type:
                     description: The type of the load-balancer. Please check the migration
-                      section to upgrade the type The type of load-balancer you want
+                      section to upgrade the type. The type of load-balancer you want
                       to create
                     type: string
                   zone:
@@ -451,6 +461,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  assignFlexibleIp:
+                    description: Defines whether to automatically assign a flexible
+                      public IP to the load-balancer. Defines whether to automatically
+                      assign a flexible public IP to the load balancer
+                    type: boolean
                   description:
                     description: The description of the load-balancer. The description
                       of the lb
@@ -530,7 +545,7 @@ spec:
                     type: array
                   type:
                     description: The type of the load-balancer. Please check the migration
-                      section to upgrade the type The type of load-balancer you want
+                      section to upgrade the type. The type of load-balancer you want
                       to create
                     type: string
                   zone:

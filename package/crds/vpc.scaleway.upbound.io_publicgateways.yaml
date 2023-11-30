@@ -446,6 +446,10 @@ spec:
                       the public gateway is associated with. The project_id you want
                       to attach the resource to
                     type: string
+                  status:
+                    description: The status of the public gateway. The status of the
+                      public gateway
+                    type: string
                   tags:
                     description: The tags associated with the public gateway. The
                       tags associated with public gateway

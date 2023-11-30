@@ -9,8 +9,35 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this Cluster.
+func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.PrivateNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.PrivateNetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.PrivateNetworkList{},
+			Managed: &v1alpha1.PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateNetworkID")
+	}
+	mg.Spec.ForProvider.PrivateNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateNetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Pool.
 func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {

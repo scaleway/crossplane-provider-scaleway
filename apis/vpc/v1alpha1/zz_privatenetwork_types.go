@@ -135,10 +135,6 @@ type PrivateNetworkInitParameters struct {
 	// The tags associated with private network
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The VPC in which to create the private network.
-	// The VPC in which to create the private network
-	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
-
 	// (Deprecated) please use region instead - (Defaults to provider zone) The zone in which the private network should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -237,8 +233,17 @@ type PrivateNetworkParameters struct {
 
 	// The VPC in which to create the private network.
 	// The VPC in which to create the private network
+	// +crossplane:generate:reference:type=VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// (Deprecated) please use region instead - (Defaults to provider zone) The zone in which the private network should be created.
 	// The zone you want to attach the resource to

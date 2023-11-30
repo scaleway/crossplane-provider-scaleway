@@ -68,13 +68,8 @@ spec:
                 properties:
                   fromSnapshotId:
                     description: If set, the new volume will be created from this
-                      snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a volume based on a image
-                    type: string
-                  fromVolumeId:
-                    description: If set, the new volume will be copied from this volume.
-                      Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a copy of an existing volume
+                      snapshot. Only one of size_in_gb and from_snapshot_id should
+                      be specified. Create a volume based on a image
                     type: string
                   name:
                     description: The name of the volume. If not provided it will be
@@ -86,8 +81,8 @@ spec:
                       the resource to
                     type: string
                   sizeInGb:
-                    description: The size of the volume. Only one of size_in_gb, from_volume_id
-                      and from_snapshot_id should be specified. The size of the volume
+                    description: The size of the volume. Only one of size_in_gb and
+                      from_snapshot_id should be specified. The size of the volume
                       in gigabyte
                     type: number
                   tags:
@@ -122,13 +117,8 @@ spec:
                 properties:
                   fromSnapshotId:
                     description: If set, the new volume will be created from this
-                      snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a volume based on a image
-                    type: string
-                  fromVolumeId:
-                    description: If set, the new volume will be copied from this volume.
-                      Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a copy of an existing volume
+                      snapshot. Only one of size_in_gb and from_snapshot_id should
+                      be specified. Create a volume based on a image
                     type: string
                   name:
                     description: The name of the volume. If not provided it will be
@@ -140,8 +130,8 @@ spec:
                       the resource to
                     type: string
                   sizeInGb:
-                    description: The size of the volume. Only one of size_in_gb, from_volume_id
-                      and from_snapshot_id should be specified. The size of the volume
+                    description: The size of the volume. Only one of size_in_gb and
+                      from_snapshot_id should be specified. The size of the volume
                       in gigabyte
                     type: number
                   tags:
@@ -334,13 +324,8 @@ spec:
                 properties:
                   fromSnapshotId:
                     description: If set, the new volume will be created from this
-                      snapshot. Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a volume based on a image
-                    type: string
-                  fromVolumeId:
-                    description: If set, the new volume will be copied from this volume.
-                      Only one of size_in_gb, from_volume_id and from_snapshot_id
-                      should be specified. Create a copy of an existing volume
+                      snapshot. Only one of size_in_gb and from_snapshot_id should
+                      be specified. Create a volume based on a image
                     type: string
                   id:
                     description: The ID of the volume.
@@ -363,8 +348,8 @@ spec:
                       with this volume
                     type: string
                   sizeInGb:
-                    description: The size of the volume. Only one of size_in_gb, from_volume_id
-                      and from_snapshot_id should be specified. The size of the volume
+                    description: The size of the volume. Only one of size_in_gb and
+                      from_snapshot_id should be specified. The size of the volume
                       in gigabyte
                     type: number
                   tags:

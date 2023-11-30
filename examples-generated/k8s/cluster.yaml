@@ -11,6 +11,9 @@ spec:
     cni: cilium
     deleteAdditionalResources: false
     name: jack
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hedy
     version: 1.24.3
 
 ---
@@ -31,3 +34,16 @@ spec:
     name: john
     nodeType: DEV1-M
     size: 1
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: hedy
+  name: hedy
+spec:
+  forProvider: {}

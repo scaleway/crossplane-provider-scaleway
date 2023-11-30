@@ -8,8 +8,43 @@ metadata:
   name: policy
 spec:
   forProvider:
-    bucket: some-unique-name
-    policy: some-unique-name
+    bucket: ${scaleway_object_bucket.bucket.id}
+    policy: |-
+      ${jsonencode(
+          {
+            Version = "2023-04-17",
+            Id      = "MyBucketPolicy",
+            Statement = [
+              {
+                Sid    = "Delegate access",
+                Effect = "Allow",
+                Principal = {
+                  SCW = "application_id:${scaleway_iam_application.main.id}"
+                },
+                Action = "s3:ListBucket",
+                Resource = [
+                  "${scaleway_object_bucket.bucket.name}",
+                  "${scaleway_object_bucket.bucket.name}/*"
+                ]
+              }
+            ]
+          }
+        )}
+
+---
+
+apiVersion: iam.scaleway.upbound.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: a description
+    name: My application
 
 ---
 

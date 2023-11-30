@@ -488,6 +488,11 @@ func (in *BucketObservation) DeepCopyInto(out *BucketObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIEndpoint != nil {
+		in, out := &in.APIEndpoint, &out.APIEndpoint
+		*out = new(string)
+		**out = **in
+	}
 	if in.CorsRule != nil {
 		in, out := &in.CorsRule, &out.CorsRule
 		*out = make([]CorsRuleObservation, len(*in))

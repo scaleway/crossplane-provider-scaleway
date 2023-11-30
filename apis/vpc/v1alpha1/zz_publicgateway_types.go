@@ -89,6 +89,10 @@ type PublicGatewayObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The status of the public gateway.
+	// The status of the public gateway
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
 	// The tags associated with the public gateway.
 	// The tags associated with public gateway
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -22,7 +22,7 @@ type CockpitInitParameters struct {
 
 type CockpitObservation struct {
 
-	// Endpoints
+	// Endpoints.
 	// Endpoints
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
@@ -32,7 +32,7 @@ type CockpitObservation struct {
 	// Name or ID of the plan
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
-	// The ID of the current plan
+	// The ID of the current plan.
 	// The plan ID of the cockpit
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
@@ -68,17 +68,20 @@ type EndpointsInitParameters struct {
 
 type EndpointsObservation struct {
 
-	// The alertmanager URL
+	// The alertmanager URL.
 	AlertmanagerURL *string `json:"alertmanagerUrl,omitempty" tf:"alertmanager_url,omitempty"`
 
-	// The grafana URL
+	// The grafana URL.
 	GrafanaURL *string `json:"grafanaUrl,omitempty" tf:"grafana_url,omitempty"`
 
-	// The logs URL
+	// The logs URL.
 	LogsURL *string `json:"logsUrl,omitempty" tf:"logs_url,omitempty"`
 
-	// The metrics URL
+	// The metrics URL.
 	MetricsURL *string `json:"metricsUrl,omitempty" tf:"metrics_url,omitempty"`
+
+	// The traces URL.
+	TracesURL *string `json:"tracesUrl,omitempty" tf:"traces_url,omitempty"`
 }
 
 type EndpointsParameters struct {
