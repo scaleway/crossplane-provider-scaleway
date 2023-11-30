@@ -1,13 +1,34 @@
 #file: noinspection YAMLSchemaValidation
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-private-network
+  providerConfigRef:
+    name: default
+---
 apiVersion: k8s.scaleway.upbound.io/v1alpha1
 kind: Cluster
 metadata:
-  name: k8s-cluster
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     name: crossplane-k8s-cluster
     version: 1.24.7
     cni: cilium
     deleteAdditionalResources: true
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
   providerConfigRef:
     name: default
