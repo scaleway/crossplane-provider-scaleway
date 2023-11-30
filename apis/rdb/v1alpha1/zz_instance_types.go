@@ -31,6 +31,10 @@ type InstanceInitParameters struct {
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
 
+	// Disable the default public endpoint
+	// Whether the instance should have a public endpoint if it has a Private Network attached
+	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
+
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -107,6 +111,10 @@ type InstanceObservation struct {
 	// Disable automated backup for the database instance.
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
+
+	// Disable the default public endpoint
+	// Whether the instance should have a public endpoint if it has a Private Network attached
+	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
 
 	// (Deprecated) The IP of the Database Instance.
 	// Endpoint IP of the database instance
@@ -207,6 +215,11 @@ type InstanceParameters struct {
 	// Disable automated backup for the database instance
 	// +kubebuilder:validation:Optional
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
+
+	// Disable the default public endpoint
+	// Whether the instance should have a public endpoint if it has a Private Network attached
+	// +kubebuilder:validation:Optional
+	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
 
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id

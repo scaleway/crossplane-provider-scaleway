@@ -83,6 +83,10 @@ spec:
                     description: Disable automated backup for the database instance.
                       Disable automated backup for the database instance
                     type: boolean
+                  disablePublicEndpoint:
+                    description: Disable the default public endpoint Whether the instance
+                      should have a public endpoint if it has a Private Network attached
+                    type: boolean
                   engine:
                     description: Database Instance's engine version (e.g. PostgreSQL-11).
                       Database's engine version id
@@ -214,6 +218,10 @@ spec:
                   disableBackup:
                     description: Disable automated backup for the database instance.
                       Disable automated backup for the database instance
+                    type: boolean
+                  disablePublicEndpoint:
+                    description: Disable the default public endpoint Whether the instance
+                      should have a public endpoint if it has a Private Network attached
                     type: boolean
                   engine:
                     description: Database Instance's engine version (e.g. PostgreSQL-11).
@@ -494,6 +502,10 @@ spec:
                   disableBackup:
                     description: Disable automated backup for the database instance.
                       Disable automated backup for the database instance
+                    type: boolean
+                  disablePublicEndpoint:
+                    description: Disable the default public endpoint Whether the instance
+                      should have a public endpoint if it has a Private Network attached
                     type: boolean
                   endpointIp:
                     description: (Deprecated) The IP of the Database Instance. Endpoint

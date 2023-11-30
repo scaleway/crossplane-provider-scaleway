@@ -205,8 +205,8 @@ spec:
                           type: string
                         strategy:
                           description: Strategy to return an IP from the IPs list.
-                            Can be random or hashed Strategy to return an IP from
-                            the IPs list
+                            Can be random, hashed or all Strategy to return an IP
+                            from the IPs list
                           type: string
                         url:
                           description: URL to match the must_contain text to validate
@@ -353,8 +353,8 @@ spec:
                           type: string
                         strategy:
                           description: Strategy to return an IP from the IPs list.
-                            Can be random or hashed Strategy to return an IP from
-                            the IPs list
+                            Can be random, hashed or all Strategy to return an IP
+                            from the IPs list
                           type: string
                         url:
                           description: URL to match the must_contain text to validate
@@ -668,8 +668,8 @@ spec:
                           type: string
                         strategy:
                           description: Strategy to return an IP from the IPs list.
-                            Can be random or hashed Strategy to return an IP from
-                            the IPs list
+                            Can be random, hashed or all Strategy to return an IP
+                            from the IPs list
                           type: string
                         url:
                           description: URL to match the must_contain text to validate

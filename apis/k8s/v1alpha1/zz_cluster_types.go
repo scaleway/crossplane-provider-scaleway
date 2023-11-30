@@ -248,10 +248,6 @@ type ClusterInitParameters struct {
 	// The OpenID Connect configuration of the cluster
 	OpenIDConnectConfig []OpenIDConnectConfigInitParameters `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
 
-	// The ID of the private network of the cluster.
-	// The ID of the cluster's private network
-	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
-
 	// (Defaults to provider project_id) The ID of the project the cluster is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -431,8 +427,17 @@ type ClusterParameters struct {
 
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
+	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
+	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
+	// +kubebuilder:validation:Optional
+	PrivateNetworkIDRef *v1.Reference `json:"privateNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateNetwork in vpc to populate privateNetworkId.
+	// +kubebuilder:validation:Optional
+	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
 	// (Defaults to provider project_id) The ID of the project the cluster is associated with.
 	// The project_id you want to attach the resource to

@@ -550,6 +550,9 @@ spec:
                     description: '(Deprecated) The canned ACL you want to apply to
                       the bucket. ACL of the bucket: either ''public-read'' or ''private''.'
                     type: string
+                  apiEndpoint:
+                    description: The endpoint URL of the bucket API URL of the bucket
+                    type: string
                   corsRule:
                     description: A rule of Cross-Origin Resource Sharing (documented
                       below).

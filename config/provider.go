@@ -21,7 +21,6 @@ import (
 	"github.com/scaleway/provider-scaleway/config/iot"
 	"github.com/scaleway/provider-scaleway/config/k8s"
 	"github.com/scaleway/provider-scaleway/config/lb"
-	"github.com/scaleway/provider-scaleway/config/mnq"
 	"github.com/scaleway/provider-scaleway/config/object"
 	"github.com/scaleway/provider-scaleway/config/rdb"
 	"github.com/scaleway/provider-scaleway/config/redis"
@@ -66,7 +65,6 @@ func GetProvider() *ujconfig.Provider {
 		iot.Configure,
 		k8s.Configure,
 		lb.Configure,
-		mnq.Configure,
 		object.Configure,
 		rdb.Configure,
 		redis.Configure,

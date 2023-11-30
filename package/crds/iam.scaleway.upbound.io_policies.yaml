@@ -225,8 +225,7 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: .The name of the iam policy. The name of the iam
-                      policy
+                    description: The name of the iam policy. The name of the iam policy
                     type: string
                   noPrincipal:
                     description: If the policy doesn't apply to a principal. Deactivate
@@ -263,6 +262,12 @@ spec:
                           type: array
                       type: object
                     type: array
+                  tags:
+                    description: The tags associated with the iam policy. The tags
+                      associated with the policy
+                    items:
+                      type: string
+                    type: array
                   userId:
                     description: ID of the User the policy will be linked to User
                       id
@@ -286,8 +291,7 @@ spec:
                       of the iam policy
                     type: string
                   name:
-                    description: .The name of the iam policy. The name of the iam
-                      policy
+                    description: The name of the iam policy. The name of the iam policy
                     type: string
                   noPrincipal:
                     description: If the policy doesn't apply to a principal. Deactivate
@@ -323,6 +327,12 @@ spec:
                             type: string
                           type: array
                       type: object
+                    type: array
+                  tags:
+                    description: The tags associated with the iam policy. The tags
+                      associated with the policy
+                    items:
+                      type: string
                     type: array
                   userId:
                     description: ID of the User the policy will be linked to User
@@ -524,8 +534,7 @@ spec:
                     description: The ID of the policy.
                     type: string
                   name:
-                    description: .The name of the iam policy. The name of the iam
-                      policy
+                    description: The name of the iam policy. The name of the iam policy
                     type: string
                   noPrincipal:
                     description: If the policy doesn't apply to a principal. Deactivate
@@ -561,6 +570,12 @@ spec:
                             type: string
                           type: array
                       type: object
+                    type: array
+                  tags:
+                    description: The tags associated with the iam policy. The tags
+                      associated with the policy
+                    items:
+                      type: string
                     type: array
                   updatedAt:
                     description: The date and time of the last update of the policy.

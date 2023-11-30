@@ -334,20 +334,23 @@ spec:
               atProvider:
                 properties:
                   endpoints:
-                    description: Endpoints Endpoints
+                    description: Endpoints. Endpoints
                     items:
                       properties:
                         alertmanagerUrl:
-                          description: The alertmanager URL
+                          description: The alertmanager URL.
                           type: string
                         grafanaUrl:
-                          description: The grafana URL
+                          description: The grafana URL.
                           type: string
                         logsUrl:
-                          description: The logs URL
+                          description: The logs URL.
                           type: string
                         metricsUrl:
-                          description: The metrics URL
+                          description: The metrics URL.
+                          type: string
+                        tracesUrl:
+                          description: The traces URL.
                           type: string
                       type: object
                     type: array
@@ -358,7 +361,7 @@ spec:
                       plan
                     type: string
                   planId:
-                    description: The ID of the current plan The plan ID of the cockpit
+                    description: The ID of the current plan. The plan ID of the cockpit
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project

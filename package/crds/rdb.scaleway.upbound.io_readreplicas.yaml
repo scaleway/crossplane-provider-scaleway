@@ -174,6 +174,12 @@ spec:
                       the Database read replica should be created. The region you
                       want to attach the resource to
                     type: string
+                  sameZone:
+                    description: (Defaults to false) Defines whether to create the
+                      replica in the same availability zone as the main instance nodes
+                      or not. Defines whether to create the replica in the same availability
+                      zone as the main instance nodes or not.
+                    type: boolean
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -219,6 +225,12 @@ spec:
                       the Database read replica should be created. The region you
                       want to attach the resource to
                     type: string
+                  sameZone:
+                    description: (Defaults to false) Defines whether to create the
+                      replica in the same availability zone as the main instance nodes
+                      or not. Defines whether to create the replica in the same availability
+                      zone as the main instance nodes or not.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -470,6 +482,12 @@ spec:
                       the Database read replica should be created. The region you
                       want to attach the resource to
                     type: string
+                  sameZone:
+                    description: (Defaults to false) Defines whether to create the
+                      replica in the same availability zone as the main instance nodes
+                      or not. Defines whether to create the replica in the same availability
+                      zone as the main instance nodes or not.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

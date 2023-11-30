@@ -31,6 +31,10 @@ type GroupInitParameters struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The tags associated with the group.
+	// The tags associated with the application
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
@@ -62,6 +66,10 @@ type GroupObservation struct {
 	// (Defaults to provider organization_id) The ID of the organization the group is associated with.
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the group.
+	// The tags associated with the application
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The date and time of the last update of the group
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
@@ -106,6 +114,11 @@ type GroupParameters struct {
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the group.
+	// The tags associated with the application
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group

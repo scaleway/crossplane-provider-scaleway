@@ -67,7 +67,7 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: The name of the token The name of the token
+                    description: The name of the token. The name of the token
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
@@ -148,31 +148,37 @@ spec:
                         type: object
                     type: object
                   scopes:
-                    description: Allowed scopes Endpoints
+                    description: Allowed scopes. Endpoints
                     items:
                       properties:
                         queryLogs:
-                          description: (Defaults to false) Query logs Query logs
+                          description: (Defaults to false) Query logs. Query logs
                           type: boolean
                         queryMetrics:
-                          description: (Defaults to false) Query metrics Query metrics
+                          description: (Defaults to false) Query metrics. Query metrics
+                          type: boolean
+                        queryTraces:
+                          description: (Defaults to false) Query traces. Query traces
                           type: boolean
                         setupAlerts:
-                          description: (Defaults to false) Setup alerts Setup alerts
+                          description: (Defaults to false) Setup alerts. Setup alerts
                           type: boolean
                         setupLogsRules:
-                          description: (Defaults to false) Setup logs rules Setup
+                          description: (Defaults to false) Setup logs rules. Setup
                             logs rules
                           type: boolean
                         setupMetricsRules:
-                          description: (Defaults to false) Setup metrics rules Setup
+                          description: (Defaults to false) Setup metrics rules. Setup
                             metrics rules
                           type: boolean
                         writeLogs:
-                          description: (Defaults to true) Write logs Write logs
+                          description: (Defaults to true) Write logs. Write logs
                           type: boolean
                         writeMetrics:
-                          description: (Defaults to true) Write metrics Write metrics
+                          description: (Defaults to true) Write metrics. Write metrics
+                          type: boolean
+                        writeTraces:
+                          description: (Defaults to false) Write traces. Write traces
                           type: boolean
                       type: object
                     type: array
@@ -191,34 +197,40 @@ spec:
                   them, like an autoscaler.
                 properties:
                   name:
-                    description: The name of the token The name of the token
+                    description: The name of the token. The name of the token
                     type: string
                   scopes:
-                    description: Allowed scopes Endpoints
+                    description: Allowed scopes. Endpoints
                     items:
                       properties:
                         queryLogs:
-                          description: (Defaults to false) Query logs Query logs
+                          description: (Defaults to false) Query logs. Query logs
                           type: boolean
                         queryMetrics:
-                          description: (Defaults to false) Query metrics Query metrics
+                          description: (Defaults to false) Query metrics. Query metrics
+                          type: boolean
+                        queryTraces:
+                          description: (Defaults to false) Query traces. Query traces
                           type: boolean
                         setupAlerts:
-                          description: (Defaults to false) Setup alerts Setup alerts
+                          description: (Defaults to false) Setup alerts. Setup alerts
                           type: boolean
                         setupLogsRules:
-                          description: (Defaults to false) Setup logs rules Setup
+                          description: (Defaults to false) Setup logs rules. Setup
                             logs rules
                           type: boolean
                         setupMetricsRules:
-                          description: (Defaults to false) Setup metrics rules Setup
+                          description: (Defaults to false) Setup metrics rules. Setup
                             metrics rules
                           type: boolean
                         writeLogs:
-                          description: (Defaults to true) Write logs Write logs
+                          description: (Defaults to true) Write logs. Write logs
                           type: boolean
                         writeMetrics:
-                          description: (Defaults to true) Write metrics Write metrics
+                          description: (Defaults to true) Write metrics. Write metrics
+                          type: boolean
+                        writeTraces:
+                          description: (Defaults to false) Write traces. Write traces
                           type: boolean
                       type: object
                     type: array
@@ -397,7 +409,7 @@ spec:
                   id:
                     type: string
                   name:
-                    description: The name of the token The name of the token
+                    description: The name of the token. The name of the token
                     type: string
                   projectId:
                     description: (Defaults to provider project_id) The ID of the project
@@ -405,31 +417,37 @@ spec:
                       the resource to
                     type: string
                   scopes:
-                    description: Allowed scopes Endpoints
+                    description: Allowed scopes. Endpoints
                     items:
                       properties:
                         queryLogs:
-                          description: (Defaults to false) Query logs Query logs
+                          description: (Defaults to false) Query logs. Query logs
                           type: boolean
                         queryMetrics:
-                          description: (Defaults to false) Query metrics Query metrics
+                          description: (Defaults to false) Query metrics. Query metrics
+                          type: boolean
+                        queryTraces:
+                          description: (Defaults to false) Query traces. Query traces
                           type: boolean
                         setupAlerts:
-                          description: (Defaults to false) Setup alerts Setup alerts
+                          description: (Defaults to false) Setup alerts. Setup alerts
                           type: boolean
                         setupLogsRules:
-                          description: (Defaults to false) Setup logs rules Setup
+                          description: (Defaults to false) Setup logs rules. Setup
                             logs rules
                           type: boolean
                         setupMetricsRules:
-                          description: (Defaults to false) Setup metrics rules Setup
+                          description: (Defaults to false) Setup metrics rules. Setup
                             metrics rules
                           type: boolean
                         writeLogs:
-                          description: (Defaults to true) Write logs Write logs
+                          description: (Defaults to true) Write logs. Write logs
                           type: boolean
                         writeMetrics:
-                          description: (Defaults to true) Write metrics Write metrics
+                          description: (Defaults to true) Write metrics. Write metrics
+                          type: boolean
+                        writeTraces:
+                          description: (Defaults to false) Write traces. Write traces
                           type: boolean
                       type: object
                     type: array

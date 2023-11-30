@@ -77,6 +77,11 @@ type PoolInitParameters struct {
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// Defines if the public IP should be removed from the nodes.
+	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
+
 	// (Defaults to provider region) The region in which the pool should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -102,7 +107,7 @@ type PoolInitParameters struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// (Default to false) Whether to wait for the pool to be ready.
+	// (Defaults to false) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
@@ -171,6 +176,11 @@ type PoolObservation struct {
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// Defines if the public IP should be removed from the nodes.
+	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
+
 	// (Defaults to provider region) The region in which the pool should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -208,7 +218,7 @@ type PoolObservation struct {
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// (Default to false) Whether to wait for the pool to be ready.
+	// (Defaults to false) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
@@ -283,6 +293,12 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
+	// ~> Important: Updates to this field will recreate a new resource.
+	// Defines if the public IP should be removed from the nodes.
+	// +kubebuilder:validation:Optional
+	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
+
 	// (Defaults to provider region) The region in which the pool should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
@@ -314,7 +330,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// (Default to false) Whether to wait for the pool to be ready.
+	// (Defaults to false) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	// +kubebuilder:validation:Optional
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`

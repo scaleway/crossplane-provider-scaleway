@@ -56,6 +56,10 @@ type ReadReplicaInitParameters struct {
 	// in which the Database read replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
 }
 
 type ReadReplicaObservation struct {
@@ -79,6 +83,10 @@ type ReadReplicaObservation struct {
 	// in which the Database read replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
 }
 
 type ReadReplicaParameters struct {
@@ -112,6 +120,11 @@ type ReadReplicaParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// +kubebuilder:validation:Optional
+	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
 }
 
 type ReadReplicaPrivateNetworkInitParameters struct {

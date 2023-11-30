@@ -323,6 +323,10 @@ spec:
                       valid (RFC 3339 format). Date and time the domain was last found
                       to be valid (RFC 3339 format)
                     type: string
+                  mxBlackhole:
+                    description: The Scaleway's blackhole MX server to use if you
+                      do not have one. The Scaleway's blackhole MX server to use
+                    type: string
                   name:
                     description: 'The domain name, must not be used in another Transactional
                       Email Domain. ~> Important: Updates to name will recreate the
@@ -343,30 +347,58 @@ spec:
                       the domain should be created. The region you want to attach
                       the resource to
                     type: string
+                  reputation:
+                    description: The domain's reputation. The domain's reputation
+                    items:
+                      properties:
+                        previousScore:
+                          description: The previously-calculated domain's reputation
+                            score.
+                          type: number
+                        previousScoredAt:
+                          description: The time and date the previous reputation score
+                            was calculated.
+                          type: string
+                        score:
+                          description: A range from 0 to 100 that determines your
+                            domain's reputation score.
+                          type: number
+                        scoredAt:
+                          description: The time and date the score was calculated.
+                          type: string
+                        status:
+                          description: The status of the Transaction Email Domain.
+                          type: string
+                      type: object
+                    type: array
                   revokedAt:
                     description: The date and time of the revocation of the domain
                       (RFC 3339 format). Date and time of the revocation of the domain
                       (RFC 3339 format)
                     type: string
                   smtpHost:
-                    description: SMTP host to use to send emails
+                    description: The SMTP host to use to send emails. SMTP host to
+                      use to send emails
                     type: string
                   smtpPort:
-                    description: SMTP port to use to send emails over TLS. (Port 587)
+                    description: The SMTP port to use to send emails over TLS. SMTP
+                      port to use to send emails over TLS. (Port 587)
                     type: number
                   smtpPortAlternative:
-                    description: SMTP port to use to send emails over TLS. (Port 2587)
+                    description: The SMTP port to use to send emails over TLS. SMTP
+                      port to use to send emails over TLS. (Port 2587)
                     type: number
                   smtpPortUnsecure:
-                    description: SMTP port to use to send emails. (Port 25)
+                    description: The SMTP port to use to send emails. SMTP port to
+                      use to send emails. (Port 25)
                     type: number
                   smtpsPort:
-                    description: SMTPS port to use to send emails over TLS Wrapper.
-                      (Port 465)
+                    description: The SMTPS port to use to send emails over TLS Wrapper.
+                      SMTPS port to use to send emails over TLS Wrapper. (Port 465)
                     type: number
                   smtpsPortAlternative:
-                    description: SMTPS port to use to send emails over TLS Wrapper.
-                      (Port 2465)
+                    description: The SMTPS port to use to send emails over TLS Wrapper.
+                      SMTPS port to use to send emails over TLS Wrapper. (Port 2465)
                     type: number
                   spfConfig:
                     description: The snippet of the SPF record that should be registered

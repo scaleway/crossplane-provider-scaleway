@@ -23,7 +23,7 @@ spec:
         testing.upbound.io/example-name: main
     port: 9997
     privacy: private
-    protocol: h2c
+    protocol: http1
     registryImage: ${scaleway_container_namespace.main.registry_endpoint}/alpine:test
     secretEnvironmentVariablesSecretRef:
       key: example-key

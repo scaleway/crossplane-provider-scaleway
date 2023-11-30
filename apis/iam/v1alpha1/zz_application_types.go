@@ -19,13 +19,17 @@ type ApplicationInitParameters struct {
 	// The description of the iam application
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// .The name of the iam application.
+	// The name of the iam application.
 	// The name of the iam application
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider organization_id) The ID of the organization the application is associated with.
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the application.
+	// The tags associated with the application
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ApplicationObservation struct {
@@ -45,13 +49,17 @@ type ApplicationObservation struct {
 	// The ID of the application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// .The name of the iam application.
+	// The name of the iam application.
 	// The name of the iam application
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider organization_id) The ID of the organization the application is associated with.
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the application.
+	// The tags associated with the application
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The date and time of the last update of the application.
 	// The date and time of the last update of the application
@@ -65,7 +73,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// .The name of the iam application.
+	// The name of the iam application.
 	// The name of the iam application
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -74,6 +82,11 @@ type ApplicationParameters struct {
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the application.
+	// The tags associated with the application
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ApplicationSpec defines the desired state of Application
