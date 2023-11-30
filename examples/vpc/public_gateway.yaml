@@ -8,8 +8,8 @@ spec:
     type: VPC-GW-S
     ipIdRef:
       name: vpc-public-gateway-ip
-providerConfigRef:
-  name: default
+  providerConfigRef:
+    name: default
 ---
 apiVersion: vpc.scaleway.upbound.io/v1alpha1
 kind: PublicGatewayIP
@@ -17,5 +17,5 @@ metadata:
   name: vpc-public-gateway-ip
 spec:
   forProvider: {}
-providerConfigRef:
-  name: default
+  providerConfigRef:
+    name: default

@@ -27,7 +27,11 @@ type GatewayNetworkInitParameters struct {
 	// Enable masquerade on this network
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
 
-	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	IpamConfig []IpamConfigInitParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
+
+	// Enable DHCP config on this network. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
@@ -46,7 +50,7 @@ type GatewayNetworkObservation struct {
 	// The date and time of the creation of the gateway network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the public gateway DHCP config. Only one of dhcp_id and static_address should be specified.
+	// The ID of the public gateway DHCP config. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
 
@@ -65,6 +69,10 @@ type GatewayNetworkObservation struct {
 	// The ID of the gateway network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	IpamConfig []IpamConfigObservation `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
+
 	// The mac address of the creation of the gateway network.
 	// The mac address on this network
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
@@ -73,9 +81,13 @@ type GatewayNetworkObservation struct {
 	// The ID of the private network where connect to
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
+	// Enable DHCP config on this network. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
+
+	// The status of the Public Gateway's connection to the Private Network.
+	// The status of the Public Gateway's connection to the Private Network
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The date and time of the last update of the gateway network.
 	// The date and time of the last update of the gateway network
@@ -93,7 +105,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
-	// The ID of the public gateway DHCP config. Only one of dhcp_id and static_address should be specified.
+	// The ID of the public gateway DHCP config. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
 	// +crossplane:generate:reference:type=PublicGatewayDHCP
 	// +kubebuilder:validation:Optional
@@ -131,6 +143,11 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
+	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	// +kubebuilder:validation:Optional
+	IpamConfig []IpamConfigParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
+
 	// The ID of the private network.
 	// The ID of the private network where connect to
 	// +crossplane:generate:reference:type=PrivateNetwork
@@ -145,7 +162,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// Enable DHCP config on this network. Only one of dhcp_id and static_address should be specified.
+	// Enable DHCP config on this network. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
@@ -154,6 +171,41 @@ type GatewayNetworkParameters struct {
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type IpamConfigInitParameters struct {
+
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network.
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network
+	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
+
+	// Defines whether the default route is enabled on that Gateway Network.
+	// Defines whether the default route is enabled on that Gateway Network
+	PushDefaultRoute *bool `json:"pushDefaultRoute,omitempty" tf:"push_default_route,omitempty"`
+}
+
+type IpamConfigObservation struct {
+
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network.
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network
+	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
+
+	// Defines whether the default route is enabled on that Gateway Network.
+	// Defines whether the default route is enabled on that Gateway Network
+	PushDefaultRoute *bool `json:"pushDefaultRoute,omitempty" tf:"push_default_route,omitempty"`
+}
+
+type IpamConfigParameters struct {
+
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network.
+	// Use this IPAM-booked IP ID as the Gateway's IP in this Private Network
+	// +kubebuilder:validation:Optional
+	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
+
+	// Defines whether the default route is enabled on that Gateway Network.
+	// Defines whether the default route is enabled on that Gateway Network
+	// +kubebuilder:validation:Optional
+	PushDefaultRoute *bool `json:"pushDefaultRoute,omitempty" tf:"push_default_route,omitempty"`
 }
 
 // GatewayNetworkSpec defines the desired state of GatewayNetwork

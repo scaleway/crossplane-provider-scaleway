@@ -73,8 +73,8 @@ spec:
                     type: boolean
                   dhcpId:
                     description: The ID of the public gateway DHCP config. Only one
-                      of dhcp_id and static_address should be specified. The ID of
-                      the public gateway DHCP config
+                      of dhcp_id, static_address and ipam_config should be specified.
+                      The ID of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
                     description: Reference to a PublicGatewayDHCP to populate dhcpId.
@@ -234,6 +234,25 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipamConfig:
+                    description: Auto-configure the Gateway Network using Scaleway's
+                      IPAM (IP address management service). Only one of dhcp_id, static_address
+                      and ipam_config should be specified. Auto-configure the Gateway
+                      Network using Scaleway's IPAM (IP address management service)
+                    items:
+                      properties:
+                        ipamIpId:
+                          description: Use this IPAM-booked IP ID as the Gateway's
+                            IP in this Private Network. Use this IPAM-booked IP ID
+                            as the Gateway's IP in this Private Network
+                          type: string
+                        pushDefaultRoute:
+                          description: Defines whether the default route is enabled
+                            on that Gateway Network. Defines whether the default route
+                            is enabled on that Gateway Network
+                          type: boolean
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: The ID of the private network. The ID of the private
                       network where connect to
@@ -312,9 +331,9 @@ spec:
                         type: object
                     type: object
                   staticAddress:
-                    description: Enable DHCP config on this network. Only one of dhcp_id
-                      and static_address should be specified. The static IP address
-                      in CIDR on this network
+                    description: Enable DHCP config on this network. Only one of dhcp_id,
+                      static_address and ipam_config should be specified. The static
+                      IP address in CIDR on this network
                     type: string
                   zone:
                     description: (Defaults to provider zone) The zone in which the
@@ -348,10 +367,29 @@ spec:
                     description: (Defaults to true) Enable masquerade on this network
                       Enable masquerade on this network
                     type: boolean
+                  ipamConfig:
+                    description: Auto-configure the Gateway Network using Scaleway's
+                      IPAM (IP address management service). Only one of dhcp_id, static_address
+                      and ipam_config should be specified. Auto-configure the Gateway
+                      Network using Scaleway's IPAM (IP address management service)
+                    items:
+                      properties:
+                        ipamIpId:
+                          description: Use this IPAM-booked IP ID as the Gateway's
+                            IP in this Private Network. Use this IPAM-booked IP ID
+                            as the Gateway's IP in this Private Network
+                          type: string
+                        pushDefaultRoute:
+                          description: Defines whether the default route is enabled
+                            on that Gateway Network. Defines whether the default route
+                            is enabled on that Gateway Network
+                          type: boolean
+                      type: object
+                    type: array
                   staticAddress:
-                    description: Enable DHCP config on this network. Only one of dhcp_id
-                      and static_address should be specified. The static IP address
-                      in CIDR on this network
+                    description: Enable DHCP config on this network. Only one of dhcp_id,
+                      static_address and ipam_config should be specified. The static
+                      IP address in CIDR on this network
                     type: string
                   zone:
                     description: (Defaults to provider zone) The zone in which the
@@ -536,8 +574,8 @@ spec:
                     type: string
                   dhcpId:
                     description: The ID of the public gateway DHCP config. Only one
-                      of dhcp_id and static_address should be specified. The ID of
-                      the public gateway DHCP config
+                      of dhcp_id, static_address and ipam_config should be specified.
+                      The ID of the public gateway DHCP config
                     type: string
                   enableDhcp:
                     description: (Defaults to true) Enable DHCP config on this network.
@@ -554,6 +592,25 @@ spec:
                   id:
                     description: The ID of the gateway network.
                     type: string
+                  ipamConfig:
+                    description: Auto-configure the Gateway Network using Scaleway's
+                      IPAM (IP address management service). Only one of dhcp_id, static_address
+                      and ipam_config should be specified. Auto-configure the Gateway
+                      Network using Scaleway's IPAM (IP address management service)
+                    items:
+                      properties:
+                        ipamIpId:
+                          description: Use this IPAM-booked IP ID as the Gateway's
+                            IP in this Private Network. Use this IPAM-booked IP ID
+                            as the Gateway's IP in this Private Network
+                          type: string
+                        pushDefaultRoute:
+                          description: Defines whether the default route is enabled
+                            on that Gateway Network. Defines whether the default route
+                            is enabled on that Gateway Network
+                          type: boolean
+                      type: object
+                    type: array
                   macAddress:
                     description: The mac address of the creation of the gateway network.
                       The mac address on this network
@@ -563,9 +620,14 @@ spec:
                       network where connect to
                     type: string
                   staticAddress:
-                    description: Enable DHCP config on this network. Only one of dhcp_id
-                      and static_address should be specified. The static IP address
-                      in CIDR on this network
+                    description: Enable DHCP config on this network. Only one of dhcp_id,
+                      static_address and ipam_config should be specified. The static
+                      IP address in CIDR on this network
+                    type: string
+                  status:
+                    description: The status of the Public Gateway's connection to
+                      the Private Network. The status of the Public Gateway's connection
+                      to the Private Network
                     type: string
                   updatedAt:
                     description: The date and time of the last update of the gateway

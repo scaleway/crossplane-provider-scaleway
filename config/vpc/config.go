@@ -7,12 +7,24 @@ const shortGroup = "vpc"
 // Configure configures individual resources by adding custom ResourceConfigurators.
 func Configure(p *config.Provider) {
 
+	p.AddResourceConfigurator("scaleway_vpc", func(r *config.Resource) {
+		// Identifier for this resource is assigned by the provider. In other
+		// words it is not simply the name of the resource.
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "VPC"
+	})
+
 	p.AddResourceConfigurator("scaleway_vpc_private_network", func(r *config.Resource) {
 		// Identifier for this resource is assigned by the provider. In other
 		// words it is not simply the name of the resource.
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
 		r.Kind = "PrivateNetwork"
+
+		r.References["vpc_id"] = config.Reference{
+			Type: "VPC",
+		}
 	})
 
 	p.AddResourceConfigurator("scaleway_vpc_public_gateway", func(r *config.Resource) {
