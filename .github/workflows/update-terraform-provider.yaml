@@ -17,15 +17,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install jq
-        run: sudo apt-get install jq
-
       - name: Check for New Terraform Provider Release
         id: check_release
         run: |
-          API_URL="https://api.github.com/repos/scaleway/terraform-provider-scaleway/releases/latest"
-          latest_release=$(curl -s $API_URL)
-          latest_version=$(echo $latest_release | jq -r '.tag_name' | sed 's/^v//')
+          latest_release=$(gh release list -R scaleway/terraform-provider-scaleway --limit 1)
+          latest_version=$(echo $latest_release | awk '{print $1}' | sed 's/^v//')
           echo "Latest version: $latest_version"
           echo "new_version=$latest_version" >> $GITHUB_ENV
 
