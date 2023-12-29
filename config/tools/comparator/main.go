@@ -11,7 +11,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/tools"
 	"github.com/upbound/upjet/pkg/registry"
 
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // ProviderMetadata represents the structure of provider-metadata.yaml
