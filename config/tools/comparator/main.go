@@ -37,7 +37,8 @@ func main() {
 
 	addedResources := findNewResources(currentResources, newResources)
 	fmt.Println("New resources found:")
-	var resourceConfigs []tools.ResourceConfig
+	resourceConfigs := make([]tools.ResourceConfig, 0, len(addedResources))
+
 	for _, resource := range addedResources {
 		references := make(map[string]string)
 
@@ -60,7 +61,11 @@ func main() {
 		fmt.Println(resource.Name)
 	}
 
-	jsonData, _ := json.Marshal(resourceConfigs)
+	jsonData, err := json.Marshal(resourceConfigs)
+	if err != nil {
+		fmt.Printf("Error marshaling resource configuration: %v\n", err)
+		return
+	}
 	fmt.Println(string(jsonData))
 }
 

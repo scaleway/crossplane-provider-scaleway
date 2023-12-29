@@ -37,64 +37,87 @@ func Configure(p *config.Provider) {
 }
 `
 
-const (
-	ProviderGoFilePath     = "config/provider.go"
-	ExternalNameGoFilePath = "config/external_name.go"
-)
+// ProviderGoFilePath is the path to the provider.go file where provider configurations are set.
+const ProviderGoFilePath = "config/provider.go"
+
+// ExternalNameGoFilePath is the path to the external_name.go file where external name configurations are defined.
+const ExternalNameGoFilePath = "config/external_name.go"
 
 func generateConfigFile(resourceConfig tools.ResourceConfig) error {
 	dirPath := filepath.Join("config", resourceConfig.PackageName)
-	if err := os.MkdirAll(dirPath, 0755); err != nil {
+	if err := os.MkdirAll(dirPath, 0750); err != nil {
 		return err
 	}
 
 	filePath := filepath.Join(dirPath, "config.go")
-
-	// Check if config.go already exists
-	if content, err := os.ReadFile(filePath); err == nil {
-		contentStr := string(content)
-		configurator := fmt.Sprintf("p.AddResourceConfigurator(\"%s\", func(r *config.Resource) {", resourceConfig.TerraformResourceName)
-
-		// Check if the configurator already exists
-		if !strings.Contains(contentStr, configurator) {
-			tmpl, err := template.New("config").Parse(`
-            p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
-                r.ExternalName = config.IdentifierFromProvider
-                r.ShortGroup = "{{ .ShortGroup }}"
-                r.Kind = "{{ .Kind }}"
-            })
-            `)
-			if err != nil {
-				return err
-			}
-
-			var tmplOutput bytes.Buffer
-			if err := tmpl.Execute(&tmplOutput, resourceConfig); err != nil {
-				return err
-			}
-
-			// Append the new configurator before the last closing brace '}'
-			insertionPoint := strings.LastIndex(contentStr, "}")
-			if insertionPoint == -1 {
-				return errors.New("failed to find insertion point in config.go")
-			}
-			updatedContent := contentStr[:insertionPoint] + tmplOutput.String() + contentStr[insertionPoint:]
-			return os.WriteFile(filePath, []byte(updatedContent), 0644)
-		}
-	} else {
-		// Use initial template for new file
-		tmpl, err := template.New("config").Parse(initialConfigTemplate + resourceConfigTemplate)
-		if err != nil {
-			return err
-		}
-		file, err := os.Create(filePath)
-		if err != nil {
-			return err
-		}
-		defer file.Close()
-		return tmpl.Execute(file, resourceConfig)
+	cleanFilePath := filepath.Clean(filePath)
+	// Ensure the filePath starts with the expected directory
+	if !strings.HasPrefix(cleanFilePath, "config/") {
+		return fmt.Errorf("invalid file path: %s", cleanFilePath)
 	}
-	return nil
+
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return createNewConfigFile(filePath, resourceConfig)
+	}
+	return updateExistingConfigFile(content, filePath, resourceConfig)
+}
+
+func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) error {
+	tmpl, err := template.New("config").Parse(initialConfigTemplate + resourceConfigTemplate)
+	if err != nil {
+		return err
+	}
+
+	cleanFilePath := filepath.Clean(filePath)
+	if !strings.HasPrefix(cleanFilePath, "config/") {
+		return fmt.Errorf("invalid file path: %s", cleanFilePath)
+	}
+
+	file, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
+	}()
+
+	return tmpl.Execute(file, resourceConfig)
+}
+
+func updateExistingConfigFile(content []byte, filePath string, resourceConfig tools.ResourceConfig) error {
+	contentStr := string(content)
+	configurator := fmt.Sprintf("p.AddResourceConfigurator(\"%s\", func(r *config.Resource) {", resourceConfig.TerraformResourceName)
+
+	if strings.Contains(contentStr, configurator) {
+		return nil // Configurator already exists
+	}
+
+	tmpl, err := template.New("config").Parse(`
+        p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
+            r.ExternalName = config.IdentifierFromProvider
+            r.ShortGroup = "{{ .ShortGroup }}"
+            r.Kind = "{{ .Kind }}"
+        })
+    `)
+	if err != nil {
+		return err
+	}
+
+	var tmplOutput bytes.Buffer
+	if err := tmpl.Execute(&tmplOutput, resourceConfig); err != nil {
+		return err
+	}
+
+	insertionPoint := strings.LastIndex(contentStr, "}")
+	if insertionPoint == -1 {
+		return errors.New("failed to find insertion point in config.go")
+	}
+	updatedContent := contentStr[:insertionPoint] + tmplOutput.String() + contentStr[insertionPoint:]
+	return os.WriteFile(filePath, []byte(updatedContent), 0600)
 }
 
 func updateProviderGo(resourceConfig tools.ResourceConfig) error {
@@ -129,7 +152,7 @@ func updateProviderGo(resourceConfig tools.ResourceConfig) error {
 	// Insert the new line at the correct position
 	updatedContent := contentStr[:actualInsertionPoint] + newLine + contentStr[actualInsertionPoint:]
 
-	return os.WriteFile(ProviderGoFilePath, []byte(updatedContent), 0644)
+	return os.WriteFile(ProviderGoFilePath, []byte(updatedContent), 0600)
 }
 
 func updateExternalNameGo(resourceConfig tools.ResourceConfig) error {
@@ -154,7 +177,7 @@ func updateExternalNameGo(resourceConfig tools.ResourceConfig) error {
 		updatedContent := contentStr[:insertionPoint] + newLine + contentStr[insertionPoint:]
 
 		// Write the updated content back to the file
-		return os.WriteFile(ExternalNameGoFilePath, []byte(updatedContent), 0644)
+		return os.WriteFile(ExternalNameGoFilePath, []byte(updatedContent), 0600)
 	}
 
 	return nil
