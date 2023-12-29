@@ -39,9 +39,32 @@ jobs:
           sed -i "s/TERRAFORM_PROVIDER_VERSION := .*/TERRAFORM_PROVIDER_VERSION := $new_version/" Makefile
           sed -i "s/TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-scaleway_v.*/TERRAFORM_NATIVE_PROVIDER_B
 
+      - name: Read Current Provider Metadata
+        run: |
+          echo "CURRENT_METADATA=$(cat config/provider-metadata.yaml)" >> $GITHUB_ENV
+
+      - name: Update Provider Metadata
+        run: make generate
+
+      - name: Read New Provider Metadata
+        run: |
+          echo "NEW_METADATA=$(cat config/provider-metadata.yaml)" >> $GITHUB_ENV
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.21'
+
+      - name: Compare Provider Metadata
+        id: compare_provider_metadata
+        run: echo "::set-output name=resource_configs::$(go run ./config/tools/comparator/main.go)"
+
+      - name: Generate Configurations for New Resources
+        run: echo ${{ steps.compare_provider_metadata.outputs.resource_configs }} | go run ./config/tools/generator/main.go
+
       - name: Commit and Push Changes
-        if: env.new_version != env.current_version
+        if: env.new_version != env.current_version || steps.compare_provider_metadata.outputs.new_resources
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Update Terraform provider to ${{ env.new_version }}"
+          commit_message: "Update Terraform provider to ${{ env.new_version }} and generate new resources"
           branch: ${{ github.head_ref }}
