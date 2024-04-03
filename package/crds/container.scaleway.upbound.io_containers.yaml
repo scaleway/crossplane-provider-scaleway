@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: containers.container.scaleway.upbound.io
 spec:
   group: container.scaleway.upbound.io
@@ -37,14 +37,19 @@ spec:
         description: Container is the Schema for the Containers API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -53,13 +58,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -67,55 +73,59 @@ spec:
               forProvider:
                 properties:
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container. Defaults to 140. The amount of vCPU computing
-                      resources to allocate to each container. Defaults to 70.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   deploy:
-                    description: Boolean controlling whether the container is on a
-                      production environment. This allows you to control your production
-                      environment
+                    description: |-
+                      Boolean controlling whether the container is on a production environment.
+                      This allows you to control your production environment
                     type: boolean
                   description:
-                    description: The description of the container. The container description
+                    description: |-
+                      The description of the container.
+                      The container description
                     type: string
                   environmentVariables:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container. The environment
-                      variables to be injected into your container at runtime.
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
                     type: object
                   httpOption:
                     description: HTTP traffic configuration
                     type: string
                   maxConcurrency:
-                    description: The maximum number of simultaneous requests your
-                      container can handle at the same time. Defaults to 50. The maximum
-                      the number of simultaneous requests your container can handle
-                      at the same time. Defaults to 50.
+                    description: |-
+                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
                     type: number
                   maxScale:
-                    description: The maximum of number of instances this container
-                      can scale to. Default to 20. The maximum of number of instances
-                      this container can scale to. Default to 20.
+                    description: |-
+                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum of number of instances this container can scale to. Default to 20.
                     type: number
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container. Defaults to 256. The memory computing resources
-                      in MB to allocate to each container. Defaults to 128.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container. Defaults to 256.
+                      The memory computing resources in MB to allocate to each container. Defaults to 128.
                     type: number
                   minScale:
-                    description: The minimum of running container instances continuously.
-                      Defaults to 0. The minimum of running container instances continuously.
-                      Defaults to 0.
+                    description: |-
+                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum of running container instances continuously. Defaults to 0.
                     type: number
                   name:
-                    description: The unique name of the container name. The container
-                      name
+                    description: |-
+                      The unique name of the container name.
+                      The container name
                     type: string
                   namespaceId:
-                    description: The container namespace ID of the container. The
-                      container namespace associated
+                    description: |-
+                      The container namespace ID of the container.
+                      The container namespace associated
                     type: string
                   namespaceIdRef:
                     description: Reference to a ContainerNamespace to populate namespaceId.
@@ -128,21 +138,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -155,8 +165,9 @@ spec:
                     description: Selector for a ContainerNamespace to populate namespaceId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -169,21 +180,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -191,36 +202,38 @@ spec:
                         type: object
                     type: object
                   port:
-                    description: The port to expose the container. Defaults to 8080.
+                    description: |-
+                      The port to expose the container. Defaults to 8080.
                       The port to expose the container. Defaults to 8080
                     type: number
                   privacy:
-                    description: The privacy type define the way to authenticate to
-                      your container. Please check our dedicated section. The privacy
-                      type define the way to authenticate to your container
+                    description: |-
+                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
-                    description: The communication protocol http1 or h2c. Defaults
-                      to http1. The communication protocol http1 or h2c. Defaults
-                      to http1.
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
                     type: string
                   region:
-                    description: (Defaults to provider region) The region in which
-                      the container was created. The region you want to attach the
-                      resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
                     type: string
                   registryImage:
-                    description: 'The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
-                      The scaleway registry image address'
+                    description: |-
+                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The scaleway registry image address
                     type: string
                   registrySha256:
                     description: The sha256 of your source registry image, changing
                       it will re-apply the deployment. Can be any string
                     type: string
                   secretEnvironmentVariablesSecretRef:
-                    description: The secret environment variables of the container.
-                      The secret environment variables to be injected into your container
-                      at runtime.
+                    description: |-
+                      The secret environment variables of the container.
+                      The secret environment variables to be injected into your container at runtime.
                     properties:
                       name:
                         description: Name of the secret.
@@ -233,131 +246,139 @@ spec:
                     - namespace
                     type: object
                   status:
-                    description: The container status. The container status
+                    description: |-
+                      The container status.
+                      The container status
                     type: string
                   timeout:
-                    description: The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s. The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s.
+                    description: |-
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
               initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container. Defaults to 140. The amount of vCPU computing
-                      resources to allocate to each container. Defaults to 70.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   deploy:
-                    description: Boolean controlling whether the container is on a
-                      production environment. This allows you to control your production
-                      environment
+                    description: |-
+                      Boolean controlling whether the container is on a production environment.
+                      This allows you to control your production environment
                     type: boolean
                   description:
-                    description: The description of the container. The container description
+                    description: |-
+                      The description of the container.
+                      The container description
                     type: string
                   environmentVariables:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container. The environment
-                      variables to be injected into your container at runtime.
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
                     type: object
                   httpOption:
                     description: HTTP traffic configuration
                     type: string
                   maxConcurrency:
-                    description: The maximum number of simultaneous requests your
-                      container can handle at the same time. Defaults to 50. The maximum
-                      the number of simultaneous requests your container can handle
-                      at the same time. Defaults to 50.
+                    description: |-
+                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
                     type: number
                   maxScale:
-                    description: The maximum of number of instances this container
-                      can scale to. Default to 20. The maximum of number of instances
-                      this container can scale to. Default to 20.
+                    description: |-
+                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum of number of instances this container can scale to. Default to 20.
                     type: number
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container. Defaults to 256. The memory computing resources
-                      in MB to allocate to each container. Defaults to 128.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container. Defaults to 256.
+                      The memory computing resources in MB to allocate to each container. Defaults to 128.
                     type: number
                   minScale:
-                    description: The minimum of running container instances continuously.
-                      Defaults to 0. The minimum of running container instances continuously.
-                      Defaults to 0.
+                    description: |-
+                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum of running container instances continuously. Defaults to 0.
                     type: number
                   name:
-                    description: The unique name of the container name. The container
-                      name
+                    description: |-
+                      The unique name of the container name.
+                      The container name
                     type: string
                   port:
-                    description: The port to expose the container. Defaults to 8080.
+                    description: |-
+                      The port to expose the container. Defaults to 8080.
                       The port to expose the container. Defaults to 8080
                     type: number
                   privacy:
-                    description: The privacy type define the way to authenticate to
-                      your container. Please check our dedicated section. The privacy
-                      type define the way to authenticate to your container
+                    description: |-
+                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
-                    description: The communication protocol http1 or h2c. Defaults
-                      to http1. The communication protocol http1 or h2c. Defaults
-                      to http1.
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
                     type: string
                   region:
-                    description: (Defaults to provider region) The region in which
-                      the container was created. The region you want to attach the
-                      resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
                     type: string
                   registryImage:
-                    description: 'The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
-                      The scaleway registry image address'
+                    description: |-
+                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The scaleway registry image address
                     type: string
                   registrySha256:
                     description: The sha256 of your source registry image, changing
                       it will re-apply the deployment. Can be any string
                     type: string
                   status:
-                    description: The container status. The container status
+                    description: |-
+                      The container status.
+                      The container status
                     type: string
                   timeout:
-                    description: The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s. The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s.
+                    description: |-
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -370,9 +391,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -382,21 +404,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -406,17 +428,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -426,21 +450,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -455,21 +479,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -480,14 +505,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -508,33 +534,41 @@ spec:
               atProvider:
                 properties:
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container. Defaults to 140. The amount of vCPU computing
-                      resources to allocate to each container. Defaults to 70.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   cronStatus:
-                    description: The cron status of the container. The cron status
+                    description: |-
+                      The cron status of the container.
+                      The cron status
                     type: string
                   deploy:
-                    description: Boolean controlling whether the container is on a
-                      production environment. This allows you to control your production
-                      environment
+                    description: |-
+                      Boolean controlling whether the container is on a production environment.
+                      This allows you to control your production environment
                     type: boolean
                   description:
-                    description: The description of the container. The container description
+                    description: |-
+                      The description of the container.
+                      The container description
                     type: string
                   domainName:
-                    description: The native domain name of the container The native
-                      container domain name.
+                    description: |-
+                      The native domain name of the container
+                      The native container domain name.
                     type: string
                   environmentVariables:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container. The environment
-                      variables to be injected into your container at runtime.
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
                     type: object
                   errorMessage:
-                    description: The error message of the container. The error description
+                    description: |-
+                      The error message of the container.
+                      The error description
                     type: string
                   httpOption:
                     description: HTTP traffic configuration
@@ -543,70 +577,73 @@ spec:
                     description: The container's ID.
                     type: string
                   maxConcurrency:
-                    description: The maximum number of simultaneous requests your
-                      container can handle at the same time. Defaults to 50. The maximum
-                      the number of simultaneous requests your container can handle
-                      at the same time. Defaults to 50.
+                    description: |-
+                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
                     type: number
                   maxScale:
-                    description: The maximum of number of instances this container
-                      can scale to. Default to 20. The maximum of number of instances
-                      this container can scale to. Default to 20.
+                    description: |-
+                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum of number of instances this container can scale to. Default to 20.
                     type: number
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container. Defaults to 256. The memory computing resources
-                      in MB to allocate to each container. Defaults to 128.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container. Defaults to 256.
+                      The memory computing resources in MB to allocate to each container. Defaults to 128.
                     type: number
                   minScale:
-                    description: The minimum of running container instances continuously.
-                      Defaults to 0. The minimum of running container instances continuously.
-                      Defaults to 0.
+                    description: |-
+                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum of running container instances continuously. Defaults to 0.
                     type: number
                   name:
-                    description: The unique name of the container name. The container
-                      name
+                    description: |-
+                      The unique name of the container name.
+                      The container name
                     type: string
                   namespaceId:
-                    description: The container namespace ID of the container. The
-                      container namespace associated
+                    description: |-
+                      The container namespace ID of the container.
+                      The container namespace associated
                     type: string
                   port:
-                    description: The port to expose the container. Defaults to 8080.
+                    description: |-
+                      The port to expose the container. Defaults to 8080.
                       The port to expose the container. Defaults to 8080
                     type: number
                   privacy:
-                    description: The privacy type define the way to authenticate to
-                      your container. Please check our dedicated section. The privacy
-                      type define the way to authenticate to your container
+                    description: |-
+                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
-                    description: The communication protocol http1 or h2c. Defaults
-                      to http1. The communication protocol http1 or h2c. Defaults
-                      to http1.
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
                     type: string
                   region:
-                    description: (Defaults to provider region) The region in which
-                      the container was created. The region you want to attach the
-                      resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
                     type: string
                   registryImage:
-                    description: 'The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
-                      The scaleway registry image address'
+                    description: |-
+                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The scaleway registry image address
                     type: string
                   registrySha256:
                     description: The sha256 of your source registry image, changing
                       it will re-apply the deployment. Can be any string
                     type: string
                   status:
-                    description: The container status. The container status
+                    description: |-
+                      The container status.
+                      The container status
                     type: string
                   timeout:
-                    description: The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s. The maximum amount of time in seconds during which
-                      your container can process a request before we stop it. Defaults
-                      to 300s.
+                    description: |-
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
               conditions:
@@ -615,13 +652,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -632,8 +671,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime

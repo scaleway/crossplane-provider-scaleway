@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: frontends.lb.scaleway.upbound.io
 spec:
   group: lb.scaleway.upbound.io
@@ -37,14 +37,19 @@ spec:
         description: Frontend is the Schema for the Frontends API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -53,13 +58,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -67,44 +73,44 @@ spec:
               forProvider:
                 properties:
                   acl:
-                    description: A list of ACL rules to apply to the load-balancer
-                      frontend.  Defined below. ACL rules
+                    description: |-
+                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      ACL rules
                     items:
                       properties:
                         action:
-                          description: Action to undertake when an ACL filter matches.
+                          description: |-
+                            Action to undertake when an ACL filter matches.
                             Action to undertake when an ACL filter matches
                           items:
                             properties:
                               redirect:
-                                description: Redirect parameters when using an ACL
-                                  with redirect action. Redirect parameters when using
-                                  an ACL with `redirect` action
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
                                 items:
                                   properties:
                                     code:
-                                      description: The HTTP redirect code to use.
-                                        Valid values are 301, 302, 303, 307 and 308.
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
                                         The HTTP redirect code to use
                                       type: number
                                     target:
-                                      description: An URL can be used in case of a
-                                        location redirect (e.g. https://scaleway.com
-                                        will redirect to this same URL). A scheme
-                                        name (e.g. https, http, ftp, git) will replace
-                                        the request's original scheme. An URL can
-                                        be used in case of a location redirect
+                                      description: |-
+                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
                                       type: string
                                     type:
-                                      description: 'The action type. Possible values
-                                        are: allow or deny or redirect. The redirect
-                                        type'
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
                                       type: string
                                   type: object
                                 type: array
                               type:
-                                description: 'The action type. Possible values are:
-                                  allow or deny or redirect. The action type'
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
                                 type: string
                             type: object
                           type: array
@@ -112,57 +118,55 @@ spec:
                           description: Description of the ACL
                           type: string
                         match:
-                          description: The ACL match rule. At least ip_subnet or http_filter
-                            and http_filter_value are required. The ACL match rule
+                          description: |-
+                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule
                           items:
                             properties:
                               httpFilter:
-                                description: 'The HTTP filter to match. This filter
-                                  is supported only if your backend protocol has an
-                                  HTTP forward protocol. It extracts the request''s
-                                  URL path, which starts at the first slash and ends
-                                  before the question mark (without the host part).
-                                  Possible values are: acl_http_filter_none, path_begin,
-                                  path_end, http_header_match or regex. The HTTP filter
-                                  to match'
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
                                 type: string
                               httpFilterOption:
                                 description: You can use this field with http_header_match
                                   acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
-                                description: A list of possible values to match for
-                                  the given HTTP filter. Keep in mind that in the
-                                  case of http_header_match the HTTP header field
-                                  name is case-insensitive. A list of possible values
-                                  to match for the given HTTP filter
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
                                 type: array
                               invert:
-                                description: If set to true, the condition will be
-                                  of type "unless". If set to true, the condition
-                                  will be of type "unless"
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
                                 type: boolean
                               ipSubnet:
-                                description: A list of IPs or CIDR v4/v6 addresses
-                                  of the client of the session to match. A list of
-                                  IPs or CIDR v4/v6 addresses of the client of the
-                                  session to match
+                                description: |-
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         name:
-                          description: The ACL name. If not provided it will be randomly
-                            generated. The ACL name
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
                           type: string
                       type: object
                     type: array
                   backendId:
-                    description: The load-balancer backend ID this frontend is attached
-                      to. The load-balancer backend ID
+                    description: |-
+                      The load-balancer backend ID this frontend is attached to.
+                      The load-balancer backend ID
                     type: string
                   backendIdRef:
                     description: Reference to a Backend to populate backendId.
@@ -175,21 +179,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -202,8 +206,9 @@ spec:
                     description: Selector for a Backend to populate backendId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -216,21 +221,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -238,30 +243,31 @@ spec:
                         type: object
                     type: object
                   certificateIds:
-                    description: List of Certificate IDs that should be used by the
-                      frontend. Collection of Certificate IDs related to the load
-                      balancer and domain
+                    description: |-
+                      List of Certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
                     type: array
                   enableHttp3:
-                    description: '(Default: false) Activates HTTP/3 protocol. Activates
-                      HTTP/3 protocol'
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
                     type: boolean
                   externalAcls:
-                    description: (Defaults to false) A boolean to specify whether
-                      to use lb_acl. If external_acls is set to true, acl can not
-                      be set directly in the lb frontend. This boolean determines
-                      if ACLs should be managed externally through the 'lb_acl' resource.
-                      If set to `true`, `acl` attribute cannot be set directly in
-                      the lb frontend
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   inboundPort:
-                    description: TCP port to listen on the front side. TCP port to
-                      listen on the front side
+                    description: |-
+                      TCP port to listen on the front side.
+                      TCP port to listen on the front side
                     type: number
                   lbId:
-                    description: The load-balancer ID this frontend is attached to.
+                    description: |-
+                      The load-balancer ID this frontend is attached to.
                       The load-balancer ID
                     type: string
                   lbIdRef:
@@ -275,21 +281,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -302,8 +308,9 @@ spec:
                     description: Selector for a LB to populate lbId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -316,21 +323,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -338,66 +345,69 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the load-balancer frontend. The name
-                      of the frontend
+                    description: |-
+                      The name of the load-balancer frontend.
+                      The name of the frontend
                     type: string
                   timeoutClient:
-                    description: 'Maximum inactivity time on the client side. (e.g.:
-                      1s) Set the maximum inactivity time on the client side'
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Set the maximum inactivity time on the client side
                     type: string
                 type: object
               initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   acl:
-                    description: A list of ACL rules to apply to the load-balancer
-                      frontend.  Defined below. ACL rules
+                    description: |-
+                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      ACL rules
                     items:
                       properties:
                         action:
-                          description: Action to undertake when an ACL filter matches.
+                          description: |-
+                            Action to undertake when an ACL filter matches.
                             Action to undertake when an ACL filter matches
                           items:
                             properties:
                               redirect:
-                                description: Redirect parameters when using an ACL
-                                  with redirect action. Redirect parameters when using
-                                  an ACL with `redirect` action
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
                                 items:
                                   properties:
                                     code:
-                                      description: The HTTP redirect code to use.
-                                        Valid values are 301, 302, 303, 307 and 308.
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
                                         The HTTP redirect code to use
                                       type: number
                                     target:
-                                      description: An URL can be used in case of a
-                                        location redirect (e.g. https://scaleway.com
-                                        will redirect to this same URL). A scheme
-                                        name (e.g. https, http, ftp, git) will replace
-                                        the request's original scheme. An URL can
-                                        be used in case of a location redirect
+                                      description: |-
+                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
                                       type: string
                                     type:
-                                      description: 'The action type. Possible values
-                                        are: allow or deny or redirect. The redirect
-                                        type'
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
                                       type: string
                                   type: object
                                 type: array
                               type:
-                                description: 'The action type. Possible values are:
-                                  allow or deny or redirect. The action type'
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
                                 type: string
                             type: object
                           type: array
@@ -405,103 +415,104 @@ spec:
                           description: Description of the ACL
                           type: string
                         match:
-                          description: The ACL match rule. At least ip_subnet or http_filter
-                            and http_filter_value are required. The ACL match rule
+                          description: |-
+                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule
                           items:
                             properties:
                               httpFilter:
-                                description: 'The HTTP filter to match. This filter
-                                  is supported only if your backend protocol has an
-                                  HTTP forward protocol. It extracts the request''s
-                                  URL path, which starts at the first slash and ends
-                                  before the question mark (without the host part).
-                                  Possible values are: acl_http_filter_none, path_begin,
-                                  path_end, http_header_match or regex. The HTTP filter
-                                  to match'
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
                                 type: string
                               httpFilterOption:
                                 description: You can use this field with http_header_match
                                   acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
-                                description: A list of possible values to match for
-                                  the given HTTP filter. Keep in mind that in the
-                                  case of http_header_match the HTTP header field
-                                  name is case-insensitive. A list of possible values
-                                  to match for the given HTTP filter
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
                                 type: array
                               invert:
-                                description: If set to true, the condition will be
-                                  of type "unless". If set to true, the condition
-                                  will be of type "unless"
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
                                 type: boolean
                               ipSubnet:
-                                description: A list of IPs or CIDR v4/v6 addresses
-                                  of the client of the session to match. A list of
-                                  IPs or CIDR v4/v6 addresses of the client of the
-                                  session to match
+                                description: |-
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         name:
-                          description: The ACL name. If not provided it will be randomly
-                            generated. The ACL name
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
                           type: string
                       type: object
                     type: array
                   certificateIds:
-                    description: List of Certificate IDs that should be used by the
-                      frontend. Collection of Certificate IDs related to the load
-                      balancer and domain
+                    description: |-
+                      List of Certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
                     type: array
                   enableHttp3:
-                    description: '(Default: false) Activates HTTP/3 protocol. Activates
-                      HTTP/3 protocol'
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
                     type: boolean
                   externalAcls:
-                    description: (Defaults to false) A boolean to specify whether
-                      to use lb_acl. If external_acls is set to true, acl can not
-                      be set directly in the lb frontend. This boolean determines
-                      if ACLs should be managed externally through the 'lb_acl' resource.
-                      If set to `true`, `acl` attribute cannot be set directly in
-                      the lb frontend
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   inboundPort:
-                    description: TCP port to listen on the front side. TCP port to
-                      listen on the front side
+                    description: |-
+                      TCP port to listen on the front side.
+                      TCP port to listen on the front side
                     type: number
                   name:
-                    description: The name of the load-balancer frontend. The name
-                      of the frontend
+                    description: |-
+                      The name of the load-balancer frontend.
+                      The name of the frontend
                     type: string
                   timeoutClient:
-                    description: 'Maximum inactivity time on the client side. (e.g.:
-                      1s) Set the maximum inactivity time on the client side'
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Set the maximum inactivity time on the client side
                     type: string
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -514,9 +525,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -526,21 +538,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -550,17 +562,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -570,21 +584,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -599,21 +613,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -624,14 +639,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -657,44 +673,44 @@ spec:
               atProvider:
                 properties:
                   acl:
-                    description: A list of ACL rules to apply to the load-balancer
-                      frontend.  Defined below. ACL rules
+                    description: |-
+                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      ACL rules
                     items:
                       properties:
                         action:
-                          description: Action to undertake when an ACL filter matches.
+                          description: |-
+                            Action to undertake when an ACL filter matches.
                             Action to undertake when an ACL filter matches
                           items:
                             properties:
                               redirect:
-                                description: Redirect parameters when using an ACL
-                                  with redirect action. Redirect parameters when using
-                                  an ACL with `redirect` action
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
                                 items:
                                   properties:
                                     code:
-                                      description: The HTTP redirect code to use.
-                                        Valid values are 301, 302, 303, 307 and 308.
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
                                         The HTTP redirect code to use
                                       type: number
                                     target:
-                                      description: An URL can be used in case of a
-                                        location redirect (e.g. https://scaleway.com
-                                        will redirect to this same URL). A scheme
-                                        name (e.g. https, http, ftp, git) will replace
-                                        the request's original scheme. An URL can
-                                        be used in case of a location redirect
+                                      description: |-
+                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
                                       type: string
                                     type:
-                                      description: 'The action type. Possible values
-                                        are: allow or deny or redirect. The redirect
-                                        type'
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
                                       type: string
                                   type: object
                                 type: array
                               type:
-                                description: 'The action type. Possible values are:
-                                  allow or deny or redirect. The action type'
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
                                 type: string
                             type: object
                           type: array
@@ -705,51 +721,48 @@ spec:
                           description: Description of the ACL
                           type: string
                         match:
-                          description: The ACL match rule. At least ip_subnet or http_filter
-                            and http_filter_value are required. The ACL match rule
+                          description: |-
+                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule
                           items:
                             properties:
                               httpFilter:
-                                description: 'The HTTP filter to match. This filter
-                                  is supported only if your backend protocol has an
-                                  HTTP forward protocol. It extracts the request''s
-                                  URL path, which starts at the first slash and ends
-                                  before the question mark (without the host part).
-                                  Possible values are: acl_http_filter_none, path_begin,
-                                  path_end, http_header_match or regex. The HTTP filter
-                                  to match'
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
                                 type: string
                               httpFilterOption:
                                 description: You can use this field with http_header_match
                                   acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
-                                description: A list of possible values to match for
-                                  the given HTTP filter. Keep in mind that in the
-                                  case of http_header_match the HTTP header field
-                                  name is case-insensitive. A list of possible values
-                                  to match for the given HTTP filter
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
                                 type: array
                               invert:
-                                description: If set to true, the condition will be
-                                  of type "unless". If set to true, the condition
-                                  will be of type "unless"
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
                                 type: boolean
                               ipSubnet:
-                                description: A list of IPs or CIDR v4/v6 addresses
-                                  of the client of the session to match. A list of
-                                  IPs or CIDR v4/v6 addresses of the client of the
-                                  session to match
+                                description: |-
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         name:
-                          description: The ACL name. If not provided it will be randomly
-                            generated. The ACL name
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
                           type: string
                         updatedAt:
                           description: Date and time of ACL's update (RFC 3339 format)
@@ -757,50 +770,55 @@ spec:
                       type: object
                     type: array
                   backendId:
-                    description: The load-balancer backend ID this frontend is attached
-                      to. The load-balancer backend ID
+                    description: |-
+                      The load-balancer backend ID this frontend is attached to.
+                      The load-balancer backend ID
                     type: string
                   certificateId:
-                    description: (Deprecated) first certificate ID used by the frontend.
+                    description: |-
+                      (Deprecated) first certificate ID used by the frontend.
                       Certificate ID
                     type: string
                   certificateIds:
-                    description: List of Certificate IDs that should be used by the
-                      frontend. Collection of Certificate IDs related to the load
-                      balancer and domain
+                    description: |-
+                      List of Certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
                     type: array
                   enableHttp3:
-                    description: '(Default: false) Activates HTTP/3 protocol. Activates
-                      HTTP/3 protocol'
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
                     type: boolean
                   externalAcls:
-                    description: (Defaults to false) A boolean to specify whether
-                      to use lb_acl. If external_acls is set to true, acl can not
-                      be set directly in the lb frontend. This boolean determines
-                      if ACLs should be managed externally through the 'lb_acl' resource.
-                      If set to `true`, `acl` attribute cannot be set directly in
-                      the lb frontend
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   id:
                     description: The ID of the load-balancer frontend.
                     type: string
                   inboundPort:
-                    description: TCP port to listen on the front side. TCP port to
-                      listen on the front side
+                    description: |-
+                      TCP port to listen on the front side.
+                      TCP port to listen on the front side
                     type: number
                   lbId:
-                    description: The load-balancer ID this frontend is attached to.
+                    description: |-
+                      The load-balancer ID this frontend is attached to.
                       The load-balancer ID
                     type: string
                   name:
-                    description: The name of the load-balancer frontend. The name
-                      of the frontend
+                    description: |-
+                      The name of the load-balancer frontend.
+                      The name of the frontend
                     type: string
                   timeoutClient:
-                    description: 'Maximum inactivity time on the client side. (e.g.:
-                      1s) Set the maximum inactivity time on the client side'
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Set the maximum inactivity time on the client side
                     type: string
                 type: object
               conditions:
@@ -809,13 +827,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -826,8 +846,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime
