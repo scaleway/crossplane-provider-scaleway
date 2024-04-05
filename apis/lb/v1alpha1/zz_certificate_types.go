@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -18,6 +22,19 @@ type CertificateInitParameters struct {
 	// Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
 	CustomCertificate []CustomCertificateInitParameters `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
+
+	// The load-balancer ID this certificate is attached to.
+	// The load-balancer ID
+	// +crossplane:generate:reference:type=LB
+	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
+
+	// Reference to a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
+
+	// Selector for a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
 	// Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The Let's Encrypt type certificate configuration
@@ -167,9 +184,8 @@ type LetsencryptParameters struct {
 type CertificateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -188,13 +204,14 @@ type CertificateStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Certificate is the Schema for the Certificates API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`

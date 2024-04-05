@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -158,6 +162,19 @@ type MatchesParameters struct {
 }
 
 type RecordInitParameters struct {
+
+	// The DNS Zone of the domain. If the DNS zone doesn't exist, it will be automatically created.
+	// The zone you want to add the record in
+	// +crossplane:generate:reference:type=Zone
+	DNSZone *string `json:"dnsZone,omitempty" tf:"dns_zone,omitempty"`
+
+	// Reference to a Zone to populate dnsZone.
+	// +kubebuilder:validation:Optional
+	DNSZoneRef *v1.Reference `json:"dnsZoneRef,omitempty" tf:"-"`
+
+	// Selector for a Zone to populate dnsZone.
+	// +kubebuilder:validation:Optional
+	DNSZoneSelector *v1.Selector `json:"dnsZoneSelector,omitempty" tf:"-"`
 
 	// The content of the record (an IPv4 for an A, a string for a TXT...).
 	// The data of the record
@@ -407,9 +424,8 @@ type WeightedParameters struct {
 type RecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RecordParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -428,13 +444,14 @@ type RecordStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Record is the Schema for the Records API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Record struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -35,6 +35,22 @@ func (mg *Cron) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FunctionIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FunctionIDRef,
+		Selector:     mg.Spec.InitProvider.FunctionIDSelector,
+		To: reference.To{
+			List:    &FunctionList{},
+			Managed: &Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionID")
+	}
+	mg.Spec.InitProvider.FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -61,6 +77,22 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FunctionIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FunctionIDRef,
+		Selector:     mg.Spec.InitProvider.FunctionIDSelector,
+		To: reference.To{
+			List:    &FunctionList{},
+			Managed: &Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionID")
+	}
+	mg.Spec.InitProvider.FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -86,6 +118,22 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &FunctionNamespaceList{},
+			Managed: &FunctionNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
+	}
+	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -128,6 +176,38 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FunctionIDRef,
+		Selector:     mg.Spec.InitProvider.FunctionIDSelector,
+		To: reference.To{
+			List:    &FunctionList{},
+			Managed: &Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionID")
+	}
+	mg.Spec.InitProvider.FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &FunctionNamespaceList{},
+			Managed: &FunctionNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
+	}
+	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

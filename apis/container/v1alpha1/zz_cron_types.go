@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -19,6 +23,19 @@ type CronInitParameters struct {
 	// during
 	// Cron arguments as json object to pass through during execution.
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The container ID to link with your cron.
+	// The Container ID to link with your trigger.
+	// +crossplane:generate:reference:type=Container
+	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+
+	// Reference to a Container to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// (Defaults to provider region) The region
 	// in where the job was created.
@@ -99,9 +116,8 @@ type CronParameters struct {
 type CronSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CronParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -120,13 +136,14 @@ type CronStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cron is the Schema for the Crons API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Cron struct {
 	metav1.TypeMeta   `json:",inline"`

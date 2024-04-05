@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -183,6 +187,19 @@ type ServerInitParameters struct {
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
+	// The ID of the reserved IP that is attached to the server.
+	// The ID of the reserved IP for the server
+	// +crossplane:generate:reference:type=IP
+	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// Reference to a IP to populate ipId.
+	// +kubebuilder:validation:Optional
+	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
+
+	// Selector for a IP to populate ipId.
+	// +kubebuilder:validation:Optional
+	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
+
 	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
 	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
@@ -194,6 +211,19 @@ type ServerInitParameters struct {
 	// The name of the server.
 	// The name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The placement group the server is attached to.
+	// The placement group the server is attached to
+	// +crossplane:generate:reference:type=PlacementGroup
+	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// Reference to a PlacementGroup to populate placementGroupId.
+	// +kubebuilder:validation:Optional
+	PlacementGroupIDRef *v1.Reference `json:"placementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a PlacementGroup to populate placementGroupId.
+	// +kubebuilder:validation:Optional
+	PlacementGroupIDSelector *v1.Selector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
@@ -220,6 +250,19 @@ type ServerInitParameters struct {
 	// If server supports routed IPs, default to true if public_ips is used
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
+	// The security group the server is attached to.
+	// The security group the server is attached to
+	// +crossplane:generate:reference:type=SecurityGroup
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
 	// The state of the server should be: started, stopped, standby
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -239,6 +282,7 @@ type ServerInitParameters struct {
 	// Use the cloud-init key to use cloud-init on your instance.
 	// You can define values using:
 	// The user data associated with the server
+	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the server should be created.
@@ -371,6 +415,7 @@ type ServerObservation struct {
 	// Use the cloud-init key to use cloud-init on your instance.
 	// You can define values using:
 	// The user data associated with the server
+	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the server should be created.
@@ -521,6 +566,7 @@ type ServerParameters struct {
 	// You can define values using:
 	// The user data associated with the server
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the server should be created.
@@ -533,9 +579,8 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -554,13 +599,14 @@ type ServerStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Server is the Schema for the Servers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`

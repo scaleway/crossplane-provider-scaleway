@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -19,6 +23,19 @@ type GatewayNetworkInitParameters struct {
 	// Remove DHCP config on this network on destroy
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
+	// The ID of the public gateway DHCP config. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// The ID of the public gateway DHCP config
+	// +crossplane:generate:reference:type=PublicGatewayDHCP
+	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
+
+	// Reference to a PublicGatewayDHCP to populate dhcpId.
+	// +kubebuilder:validation:Optional
+	DHCPIDRef *v1.Reference `json:"dhcpIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicGatewayDHCP to populate dhcpId.
+	// +kubebuilder:validation:Optional
+	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
+
 	// (Defaults to true) Enable DHCP config on this network. It requires DHCP id.
 	// Enable DHCP config on this network
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
@@ -27,9 +44,35 @@ type GatewayNetworkInitParameters struct {
 	// Enable masquerade on this network
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
 
+	// The ID of the public gateway.
+	// The ID of the public gateway where connect to
+	// +crossplane:generate:reference:type=PublicGateway
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
+	// Reference to a PublicGateway to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicGateway to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
+
 	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
 	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
 	IpamConfig []IpamConfigInitParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
+
+	// The ID of the private network.
+	// The ID of the private network where connect to
+	// +crossplane:generate:reference:type=PrivateNetwork
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
+	// Reference to a PrivateNetwork to populate privateNetworkId.
+	// +kubebuilder:validation:Optional
+	PrivateNetworkIDRef *v1.Reference `json:"privateNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateNetwork to populate privateNetworkId.
+	// +kubebuilder:validation:Optional
+	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
 	// Enable DHCP config on this network. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
@@ -212,9 +255,8 @@ type IpamConfigParameters struct {
 type GatewayNetworkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GatewayNetworkParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -233,13 +275,14 @@ type GatewayNetworkStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GatewayNetwork is the Schema for the GatewayNetworks API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type GatewayNetwork struct {
 	metav1.TypeMeta   `json:",inline"`

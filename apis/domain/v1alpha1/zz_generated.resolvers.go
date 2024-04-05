@@ -35,5 +35,21 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.DNSZone = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DNSZoneRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSZone),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DNSZoneRef,
+		Selector:     mg.Spec.InitProvider.DNSZoneSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DNSZone")
+	}
+	mg.Spec.InitProvider.DNSZone = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DNSZoneRef = rsp.ResolvedReference
+
 	return nil
 }

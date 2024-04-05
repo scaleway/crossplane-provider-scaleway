@@ -461,6 +461,7 @@ spec:
                       You can define values using:
                       The user data associated with the server
                     type: object
+                    x-kubernetes-map-type: granular
                   zone:
                     description: |-
                       (Defaults to provider zone) The zone in which the server should be created.
@@ -469,9 +470,8 @@ spec:
                 type: object
               initProvider:
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
                   InitProvider holds the same fields as ForProvider, with the exception
                   of Identifier and other resource reference fields. The fields that are
                   in InitProvider are merged into ForProvider when the resource is created.
@@ -518,6 +518,85 @@ spec:
                       to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
                       The UUID or the label of the base image used by the server
                     type: string
+                  ipId:
+                    description: |-
+                      The ID of the reserved IP that is attached to the server.
+                      The ID of the reserved IP for the server
+                    type: string
+                  ipIdRef:
+                    description: Reference to a IP to populate ipId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  ipIdSelector:
+                    description: Selector for a IP to populate ipId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   ipIds:
                     description: List of ID of reserved IPs that are attached to the
                       server. Cannot be used with ip_id.
@@ -529,6 +608,85 @@ spec:
                       The name of the server.
                       The name of the server
                     type: string
+                  placementGroupId:
+                    description: |-
+                      The placement group the server is attached to.
+                      The placement group the server is attached to
+                    type: string
+                  placementGroupIdRef:
+                    description: Reference to a PlacementGroup to populate placementGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  placementGroupIdSelector:
+                    description: Selector for a PlacementGroup to populate placementGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   privateNetwork:
                     description: |-
                       The private network associated with the server.
@@ -604,6 +762,85 @@ spec:
                       (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
                       If server supports routed IPs, default to true if public_ips is used
                     type: boolean
+                  securityGroupId:
+                    description: |-
+                      The security group the server is attached to.
+                      The security group the server is attached to
+                    type: string
+                  securityGroupIdRef:
+                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  securityGroupIdSelector:
+                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   state:
                     description: |-
                       (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
@@ -633,6 +870,7 @@ spec:
                       You can define values using:
                       The user data associated with the server
                     type: object
+                    x-kubernetes-map-type: granular
                   zone:
                     description: |-
                       (Defaults to provider zone) The zone in which the server should be created.
@@ -643,9 +881,8 @@ spec:
                 default:
                 - '*'
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
                   ManagementPolicies specify the array of actions Crossplane is allowed to
                   take on the managed and external resources.
                   This field is planned to replace the DeletionPolicy field in a future
@@ -1048,6 +1285,7 @@ spec:
                       You can define values using:
                       The user data associated with the server
                     type: object
+                    x-kubernetes-map-type: granular
                   zone:
                     description: |-
                       (Defaults to provider zone) The zone in which the server should be created.
@@ -1090,6 +1328,9 @@ spec:
                   - type
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec

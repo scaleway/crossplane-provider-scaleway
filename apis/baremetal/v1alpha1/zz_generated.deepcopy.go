@@ -452,6 +452,29 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SSHKeyIds != nil {
+		in, out := &in.SSHKeyIds, &out.SSHKeyIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SSHKeyIdsRefs != nil {
+		in, out := &in.SSHKeyIdsRefs, &out.SSHKeyIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SSHKeyIdsSelector != nil {
+		in, out := &in.SSHKeyIdsSelector, &out.SSHKeyIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServiceUser != nil {
 		in, out := &in.ServiceUser, &out.ServiceUser
 		*out = new(string)

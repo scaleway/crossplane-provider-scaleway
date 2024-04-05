@@ -159,6 +159,7 @@ spec:
                             A list of tags (key / value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
+                          x-kubernetes-map-type: granular
                         transition:
                           description: |-
                             Specifies a period in the object's transitions (documented below).
@@ -206,6 +207,7 @@ spec:
                       A list of tags (key / value) for the bucket.
                       The tags associated with this bucket
                     type: object
+                    x-kubernetes-map-type: granular
                   versioning:
                     description: |-
                       A state of versioning (documented below)
@@ -222,9 +224,8 @@ spec:
                 type: object
               initProvider:
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
                   InitProvider holds the same fields as ForProvider, with the exception
                   of Identifier and other resource reference fields. The fields that are
                   in InitProvider are merged into ForProvider when the resource is created.
@@ -321,6 +322,7 @@ spec:
                             A list of tags (key / value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
+                          x-kubernetes-map-type: granular
                         transition:
                           description: |-
                             Specifies a period in the object's transitions (documented below).
@@ -368,6 +370,7 @@ spec:
                       A list of tags (key / value) for the bucket.
                       The tags associated with this bucket
                     type: object
+                    x-kubernetes-map-type: granular
                   versioning:
                     description: |-
                       A state of versioning (documented below)
@@ -386,9 +389,8 @@ spec:
                 default:
                 - '*'
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
                   ManagementPolicies specify the array of actions Crossplane is allowed to
                   take on the managed and external resources.
                   This field is planned to replace the DeletionPolicy field in a future
@@ -661,6 +663,7 @@ spec:
                             A list of tags (key / value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
+                          x-kubernetes-map-type: granular
                         transition:
                           description: |-
                             Specifies a period in the object's transitions (documented below).
@@ -708,6 +711,7 @@ spec:
                       A list of tags (key / value) for the bucket.
                       The tags associated with this bucket
                     type: object
+                    x-kubernetes-map-type: granular
                   versioning:
                     description: |-
                       A state of versioning (documented below)
@@ -758,6 +762,9 @@ spec:
                   - type
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec

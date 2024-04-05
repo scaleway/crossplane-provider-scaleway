@@ -26,8 +26,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
-	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	"github.com/upbound/upjet/pkg/terraform"
+	tjcontroller "github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/terraform"
 
 	"github.com/scaleway/provider-scaleway/apis"
 	"github.com/scaleway/provider-scaleway/apis/v1alpha1"
@@ -100,8 +100,8 @@ func main() {
 	}
 
 	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableAlphaManagementPolicies)
-		log.Info("Alpha feature enabled", "flag", features.EnableAlphaManagementPolicies)
+		o.Features.Enable(features.EnableBetaManagementPolicies)
+		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
 	if *enableExternalSecretStores {

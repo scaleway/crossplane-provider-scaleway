@@ -109,6 +109,7 @@ spec:
                       Map of metadata used for the object, keys must be lowercase
                       Map of object's metadata, only lower case keys are allowed
                     type: object
+                    x-kubernetes-map-type: granular
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -131,6 +132,7 @@ spec:
                       Map of tags
                       Map of object's tags
                     type: object
+                    x-kubernetes-map-type: granular
                   visibility:
                     description: |-
                       Visibility of the object, public-read or private
@@ -139,9 +141,8 @@ spec:
                 type: object
               initProvider:
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
                   InitProvider holds the same fields as ForProvider, with the exception
                   of Identifier and other resource reference fields. The fields that are
                   in InitProvider are merged into ForProvider when the resource is created.
@@ -188,6 +189,7 @@ spec:
                       Map of metadata used for the object, keys must be lowercase
                       Map of object's metadata, only lower case keys are allowed
                     type: object
+                    x-kubernetes-map-type: granular
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -210,6 +212,7 @@ spec:
                       Map of tags
                       Map of object's tags
                     type: object
+                    x-kubernetes-map-type: granular
                   visibility:
                     description: |-
                       Visibility of the object, public-read or private
@@ -220,9 +223,8 @@ spec:
                 default:
                 - '*'
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
                   ManagementPolicies specify the array of actions Crossplane is allowed to
                   take on the managed and external resources.
                   This field is planned to replace the DeletionPolicy field in a future
@@ -438,6 +440,7 @@ spec:
                       Map of metadata used for the object, keys must be lowercase
                       Map of object's metadata, only lower case keys are allowed
                     type: object
+                    x-kubernetes-map-type: granular
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -460,6 +463,7 @@ spec:
                       Map of tags
                       Map of object's tags
                     type: object
+                    x-kubernetes-map-type: granular
                   visibility:
                     description: |-
                       Visibility of the object, public-read or private
@@ -502,6 +506,9 @@ spec:
                   - type
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -15,8 +19,8 @@ import (
 
 type FunctionInitParameters struct {
 
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed. function will get deployed if you change source zip
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed
+	// define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
+	// define if the function should be deployed, provider will wait for function to be deployed
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
 	// The description of the function.
@@ -25,6 +29,7 @@ type FunctionInitParameters struct {
 
 	// The environment variables of the function.
 	// The environment variables of the function
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// HTTP traffic configuration
@@ -49,6 +54,19 @@ type FunctionInitParameters struct {
 	// The unique name of the function.
 	// The name of the function
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the function
+	// The namespace ID associated with this function
+	// +crossplane:generate:reference:type=FunctionNamespace
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a FunctionNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a FunctionNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Privacy of the function. Can be either private or public. Read more on authentication
 	// Privacy of the function. Can be either `private` or `public`
@@ -84,8 +102,8 @@ type FunctionObservation struct {
 	// CPU limit in mCPU for your function
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed. function will get deployed if you change source zip
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed
+	// define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
+	// define if the function should be deployed, provider will wait for function to be deployed
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
 	// The description of the function.
@@ -98,6 +116,7 @@ type FunctionObservation struct {
 
 	// The environment variables of the function.
 	// The environment variables of the function
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// HTTP traffic configuration
@@ -164,8 +183,8 @@ type FunctionObservation struct {
 
 type FunctionParameters struct {
 
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed. function will get deployed if you change source zip
-	// define if the function should be deployed, Upbound official provider will wait for function to be deployed
+	// define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
+	// define if the function should be deployed, provider will wait for function to be deployed
 	// +kubebuilder:validation:Optional
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
@@ -177,6 +196,7 @@ type FunctionParameters struct {
 	// The environment variables of the function.
 	// The environment variables of the function
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// HTTP traffic configuration
@@ -266,9 +286,8 @@ type FunctionParameters struct {
 type FunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -287,13 +306,14 @@ type FunctionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Function is the Schema for the Functions API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`

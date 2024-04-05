@@ -171,6 +171,7 @@ spec:
                       with scaleway API or CLI
                       Map of settings to define for the cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     description: |-
                       The tags associated with the Redis Cluster.
@@ -202,9 +203,8 @@ spec:
                 type: object
               initProvider:
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
                   InitProvider holds the same fields as ForProvider, with the exception
                   of Identifier and other resource reference fields. The fields that are
                   in InitProvider are merged into ForProvider when the resource is created.
@@ -294,6 +294,7 @@ spec:
                       with scaleway API or CLI
                       Map of settings to define for the cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     description: |-
                       The tags associated with the Redis Cluster.
@@ -327,9 +328,8 @@ spec:
                 default:
                 - '*'
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
                   ManagementPolicies specify the array of actions Crossplane is allowed to
                   take on the managed and external resources.
                   This field is planned to replace the DeletionPolicy field in a future
@@ -635,6 +635,7 @@ spec:
                       with scaleway API or CLI
                       Map of settings to define for the cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     description: |-
                       The tags associated with the Redis Cluster.
@@ -705,6 +706,9 @@ spec:
                   - type
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec

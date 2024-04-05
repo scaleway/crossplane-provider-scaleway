@@ -36,5 +36,21 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.SSHKeyIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SSHKeyIdsRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SSHKeyIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SSHKeyIdsRefs,
+		Selector:      mg.Spec.InitProvider.SSHKeyIdsSelector,
+		To: reference.To{
+			List:    &v1alpha1.SSHKeyList{},
+			Managed: &v1alpha1.SSHKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SSHKeyIds")
+	}
+	mg.Spec.InitProvider.SSHKeyIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SSHKeyIdsRefs = mrsp.ResolvedReferences
+
 	return nil
 }

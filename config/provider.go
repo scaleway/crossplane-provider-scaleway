@@ -8,6 +8,7 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/scaleway/provider-scaleway/config/account"
 	"github.com/scaleway/provider-scaleway/config/applesilicon"
 	"github.com/scaleway/provider-scaleway/config/baremetal"
@@ -27,7 +28,6 @@ import (
 	"github.com/scaleway/provider-scaleway/config/registry"
 	"github.com/scaleway/provider-scaleway/config/tem"
 	"github.com/scaleway/provider-scaleway/config/vpc"
-	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
