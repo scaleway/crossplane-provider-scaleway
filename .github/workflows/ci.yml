@@ -81,7 +81,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/setup-go@v4
+        uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -117,7 +117,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/setup-go@v4
+        uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -156,7 +156,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/setup-go@v4
+        uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -208,7 +208,7 @@ jobs:
           password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Checkout
-        uses: actions/setup-go@v4
+        uses: actions/checkout@v4
         with:
           submodules: true
 
