@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: backends.lb.scaleway.upbound.io
 spec:
   group: lb.scaleway.upbound.io
@@ -37,14 +37,19 @@ spec:
         description: Backend is the Schema for the Backends API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -53,13 +58,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -67,32 +73,35 @@ spec:
               forProvider:
                 properties:
                   failoverHost:
-                    description: "Scaleway S3 bucket website to be served in case
-                      all backend servers are down. ~> Note: Only the host part of
-                      the Scaleway S3 bucket website is expected: e.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
-                      Scaleway S3 bucket website to be served in case all backend
-                      servers are down \n **NOTE** : Only the host part of the Scaleway
-                      S3 bucket website is expected. E.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'."
+                    description: |-
+                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
+                      e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+                      Scaleway S3 bucket website to be served in case all backend servers are down
+
+
+                      **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
+                      E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                     type: string
                   forwardPort:
-                    description: User sessions will be forwarded to this port of backend
-                      servers. User sessions will be forwarded to this port of backend
-                      servers
+                    description: |-
+                      User sessions will be forwarded to this port of backend servers.
+                      User sessions will be forwarded to this port of backend servers
                     type: number
                   forwardPortAlgorithm:
-                    description: '(Default: roundrobin) Load balancing algorithm.
-                      Possible values are: roundrobin, leastconn and first. Load balancing
-                      algorithm'
+                    description: |-
+                      (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
+                      Load balancing algorithm
                     type: string
                   forwardProtocol:
-                    description: 'Backend protocol. Possible values are: tcp or http.
-                      Backend protocol'
+                    description: |-
+                      Backend protocol. Possible values are: tcp or http.
+                      Backend protocol
                     type: string
                   healthCheckDelay:
-                    description: '(Default: 60s) Interval between two HC requests.
-                      Interval between two HC requests'
+                    description: |-
+                      (Default: 60s) Interval between two HC requests.
+                      Interval between two HC requests
                     type: string
                   healthCheckHttp:
                     description: This block enable HTTP health check. Only one of
@@ -101,19 +110,23 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
@@ -125,41 +138,46 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         sni:
-                          description: The SNI to use for HC requests over SSL. The
-                            SNI to use for HC requests over SSL
+                          description: |-
+                            The SNI to use for HC requests over SSL.
+                            The SNI to use for HC requests over SSL
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
-                    description: '(Default: 2) Number of allowed failed HC requests
-                      before the backend server is marked down. Number of allowed
-                      failed HC requests before the backend server is marked down'
+                    description: |-
+                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
-                    description: '(Default: forward_port) Port the HC requests will
-                      be send to. Port the HC requests will be send to. Default to
-                      `forward_port`'
+                    description: |-
+                      (Default: forward_port) Port the HC requests will be send to.
+                      Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
-                    description: '(Default: false) Defines whether proxy protocol
-                      should be activated for the health check. Defines whether proxy
-                      protocol should be activated for the health check'
+                    description: |-
+                      (Default: false) Defines whether proxy protocol should be activated for the health check.
+                      Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
                     description: This block enable TCP health check. Only one of health_check_tcp,
@@ -168,26 +186,25 @@ spec:
                       type: object
                     type: array
                   healthCheckTimeout:
-                    description: '(Default: 30s) Timeout before we consider a HC request
-                      failed. Timeout before we consider a HC request failed'
+                    description: |-
+                      (Default: 30s) Timeout before we consider a HC request failed.
+                      Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
-                    description: '(Default: 0.5s) The time to wait between two consecutive
-                      health checks when a backend server is in a transient state
-                      (going UP or DOWN). Time to wait between two consecutive health
-                      checks when a backend server is in a transient state (going
-                      UP or DOWN)'
+                    description: |-
+                      (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+                      Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
                     type: string
                   ignoreSslServerVerify:
-                    description: '(Default: false) Specifies whether the Load Balancer
-                      should check the backend server’s certificate before initiating
-                      a connection. Specifies whether the Load Balancer should check
-                      the backend server’s certificate before initiating a connection'
+                    description: |-
+                      (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
+                      Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
                     type: boolean
                   lbId:
-                    description: 'The load-balancer ID this backend is attached to.
-                      ~> Important: Updates to lb_id will recreate the backend. The
-                      load-balancer ID'
+                    description: |-
+                      The load-balancer ID this backend is attached to.
+                      ~> Important: Updates to lb_id will recreate the backend.
+                      The load-balancer ID
                     type: string
                   lbIdRef:
                     description: Reference to a LB to populate lbId.
@@ -200,21 +217,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -227,8 +244,9 @@ spec:
                     description: Selector for a LB to populate lbId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -241,21 +259,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -263,118 +281,127 @@ spec:
                         type: object
                     type: object
                   maxConnections:
-                    description: Maximum number of connections allowed per backend
-                      server. Maximum number of connections allowed per backend server
+                    description: |-
+                      Maximum number of connections allowed per backend server.
+                      Maximum number of connections allowed per backend server
                     type: number
                   maxRetries:
-                    description: Number of retries when a backend server connection
-                      failed. Number of retries when a backend server connection failed
+                    description: |-
+                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection failed
                     type: number
                   name:
-                    description: The name of the load-balancer backend. The name of
-                      the backend
+                    description: |-
+                      The name of the load-balancer backend.
+                      The name of the backend
                     type: string
                   onMarkedDownAction:
-                    description: '(Default: none) Modify what occurs when a backend
-                      server is marked down. Possible values are: none and shutdown_sessions.
-                      Modify what occurs when a backend server is marked down'
+                    description: |-
+                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
-                    description: '(Default: none) Choose the type of PROXY protocol
-                      to enable (none, v1, v2, v2_ssl, v2_ssl_cn) Type of PROXY protocol
-                      to enable'
+                    description: |-
+                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
-                    description: Whether to use another backend server on each attempt.
+                    description: |-
+                      Whether to use another backend server on each attempt.
                       Whether to use another backend server on each attempt
                     type: number
                   sendProxyV2:
-                    description: 'DEPRECATED please use proxy_protocol instead - (Default:
-                      false) Enables PROXY protocol version 2. Enables PROXY protocol
-                      version 2'
+                    description: |-
+                      DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.
+                      Enables PROXY protocol version 2
                     type: boolean
                   serverIps:
-                    description: List of backend server IP addresses. Addresses can
-                      be either IPv4 or IPv6. Backend server IP addresses list (IPv4
-                      or IPv6)
+                    description: |-
+                      List of backend server IP addresses. Addresses can be either IPv4 or IPv6.
+                      Backend server IP addresses list (IPv4 or IPv6)
                     items:
                       type: string
                     type: array
                   sslBridging:
-                    description: '(Default: false) Enables SSL between load balancer
-                      and backend servers. Enables SSL between load balancer and backend
-                      servers'
+                    description: |-
+                      (Default: false) Enables SSL between load balancer and backend servers.
+                      Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
-                    description: '(Default: none) The type of sticky sessions. The
-                      only current possible values are: none, cookie and table. The
-                      type of sticky sessions'
+                    description: |-
+                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
-                    description: Cookie name for sticky sessions. Only applicable
-                      when sticky_sessions is set to cookie. Cookie name for for sticky
-                      sessions
+                    description: |-
+                      Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+                      Cookie name for for sticky sessions
                     type: string
                   timeoutConnect:
-                    description: 'Maximum initial server connection establishment
-                      time. (e.g.: 1s) Maximum initial server connection establishment
-                      time'
+                    description: |-
+                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
-                    description: 'Maximum time for a request to be left pending in
-                      queue when max_connections is reached. (e.g.: 1s) Maximum time
-                      (in seconds) for a request to be left pending in queue when
-                      `max_connections` is reached'
+                    description: |-
+                      Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+                      Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
                     type: string
                   timeoutServer:
-                    description: 'Maximum server connection inactivity time. (e.g.:
-                      1s) Maximum server connection inactivity time'
+                    description: |-
+                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
-                    description: 'Maximum tunnel inactivity time. (e.g.: 1s) Maximum
-                      tunnel inactivity time'
+                    description: |-
+                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time
                     type: string
                 type: object
               initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   failoverHost:
-                    description: "Scaleway S3 bucket website to be served in case
-                      all backend servers are down. ~> Note: Only the host part of
-                      the Scaleway S3 bucket website is expected: e.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
-                      Scaleway S3 bucket website to be served in case all backend
-                      servers are down \n **NOTE** : Only the host part of the Scaleway
-                      S3 bucket website is expected. E.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'."
+                    description: |-
+                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
+                      e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+                      Scaleway S3 bucket website to be served in case all backend servers are down
+
+
+                      **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
+                      E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                     type: string
                   forwardPort:
-                    description: User sessions will be forwarded to this port of backend
-                      servers. User sessions will be forwarded to this port of backend
-                      servers
+                    description: |-
+                      User sessions will be forwarded to this port of backend servers.
+                      User sessions will be forwarded to this port of backend servers
                     type: number
                   forwardPortAlgorithm:
-                    description: '(Default: roundrobin) Load balancing algorithm.
-                      Possible values are: roundrobin, leastconn and first. Load balancing
-                      algorithm'
+                    description: |-
+                      (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
+                      Load balancing algorithm
                     type: string
                   forwardProtocol:
-                    description: 'Backend protocol. Possible values are: tcp or http.
-                      Backend protocol'
+                    description: |-
+                      Backend protocol. Possible values are: tcp or http.
+                      Backend protocol
                     type: string
                   healthCheckDelay:
-                    description: '(Default: 60s) Interval between two HC requests.
-                      Interval between two HC requests'
+                    description: |-
+                      (Default: 60s) Interval between two HC requests.
+                      Interval between two HC requests
                     type: string
                   healthCheckHttp:
                     description: This block enable HTTP health check. Only one of
@@ -383,19 +410,23 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
@@ -407,41 +438,46 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         sni:
-                          description: The SNI to use for HC requests over SSL. The
-                            SNI to use for HC requests over SSL
+                          description: |-
+                            The SNI to use for HC requests over SSL.
+                            The SNI to use for HC requests over SSL
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
-                    description: '(Default: 2) Number of allowed failed HC requests
-                      before the backend server is marked down. Number of allowed
-                      failed HC requests before the backend server is marked down'
+                    description: |-
+                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
-                    description: '(Default: forward_port) Port the HC requests will
-                      be send to. Port the HC requests will be send to. Default to
-                      `forward_port`'
+                    description: |-
+                      (Default: forward_port) Port the HC requests will be send to.
+                      Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
-                    description: '(Default: false) Defines whether proxy protocol
-                      should be activated for the health check. Defines whether proxy
-                      protocol should be activated for the health check'
+                    description: |-
+                      (Default: false) Defines whether proxy protocol should be activated for the health check.
+                      Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
                     description: This block enable TCP health check. Only one of health_check_tcp,
@@ -450,112 +486,117 @@ spec:
                       type: object
                     type: array
                   healthCheckTimeout:
-                    description: '(Default: 30s) Timeout before we consider a HC request
-                      failed. Timeout before we consider a HC request failed'
+                    description: |-
+                      (Default: 30s) Timeout before we consider a HC request failed.
+                      Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
-                    description: '(Default: 0.5s) The time to wait between two consecutive
-                      health checks when a backend server is in a transient state
-                      (going UP or DOWN). Time to wait between two consecutive health
-                      checks when a backend server is in a transient state (going
-                      UP or DOWN)'
+                    description: |-
+                      (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+                      Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
                     type: string
                   ignoreSslServerVerify:
-                    description: '(Default: false) Specifies whether the Load Balancer
-                      should check the backend server’s certificate before initiating
-                      a connection. Specifies whether the Load Balancer should check
-                      the backend server’s certificate before initiating a connection'
+                    description: |-
+                      (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
+                      Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
                     type: boolean
                   maxConnections:
-                    description: Maximum number of connections allowed per backend
-                      server. Maximum number of connections allowed per backend server
+                    description: |-
+                      Maximum number of connections allowed per backend server.
+                      Maximum number of connections allowed per backend server
                     type: number
                   maxRetries:
-                    description: Number of retries when a backend server connection
-                      failed. Number of retries when a backend server connection failed
+                    description: |-
+                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection failed
                     type: number
                   name:
-                    description: The name of the load-balancer backend. The name of
-                      the backend
+                    description: |-
+                      The name of the load-balancer backend.
+                      The name of the backend
                     type: string
                   onMarkedDownAction:
-                    description: '(Default: none) Modify what occurs when a backend
-                      server is marked down. Possible values are: none and shutdown_sessions.
-                      Modify what occurs when a backend server is marked down'
+                    description: |-
+                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
-                    description: '(Default: none) Choose the type of PROXY protocol
-                      to enable (none, v1, v2, v2_ssl, v2_ssl_cn) Type of PROXY protocol
-                      to enable'
+                    description: |-
+                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
-                    description: Whether to use another backend server on each attempt.
+                    description: |-
+                      Whether to use another backend server on each attempt.
                       Whether to use another backend server on each attempt
                     type: number
                   sendProxyV2:
-                    description: 'DEPRECATED please use proxy_protocol instead - (Default:
-                      false) Enables PROXY protocol version 2. Enables PROXY protocol
-                      version 2'
+                    description: |-
+                      DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.
+                      Enables PROXY protocol version 2
                     type: boolean
                   serverIps:
-                    description: List of backend server IP addresses. Addresses can
-                      be either IPv4 or IPv6. Backend server IP addresses list (IPv4
-                      or IPv6)
+                    description: |-
+                      List of backend server IP addresses. Addresses can be either IPv4 or IPv6.
+                      Backend server IP addresses list (IPv4 or IPv6)
                     items:
                       type: string
                     type: array
                   sslBridging:
-                    description: '(Default: false) Enables SSL between load balancer
-                      and backend servers. Enables SSL between load balancer and backend
-                      servers'
+                    description: |-
+                      (Default: false) Enables SSL between load balancer and backend servers.
+                      Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
-                    description: '(Default: none) The type of sticky sessions. The
-                      only current possible values are: none, cookie and table. The
-                      type of sticky sessions'
+                    description: |-
+                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
-                    description: Cookie name for sticky sessions. Only applicable
-                      when sticky_sessions is set to cookie. Cookie name for for sticky
-                      sessions
+                    description: |-
+                      Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+                      Cookie name for for sticky sessions
                     type: string
                   timeoutConnect:
-                    description: 'Maximum initial server connection establishment
-                      time. (e.g.: 1s) Maximum initial server connection establishment
-                      time'
+                    description: |-
+                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
-                    description: 'Maximum time for a request to be left pending in
-                      queue when max_connections is reached. (e.g.: 1s) Maximum time
-                      (in seconds) for a request to be left pending in queue when
-                      `max_connections` is reached'
+                    description: |-
+                      Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+                      Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
                     type: string
                   timeoutServer:
-                    description: 'Maximum server connection inactivity time. (e.g.:
-                      1s) Maximum server connection inactivity time'
+                    description: |-
+                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
-                    description: 'Maximum tunnel inactivity time. (e.g.: 1s) Maximum
-                      tunnel inactivity time'
+                    description: |-
+                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time
                     type: string
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+                  unless the relevant Crossplane feature flag is enabled, and may be
+                  changed or removed without notice.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -568,9 +609,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -580,21 +622,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -604,17 +646,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -624,21 +668,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -653,21 +697,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -678,14 +723,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -715,32 +761,35 @@ spec:
               atProvider:
                 properties:
                   failoverHost:
-                    description: "Scaleway S3 bucket website to be served in case
-                      all backend servers are down. ~> Note: Only the host part of
-                      the Scaleway S3 bucket website is expected: e.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
-                      Scaleway S3 bucket website to be served in case all backend
-                      servers are down \n **NOTE** : Only the host part of the Scaleway
-                      S3 bucket website is expected. E.g. 'failover-website.s3-website.fr-par.scw.cloud'
-                      if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'."
+                    description: |-
+                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
+                      e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
+                      Scaleway S3 bucket website to be served in case all backend servers are down
+
+
+                      **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
+                      E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                     type: string
                   forwardPort:
-                    description: User sessions will be forwarded to this port of backend
-                      servers. User sessions will be forwarded to this port of backend
-                      servers
+                    description: |-
+                      User sessions will be forwarded to this port of backend servers.
+                      User sessions will be forwarded to this port of backend servers
                     type: number
                   forwardPortAlgorithm:
-                    description: '(Default: roundrobin) Load balancing algorithm.
-                      Possible values are: roundrobin, leastconn and first. Load balancing
-                      algorithm'
+                    description: |-
+                      (Default: roundrobin) Load balancing algorithm. Possible values are: roundrobin, leastconn and first.
+                      Load balancing algorithm
                     type: string
                   forwardProtocol:
-                    description: 'Backend protocol. Possible values are: tcp or http.
-                      Backend protocol'
+                    description: |-
+                      Backend protocol. Possible values are: tcp or http.
+                      Backend protocol
                     type: string
                   healthCheckDelay:
-                    description: '(Default: 60s) Interval between two HC requests.
-                      Interval between two HC requests'
+                    description: |-
+                      (Default: 60s) Interval between two HC requests.
+                      Interval between two HC requests
                     type: string
                   healthCheckHttp:
                     description: This block enable HTTP health check. Only one of
@@ -749,19 +798,23 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
@@ -773,41 +826,46 @@ spec:
                     items:
                       properties:
                         code:
-                          description: '(Default: 200) The expected HTTP status code.
-                            The expected HTTP status code'
+                          description: |-
+                            (Default: 200) The expected HTTP status code.
+                            The expected HTTP status code
                           type: number
                         hostHeader:
-                          description: The HTTP host header to use for HC requests.
+                          description: |-
+                            The HTTP host header to use for HC requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
-                          description: '(Default: GET) The HTTP method to use for
-                            HC requests. The HTTP method to use for HC requests'
+                          description: |-
+                            (Default: GET) The HTTP method to use for HC requests.
+                            The HTTP method to use for HC requests
                           type: string
                         sni:
-                          description: The SNI to use for HC requests over SSL. The
-                            SNI to use for HC requests over SSL
+                          description: |-
+                            The SNI to use for HC requests over SSL.
+                            The SNI to use for HC requests over SSL
                           type: string
                         uri:
-                          description: The HTTP endpoint URL to call for HC requests.
+                          description: |-
+                            The HTTP endpoint URL to call for HC requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
-                    description: '(Default: 2) Number of allowed failed HC requests
-                      before the backend server is marked down. Number of allowed
-                      failed HC requests before the backend server is marked down'
+                    description: |-
+                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
-                    description: '(Default: forward_port) Port the HC requests will
-                      be send to. Port the HC requests will be send to. Default to
-                      `forward_port`'
+                    description: |-
+                      (Default: forward_port) Port the HC requests will be send to.
+                      Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
-                    description: '(Default: false) Defines whether proxy protocol
-                      should be activated for the health check. Defines whether proxy
-                      protocol should be activated for the health check'
+                    description: |-
+                      (Default: false) Defines whether proxy protocol should be activated for the health check.
+                      Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
                     description: This block enable TCP health check. Only one of health_check_tcp,
@@ -816,101 +874,105 @@ spec:
                       type: object
                     type: array
                   healthCheckTimeout:
-                    description: '(Default: 30s) Timeout before we consider a HC request
-                      failed. Timeout before we consider a HC request failed'
+                    description: |-
+                      (Default: 30s) Timeout before we consider a HC request failed.
+                      Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
-                    description: '(Default: 0.5s) The time to wait between two consecutive
-                      health checks when a backend server is in a transient state
-                      (going UP or DOWN). Time to wait between two consecutive health
-                      checks when a backend server is in a transient state (going
-                      UP or DOWN)'
+                    description: |-
+                      (Default: 0.5s) The time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
+                      Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
                     type: string
                   id:
                     description: The ID of the loadbalancer backend.
                     type: string
                   ignoreSslServerVerify:
-                    description: '(Default: false) Specifies whether the Load Balancer
-                      should check the backend server’s certificate before initiating
-                      a connection. Specifies whether the Load Balancer should check
-                      the backend server’s certificate before initiating a connection'
+                    description: |-
+                      (Default: false) Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection.
+                      Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
                     type: boolean
                   lbId:
-                    description: 'The load-balancer ID this backend is attached to.
-                      ~> Important: Updates to lb_id will recreate the backend. The
-                      load-balancer ID'
+                    description: |-
+                      The load-balancer ID this backend is attached to.
+                      ~> Important: Updates to lb_id will recreate the backend.
+                      The load-balancer ID
                     type: string
                   maxConnections:
-                    description: Maximum number of connections allowed per backend
-                      server. Maximum number of connections allowed per backend server
+                    description: |-
+                      Maximum number of connections allowed per backend server.
+                      Maximum number of connections allowed per backend server
                     type: number
                   maxRetries:
-                    description: Number of retries when a backend server connection
-                      failed. Number of retries when a backend server connection failed
+                    description: |-
+                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection failed
                     type: number
                   name:
-                    description: The name of the load-balancer backend. The name of
-                      the backend
+                    description: |-
+                      The name of the load-balancer backend.
+                      The name of the backend
                     type: string
                   onMarkedDownAction:
-                    description: '(Default: none) Modify what occurs when a backend
-                      server is marked down. Possible values are: none and shutdown_sessions.
-                      Modify what occurs when a backend server is marked down'
+                    description: |-
+                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
-                    description: '(Default: none) Choose the type of PROXY protocol
-                      to enable (none, v1, v2, v2_ssl, v2_ssl_cn) Type of PROXY protocol
-                      to enable'
+                    description: |-
+                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
-                    description: Whether to use another backend server on each attempt.
+                    description: |-
+                      Whether to use another backend server on each attempt.
                       Whether to use another backend server on each attempt
                     type: number
                   sendProxyV2:
-                    description: 'DEPRECATED please use proxy_protocol instead - (Default:
-                      false) Enables PROXY protocol version 2. Enables PROXY protocol
-                      version 2'
+                    description: |-
+                      DEPRECATED please use proxy_protocol instead - (Default: false) Enables PROXY protocol version 2.
+                      Enables PROXY protocol version 2
                     type: boolean
                   serverIps:
-                    description: List of backend server IP addresses. Addresses can
-                      be either IPv4 or IPv6. Backend server IP addresses list (IPv4
-                      or IPv6)
+                    description: |-
+                      List of backend server IP addresses. Addresses can be either IPv4 or IPv6.
+                      Backend server IP addresses list (IPv4 or IPv6)
                     items:
                       type: string
                     type: array
                   sslBridging:
-                    description: '(Default: false) Enables SSL between load balancer
-                      and backend servers. Enables SSL between load balancer and backend
-                      servers'
+                    description: |-
+                      (Default: false) Enables SSL between load balancer and backend servers.
+                      Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
-                    description: '(Default: none) The type of sticky sessions. The
-                      only current possible values are: none, cookie and table. The
-                      type of sticky sessions'
+                    description: |-
+                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
-                    description: Cookie name for sticky sessions. Only applicable
-                      when sticky_sessions is set to cookie. Cookie name for for sticky
-                      sessions
+                    description: |-
+                      Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
+                      Cookie name for for sticky sessions
                     type: string
                   timeoutConnect:
-                    description: 'Maximum initial server connection establishment
-                      time. (e.g.: 1s) Maximum initial server connection establishment
-                      time'
+                    description: |-
+                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
-                    description: 'Maximum time for a request to be left pending in
-                      queue when max_connections is reached. (e.g.: 1s) Maximum time
-                      (in seconds) for a request to be left pending in queue when
-                      `max_connections` is reached'
+                    description: |-
+                      Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)
+                      Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
                     type: string
                   timeoutServer:
-                    description: 'Maximum server connection inactivity time. (e.g.:
-                      1s) Maximum server connection inactivity time'
+                    description: |-
+                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
-                    description: 'Maximum tunnel inactivity time. (e.g.: 1s) Maximum
-                      tunnel inactivity time'
+                    description: |-
+                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time
                     type: string
                 type: object
               conditions:
@@ -919,13 +981,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -936,8 +1000,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime
