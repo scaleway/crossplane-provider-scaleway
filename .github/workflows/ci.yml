@@ -48,6 +48,8 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
+          # https://github.com/golangci/golangci-lint-action/issues/863
+          cache: false
           go-version: ${{ env.GO_VERSION }}
 
       - name: Find the Go Build Cache
@@ -71,8 +73,6 @@ jobs:
         with:
           version: latest
           args: --timeout 10m
-          # https://github.com/golangci/golangci-lint-action/issues/863
-          cache: false
 
   check-diff:
     runs-on: ubuntu-22.04
