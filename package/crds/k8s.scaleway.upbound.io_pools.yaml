@@ -175,6 +175,7 @@ spec:
                       The Kubelet arguments to be used by this pool
                       The Kubelet arguments to be used by this pool
                     type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -268,9 +269,8 @@ spec:
                 type: object
               initProvider:
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
                   InitProvider holds the same fields as ForProvider, with the exception
                   of Identifier and other resource reference fields. The fields that are
                   in InitProvider are merged into ForProvider when the resource is created.
@@ -291,6 +291,85 @@ spec:
                       ~> Important: When enabled, an update of the size will not be taken into account.
                       Enable the autoscaling on the pool
                     type: boolean
+                  clusterId:
+                    description: |-
+                      The ID of the Kubernetes cluster on which this pool will be created.
+                      The ID of the cluster on which this pool will be created
+                    type: string
+                  clusterIdRef:
+                    description: Reference to a Cluster to populate clusterId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  clusterIdSelector:
+                    description: Selector for a Cluster to populate clusterId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   containerRuntime:
                     description: |-
                       (Defaults to containerd) The container runtime of the pool.
@@ -304,6 +383,7 @@ spec:
                       The Kubelet arguments to be used by this pool
                       The Kubelet arguments to be used by this pool
                     type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -399,9 +479,8 @@ spec:
                 default:
                 - '*'
                 description: |-
-                  THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-                  unless the relevant Crossplane feature flag is enabled, and may be
-                  changed or removed without notice.
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
                   ManagementPolicies specify the array of actions Crossplane is allowed to
                   take on the managed and external resources.
                   This field is planned to replace the DeletionPolicy field in a future
@@ -621,6 +700,7 @@ spec:
                       The Kubelet arguments to be used by this pool
                       The Kubelet arguments to be used by this pool
                     type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -783,6 +863,9 @@ spec:
                   - type
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec

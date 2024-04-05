@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -26,6 +30,19 @@ type PublicGatewayInitParameters struct {
 	// Enable SMTP on the gateway
 	// Enable SMTP on the gateway
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
+
+	// attach an existing flexible IP to the gateway
+	// attach an existing IP to the gateway
+	// +crossplane:generate:reference:type=PublicGatewayIP
+	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// Reference to a PublicGatewayIP to populate ipId.
+	// +kubebuilder:validation:Optional
+	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicGatewayIP to populate ipId.
+	// +kubebuilder:validation:Optional
+	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
 	// The name of the public gateway. If not provided it will be randomly generated.
 	// name of the gateway
@@ -180,9 +197,8 @@ type PublicGatewayParameters struct {
 type PublicGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicGatewayParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -201,13 +217,14 @@ type PublicGatewayStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PublicGateway is the Schema for the PublicGateways API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type PublicGateway struct {
 	metav1.TypeMeta   `json:",inline"`

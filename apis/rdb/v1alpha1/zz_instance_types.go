@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -41,6 +45,7 @@ type InstanceInitParameters struct {
 
 	// Map of engine settings to be set at database initialisation.
 	// Map of engine settings to be set at database initialisation.
+	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
 	// Enable or disable high availability for the database instance.
@@ -71,6 +76,7 @@ type InstanceInitParameters struct {
 
 	// Map of engine settings to be set. Using this option will override default config.
 	// Map of engine settings to be set on a running instance.
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// The tags associated with the Database Instance.
@@ -133,6 +139,7 @@ type InstanceObservation struct {
 
 	// Map of engine settings to be set at database initialisation.
 	// Map of engine settings to be set at database initialisation.
+	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
 	// Enable or disable high availability for the database instance.
@@ -175,6 +182,7 @@ type InstanceObservation struct {
 
 	// Map of engine settings to be set. Using this option will override default config.
 	// Map of engine settings to be set on a running instance.
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// The tags associated with the Database Instance.
@@ -229,6 +237,7 @@ type InstanceParameters struct {
 	// Map of engine settings to be set at database initialisation.
 	// Map of engine settings to be set at database initialisation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
 	// Enable or disable high availability for the database instance.
@@ -271,6 +280,7 @@ type InstanceParameters struct {
 	// Map of engine settings to be set. Using this option will override default config.
 	// Map of engine settings to be set on a running instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// The tags associated with the Database Instance.
@@ -420,9 +430,8 @@ type ReadReplicasParameters struct {
 type InstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -441,13 +450,14 @@ type InstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`

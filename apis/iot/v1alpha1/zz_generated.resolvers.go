@@ -35,6 +35,22 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HubIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HubID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HubIDRef,
+		Selector:     mg.Spec.InitProvider.HubIDSelector,
+		To: reference.To{
+			List:    &HubList{},
+			Managed: &Hub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HubID")
+	}
+	mg.Spec.InitProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HubIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -61,6 +77,22 @@ func (mg *Network) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HubIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HubID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HubIDRef,
+		Selector:     mg.Spec.InitProvider.HubIDSelector,
+		To: reference.To{
+			List:    &HubList{},
+			Managed: &Hub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HubID")
+	}
+	mg.Spec.InitProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HubIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -86,6 +118,22 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HubIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HubID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HubIDRef,
+		Selector:     mg.Spec.InitProvider.HubIDSelector,
+		To: reference.To{
+			List:    &HubList{},
+			Managed: &Hub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HubID")
+	}
+	mg.Spec.InitProvider.HubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HubIDRef = rsp.ResolvedReference
 
 	return nil
 }

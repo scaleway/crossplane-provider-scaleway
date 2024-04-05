@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -118,6 +122,19 @@ type FrontendInitParameters struct {
 	// ACL rules
 	ACL []ACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The load-balancer backend ID this frontend is attached to.
+	// The load-balancer backend ID
+	// +crossplane:generate:reference:type=Backend
+	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
+
+	// Reference to a Backend to populate backendId.
+	// +kubebuilder:validation:Optional
+	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
+
+	// Selector for a Backend to populate backendId.
+	// +kubebuilder:validation:Optional
+	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
+
 	// List of Certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
@@ -134,6 +151,19 @@ type FrontendInitParameters struct {
 	// TCP port to listen on the front side.
 	// TCP port to listen on the front side
 	InboundPort *float64 `json:"inboundPort,omitempty" tf:"inbound_port,omitempty"`
+
+	// The load-balancer ID this frontend is attached to.
+	// The load-balancer ID
+	// +crossplane:generate:reference:type=LB
+	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
+
+	// Reference to a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
+
+	// Selector for a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
 	// The name of the load-balancer frontend.
 	// The name of the frontend
@@ -390,9 +420,8 @@ type RedirectParameters struct {
 type FrontendSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontendParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -411,13 +440,14 @@ type FrontendStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Frontend is the Schema for the Frontends API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Frontend struct {
 	metav1.TypeMeta   `json:",inline"`

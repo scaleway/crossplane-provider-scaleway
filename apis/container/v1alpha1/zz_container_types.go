@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -29,6 +33,7 @@ type ContainerInitParameters struct {
 
 	// The environment variables of the container.
 	// The environment variables to be injected into your container at runtime.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// HTTP traffic configuration
@@ -53,6 +58,19 @@ type ContainerInitParameters struct {
 	// The unique name of the container name.
 	// The container name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The container namespace ID of the container.
+	// The container namespace associated
+	// +crossplane:generate:reference:type=ContainerNamespace
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a ContainerNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ContainerNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// The port to expose the container. Defaults to 8080.
 	// The port to expose the container. Defaults to 8080
@@ -110,6 +128,7 @@ type ContainerObservation struct {
 
 	// The environment variables of the container.
 	// The environment variables to be injected into your container at runtime.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The error message of the container.
@@ -198,6 +217,7 @@ type ContainerParameters struct {
 	// The environment variables of the container.
 	// The environment variables to be injected into your container at runtime.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// HTTP traffic configuration
@@ -292,9 +312,8 @@ type ContainerParameters struct {
 type ContainerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContainerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -313,13 +332,14 @@ type ContainerStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Container is the Schema for the Containers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Container struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -1,6 +1,6 @@
 package k8s
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 const shortGroup = "k8s"
 

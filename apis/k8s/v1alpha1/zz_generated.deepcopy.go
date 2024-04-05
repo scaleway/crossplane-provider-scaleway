@@ -402,6 +402,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PrivateNetworkID != nil {
+		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateNetworkIDRef != nil {
+		in, out := &in.PrivateNetworkIDRef, &out.PrivateNetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PrivateNetworkIDSelector != nil {
+		in, out := &in.PrivateNetworkIDSelector, &out.PrivateNetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -1167,6 +1182,21 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 		in, out := &in.Autoscaling, &out.Autoscaling
 		*out = new(bool)
 		**out = **in
+	}
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRuntime != nil {
 		in, out := &in.ContainerRuntime, &out.ContainerRuntime

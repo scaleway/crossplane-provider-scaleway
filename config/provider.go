@@ -27,7 +27,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/registry"
 	"github.com/scaleway/provider-scaleway/config/tem"
 	"github.com/scaleway/provider-scaleway/config/vpc"
-	ujconfig "github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 )
 
 const (
