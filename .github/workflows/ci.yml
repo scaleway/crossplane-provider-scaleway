@@ -78,6 +78,8 @@ jobs:
         with:
           version: latest
           args: --timeout 10m
+          # https://github.com/golangci/golangci-lint-action/issues/863
+          cache: false
 
   check-diff:
     runs-on: ubuntu-22.04
