@@ -57,7 +57,7 @@ jobs:
         run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-lint-${{ hashFiles('**/go.sum') }}
@@ -98,7 +98,7 @@ jobs:
         run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-check-diff-${{ hashFiles('**/go.sum') }}
@@ -131,7 +131,7 @@ jobs:
         run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
@@ -170,7 +170,7 @@ jobs:
         run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
@@ -225,7 +225,7 @@ jobs:
         run: echo "::set-output name=cache::$(make go.cachedir)"
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
