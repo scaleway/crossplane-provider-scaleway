@@ -15,6 +15,19 @@ import (
 
 type DomainInitParameters struct {
 
+	// The ID of the function you want to create a domain with.
+	// The ID of the function
+	// +crossplane:generate:reference:type=Function
+	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
+
+	// Reference to a Function to populate functionId.
+	// +kubebuilder:validation:Optional
+	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionId.
+	// +kubebuilder:validation:Optional
+	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
+
 	// The hostname that should resolve to your function id native domain.
 	// You should use a CNAME domain record that point to your native function domain_name for it.
 	// The hostname that should be redirected to the function
@@ -80,9 +93,8 @@ type DomainParameters struct {
 type DomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -101,13 +113,14 @@ type DomainStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Domain is the Schema for the Domains API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`

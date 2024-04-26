@@ -15,6 +15,19 @@ import (
 
 type PublicGatewayPATRuleInitParameters struct {
 
+	// The ID of the public gateway.
+	// The ID of the gateway this PAT rule is applied to
+	// +crossplane:generate:reference:type=PublicGateway
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
+	// Reference to a PublicGateway to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicGateway to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
+
 	// The Private IP to forward data to (IP address).
 	// The private IP used in the PAT rule
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
@@ -124,9 +137,8 @@ type PublicGatewayPATRuleParameters struct {
 type PublicGatewayPATRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicGatewayPATRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -145,13 +157,14 @@ type PublicGatewayPATRuleStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PublicGatewayPATRule is the Schema for the PublicGatewayPATRules API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type PublicGatewayPATRule struct {
 	metav1.TypeMeta   `json:",inline"`

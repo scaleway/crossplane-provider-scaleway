@@ -35,6 +35,22 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RootVolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RootVolumeIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RootVolumeID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RootVolumeIDRef,
+		Selector:     mg.Spec.InitProvider.RootVolumeIDSelector,
+		To: reference.To{
+			List:    &SnapshotList{},
+			Managed: &Snapshot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RootVolumeID")
+	}
+	mg.Spec.InitProvider.RootVolumeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RootVolumeIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -60,6 +76,22 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecurityGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityGroupID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SecurityGroupIDRef,
+		Selector:     mg.Spec.InitProvider.SecurityGroupIDSelector,
+		To: reference.To{
+			List:    &SecurityGroupList{},
+			Managed: &SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupID")
+	}
+	mg.Spec.InitProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecurityGroupIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -119,6 +151,54 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecurityGroupIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.IPIDRef,
+		Selector:     mg.Spec.InitProvider.IPIDSelector,
+		To: reference.To{
+			List:    &IPList{},
+			Managed: &IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPID")
+	}
+	mg.Spec.InitProvider.IPID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PlacementGroupID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PlacementGroupIDRef,
+		Selector:     mg.Spec.InitProvider.PlacementGroupIDSelector,
+		To: reference.To{
+			List:    &PlacementGroupList{},
+			Managed: &PlacementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PlacementGroupID")
+	}
+	mg.Spec.InitProvider.PlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PlacementGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityGroupID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SecurityGroupIDRef,
+		Selector:     mg.Spec.InitProvider.SecurityGroupIDSelector,
+		To: reference.To{
+			List:    &SecurityGroupList{},
+			Managed: &SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupID")
+	}
+	mg.Spec.InitProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecurityGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -145,6 +225,22 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VolumeIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VolumeID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VolumeIDRef,
+		Selector:     mg.Spec.InitProvider.VolumeIDSelector,
+		To: reference.To{
+			List:    &VolumeList{},
+			Managed: &Volume{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VolumeID")
+	}
+	mg.Spec.InitProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VolumeIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -170,6 +266,22 @@ func (mg *UserData) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
 
 	return nil
 }

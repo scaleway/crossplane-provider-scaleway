@@ -67,6 +67,54 @@ func (mg *GatewayNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.PrivateNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateNetworkIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DHCPID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DHCPIDRef,
+		Selector:     mg.Spec.InitProvider.DHCPIDSelector,
+		To: reference.To{
+			List:    &PublicGatewayDHCPList{},
+			Managed: &PublicGatewayDHCP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DHCPID")
+	}
+	mg.Spec.InitProvider.DHCPID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DHCPIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GatewayID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.GatewayIDRef,
+		Selector:     mg.Spec.InitProvider.GatewayIDSelector,
+		To: reference.To{
+			List:    &PublicGatewayList{},
+			Managed: &PublicGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GatewayID")
+	}
+	mg.Spec.InitProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GatewayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PrivateNetworkIDRef,
+		Selector:     mg.Spec.InitProvider.PrivateNetworkIDSelector,
+		To: reference.To{
+			List:    &PrivateNetworkList{},
+			Managed: &PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateNetworkID")
+	}
+	mg.Spec.InitProvider.PrivateNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateNetworkIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -92,6 +140,22 @@ func (mg *PrivateNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -119,6 +183,22 @@ func (mg *PublicGateway) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.IPID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IPIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.IPIDRef,
+		Selector:     mg.Spec.InitProvider.IPIDSelector,
+		To: reference.To{
+			List:    &PublicGatewayIPList{},
+			Managed: &PublicGatewayIP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPID")
+	}
+	mg.Spec.InitProvider.IPID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -144,6 +224,22 @@ func (mg *PublicGatewayPATRule) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GatewayID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.GatewayIDRef,
+		Selector:     mg.Spec.InitProvider.GatewayIDSelector,
+		To: reference.To{
+			List:    &PublicGatewayList{},
+			Managed: &PublicGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GatewayID")
+	}
+	mg.Spec.InitProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GatewayIDRef = rsp.ResolvedReference
 
 	return nil
 }

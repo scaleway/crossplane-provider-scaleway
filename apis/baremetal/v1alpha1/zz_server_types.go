@@ -200,6 +200,22 @@ type ServerInitParameters struct {
 	// If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
 	ReinstallOnConfigChanges *bool `json:"reinstallOnConfigChanges,omitempty" tf:"reinstall_on_config_changes,omitempty"`
 
+	// List of SSH keys allowed to connect to the server.
+	// Array of SSH key IDs allowed to SSH to the server
+	//
+	// **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
+	// If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
+	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.SSHKey
+	SSHKeyIds []*string `json:"sshKeyIds,omitempty" tf:"ssh_key_ids,omitempty"`
+
+	// References to SSHKey in account to populate sshKeyIds.
+	// +kubebuilder:validation:Optional
+	SSHKeyIdsRefs []v1.Reference `json:"sshKeyIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SSHKey in account to populate sshKeyIds.
+	// +kubebuilder:validation:Optional
+	SSHKeyIdsSelector *v1.Selector `json:"sshKeyIdsSelector,omitempty" tf:"-"`
+
 	// User used for the service to install.
 	// User used for the service to install.
 	ServiceUser *string `json:"serviceUser,omitempty" tf:"service_user,omitempty"`
@@ -431,9 +447,8 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -452,13 +467,14 @@ type ServerStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Server is the Schema for the Servers API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`

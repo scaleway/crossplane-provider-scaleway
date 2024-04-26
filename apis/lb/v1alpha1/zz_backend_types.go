@@ -73,6 +73,20 @@ type BackendInitParameters struct {
 	// Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
 	IgnoreSSLServerVerify *bool `json:"ignoreSslServerVerify,omitempty" tf:"ignore_ssl_server_verify,omitempty"`
 
+	// The load-balancer ID this backend is attached to.
+	// ~> Important: Updates to lb_id will recreate the backend.
+	// The load-balancer ID
+	// +crossplane:generate:reference:type=LB
+	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
+
+	// Reference to a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
+
+	// Selector for a LB to populate lbId.
+	// +kubebuilder:validation:Optional
+	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
+
 	// Maximum number of connections allowed per backend server.
 	// Maximum number of connections allowed per backend server
 	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
@@ -576,9 +590,8 @@ type HealthCheckTCPParameters struct {
 type BackendSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackendParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -597,13 +610,14 @@ type BackendStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Backend is the Schema for the Backends API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Backend struct {
 	metav1.TypeMeta   `json:",inline"`

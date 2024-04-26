@@ -21,6 +21,30 @@ type TokenInitParameters struct {
 	// The expiration date of the token.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
+	// The ID of the function.
+	// +crossplane:generate:reference:type=Function
+	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
+
+	// Reference to a Function to populate functionId.
+	// +kubebuilder:validation:Optional
+	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionId.
+	// +kubebuilder:validation:Optional
+	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
+
+	// The ID of the function namespace.
+	// +crossplane:generate:reference:type=FunctionNamespace
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a FunctionNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a FunctionNamespace to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+
 	// (Defaults to provider region). The region in which the namespace should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -94,9 +118,8 @@ type TokenParameters struct {
 type TokenSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TokenParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -115,13 +138,14 @@ type TokenStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Token is the Schema for the Tokens API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Token struct {
 	metav1.TypeMeta   `json:",inline"`

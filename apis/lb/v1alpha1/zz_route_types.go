@@ -15,6 +15,32 @@ import (
 
 type RouteInitParameters struct {
 
+	// The ID of the backend to which the route is associated.
+	// The backend ID destination of redirection
+	// +crossplane:generate:reference:type=Backend
+	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
+
+	// Reference to a Backend to populate backendId.
+	// +kubebuilder:validation:Optional
+	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
+
+	// Selector for a Backend to populate backendId.
+	// +kubebuilder:validation:Optional
+	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
+
+	// The ID of the frontend to which the route is associated.
+	// The frontend ID origin of redirection
+	// +crossplane:generate:reference:type=Frontend
+	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
+
+	// Reference to a Frontend to populate frontendId.
+	// +kubebuilder:validation:Optional
+	FrontendIDRef *v1.Reference `json:"frontendIdRef,omitempty" tf:"-"`
+
+	// Selector for a Frontend to populate frontendId.
+	// +kubebuilder:validation:Optional
+	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
+
 	// The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
 	// Only one of match_sni and match_host_header should be specified.
 	// Specifies the host of the server to which the request is being sent
@@ -105,9 +131,8 @@ type RouteParameters struct {
 type RouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -126,13 +151,14 @@ type RouteStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Route is the Schema for the Routes API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`

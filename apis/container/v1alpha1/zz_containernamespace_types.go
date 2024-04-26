@@ -24,6 +24,7 @@ type ContainerNamespaceInitParameters struct {
 
 	// The environment variables of the namespace.
 	// The environment variables of the container namespace
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The unique name of the container namespace.
@@ -50,6 +51,7 @@ type ContainerNamespaceObservation struct {
 
 	// The environment variables of the namespace.
 	// The environment variables of the container namespace
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The ID of the namespace
@@ -94,6 +96,7 @@ type ContainerNamespaceParameters struct {
 	// The environment variables of the namespace.
 	// The environment variables of the container namespace
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The unique name of the container namespace.
@@ -121,9 +124,8 @@ type ContainerNamespaceParameters struct {
 type ContainerNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContainerNamespaceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -142,13 +144,14 @@ type ContainerNamespaceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ContainerNamespace is the Schema for the ContainerNamespaces API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type ContainerNamespace struct {
 	metav1.TypeMeta   `json:",inline"`

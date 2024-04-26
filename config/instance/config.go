@@ -1,6 +1,6 @@
 package instance
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 const shortGroup = "instance"
 
@@ -69,7 +69,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Server"
 
-		// These are ignored because they conflict with each other. See https://github.com/upbound/upjet/blob/main/docs/add-new-resource-long.md#late-initialization-configuration
+		// These are ignored because they conflict with each other. See https://github.com/crossplane/upjet/blob/main/docs/add-new-resource-long.md#late-initialization-configuration
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"image", "root_volume.volume_id"},
 		}

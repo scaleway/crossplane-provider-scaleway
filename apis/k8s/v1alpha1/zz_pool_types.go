@@ -46,6 +46,19 @@ type PoolInitParameters struct {
 	// Enable the autoscaling on the pool
 	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
 
+	// The ID of the Kubernetes cluster on which this pool will be created.
+	// The ID of the cluster on which this pool will be created
+	// +crossplane:generate:reference:type=Cluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a Cluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// (Defaults to containerd) The container runtime of the pool.
 	// ~> Important: Updates to this field will recreate a new resource.
 	// Container runtime for the pool
@@ -53,6 +66,7 @@ type PoolInitParameters struct {
 
 	// The Kubelet arguments to be used by this pool
 	// The Kubelet arguments to be used by this pool
+	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -149,6 +163,7 @@ type PoolObservation struct {
 
 	// The Kubelet arguments to be used by this pool
 	// The Kubelet arguments to be used by this pool
+	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -264,6 +279,7 @@ type PoolParameters struct {
 	// The Kubelet arguments to be used by this pool
 	// The Kubelet arguments to be used by this pool
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -381,9 +397,8 @@ type UpgradePolicyParameters struct {
 type PoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PoolParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -402,13 +417,14 @@ type PoolStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Pool is the Schema for the Pools API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`

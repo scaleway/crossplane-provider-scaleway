@@ -15,6 +15,20 @@ import (
 
 type GroupInitParameters struct {
 
+	// The list of IDs of the applications attached to the group.
+	// List of IDs of the applications attached to the group
+	// +crossplane:generate:reference:type=Application
+	// +listType=set
+	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
+
+	// References to Application to populate applicationIds.
+	// +kubebuilder:validation:Optional
+	ApplicationIdsRefs []v1.Reference `json:"applicationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Application to populate applicationIds.
+	// +kubebuilder:validation:Optional
+	ApplicationIdsSelector *v1.Selector `json:"applicationIdsSelector,omitempty" tf:"-"`
+
 	// The description of the IAM group.
 	// The description of the iam group
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -37,6 +51,7 @@ type GroupInitParameters struct {
 
 	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
@@ -44,6 +59,7 @@ type GroupObservation struct {
 
 	// The list of IDs of the applications attached to the group.
 	// List of IDs of the applications attached to the group
+	// +listType=set
 	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
 	// The date and time of the creation of the group
@@ -76,6 +92,7 @@ type GroupObservation struct {
 
 	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
@@ -85,6 +102,7 @@ type GroupParameters struct {
 	// List of IDs of the applications attached to the group
 	// +crossplane:generate:reference:type=Application
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
 	// References to Application to populate applicationIds.
@@ -123,6 +141,7 @@ type GroupParameters struct {
 	// The list of IDs of the users attached to the group.
 	// List of IDs of the users attached to the group
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
@@ -130,9 +149,8 @@ type GroupParameters struct {
 type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -151,13 +169,14 @@ type GroupStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Group is the Schema for the Groups API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Group struct {
 	metav1.TypeMeta   `json:",inline"`

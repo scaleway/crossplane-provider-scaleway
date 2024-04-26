@@ -72,6 +72,19 @@ type SnapshotInitParameters struct {
 	// The snapshot's volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// The ID of the volume to take a snapshot from.
+	// ID of the volume to take a snapshot from
+	// +crossplane:generate:reference:type=Volume
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Reference to a Volume to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
+
+	// Selector for a Volume to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
+
 	// (Defaults to provider zone) The zone in which
 	// the snapshot should be created.
 	// The zone you want to attach the resource to
@@ -181,9 +194,8 @@ type SnapshotParameters struct {
 type SnapshotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SnapshotParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -202,13 +214,14 @@ type SnapshotStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Snapshot is the Schema for the Snapshots API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Snapshot struct {
 	metav1.TypeMeta   `json:",inline"`

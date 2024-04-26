@@ -35,6 +35,22 @@ func (mg *Container) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &ContainerNamespaceList{},
+			Managed: &ContainerNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
+	}
+	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -61,6 +77,22 @@ func (mg *Cron) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ContainerIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerIDSelector,
+		To: reference.To{
+			List:    &ContainerList{},
+			Managed: &Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerID")
+	}
+	mg.Spec.InitProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -86,6 +118,22 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ContainerIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerIDSelector,
+		To: reference.To{
+			List:    &ContainerList{},
+			Managed: &Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerID")
+	}
+	mg.Spec.InitProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -128,6 +176,38 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ContainerIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerIDSelector,
+		To: reference.To{
+			List:    &ContainerList{},
+			Managed: &Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerID")
+	}
+	mg.Spec.InitProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &ContainerNamespaceList{},
+			Managed: &ContainerNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
+	}
+	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

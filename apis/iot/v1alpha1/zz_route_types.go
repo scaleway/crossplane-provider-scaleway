@@ -96,6 +96,7 @@ type RestInitParameters struct {
 
 	// a map of the extra headers to send with the HTTP call (e.g. X-Header = Value).
 	// The HTTP call extra headers
+	// +mapType=granular
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The URI of the Rest endpoint (e.g. https://internal.mycompany.com/ingest/mqttdata).
@@ -111,6 +112,7 @@ type RestObservation struct {
 
 	// a map of the extra headers to send with the HTTP call (e.g. X-Header = Value).
 	// The HTTP call extra headers
+	// +mapType=granular
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The URI of the Rest endpoint (e.g. https://internal.mycompany.com/ingest/mqttdata).
@@ -127,6 +129,7 @@ type RestParameters struct {
 	// a map of the extra headers to send with the HTTP call (e.g. X-Header = Value).
 	// The HTTP call extra headers
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Headers map[string]*string `json:"headers" tf:"headers,omitempty"`
 
 	// The URI of the Rest endpoint (e.g. https://internal.mycompany.com/ingest/mqttdata).
@@ -145,6 +148,19 @@ type RouteInitParameters struct {
 	// Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
 	// Database Route parameters
 	Database []DatabaseInitParameters `json:"database,omitempty" tf:"database,omitempty"`
+
+	// The hub ID to which the Route will be attached to.
+	// The ID of the route's hub
+	// +crossplane:generate:reference:type=Hub
+	HubID *string `json:"hubId,omitempty" tf:"hub_id,omitempty"`
+
+	// Reference to a Hub to populate hubId.
+	// +kubebuilder:validation:Optional
+	HubIDRef *v1.Reference `json:"hubIdRef,omitempty" tf:"-"`
+
+	// Selector for a Hub to populate hubId.
+	// +kubebuilder:validation:Optional
+	HubIDSelector *v1.Selector `json:"hubIdSelector,omitempty" tf:"-"`
 
 	// The name of the IoT Route you want to create (e.g. my-route).
 	// The name of the route
@@ -317,9 +333,8 @@ type S3Parameters struct {
 type RouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -338,13 +353,14 @@ type RouteStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Route is the Schema for the Routes API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -14,7 +14,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/terraform"
+	"github.com/crossplane/upjet/pkg/terraform"
 
 	"github.com/scaleway/provider-scaleway/apis/v1beta1"
 )

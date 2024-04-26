@@ -45,6 +45,19 @@ type DeviceInitParameters struct {
 	// The description of the device
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the hub on which this device will be created.
+	// The ID of the hub on which this device will be created
+	// +crossplane:generate:reference:type=Hub
+	HubID *string `json:"hubId,omitempty" tf:"hub_id,omitempty"`
+
+	// Reference to a Hub to populate hubId.
+	// +kubebuilder:validation:Optional
+	HubIDRef *v1.Reference `json:"hubIdRef,omitempty" tf:"-"`
+
+	// Selector for a Hub to populate hubId.
+	// +kubebuilder:validation:Optional
+	HubIDSelector *v1.Selector `json:"hubIdSelector,omitempty" tf:"-"`
+
 	// Rules that define which messages are authorized or denied based on their topic.
 	// Rules to authorize or deny the device to publish/subscribe to specific topics
 	MessageFilters []MessageFiltersInitParameters `json:"messageFilters,omitempty" tf:"message_filters,omitempty"`
@@ -274,9 +287,8 @@ type SubscribeParameters struct {
 type DeviceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeviceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -295,13 +307,14 @@ type DeviceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Device is the Schema for the Devices API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`

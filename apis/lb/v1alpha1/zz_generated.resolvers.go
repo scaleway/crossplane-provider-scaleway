@@ -35,6 +35,22 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LBIDRef,
+		Selector:     mg.Spec.InitProvider.LBIDSelector,
+		To: reference.To{
+			List:    &LBList{},
+			Managed: &LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LBID")
+	}
+	mg.Spec.InitProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LBIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -60,6 +76,22 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LBIDRef,
+		Selector:     mg.Spec.InitProvider.LBIDSelector,
+		To: reference.To{
+			List:    &LBList{},
+			Managed: &LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LBID")
+	}
+	mg.Spec.InitProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LBIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -103,6 +135,38 @@ func (mg *Frontend) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackendID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BackendIDRef,
+		Selector:     mg.Spec.InitProvider.BackendIDSelector,
+		To: reference.To{
+			List:    &BackendList{},
+			Managed: &Backend{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackendID")
+	}
+	mg.Spec.InitProvider.BackendID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackendIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LBIDRef,
+		Selector:     mg.Spec.InitProvider.LBIDSelector,
+		To: reference.To{
+			List:    &LBList{},
+			Managed: &LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LBID")
+	}
+	mg.Spec.InitProvider.LBID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LBIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -128,6 +192,22 @@ func (mg *LB) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.IPID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IPIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.IPIDRef,
+		Selector:     mg.Spec.InitProvider.IPIDSelector,
+		To: reference.To{
+			List:    &IPList{},
+			Managed: &IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPID")
+	}
+	mg.Spec.InitProvider.IPID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -170,6 +250,38 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.FrontendID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FrontendIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackendID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BackendIDRef,
+		Selector:     mg.Spec.InitProvider.BackendIDSelector,
+		To: reference.To{
+			List:    &BackendList{},
+			Managed: &Backend{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackendID")
+	}
+	mg.Spec.InitProvider.BackendID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackendIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FrontendID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FrontendIDRef,
+		Selector:     mg.Spec.InitProvider.FrontendIDSelector,
+		To: reference.To{
+			List:    &FrontendList{},
+			Managed: &Frontend{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FrontendID")
+	}
+	mg.Spec.InitProvider.FrontendID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FrontendIDRef = rsp.ResolvedReference
 
 	return nil
 }

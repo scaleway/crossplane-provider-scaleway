@@ -40,6 +40,7 @@ type AdditionalVolumesObservation struct {
 	Project *string `json:"project,omitempty" tf:"project,omitempty"`
 
 	// Description of the server containing the volume (in case the image is a backup from a server).
+	// +mapType=granular
 	Server map[string]*string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The size of the volume.
@@ -82,6 +83,19 @@ type ImageInitParameters struct {
 	// Set to true if the image is public.
 	// If true, the image will be public
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
+
+	// The ID of the snapshot of the volume to be used as root in the image.
+	// UUID of the snapshot from which the image is to be created
+	// +crossplane:generate:reference:type=Snapshot
+	RootVolumeID *string `json:"rootVolumeId,omitempty" tf:"root_volume_id,omitempty"`
+
+	// Reference to a Snapshot to populate rootVolumeId.
+	// +kubebuilder:validation:Optional
+	RootVolumeIDRef *v1.Reference `json:"rootVolumeIdRef,omitempty" tf:"-"`
+
+	// Selector for a Snapshot to populate rootVolumeId.
+	// +kubebuilder:validation:Optional
+	RootVolumeIDSelector *v1.Selector `json:"rootVolumeIdSelector,omitempty" tf:"-"`
 
 	// A list of tags to apply to the image.
 	// List of tags ["tag1", "tag2", ...] attached to the image
@@ -210,9 +224,8 @@ type ImageParameters struct {
 type ImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -231,13 +244,14 @@ type ImageStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Image is the Schema for the Images API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Image struct {
 	metav1.TypeMeta   `json:",inline"`

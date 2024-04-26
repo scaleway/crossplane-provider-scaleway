@@ -47,6 +47,7 @@ type BucketInitParameters struct {
 
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with this bucket
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -99,6 +100,7 @@ type BucketObservation struct {
 
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with this bucket
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -149,6 +151,7 @@ type BucketParameters struct {
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with this bucket
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -262,6 +265,7 @@ type LifecycleRuleInitParameters struct {
 
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with the bucket lifecycle
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
@@ -293,6 +297,7 @@ type LifecycleRuleObservation struct {
 
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with the bucket lifecycle
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
@@ -330,6 +335,7 @@ type LifecycleRuleParameters struct {
 	// A list of tags (key / value) for the bucket.
 	// The tags associated with the bucket lifecycle
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
@@ -399,9 +405,8 @@ type VersioningParameters struct {
 type BucketSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -420,13 +425,14 @@ type BucketStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Bucket is the Schema for the Buckets API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
