@@ -7,12 +7,15 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+	"os"
 
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
+	"github.com/scaleway/provider-scaleway/internal/version"
 
 	"github.com/crossplane/upjet/pkg/terraform"
 
@@ -37,10 +40,10 @@ const (
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
-func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
+func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) terraform.SetupFn {
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
-			Version: version,
+			Version: tfversion,
 			Requirement: terraform.ProviderRequirement{
 				Source:  providerSource,
 				Version: providerVersion,
@@ -87,6 +90,13 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			if scalewayCreds[key] != "" {
 				ps.Configuration[key] = scalewayCreds[key]
 			}
+		}
+
+		// Set the custom user agent
+		userAgent := fmt.Sprintf("crossplane-provider-scaleway/%s", version.Version)
+		err = os.Setenv("TF_APPEND_USER_AGENT", userAgent)
+		if err != nil {
+			return ps, errors.Wrap(err, "cannot set user agent")
 		}
 
 		return ps, nil
