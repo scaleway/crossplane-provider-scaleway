@@ -27,11 +27,12 @@ const (
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal scaleway credentials as JSON"
 
-	keyAccessKey = "access_key"
-	keySecretKey = "secret_key"
-	keyProjectID = "project_id"
-	keyRegion    = "region"
-	keyZone      = "zone"
+	keyAccessKey      = "access_key"
+	keySecretKey      = "secret_key"
+	keyProjectID      = "project_id"
+	keyOrganizationID = "organization_id"
+	keyRegion         = "region"
+	keyZone           = "zone"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -79,6 +80,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			keyAccessKey,
 			keySecretKey,
 			keyProjectID,
+			keyOrganizationID,
 			keyRegion,
 			keyZone,
 		} {
