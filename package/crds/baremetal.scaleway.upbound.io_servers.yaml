@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -363,6 +363,25 @@ spec:
                       ~> Important: Updates to os will reinstall the server.
                       The base image of the server
                     type: string
+                  passwordSecretRef:
+                    description: |-
+                      Password used for the installation. May be required depending on used os.
+                      Password used for the installation.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
@@ -387,6 +406,25 @@ spec:
                       ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
                       If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
                     type: boolean
+                  servicePasswordSecretRef:
+                    description: |-
+                      Password used for the service to install. May be required depending on used os.
+                      Password used for the service to install.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   serviceUser:
                     description: |-
                       User used for the service to install.
@@ -917,6 +955,13 @@ spec:
                         A Message containing details about this condition's last transition from
                         one status to another, if any.
                       type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
                     reason:
                       description: A Reason for this condition's last transition from
                         one status to another.
@@ -940,6 +985,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
             type: object
         required:
         - spec

@@ -149,6 +149,22 @@ func (in *ContainerInitParameters) DeepCopyInto(out *ContainerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretEnvironmentVariables != nil {
+		in, out := &in.SecretEnvironmentVariables, &out.SecretEnvironmentVariables
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -273,6 +289,22 @@ func (in *ContainerNamespaceInitParameters) DeepCopyInto(out *ContainerNamespace
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.SecretEnvironmentVariables != nil {
+		in, out := &in.SecretEnvironmentVariables, &out.SecretEnvironmentVariables
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 }
 

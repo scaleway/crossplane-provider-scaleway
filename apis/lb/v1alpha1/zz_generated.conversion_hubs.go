@@ -7,9 +7,6 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
-func (tr *LB) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Backend) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -20,6 +17,9 @@ func (tr *Frontend) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IP) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *LB) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Route) Hub() {}

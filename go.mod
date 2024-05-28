@@ -7,9 +7,9 @@ toolchain go1.22.2
 require (
 	dario.cat/mergo v1.0.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/crossplane/crossplane-runtime v1.16.0-rc.1
+	github.com/crossplane/crossplane-runtime v1.16.0-rc.1.0.20240424114634-8641eb2ba384
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.2.4
+	github.com/crossplane/upjet v1.4.0
 	github.com/pkg/errors v0.9.1
 	k8s.io/apimachinery v0.30.1
 	k8s.io/client-go v0.29.4
@@ -25,6 +25,7 @@ require (
 	github.com/antchfx/xpath v1.2.0 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dave/jennifer v1.4.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect

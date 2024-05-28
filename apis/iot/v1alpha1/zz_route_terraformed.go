@@ -21,7 +21,7 @@ func (mg *Route) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Route
 func (tr *Route) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"database[*].password": "spec.forProvider.database[*].passwordSecretRef"}
+	return map[string]string{"database[*].password": "database[*].passwordSecretRef"}
 }
 
 // GetObservation of this Route

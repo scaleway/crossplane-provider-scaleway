@@ -73,6 +73,10 @@ type ClusterInitParameters struct {
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Password for the first user of the Redis Cluster.
+	// Password of the user
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Describes the private network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
@@ -371,8 +375,8 @@ type ClusterStatus struct {
 // +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}

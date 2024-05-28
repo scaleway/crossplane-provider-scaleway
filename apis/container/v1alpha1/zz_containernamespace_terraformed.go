@@ -21,7 +21,7 @@ func (mg *ContainerNamespace) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ContainerNamespace
 func (tr *ContainerNamespace) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"secret_environment_variables": "spec.forProvider.secretEnvironmentVariablesSecretRef"}
+	return map[string]string{"secret_environment_variables": "secretEnvironmentVariablesSecretRef"}
 }
 
 // GetObservation of this ContainerNamespace

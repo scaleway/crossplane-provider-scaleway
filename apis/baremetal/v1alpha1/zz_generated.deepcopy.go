@@ -435,6 +435,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkInitParameters, len(*in))
@@ -474,6 +479,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		in, out := &in.SSHKeyIdsSelector, &out.SSHKeyIdsSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ServicePasswordSecretRef != nil {
+		in, out := &in.ServicePasswordSecretRef, &out.ServicePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.ServiceUser != nil {
 		in, out := &in.ServiceUser, &out.ServiceUser
