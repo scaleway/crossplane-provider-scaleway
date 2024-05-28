@@ -23,6 +23,10 @@ type DatabaseInitParameters struct {
 	// The database hostname
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
+	// The database password.
+	// The database password
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The database port (e.g. 5432)
 	// The database port
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -73,7 +77,7 @@ type DatabaseParameters struct {
 
 	// The database password.
 	// The database password
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The database port (e.g. 5432)
@@ -357,8 +361,8 @@ type RouteStatus struct {
 // +kubebuilder:storageversion
 
 // Route is the Schema for the Routes API.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}

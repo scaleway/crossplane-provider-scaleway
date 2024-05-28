@@ -7,9 +7,6 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
-func (tr *VPC) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GatewayNetwork) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,3 +23,6 @@ func (tr *PublicGatewayIP) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PublicGatewayPATRule) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPC) Hub() {}

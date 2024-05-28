@@ -91,6 +91,8 @@ type ContainerInitParameters struct {
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
 
+	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
 	// The container status.
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -332,8 +334,8 @@ type ContainerStatus struct {
 // +kubebuilder:storageversion
 
 // Container is the Schema for the Containers API.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}
