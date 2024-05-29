@@ -187,6 +187,10 @@ type ServerInitParameters struct {
 	// The base image of the server
 	Os *string `json:"os,omitempty" tf:"os,omitempty"`
 
+	// Password used for the installation. May be required depending on used os.
+	// Password used for the installation.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -215,6 +219,10 @@ type ServerInitParameters struct {
 	// Selector for a list of SSHKey in account to populate sshKeyIds.
 	// +kubebuilder:validation:Optional
 	SSHKeyIdsSelector *v1.Selector `json:"sshKeyIdsSelector,omitempty" tf:"-"`
+
+	// Password used for the service to install. May be required depending on used os.
+	// Password used for the service to install.
+	ServicePasswordSecretRef *v1.SecretKeySelector `json:"servicePasswordSecretRef,omitempty" tf:"-"`
 
 	// User used for the service to install.
 	// User used for the service to install.
@@ -471,8 +479,8 @@ type ServerStatus struct {
 // +kubebuilder:storageversion
 
 // Server is the Schema for the Servers API.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}

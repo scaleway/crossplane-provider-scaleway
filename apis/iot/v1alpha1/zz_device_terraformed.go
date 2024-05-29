@@ -21,7 +21,7 @@ func (mg *Device) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Device
 func (tr *Device) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"certificate[*].crt": "spec.forProvider.certificate[*].crtSecretRef", "certificate[*].key": "status.atProvider.certificate[*].key"}
+	return map[string]string{"certificate[*].crt": "certificate[*].crtSecretRef", "certificate[*].key": "status.atProvider.certificate[*].key"}
 }
 
 // GetObservation of this Device

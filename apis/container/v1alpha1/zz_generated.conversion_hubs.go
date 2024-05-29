@@ -10,13 +10,13 @@ package v1alpha1
 func (tr *Container) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ContainerNamespace) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Cron) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Domain) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ContainerNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Token) Hub() {}
