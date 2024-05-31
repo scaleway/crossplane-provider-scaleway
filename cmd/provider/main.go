@@ -8,16 +8,20 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"time"
 
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 
-	"github.com/alecthomas/kingpin/v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
+
+	"github.com/alecthomas/kingpin/v2"
+	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
+	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/certificates"
@@ -39,15 +43,16 @@ import (
 
 func main() {
 	var (
-		app              = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Scaleway").DefaultEnvars()
-		debug            = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
-		syncInterval     = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
-		pollInterval     = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
-		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
-		terraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
-		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
-		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
-		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
+		app                     = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Scaleway").DefaultEnvars()
+		debug                   = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
+		syncInterval            = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
+		pollInterval            = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
+		pollStateMetricInterval = app.Flag("poll-state-metric", "State metric recording interval").Default("5s").Duration()
+		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
+		terraformVersion        = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
+		providerSource          = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
+		providerVersion         = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
+		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
 
 		namespace                  = app.Flag("registry_namespace.yaml", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
@@ -83,6 +88,18 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Scaleway APIs to scheme")
 
+	metricRecorder := managed.NewMRMetricRecorder()
+	stateMetrics := statemetrics.NewMRStateMetrics()
+
+	metrics.Registry.MustRegister(metricRecorder)
+	metrics.Registry.MustRegister(stateMetrics)
+
+	metricOptions := &xpcontroller.MetricOptions{
+		PollStateMetricInterval: *pollStateMetricInterval,
+		MRMetrics:               metricRecorder,
+		MRStateMetrics:          stateMetrics,
+	}
+
 	featureFlags := &feature.Flags{}
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
@@ -91,6 +108,7 @@ func main() {
 			PollInterval:            *pollInterval,
 			MaxConcurrentReconciles: 1,
 			Features:                featureFlags,
+			MetricOptions:           metricOptions,
 		},
 		Provider: config.GetProvider(),
 		// use the following WorkspaceStoreOption to enable the shared gRPC mode
