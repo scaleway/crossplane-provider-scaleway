@@ -7,16 +7,16 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
-func (tr *Object) Hub() {}
+func (tr *ACL) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Bucket) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ACL) Hub() {}
+func (tr *LockConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LockConfiguration) Hub() {}
+func (tr *Object) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Policy) Hub() {}

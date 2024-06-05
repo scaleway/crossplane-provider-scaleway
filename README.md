@@ -100,6 +100,7 @@ stringData:
       "access_key": "SCWXXXXXXXXXXXXXXXXX",
       "secret_key": "11111111-1111-1111-1111-111111111111",
       "project_id": "11111111-1111-1111-1111-111111111111",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
       "region": "fr-par",
       "zone": "fr-par-1"
     }
@@ -115,9 +116,10 @@ $ kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl 
 
 | Provider Argument | Description                                                                                                                                                      |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `access_key`      | [Scaleway access key](https://console.scaleway.com/iam/api-keys)                                                                                          |
-| `secret_key`      | [Scaleway secret key](https://console.scaleway.com/iam/api-keys)                                                                                          |
+| `access_key`      | [Scaleway access key](https://console.scaleway.com/iam/api-keys)                                                                                                 |
+| `secret_key`      | [Scaleway secret key](https://console.scaleway.com/iam/api-keys)                                                                                                 |
 | `project_id`      | The [project ID](https://console.scaleway.com/project/settings) that will be used as default value for project-scoped resources.                                 |
+| `organization_id` | The [organization ID](https://console.scaleway.com/organization/settings) that will be used as default value for organization-scoped resources.                  |
 | `region`          | The [region](https://developers.scaleway.com/en/quickstart/#region-and-zone)  that will be used as default value for all resources. (`fr-par` if none specified) |
 | `zone`            | The [zone](https://developers.scaleway.com/en/quickstart/#region-and-zone) that will be used as default value for all resources. (`fr-par-1` if none specified)  |
 

@@ -56,6 +56,10 @@ type InstanceInitParameters struct {
 	// The type of database instance you want to create
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Password for the first user of the database instance.
+	// Password for the first user of the database instance
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// List of private networks endpoints of the database instance.
 	// List of private network to expose your database instance
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -450,8 +454,8 @@ type InstanceStatus struct {
 // +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,scaleway}

@@ -947,6 +947,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkInitParameters, len(*in))
@@ -2300,6 +2305,7 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
