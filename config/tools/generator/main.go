@@ -14,29 +14,6 @@ import (
 	"github.com/scaleway/provider-scaleway/config/tools"
 )
 
-const initialConfigTemplate = `package {{ .PackageName }}
-
-import "github.com/upbound/upjet/pkg/config"
-
-const shortGroup = "{{ .ShortGroup }}"
-`
-
-const resourceConfigTemplate = `
-// Configure adds configurations for {{ .ResourceName }} resource.
-func Configure(p *config.Provider) {
-    p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
-        r.ExternalName = config.IdentifierFromProvider
-        r.ShortGroup = shortGroup
-        r.Kind = "{{ .Kind }}"
-        {{ range $key, $value := .References }}
-        r.References["{{$key}}"] = config.Reference{
-            Type: "{{$value}}",
-        }
-        {{ end }}
-    })
-}
-`
-
 // ProviderGoFilePath is the path to the provider.go file where provider configurations are set.
 const ProviderGoFilePath = "config/provider.go"
 
