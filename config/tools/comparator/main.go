@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/crossplane/upjet/pkg/registry"
 	"github.com/pkg/errors"
 	"github.com/scaleway/provider-scaleway/config/tools"
-	"github.com/upbound/upjet/pkg/registry"
 
 	"gopkg.in/yaml.v3"
 )

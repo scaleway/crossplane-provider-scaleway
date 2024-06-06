@@ -43,6 +43,10 @@ const ProviderGoFilePath = "config/provider.go"
 // ExternalNameGoFilePath is the path to the external_name.go file where external name configurations are defined.
 const ExternalNameGoFilePath = "config/external_name.go"
 
+func parseTemplates() (*template.Template, error) {
+	return template.ParseFiles("config_templates.tmpl")
+}
+
 func generateConfigFile(resourceConfig tools.ResourceConfig) error {
 	dirPath := filepath.Join("config", resourceConfig.PackageName)
 	if err := os.MkdirAll(dirPath, 0750); err != nil {
@@ -64,7 +68,12 @@ func generateConfigFile(resourceConfig tools.ResourceConfig) error {
 }
 
 func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) error {
-	tmpl, err := template.New("config").Parse(initialConfigTemplate + resourceConfigTemplate)
+	tmpl, err := parseTemplates()
+	if err != nil {
+		return err
+	}
+
+	file, err := os.Create(filePath)
 	if err != nil {
 		return err
 	}
@@ -74,18 +83,20 @@ func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) e
 		return fmt.Errorf("invalid file path: %s", cleanFilePath)
 	}
 
-	file, err := os.Create(filePath)
-	if err != nil {
-		return err
-	}
-
 	defer func() {
 		if cerr := file.Close(); cerr != nil && err == nil {
 			err = cerr
 		}
 	}()
 
-	return tmpl.Execute(file, resourceConfig)
+	templates := []string{"initialConfigTemplate", "resourceConfigTemplate"}
+	for _, tmplName := range templates {
+		if err = tmpl.ExecuteTemplate(file, tmplName, resourceConfig); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func updateExistingConfigFile(content []byte, filePath string, resourceConfig tools.ResourceConfig) error {
@@ -96,19 +107,13 @@ func updateExistingConfigFile(content []byte, filePath string, resourceConfig to
 		return nil // Configurator already exists
 	}
 
-	tmpl, err := template.New("config").Parse(`
-        p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
-            r.ExternalName = config.IdentifierFromProvider
-            r.ShortGroup = "{{ .ShortGroup }}"
-            r.Kind = "{{ .Kind }}"
-        })
-    `)
+	tmpl, err := parseTemplates()
 	if err != nil {
 		return err
 	}
 
 	var tmplOutput bytes.Buffer
-	if err := tmpl.Execute(&tmplOutput, resourceConfig); err != nil {
+	if err := tmpl.ExecuteTemplate(&tmplOutput, "updateConfigTemplate", resourceConfig); err != nil {
 		return err
 	}
 
