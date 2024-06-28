@@ -16,15 +16,14 @@ import (
 type ACLInitParameters struct {
 
 	// The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A configuration block that sets the ACL permissions for an object per grantee documented below.
 	// A configuration block that sets the ACL permissions for an object per grantee.
 	AccessControlPolicy []AccessControlPolicyInitParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The project ID of the expected bucket owner.
@@ -43,15 +42,14 @@ type ACLInitParameters struct {
 type ACLObservation struct {
 
 	// The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A configuration block that sets the ACL permissions for an object per grantee documented below.
 	// A configuration block that sets the ACL permissions for an object per grantee.
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The project ID of the expected bucket owner.
@@ -73,7 +71,7 @@ type ACLObservation struct {
 type ACLParameters struct {
 
 	// The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -82,8 +80,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

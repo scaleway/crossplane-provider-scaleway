@@ -508,6 +508,11 @@ func (in *RecordObservation) DeepCopyInto(out *RecordObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Fqdn != nil {
+		in, out := &in.Fqdn, &out.Fqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.GeoIP != nil {
 		in, out := &in.GeoIP, &out.GeoIP
 		*out = make([]GeoIPObservation, len(*in))

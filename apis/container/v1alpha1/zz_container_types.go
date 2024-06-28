@@ -32,6 +32,7 @@ type ContainerInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
@@ -88,6 +89,7 @@ type ContainerInitParameters struct {
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
+	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
 
@@ -133,6 +135,7 @@ type ContainerObservation struct {
 	// The error description
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 
+	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
@@ -183,6 +186,7 @@ type ContainerObservation struct {
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
+	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
 
@@ -218,6 +222,7 @@ type ContainerParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	// +kubebuilder:validation:Optional
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
@@ -286,6 +291,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
+	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	// +kubebuilder:validation:Optional
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`

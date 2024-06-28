@@ -20,7 +20,7 @@ type RegistryNamespaceInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-	// Define the default visibity policy
+	// Define the default visibility policy
 	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
 
 	// The unique name of the namespace.
@@ -50,7 +50,7 @@ type RegistryNamespaceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-	// Define the default visibity policy
+	// Define the default visibility policy
 	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
 
 	// The unique name of the namespace.
@@ -78,7 +78,7 @@ type RegistryNamespaceParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-	// Define the default visibity policy
+	// Define the default visibility policy
 	// +kubebuilder:validation:Optional
 	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
 

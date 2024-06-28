@@ -91,6 +91,14 @@ type HubObservation struct {
 	// The ID of the Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The MQTT certificat content
+	// The MQTT certificat content
+	MqttCA *string `json:"mqttCa,omitempty" tf:"mqtt_ca,omitempty"`
+
+	// The MQTT ca url
+	// The url of the MQTT ca
+	MqttCAURL *string `json:"mqttCaUrl,omitempty" tf:"mqtt_ca_url,omitempty"`
+
 	// The name of the IoT Hub instance you want to create (e.g. my-hub).
 	// The name of the hub
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

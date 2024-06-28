@@ -227,6 +227,10 @@ type RecordObservation struct {
 	// The data of the record
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
+	// The FQDN of the record.
+	// The FQDN of the record
+	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
 	// The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example
 	// Return record based on client localisation
 	GeoIP []GeoIPObservation `json:"geoIp,omitempty" tf:"geo_ip,omitempty"`

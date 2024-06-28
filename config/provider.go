@@ -12,6 +12,7 @@ import (
 	"github.com/scaleway/provider-scaleway/config/account"
 	"github.com/scaleway/provider-scaleway/config/applesilicon"
 	"github.com/scaleway/provider-scaleway/config/baremetal"
+	"github.com/scaleway/provider-scaleway/config/block"
 	"github.com/scaleway/provider-scaleway/config/cockpit"
 	"github.com/scaleway/provider-scaleway/config/container"
 	"github.com/scaleway/provider-scaleway/config/domain"
@@ -20,6 +21,8 @@ import (
 	"github.com/scaleway/provider-scaleway/config/iam"
 	"github.com/scaleway/provider-scaleway/config/instance"
 	"github.com/scaleway/provider-scaleway/config/iot"
+	"github.com/scaleway/provider-scaleway/config/ipam"
+	"github.com/scaleway/provider-scaleway/config/jobs"
 	"github.com/scaleway/provider-scaleway/config/k8s"
 	"github.com/scaleway/provider-scaleway/config/lb"
 	"github.com/scaleway/provider-scaleway/config/object"
@@ -55,6 +58,7 @@ func GetProvider() *ujconfig.Provider {
 		account.Configure,
 		applesilicon.Configure,
 		baremetal.Configure,
+		block.Configure,
 		cockpit.Configure,
 		container.Configure,
 		domain.Configure,
@@ -63,6 +67,8 @@ func GetProvider() *ujconfig.Provider {
 		iam.Configure,
 		instance.Configure,
 		iot.Configure,
+		ipam.Configure,
+		jobs.Configure,
 		k8s.Configure,
 		lb.Configure,
 		object.Configure,

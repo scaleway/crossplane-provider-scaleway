@@ -15,7 +15,6 @@ import (
 
 type PolicyInitParameters struct {
 
-	// The name of the bucket.
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -34,7 +33,6 @@ type PolicyInitParameters struct {
 
 type PolicyObservation struct {
 
-	// The name of the bucket.
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -56,7 +54,6 @@ type PolicyObservation struct {
 
 type PolicyParameters struct {
 
-	// The name of the bucket.
 	// The bucket's name or regional ID.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

@@ -54,7 +54,7 @@ type GatewayNetworkInitParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	// Auto-configure the Gateway Network using IPAM (IP address management service)
 	IpamConfig []IpamConfigInitParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
 
 	// The ID of the private network.
@@ -109,7 +109,7 @@ type GatewayNetworkObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	// Auto-configure the Gateway Network using IPAM (IP address management service)
 	IpamConfig []IpamConfigObservation `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
 
 	// The mac address of the creation of the gateway network.
@@ -183,7 +183,7 @@ type GatewayNetworkParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-	// Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+	// Auto-configure the Gateway Network using IPAM (IP address management service)
 	// +kubebuilder:validation:Optional
 	IpamConfig []IpamConfigParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
 

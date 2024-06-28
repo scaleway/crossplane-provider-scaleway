@@ -16,7 +16,7 @@ import (
 type BucketInitParameters struct {
 
 	// (Deprecated) The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A rule of Cross-Origin Resource Sharing (documented below).
@@ -58,7 +58,7 @@ type BucketInitParameters struct {
 type BucketObservation struct {
 
 	// (Deprecated) The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// The endpoint URL of the bucket
@@ -111,7 +111,7 @@ type BucketObservation struct {
 type BucketParameters struct {
 
 	// (Deprecated) The canned ACL you want to apply to the bucket.
-	// ACL of the bucket: either 'public-read' or 'private'.
+	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 

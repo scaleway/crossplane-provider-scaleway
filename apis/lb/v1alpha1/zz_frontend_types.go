@@ -37,7 +37,7 @@ type ACLObservation struct {
 	// Action to undertake when an ACL filter matches
 	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Date and time of ACL's creation (RFC 3339 format)
+	// IsDate and time of ACL's creation (RFC 3339 format)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// Description of the ACL
@@ -51,7 +51,7 @@ type ACLObservation struct {
 	// The ACL name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Date and time of ACL's update (RFC 3339 format)
+	// IsDate and time of ACL's update (RFC 3339 format)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
@@ -292,6 +292,7 @@ type MatchInitParameters struct {
 	// The HTTP filter to match
 	HTTPFilter *string `json:"httpFilter,omitempty" tf:"http_filter,omitempty"`
 
+	// If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
 	// You can use this field with http_header_match acl type to set the header name to filter
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
@@ -317,6 +318,7 @@ type MatchObservation struct {
 	// The HTTP filter to match
 	HTTPFilter *string `json:"httpFilter,omitempty" tf:"http_filter,omitempty"`
 
+	// If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
 	// You can use this field with http_header_match acl type to set the header name to filter
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
@@ -343,6 +345,7 @@ type MatchParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPFilter *string `json:"httpFilter,omitempty" tf:"http_filter,omitempty"`
 
+	// If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
 	// You can use this field with http_header_match acl type to set the header name to filter
 	// +kubebuilder:validation:Optional
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`

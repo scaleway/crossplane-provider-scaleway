@@ -15,6 +15,10 @@ import (
 
 type VPCInitParameters struct {
 
+	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// Enable routing between Private Networks in the VPC
+	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
+
 	// The name of the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -37,6 +41,10 @@ type VPCObservation struct {
 	// Date and time of VPC's creation (RFC 3339 format).
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// Enable routing between Private Networks in the VPC
+	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
 	// The ID of the VPC.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -71,6 +79,11 @@ type VPCObservation struct {
 }
 
 type VPCParameters struct {
+
+	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// Enable routing between Private Networks in the VPC
+	// +kubebuilder:validation:Optional
+	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
 	// The name of the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
