@@ -8,43 +8,43 @@ metadata:
   name: policy
 spec:
   forProvider:
-    bucket: ${scaleway_object_bucket.bucket.id}
+    bucket: some-unique-name
     policy: |-
-      ${jsonencode(
-          {
-            Version = "2023-04-17",
-            Id      = "MyBucketPolicy",
-            Statement = [
-              {
-                Sid    = "Delegate access",
-                Effect = "Allow",
-                Principal = {
-                  SCW = "application_id:${scaleway_iam_application.main.id}"
-                },
-                Action = "s3:ListBucket",
-                Resource = [
-                  "${scaleway_object_bucket.bucket.name}",
-                  "${scaleway_object_bucket.bucket.name}/*"
-                ]
-              }
-            ]
-          }
-        )}
+      ${jsonencode({
+          Version   = "2023-04-17",
+          Id      = "MyBucketPolicy",
+          Statement = [
+            {
+              Effect = "Allow"
+              Action = ["s3:*"]
+              Principal = { SCW = "user_id:${data.scaleway_iam_user.user.id}" }
+              Resource  = [
+                scaleway_object_bucket.bucket.name,
+                "${scaleway_object_bucket.bucket.name}/*",
+              ]
+            },
+          ]
+        })}
 
 ---
 
 apiVersion: iam.scaleway.upbound.io/v1alpha1
-kind: Application
+kind: Policy
 metadata:
   annotations:
     meta.upbound.io/example-id: object/v1alpha1/policy
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: policy
+  name: policy
 spec:
   forProvider:
-    description: a description
-    name: My application
+    name: object-storage-policy
+    rule:
+    - permissionSetNames:
+      - ObjectStorageFullAccess
+      projectIds:
+      - ${data.scaleway_account_project.default.id}
+    userId: ${data.scaleway_iam_user.user.id}
 
 ---
 

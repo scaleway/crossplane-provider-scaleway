@@ -73,9 +73,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The name of the bucket
+                    description: The bucket's name or regional ID.
                     type: string
                   content:
                     description: |-
@@ -153,9 +151,7 @@ spec:
                   autoscaler.
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The name of the bucket
+                    description: The bucket's name or regional ID.
                     type: string
                   content:
                     description: |-
@@ -401,9 +397,7 @@ spec:
               atProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The name of the bucket
+                    description: The bucket's name or regional ID.
                     type: string
                   content:
                     description: |-

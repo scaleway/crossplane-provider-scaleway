@@ -8,9 +8,8 @@ metadata:
   name: base
 spec:
   forProvider:
-    ipIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: main
+    ipIds:
+    - ${scaleway_lb_ip.main.id}
     type: LB-S
     zone: ${scaleway_lb_ip.main.zone}
 

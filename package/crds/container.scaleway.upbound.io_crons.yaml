@@ -157,6 +157,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: |-
+                      The name of the container cron. If not provided, the name is generated.
+                      during
+                      Cron job name
+                    type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region
@@ -268,6 +274,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: |-
+                      The name of the container cron. If not provided, the name is generated.
+                      during
+                      Cron job name
+                    type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region
@@ -475,6 +487,12 @@ spec:
                     type: string
                   id:
                     description: The container CRON's ID.
+                    type: string
+                  name:
+                    description: |-
+                      The name of the container cron. If not provided, the name is generated.
+                      during
+                      Cron job name
                     type: string
                   region:
                     description: |-

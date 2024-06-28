@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  isIpv6:
+                    description: |-
+                      If true, creates a Flexible IP with an IPv6 address.
+                      If true, creates a Flexible IP with an IPv6 address
+                    type: boolean
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the IP is associated with.
@@ -101,6 +106,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  isIpv6:
+                    description: |-
+                      If true, creates a Flexible IP with an IPv6 address.
+                      If true, creates a Flexible IP with an IPv6 address
+                    type: boolean
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the IP is associated with.
@@ -297,6 +307,11 @@ spec:
                       The IP Address
                       The load-balancer public IP address
                     type: string
+                  isIpv6:
+                    description: |-
+                      If true, creates a Flexible IP with an IPv6 address.
+                      If true, creates a Flexible IP with an IPv6 address
+                    type: boolean
                   lbId:
                     description: |-
                       The associated load-balance ID if any

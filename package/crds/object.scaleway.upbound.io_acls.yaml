@@ -131,12 +131,10 @@ spec:
                   acl:
                     description: |-
                       The canned ACL you want to apply to the bucket.
-                      ACL of the bucket: either 'public-read' or 'private'.
+                      ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   expectedBucketOwner:
                     description: |-
@@ -226,12 +224,10 @@ spec:
                   acl:
                     description: |-
                       The canned ACL you want to apply to the bucket.
-                      ACL of the bucket: either 'public-read' or 'private'.
+                      ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   expectedBucketOwner:
                     description: |-
@@ -488,12 +484,10 @@ spec:
                   acl:
                     description: |-
                       The canned ACL you want to apply to the bucket.
-                      ACL of the bucket: either 'public-read' or 'private'.
+                      ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   expectedBucketOwner:
                     description: |-

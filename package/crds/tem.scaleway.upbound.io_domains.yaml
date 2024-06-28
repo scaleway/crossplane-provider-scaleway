@@ -328,6 +328,16 @@ spec:
                       The DKIM public key, as should be recorded in the DNS zone.
                       DKIM public key, as should be recorded in the DNS zone
                     type: string
+                  dmarcConfig:
+                    description: |-
+                      DMARC record for the domain, as should be recorded in the DNS zone.
+                      DMARC record for the domain, as should be recorded in the DNS zone
+                    type: string
+                  dmarcName:
+                    description: |-
+                      DMARC name for the domain, as should be recorded in the DNS zone.
+                      DMARC name for the domain, as should be recorded in the DNS zone
+                    type: string
                   id:
                     description: The ID of the Transaction Email Domain.
                     type: string
@@ -418,6 +428,11 @@ spec:
                       The SMTP port to use to send emails.
                       SMTP port to use to send emails. (Port 25)
                     type: number
+                  smtpsAuthUser:
+                    description: |-
+                      SMTPS auth user refers to the identifier for a user authorized to send emails via SMTPS, ensuring secure email transmission.
+                      SMTPS auth user refers to the identifier for a user authorized to send emails via SMTPS, ensuring secure email transmission
+                    type: string
                   smtpsPort:
                     description: |-
                       The SMTPS port to use to send emails over TLS Wrapper.

@@ -8,7 +8,7 @@ metadata:
   name: some-file
 spec:
   forProvider:
-    bucket: some-unique-name
+    bucket: ${scaleway_object_bucket.some_bucket.id}
     file: myfile
     hash: ${filemd5("myfile")}
     key: object_path

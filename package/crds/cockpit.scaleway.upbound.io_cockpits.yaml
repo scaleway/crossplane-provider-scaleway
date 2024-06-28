@@ -467,6 +467,18 @@ spec:
                       (Defaults to provider project_id) The ID of the project the cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  pushUrl:
+                    description: Push_url
+                    items:
+                      properties:
+                        pushLogsUrl:
+                          description: The logs URL.
+                          type: string
+                        pushMetricsUrl:
+                          description: The metrics URL.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

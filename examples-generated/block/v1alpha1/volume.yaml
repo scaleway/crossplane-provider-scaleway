@@ -1,0 +1,13 @@
+apiVersion: block.scaleway.upbound.io/v1alpha1
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: block/v1alpha1/volume
+  labels:
+    testing.upbound.io/example-name: block_volume
+  name: block-volume
+spec:
+  forProvider:
+    iops: 5000
+    name: some-volume-name
+    sizeInGb: 20

@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  enableRouting:
+                    description: |-
+                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      Enable routing between Private Networks in the VPC
+                    type: boolean
                   name:
                     description: |-
                       The name of the VPC. If not provided it will be randomly generated.
@@ -108,6 +113,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  enableRouting:
+                    description: |-
+                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      Enable routing between Private Networks in the VPC
+                    type: boolean
                   name:
                     description: |-
                       The name of the VPC. If not provided it will be randomly generated.
@@ -308,6 +318,11 @@ spec:
                       Date and time of VPC's creation (RFC 3339 format).
                       The date and time of the creation of the private network
                     type: string
+                  enableRouting:
+                    description: |-
+                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      Enable routing between Private Networks in the VPC
+                    type: boolean
                   id:
                     description: The ID of the VPC.
                     type: string

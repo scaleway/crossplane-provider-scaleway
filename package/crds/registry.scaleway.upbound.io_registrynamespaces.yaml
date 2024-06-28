@@ -80,7 +80,7 @@ spec:
                   isPublic:
                     description: |-
                       (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-                      Define the default visibity policy
+                      Define the default visibility policy
                     type: boolean
                   name:
                     description: |-
@@ -119,7 +119,7 @@ spec:
                   isPublic:
                     description: |-
                       (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-                      Define the default visibity policy
+                      Define the default visibility policy
                     type: boolean
                   name:
                     description: |-
@@ -330,7 +330,7 @@ spec:
                   isPublic:
                     description: |-
                       (Defaults to false) Whether the images stored in the namespace should be downloadable publicly (docker pull).
-                      Define the default visibity policy
+                      Define the default visibility policy
                     type: boolean
                   name:
                     description: |-

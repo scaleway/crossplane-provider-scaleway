@@ -74,7 +74,7 @@ spec:
                 properties:
                   bastionEnabled:
                     description: |-
-                      Enable SSH bastion on the gateway
+                      Enable SSH bastion on the gateway.
                       Enable SSH bastion on the gateway
                     type: boolean
                   bastionPort:
@@ -84,12 +84,12 @@ spec:
                     type: number
                   enableSmtp:
                     description: |-
-                      Enable SMTP on the gateway
+                      Enable SMTP on the gateway.
                       Enable SMTP on the gateway
                     type: boolean
                   ipId:
                     description: |-
-                      attach an existing flexible IP to the gateway
+                      attach an existing flexible IP to the gateway.
                       attach an existing IP to the gateway
                     type: string
                   ipIdRef:
@@ -175,6 +175,11 @@ spec:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the public gateway is associated with.
                       The project_id you want to attach the resource to
+                    type: string
+                  refreshSshKeys:
+                    description: |-
+                      Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+                      Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
                     type: string
                   tags:
                     description: |-
@@ -216,7 +221,7 @@ spec:
                 properties:
                   bastionEnabled:
                     description: |-
-                      Enable SSH bastion on the gateway
+                      Enable SSH bastion on the gateway.
                       Enable SSH bastion on the gateway
                     type: boolean
                   bastionPort:
@@ -226,12 +231,12 @@ spec:
                     type: number
                   enableSmtp:
                     description: |-
-                      Enable SMTP on the gateway
+                      Enable SMTP on the gateway.
                       Enable SMTP on the gateway
                     type: boolean
                   ipId:
                     description: |-
-                      attach an existing flexible IP to the gateway
+                      attach an existing flexible IP to the gateway.
                       attach an existing IP to the gateway
                     type: string
                   ipIdRef:
@@ -317,6 +322,11 @@ spec:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the public gateway is associated with.
                       The project_id you want to attach the resource to
+                    type: string
+                  refreshSshKeys:
+                    description: |-
+                      Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+                      Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
                     type: string
                   tags:
                     description: |-
@@ -522,7 +532,7 @@ spec:
                 properties:
                   bastionEnabled:
                     description: |-
-                      Enable SSH bastion on the gateway
+                      Enable SSH bastion on the gateway.
                       Enable SSH bastion on the gateway
                     type: boolean
                   bastionPort:
@@ -537,7 +547,7 @@ spec:
                     type: string
                   enableSmtp:
                     description: |-
-                      Enable SMTP on the gateway
+                      Enable SMTP on the gateway.
                       Enable SMTP on the gateway
                     type: boolean
                   id:
@@ -545,7 +555,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      attach an existing flexible IP to the gateway
+                      attach an existing flexible IP to the gateway.
                       attach an existing IP to the gateway
                     type: string
                   name:
@@ -562,6 +572,11 @@ spec:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the public gateway is associated with.
                       The project_id you want to attach the resource to
+                    type: string
+                  refreshSshKeys:
+                    description: |-
+                      Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+                      Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
                     type: string
                   status:
                     description: |-

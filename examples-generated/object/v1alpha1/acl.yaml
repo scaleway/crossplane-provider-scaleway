@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     acl: private
-    bucket: some-unique-name
+    bucket: ${scaleway_object_bucket.main.id}
 
 ---
 
