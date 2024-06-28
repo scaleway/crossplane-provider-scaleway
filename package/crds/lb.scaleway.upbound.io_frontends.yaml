@@ -131,8 +131,9 @@ spec:
                                   The HTTP filter to match
                                 type: string
                               httpFilterOption:
-                                description: You can use this field with http_header_match
-                                  acl type to set the header name to filter
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
                                 description: |-
@@ -427,8 +428,9 @@ spec:
                                   The HTTP filter to match
                                 type: string
                               httpFilterOption:
-                                description: You can use this field with http_header_match
-                                  acl type to set the header name to filter
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
                                 description: |-
@@ -871,7 +873,8 @@ spec:
                             type: object
                           type: array
                         createdAt:
-                          description: Date and time of ACL's creation (RFC 3339 format)
+                          description: IsDate and time of ACL's creation (RFC 3339
+                            format)
                           type: string
                         description:
                           description: Description of the ACL
@@ -890,8 +893,9 @@ spec:
                                   The HTTP filter to match
                                 type: string
                               httpFilterOption:
-                                description: You can use this field with http_header_match
-                                  acl type to set the header name to filter
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
                                 type: string
                               httpFilterValue:
                                 description: |-
@@ -921,7 +925,7 @@ spec:
                             The ACL name
                           type: string
                         updatedAt:
-                          description: Date and time of ACL's update (RFC 3339 format)
+                          description: IsDate and time of ACL's update (RFC 3339 format)
                           type: string
                       type: object
                     type: array

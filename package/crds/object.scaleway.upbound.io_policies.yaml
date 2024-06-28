@@ -73,9 +73,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket's name or regional ID.
+                    description: The bucket's name or regional ID.
                     type: string
                   policy:
                     description: |-
@@ -107,9 +105,7 @@ spec:
                   autoscaler.
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket's name or regional ID.
+                    description: The bucket's name or regional ID.
                     type: string
                   policy:
                     description: |-
@@ -309,9 +305,7 @@ spec:
               atProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket's name or regional ID.
+                    description: The bucket's name or regional ID.
                     type: string
                   id:
                     description: The ID of the policy, which is the ID of the bucket.

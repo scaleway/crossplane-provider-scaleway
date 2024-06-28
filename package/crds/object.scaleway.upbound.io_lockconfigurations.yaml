@@ -73,9 +73,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   projectId:
                     description: |-
@@ -129,9 +127,7 @@ spec:
                   autoscaler.
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   projectId:
                     description: |-
@@ -353,9 +349,7 @@ spec:
               atProvider:
                 properties:
                   bucket:
-                    description: |-
-                      The name of the bucket.
-                      The bucket name.
+                    description: The bucket's name or regional ID.
                     type: string
                   id:
                     description: The ID of the Object bucket lock configuration.

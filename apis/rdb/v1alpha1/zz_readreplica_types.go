@@ -70,7 +70,7 @@ type ReadReplicaInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
 }
@@ -97,7 +97,7 @@ type ReadReplicaObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
 }
@@ -134,7 +134,7 @@ type ReadReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+	// (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	// Defines whether to create the replica in the same availability zone as the main instance nodes or not.
 	// +kubebuilder:validation:Optional
 	SameZone *bool `json:"sameZone,omitempty" tf:"same_zone,omitempty"`
@@ -142,18 +142,24 @@ type ReadReplicaParameters struct {
 
 type ReadReplicaPrivateNetworkInitParameters struct {
 
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
+
 	// UUID of the private network to be connected to the read replica.
 	// UUID of the private network to be connected to the read replica (UUID format)
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP network address within the private subnet
 	ServiceIP *string `json:"serviceIp,omitempty" tf:"service_ip,omitempty"`
 }
 
 type ReadReplicaPrivateNetworkObservation struct {
+
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
 
 	// The ID of the endpoint of the read replica.
 	// UUID of the endpoint (UUID format).
@@ -179,9 +185,7 @@ type ReadReplicaPrivateNetworkObservation struct {
 	// UUID of the private network to be connected to the read replica (UUID format)
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP network address within the private subnet
 	ServiceIP *string `json:"serviceIp,omitempty" tf:"service_ip,omitempty"`
 
@@ -191,14 +195,17 @@ type ReadReplicaPrivateNetworkObservation struct {
 
 type ReadReplicaPrivateNetworkParameters struct {
 
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	// +kubebuilder:validation:Optional
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
+
 	// UUID of the private network to be connected to the read replica.
 	// UUID of the private network to be connected to the read replica (UUID format)
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP network address within the private subnet
 	// +kubebuilder:validation:Optional
 	ServiceIP *string `json:"serviceIp,omitempty" tf:"service_ip,omitempty"`

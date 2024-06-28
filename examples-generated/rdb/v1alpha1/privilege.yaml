@@ -8,12 +8,12 @@ metadata:
   name: main
 spec:
   forProvider:
-    databaseName: my-db-name
+    databaseName: my-new-database
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
     permission: all
-    userName: my-db-user
+    userName: devtools
 
 ---
 
@@ -71,7 +71,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     isAdmin: false
-    name: foobar
+    name: my-db-user
     passwordSecretRef:
       key: example-key
       name: example-secret

@@ -124,6 +124,16 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DmarcConfig != nil {
+		in, out := &in.DmarcConfig, &out.DmarcConfig
+		*out = new(string)
+		**out = **in
+	}
+	if in.DmarcName != nil {
+		in, out := &in.DmarcName, &out.DmarcName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -194,6 +204,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	if in.SMTPPortUnsecure != nil {
 		in, out := &in.SMTPPortUnsecure, &out.SMTPPortUnsecure
 		*out = new(float64)
+		**out = **in
+	}
+	if in.SmtpsAuthUser != nil {
+		in, out := &in.SmtpsAuthUser, &out.SmtpsAuthUser
+		*out = new(string)
 		**out = **in
 	}
 	if in.SmtpsPort != nil {

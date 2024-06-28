@@ -1,0 +1,69 @@
+apiVersion: ipam.scaleway.upbound.io/v1alpha1
+kind: IPReverseDNS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipreversedns
+  labels:
+    testing.upbound.io/example-name: base
+  name: base
+spec:
+  forProvider:
+    address: ${cidrhost(data.scaleway_ipam_ip.ipam01.address_cidr, 42)}
+    hostname: example.com
+    ipamIpIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scaleway_ipam_ip
+
+---
+
+apiVersion: domain.scaleway.upbound.io/v1alpha1
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipreversedns
+  labels:
+    testing.upbound.io/example-name: tf_AAAA
+  name: tf-aaaa
+spec:
+  forProvider:
+    data: ${cidrhost(data.scaleway_ipam_ip.ipam01.address_cidr, 42)}
+    dnsZoneSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: ""
+    priority: 1
+    ttl: 3600
+    type: AAAA
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipreversedns
+  labels:
+    testing.upbound.io/example-name: ip01
+  name: ip01
+spec:
+  forProvider:
+    type: routed_ipv6
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipreversedns
+  labels:
+    testing.upbound.io/example-name: srv01
+  name: srv01
+spec:
+  forProvider:
+    image: ubuntu_jammy
+    ipIds:
+    - ${scaleway_instance_ip.ip01.id}
+    name: tf-tests-instance-server-ips
+    state: stopped
+    type: PRO2-XXS

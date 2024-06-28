@@ -20,3 +20,6 @@ func (tr *Policy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SSHKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *User) Hub() {}

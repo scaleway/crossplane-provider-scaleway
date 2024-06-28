@@ -19,11 +19,15 @@ type LBInitParameters struct {
 	// Defines whether to automatically assign a flexible public IP to the load balancer
 	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
 
+	// Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+	// Defines whether to automatically assign a flexible public IPv6 to the load balancer
+	AssignFlexibleIPv6 *bool `json:"assignFlexibleIpv6,omitempty" tf:"assign_flexible_ipv6,omitempty"`
+
 	// The description of the load-balancer.
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the associated LB IP. See below.
+	// (Deprecated) The ID of the associated LB IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=IP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
@@ -35,6 +39,10 @@ type LBInitParameters struct {
 	// Selector for a IP to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
+
+	// The List of IP IDs to attach to the Load Balancer.
+	// List of IP IDs to attach to the Load Balancer
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The name of the load-balancer.
 	// Name of the lb
@@ -75,6 +83,10 @@ type LBObservation struct {
 	// Defines whether to automatically assign a flexible public IP to the load balancer
 	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
 
+	// Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+	// Defines whether to automatically assign a flexible public IPv6 to the load balancer
+	AssignFlexibleIPv6 *bool `json:"assignFlexibleIpv6,omitempty" tf:"assign_flexible_ipv6,omitempty"`
+
 	// The description of the load-balancer.
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -82,13 +94,21 @@ type LBObservation struct {
 	// The ID of the load-balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The load-balance public IP Address
-	// The load-balance public IP address
+	// The load-balancer public IPv4 Address.
+	// The load-balance public IPv4 address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The ID of the associated LB IP. See below.
+	// (Deprecated) The ID of the associated LB IP. See below.
 	// The load-balance public IP ID
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// The List of IP IDs to attach to the Load Balancer.
+	// List of IP IDs to attach to the Load Balancer
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
+
+	// The load-balancer public IPv6 Address.
+	// The load-balance public IPv6 address
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
 	// The name of the load-balancer.
 	// Name of the lb
@@ -137,12 +157,17 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	AssignFlexibleIP *bool `json:"assignFlexibleIp,omitempty" tf:"assign_flexible_ip,omitempty"`
 
+	// Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+	// Defines whether to automatically assign a flexible public IPv6 to the load balancer
+	// +kubebuilder:validation:Optional
+	AssignFlexibleIPv6 *bool `json:"assignFlexibleIpv6,omitempty" tf:"assign_flexible_ipv6,omitempty"`
+
 	// The description of the load-balancer.
 	// The description of the lb
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the associated LB IP. See below.
+	// (Deprecated) The ID of the associated LB IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=IP
 	// +kubebuilder:validation:Optional
@@ -155,6 +180,11 @@ type LBParameters struct {
 	// Selector for a IP to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
+
+	// The List of IP IDs to attach to the Load Balancer.
+	// List of IP IDs to attach to the Load Balancer
+	// +kubebuilder:validation:Optional
+	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The name of the load-balancer.
 	// Name of the lb

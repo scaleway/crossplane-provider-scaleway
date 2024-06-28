@@ -49,6 +49,14 @@ type DomainObservation struct {
 	// DKIM public key, as should be recorded in the DNS zone
 	DKIMConfig *string `json:"dkimConfig,omitempty" tf:"dkim_config,omitempty"`
 
+	// DMARC record for the domain, as should be recorded in the DNS zone.
+	// DMARC record for the domain, as should be recorded in the DNS zone
+	DmarcConfig *string `json:"dmarcConfig,omitempty" tf:"dmarc_config,omitempty"`
+
+	// DMARC name for the domain, as should be recorded in the DNS zone.
+	// DMARC name for the domain, as should be recorded in the DNS zone
+	DmarcName *string `json:"dmarcName,omitempty" tf:"dmarc_name,omitempty"`
+
 	// The ID of the Transaction Email Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -104,6 +112,10 @@ type DomainObservation struct {
 	// The SMTP port to use to send emails.
 	// SMTP port to use to send emails. (Port 25)
 	SMTPPortUnsecure *float64 `json:"smtpPortUnsecure,omitempty" tf:"smtp_port_unsecure,omitempty"`
+
+	// SMTPS auth user refers to the identifier for a user authorized to send emails via SMTPS, ensuring secure email transmission.
+	// SMTPS auth user refers to the identifier for a user authorized to send emails via SMTPS, ensuring secure email transmission
+	SmtpsAuthUser *string `json:"smtpsAuthUser,omitempty" tf:"smtps_auth_user,omitempty"`
 
 	// The SMTPS port to use to send emails over TLS Wrapper.
 	// SMTPS port to use to send emails over TLS Wrapper. (Port 465)

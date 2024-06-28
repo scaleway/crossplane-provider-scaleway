@@ -15,7 +15,7 @@ import (
 
 type PublicGatewayInitParameters struct {
 
-	// Enable SSH bastion on the gateway
+	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
 	BastionEnabled *bool `json:"bastionEnabled,omitempty" tf:"bastion_enabled,omitempty"`
 
@@ -23,11 +23,11 @@ type PublicGatewayInitParameters struct {
 	// Port of the SSH bastion
 	BastionPort *float64 `json:"bastionPort,omitempty" tf:"bastion_port,omitempty"`
 
-	// Enable SMTP on the gateway
+	// Enable SMTP on the gateway.
 	// Enable SMTP on the gateway
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
-	// attach an existing flexible IP to the gateway
+	// attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	// +crossplane:generate:reference:type=PublicGatewayIP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
@@ -48,6 +48,10 @@ type PublicGatewayInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
+	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
+
 	// The tags associated with the public gateway.
 	// The tags associated with public gateway
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -67,7 +71,7 @@ type PublicGatewayInitParameters struct {
 
 type PublicGatewayObservation struct {
 
-	// Enable SSH bastion on the gateway
+	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
 	BastionEnabled *bool `json:"bastionEnabled,omitempty" tf:"bastion_enabled,omitempty"`
 
@@ -79,14 +83,14 @@ type PublicGatewayObservation struct {
 	// The date and time of the creation of the public gateway
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Enable SMTP on the gateway
+	// Enable SMTP on the gateway.
 	// Enable SMTP on the gateway
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
 	// The ID of the public gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// attach an existing flexible IP to the gateway
+	// attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
@@ -101,6 +105,10 @@ type PublicGatewayObservation struct {
 	// (Defaults to provider project_id) The ID of the project the public gateway is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
+	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
 	// The status of the public gateway.
 	// The status of the public gateway
@@ -129,7 +137,7 @@ type PublicGatewayObservation struct {
 
 type PublicGatewayParameters struct {
 
-	// Enable SSH bastion on the gateway
+	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
 	// +kubebuilder:validation:Optional
 	BastionEnabled *bool `json:"bastionEnabled,omitempty" tf:"bastion_enabled,omitempty"`
@@ -139,12 +147,12 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	BastionPort *float64 `json:"bastionPort,omitempty" tf:"bastion_port,omitempty"`
 
-	// Enable SMTP on the gateway
+	// Enable SMTP on the gateway.
 	// Enable SMTP on the gateway
 	// +kubebuilder:validation:Optional
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
-	// attach an existing flexible IP to the gateway
+	// attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	// +crossplane:generate:reference:type=PublicGatewayIP
 	// +kubebuilder:validation:Optional
@@ -167,6 +175,11 @@ type PublicGatewayParameters struct {
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
+	// +kubebuilder:validation:Optional
+	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
 	// The tags associated with the public gateway.
 	// The tags associated with public gateway

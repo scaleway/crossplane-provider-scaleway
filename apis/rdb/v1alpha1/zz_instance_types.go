@@ -31,10 +31,6 @@ type InstanceInitParameters struct {
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
 
-	// Disable the default public endpoint
-	// Whether the instance should have a public endpoint if it has a Private Network attached
-	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
-
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -47,6 +43,14 @@ type InstanceInitParameters struct {
 	// Enable or disable high availability for the database instance.
 	// Enable or disable high availability for the database instance
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
+
+	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// This block must be defined if you want a public endpoint in addition to your private endpoint.
+	// Load balancer of the database instance
+	LoadBalancer []LoadBalancerInitParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Logs policy configuration
+	LogsPolicy []LogsPolicyInitParameters `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
 	// The name of the Database Instance.
 	// Name of the database instance
@@ -87,11 +91,11 @@ type InstanceInitParameters struct {
 	// Identifier for the first user of the database instance
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Volume size (in GB) when volume_type is set to bssd.
+	// Volume size (in GB). Cannot be used when volume_type is set to lssd.
 	// Volume size (in GB) when volume_type is not lssd
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd or lssd).
+	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -118,10 +122,6 @@ type InstanceObservation struct {
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
 
-	// Disable the default public endpoint
-	// Whether the instance should have a public endpoint if it has a Private Network attached
-	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
-
 	// (Deprecated) The IP of the Database Instance.
 	// Endpoint IP of the database instance
 	EndpointIP *string `json:"endpointIp,omitempty" tf:"endpoint_ip,omitempty"`
@@ -146,9 +146,13 @@ type InstanceObservation struct {
 	// Enable or disable high availability for the database instance
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
 
-	// List of load balancer endpoints of the database instance.
+	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// This block must be defined if you want a public endpoint in addition to your private endpoint.
 	// Load balancer of the database instance
 	LoadBalancer []LoadBalancerObservation `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Logs policy configuration
+	LogsPolicy []LogsPolicyObservation `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
 	// The name of the Database Instance.
 	// Name of the database instance
@@ -193,11 +197,11 @@ type InstanceObservation struct {
 	// Identifier for the first user of the database instance
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Volume size (in GB) when volume_type is set to bssd.
+	// Volume size (in GB). Cannot be used when volume_type is set to lssd.
 	// Volume size (in GB) when volume_type is not lssd
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd or lssd).
+	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -224,11 +228,6 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
 
-	// Disable the default public endpoint
-	// Whether the instance should have a public endpoint if it has a Private Network attached
-	// +kubebuilder:validation:Optional
-	DisablePublicEndpoint *bool `json:"disablePublicEndpoint,omitempty" tf:"disable_public_endpoint,omitempty"`
-
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id
 	// +kubebuilder:validation:Optional
@@ -244,6 +243,16 @@ type InstanceParameters struct {
 	// Enable or disable high availability for the database instance
 	// +kubebuilder:validation:Optional
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
+
+	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// This block must be defined if you want a public endpoint in addition to your private endpoint.
+	// Load balancer of the database instance
+	// +kubebuilder:validation:Optional
+	LoadBalancer []LoadBalancerParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Logs policy configuration
+	// +kubebuilder:validation:Optional
+	LogsPolicy []LogsPolicyParameters `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
 	// The name of the Database Instance.
 	// Name of the database instance
@@ -293,46 +302,91 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Volume size (in GB) when volume_type is set to bssd.
+	// Volume size (in GB). Cannot be used when volume_type is set to lssd.
 	// Volume size (in GB) when volume_type is not lssd
 	// +kubebuilder:validation:Optional
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd or lssd).
+	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type LoadBalancerInitParameters struct {
+
+	// The ID of the endpoint of the load balancer.
+	// The endpoint ID
+	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 }
 
 type LoadBalancerObservation struct {
 
 	// The ID of the endpoint of the load balancer.
+	// The endpoint ID
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// Name of the endpoint.
+	// The hostname of your endpoint
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// IP of the replica.
+	// The IP of your load balancer service
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// The name of the Database Instance.
+	// The name of your load balancer service
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Port of the replica.
+	// The port of your load balancer service
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type LoadBalancerParameters struct {
+
+	// The ID of the endpoint of the load balancer.
+	// The endpoint ID
+	// +kubebuilder:validation:Optional
+	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
+}
+
+type LogsPolicyInitParameters struct {
+
+	// The max age (in days) of remote logs to keep on the Database Instance
+	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
+
+	// The max disk size of remote logs to keep on the Database Instance.
+	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
+}
+
+type LogsPolicyObservation struct {
+
+	// The max age (in days) of remote logs to keep on the Database Instance
+	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
+
+	// The max disk size of remote logs to keep on the Database Instance.
+	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
+}
+
+type LogsPolicyParameters struct {
+
+	// The max age (in days) of remote logs to keep on the Database Instance
+	// +kubebuilder:validation:Optional
+	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
+
+	// The max disk size of remote logs to keep on the Database Instance.
+	// +kubebuilder:validation:Optional
+	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
 }
 
 type PrivateNetworkInitParameters struct {
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
+
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP with the given mask within the private subnet
 	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`
 
@@ -359,6 +413,10 @@ type PrivateNetworkInitParameters struct {
 
 type PrivateNetworkObservation struct {
 
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
+
 	// The ID of the endpoint of the load balancer.
 	// The endpoint ID
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
@@ -371,9 +429,7 @@ type PrivateNetworkObservation struct {
 	// The IP of your Instance within the private service
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP with the given mask within the private subnet
 	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`
 
@@ -395,9 +451,12 @@ type PrivateNetworkObservation struct {
 
 type PrivateNetworkParameters struct {
 
-	// The IP network address within the private subnet. This must be an IPv4 address with a
-	// CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// Whether or not the private network endpoint should be configured with IPAM
+	// +kubebuilder:validation:Optional
+	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
+
+	// The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// The IP with the given mask within the private subnet
 	// +kubebuilder:validation:Optional
 	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`

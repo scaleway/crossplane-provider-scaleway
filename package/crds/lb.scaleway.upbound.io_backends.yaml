@@ -335,7 +335,7 @@ spec:
                   stickySessionsCookieName:
                     description: |-
                       Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-                      Cookie name for for sticky sessions
+                      Cookie name for sticky sessions
                     type: string
                   timeoutConnect:
                     description: |-
@@ -634,7 +634,7 @@ spec:
                   stickySessionsCookieName:
                     description: |-
                       Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-                      Cookie name for for sticky sessions
+                      Cookie name for sticky sessions
                     type: string
                   timeoutConnect:
                     description: |-
@@ -1030,7 +1030,7 @@ spec:
                   stickySessionsCookieName:
                     description: |-
                       Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-                      Cookie name for for sticky sessions
+                      Cookie name for sticky sessions
                     type: string
                   timeoutConnect:
                     description: |-

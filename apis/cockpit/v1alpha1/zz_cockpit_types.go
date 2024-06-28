@@ -52,6 +52,9 @@ type CockpitObservation struct {
 	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Push_url
+	PushURL []PushURLObservation `json:"pushUrl,omitempty" tf:"push_url,omitempty"`
 }
 
 type CockpitParameters struct {
@@ -98,6 +101,21 @@ type EndpointsObservation struct {
 }
 
 type EndpointsParameters struct {
+}
+
+type PushURLInitParameters struct {
+}
+
+type PushURLObservation struct {
+
+	// The logs URL.
+	PushLogsURL *string `json:"pushLogsUrl,omitempty" tf:"push_logs_url,omitempty"`
+
+	// The metrics URL.
+	PushMetricsURL *string `json:"pushMetricsUrl,omitempty" tf:"push_metrics_url,omitempty"`
+}
+
+type PushURLParameters struct {
 }
 
 // CockpitSpec defines the desired state of Cockpit

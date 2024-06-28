@@ -718,6 +718,11 @@ spec:
                       The DNS Zone of the domain. If the DNS zone doesn't exist, it will be automatically created.
                       The zone you want to add the record in
                     type: string
+                  fqdn:
+                    description: |-
+                      The FQDN of the record.
+                      The FQDN of the record
+                    type: string
                   geoIp:
                     description: |-
                       The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example

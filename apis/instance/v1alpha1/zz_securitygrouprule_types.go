@@ -32,7 +32,6 @@ type SecurityGroupRuleInboundRuleInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
@@ -62,7 +61,6 @@ type SecurityGroupRuleInboundRuleObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
@@ -96,7 +94,6 @@ type SecurityGroupRuleInboundRuleParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
@@ -170,7 +167,6 @@ type SecurityGroupRuleOutboundRuleInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
@@ -200,7 +196,6 @@ type SecurityGroupRuleOutboundRuleObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)
@@ -234,7 +229,6 @@ type SecurityGroupRuleOutboundRuleParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// 13.0  The port range (e.g 22-23) this rule applies to.
-	// Port range MUST comply the Scaleway-notation: interval between ports must be a power of 2 2^X-1 number (e.g 2^13-1=8191 in port_range = "10000-18191").
 	// If no port nor port_range are specified, rule will apply to all port.
 	// Only one of port and port_range should be specified.
 	// Computed port range for this rule (e.g: 1-1024, 22-22)

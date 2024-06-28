@@ -63,6 +63,11 @@ func (in *CronInitParameters) DeepCopyInto(out *CronInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -135,6 +140,11 @@ func (in *CronObservation) DeepCopyInto(out *CronObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -184,6 +194,11 @@ func (in *CronParameters) DeepCopyInto(out *CronParameters) {
 		in, out := &in.FunctionIDSelector, &out.FunctionIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

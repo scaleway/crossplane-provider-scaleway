@@ -29,6 +29,7 @@ spec:
     containerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
+    name: my-cron-name
     schedule: 5 4 1 * *
 
 ---

@@ -60,4 +60,10 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "SSHKey"
 	})
+
+	p.AddResourceConfigurator("scaleway_iam_user", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "User"
+	})
 }

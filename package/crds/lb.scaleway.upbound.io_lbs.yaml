@@ -77,6 +77,11 @@ spec:
                       Defines whether to automatically assign a flexible public IP to the load-balancer.
                       Defines whether to automatically assign a flexible public IP to the load balancer
                     type: boolean
+                  assignFlexibleIpv6:
+                    description: |-
+                      Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+                      Defines whether to automatically assign a flexible public IPv6 to the load balancer
+                    type: boolean
                   description:
                     description: |-
                       The description of the load-balancer.
@@ -84,7 +89,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      The ID of the associated LB IP. See below.
+                      (Deprecated) The ID of the associated LB IP. See below.
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
@@ -161,6 +166,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipIds:
+                    description: |-
+                      The List of IP IDs to attach to the Load Balancer.
+                      List of IP IDs to attach to the Load Balancer
+                    items:
+                      type: string
+                    type: array
                   name:
                     description: |-
                       The name of the load-balancer.
@@ -242,6 +254,11 @@ spec:
                       Defines whether to automatically assign a flexible public IP to the load-balancer.
                       Defines whether to automatically assign a flexible public IP to the load balancer
                     type: boolean
+                  assignFlexibleIpv6:
+                    description: |-
+                      Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+                      Defines whether to automatically assign a flexible public IPv6 to the load balancer
+                    type: boolean
                   description:
                     description: |-
                       The description of the load-balancer.
@@ -249,7 +266,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      The ID of the associated LB IP. See below.
+                      (Deprecated) The ID of the associated LB IP. See below.
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
@@ -326,6 +343,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipIds:
+                    description: |-
+                      The List of IP IDs to attach to the Load Balancer.
+                      List of IP IDs to attach to the Load Balancer
+                    items:
+                      type: string
+                    type: array
                   name:
                     description: |-
                       The name of the load-balancer.
@@ -571,6 +595,11 @@ spec:
                       Defines whether to automatically assign a flexible public IP to the load-balancer.
                       Defines whether to automatically assign a flexible public IP to the load balancer
                     type: boolean
+                  assignFlexibleIpv6:
+                    description: |-
+                      Defines whether to automatically assign a flexible public IPv6 to the load-balancer.
+                      Defines whether to automatically assign a flexible public IPv6 to the load balancer
+                    type: boolean
                   description:
                     description: |-
                       The description of the load-balancer.
@@ -581,13 +610,25 @@ spec:
                     type: string
                   ipAddress:
                     description: |-
-                      The load-balance public IP Address
-                      The load-balance public IP address
+                      The load-balancer public IPv4 Address.
+                      The load-balance public IPv4 address
                     type: string
                   ipId:
                     description: |-
-                      The ID of the associated LB IP. See below.
+                      (Deprecated) The ID of the associated LB IP. See below.
                       The load-balance public IP ID
+                    type: string
+                  ipIds:
+                    description: |-
+                      The List of IP IDs to attach to the Load Balancer.
+                      List of IP IDs to attach to the Load Balancer
+                    items:
+                      type: string
+                    type: array
+                  ipv6Address:
+                    description: |-
+                      The load-balancer public IPv6 Address.
+                      The load-balance public IPv6 address
                     type: string
                   name:
                     description: |-

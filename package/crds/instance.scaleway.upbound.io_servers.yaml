@@ -100,7 +100,7 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
+                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   image:
@@ -201,7 +201,7 @@ spec:
                     type: string
                   placementGroupId:
                     description: |-
-                      The placement group the server is attached to.
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
                       The placement group the server is attached to
                     type: string
                   placementGroupIdRef:
@@ -282,7 +282,7 @@ spec:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instance
+                      List of private network to connect with your instanceSDK
                     items:
                       properties:
                         pnId:
@@ -305,7 +305,7 @@ spec:
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instance
+                      List of public IPs attached to your instanceSDK
                     items:
                       type: object
                     type: array
@@ -326,7 +326,7 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instance termination
+                            Force deletion of the root volume on instanceSDK termination
                           type: boolean
                         sizeInGb:
                           description: |-
@@ -350,7 +350,7 @@ spec:
                     type: array
                   routedIpEnabled:
                     description: |-
-                      (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
                       If server supports routed IPs, default to true if public_ips is used
                     type: boolean
                   securityGroupId:
@@ -450,7 +450,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instance type of the server
+                      The instanceSDK type of the server
                     type: string
                   userData:
                     additionalProperties:
@@ -509,7 +509,7 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
+                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   image:
@@ -610,7 +610,7 @@ spec:
                     type: string
                   placementGroupId:
                     description: |-
-                      The placement group the server is attached to.
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
                       The placement group the server is attached to
                     type: string
                   placementGroupIdRef:
@@ -691,7 +691,7 @@ spec:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instance
+                      List of private network to connect with your instanceSDK
                     items:
                       properties:
                         pnId:
@@ -714,7 +714,7 @@ spec:
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instance
+                      List of public IPs attached to your instanceSDK
                     items:
                       type: object
                     type: array
@@ -735,7 +735,7 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instance termination
+                            Force deletion of the root volume on instanceSDK termination
                           type: boolean
                         sizeInGb:
                           description: |-
@@ -759,7 +759,7 @@ spec:
                     type: array
                   routedIpEnabled:
                     description: |-
-                      (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
                       If server supports routed IPs, default to true if public_ips is used
                     type: boolean
                   securityGroupId:
@@ -859,7 +859,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instance type of the server
+                      The instanceSDK type of the server
                     type: string
                   userData:
                     additionalProperties:
@@ -1082,7 +1082,7 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
+                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   id:
@@ -1132,7 +1132,7 @@ spec:
                     type: string
                   placementGroupId:
                     description: |-
-                      The placement group the server is attached to.
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
                       The placement group the server is attached to
                     type: string
                   placementGroupPolicyRespected:
@@ -1149,7 +1149,7 @@ spec:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instance
+                      List of private network to connect with your instanceSDK
                     items:
                       properties:
                         macAddress:
@@ -1161,6 +1161,11 @@ spec:
                           description: |-
                             The private network ID where to connect.
                             The Private Network ID
+                          type: string
+                        pnicId:
+                          description: |-
+                            The ID of the server.
+                            The ID of the NIC
                           type: string
                         status:
                           description: |-
@@ -1187,7 +1192,7 @@ spec:
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instance
+                      List of public IPs attached to your instanceSDK
                     items:
                       properties:
                         address:
@@ -1219,7 +1224,7 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instance termination
+                            Force deletion of the root volume on instanceSDK termination
                           type: boolean
                         name:
                           description: |-
@@ -1248,7 +1253,7 @@ spec:
                     type: array
                   routedIpEnabled:
                     description: |-
-                      (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
                       If server supports routed IPs, default to true if public_ips is used
                     type: boolean
                   securityGroupId:
@@ -1274,7 +1279,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instance type of the server
+                      The instanceSDK type of the server
                     type: string
                   userData:
                     additionalProperties:

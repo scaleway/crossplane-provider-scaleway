@@ -347,8 +347,7 @@ spec:
                     type: string
                   state:
                     description: |-
-                      The state of the server. Check the possible values on
-                      our sdk.
+                      The state of the server.
                       The state of the server
                     type: string
                   type:

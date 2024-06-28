@@ -96,7 +96,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   maxConcurrency:
                     description: |-
@@ -228,8 +230,9 @@ spec:
                       The scaleway registry image address
                     type: string
                   registrySha256:
-                    description: The sha256 of your source registry image, changing
-                      it will re-apply the deployment. Can be any string
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     description: |-
@@ -294,7 +297,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   maxConcurrency:
                     description: |-
@@ -426,8 +431,9 @@ spec:
                       The scaleway registry image address
                     type: string
                   registrySha256:
-                    description: The sha256 of your source registry image, changing
-                      it will re-apply the deployment. Can be any string
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     additionalProperties:
@@ -655,7 +661,9 @@ spec:
                       The error description
                     type: string
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   id:
                     description: The container's ID.
@@ -716,8 +724,9 @@ spec:
                       The scaleway registry image address
                     type: string
                   registrySha256:
-                    description: The sha256 of your source registry image, changing
-                      it will re-apply the deployment. Can be any string
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
                     type: string
                   status:
                     description: |-

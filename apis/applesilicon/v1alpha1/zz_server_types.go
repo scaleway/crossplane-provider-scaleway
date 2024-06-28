@@ -65,8 +65,7 @@ type ServerObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The state of the server. Check the possible values on
-	// our sdk.
+	// The state of the server.
 	// The state of the server
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 

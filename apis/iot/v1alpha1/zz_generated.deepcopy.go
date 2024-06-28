@@ -693,6 +693,16 @@ func (in *HubObservation) DeepCopyInto(out *HubObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MqttCA != nil {
+		in, out := &in.MqttCA, &out.MqttCA
+		*out = new(string)
+		**out = **in
+	}
+	if in.MqttCAURL != nil {
+		in, out := &in.MqttCAURL, &out.MqttCAURL
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)

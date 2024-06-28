@@ -4,6 +4,6 @@ metadata:
   name: flexibleip-ip
 spec:
   forProvider:
-    name: crossplane-ip
+    description: crossplane-ip
   providerConfigRef:
     name: default

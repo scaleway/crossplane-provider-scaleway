@@ -120,7 +120,7 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The ID of the function
+                      The namespace ID the function is associated with.
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
@@ -214,7 +214,7 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using specific route
+                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
                       Runtime of the function
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -309,7 +309,7 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The ID of the function
+                      The namespace ID the function is associated with.
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
@@ -403,7 +403,7 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using specific route
+                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
                       Runtime of the function
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -672,7 +672,7 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The ID of the function
+                      The namespace ID the function is associated with.
                       The namespace ID associated with this function
                     type: string
                   organizationId:
@@ -697,7 +697,7 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using specific route
+                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
                       Runtime of the function
                     type: string
                   timeout:
