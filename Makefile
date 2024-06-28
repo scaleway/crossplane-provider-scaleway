@@ -200,6 +200,3 @@ crossplane.help:
 help-special: crossplane.help
 
 .PHONY: crossplane.help help-special
-
-vendor: modules.download
-vendor.check: modules.check
