@@ -338,7 +338,16 @@ type PrivateNetworkInitParameters struct {
 
 	// The ID of the private network.
 	// The private network ID
+	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+
+	// Reference to a PrivateNetwork in vpc to populate pnId.
+	// +kubebuilder:validation:Optional
+	PnIDRef *v1.Reference `json:"pnIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateNetwork in vpc to populate pnId.
+	// +kubebuilder:validation:Optional
+	PnIDSelector *v1.Selector `json:"pnIdSelector,omitempty" tf:"-"`
 
 	// Port of the replica.
 	// The port of your private service
@@ -395,8 +404,17 @@ type PrivateNetworkParameters struct {
 
 	// The ID of the private network.
 	// The private network ID
+	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
-	PnID *string `json:"pnId" tf:"pn_id,omitempty"`
+	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+
+	// Reference to a PrivateNetwork in vpc to populate pnId.
+	// +kubebuilder:validation:Optional
+	PnIDRef *v1.Reference `json:"pnIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateNetwork in vpc to populate pnId.
+	// +kubebuilder:validation:Optional
+	PnIDSelector *v1.Selector `json:"pnIdSelector,omitempty" tf:"-"`
 
 	// Port of the replica.
 	// The port of your private service

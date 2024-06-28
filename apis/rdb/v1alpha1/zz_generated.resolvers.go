@@ -9,6 +9,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -134,6 +135,53 @@ func (mg *DatabaseBackup) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Instance.
+func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateNetwork); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateNetwork[i3].PnID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.PrivateNetwork[i3].PnIDRef,
+			Selector:     mg.Spec.ForProvider.PrivateNetwork[i3].PnIDSelector,
+			To: reference.To{
+				List:    &v1alpha1.PrivateNetworkList{},
+				Managed: &v1alpha1.PrivateNetwork{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateNetwork[i3].PnID")
+		}
+		mg.Spec.ForProvider.PrivateNetwork[i3].PnID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateNetwork[i3].PnIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateNetwork); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateNetwork[i3].PnID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.PrivateNetwork[i3].PnIDRef,
+			Selector:     mg.Spec.InitProvider.PrivateNetwork[i3].PnIDSelector,
+			To: reference.To{
+				List:    &v1alpha1.PrivateNetworkList{},
+				Managed: &v1alpha1.PrivateNetwork{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PrivateNetwork[i3].PnID")
+		}
+		mg.Spec.InitProvider.PrivateNetwork[i3].PnID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrivateNetwork[i3].PnIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

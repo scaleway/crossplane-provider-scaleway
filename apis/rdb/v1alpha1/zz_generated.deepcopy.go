@@ -1487,6 +1487,16 @@ func (in *PrivateNetworkInitParameters) DeepCopyInto(out *PrivateNetworkInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.PnIDRef != nil {
+		in, out := &in.PnIDRef, &out.PnIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PnIDSelector != nil {
+		in, out := &in.PnIDSelector, &out.PnIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -1576,6 +1586,16 @@ func (in *PrivateNetworkParameters) DeepCopyInto(out *PrivateNetworkParameters) 
 		in, out := &in.PnID, &out.PnID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PnIDRef != nil {
+		in, out := &in.PnIDRef, &out.PnIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PnIDSelector != nil {
+		in, out := &in.PnIDSelector, &out.PnIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port

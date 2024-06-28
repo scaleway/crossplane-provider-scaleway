@@ -1,0 +1,44 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: crossplane-private-network
+  providerConfigRef:
+    name: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rdb-instance-secret
+  namespace: default
+stringData:
+  password: "thiZ_is_v&ry_s3cret"
+---
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  name: rdb-instance
+spec:
+  forProvider:
+    name: crossplane-rdb-instance
+    nodeType: DB-DEV-S
+    engine: "PostgreSQL-14"
+    isHaCluster: false
+    disableBackup: true
+    userName: admin
+    privateNetwork:
+      - pnIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    passwordSecretRef:
+      key: password
+      name: rdb-instance-secret
+      namespace: default
+  providerConfigRef:
+    name: default
