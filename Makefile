@@ -48,11 +48,12 @@ GO_SUBDIRS += cmd internal apis
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.15.0
-UP_VERSION = v0.14.0
+KIND_VERSION = v0.23.0
+UP_VERSION = v0.31.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.2.1
+UPTEST_VERSION = v0.12.0
 -include build/makelib/k8s_tools.mk
+CROSSPLANE_VERSION = 1.16.0
 
 # ====================================================================================
 # Setup Images
@@ -199,3 +200,6 @@ crossplane.help:
 help-special: crossplane.help
 
 .PHONY: crossplane.help help-special
+
+vendor: modules.download
+vendor.check: modules.check
