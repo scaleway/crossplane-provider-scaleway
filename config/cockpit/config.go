@@ -41,4 +41,24 @@ func Configure(p *config.Provider) {
 			Type: "github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_cockpit_source", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Source"
+
+		r.References["project_id"] = config.Reference{
+			Type: "github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project",
+		}
+	})
+
+	p.AddResourceConfigurator("scaleway_cockpit_alert_manager", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "AlertManager"
+
+		r.References["project_id"] = config.Reference{
+			Type: "github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project",
+		}
+	})
 }

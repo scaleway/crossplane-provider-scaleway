@@ -15,6 +15,10 @@ import (
 
 type IPInitParameters struct {
 
+	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a Flexible IP with an IPv6 address
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -36,6 +40,10 @@ type IPObservation struct {
 	// The IP Address
 	// The load-balancer public IP address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a Flexible IP with an IPv6 address
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
 	// The associated load-balance ID if any
 	// The ID of the load balancer attached to this IP, if any
@@ -62,6 +70,11 @@ type IPObservation struct {
 }
 
 type IPParameters struct {
+
+	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a Flexible IP with an IPv6 address
+	// +kubebuilder:validation:Optional
+	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the IP is associated with.
 	// The project_id you want to attach the resource to

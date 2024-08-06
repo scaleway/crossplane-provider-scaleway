@@ -63,8 +63,7 @@ type DefaultRetentionParameters struct {
 
 type LockConfigurationInitParameters struct {
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -81,8 +80,7 @@ type LockConfigurationInitParameters struct {
 
 type LockConfigurationObservation struct {
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The ID of the Object bucket lock configuration.
@@ -102,8 +100,7 @@ type LockConfigurationObservation struct {
 
 type LockConfigurationParameters struct {
 
-	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

@@ -34,6 +34,10 @@ type PrivateNetworkObservation struct {
 	// The Private Network ID
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 
+	// The ID of the server.
+	// The ID of the NIC
+	PnicID *string `json:"pnicId,omitempty" tf:"pnic_id,omitempty"`
+
 	// The private NIC state.
 	// The private NIC state
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -79,7 +83,7 @@ type RootVolumeInitParameters struct {
 	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
 
 	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instance termination
+	// Force deletion of the root volume on instanceSDK termination
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Size of the root volume in gigabytes.
@@ -104,7 +108,7 @@ type RootVolumeObservation struct {
 	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
 
 	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instance termination
+	// Force deletion of the root volume on instanceSDK termination
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// The name of the server.
@@ -134,7 +138,7 @@ type RootVolumeParameters struct {
 	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
 
 	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instance termination
+	// Force deletion of the root volume on instanceSDK termination
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -179,7 +183,7 @@ type ServerInitParameters struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
+	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
@@ -208,7 +212,7 @@ type ServerInitParameters struct {
 	// The name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The placement group the server is attached to.
+	// The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
 	// The placement group the server is attached to
 	// +crossplane:generate:reference:type=PlacementGroup
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
@@ -223,7 +227,7 @@ type ServerInitParameters struct {
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instance
+	// List of private network to connect with your instanceSDK
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -231,7 +235,7 @@ type ServerInitParameters struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instance
+	// List of public IPs attached to your instanceSDK
 	PublicIps []PublicIpsInitParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
@@ -242,7 +246,7 @@ type ServerInitParameters struct {
 	// Root volume attached to the server on creation
 	RootVolume []RootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
-	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
 	// If server supports routed IPs, default to true if public_ips is used
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
@@ -271,7 +275,7 @@ type ServerInitParameters struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instance type of the server
+	// The instanceSDK type of the server
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The user data associated with the server.
@@ -308,7 +312,7 @@ type ServerObservation struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
+	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
@@ -347,7 +351,7 @@ type ServerObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The placement group the server is attached to.
+	// The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
 	// The placement group the server is attached to
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
@@ -361,7 +365,7 @@ type ServerObservation struct {
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instance
+	// List of private network to connect with your instanceSDK
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -373,7 +377,7 @@ type ServerObservation struct {
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instance
+	// List of public IPs attached to your instanceSDK
 	PublicIps []PublicIpsObservation `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
@@ -384,7 +388,7 @@ type ServerObservation struct {
 	// Root volume attached to the server on creation
 	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
-	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
 	// If server supports routed IPs, default to true if public_ips is used
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
@@ -404,7 +408,7 @@ type ServerObservation struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instance type of the server
+	// The instanceSDK type of the server
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The user data associated with the server.
@@ -446,7 +450,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
+	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
 	// Determines if IPv6 is enabled for the server
 	// +kubebuilder:validation:Optional
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
@@ -480,7 +484,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The placement group the server is attached to.
+	// The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
 	// The placement group the server is attached to
 	// +crossplane:generate:reference:type=PlacementGroup
 	// +kubebuilder:validation:Optional
@@ -496,7 +500,7 @@ type ServerParameters struct {
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instance
+	// List of private network to connect with your instanceSDK
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -506,7 +510,7 @@ type ServerParameters struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instance
+	// List of public IPs attached to your instanceSDK
 	// +kubebuilder:validation:Optional
 	PublicIps []PublicIpsParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
@@ -520,7 +524,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	RootVolume []RootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
-	// (Defaults to false) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
+	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
 	// If server supports routed IPs, default to true if public_ips is used
 	// +kubebuilder:validation:Optional
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
@@ -553,7 +557,7 @@ type ServerParameters struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instance type of the server
+	// The instanceSDK type of the server
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 

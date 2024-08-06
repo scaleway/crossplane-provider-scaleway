@@ -13,8 +13,12 @@ import (
 	sshkey "github.com/scaleway/provider-scaleway/internal/controller/account/sshkey"
 	server "github.com/scaleway/provider-scaleway/internal/controller/applesilicon/server"
 	serverbaremetal "github.com/scaleway/provider-scaleway/internal/controller/baremetal/server"
+	snapshot "github.com/scaleway/provider-scaleway/internal/controller/block/snapshot"
+	volume "github.com/scaleway/provider-scaleway/internal/controller/block/volume"
+	alertmanager "github.com/scaleway/provider-scaleway/internal/controller/cockpit/alertmanager"
 	cockpit "github.com/scaleway/provider-scaleway/internal/controller/cockpit/cockpit"
 	grafanauser "github.com/scaleway/provider-scaleway/internal/controller/cockpit/grafanauser"
+	source "github.com/scaleway/provider-scaleway/internal/controller/cockpit/source"
 	token "github.com/scaleway/provider-scaleway/internal/controller/cockpit/token"
 	container "github.com/scaleway/provider-scaleway/internal/controller/container/container"
 	containernamespace "github.com/scaleway/provider-scaleway/internal/controller/container/containernamespace"
@@ -34,19 +38,23 @@ import (
 	group "github.com/scaleway/provider-scaleway/internal/controller/iam/group"
 	policy "github.com/scaleway/provider-scaleway/internal/controller/iam/policy"
 	sshkeyiam "github.com/scaleway/provider-scaleway/internal/controller/iam/sshkey"
+	user "github.com/scaleway/provider-scaleway/internal/controller/iam/user"
 	image "github.com/scaleway/provider-scaleway/internal/controller/instance/image"
 	ipinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/ip"
 	placementgroup "github.com/scaleway/provider-scaleway/internal/controller/instance/placementgroup"
 	securitygroup "github.com/scaleway/provider-scaleway/internal/controller/instance/securitygroup"
 	securitygrouprule "github.com/scaleway/provider-scaleway/internal/controller/instance/securitygrouprule"
 	serverinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/server"
-	snapshot "github.com/scaleway/provider-scaleway/internal/controller/instance/snapshot"
+	snapshotinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/snapshot"
 	userdata "github.com/scaleway/provider-scaleway/internal/controller/instance/userdata"
-	volume "github.com/scaleway/provider-scaleway/internal/controller/instance/volume"
+	volumeinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/volume"
 	device "github.com/scaleway/provider-scaleway/internal/controller/iot/device"
 	hub "github.com/scaleway/provider-scaleway/internal/controller/iot/hub"
 	network "github.com/scaleway/provider-scaleway/internal/controller/iot/network"
 	route "github.com/scaleway/provider-scaleway/internal/controller/iot/route"
+	ipipam "github.com/scaleway/provider-scaleway/internal/controller/ipam/ip"
+	ipreversedns "github.com/scaleway/provider-scaleway/internal/controller/ipam/ipreversedns"
+	definition "github.com/scaleway/provider-scaleway/internal/controller/jobs/definition"
 	cluster "github.com/scaleway/provider-scaleway/internal/controller/k8s/cluster"
 	pool "github.com/scaleway/provider-scaleway/internal/controller/k8s/pool"
 	backend "github.com/scaleway/provider-scaleway/internal/controller/lb/backend"
@@ -68,9 +76,10 @@ import (
 	instance "github.com/scaleway/provider-scaleway/internal/controller/rdb/instance"
 	privilege "github.com/scaleway/provider-scaleway/internal/controller/rdb/privilege"
 	readreplica "github.com/scaleway/provider-scaleway/internal/controller/rdb/readreplica"
-	user "github.com/scaleway/provider-scaleway/internal/controller/rdb/user"
+	userrdb "github.com/scaleway/provider-scaleway/internal/controller/rdb/user"
 	clusterredis "github.com/scaleway/provider-scaleway/internal/controller/redis/cluster"
 	registrynamespace "github.com/scaleway/provider-scaleway/internal/controller/registry/registrynamespace"
+	sqldatabase "github.com/scaleway/provider-scaleway/internal/controller/sdb/sqldatabase"
 	domaintem "github.com/scaleway/provider-scaleway/internal/controller/tem/domain"
 	gatewaynetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/gatewaynetwork"
 	privatenetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/privatenetwork"
@@ -89,8 +98,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sshkey.Setup,
 		server.Setup,
 		serverbaremetal.Setup,
+		snapshot.Setup,
+		volume.Setup,
+		alertmanager.Setup,
 		cockpit.Setup,
 		grafanauser.Setup,
+		source.Setup,
 		token.Setup,
 		container.Setup,
 		containernamespace.Setup,
@@ -110,19 +123,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		group.Setup,
 		policy.Setup,
 		sshkeyiam.Setup,
+		user.Setup,
 		image.Setup,
 		ipinstance.Setup,
 		placementgroup.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,
 		serverinstance.Setup,
-		snapshot.Setup,
+		snapshotinstance.Setup,
 		userdata.Setup,
-		volume.Setup,
+		volumeinstance.Setup,
 		device.Setup,
 		hub.Setup,
 		network.Setup,
 		route.Setup,
+		ipipam.Setup,
+		ipreversedns.Setup,
+		definition.Setup,
 		cluster.Setup,
 		pool.Setup,
 		backend.Setup,
@@ -144,9 +161,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		instance.Setup,
 		privilege.Setup,
 		readreplica.Setup,
-		user.Setup,
+		userrdb.Setup,
 		clusterredis.Setup,
 		registrynamespace.Setup,
+		sqldatabase.Setup,
 		domaintem.Setup,
 		gatewaynetwork.Setup,
 		privatenetwork.Setup,

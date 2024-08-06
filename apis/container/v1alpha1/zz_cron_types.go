@@ -33,6 +33,11 @@ type CronInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
+	// The name of the container cron. If not provided, the name is generated.
+	// during
+	// Cron job name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (Defaults to provider region) The region
 	// in where the job was created.
 	// The region you want to attach the resource to
@@ -57,6 +62,11 @@ type CronObservation struct {
 
 	// The container CRON's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the container cron. If not provided, the name is generated.
+	// during
+	// Cron job name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
 	// in where the job was created.
@@ -94,6 +104,12 @@ type CronParameters struct {
 	// Selector for a Container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+
+	// The name of the container cron. If not provided, the name is generated.
+	// during
+	// Cron job name
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
 	// in where the job was created.

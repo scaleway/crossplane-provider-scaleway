@@ -110,7 +110,7 @@ type ClusterInitParameters struct {
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.6).
+	// Redis's Cluster version (e.g. 6.2.7).
 	// Redis version of the cluster
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -186,7 +186,7 @@ type ClusterObservation struct {
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.6).
+	// Redis's Cluster version (e.g. 6.2.7).
 	// Redis version of the cluster
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -263,7 +263,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.6).
+	// Redis's Cluster version (e.g. 6.2.7).
 	// Redis version of the cluster
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -277,14 +277,14 @@ type ClusterParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
-	// The UUID of the private network resource.
+	// The UUID of the Private Network resource.
 	// UUID of the private network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Endpoint IPv4 addresses
-	// in CIDR notation. You must provide at
-	// least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 }
@@ -295,14 +295,14 @@ type PrivateNetworkObservation struct {
 	// UUID of the endpoint to be connected to the cluster
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// The UUID of the private network resource.
+	// The UUID of the Private Network resource.
 	// UUID of the private network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Endpoint IPv4 addresses
-	// in CIDR notation. You must provide at
-	// least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 
@@ -314,15 +314,15 @@ type PrivateNetworkObservation struct {
 
 type PrivateNetworkParameters struct {
 
-	// The UUID of the private network resource.
+	// The UUID of the Private Network resource.
 	// UUID of the private network to be connected to the cluster
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// Endpoint IPv4 addresses
-	// in CIDR notation. You must provide at
-	// least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-	// service if not set.
+	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	// +kubebuilder:validation:Optional
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`

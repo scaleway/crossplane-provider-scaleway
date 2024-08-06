@@ -12,6 +12,7 @@ spec:
     functionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
+    name: test-cron
     schedule: 0 0 * * *
 
 ---

@@ -158,12 +158,21 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to provider region) The region of the cockpit token.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Allowed scopes.
 	// Endpoints
 	Scopes []ScopesInitParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
 type TokenObservation struct {
+
+	// The date and time of the creation of the Cockpit Token (Format ISO 8601)
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The ID of the cockpit token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the token.
@@ -174,9 +183,16 @@ type TokenObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to provider region) The region of the cockpit token.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Allowed scopes.
 	// Endpoints
 	Scopes []ScopesObservation `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// The date and time of the last update of the Cockpit Token (Format ISO 8601)
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type TokenParameters struct {
@@ -199,6 +215,11 @@ type TokenParameters struct {
 	// Selector for a Project in account to populate projectId.
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
+
+	// (Defaults to provider region) The region of the cockpit token.
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Allowed scopes.
 	// Endpoints

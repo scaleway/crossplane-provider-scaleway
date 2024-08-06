@@ -51,7 +51,7 @@ type FunctionInitParameters struct {
 	// The name of the function
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the function
+	// The namespace ID the function is associated with.
 	// The namespace ID associated with this function
 	// +crossplane:generate:reference:type=FunctionNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -76,7 +76,7 @@ type FunctionInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Runtime of the function. Runtimes can be fetched using specific route
+	// Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
 	// Runtime of the function
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
@@ -143,7 +143,7 @@ type FunctionObservation struct {
 	// The name of the function
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the function
+	// The namespace ID the function is associated with.
 	// The namespace ID associated with this function
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -163,7 +163,7 @@ type FunctionObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Runtime of the function. Runtimes can be fetched using specific route
+	// Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
 	// Runtime of the function
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
@@ -226,7 +226,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the function
+	// The namespace ID the function is associated with.
 	// The namespace ID associated with this function
 	// +crossplane:generate:reference:type=FunctionNamespace
 	// +kubebuilder:validation:Optional
@@ -255,7 +255,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Runtime of the function. Runtimes can be fetched using specific route
+	// Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
 	// Runtime of the function
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`

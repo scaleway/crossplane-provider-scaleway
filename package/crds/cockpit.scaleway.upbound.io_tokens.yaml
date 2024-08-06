@@ -156,6 +156,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region of the cockpit token.
+                      The region you want to attach the resource to
+                    type: string
                   scopes:
                     description: |-
                       Allowed scopes.
@@ -307,6 +312,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region of the cockpit token.
+                      The region you want to attach the resource to
+                    type: string
                   scopes:
                     description: |-
                       Allowed scopes.
@@ -538,7 +548,12 @@ spec:
             properties:
               atProvider:
                 properties:
+                  createdAt:
+                    description: The date and time of the creation of the Cockpit
+                      Token (Format ISO 8601)
+                    type: string
                   id:
+                    description: The ID of the cockpit token.
                     type: string
                   name:
                     description: |-
@@ -549,6 +564,11 @@ spec:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the cockpit is associated with.
                       The project_id you want to attach the resource to
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region of the cockpit token.
+                      The region you want to attach the resource to
                     type: string
                   scopes:
                     description: |-
@@ -603,6 +623,10 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  updatedAt:
+                    description: The date and time of the last update of the Cockpit
+                      Token (Format ISO 8601)
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

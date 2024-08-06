@@ -15,8 +15,7 @@ import (
 
 type ObjectInitParameters struct {
 
-	// The name of the bucket.
-	// The name of the bucket
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The content of the file to upload. Only one of file, content or content_base64 can be defined.
@@ -68,8 +67,7 @@ type ObjectInitParameters struct {
 
 type ObjectObservation struct {
 
-	// The name of the bucket.
-	// The name of the bucket
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The content of the file to upload. Only one of file, content or content_base64 can be defined.
@@ -124,8 +122,7 @@ type ObjectObservation struct {
 
 type ObjectParameters struct {
 
-	// The name of the bucket.
-	// The name of the bucket
+	// The bucket's name or regional ID.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

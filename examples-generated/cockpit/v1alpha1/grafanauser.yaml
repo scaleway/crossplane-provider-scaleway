@@ -11,5 +11,19 @@ spec:
     login: my-awesome-user
     projectIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: scaleway_cockpit
+        testing.upbound.io/example-name: project
     role: editor
+
+---
+
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/grafanauser
+  labels:
+    testing.upbound.io/example-name: project
+  name: project
+spec:
+  forProvider:
+    name: test project grafana user

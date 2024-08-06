@@ -54,7 +54,7 @@ type IndexDocumentParameters struct {
 type WebsiteConfigurationInitParameters struct {
 
 	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The name of the error document for the website detailed below.
@@ -76,7 +76,7 @@ type WebsiteConfigurationInitParameters struct {
 type WebsiteConfigurationObservation struct {
 
 	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The name of the error document for the website detailed below.
@@ -109,7 +109,7 @@ type WebsiteConfigurationObservation struct {
 type WebsiteConfigurationParameters struct {
 
 	// The name of the bucket.
-	// The bucket name.
+	// The bucket's name or regional ID.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

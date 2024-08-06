@@ -33,6 +33,10 @@ type CronInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
+	// The name of the cron. If not provided, the name is generated.
+	// The name of the cron job.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (Defaults to provider region) The region
 	// in where the job was created.
 	// The region you want to attach the resource to
@@ -57,6 +61,10 @@ type CronObservation struct {
 
 	// The function CRON's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the cron. If not provided, the name is generated.
+	// The name of the cron job.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
 	// in where the job was created.
@@ -94,6 +102,11 @@ type CronParameters struct {
 	// Selector for a Function to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
+
+	// The name of the cron. If not provided, the name is generated.
+	// The name of the cron job.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
 	// in where the job was created.

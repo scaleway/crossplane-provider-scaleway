@@ -128,7 +128,7 @@ type BackendInitParameters struct {
 	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
 
 	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-	// Cookie name for for sticky sessions
+	// Cookie name for sticky sessions
 	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
 
 	// Maximum initial server connection establishment time. (e.g.: 1s)
@@ -257,7 +257,7 @@ type BackendObservation struct {
 	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
 
 	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-	// Cookie name for for sticky sessions
+	// Cookie name for sticky sessions
 	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
 
 	// Maximum initial server connection establishment time. (e.g.: 1s)
@@ -417,7 +417,7 @@ type BackendParameters struct {
 	StickySessions *string `json:"stickySessions,omitempty" tf:"sticky_sessions,omitempty"`
 
 	// Cookie name for sticky sessions. Only applicable when sticky_sessions is set to cookie.
-	// Cookie name for for sticky sessions
+	// Cookie name for sticky sessions
 	// +kubebuilder:validation:Optional
 	StickySessionsCookieName *string `json:"stickySessionsCookieName,omitempty" tf:"sticky_sessions_cookie_name,omitempty"`
 

@@ -1384,6 +1384,11 @@ func (in *PrivateNetworkObservation) DeepCopyInto(out *PrivateNetworkObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.PnicID != nil {
+		in, out := &in.PnicID, &out.PnicID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)

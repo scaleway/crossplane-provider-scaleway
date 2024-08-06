@@ -134,15 +134,15 @@ spec:
                       properties:
                         id:
                           description: |-
-                            The UUID of the private network resource.
+                            The UUID of the Private Network resource.
                             UUID of the private network to be connected to the cluster
                           type: string
                         serviceIps:
                           description: |-
-                            Endpoint IPv4 addresses
-                            in CIDR notation. You must provide at
-                            least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string
@@ -191,7 +191,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Redis's Cluster version (e.g. 6.2.6).
+                      Redis's Cluster version (e.g. 6.2.7).
                       Redis version of the cluster
                     type: string
                   zone:
@@ -276,15 +276,15 @@ spec:
                       properties:
                         id:
                           description: |-
-                            The UUID of the private network resource.
+                            The UUID of the Private Network resource.
                             UUID of the private network to be connected to the cluster
                           type: string
                         serviceIps:
                           description: |-
-                            Endpoint IPv4 addresses
-                            in CIDR notation. You must provide at
-                            least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string
@@ -333,7 +333,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Redis's Cluster version (e.g. 6.2.6).
+                      Redis's Cluster version (e.g. 6.2.7).
                       Redis version of the cluster
                     type: string
                   zone:
@@ -599,15 +599,15 @@ spec:
                           type: string
                         id:
                           description: |-
-                            The UUID of the private network resource.
+                            The UUID of the Private Network resource.
                             UUID of the private network to be connected to the cluster
                           type: string
                         serviceIps:
                           description: |-
-                            Endpoint IPv4 addresses
-                            in CIDR notation. You must provide at
-                            least one IP per node or The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string
@@ -681,7 +681,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Redis's Cluster version (e.g. 6.2.6).
+                      Redis's Cluster version (e.g. 6.2.7).
                       Redis version of the cluster
                     type: string
                   zone:

@@ -1,0 +1,31 @@
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: AlertManager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/alertmanager
+  labels:
+    testing.upbound.io/example-name: alert_manager
+  name: alert-manager
+spec:
+  forProvider:
+    contactPoints:
+    - email: alert1@example.com
+    - email: alert2@example.com
+    enableManagedAlerts: true
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: project
+
+---
+
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/alertmanager
+  labels:
+    testing.upbound.io/example-name: project
+  name: project
+spec:
+  forProvider:
+    name: tf_test_project

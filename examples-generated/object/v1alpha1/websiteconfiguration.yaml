@@ -8,7 +8,7 @@ metadata:
   name: main
 spec:
   forProvider:
-    bucket: some-unique-name
+    bucket: ${scaleway_object_bucket.main.id}
     indexDocument:
     - suffix: index.html
 

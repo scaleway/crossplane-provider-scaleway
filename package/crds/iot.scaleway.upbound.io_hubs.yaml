@@ -394,6 +394,16 @@ spec:
                   id:
                     description: The ID of the Hub.
                     type: string
+                  mqttCa:
+                    description: |-
+                      The MQTT certificat content
+                      The MQTT certificat content
+                    type: string
+                  mqttCaUrl:
+                    description: |-
+                      The MQTT ca url
+                      The url of the MQTT ca
+                    type: string
                   name:
                     description: |-
                       The name of the IoT Hub instance you want to create (e.g. my-hub).

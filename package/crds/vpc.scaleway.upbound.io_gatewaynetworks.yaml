@@ -248,7 +248,7 @@ spec:
                   ipamConfig:
                     description: |-
                       Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-                      Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+                      Auto-configure the Gateway Network using IPAM (IP address management service)
                     items:
                       properties:
                         ipamIpId:
@@ -542,7 +542,7 @@ spec:
                   ipamConfig:
                     description: |-
                       Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-                      Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+                      Auto-configure the Gateway Network using IPAM (IP address management service)
                     items:
                       properties:
                         ipamIpId:
@@ -855,7 +855,7 @@ spec:
                   ipamConfig:
                     description: |-
                       Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.
-                      Auto-configure the Gateway Network using Scaleway's IPAM (IP address management service)
+                      Auto-configure the Gateway Network using IPAM (IP address management service)
                     items:
                       properties:
                         ipamIpId:

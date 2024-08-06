@@ -76,7 +76,7 @@ spec:
                   bucket:
                     description: |-
                       The name of the bucket.
-                      The bucket name.
+                      The bucket's name or regional ID.
                     type: string
                   errorDocument:
                     description: |-
@@ -127,7 +127,7 @@ spec:
                   bucket:
                     description: |-
                       The name of the bucket.
-                      The bucket name.
+                      The bucket's name or regional ID.
                     type: string
                   errorDocument:
                     description: |-
@@ -347,7 +347,7 @@ spec:
                   bucket:
                     description: |-
                       The name of the bucket.
-                      The bucket name.
+                      The bucket's name or regional ID.
                     type: string
                   errorDocument:
                     description: |-

@@ -4,17 +4,55 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: pat01
+  name: pat01
 spec:
   forProvider:
     gatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pg01
-    privateIp: ${scaleway_vpc_public_gateway_dhcp.dhcp01.address}
-    privatePort: 42
-    protocol: both
-    publicPort: 42
+    privateIp: ${scaleway_vpc_public_gateway_dhcp_reservation.rsv01.ip_address}
+    privatePort: 22
+    protocol: tcp
+    publicPort: 2202
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: sg01
+  name: sg01
+spec:
+  forProvider:
+    inboundDefaultPolicy: drop
+    inboundRule:
+    - action: accept
+      port: 22
+      protocol: TCP
+    outboundDefaultPolicy: accept
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: srv01
+  name: srv01
+spec:
+  forProvider:
+    image: ubuntu_jammy
+    name: my-server
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sg01
+    type: PLAY2-NANO
 
 ---
 
@@ -32,6 +70,7 @@ spec:
     dhcpIdSelector:
       matchLabels:
         testing.upbound.io/example-name: dhcp01
+    enableMasquerade: true
     gatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pg01
@@ -51,7 +90,7 @@ metadata:
   name: pn01
 spec:
   forProvider:
-    name: pn_test_network
+    name: my-pn
 
 ---
 
@@ -65,6 +104,10 @@ metadata:
   name: pg01
 spec:
   forProvider:
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ip01
+    name: my-pg
     type: VPC-GW-S
 
 ---
@@ -79,4 +122,17 @@ metadata:
   name: dhcp01
 spec:
   forProvider:
-    subnet: 192.168.1.0/24
+    subnet: 192.168.0.0/24
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PublicGatewayIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: ip01
+  name: ip01
+spec:
+  forProvider: {}

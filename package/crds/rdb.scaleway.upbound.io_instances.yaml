@@ -92,11 +92,6 @@ spec:
                       Disable automated backup for the database instance.
                       Disable automated backup for the database instance
                     type: boolean
-                  disablePublicEndpoint:
-                    description: |-
-                      Disable the default public endpoint
-                      Whether the instance should have a public endpoint if it has a Private Network attached
-                    type: boolean
                   engine:
                     description: |-
                       Database Instance's engine version (e.g. PostgreSQL-11).
@@ -115,6 +110,34 @@ spec:
                       Enable or disable high availability for the database instance.
                       Enable or disable high availability for the database instance
                     type: boolean
+                  loadBalancer:
+                    description: |-
+                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      This block must be defined if you want a public endpoint in addition to your private endpoint.
+                      Load balancer of the database instance
+                    items:
+                      properties:
+                        endpointId:
+                          description: |-
+                            The ID of the endpoint of the load balancer.
+                            The endpoint ID
+                          type: string
+                      type: object
+                    type: array
+                  logsPolicy:
+                    description: Logs policy configuration
+                    items:
+                      properties:
+                        maxAgeRetention:
+                          description: The max age (in days) of remote logs to keep
+                            on the Database Instance
+                          type: number
+                        totalDiskRetention:
+                          description: The max disk size of remote logs to keep on
+                            the Database Instance.
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the Database Instance.
@@ -150,11 +173,14 @@ spec:
                       List of private network to expose your database instance
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         ipNet:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP with the given mask within the private subnet
                           type: string
                         pnId:
@@ -162,6 +188,82 @@ spec:
                             The ID of the private network.
                             The private network ID
                           type: string
+                        pnIdRef:
+                          description: Reference to a PrivateNetwork in vpc to populate
+                            pnId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        pnIdSelector:
+                          description: Selector for a PrivateNetwork in vpc to populate
+                            pnId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         port:
                           description: |-
                             Port of the replica.
@@ -206,12 +308,12 @@ spec:
                     type: string
                   volumeSizeInGb:
                     description: |-
-                      Volume size (in GB) when volume_type is set to bssd.
+                      Volume size (in GB). Cannot be used when volume_type is set to lssd.
                       Volume size (in GB) when volume_type is not lssd
                     type: number
                   volumeType:
                     description: |-
-                      Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
                       Type of volume where data are stored
                     type: string
                 type: object
@@ -248,11 +350,6 @@ spec:
                       Disable automated backup for the database instance.
                       Disable automated backup for the database instance
                     type: boolean
-                  disablePublicEndpoint:
-                    description: |-
-                      Disable the default public endpoint
-                      Whether the instance should have a public endpoint if it has a Private Network attached
-                    type: boolean
                   engine:
                     description: |-
                       Database Instance's engine version (e.g. PostgreSQL-11).
@@ -271,6 +368,34 @@ spec:
                       Enable or disable high availability for the database instance.
                       Enable or disable high availability for the database instance
                     type: boolean
+                  loadBalancer:
+                    description: |-
+                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      This block must be defined if you want a public endpoint in addition to your private endpoint.
+                      Load balancer of the database instance
+                    items:
+                      properties:
+                        endpointId:
+                          description: |-
+                            The ID of the endpoint of the load balancer.
+                            The endpoint ID
+                          type: string
+                      type: object
+                    type: array
+                  logsPolicy:
+                    description: Logs policy configuration
+                    items:
+                      properties:
+                        maxAgeRetention:
+                          description: The max age (in days) of remote logs to keep
+                            on the Database Instance
+                          type: number
+                        totalDiskRetention:
+                          description: The max disk size of remote logs to keep on
+                            the Database Instance.
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the Database Instance.
@@ -306,11 +431,14 @@ spec:
                       List of private network to expose your database instance
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         ipNet:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP with the given mask within the private subnet
                           type: string
                         pnId:
@@ -318,6 +446,82 @@ spec:
                             The ID of the private network.
                             The private network ID
                           type: string
+                        pnIdRef:
+                          description: Reference to a PrivateNetwork in vpc to populate
+                            pnId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        pnIdSelector:
+                          description: Selector for a PrivateNetwork in vpc to populate
+                            pnId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         port:
                           description: |-
                             Port of the replica.
@@ -362,12 +566,12 @@ spec:
                     type: string
                   volumeSizeInGb:
                     description: |-
-                      Volume size (in GB) when volume_type is set to bssd.
+                      Volume size (in GB). Cannot be used when volume_type is set to lssd.
                       Volume size (in GB) when volume_type is not lssd
                     type: number
                   volumeType:
                     description: |-
-                      Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
                       Type of volume where data are stored
                     type: string
                 type: object
@@ -577,11 +781,6 @@ spec:
                       Disable automated backup for the database instance.
                       Disable automated backup for the database instance
                     type: boolean
-                  disablePublicEndpoint:
-                    description: |-
-                      Disable the default public endpoint
-                      Whether the instance should have a public endpoint if it has a Private Network attached
-                    type: boolean
                   endpointIp:
                     description: |-
                       (Deprecated) The IP of the Database Instance.
@@ -615,24 +814,49 @@ spec:
                     type: boolean
                   loadBalancer:
                     description: |-
-                      List of load balancer endpoints of the database instance.
+                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      This block must be defined if you want a public endpoint in addition to your private endpoint.
                       Load balancer of the database instance
                     items:
                       properties:
                         endpointId:
-                          description: The ID of the endpoint of the load balancer.
+                          description: |-
+                            The ID of the endpoint of the load balancer.
+                            The endpoint ID
                           type: string
                         hostname:
-                          description: Name of the endpoint.
+                          description: |-
+                            Name of the endpoint.
+                            The hostname of your endpoint
                           type: string
                         ip:
-                          description: IP of the replica.
+                          description: |-
+                            IP of the replica.
+                            The IP of your load balancer service
                           type: string
                         name:
-                          description: The name of the Database Instance.
+                          description: |-
+                            The name of the Database Instance.
+                            The name of your load balancer service
                           type: string
                         port:
-                          description: Port of the replica.
+                          description: |-
+                            Port of the replica.
+                            The port of your load balancer service
+                          type: number
+                      type: object
+                    type: array
+                  logsPolicy:
+                    description: Logs policy configuration
+                    items:
+                      properties:
+                        maxAgeRetention:
+                          description: The max age (in days) of remote logs to keep
+                            on the Database Instance
+                          type: number
+                        totalDiskRetention:
+                          description: The max disk size of remote logs to keep on
+                            the Database Instance.
                           type: number
                       type: object
                     type: array
@@ -657,6 +881,11 @@ spec:
                       List of private network to expose your database instance
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         endpointId:
                           description: |-
                             The ID of the endpoint of the load balancer.
@@ -674,9 +903,7 @@ spec:
                           type: string
                         ipNet:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP with the given mask within the private subnet
                           type: string
                         name:
@@ -750,12 +977,12 @@ spec:
                     type: string
                   volumeSizeInGb:
                     description: |-
-                      Volume size (in GB) when volume_type is set to bssd.
+                      Volume size (in GB). Cannot be used when volume_type is set to lssd.
                       Volume size (in GB) when volume_type is not lssd
                     type: number
                   volumeType:
                     description: |-
-                      Type of volume where data are stored (bssd or lssd).
+                      Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
                       Type of volume where data are stored
                     type: string
                 type: object

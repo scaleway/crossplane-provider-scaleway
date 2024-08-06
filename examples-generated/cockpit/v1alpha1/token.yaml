@@ -11,4 +11,18 @@ spec:
     name: my-awesome-token
     projectIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: scaleway_cockpit
+        testing.upbound.io/example-name: project
+
+---
+
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: project
+  name: project
+spec:
+  forProvider:
+    name: my-project

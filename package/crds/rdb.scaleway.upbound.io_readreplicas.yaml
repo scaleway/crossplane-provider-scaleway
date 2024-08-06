@@ -164,6 +164,11 @@ spec:
                       Private network endpoints
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         privateNetworkId:
                           description: |-
                             UUID of the private network to be connected to the read replica.
@@ -171,9 +176,7 @@ spec:
                           type: string
                         serviceIp:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP network address within the private subnet
                           type: string
                       type: object
@@ -186,7 +189,7 @@ spec:
                     type: string
                   sameZone:
                     description: |-
-                      (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+                      (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                       Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                     type: boolean
                 type: object
@@ -295,6 +298,11 @@ spec:
                       Private network endpoints
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         privateNetworkId:
                           description: |-
                             UUID of the private network to be connected to the read replica.
@@ -302,9 +310,7 @@ spec:
                           type: string
                         serviceIp:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP network address within the private subnet
                           type: string
                       type: object
@@ -317,7 +323,7 @@ spec:
                     type: string
                   sameZone:
                     description: |-
-                      (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+                      (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                       Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                     type: boolean
                 type: object
@@ -540,6 +546,11 @@ spec:
                       Private network endpoints
                     items:
                       properties:
+                        enableIpam:
+                          description: |-
+                            If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            Whether or not the private network endpoint should be configured with IPAM
+                          type: boolean
                         endpointId:
                           description: |-
                             The ID of the endpoint of the read replica.
@@ -572,9 +583,7 @@ spec:
                           type: string
                         serviceIp:
                           description: |-
-                            The IP network address within the private subnet. This must be an IPv4 address with a
-                            CIDR notation. The IP network address within the private subnet is determined by the IP Address Management (IPAM)
-                            service if not set.
+                            The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
                             The IP network address within the private subnet
                           type: string
                         zone:
@@ -590,7 +599,7 @@ spec:
                     type: string
                   sameZone:
                     description: |-
-                      (Defaults to false) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
+                      (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                       Defines whether to create the replica in the same availability zone as the main instance nodes or not.
                     type: boolean
                 type: object
