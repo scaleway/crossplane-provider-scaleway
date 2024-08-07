@@ -75,7 +75,7 @@ func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) e
 		return fmt.Errorf("invalid file path: %s", cleanFilePath)
 	}
 
-	err = os.WriteFile(filePath, formattedCode, 0644)
+	err = os.WriteFile(filePath, formattedCode, 0600)
 	if err != nil {
 		return err
 	}
