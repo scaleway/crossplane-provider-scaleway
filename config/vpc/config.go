@@ -46,6 +46,11 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "GatewayNetwork"
 
+		// https://github.com/crossplane/upjet/issues/197
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"static_address"},
+		}
+
 		r.References["gateway_id"] = config.Reference{
 			Type: "PublicGateway",
 		}
