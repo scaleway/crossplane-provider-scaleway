@@ -53,7 +53,7 @@ func main() {
 		}
 
 		config := tools.ResourceConfig{
-			PackageName:           strings.ToLower(strings.ReplaceAll(resource.SubCategory, " ", "")), // Convert "Apple Silicon" to "applesilicon"
+			PackageName:           generatePackageName(resource.SubCategory),
 			ShortGroup:            strings.ToLower(resource.SubCategory),
 			ResourceName:          resource.Title,
 			TerraformResourceName: resource.Name,
@@ -101,4 +101,8 @@ func parseKindFromResourceName(resourceName string) string {
 	lastWord := parts[len(parts)-1]
 
 	return titleCaser.String(lastWord)
+}
+
+func generatePackageName(subCategory string) string {
+	return strings.ToLower(strings.ReplaceAll(subCategory, " ", ""))
 }
