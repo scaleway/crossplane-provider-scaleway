@@ -27,5 +27,10 @@
         r.ExternalName = config.IdentifierFromProvider
         r.ShortGroup = "{{ .ShortGroup }}"
         r.Kind = "{{ .Kind }}"
+        {{ range $key, $value := .References }}
+            r.References["{{$key}}"] = config.Reference{
+            Type: "{{$value}}",
+            }
+        {{ end }}
     })
 {{ end }}

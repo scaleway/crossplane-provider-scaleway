@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"go/format"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -21,7 +23,12 @@ const ProviderGoFilePath = "config/provider.go"
 const ExternalNameGoFilePath = "config/external_name.go"
 
 func parseTemplates() (*template.Template, error) {
-	return template.ParseFiles("config_templates.tmpl")
+	templatePath := "config/config_templates.tmpl"
+	tmpl, err := template.ParseFiles(templatePath)
+	if err != nil {
+		log.Fatalf("Failed to parse templates: %v", err)
+	}
+	return tmpl, err
 }
 
 func generateConfigFile(resourceConfig tools.ResourceConfig) error {
@@ -50,9 +57,17 @@ func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) e
 		return err
 	}
 
-	file, err := os.Create(filePath)
+	var buf bytes.Buffer
+	templates := []string{"initialConfigTemplate", "resourceConfigTemplate"}
+	for _, tmplName := range templates {
+		if err = tmpl.ExecuteTemplate(&buf, tmplName, resourceConfig); err != nil {
+			return err
+		}
+	}
+
+	formattedCode, err := format.Source(buf.Bytes())
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to format generated code: %w", err)
 	}
 
 	cleanFilePath := filepath.Clean(filePath)
@@ -60,17 +75,9 @@ func createNewConfigFile(filePath string, resourceConfig tools.ResourceConfig) e
 		return fmt.Errorf("invalid file path: %s", cleanFilePath)
 	}
 
-	defer func() {
-		if cerr := file.Close(); cerr != nil && err == nil {
-			err = cerr
-		}
-	}()
-
-	templates := []string{"initialConfigTemplate", "resourceConfigTemplate"}
-	for _, tmplName := range templates {
-		if err = tmpl.ExecuteTemplate(file, tmplName, resourceConfig); err != nil {
-			return err
-		}
+	err = os.WriteFile(filePath, formattedCode, 0644)
+	if err != nil {
+		return err
 	}
 
 	return nil
@@ -90,7 +97,7 @@ func updateExistingConfigFile(content []byte, filePath string, resourceConfig to
 	}
 
 	var tmplOutput bytes.Buffer
-	if err := tmpl.ExecuteTemplate(&tmplOutput, "updateConfigTemplate", resourceConfig); err != nil {
+	if err := tmpl.ExecuteTemplate(&tmplOutput, "updateExistingConfigTemplate", resourceConfig); err != nil {
 		return err
 	}
 
@@ -98,8 +105,15 @@ func updateExistingConfigFile(content []byte, filePath string, resourceConfig to
 	if insertionPoint == -1 {
 		return errors.New("failed to find insertion point in config.go")
 	}
+
 	updatedContent := contentStr[:insertionPoint] + tmplOutput.String() + contentStr[insertionPoint:]
-	return os.WriteFile(filePath, []byte(updatedContent), 0600)
+
+	formattedCode, err := format.Source([]byte(updatedContent))
+	if err != nil {
+		return fmt.Errorf("failed to format updated code: %w", err)
+	}
+
+	return os.WriteFile(filePath, formattedCode, 0600)
 }
 
 func updateProviderGo(resourceConfig tools.ResourceConfig) error {
@@ -134,7 +148,12 @@ func updateProviderGo(resourceConfig tools.ResourceConfig) error {
 	// Insert the new line at the correct position
 	updatedContent := contentStr[:actualInsertionPoint] + newLine + contentStr[actualInsertionPoint:]
 
-	return os.WriteFile(ProviderGoFilePath, []byte(updatedContent), 0600)
+	formattedCode, err := format.Source([]byte(updatedContent))
+	if err != nil {
+		return fmt.Errorf("failed to format provider.go: %w", err)
+	}
+
+	return os.WriteFile(ProviderGoFilePath, formattedCode, 0600)
 }
 
 func updateExternalNameGo(resourceConfig tools.ResourceConfig) error {
@@ -158,8 +177,13 @@ func updateExternalNameGo(resourceConfig tools.ResourceConfig) error {
 		// Insert the new line at the correct position
 		updatedContent := contentStr[:insertionPoint] + newLine + contentStr[insertionPoint:]
 
+		formattedCode, err := format.Source([]byte(updatedContent))
+		if err != nil {
+			return fmt.Errorf("failed to format external_name.go: %w", err)
+		}
+
 		// Write the updated content back to the file
-		return os.WriteFile(ExternalNameGoFilePath, []byte(updatedContent), 0600)
+		return os.WriteFile(ExternalNameGoFilePath, formattedCode, 0600)
 	}
 
 	return nil
@@ -167,7 +191,6 @@ func updateExternalNameGo(resourceConfig tools.ResourceConfig) error {
 
 func main() {
 	jsonData, err := io.ReadAll(os.Stdin)
-
 	if err != nil {
 		fmt.Printf("Error reading JSON input: %v\n", err)
 		return
