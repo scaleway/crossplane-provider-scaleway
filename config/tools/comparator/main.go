@@ -4,6 +4,8 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"os"
 	"strings"
 
@@ -54,7 +56,7 @@ func main() {
 			ShortGroup:            strings.ToLower(resource.SubCategory),
 			ResourceName:          resource.Title,
 			TerraformResourceName: resource.Name,
-			Kind:                  resource.Title,
+			Kind:                  parseKindFromResourceName(resource.Name),
 			References:            references,
 		}
 		resourceConfigs = append(resourceConfigs, config)
@@ -86,4 +88,16 @@ func findNewResources(current, new map[string]*registry.Resource) []*registry.Re
 		}
 	}
 	return addedResources
+}
+
+func parseKindFromResourceName(resourceName string) string {
+	titleCaser := cases.Title(language.English)
+
+	parts := strings.Split(resourceName, "_")
+	if len(parts) == 0 {
+		return ""
+	}
+	lastWord := parts[len(parts)-1]
+
+	return titleCaser.String(lastWord)
 }
