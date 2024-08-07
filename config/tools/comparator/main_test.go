@@ -10,15 +10,15 @@ func TestParseKindFromResourceName(t *testing.T) {
 		resourceName string
 		expected     string
 	}{
-		{"scaleway_object_bucket", "Bucket"},         // Normal case
-		{"scaleway_flexible_ip", "Ip"},               // Multiple words
-		{"simple_resource", "Resource"},              // Single word
-		{"", ""},                                     // Empty string
-		{"singleword", "Singleword"},                 // No underscores
-		{"trailing_underscore_", ""},                 // Trailing underscore
-		{"_leading_underscore", "Underscore"},        // Leading underscore
-		{"middle__double__underscore", "Underscore"}, // Double underscores
-		{"_underscore", "Underscore"},                // Starts with underscore
+		{"scaleway_object_bucket", "Bucket"},
+		{"scaleway_flexible_ip", "Ip"},
+		{"simple_resource", "Resource"},
+		{"", ""},
+		{"singleword", "Singleword"},
+		{"trailing_underscore_", ""},
+		{"_leading_underscore", "Underscore"},
+		{"middle__double__underscore", "Underscore"},
+		{"_underscore", "Underscore"},
 	}
 
 	for _, tt := range tests {
