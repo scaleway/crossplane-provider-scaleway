@@ -79,7 +79,6 @@ import (
 	userrdb "github.com/scaleway/provider-scaleway/internal/controller/rdb/user"
 	clusterredis "github.com/scaleway/provider-scaleway/internal/controller/redis/cluster"
 	registrynamespace "github.com/scaleway/provider-scaleway/internal/controller/registry/registrynamespace"
-	sqldatabase "github.com/scaleway/provider-scaleway/internal/controller/sdb/sqldatabase"
 	domaintem "github.com/scaleway/provider-scaleway/internal/controller/tem/domain"
 	gatewaynetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/gatewaynetwork"
 	privatenetwork "github.com/scaleway/provider-scaleway/internal/controller/vpc/privatenetwork"
@@ -164,7 +163,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userrdb.Setup,
 		clusterredis.Setup,
 		registrynamespace.Setup,
-		sqldatabase.Setup,
 		domaintem.Setup,
 		gatewaynetwork.Setup,
 		privatenetwork.Setup,
