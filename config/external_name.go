@@ -79,7 +79,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_rdb_read_replica":                    config.NameAsIdentifier,
 	"scaleway_redis_cluster":                       config.NameAsIdentifier,
 	"scaleway_registry_namespace":                  config.NameAsIdentifier,
-	"scaleway_sdb_sql_database":                    config.NameAsIdentifier,
 	"scaleway_tem_domain":                          config.NameAsIdentifier,
 	"scaleway_vpc":                                 config.NameAsIdentifier,
 	"scaleway_vpc_gateway_network":                 config.NameAsIdentifier,
