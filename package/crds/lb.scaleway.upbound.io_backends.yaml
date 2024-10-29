@@ -74,7 +74,7 @@ spec:
                 properties:
                   failoverHost:
                     description: |-
-                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      Scaleway S3 bucket website to be served if all backend servers are down.
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
@@ -100,11 +100,11 @@ spec:
                     type: string
                   healthCheckDelay:
                     description: |-
-                      (Default: 60s) Interval between two HC requests.
+                      (Default: 60s) Interval between two health check requests.
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enable HTTP health check. Only one of
+                    description: This block enables HTTP health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -116,23 +116,23 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health check. Only one of
+                    description: This block enable HTTPS health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -144,34 +144,34 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         sni:
                           description: |-
-                            The SNI to use for HC requests over SSL.
+                            The SNI to use for health check requests over SSL.
                             The SNI to use for HC requests over SSL
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
                     description: |-
-                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      (Default: 2) Number of allowed failed health check requests before the backend server is marked as down.
                       Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
                     description: |-
-                      (Default: forward_port) Port the HC requests will be send to.
+                      (Default: forward_port) Port the health check requests will be sent to.
                       Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
@@ -180,14 +180,15 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enable TCP health check. Only one of health_check_tcp,
-                      health_check_http and health_check_https should be specified.
+                    description: This block enables TCP health checks. Only one of
+                      health_check_tcp, health_check_http and health_check_https should
+                      be specified.
                     items:
                       type: object
                     type: array
                   healthCheckTimeout:
                     description: |-
-                      (Default: 30s) Timeout before we consider a HC request failed.
+                      (Default: 30s) Timeout before we consider a health check request failed.
                       Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
@@ -202,7 +203,7 @@ spec:
                     type: boolean
                   lbId:
                     description: |-
-                      The load-balancer ID this backend is attached to.
+                      The ID of the Load Balancer this backend is attached to.
                       ~> Important: Updates to lb_id will recreate the backend.
                       The load-balancer ID
                     type: string
@@ -287,22 +288,22 @@ spec:
                     type: number
                   maxRetries:
                     description: |-
-                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection fails.
                       Number of retries when a backend server connection failed
                     type: number
                   name:
                     description: |-
-                      The name of the load-balancer backend.
+                      The name of the Load Balancer backend.
                       The name of the backend
                     type: string
                   onMarkedDownAction:
                     description: |-
-                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      (Default: none) Specify what action to take when a backend server is marked down. Possible values are: none and shutdown_sessions.
                       Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
                     description: |-
-                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      (Default: none) The type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
                       Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
@@ -324,12 +325,12 @@ spec:
                     type: array
                   sslBridging:
                     description: |-
-                      (Default: false) Enables SSL between load balancer and backend servers.
+                      (Default: false) Enables SSL between the Load Balancer and its backend servers.
                       Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
                     description: |-
-                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      (Default: none) The type of sticky session. Possible values are: none, cookie and table.
                       The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
@@ -339,7 +340,7 @@ spec:
                     type: string
                   timeoutConnect:
                     description: |-
-                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time. (e.g. 1s)
                       Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
@@ -349,12 +350,12 @@ spec:
                     type: string
                   timeoutServer:
                     description: |-
-                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time. (e.g. 1s)
                       Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
                     description: |-
-                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time. (e.g. 1s)
                       Maximum tunnel inactivity time
                     type: string
                 type: object
@@ -373,7 +374,7 @@ spec:
                 properties:
                   failoverHost:
                     description: |-
-                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      Scaleway S3 bucket website to be served if all backend servers are down.
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
@@ -399,11 +400,11 @@ spec:
                     type: string
                   healthCheckDelay:
                     description: |-
-                      (Default: 60s) Interval between two HC requests.
+                      (Default: 60s) Interval between two health check requests.
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enable HTTP health check. Only one of
+                    description: This block enables HTTP health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -415,23 +416,23 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health check. Only one of
+                    description: This block enable HTTPS health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -443,34 +444,34 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         sni:
                           description: |-
-                            The SNI to use for HC requests over SSL.
+                            The SNI to use for health check requests over SSL.
                             The SNI to use for HC requests over SSL
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
                     description: |-
-                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      (Default: 2) Number of allowed failed health check requests before the backend server is marked as down.
                       Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
                     description: |-
-                      (Default: forward_port) Port the HC requests will be send to.
+                      (Default: forward_port) Port the health check requests will be sent to.
                       Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
@@ -479,14 +480,15 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enable TCP health check. Only one of health_check_tcp,
-                      health_check_http and health_check_https should be specified.
+                    description: This block enables TCP health checks. Only one of
+                      health_check_tcp, health_check_http and health_check_https should
+                      be specified.
                     items:
                       type: object
                     type: array
                   healthCheckTimeout:
                     description: |-
-                      (Default: 30s) Timeout before we consider a HC request failed.
+                      (Default: 30s) Timeout before we consider a health check request failed.
                       Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
@@ -501,7 +503,7 @@ spec:
                     type: boolean
                   lbId:
                     description: |-
-                      The load-balancer ID this backend is attached to.
+                      The ID of the Load Balancer this backend is attached to.
                       ~> Important: Updates to lb_id will recreate the backend.
                       The load-balancer ID
                     type: string
@@ -586,22 +588,22 @@ spec:
                     type: number
                   maxRetries:
                     description: |-
-                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection fails.
                       Number of retries when a backend server connection failed
                     type: number
                   name:
                     description: |-
-                      The name of the load-balancer backend.
+                      The name of the Load Balancer backend.
                       The name of the backend
                     type: string
                   onMarkedDownAction:
                     description: |-
-                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      (Default: none) Specify what action to take when a backend server is marked down. Possible values are: none and shutdown_sessions.
                       Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
                     description: |-
-                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      (Default: none) The type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
                       Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
@@ -623,12 +625,12 @@ spec:
                     type: array
                   sslBridging:
                     description: |-
-                      (Default: false) Enables SSL between load balancer and backend servers.
+                      (Default: false) Enables SSL between the Load Balancer and its backend servers.
                       Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
                     description: |-
-                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      (Default: none) The type of sticky session. Possible values are: none, cookie and table.
                       The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
@@ -638,7 +640,7 @@ spec:
                     type: string
                   timeoutConnect:
                     description: |-
-                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time. (e.g. 1s)
                       Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
@@ -648,12 +650,12 @@ spec:
                     type: string
                   timeoutServer:
                     description: |-
-                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time. (e.g. 1s)
                       Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
                     description: |-
-                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time. (e.g. 1s)
                       Maximum tunnel inactivity time
                     type: string
                 type: object
@@ -840,7 +842,7 @@ spec:
                 properties:
                   failoverHost:
                     description: |-
-                      Scaleway S3 bucket website to be served in case all backend servers are down.
+                      Scaleway S3 bucket website to be served if all backend servers are down.
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
@@ -866,11 +868,11 @@ spec:
                     type: string
                   healthCheckDelay:
                     description: |-
-                      (Default: 60s) Interval between two HC requests.
+                      (Default: 60s) Interval between two health check requests.
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enable HTTP health check. Only one of
+                    description: This block enables HTTP health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -882,23 +884,23 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTP endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health check. Only one of
+                    description: This block enable HTTPS health checks. Only one of
                       health_check_tcp, health_check_http and health_check_https should
                       be specified.
                     items:
@@ -910,34 +912,34 @@ spec:
                           type: number
                         hostHeader:
                           description: |-
-                            The HTTP host header to use for HC requests.
+                            The HTTP host header to use for health check requests.
                             The HTTP host header to use for HC requests
                           type: string
                         method:
                           description: |-
-                            (Default: GET) The HTTP method to use for HC requests.
+                            (Default: GET) The HTTP method to use for health check requests.
                             The HTTP method to use for HC requests
                           type: string
                         sni:
                           description: |-
-                            The SNI to use for HC requests over SSL.
+                            The SNI to use for health check requests over SSL.
                             The SNI to use for HC requests over SSL
                           type: string
                         uri:
                           description: |-
-                            The HTTP endpoint URL to call for HC requests.
+                            The HTTP endpoint URL to call for health check requests.
                             The HTTPS endpoint URL to call for HC requests
                           type: string
                       type: object
                     type: array
                   healthCheckMaxRetries:
                     description: |-
-                      (Default: 2) Number of allowed failed HC requests before the backend server is marked down.
+                      (Default: 2) Number of allowed failed health check requests before the backend server is marked as down.
                       Number of allowed failed HC requests before the backend server is marked down
                     type: number
                   healthCheckPort:
                     description: |-
-                      (Default: forward_port) Port the HC requests will be send to.
+                      (Default: forward_port) Port the health check requests will be sent to.
                       Port the HC requests will be send to. Default to `forward_port`
                     type: number
                   healthCheckSendProxy:
@@ -946,14 +948,15 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enable TCP health check. Only one of health_check_tcp,
-                      health_check_http and health_check_https should be specified.
+                    description: This block enables TCP health checks. Only one of
+                      health_check_tcp, health_check_http and health_check_https should
+                      be specified.
                     items:
                       type: object
                     type: array
                   healthCheckTimeout:
                     description: |-
-                      (Default: 30s) Timeout before we consider a HC request failed.
+                      (Default: 30s) Timeout before we consider a health check request failed.
                       Timeout before we consider a HC request failed
                     type: string
                   healthCheckTransientDelay:
@@ -962,7 +965,7 @@ spec:
                       Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
                     type: string
                   id:
-                    description: The ID of the loadbalancer backend.
+                    description: The ID of the Load Balancer backend.
                     type: string
                   ignoreSslServerVerify:
                     description: |-
@@ -971,7 +974,7 @@ spec:
                     type: boolean
                   lbId:
                     description: |-
-                      The load-balancer ID this backend is attached to.
+                      The ID of the Load Balancer this backend is attached to.
                       ~> Important: Updates to lb_id will recreate the backend.
                       The load-balancer ID
                     type: string
@@ -982,22 +985,22 @@ spec:
                     type: number
                   maxRetries:
                     description: |-
-                      Number of retries when a backend server connection failed.
+                      Number of retries when a backend server connection fails.
                       Number of retries when a backend server connection failed
                     type: number
                   name:
                     description: |-
-                      The name of the load-balancer backend.
+                      The name of the Load Balancer backend.
                       The name of the backend
                     type: string
                   onMarkedDownAction:
                     description: |-
-                      (Default: none) Modify what occurs when a backend server is marked down. Possible values are: none and shutdown_sessions.
+                      (Default: none) Specify what action to take when a backend server is marked down. Possible values are: none and shutdown_sessions.
                       Modify what occurs when a backend server is marked down
                     type: string
                   proxyProtocol:
                     description: |-
-                      (Default: none) Choose the type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
+                      (Default: none) The type of PROXY protocol to enable (none, v1, v2, v2_ssl, v2_ssl_cn)
                       Type of PROXY protocol to enable
                     type: string
                   redispatchAttemptCount:
@@ -1019,12 +1022,12 @@ spec:
                     type: array
                   sslBridging:
                     description: |-
-                      (Default: false) Enables SSL between load balancer and backend servers.
+                      (Default: false) Enables SSL between the Load Balancer and its backend servers.
                       Enables SSL between load balancer and backend servers
                     type: boolean
                   stickySessions:
                     description: |-
-                      (Default: none) The type of sticky sessions. The only current possible values are: none, cookie and table.
+                      (Default: none) The type of sticky session. Possible values are: none, cookie and table.
                       The type of sticky sessions
                     type: string
                   stickySessionsCookieName:
@@ -1034,7 +1037,7 @@ spec:
                     type: string
                   timeoutConnect:
                     description: |-
-                      Maximum initial server connection establishment time. (e.g.: 1s)
+                      Maximum initial server connection establishment time. (e.g. 1s)
                       Maximum initial server connection establishment time
                     type: string
                   timeoutQueue:
@@ -1044,12 +1047,12 @@ spec:
                     type: string
                   timeoutServer:
                     description: |-
-                      Maximum server connection inactivity time. (e.g.: 1s)
+                      Maximum server connection inactivity time. (e.g. 1s)
                       Maximum server connection inactivity time
                     type: string
                   timeoutTunnel:
                     description: |-
-                      Maximum tunnel inactivity time. (e.g.: 1s)
+                      Maximum tunnel inactivity time. (e.g. 1s)
                       Maximum tunnel inactivity time
                     type: string
                 type: object

@@ -15,74 +15,74 @@ import (
 
 type ZoneInitParameters struct {
 
-	// The domain where the DNS zone will be created.
+	// The main domain where the DNS zone will be created.
 	// The domain where the DNS zone will be created.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the domain is associated with.
+	// (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The subdomain(zone name) to create in the domain.
+	// The name of the subdomain (zone name) to create within the domain.
 	// The subdomain of the DNS zone to create.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 }
 
 type ZoneObservation struct {
 
-	// The domain where the DNS zone will be created.
+	// The main domain where the DNS zone will be created.
 	// The domain where the DNS zone will be created.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The ID of the zone, which is of the form {subdomain}.{domain}
+	// The ID of the zone, in the {subdomain}.{domain} format.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Message
+	// Message.
 	// Message
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
-	// NameServer list for zone.
+	// The list of same servers for the zone.
 	// NameServer list for zone.
 	Ns []*string `json:"ns,omitempty" tf:"ns,omitempty"`
 
-	// NameServer default list for zone.
+	// The default list of same servers for the zone.
 	// NameServer default list for zone.
 	NsDefault []*string `json:"nsDefault,omitempty" tf:"ns_default,omitempty"`
 
-	// NameServer master list for zone.
+	// The master list of same servers for the zone.
 	// NameServer master list for zone.
 	NsMaster []*string `json:"nsMaster,omitempty" tf:"ns_master,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the domain is associated with.
+	// (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The domain zone status.
+	// The status of the domain zone.
 	// The domain zone status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The subdomain(zone name) to create in the domain.
+	// The name of the subdomain (zone name) to create within the domain.
 	// The subdomain of the DNS zone to create.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
-	// The date and time of the last update of the DNS zone.
+	// The date and time at which the DNS zone was last updated.
 	// The date and time of the last update of the DNS zone.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ZoneParameters struct {
 
-	// The domain where the DNS zone will be created.
+	// The main domain where the DNS zone will be created.
 	// The domain where the DNS zone will be created.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the domain is associated with.
+	// (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The subdomain(zone name) to create in the domain.
+	// The name of the subdomain (zone name) to create within the domain.
 	// The subdomain of the DNS zone to create.
 	// +kubebuilder:validation:Optional
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`

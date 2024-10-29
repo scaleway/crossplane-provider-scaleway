@@ -74,12 +74,12 @@ spec:
                 properties:
                   cpuLimit:
                     description: |-
-                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container.
                       The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   deploy:
                     description: |-
-                      Boolean controlling whether the container is on a production environment.
+                      Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -97,28 +97,28 @@ spec:
                     x-kubernetes-map-type: granular
                   httpOption:
                     description: |-
-                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum number of simultaneous requests your container can handle at the same time.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
                     description: |-
-                      The maximum of number of instances this container can scale to. Default to 20.
-                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory computing resources in MB to allocate to each container. Defaults to 256.
-                      The memory computing resources in MB to allocate to each container. Defaults to 128.
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
                     type: number
                   minScale:
                     description: |-
-                      The minimum of running container instances continuously. Defaults to 0.
-                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
                     type: number
                   name:
                     description: |-
@@ -127,7 +127,7 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The container namespace ID of the container.
+                      The Containers namespace ID of the container.
                       The container namespace associated
                     type: string
                   namespaceIdRef:
@@ -206,12 +206,12 @@ spec:
                     type: object
                   port:
                     description: |-
-                      The port to expose the container. Defaults to 8080.
-                      The port to expose the container. Defaults to 8080
+                      The port to expose the container.
+                      The port to expose the container.
                     type: number
                   privacy:
                     description: |-
-                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
@@ -226,13 +226,18 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
                     description: |-
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     description: |-
@@ -256,7 +261,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time your container can spend processing a request before being stopped.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
@@ -275,12 +280,12 @@ spec:
                 properties:
                   cpuLimit:
                     description: |-
-                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container.
                       The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   deploy:
                     description: |-
-                      Boolean controlling whether the container is on a production environment.
+                      Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -298,28 +303,28 @@ spec:
                     x-kubernetes-map-type: granular
                   httpOption:
                     description: |-
-                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum number of simultaneous requests your container can handle at the same time.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
                     description: |-
-                      The maximum of number of instances this container can scale to. Default to 20.
-                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory computing resources in MB to allocate to each container. Defaults to 256.
-                      The memory computing resources in MB to allocate to each container. Defaults to 128.
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
                     type: number
                   minScale:
                     description: |-
-                      The minimum of running container instances continuously. Defaults to 0.
-                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
                     type: number
                   name:
                     description: |-
@@ -328,7 +333,7 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The container namespace ID of the container.
+                      The Containers namespace ID of the container.
                       The container namespace associated
                     type: string
                   namespaceIdRef:
@@ -407,12 +412,12 @@ spec:
                     type: object
                   port:
                     description: |-
-                      The port to expose the container. Defaults to 8080.
-                      The port to expose the container. Defaults to 8080
+                      The port to expose the container.
+                      The port to expose the container.
                     type: number
                   privacy:
                     description: |-
-                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
@@ -427,13 +432,18 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
                     description: |-
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     additionalProperties:
@@ -446,7 +456,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time your container can spend processing a request before being stopped.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
@@ -624,7 +634,7 @@ spec:
                 properties:
                   cpuLimit:
                     description: |-
-                      The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+                      The amount of vCPU computing resources to allocate to each container.
                       The amount of vCPU computing resources to allocate to each container. Defaults to 70.
                     type: number
                   cronStatus:
@@ -634,7 +644,7 @@ spec:
                     type: string
                   deploy:
                     description: |-
-                      Boolean controlling whether the container is on a production environment.
+                      Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -662,31 +672,31 @@ spec:
                     type: string
                   httpOption:
                     description: |-
-                      Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
                   id:
-                    description: The container's ID.
+                    description: The unique identifier of the container.
                     type: string
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-                      The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+                      The maximum number of simultaneous requests your container can handle at the same time.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
                     description: |-
-                      The maximum of number of instances this container can scale to. Default to 20.
-                      The maximum of number of instances this container can scale to. Default to 20.
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory computing resources in MB to allocate to each container. Defaults to 256.
-                      The memory computing resources in MB to allocate to each container. Defaults to 128.
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
                     type: number
                   minScale:
                     description: |-
-                      The minimum of running container instances continuously. Defaults to 0.
-                      The minimum of running container instances continuously. Defaults to 0.
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
                     type: number
                   name:
                     description: |-
@@ -695,17 +705,17 @@ spec:
                     type: string
                   namespaceId:
                     description: |-
-                      The container namespace ID of the container.
+                      The Containers namespace ID of the container.
                       The container namespace associated
                     type: string
                   port:
                     description: |-
-                      The port to expose the container. Defaults to 8080.
-                      The port to expose the container. Defaults to 8080
+                      The port to expose the container.
+                      The port to expose the container.
                     type: number
                   privacy:
                     description: |-
-                      The privacy type define the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
                     type: string
                   protocol:
@@ -720,13 +730,18 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
                     description: |-
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
                       The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
                     type: string
                   status:
                     description: |-
@@ -735,7 +750,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                      The maximum amount of time your container can spend processing a request before being stopped.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object

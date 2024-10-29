@@ -15,15 +15,15 @@ import (
 
 type IPInitParameters struct {
 
-	// Request a specific IP in the requested source pool.
+	// Request a specific IP in the specified source pool.
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// Defines whether to request an IPv6 instead of an IPv4.
+	// Defines whether to request an IPv6 address instead of IPv4.
 	// Request an IPv6 instead of an IPv4
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -42,7 +42,7 @@ type IPInitParameters struct {
 
 type IPObservation struct {
 
-	// Request a specific IP in the requested source pool.
+	// Request a specific IP in the specified source pool.
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
@@ -53,11 +53,11 @@ type IPObservation struct {
 	// The ID of the IP in IPAM.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Defines whether to request an IPv6 instead of an IPv4.
+	// Defines whether to request an IPv6 address instead of IPv4.
 	// Request an IPv6 instead of an IPv4
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -69,7 +69,7 @@ type IPObservation struct {
 	// The IP resource
 	Resource []ResourceObservation `json:"resource,omitempty" tf:"resource,omitempty"`
 
-	// The reverses DNS for this IP.
+	// The reverse DNS for this IP.
 	// The reverses DNS for this IP
 	Reverses []ReversesObservation `json:"reverses,omitempty" tf:"reverses,omitempty"`
 
@@ -92,17 +92,17 @@ type IPObservation struct {
 
 type IPParameters struct {
 
-	// Request a specific IP in the requested source pool.
+	// Request a specific IP in the specified source pool.
 	// Request a specific IP in the requested source pool
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// Defines whether to request an IPv6 instead of an IPv4.
+	// Defines whether to request an IPv6 address instead of IPv4.
 	// Request an IPv6 instead of an IPv4
 	// +kubebuilder:validation:Optional
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -131,7 +131,7 @@ type ResourceObservation struct {
 	// The ID of the IP in IPAM.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The MAC Address of the resource the IP is attached to.
+	// The MAC address of the resource the IP is attached to.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
 	// The name of the resource the IP is attached to.
@@ -149,7 +149,7 @@ type ReversesInitParameters struct {
 
 type ReversesObservation struct {
 
-	// Request a specific IP in the requested source pool.
+	// Request a specific IP in the specified source pool.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The reverse domain name.
@@ -161,7 +161,7 @@ type ReversesParameters struct {
 
 type SourceInitParameters struct {
 
-	// The private network the IP lives in if the IP is a private IP.
+	// The Private Network of the IP (if the IP is a private IP).
 	// Private Network the IP lives in if the IP is a private IP
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
@@ -174,33 +174,33 @@ type SourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// The private network subnet the IP lives in if the IP is a private IP in a private network.
+	// The Private Network subnet of the IP (if the IP is a private IP).
 	// Private Network subnet the IP lives in if the IP is a private IP in a Private Network
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// The zone the IP lives in if the IP is a public zoned one
+	// The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
 	// Zone the IP lives in if the IP is a public zoned one
 	Zonal *string `json:"zonal,omitempty" tf:"zonal,omitempty"`
 }
 
 type SourceObservation struct {
 
-	// The private network the IP lives in if the IP is a private IP.
+	// The Private Network of the IP (if the IP is a private IP).
 	// Private Network the IP lives in if the IP is a private IP
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// The private network subnet the IP lives in if the IP is a private IP in a private network.
+	// The Private Network subnet of the IP (if the IP is a private IP).
 	// Private Network subnet the IP lives in if the IP is a private IP in a Private Network
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// The zone the IP lives in if the IP is a public zoned one
+	// The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
 	// Zone the IP lives in if the IP is a public zoned one
 	Zonal *string `json:"zonal,omitempty" tf:"zonal,omitempty"`
 }
 
 type SourceParameters struct {
 
-	// The private network the IP lives in if the IP is a private IP.
+	// The Private Network of the IP (if the IP is a private IP).
 	// Private Network the IP lives in if the IP is a private IP
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
@@ -214,12 +214,12 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// The private network subnet the IP lives in if the IP is a private IP in a private network.
+	// The Private Network subnet of the IP (if the IP is a private IP).
 	// Private Network subnet the IP lives in if the IP is a private IP in a Private Network
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// The zone the IP lives in if the IP is a public zoned one
+	// The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
 	// Zone the IP lives in if the IP is a public zoned one
 	// +kubebuilder:validation:Optional
 	Zonal *string `json:"zonal,omitempty" tf:"zonal,omitempty"`

@@ -74,7 +74,7 @@ spec:
                 properties:
                   applicationId:
                     description: |-
-                      ID of the Application the policy will be linked to
+                      ID of the application the policy will be linked to
                       Application id
                     type: string
                   applicationIdRef:
@@ -153,12 +153,12 @@ spec:
                     type: object
                   description:
                     description: |-
-                      The description of the iam policy.
+                      The description of the IAM policy.
                       The description of the iam policy
                     type: string
                   groupId:
                     description: |-
-                      ID of the Group the policy will be linked to
+                      ID of the group the policy will be linked to
                       Group id
                     type: string
                   groupIdRef:
@@ -237,7 +237,7 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the iam policy.
+                      The name of the IAM policy.
                       The name of the iam policy
                     type: string
                   noPrincipal:
@@ -256,6 +256,11 @@ spec:
                       Rules of the policy to create
                     items:
                       properties:
+                        condition:
+                          description: |-
+                            The condition of the IAM policy.
+                            Conditions of the policy
+                          type: string
                         organizationId:
                           description: |-
                             (Defaults to provider organization_id) The ID of the organization the policy is associated with.
@@ -263,7 +268,7 @@ spec:
                           type: string
                         permissionSetNames:
                           description: |-
-                            Names of permission sets bound to the rule.
+                            Names of permission sets bind to the rule.
                             Names of permission sets bound to the rule.
                           items:
                             type: string
@@ -280,14 +285,14 @@ spec:
                     type: array
                   tags:
                     description: |-
-                      The tags associated with the iam policy.
+                      The tags associated with the IAM policy.
                       The tags associated with the policy
                     items:
                       type: string
                     type: array
                   userId:
                     description: |-
-                      ID of the User the policy will be linked to
+                      ID of the user the policy will be linked to
                       User id
                     type: string
                 type: object
@@ -306,7 +311,7 @@ spec:
                 properties:
                   applicationId:
                     description: |-
-                      ID of the Application the policy will be linked to
+                      ID of the application the policy will be linked to
                       Application id
                     type: string
                   applicationIdRef:
@@ -385,12 +390,12 @@ spec:
                     type: object
                   description:
                     description: |-
-                      The description of the iam policy.
+                      The description of the IAM policy.
                       The description of the iam policy
                     type: string
                   groupId:
                     description: |-
-                      ID of the Group the policy will be linked to
+                      ID of the group the policy will be linked to
                       Group id
                     type: string
                   groupIdRef:
@@ -469,7 +474,7 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the iam policy.
+                      The name of the IAM policy.
                       The name of the iam policy
                     type: string
                   noPrincipal:
@@ -488,6 +493,11 @@ spec:
                       Rules of the policy to create
                     items:
                       properties:
+                        condition:
+                          description: |-
+                            The condition of the IAM policy.
+                            Conditions of the policy
+                          type: string
                         organizationId:
                           description: |-
                             (Defaults to provider organization_id) The ID of the organization the policy is associated with.
@@ -495,7 +505,7 @@ spec:
                           type: string
                         permissionSetNames:
                           description: |-
-                            Names of permission sets bound to the rule.
+                            Names of permission sets bind to the rule.
                             Names of permission sets bound to the rule.
                           items:
                             type: string
@@ -512,14 +522,14 @@ spec:
                     type: array
                   tags:
                     description: |-
-                      The tags associated with the iam policy.
+                      The tags associated with the IAM policy.
                       The tags associated with the policy
                     items:
                       type: string
                     type: array
                   userId:
                     description: |-
-                      ID of the User the policy will be linked to
+                      ID of the user the policy will be linked to
                       User id
                     type: string
                 type: object
@@ -702,7 +712,7 @@ spec:
                 properties:
                   applicationId:
                     description: |-
-                      ID of the Application the policy will be linked to
+                      ID of the application the policy will be linked to
                       Application id
                     type: string
                   createdAt:
@@ -712,7 +722,7 @@ spec:
                     type: string
                   description:
                     description: |-
-                      The description of the iam policy.
+                      The description of the IAM policy.
                       The description of the iam policy
                     type: string
                   editable:
@@ -722,7 +732,7 @@ spec:
                     type: boolean
                   groupId:
                     description: |-
-                      ID of the Group the policy will be linked to
+                      ID of the group the policy will be linked to
                       Group id
                     type: string
                   id:
@@ -730,7 +740,7 @@ spec:
                     type: string
                   name:
                     description: |-
-                      The name of the iam policy.
+                      The name of the IAM policy.
                       The name of the iam policy
                     type: string
                   noPrincipal:
@@ -749,6 +759,11 @@ spec:
                       Rules of the policy to create
                     items:
                       properties:
+                        condition:
+                          description: |-
+                            The condition of the IAM policy.
+                            Conditions of the policy
+                          type: string
                         organizationId:
                           description: |-
                             (Defaults to provider organization_id) The ID of the organization the policy is associated with.
@@ -756,7 +771,7 @@ spec:
                           type: string
                         permissionSetNames:
                           description: |-
-                            Names of permission sets bound to the rule.
+                            Names of permission sets bind to the rule.
                             Names of permission sets bound to the rule.
                           items:
                             type: string
@@ -773,7 +788,7 @@ spec:
                     type: array
                   tags:
                     description: |-
-                      The tags associated with the iam policy.
+                      The tags associated with the IAM policy.
                       The tags associated with the policy
                     items:
                       type: string
@@ -785,7 +800,7 @@ spec:
                     type: string
                   userId:
                     description: |-
-                      ID of the User the policy will be linked to
+                      ID of the user the policy will be linked to
                       User id
                     type: string
                 type: object

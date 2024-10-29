@@ -19,13 +19,14 @@ type BucketInitParameters struct {
 	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// A rule of Cross-Origin Resource Sharing (documented below).
+	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
 	CorsRule []CorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
 	// Delete objects in bucket
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
+	// A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
 	// Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
 	LifecycleRule []LifecycleRuleInitParameters `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
 
@@ -33,7 +34,7 @@ type BucketInitParameters struct {
 	// The name of the bucket
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable object lock
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
@@ -41,16 +42,16 @@ type BucketInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the bucket should be created.
+	// The region in which the bucket will be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with this bucket
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A state of versioning (documented below)
+	// A state of versioning. The versioning object supports the following:
 	// Allow multiple versions of an object in the same bucket
 	Versioning []VersioningInitParameters `json:"versioning,omitempty" tf:"versioning,omitempty"`
 }
@@ -61,24 +62,25 @@ type BucketObservation struct {
 	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The endpoint URL of the bucket
+	// The endpoint URL of the bucket.
 	// API URL of the bucket
 	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
 
-	// A rule of Cross-Origin Resource Sharing (documented below).
+	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
 	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// The endpoint URL of the bucket
+	// The endpoint URL of the bucket.
 	// Endpoint of the bucket
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
 	// Delete objects in bucket
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
 	// Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
 	LifecycleRule []LifecycleRuleObservation `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
 
@@ -86,7 +88,7 @@ type BucketObservation struct {
 	// The name of the bucket
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable object lock
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
@@ -94,16 +96,16 @@ type BucketObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the bucket should be created.
+	// The region in which the bucket will be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with this bucket
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A state of versioning (documented below)
+	// A state of versioning. The versioning object supports the following:
 	// Allow multiple versions of an object in the same bucket
 	Versioning []VersioningObservation `json:"versioning,omitempty" tf:"versioning,omitempty"`
 }
@@ -115,15 +117,16 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// A rule of Cross-Origin Resource Sharing (documented below).
+	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
 	// Delete objects in bucket
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
+	// A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
 	// Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
 	// +kubebuilder:validation:Optional
 	LifecycleRule []LifecycleRuleParameters `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
@@ -133,7 +136,7 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable object lock
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
@@ -143,18 +146,18 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the bucket should be created.
+	// The region in which the bucket will be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with this bucket
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A state of versioning (documented below)
+	// A state of versioning. The versioning object supports the following:
 	// Allow multiple versions of an object in the same bucket
 	// +kubebuilder:validation:Optional
 	Versioning []VersioningParameters `json:"versioning,omitempty" tf:"versioning,omitempty"`
@@ -165,16 +168,16 @@ type CorsRuleInitParameters struct {
 	// Specifies which headers are allowed.
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
-	// Specifies expose header in the response.
+	// Specifies header exposure in the response.
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
-	// Specifies time in seconds that browser can cache the response for a preflight request.
+	// Specifies time in seconds that the browser can cache the response for a preflight request.
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
@@ -183,16 +186,16 @@ type CorsRuleObservation struct {
 	// Specifies which headers are allowed.
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
-	// Specifies expose header in the response.
+	// Specifies header exposure in the response.
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
-	// Specifies time in seconds that browser can cache the response for a preflight request.
+	// Specifies time in seconds that the browser can cache the response for a preflight request.
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
@@ -202,7 +205,7 @@ type CorsRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// Specifies which methods are allowed. Can be GET, PUT, POST, DELETE or HEAD.
+	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
 	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
@@ -210,11 +213,11 @@ type CorsRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
-	// Specifies expose header in the response.
+	// Specifies header exposure in the response.
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
-	// Specifies time in seconds that browser can cache the response for a preflight request.
+	// Specifies time in seconds that the browser can cache the response for a preflight request.
 	// +kubebuilder:validation:Optional
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
@@ -247,11 +250,11 @@ type LifecycleRuleInitParameters struct {
 	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed
 	AbortIncompleteMultipartUploadDays *float64 `json:"abortIncompleteMultipartUploadDays,omitempty" tf:"abort_incomplete_multipart_upload_days,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Specifies if the configuration rule is Enabled or Disabled
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies a period in the object's expire (documented below).
+	// Specifies a period of expiration for the object. The expiration object supports the following:
 	// Specifies a period in the object's expire
 	Expiration []ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
@@ -263,12 +266,12 @@ type LifecycleRuleInitParameters struct {
 	// The prefix identifying one or more objects to which the rule applies
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with the bucket lifecycle
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a period in the object's transitions (documented below).
+	// Specifies a period in the object's transitions.
 	// Define when objects transition to another storage class
 	Transition []TransitionInitParameters `json:"transition,omitempty" tf:"transition,omitempty"`
 }
@@ -279,11 +282,11 @@ type LifecycleRuleObservation struct {
 	// Specifies the number of days after initiating a multipart upload when the multipart upload must be completed
 	AbortIncompleteMultipartUploadDays *float64 `json:"abortIncompleteMultipartUploadDays,omitempty" tf:"abort_incomplete_multipart_upload_days,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Specifies if the configuration rule is Enabled or Disabled
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies a period in the object's expire (documented below).
+	// Specifies a period of expiration for the object. The expiration object supports the following:
 	// Specifies a period in the object's expire
 	Expiration []ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
@@ -295,12 +298,12 @@ type LifecycleRuleObservation struct {
 	// The prefix identifying one or more objects to which the rule applies
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with the bucket lifecycle
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a period in the object's transitions (documented below).
+	// Specifies a period in the object's transitions.
 	// Define when objects transition to another storage class
 	Transition []TransitionObservation `json:"transition,omitempty" tf:"transition,omitempty"`
 }
@@ -312,12 +315,12 @@ type LifecycleRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	AbortIncompleteMultipartUploadDays *float64 `json:"abortIncompleteMultipartUploadDays,omitempty" tf:"abort_incomplete_multipart_upload_days,omitempty"`
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Specifies if the configuration rule is Enabled or Disabled
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Specifies a period in the object's expire (documented below).
+	// Specifies a period of expiration for the object. The expiration object supports the following:
 	// Specifies a period in the object's expire
 	// +kubebuilder:validation:Optional
 	Expiration []ExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
@@ -332,13 +335,13 @@ type LifecycleRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// A list of tags (key / value) for the bucket.
+	// A list of tags (key/value) for the bucket.
 	// The tags associated with the bucket lifecycle
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a period in the object's transitions (documented below).
+	// Specifies a period in the object's transitions.
 	// Define when objects transition to another storage class
 	// +kubebuilder:validation:Optional
 	Transition []TransitionParameters `json:"transition,omitempty" tf:"transition,omitempty"`
@@ -381,21 +384,21 @@ type TransitionParameters struct {
 
 type VersioningInitParameters struct {
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type VersioningObservation struct {
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type VersioningParameters struct {
 
-	// The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
 	// Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`

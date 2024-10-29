@@ -15,7 +15,7 @@ import (
 
 type DomainInitParameters struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	// Container the domain will be bound to
 	// +crossplane:generate:reference:type=Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
@@ -32,14 +32,14 @@ type DomainInitParameters struct {
 	// Domain's hostname
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists
+	// (Defaults to provider region) The region in which the container exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DomainObservation struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	// Container the domain will be bound to
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -47,21 +47,21 @@ type DomainObservation struct {
 	// Domain's hostname
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// The container domain's ID.
+	// The unique identifier of the container domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists
+	// (Defaults to provider region) The region in which the container exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The URL used to query the container
+	// The URL used to query the container.
 	// URL used to query the container
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type DomainParameters struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	// Container the domain will be bound to
 	// +crossplane:generate:reference:type=Container
 	// +kubebuilder:validation:Optional
@@ -80,7 +80,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists
+	// (Defaults to provider region) The region in which the container exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

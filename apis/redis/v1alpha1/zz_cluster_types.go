@@ -19,7 +19,7 @@ type ACLInitParameters struct {
 	// Description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ip range to whitelist
+	// The IP range to whitelist
 	// in CIDR notation
 	// IPv4 network address of the rule (IP network in a CIDR format).
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
@@ -35,7 +35,7 @@ type ACLObservation struct {
 	// ID of the rule (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ip range to whitelist
+	// The IP range to whitelist
 	// in CIDR notation
 	// IPv4 network address of the rule (IP network in a CIDR format).
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
@@ -48,7 +48,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ip range to whitelist
+	// The IP range to whitelist
 	// in CIDR notation
 	// IPv4 network address of the rule (IP network in a CIDR format).
 	// +kubebuilder:validation:Optional
@@ -61,28 +61,28 @@ type ClusterInitParameters struct {
 	// List of acl rules.
 	ACL []ACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The number of nodes in the Redis Cluster.
+	// The number of nodes in the Redis™ cluster.
 	// Number of nodes for the cluster.
 	ClusterSize *float64 `json:"clusterSize,omitempty" tf:"cluster_size,omitempty"`
 
-	// The name of the Redis Cluster.
+	// The name of the Redis™ cluster.
 	// Name of the redis cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of Redis Cluster you want to create (e.g. RED1-M).
+	// The type of Redis™ cluster you want to create (e.g. RED1-M).
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the Redis Cluster.
+	// Password for the first user of the Redis™ cluster.
 	// Password of the user
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// Describes the private network you want to connect to your cluster. If not set, a public
+	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the Redis Cluster is
+	// (Defaults to provider project_id) The ID of the project the Redis™ cluster is
 	// associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -92,7 +92,7 @@ type ClusterInitParameters struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// Map of settings for redis cluster. Available settings can be found by listing redis versions
+	// Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
 	// with scaleway API or CLI
 	// Map of settings to define for the cluster.
 	// +mapType=granular
@@ -102,20 +102,20 @@ type ClusterInitParameters struct {
 	// Whether or not TLS is enabled.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
-	// The tags associated with the Redis Cluster.
+	// The tags associated with the Redis™ cluster.
 	// List of tags ["tag1", "tag2", ...] attached to a redis cluster
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifier for the first user of the Redis Cluster.
+	// Identifier for the first user of the Redis™ cluster.
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.7).
+	// Redis™ cluster's version (e.g. 6.2.7).
 	// Redis version of the cluster
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the
-	// Redis Cluster should be created.
+	// Redis™ cluster should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -130,31 +130,31 @@ type ClusterObservation struct {
 	// public TLS certificate used by redis cluster, empty if tls is disabled
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// The number of nodes in the Redis Cluster.
+	// The number of nodes in the Redis™ cluster.
 	// Number of nodes for the cluster.
 	ClusterSize *float64 `json:"clusterSize,omitempty" tf:"cluster_size,omitempty"`
 
-	// The date and time of creation of the Redis Cluster.
+	// The date and time of creation of the Redis™ cluster.
 	// The date and time of the creation of the Redis cluster
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the Redis cluster.
+	// The ID of the Redis™ cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Redis Cluster.
+	// The name of the Redis™ cluster.
 	// Name of the redis cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of Redis Cluster you want to create (e.g. RED1-M).
+	// The type of Redis™ cluster you want to create (e.g. RED1-M).
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Describes the private network you want to connect to your cluster. If not set, a public
+	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the Redis Cluster is
+	// (Defaults to provider project_id) The ID of the project the Redis™ cluster is
 	// associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -164,7 +164,7 @@ type ClusterObservation struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// Map of settings for redis cluster. Available settings can be found by listing redis versions
+	// Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
 	// with scaleway API or CLI
 	// Map of settings to define for the cluster.
 	// +mapType=granular
@@ -174,24 +174,24 @@ type ClusterObservation struct {
 	// Whether or not TLS is enabled.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
-	// The tags associated with the Redis Cluster.
+	// The tags associated with the Redis™ cluster.
 	// List of tags ["tag1", "tag2", ...] attached to a redis cluster
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The date and time of the last update of the Redis Cluster.
+	// The date and time of the last update of the Redis™ cluster.
 	// The date and time of the last update of the Redis cluster
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// Identifier for the first user of the Redis Cluster.
+	// Identifier for the first user of the Redis™ cluster.
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.7).
+	// Redis™ cluster's version (e.g. 6.2.7).
 	// Redis version of the cluster
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the
-	// Redis Cluster should be created.
+	// Redis™ cluster should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -203,33 +203,33 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The number of nodes in the Redis Cluster.
+	// The number of nodes in the Redis™ cluster.
 	// Number of nodes for the cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSize *float64 `json:"clusterSize,omitempty" tf:"cluster_size,omitempty"`
 
-	// The name of the Redis Cluster.
+	// The name of the Redis™ cluster.
 	// Name of the redis cluster
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of Redis Cluster you want to create (e.g. RED1-M).
+	// The type of Redis™ cluster you want to create (e.g. RED1-M).
 	// Type of node to use for the cluster
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the Redis Cluster.
+	// Password for the first user of the Redis™ cluster.
 	// Password of the user
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// Describes the private network you want to connect to your cluster. If not set, a public
+	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the Redis Cluster is
+	// (Defaults to provider project_id) The ID of the project the Redis™ cluster is
 	// associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
@@ -241,7 +241,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// Map of settings for redis cluster. Available settings can be found by listing redis versions
+	// Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
 	// with scaleway API or CLI
 	// Map of settings to define for the cluster.
 	// +kubebuilder:validation:Optional
@@ -253,23 +253,23 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
-	// The tags associated with the Redis Cluster.
+	// The tags associated with the Redis™ cluster.
 	// List of tags ["tag1", "tag2", ...] attached to a redis cluster
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifier for the first user of the Redis Cluster.
+	// Identifier for the first user of the Redis™ cluster.
 	// Name of the user created when the cluster is created
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Redis's Cluster version (e.g. 6.2.7).
+	// Redis™ cluster's version (e.g. 6.2.7).
 	// Redis version of the cluster
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the
-	// Redis Cluster should be created.
+	// Redis™ cluster should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -282,8 +282,8 @@ type PrivateNetworkInitParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
-	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
-	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
@@ -300,14 +300,14 @@ type PrivateNetworkObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
-	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
-	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the
-	// Redis Cluster should be created.
+	// Redis™ cluster should be created.
 	// The zone of the resource
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -320,8 +320,8 @@ type PrivateNetworkParameters struct {
 	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
-	// Keep in mind that in Cluster mode you cannot edit your Private Network after its creation so if you want to be able to
-	// scale your Cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	// +kubebuilder:validation:Optional

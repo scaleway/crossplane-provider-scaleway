@@ -74,7 +74,7 @@ spec:
                 properties:
                   backendId:
                     description: |-
-                      The ID of the backend to which the route is associated.
+                      The ID of the backend the route is associated with.
                       The backend ID destination of redirection
                     type: string
                   backendIdRef:
@@ -153,7 +153,7 @@ spec:
                     type: object
                   frontendId:
                     description: |-
-                      The ID of the frontend to which the route is associated.
+                      The ID of the frontend the route is associated with.
                       The frontend ID origin of redirection
                     type: string
                   frontendIdRef:
@@ -258,7 +258,7 @@ spec:
                 properties:
                   backendId:
                     description: |-
-                      The ID of the backend to which the route is associated.
+                      The ID of the backend the route is associated with.
                       The backend ID destination of redirection
                     type: string
                   backendIdRef:
@@ -337,7 +337,7 @@ spec:
                     type: object
                   frontendId:
                     description: |-
-                      The ID of the frontend to which the route is associated.
+                      The ID of the frontend the route is associated with.
                       The frontend ID origin of redirection
                     type: string
                   frontendIdRef:
@@ -601,17 +601,17 @@ spec:
                 properties:
                   backendId:
                     description: |-
-                      The ID of the backend to which the route is associated.
+                      The ID of the backend the route is associated with.
                       The backend ID destination of redirection
                     type: string
                   createdAt:
                     description: |-
-                      The date at which the route was created.
+                      The date on which the route was created.
                       The date at which the route was created (RFC 3339 format)
                     type: string
                   frontendId:
                     description: |-
-                      The ID of the frontend to which the route is associated.
+                      The ID of the frontend the route is associated with.
                       The frontend ID origin of redirection
                     type: string
                   id:
@@ -631,7 +631,7 @@ spec:
                     type: string
                   updatedAt:
                     description: |-
-                      The date at which the route was last updated.
+                      The date on which the route was last updated.
                       The date at which the route was last updated (RFC 3339 format)
                     type: string
                 type: object

@@ -34,19 +34,19 @@ type ErrorDocumentParameters struct {
 
 type IndexDocumentInitParameters struct {
 
-	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentObservation struct {
 
-	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentParameters struct {
 
-	// A suffix that is appended to a request that is for a directory on the website endpoint.
+	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
 }
@@ -57,11 +57,11 @@ type WebsiteConfigurationInitParameters struct {
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the error document for the website detailed below.
+	// The name of the error file for the website detailed below.
 	// The name of the error document for the website.
 	ErrorDocument []ErrorDocumentInitParameters `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
-	// The name of the index document for the website detailed below.
+	// The name of the index file for the website detailed below.
 	// The name of the index document for the website.
 	IndexDocument []IndexDocumentInitParameters `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
@@ -79,14 +79,14 @@ type WebsiteConfigurationObservation struct {
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the error document for the website detailed below.
+	// The name of the error file for the website detailed below.
 	// The name of the error document for the website.
 	ErrorDocument []ErrorDocumentObservation `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
-	// The region and bucket separated by a slash (/)
+	// The region and bucket name, separated by a slash (e.g. fr-par/some-bucket)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the index document for the website detailed below.
+	// The name of the index file for the website detailed below.
 	// The name of the index document for the website.
 	IndexDocument []IndexDocumentObservation `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
@@ -113,12 +113,12 @@ type WebsiteConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the error document for the website detailed below.
+	// The name of the error file for the website detailed below.
 	// The name of the error document for the website.
 	// +kubebuilder:validation:Optional
 	ErrorDocument []ErrorDocumentParameters `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
-	// The name of the index document for the website detailed below.
+	// The name of the index file for the website detailed below.
 	// The name of the index document for the website.
 	// +kubebuilder:validation:Optional
 	IndexDocument []IndexDocumentParameters `json:"indexDocument,omitempty" tf:"index_document,omitempty"`

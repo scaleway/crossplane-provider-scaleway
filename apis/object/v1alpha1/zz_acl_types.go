@@ -15,7 +15,7 @@ import (
 
 type ACLInitParameters struct {
 
-	// The canned ACL you want to apply to the bucket.
+	// The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
 	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -41,7 +41,7 @@ type ACLInitParameters struct {
 
 type ACLObservation struct {
 
-	// The canned ACL you want to apply to the bucket.
+	// The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
 	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -56,7 +56,7 @@ type ACLObservation struct {
 	// The project ID as owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The region,bucket and acl separated by (/).
+	// The region, bucket and acl separated by (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -70,7 +70,7 @@ type ACLObservation struct {
 
 type ACLParameters struct {
 
-	// The canned ACL you want to apply to the bucket.
+	// The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
 	// ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`

@@ -85,7 +85,7 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      Specifies the Object Lock rule for the specified object.
+                      Specifies the object lock rule for the specified object.
                       Specifies the Object Lock rule for the specified object.
                     items:
                       properties:
@@ -95,17 +95,17 @@ spec:
                             properties:
                               days:
                                 description: |-
-                                  The number of days that you want to specify for the default retention period.
+                                  The number of days you want to specify for the default retention period.
                                   The number of days that you want to specify for the default retention period.
                                 type: number
                               mode:
                                 description: |-
-                                  The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+                                  The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
                                   The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
                                 type: string
                               years:
                                 description: |-
-                                  The number of years that you want to specify for the default retention period.
+                                  The number of years you want to specify for the default retention period.
                                   The number of years that you want to specify for the default retention period.
                                 type: number
                             type: object
@@ -139,7 +139,7 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      Specifies the Object Lock rule for the specified object.
+                      Specifies the object lock rule for the specified object.
                       Specifies the Object Lock rule for the specified object.
                     items:
                       properties:
@@ -149,17 +149,17 @@ spec:
                             properties:
                               days:
                                 description: |-
-                                  The number of days that you want to specify for the default retention period.
+                                  The number of days you want to specify for the default retention period.
                                   The number of days that you want to specify for the default retention period.
                                 type: number
                               mode:
                                 description: |-
-                                  The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+                                  The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
                                   The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
                                 type: string
                               years:
                                 description: |-
-                                  The number of years that you want to specify for the default retention period.
+                                  The number of years you want to specify for the default retention period.
                                   The number of years that you want to specify for the default retention period.
                                 type: number
                             type: object
@@ -352,7 +352,7 @@ spec:
                     description: The bucket's name or regional ID.
                     type: string
                   id:
-                    description: The ID of the Object bucket lock configuration.
+                    description: The unique identifier of the Object bucket lock configuration.
                     type: string
                   projectId:
                     description: |-
@@ -364,7 +364,7 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      Specifies the Object Lock rule for the specified object.
+                      Specifies the object lock rule for the specified object.
                       Specifies the Object Lock rule for the specified object.
                     items:
                       properties:
@@ -374,17 +374,17 @@ spec:
                             properties:
                               days:
                                 description: |-
-                                  The number of days that you want to specify for the default retention period.
+                                  The number of days you want to specify for the default retention period.
                                   The number of days that you want to specify for the default retention period.
                                 type: number
                               mode:
                                 description: |-
-                                  The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+                                  The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
                                   The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
                                 type: string
                               years:
                                 description: |-
-                                  The number of years that you want to specify for the default retention period.
+                                  The number of years you want to specify for the default retention period.
                                   The number of years that you want to specify for the default retention period.
                                 type: number
                             type: object

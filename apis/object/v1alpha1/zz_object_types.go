@@ -26,19 +26,19 @@ type ObjectInitParameters struct {
 	// Content of the file to upload, should be base64 encoded
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
 
-	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file
 	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
-	// Hash of the file, used to trigger upload on file change
+	// Hash of the file, used to trigger the upload on file change.
 	// File hash to trigger upload
 	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 
-	// The path of the object.
+	// The path to the object.
 	// Key of the object
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Map of metadata used for the object, keys must be lowercase
+	// Map of metadata used for the object (keys must be lowercase).
 	// Map of object's metadata, only lower case keys are allowed
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -47,20 +47,20 @@ type ObjectInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// The Scaleway region the bucket resides in.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.
+	// Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Map of tags
+	// Map of tags.
 	// Map of object's tags
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Visibility of the object, public-read or private
+	// Visibility of the object, public-read or private.
 	// Visibility of the object, public-read or private
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 }
@@ -78,22 +78,22 @@ type ObjectObservation struct {
 	// Content of the file to upload, should be base64 encoded
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
 
-	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file
 	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
-	// Hash of the file, used to trigger upload on file change
+	// Hash of the file, used to trigger the upload on file change.
 	// File hash to trigger upload
 	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 
-	// The path of the object, including bucket name.
+	// The path of the object, including the name of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The path of the object.
+	// The path to the object.
 	// Key of the object
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Map of metadata used for the object, keys must be lowercase
+	// Map of metadata used for the object (keys must be lowercase).
 	// Map of object's metadata, only lower case keys are allowed
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -102,20 +102,20 @@ type ObjectObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// The Scaleway region the bucket resides in.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.
+	// Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Map of tags
+	// Map of tags.
 	// Map of object's tags
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Visibility of the object, public-read or private
+	// Visibility of the object, public-read or private.
 	// Visibility of the object, public-read or private
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 }
@@ -136,22 +136,22 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
 
-	// The name of the file to upload, defaults to an empty file. Only one of file, content or content_base64 can be defined.
+	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file
 	// +kubebuilder:validation:Optional
 	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
-	// Hash of the file, used to trigger upload on file change
+	// Hash of the file, used to trigger the upload on file change.
 	// File hash to trigger upload
 	// +kubebuilder:validation:Optional
 	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 
-	// The path of the object.
+	// The path to the object.
 	// Key of the object
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Map of metadata used for the object, keys must be lowercase
+	// Map of metadata used for the object (keys must be lowercase).
 	// Map of object's metadata, only lower case keys are allowed
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -162,23 +162,23 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// The Scaleway region the bucket resides in.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA used to store the object.
+	// Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition
 	// +kubebuilder:validation:Optional
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Map of tags
+	// Map of tags.
 	// Map of object's tags
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Visibility of the object, public-read or private
+	// Visibility of the object, public-read or private.
 	// Visibility of the object, public-read or private
 	// +kubebuilder:validation:Optional
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`

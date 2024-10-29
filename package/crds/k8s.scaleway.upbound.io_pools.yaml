@@ -732,10 +732,14 @@ spec:
                             ~> Important: Updates to this field will recreate a new resource.
                           type: string
                         publicIp:
-                          description: The public IPv4.
+                          description: The public IPv4. (Deprecated, Please use the
+                            official Kubernetes provider and the kubernetes_nodes
+                            data source)
                           type: string
                         publicIpV6:
-                          description: The public IPv6.
+                          description: The public IPv6. (Deprecated, Please use the
+                            official Kubernetes provider and the kubernetes_nodes
+                            data source)
                           type: string
                         status:
                           description: The status of the pool.

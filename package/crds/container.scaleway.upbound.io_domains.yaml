@@ -74,7 +74,7 @@ spec:
                 properties:
                   containerId:
                     description: |-
-                      The ID of the container.
+                      The unique identifier of the container.
                       Container the domain will be bound to
                     type: string
                   containerIdRef:
@@ -158,7 +158,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the container exists
+                      (Defaults to provider region) The region in which the container exists.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -177,7 +177,7 @@ spec:
                 properties:
                   containerId:
                     description: |-
-                      The ID of the container.
+                      The unique identifier of the container.
                       Container the domain will be bound to
                     type: string
                   containerIdRef:
@@ -261,7 +261,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the container exists
+                      (Defaults to provider region) The region in which the container exists.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -444,7 +444,7 @@ spec:
                 properties:
                   containerId:
                     description: |-
-                      The ID of the container.
+                      The unique identifier of the container.
                       Container the domain will be bound to
                     type: string
                   hostname:
@@ -453,16 +453,16 @@ spec:
                       Domain's hostname
                     type: string
                   id:
-                    description: The container domain's ID.
+                    description: The unique identifier of the container domain.
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the container exists
+                      (Defaults to provider region) The region in which the container exists.
                       The region you want to attach the resource to
                     type: string
                   url:
                     description: |-
-                      The URL used to query the container
+                      The URL used to query the container.
                       URL used to query the container
                     type: string
                 type: object

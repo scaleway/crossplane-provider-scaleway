@@ -74,17 +74,17 @@ spec:
                 properties:
                   address:
                     description: |-
-                      Request a specific IP in the requested source pool.
+                      Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
                   isIpv6:
                     description: |-
-                      Defines whether to request an IPv6 instead of an IPv4.
+                      Defines whether to request an IPv6 address instead of IPv4.
                       Request an IPv6 instead of an IPv4
                     type: boolean
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the IP is associated with.
+                      (Defaults to provider project_id) The ID of the Project the IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -100,7 +100,7 @@ spec:
                       properties:
                         privateNetworkId:
                           description: |-
-                            The private network the IP lives in if the IP is a private IP.
+                            The Private Network of the IP (if the IP is a private IP).
                             Private Network the IP lives in if the IP is a private IP
                           type: string
                         privateNetworkIdRef:
@@ -181,12 +181,12 @@ spec:
                           type: object
                         subnetId:
                           description: |-
-                            The private network subnet the IP lives in if the IP is a private IP in a private network.
+                            The Private Network subnet of the IP (if the IP is a private IP).
                             Private Network subnet the IP lives in if the IP is a private IP in a Private Network
                           type: string
                         zonal:
                           description: |-
-                            The zone the IP lives in if the IP is a public zoned one
+                            The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
                             Zone the IP lives in if the IP is a public zoned one
                           type: string
                       type: object
@@ -214,17 +214,17 @@ spec:
                 properties:
                   address:
                     description: |-
-                      Request a specific IP in the requested source pool.
+                      Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
                   isIpv6:
                     description: |-
-                      Defines whether to request an IPv6 instead of an IPv4.
+                      Defines whether to request an IPv6 address instead of IPv4.
                       Request an IPv6 instead of an IPv4
                     type: boolean
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the IP is associated with.
+                      (Defaults to provider project_id) The ID of the Project the IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -240,7 +240,7 @@ spec:
                       properties:
                         privateNetworkId:
                           description: |-
-                            The private network the IP lives in if the IP is a private IP.
+                            The Private Network of the IP (if the IP is a private IP).
                             Private Network the IP lives in if the IP is a private IP
                           type: string
                         privateNetworkIdRef:
@@ -321,12 +321,12 @@ spec:
                           type: object
                         subnetId:
                           description: |-
-                            The private network subnet the IP lives in if the IP is a private IP in a private network.
+                            The Private Network subnet of the IP (if the IP is a private IP).
                             Private Network subnet the IP lives in if the IP is a private IP in a Private Network
                           type: string
                         zonal:
                           description: |-
-                            The zone the IP lives in if the IP is a public zoned one
+                            The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
                             Zone the IP lives in if the IP is a public zoned one
                           type: string
                       type: object
@@ -518,7 +518,7 @@ spec:
                 properties:
                   address:
                     description: |-
-                      Request a specific IP in the requested source pool.
+                      Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
                   createdAt:
@@ -531,12 +531,12 @@ spec:
                     type: string
                   isIpv6:
                     description: |-
-                      Defines whether to request an IPv6 instead of an IPv4.
+                      Defines whether to request an IPv6 address instead of IPv4.
                       Request an IPv6 instead of an IPv4
                     type: boolean
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the IP is associated with.
+                      (Defaults to provider project_id) The ID of the Project the IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -554,7 +554,7 @@ spec:
                           description: The ID of the IP in IPAM.
                           type: string
                         macAddress:
-                          description: The MAC Address of the resource the IP is attached
+                          description: The MAC address of the resource the IP is attached
                             to.
                           type: string
                         name:
@@ -568,12 +568,12 @@ spec:
                     type: array
                   reverses:
                     description: |-
-                      The reverses DNS for this IP.
+                      The reverse DNS for this IP.
                       The reverses DNS for this IP
                     items:
                       properties:
                         address:
-                          description: Request a specific IP in the requested source
+                          description: Request a specific IP in the specified source
                             pool.
                           type: string
                         hostname:
@@ -589,17 +589,17 @@ spec:
                       properties:
                         privateNetworkId:
                           description: |-
-                            The private network the IP lives in if the IP is a private IP.
+                            The Private Network of the IP (if the IP is a private IP).
                             Private Network the IP lives in if the IP is a private IP
                           type: string
                         subnetId:
                           description: |-
-                            The private network subnet the IP lives in if the IP is a private IP in a private network.
+                            The Private Network subnet of the IP (if the IP is a private IP).
                             Private Network subnet the IP lives in if the IP is a private IP in a Private Network
                           type: string
                         zonal:
                           description: |-
-                            The zone the IP lives in if the IP is a public zoned one
+                            The zone of the IP (if the IP is public and zoned, rather than private and/or regional)
                             Zone the IP lives in if the IP is a public zoned one
                           type: string
                       type: object

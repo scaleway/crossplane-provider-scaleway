@@ -15,47 +15,47 @@ import (
 
 type DefaultRetentionInitParameters struct {
 
-	// The number of days that you want to specify for the default retention period.
+	// The number of days you want to specify for the default retention period.
 	// The number of days that you want to specify for the default retention period.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+	// The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
 	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The number of years that you want to specify for the default retention period.
+	// The number of years you want to specify for the default retention period.
 	// The number of years that you want to specify for the default retention period.
 	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type DefaultRetentionObservation struct {
 
-	// The number of days that you want to specify for the default retention period.
+	// The number of days you want to specify for the default retention period.
 	// The number of days that you want to specify for the default retention period.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+	// The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
 	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The number of years that you want to specify for the default retention period.
+	// The number of years you want to specify for the default retention period.
 	// The number of years that you want to specify for the default retention period.
 	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type DefaultRetentionParameters struct {
 
-	// The number of days that you want to specify for the default retention period.
+	// The number of days you want to specify for the default retention period.
 	// The number of days that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. To learn more about the difference between these modes, see Object Lock retention modes.
+	// The default object lock retention mode you want to apply to new objects placed in the specified bucket. Valid values are GOVERNANCE or COMPLIANCE. Refer to the dedicated documentation for more information on retention modes.
 	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
-	// The number of years that you want to specify for the default retention period.
+	// The number of years you want to specify for the default retention period.
 	// The number of years that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
 	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
@@ -73,7 +73,7 @@ type LockConfigurationInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Object Lock rule for the specified object.
+	// Specifies the object lock rule for the specified object.
 	// Specifies the Object Lock rule for the specified object.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
@@ -83,7 +83,7 @@ type LockConfigurationObservation struct {
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The ID of the Object bucket lock configuration.
+	// The unique identifier of the Object bucket lock configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the bucket is associated with.
@@ -93,7 +93,7 @@ type LockConfigurationObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Object Lock rule for the specified object.
+	// Specifies the object lock rule for the specified object.
 	// Specifies the Object Lock rule for the specified object.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
@@ -113,7 +113,7 @@ type LockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the Object Lock rule for the specified object.
+	// Specifies the object lock rule for the specified object.
 	// Specifies the Object Lock rule for the specified object.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`

@@ -291,12 +291,12 @@ spec:
                     type: string
                   createdAt:
                     description: |-
-                      The date and time of the creation of the iam user.
+                      The date and time of the creation of the IAM user.
                       The date and time of the creation of the iam user
                     type: string
                   deletable:
                     description: |-
-                      Whether the iam user is deletable.
+                      Whether the IAM user is deletable.
                       Whether or not the iam user is editable
                     type: boolean
                   email:
@@ -324,17 +324,17 @@ spec:
                     type: string
                   status:
                     description: |-
-                      The status of user invitation. Check the possible values in the api doc.
+                      The status of user invitation. Check the possible values in the API doc.
                       The status of user invitation.
                     type: string
                   type:
                     description: |-
-                      The type of user. Check the possible values in the api doc.
+                      The type of user. Check the possible values in the API doc.
                       The type of the iam user
                     type: string
                   updatedAt:
                     description: |-
-                      The date and time of the last update of the iam user.
+                      The date and time of the last update of the IAM user.
                       The date and time of the last update of the iam user
                     type: string
                 type: object

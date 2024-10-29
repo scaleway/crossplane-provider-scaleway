@@ -1860,6 +1860,17 @@ func (in *IPInitParameters) DeepCopyInto(out *IPInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -1952,6 +1963,17 @@ func (in *IPObservation) DeepCopyInto(out *IPObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -1986,6 +2008,17 @@ func (in *IPParameters) DeepCopyInto(out *IPParameters) {
 		in, out := &in.Reverse, &out.Reverse
 		*out = new(string)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
@@ -2717,6 +2750,17 @@ func (in *PrivateNetworkInitParameters) DeepCopyInto(out *PrivateNetworkInitPara
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IpamIds != nil {
+		in, out := &in.IpamIds, &out.IpamIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
 		*out = new(string)
@@ -2752,6 +2796,17 @@ func (in *PrivateNetworkObservation) DeepCopyInto(out *PrivateNetworkObservation
 		in, out := &in.DHCPConfig, &out.DHCPConfig
 		*out = new(bool)
 		**out = **in
+	}
+	if in.IpamIds != nil {
+		in, out := &in.IpamIds, &out.IpamIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
@@ -2798,6 +2853,17 @@ func (in *PrivateNetworkParameters) DeepCopyInto(out *PrivateNetworkParameters) 
 		in, out := &in.DHCPConfig, &out.DHCPConfig
 		*out = new(bool)
 		**out = **in
+	}
+	if in.IpamIds != nil {
+		in, out := &in.IpamIds, &out.IpamIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID

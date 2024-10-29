@@ -15,17 +15,21 @@ import (
 
 type IPInitParameters struct {
 
-	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a flexible IP with an IPv6 address.
 	// If true, creates a Flexible IP with an IPv6 address
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The reverse domain associated with this IP.
 	// The reverse domain name for this IP
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
+
+	// The tags associated with this IP.
+	// The tags associated with the flexible IP
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
@@ -34,26 +38,26 @@ type IPInitParameters struct {
 
 type IPObservation struct {
 
-	// The ID of the IP
+	// The ID of the IP address
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP Address
+	// The IP address
 	// The load-balancer public IP address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a flexible IP with an IPv6 address.
 	// If true, creates a Flexible IP with an IPv6 address
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// The associated load-balance ID if any
+	// The associated Load Balancer ID if any
 	// The ID of the load balancer attached to this IP, if any
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// The ID of the IP
+	// The ID of the IP address
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -64,6 +68,10 @@ type IPObservation struct {
 	// The reverse domain name for this IP
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
+	// The tags associated with this IP.
+	// The tags associated with the flexible IP
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// (Defaults to provider zone) The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -71,12 +79,12 @@ type IPObservation struct {
 
 type IPParameters struct {
 
-	// If true, creates a Flexible IP with an IPv6 address.
+	// If true, creates a flexible IP with an IPv6 address.
 	// If true, creates a Flexible IP with an IPv6 address
 	// +kubebuilder:validation:Optional
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the IP is associated with.
+	// (Defaults to provider project_id) The ID of the Project the IP is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -85,6 +93,11 @@ type IPParameters struct {
 	// The reverse domain name for this IP
 	// +kubebuilder:validation:Optional
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
+
+	// The tags associated with this IP.
+	// The tags associated with the flexible IP
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to

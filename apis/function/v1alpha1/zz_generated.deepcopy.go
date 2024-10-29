@@ -592,6 +592,11 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecretEnvironmentVariables != nil {
 		in, out := &in.SecretEnvironmentVariables, &out.SecretEnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -1059,6 +1064,11 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
+		*out = new(string)
+		**out = **in
+	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
 		*out = new(float64)
@@ -1177,6 +1187,11 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.Runtime != nil {
 		in, out := &in.Runtime, &out.Runtime
+		*out = new(string)
+		**out = **in
+	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
 		*out = new(string)
 		**out = **in
 	}

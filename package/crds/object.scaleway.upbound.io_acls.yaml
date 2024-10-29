@@ -130,7 +130,7 @@ spec:
                     type: array
                   acl:
                     description: |-
-                      The canned ACL you want to apply to the bucket.
+                      The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
                       ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
@@ -223,7 +223,7 @@ spec:
                     type: array
                   acl:
                     description: |-
-                      The canned ACL you want to apply to the bucket.
+                      The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
                       ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
@@ -483,7 +483,7 @@ spec:
                     type: array
                   acl:
                     description: |-
-                      The canned ACL you want to apply to the bucket.
+                      The canned ACL you want to apply to the bucket. Refer to the AWS Canned ACL documentation page to find a list of all the supported canned ACLs.
                       ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   bucket:
@@ -495,7 +495,7 @@ spec:
                       The project ID as owner.
                     type: string
                   id:
-                    description: The region,bucket and acl separated by (/).
+                    description: The region, bucket and acl separated by (/).
                     type: string
                   projectId:
                     description: |-

@@ -74,12 +74,12 @@ spec:
                 properties:
                   name:
                     description: |-
-                      The name of the cockpit data source.
+                      The name of the data source.
                       Name of the datasource
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -158,12 +158,12 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit datasource.
+                      (Defaults to the region specified in the provider configuration) The region where the data source is located.
                       The region you want to attach the resource to
                     type: string
                   type:
                     description: |-
-                      The type of the cockpit data source. Possible values are: metrics, logs or traces.
+                      The type of data source. Possible values are: metrics, logs, or traces.
                       The type of the datasource
                     type: string
                 type: object
@@ -182,12 +182,12 @@ spec:
                 properties:
                   name:
                     description: |-
-                      The name of the cockpit data source.
+                      The name of the data source.
                       Name of the datasource
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -266,12 +266,12 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit datasource.
+                      (Defaults to the region specified in the provider configuration) The region where the data source is located.
                       The region you want to attach the resource to
                     type: string
                   type:
                     description: |-
-                      The type of the cockpit data source. Possible values are: metrics, logs or traces.
+                      The type of data source. Possible values are: metrics, logs, or traces.
                       The type of the datasource
                     type: string
                 type: object
@@ -449,30 +449,35 @@ spec:
                 properties:
                   createdAt:
                     description: |-
-                      Date and time of the cockpit data source's creation (RFC 3339 format).
+                      The date and time the data source was created (in RFC 3339 format).
                       The date and time of the creation of the cockpit datasource
                     type: string
                   id:
-                    description: The ID of the cockpit data source.
+                    description: The ID of the data source.
                     type: string
                   name:
                     description: |-
-                      The name of the cockpit data source.
+                      The name of the data source.
                       Name of the datasource
                     type: string
                   origin:
                     description: |-
-                      The origin of the cockpit data source.
+                      The origin of the Cockpit data source.
                       The origin of the datasource
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
                       The project_id you want to attach the resource to
+                    type: string
+                  pushUrl:
+                    description: |-
+                      The URL endpoint used for pushing data to the Cockpit data source.
+                      The URL endpoint used for pushing data to the cockpit data source.
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit datasource.
+                      (Defaults to the region specified in the provider configuration) The region where the data source is located.
                       The region you want to attach the resource to
                     type: string
                   synchronizedWithGrafana:
@@ -482,17 +487,17 @@ spec:
                     type: boolean
                   type:
                     description: |-
-                      The type of the cockpit data source. Possible values are: metrics, logs or traces.
+                      The type of data source. Possible values are: metrics, logs, or traces.
                       The type of the datasource
                     type: string
                   updatedAt:
                     description: |-
-                      Date and time of the cockpit datas ource's last update (RFC 3339 format).
+                      The date and time the data source was last updated (in RFC 3339 format).
                       The date and time of the last update of the cockpit datasource
                     type: string
                   url:
                     description: |-
-                      The URL of the cockpit data source.
+                      The URL of the Cockpit data source.
                       The URL of the datasource
                     type: string
                 type: object

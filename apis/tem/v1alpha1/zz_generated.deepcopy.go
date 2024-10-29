@@ -47,6 +47,11 @@ func (in *DomainInitParameters) DeepCopyInto(out *DomainInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Autoconfig != nil {
+		in, out := &in.Autoconfig, &out.Autoconfig
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -111,6 +116,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	*out = *in
 	if in.AcceptTos != nil {
 		in, out := &in.AcceptTos, &out.AcceptTos
+		*out = new(bool)
+		**out = **in
+	}
+	if in.Autoconfig != nil {
+		in, out := &in.Autoconfig, &out.Autoconfig
 		*out = new(bool)
 		**out = **in
 	}
@@ -248,6 +258,11 @@ func (in *DomainParameters) DeepCopyInto(out *DomainParameters) {
 	*out = *in
 	if in.AcceptTos != nil {
 		in, out := &in.AcceptTos, &out.AcceptTos
+		*out = new(bool)
+		**out = **in
+	}
+	if in.Autoconfig != nil {
+		in, out := &in.Autoconfig, &out.Autoconfig
 		*out = new(bool)
 		**out = **in
 	}

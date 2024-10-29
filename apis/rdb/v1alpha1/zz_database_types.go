@@ -15,7 +15,7 @@ import (
 
 type DatabaseInitParameters struct {
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -42,7 +42,7 @@ type DatabaseObservation struct {
 	// The ID of the database, which is of the form {region}/{id}/{DBNAME} e.g. fr-par/11111111-1111-1111-1111-111111111111/mydb
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -69,7 +69,7 @@ type DatabaseObservation struct {
 
 type DatabaseParameters struct {
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional

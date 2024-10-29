@@ -74,17 +74,17 @@ spec:
                 properties:
                   domain:
                     description: |-
-                      The domain where the DNS zone will be created.
+                      The main domain where the DNS zone will be created.
                       The domain where the DNS zone will be created.
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the domain is associated with.
+                      (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
                       The project_id you want to attach the resource to
                     type: string
                   subdomain:
                     description: |-
-                      The subdomain(zone name) to create in the domain.
+                      The name of the subdomain (zone name) to create within the domain.
                       The subdomain of the DNS zone to create.
                     type: string
                 type: object
@@ -103,17 +103,17 @@ spec:
                 properties:
                   domain:
                     description: |-
-                      The domain where the DNS zone will be created.
+                      The main domain where the DNS zone will be created.
                       The domain where the DNS zone will be created.
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the domain is associated with.
+                      (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
                       The project_id you want to attach the resource to
                     type: string
                   subdomain:
                     description: |-
-                      The subdomain(zone name) to create in the domain.
+                      The name of the subdomain (zone name) to create within the domain.
                       The subdomain of the DNS zone to create.
                     type: string
                 type: object
@@ -300,56 +300,56 @@ spec:
                 properties:
                   domain:
                     description: |-
-                      The domain where the DNS zone will be created.
+                      The main domain where the DNS zone will be created.
                       The domain where the DNS zone will be created.
                     type: string
                   id:
-                    description: The ID of the zone, which is of the form {subdomain}.{domain}
+                    description: The ID of the zone, in the {subdomain}.{domain} format.
                     type: string
                   message:
                     description: |-
-                      Message
+                      Message.
                       Message
                     type: string
                   ns:
                     description: |-
-                      NameServer list for zone.
+                      The list of same servers for the zone.
                       NameServer list for zone.
                     items:
                       type: string
                     type: array
                   nsDefault:
                     description: |-
-                      NameServer default list for zone.
+                      The default list of same servers for the zone.
                       NameServer default list for zone.
                     items:
                       type: string
                     type: array
                   nsMaster:
                     description: |-
-                      NameServer master list for zone.
+                      The master list of same servers for the zone.
                       NameServer master list for zone.
                     items:
                       type: string
                     type: array
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the domain is associated with.
+                      (Defaults to Project ID specified in the provider configuration project_id) The ID of the Project associated with the domain.
                       The project_id you want to attach the resource to
                     type: string
                   status:
                     description: |-
-                      The domain zone status.
+                      The status of the domain zone.
                       The domain zone status.
                     type: string
                   subdomain:
                     description: |-
-                      The subdomain(zone name) to create in the domain.
+                      The name of the subdomain (zone name) to create within the domain.
                       The subdomain of the DNS zone to create.
                     type: string
                   updatedAt:
                     description: |-
-                      The date and time of the last update of the DNS zone.
+                      The date and time at which the DNS zone was last updated.
                       The date and time of the last update of the DNS zone.
                     type: string
                 type: object

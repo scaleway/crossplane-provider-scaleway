@@ -15,7 +15,7 @@ import (
 
 type DomainInitParameters struct {
 
-	// The ID of the function you want to create a domain with.
+	// The unique identifier of the function.
 	// The ID of the function
 	// +crossplane:generate:reference:type=Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -28,42 +28,40 @@ type DomainInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The hostname that should resolve to your function id native domain.
-	// You should use a CNAME domain record that point to your native function domain_name for it.
+	// The hostname with a CNAME record.
 	// The hostname that should be redirected to the function
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in where the domain was created.
+	// (Defaults to provider region) The region in which the domain was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DomainObservation struct {
 
-	// The ID of the function you want to create a domain with.
+	// The unique identifier of the function.
 	// The ID of the function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// The hostname that should resolve to your function id native domain.
-	// You should use a CNAME domain record that point to your native function domain_name for it.
+	// The hostname with a CNAME record.
 	// The hostname that should be redirected to the function
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// The function domain's ID.
+	// The unique identifier of the function domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Defaults to provider region) The region in where the domain was created.
+	// (Defaults to provider region) The region in which the domain was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The URL that triggers the function
+	// The URL used to query the function.
 	// URL to use to trigger the function
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type DomainParameters struct {
 
-	// The ID of the function you want to create a domain with.
+	// The unique identifier of the function.
 	// The ID of the function
 	// +crossplane:generate:reference:type=Function
 	// +kubebuilder:validation:Optional
@@ -77,13 +75,12 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The hostname that should resolve to your function id native domain.
-	// You should use a CNAME domain record that point to your native function domain_name for it.
+	// The hostname with a CNAME record.
 	// The hostname that should be redirected to the function
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in where the domain was created.
+	// (Defaults to provider region) The region in which the domain was created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

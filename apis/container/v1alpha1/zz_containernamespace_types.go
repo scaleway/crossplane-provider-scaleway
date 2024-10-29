@@ -27,15 +27,15 @@ type ContainerNamespaceInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The unique name of the container namespace.
+	// The unique name of the Containers namespace.
 	// The name of the container namespace
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
+	// (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -56,22 +56,22 @@ type ContainerNamespaceObservation struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The ID of the namespace
+	// The unique identifier of the namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The unique name of the container namespace.
+	// The unique name of the Containers namespace.
 	// The name of the container namespace
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the namespace is associated with.
+	// The Organization ID with which the namespace is associated.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
+	// (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -101,17 +101,17 @@ type ContainerNamespaceParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The unique name of the container namespace.
+	// The unique name of the Containers namespace.
 	// The name of the container namespace
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the namespace is associated with.
+	// (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

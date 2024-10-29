@@ -308,7 +308,8 @@ spec:
                     description: The bucket's name or regional ID.
                     type: string
                   id:
-                    description: The ID of the policy, which is the ID of the bucket.
+                    description: The unique identifier of the policy, which is the
+                      ID of the bucket.
                     type: string
                   policy:
                     description: |-

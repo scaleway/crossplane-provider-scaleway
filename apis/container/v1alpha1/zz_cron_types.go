@@ -16,11 +16,10 @@ import (
 type CronInitParameters struct {
 
 	// The key-value mapping to define arguments that will be passed to your container’s event object
-	// during
 	// Cron arguments as json object to pass through during execution.
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The container ID to link with your cron.
+	// The unique identifier of the container to link to your CRON trigger.
 	// The Container ID to link with your trigger.
 	// +crossplane:generate:reference:type=Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
@@ -33,18 +32,16 @@ type CronInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
-	// The name of the container cron. If not provided, the name is generated.
-	// during
+	// The name of the container CRON trigger. If not provided, a random name is generated.
 	// Cron job name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
@@ -52,33 +49,30 @@ type CronInitParameters struct {
 type CronObservation struct {
 
 	// The key-value mapping to define arguments that will be passed to your container’s event object
-	// during
 	// Cron arguments as json object to pass through during execution.
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The container ID to link with your cron.
+	// The unique identifier of the container to link to your CRON trigger.
 	// The Container ID to link with your trigger.
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// The container CRON's ID.
+	// The unique identifier of the container's CRON trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the container cron. If not provided, the name is generated.
-	// during
+	// The name of the container CRON trigger. If not provided, a random name is generated.
 	// Cron job name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The cron status.
+	// The CRON status.
 	// Cron job status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -86,12 +80,11 @@ type CronObservation struct {
 type CronParameters struct {
 
 	// The key-value mapping to define arguments that will be passed to your container’s event object
-	// during
 	// Cron arguments as json object to pass through during execution.
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The container ID to link with your cron.
+	// The unique identifier of the container to link to your CRON trigger.
 	// The Container ID to link with your trigger.
 	// +crossplane:generate:reference:type=Container
 	// +kubebuilder:validation:Optional
@@ -105,20 +98,18 @@ type CronParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
-	// The name of the container cron. If not provided, the name is generated.
-	// during
+	// The name of the container CRON trigger. If not provided, a random name is generated.
 	// Cron job name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`

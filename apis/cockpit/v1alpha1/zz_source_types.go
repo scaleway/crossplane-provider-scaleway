@@ -15,11 +15,11 @@ import (
 
 type SourceInitParameters struct {
 
-	// The name of the cockpit data source.
+	// The name of the data source.
 	// Name of the datasource
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -32,37 +32,41 @@ type SourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region of the cockpit datasource.
+	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The type of the cockpit data source. Possible values are: metrics, logs or traces.
+	// The type of data source. Possible values are: metrics, logs, or traces.
 	// The type of the datasource
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SourceObservation struct {
 
-	// Date and time of the cockpit data source's creation (RFC 3339 format).
+	// The date and time the data source was created (in RFC 3339 format).
 	// The date and time of the creation of the cockpit datasource
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the cockpit data source.
+	// The ID of the data source.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the cockpit data source.
+	// The name of the data source.
 	// Name of the datasource
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The origin of the cockpit data source.
+	// The origin of the Cockpit data source.
 	// The origin of the datasource
 	Origin *string `json:"origin,omitempty" tf:"origin,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the cockpit datasource.
+	// The URL endpoint used for pushing data to the Cockpit data source.
+	// The URL endpoint used for pushing data to the cockpit data source.
+	PushURL *string `json:"pushUrl,omitempty" tf:"push_url,omitempty"`
+
+	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -70,27 +74,27 @@ type SourceObservation struct {
 	// Indicates whether the data source is synchronized with Grafana
 	SynchronizedWithGrafana *bool `json:"synchronizedWithGrafana,omitempty" tf:"synchronized_with_grafana,omitempty"`
 
-	// The type of the cockpit data source. Possible values are: metrics, logs or traces.
+	// The type of data source. Possible values are: metrics, logs, or traces.
 	// The type of the datasource
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The URL of the cockpit data source.
+	// The URL of the Cockpit data source.
 	// The URL of the datasource
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Date and time of the cockpit datas ource's last update (RFC 3339 format).
+	// The date and time the data source was last updated (in RFC 3339 format).
 	// The date and time of the last update of the cockpit datasource
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type SourceParameters struct {
 
-	// The name of the cockpit data source.
+	// The name of the data source.
 	// Name of the datasource
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit data source is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
@@ -104,12 +108,12 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region of the cockpit datasource.
+	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The type of the cockpit data source. Possible values are: metrics, logs or traces.
+	// The type of data source. Possible values are: metrics, logs, or traces.
 	// The type of the datasource
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

@@ -149,6 +149,11 @@ func (in *ContainerInitParameters) DeepCopyInto(out *ContainerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecretEnvironmentVariables != nil {
 		in, out := &in.SecretEnvironmentVariables, &out.SecretEnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -641,6 +646,11 @@ func (in *ContainerObservation) DeepCopyInto(out *ContainerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -769,6 +779,11 @@ func (in *ContainerParameters) DeepCopyInto(out *ContainerParameters) {
 	}
 	if in.RegistrySha256 != nil {
 		in, out := &in.RegistrySha256, &out.RegistrySha256
+		*out = new(string)
+		**out = **in
+	}
+	if in.Sandbox != nil {
+		in, out := &in.Sandbox, &out.Sandbox
 		*out = new(string)
 		**out = **in
 	}

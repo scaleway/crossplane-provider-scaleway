@@ -78,8 +78,8 @@ spec:
                       ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   corsRule:
-                    description: A rule of Cross-Origin Resource Sharing (documented
-                      below).
+                    description: 'A rule of Cross-Origin Resource Sharing. The CORS
+                      object supports the following:'
                     items:
                       properties:
                         allowedHeaders:
@@ -88,8 +88,8 @@ spec:
                             type: string
                           type: array
                         allowedMethods:
-                          description: Specifies which methods are allowed. Can be
-                            GET, PUT, POST, DELETE or HEAD.
+                          description: Specifies which methods are allowed (GET, PUT,
+                            POST, DELETE or HEAD).
                           items:
                             type: string
                           type: array
@@ -99,24 +99,25 @@ spec:
                             type: string
                           type: array
                         exposeHeaders:
-                          description: Specifies expose header in the response.
+                          description: Specifies header exposure in the response.
                           items:
                             type: string
                           type: array
                         maxAgeSeconds:
-                          description: Specifies time in seconds that browser can
-                            cache the response for a preflight request.
+                          description: Specifies time in seconds that the browser
+                            can cache the response for a preflight request.
                           type: number
                       type: object
                     type: array
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
                       Delete objects in bucket
                     type: boolean
                   lifecycleRule:
-                    description: Lifecycle configuration is a set of rules that define
-                      actions that Scaleway Object Storage applies to a group of objects
+                    description: |-
+                      A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
+                      Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
                     items:
                       properties:
                         abortIncompleteMultipartUploadDays:
@@ -126,12 +127,12 @@ spec:
                           type: number
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Specifies if the configuration rule is Enabled or Disabled
                           type: boolean
                         expiration:
                           description: |-
-                            Specifies a period in the object's expire (documented below).
+                            Specifies a period of expiration for the object. The expiration object supports the following:
                             Specifies a period in the object's expire
                           items:
                             properties:
@@ -156,13 +157,13 @@ spec:
                           additionalProperties:
                             type: string
                           description: |-
-                            A list of tags (key / value) for the bucket.
+                            A list of tags (key/value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
                           x-kubernetes-map-type: granular
                         transition:
                           description: |-
-                            Specifies a period in the object's transitions (documented below).
+                            Specifies a period in the object's transitions.
                             Define when objects transition to another storage class
                           items:
                             properties:
@@ -187,7 +188,7 @@ spec:
                     type: string
                   objectLockEnabled:
                     description: |-
-                      The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                      Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                       Enable object lock
                     type: boolean
                   projectId:
@@ -197,26 +198,26 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The region in which the bucket should be created.
+                      The region in which the bucket will be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: |-
-                      A list of tags (key / value) for the bucket.
+                      A list of tags (key/value) for the bucket.
                       The tags associated with this bucket
                     type: object
                     x-kubernetes-map-type: granular
                   versioning:
                     description: |-
-                      A state of versioning (documented below)
+                      A state of versioning. The versioning object supports the following:
                       Allow multiple versions of an object in the same bucket
                     items:
                       properties:
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
                           type: boolean
                       type: object
@@ -241,8 +242,8 @@ spec:
                       ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
                     type: string
                   corsRule:
-                    description: A rule of Cross-Origin Resource Sharing (documented
-                      below).
+                    description: 'A rule of Cross-Origin Resource Sharing. The CORS
+                      object supports the following:'
                     items:
                       properties:
                         allowedHeaders:
@@ -251,8 +252,8 @@ spec:
                             type: string
                           type: array
                         allowedMethods:
-                          description: Specifies which methods are allowed. Can be
-                            GET, PUT, POST, DELETE or HEAD.
+                          description: Specifies which methods are allowed (GET, PUT,
+                            POST, DELETE or HEAD).
                           items:
                             type: string
                           type: array
@@ -262,24 +263,25 @@ spec:
                             type: string
                           type: array
                         exposeHeaders:
-                          description: Specifies expose header in the response.
+                          description: Specifies header exposure in the response.
                           items:
                             type: string
                           type: array
                         maxAgeSeconds:
-                          description: Specifies time in seconds that browser can
-                            cache the response for a preflight request.
+                          description: Specifies time in seconds that the browser
+                            can cache the response for a preflight request.
                           type: number
                       type: object
                     type: array
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
                       Delete objects in bucket
                     type: boolean
                   lifecycleRule:
-                    description: Lifecycle configuration is a set of rules that define
-                      actions that Scaleway Object Storage applies to a group of objects
+                    description: |-
+                      A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
+                      Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
                     items:
                       properties:
                         abortIncompleteMultipartUploadDays:
@@ -289,12 +291,12 @@ spec:
                           type: number
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Specifies if the configuration rule is Enabled or Disabled
                           type: boolean
                         expiration:
                           description: |-
-                            Specifies a period in the object's expire (documented below).
+                            Specifies a period of expiration for the object. The expiration object supports the following:
                             Specifies a period in the object's expire
                           items:
                             properties:
@@ -319,13 +321,13 @@ spec:
                           additionalProperties:
                             type: string
                           description: |-
-                            A list of tags (key / value) for the bucket.
+                            A list of tags (key/value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
                           x-kubernetes-map-type: granular
                         transition:
                           description: |-
-                            Specifies a period in the object's transitions (documented below).
+                            Specifies a period in the object's transitions.
                             Define when objects transition to another storage class
                           items:
                             properties:
@@ -350,7 +352,7 @@ spec:
                     type: string
                   objectLockEnabled:
                     description: |-
-                      The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                      Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                       Enable object lock
                     type: boolean
                   projectId:
@@ -360,26 +362,26 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The region in which the bucket should be created.
+                      The region in which the bucket will be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: |-
-                      A list of tags (key / value) for the bucket.
+                      A list of tags (key/value) for the bucket.
                       The tags associated with this bucket
                     type: object
                     x-kubernetes-map-type: granular
                   versioning:
                     description: |-
-                      A state of versioning (documented below)
+                      A state of versioning. The versioning object supports the following:
                       Allow multiple versions of an object in the same bucket
                     items:
                       properties:
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
                           type: boolean
                       type: object
@@ -569,12 +571,12 @@ spec:
                     type: string
                   apiEndpoint:
                     description: |-
-                      The endpoint URL of the bucket
+                      The endpoint URL of the bucket.
                       API URL of the bucket
                     type: string
                   corsRule:
-                    description: A rule of Cross-Origin Resource Sharing (documented
-                      below).
+                    description: 'A rule of Cross-Origin Resource Sharing. The CORS
+                      object supports the following:'
                     items:
                       properties:
                         allowedHeaders:
@@ -583,8 +585,8 @@ spec:
                             type: string
                           type: array
                         allowedMethods:
-                          description: Specifies which methods are allowed. Can be
-                            GET, PUT, POST, DELETE or HEAD.
+                          description: Specifies which methods are allowed (GET, PUT,
+                            POST, DELETE or HEAD).
                           items:
                             type: string
                           type: array
@@ -594,24 +596,24 @@ spec:
                             type: string
                           type: array
                         exposeHeaders:
-                          description: Specifies expose header in the response.
+                          description: Specifies header exposure in the response.
                           items:
                             type: string
                           type: array
                         maxAgeSeconds:
-                          description: Specifies time in seconds that browser can
-                            cache the response for a preflight request.
+                          description: Specifies time in seconds that the browser
+                            can cache the response for a preflight request.
                           type: number
                       type: object
                     type: array
                   endpoint:
                     description: |-
-                      The endpoint URL of the bucket
+                      The endpoint URL of the bucket.
                       Endpoint of the bucket
                     type: string
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
                       Delete objects in bucket
                     type: boolean
                   id:
@@ -619,8 +621,9 @@ spec:
                       or equal to 255 characters in length.
                     type: string
                   lifecycleRule:
-                    description: Lifecycle configuration is a set of rules that define
-                      actions that Scaleway Object Storage applies to a group of objects
+                    description: |-
+                      A set of rules that defines actions applied to a group of objects. The lifecycle_rule object supports the following:
+                      Lifecycle configuration is a set of rules that define actions that Scaleway Object Storage applies to a group of objects
                     items:
                       properties:
                         abortIncompleteMultipartUploadDays:
@@ -630,12 +633,12 @@ spec:
                           type: number
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Specifies if the configuration rule is Enabled or Disabled
                           type: boolean
                         expiration:
                           description: |-
-                            Specifies a period in the object's expire (documented below).
+                            Specifies a period of expiration for the object. The expiration object supports the following:
                             Specifies a period in the object's expire
                           items:
                             properties:
@@ -660,13 +663,13 @@ spec:
                           additionalProperties:
                             type: string
                           description: |-
-                            A list of tags (key / value) for the bucket.
+                            A list of tags (key/value) for the bucket.
                             The tags associated with the bucket lifecycle
                           type: object
                           x-kubernetes-map-type: granular
                         transition:
                           description: |-
-                            Specifies a period in the object's transitions (documented below).
+                            Specifies a period in the object's transitions.
                             Define when objects transition to another storage class
                           items:
                             properties:
@@ -691,7 +694,7 @@ spec:
                     type: string
                   objectLockEnabled:
                     description: |-
-                      The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                      Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                       Enable object lock
                     type: boolean
                   projectId:
@@ -701,26 +704,26 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The region in which the bucket should be created.
+                      The region in which the bucket will be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: |-
-                      A list of tags (key / value) for the bucket.
+                      A list of tags (key/value) for the bucket.
                       The tags associated with this bucket
                     type: object
                     x-kubernetes-map-type: granular
                   versioning:
                     description: |-
-                      A state of versioning (documented below)
+                      A state of versioning. The versioning object supports the following:
                       Allow multiple versions of an object in the same bucket
                     items:
                       properties:
                         enabled:
                           description: |-
-                            The element value can be either Enabled or Disabled. If a rule is disabled, Scaleway S3 doesn't perform any of the actions defined in the rule.
+                            Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
                             Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state
                           type: boolean
                       type: object

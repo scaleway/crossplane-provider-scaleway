@@ -114,11 +114,11 @@ type ActionParameters struct {
 
 type FrontendInitParameters struct {
 
-	// A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
 	// ACL rules
 	ACL []ACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The load-balancer backend ID this frontend is attached to.
+	// The ID of the Load Balancer backend this frontend is attached to.
 	// The load-balancer backend ID
 	// +crossplane:generate:reference:type=Backend
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
@@ -131,7 +131,7 @@ type FrontendInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
-	// List of Certificate IDs that should be used by the frontend.
+	// List of certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
@@ -140,15 +140,15 @@ type FrontendInitParameters struct {
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
 
 	// (Defaults to false) A boolean to specify whether to use lb_acl.
-	// If external_acls is set to true, acl can not be set directly in the lb frontend.
+	// If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
 	// This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
 	ExternalAcls *bool `json:"externalAcls,omitempty" tf:"external_acls,omitempty"`
 
-	// TCP port to listen on the front side.
+	// TCP port to listen to on the front side.
 	// TCP port to listen on the front side
 	InboundPort *float64 `json:"inboundPort,omitempty" tf:"inbound_port,omitempty"`
 
-	// The load-balancer ID this frontend is attached to.
+	// The ID of the Load Balancer this frontend is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
@@ -161,30 +161,30 @@ type FrontendInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
-	// The name of the load-balancer frontend.
+	// The name of the Load Balancer frontend.
 	// The name of the frontend
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Maximum inactivity time on the client side. (e.g.: 1s)
+	// Maximum inactivity time on the client side. (e.g. 1s)
 	// Set the maximum inactivity time on the client side
 	TimeoutClient *string `json:"timeoutClient,omitempty" tf:"timeout_client,omitempty"`
 }
 
 type FrontendObservation struct {
 
-	// A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
 	// ACL rules
 	ACL []ACLObservation `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The load-balancer backend ID this frontend is attached to.
+	// The ID of the Load Balancer backend this frontend is attached to.
 	// The load-balancer backend ID
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// (Deprecated) first certificate ID used by the frontend.
+	// (Deprecated, use certificate_ids instead) First certificate ID used by the frontend.
 	// Certificate ID
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
-	// List of Certificate IDs that should be used by the frontend.
+	// List of certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
@@ -193,38 +193,38 @@ type FrontendObservation struct {
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
 
 	// (Defaults to false) A boolean to specify whether to use lb_acl.
-	// If external_acls is set to true, acl can not be set directly in the lb frontend.
+	// If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
 	// This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
 	ExternalAcls *bool `json:"externalAcls,omitempty" tf:"external_acls,omitempty"`
 
-	// The ID of the load-balancer frontend.
+	// The ID of the Load Balancer frontend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// TCP port to listen on the front side.
+	// TCP port to listen to on the front side.
 	// TCP port to listen on the front side
 	InboundPort *float64 `json:"inboundPort,omitempty" tf:"inbound_port,omitempty"`
 
-	// The load-balancer ID this frontend is attached to.
+	// The ID of the Load Balancer this frontend is attached to.
 	// The load-balancer ID
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// The name of the load-balancer frontend.
+	// The name of the Load Balancer frontend.
 	// The name of the frontend
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Maximum inactivity time on the client side. (e.g.: 1s)
+	// Maximum inactivity time on the client side. (e.g. 1s)
 	// Set the maximum inactivity time on the client side
 	TimeoutClient *string `json:"timeoutClient,omitempty" tf:"timeout_client,omitempty"`
 }
 
 type FrontendParameters struct {
 
-	// A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
 	// ACL rules
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The load-balancer backend ID this frontend is attached to.
+	// The ID of the Load Balancer backend this frontend is attached to.
 	// The load-balancer backend ID
 	// +crossplane:generate:reference:type=Backend
 	// +kubebuilder:validation:Optional
@@ -238,7 +238,7 @@ type FrontendParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
-	// List of Certificate IDs that should be used by the frontend.
+	// List of certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	// +kubebuilder:validation:Optional
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
@@ -249,17 +249,17 @@ type FrontendParameters struct {
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
 
 	// (Defaults to false) A boolean to specify whether to use lb_acl.
-	// If external_acls is set to true, acl can not be set directly in the lb frontend.
+	// If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
 	// This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
 	// +kubebuilder:validation:Optional
 	ExternalAcls *bool `json:"externalAcls,omitempty" tf:"external_acls,omitempty"`
 
-	// TCP port to listen on the front side.
+	// TCP port to listen to on the front side.
 	// TCP port to listen on the front side
 	// +kubebuilder:validation:Optional
 	InboundPort *float64 `json:"inboundPort,omitempty" tf:"inbound_port,omitempty"`
 
-	// The load-balancer ID this frontend is attached to.
+	// The ID of the Load Balancer this frontend is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	// +kubebuilder:validation:Optional
@@ -273,12 +273,12 @@ type FrontendParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
-	// The name of the load-balancer frontend.
+	// The name of the Load Balancer frontend.
 	// The name of the frontend
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Maximum inactivity time on the client side. (e.g.: 1s)
+	// Maximum inactivity time on the client side. (e.g. 1s)
 	// Set the maximum inactivity time on the client side
 	// +kubebuilder:validation:Optional
 	TimeoutClient *string `json:"timeoutClient,omitempty" tf:"timeout_client,omitempty"`
@@ -297,11 +297,11 @@ type MatchInitParameters struct {
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
 	// A list of possible values to match for the given HTTP filter.
-	// Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+	// Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
 	// A list of possible values to match for the given HTTP filter
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
 
@@ -323,11 +323,11 @@ type MatchObservation struct {
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
 	// A list of possible values to match for the given HTTP filter.
-	// Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+	// Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
 	// A list of possible values to match for the given HTTP filter
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
 
@@ -351,12 +351,12 @@ type MatchParameters struct {
 	HTTPFilterOption *string `json:"httpFilterOption,omitempty" tf:"http_filter_option,omitempty"`
 
 	// A list of possible values to match for the given HTTP filter.
-	// Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+	// Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
 	// A list of possible values to match for the given HTTP filter
 	// +kubebuilder:validation:Optional
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	// +kubebuilder:validation:Optional
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
@@ -373,7 +373,7 @@ type RedirectInitParameters struct {
 	// The HTTP redirect code to use
 	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
 
-	// An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+	// A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
 	// An URL can be used in case of a location redirect
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -388,7 +388,7 @@ type RedirectObservation struct {
 	// The HTTP redirect code to use
 	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
 
-	// An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+	// A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
 	// An URL can be used in case of a location redirect
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -404,7 +404,7 @@ type RedirectParameters struct {
 	// +kubebuilder:validation:Optional
 	Code *float64 `json:"code,omitempty" tf:"code,omitempty"`
 
-	// An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+	// A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
 	// An URL can be used in case of a location redirect
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`

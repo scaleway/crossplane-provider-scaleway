@@ -15,19 +15,19 @@ import (
 
 type VolumeInitParameters struct {
 
-	// The maximum IO/s expected, must match available options.
+	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The name of the volume. If not provided it will be randomly generated.
+	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the volume is associated with.
+	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
 	// The volume size in GB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -48,7 +48,7 @@ type VolumeInitParameters struct {
 	// The tags associated with the volume
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -58,19 +58,19 @@ type VolumeObservation struct {
 	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The maximum IO/s expected, must match available options.
+	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The name of the volume. If not provided it will be randomly generated.
+	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the volume is associated with.
+	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
 	// The volume size in GB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -82,29 +82,29 @@ type VolumeObservation struct {
 	// The tags associated with the volume
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type VolumeParameters struct {
 
-	// The maximum IO/s expected, must match available options.
+	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The name of the volume. If not provided it will be randomly generated.
+	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the volume is associated with.
+	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
 	// The volume size in GB
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
@@ -128,7 +128,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
