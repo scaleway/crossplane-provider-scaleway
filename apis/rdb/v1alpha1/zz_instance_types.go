@@ -15,7 +15,7 @@ import (
 
 type InstanceInitParameters struct {
 
-	// Boolean to store logical backups in the same region as the database instance.
+	// Boolean to store logical backups in the same region as the Database Instance.
 	// Boolean to store logical backups in the same region as the database instance
 	BackupSameRegion *bool `json:"backupSameRegion,omitempty" tf:"backup_same_region,omitempty"`
 
@@ -27,9 +27,13 @@ type InstanceInitParameters struct {
 	// Backup schedule retention in days
 	BackupScheduleRetention *float64 `json:"backupScheduleRetention,omitempty" tf:"backup_schedule_retention,omitempty"`
 
-	// Disable automated backup for the database instance.
+	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
+
+	// Enable or disable encryption at rest for the Database Instance.
+	// Enable or disable encryption at rest for the database instance
+	EncryptionAtRest *bool `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id
@@ -40,11 +44,11 @@ type InstanceInitParameters struct {
 	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
-	// Enable or disable high availability for the database instance.
+	// Enable or disable high availability for the Database Instance.
 	// Enable or disable high availability for the database instance
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
 
-	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
 	// This block must be defined if you want a public endpoint in addition to your private endpoint.
 	// Load balancer of the database instance
 	LoadBalancer []LoadBalancerInitParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
@@ -56,15 +60,15 @@ type InstanceInitParameters struct {
 	// Name of the database instance
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of database instance you want to create (e.g. db-dev-s).
+	// The type of Database Instance you want to create (e.g. db-dev-s).
 	// The type of database instance you want to create
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the database instance.
+	// Password for the first user of the Database Instance.
 	// Password for the first user of the database instance
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// List of private networks endpoints of the database instance.
+	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -87,7 +91,7 @@ type InstanceInitParameters struct {
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifier for the first user of the database instance.
+	// Identifier for the first user of the Database Instance.
 	// Identifier for the first user of the database instance
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -102,7 +106,7 @@ type InstanceInitParameters struct {
 
 type InstanceObservation struct {
 
-	// Boolean to store logical backups in the same region as the database instance.
+	// Boolean to store logical backups in the same region as the Database Instance.
 	// Boolean to store logical backups in the same region as the database instance
 	BackupSameRegion *bool `json:"backupSameRegion,omitempty" tf:"backup_same_region,omitempty"`
 
@@ -114,19 +118,23 @@ type InstanceObservation struct {
 	// Backup schedule retention in days
 	BackupScheduleRetention *float64 `json:"backupScheduleRetention,omitempty" tf:"backup_schedule_retention,omitempty"`
 
-	// Certificate of the database instance.
+	// Certificate of the Database Instance.
 	// Certificate of the database instance
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// Disable automated backup for the database instance.
+	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
 
-	// (Deprecated) The IP of the Database Instance.
+	// Enable or disable encryption at rest for the Database Instance.
+	// Enable or disable encryption at rest for the database instance
+	EncryptionAtRest *bool `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
+
+	// (Deprecated) The IP of the Database Instance. Please use the private_network or the load_balancer attribute.
 	// Endpoint IP of the database instance
 	EndpointIP *string `json:"endpointIp,omitempty" tf:"endpoint_ip,omitempty"`
 
-	// (Deprecated) The port of the Database Instance.
+	// (Deprecated) The port of the Database Instance. Please use the private_network or the load_balancer attribute.
 	// Endpoint port of the database instance
 	EndpointPort *float64 `json:"endpointPort,omitempty" tf:"endpoint_port,omitempty"`
 
@@ -142,11 +150,11 @@ type InstanceObservation struct {
 	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
-	// Enable or disable high availability for the database instance.
+	// Enable or disable high availability for the Database Instance.
 	// Enable or disable high availability for the database instance
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
 
-	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
 	// This block must be defined if you want a public endpoint in addition to your private endpoint.
 	// Load balancer of the database instance
 	LoadBalancer []LoadBalancerObservation `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
@@ -158,7 +166,7 @@ type InstanceObservation struct {
 	// Name of the database instance
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of database instance you want to create (e.g. db-dev-s).
+	// The type of Database Instance you want to create (e.g. db-dev-s).
 	// The type of database instance you want to create
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -166,7 +174,7 @@ type InstanceObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// List of private networks endpoints of the database instance.
+	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -175,7 +183,7 @@ type InstanceObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// List of read replicas of the database instance.
+	// List of read replicas of the Database Instance.
 	// Read replicas of the database instance
 	ReadReplicas []ReadReplicasObservation `json:"readReplicas,omitempty" tf:"read_replicas,omitempty"`
 
@@ -193,7 +201,7 @@ type InstanceObservation struct {
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifier for the first user of the database instance.
+	// Identifier for the first user of the Database Instance.
 	// Identifier for the first user of the database instance
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -208,7 +216,7 @@ type InstanceObservation struct {
 
 type InstanceParameters struct {
 
-	// Boolean to store logical backups in the same region as the database instance.
+	// Boolean to store logical backups in the same region as the Database Instance.
 	// Boolean to store logical backups in the same region as the database instance
 	// +kubebuilder:validation:Optional
 	BackupSameRegion *bool `json:"backupSameRegion,omitempty" tf:"backup_same_region,omitempty"`
@@ -223,10 +231,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupScheduleRetention *float64 `json:"backupScheduleRetention,omitempty" tf:"backup_schedule_retention,omitempty"`
 
-	// Disable automated backup for the database instance.
+	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
 	// +kubebuilder:validation:Optional
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
+
+	// Enable or disable encryption at rest for the Database Instance.
+	// Enable or disable encryption at rest for the database instance
+	// +kubebuilder:validation:Optional
+	EncryptionAtRest *bool `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 
 	// Database Instance's engine version (e.g. PostgreSQL-11).
 	// Database's engine version id
@@ -239,12 +252,12 @@ type InstanceParameters struct {
 	// +mapType=granular
 	InitSettings map[string]*string `json:"initSettings,omitempty" tf:"init_settings,omitempty"`
 
-	// Enable or disable high availability for the database instance.
+	// Enable or disable high availability for the Database Instance.
 	// Enable or disable high availability for the database instance
 	// +kubebuilder:validation:Optional
 	IsHaCluster *bool `json:"isHaCluster,omitempty" tf:"is_ha_cluster,omitempty"`
 
-	// List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+	// List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
 	// This block must be defined if you want a public endpoint in addition to your private endpoint.
 	// Load balancer of the database instance
 	// +kubebuilder:validation:Optional
@@ -259,17 +272,17 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of database instance you want to create (e.g. db-dev-s).
+	// The type of Database Instance you want to create (e.g. db-dev-s).
 	// The type of database instance you want to create
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the database instance.
+	// Password for the first user of the Database Instance.
 	// Password for the first user of the database instance
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// List of private networks endpoints of the database instance.
+	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -297,7 +310,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Identifier for the first user of the database instance.
+	// Identifier for the first user of the Database Instance.
 	// Identifier for the first user of the database instance
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
@@ -315,14 +328,14 @@ type InstanceParameters struct {
 
 type LoadBalancerInitParameters struct {
 
-	// The ID of the endpoint of the load balancer.
+	// The ID of the endpoint of the Load Balancer.
 	// The endpoint ID
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 }
 
 type LoadBalancerObservation struct {
 
-	// The ID of the endpoint of the load balancer.
+	// The ID of the endpoint of the Load Balancer.
 	// The endpoint ID
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -345,7 +358,7 @@ type LoadBalancerObservation struct {
 
 type LoadBalancerParameters struct {
 
-	// The ID of the endpoint of the load balancer.
+	// The ID of the endpoint of the Load Balancer.
 	// The endpoint ID
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
@@ -390,7 +403,7 @@ type PrivateNetworkInitParameters struct {
 	// The IP with the given mask within the private subnet
 	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	// The private network ID
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
@@ -417,7 +430,7 @@ type PrivateNetworkObservation struct {
 	// Whether or not the private network endpoint should be configured with IPAM
 	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
 
-	// The ID of the endpoint of the load balancer.
+	// The ID of the endpoint of the Load Balancer.
 	// The endpoint ID
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -437,7 +450,7 @@ type PrivateNetworkObservation struct {
 	// The name of your private service
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	// The private network ID
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 
@@ -461,7 +474,7 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	IPNet *string `json:"ipNet,omitempty" tf:"ip_net,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	// The private network ID
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional

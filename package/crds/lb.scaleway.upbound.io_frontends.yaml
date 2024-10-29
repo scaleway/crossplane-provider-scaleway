@@ -74,7 +74,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
                       ACL rules
                     items:
                       properties:
@@ -97,7 +97,7 @@ spec:
                                       type: number
                                     target:
                                       description: |-
-                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
                                         An URL can be used in case of a location redirect
                                       type: string
                                     type:
@@ -138,7 +138,7 @@ spec:
                               httpFilterValue:
                                 description: |-
                                   A list of possible values to match for the given HTTP filter.
-                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
                                   A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
@@ -150,7 +150,7 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
@@ -166,7 +166,7 @@ spec:
                     type: array
                   backendId:
                     description: |-
-                      The load-balancer backend ID this frontend is attached to.
+                      The ID of the Load Balancer backend this frontend is attached to.
                       The load-balancer backend ID
                     type: string
                   backendIdRef:
@@ -245,7 +245,7 @@ spec:
                     type: object
                   certificateIds:
                     description: |-
-                      List of Certificate IDs that should be used by the frontend.
+                      List of certificate IDs that should be used by the frontend.
                       Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
@@ -258,17 +258,17 @@ spec:
                   externalAcls:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use lb_acl.
-                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
                       This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   inboundPort:
                     description: |-
-                      TCP port to listen on the front side.
+                      TCP port to listen to on the front side.
                       TCP port to listen on the front side
                     type: number
                   lbId:
                     description: |-
-                      The load-balancer ID this frontend is attached to.
+                      The ID of the Load Balancer this frontend is attached to.
                       The load-balancer ID
                     type: string
                   lbIdRef:
@@ -347,12 +347,12 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the load-balancer frontend.
+                      The name of the Load Balancer frontend.
                       The name of the frontend
                     type: string
                   timeoutClient:
                     description: |-
-                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Maximum inactivity time on the client side. (e.g. 1s)
                       Set the maximum inactivity time on the client side
                     type: string
                 type: object
@@ -371,7 +371,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
                       ACL rules
                     items:
                       properties:
@@ -394,7 +394,7 @@ spec:
                                       type: number
                                     target:
                                       description: |-
-                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
                                         An URL can be used in case of a location redirect
                                       type: string
                                     type:
@@ -435,7 +435,7 @@ spec:
                               httpFilterValue:
                                 description: |-
                                   A list of possible values to match for the given HTTP filter.
-                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
                                   A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
@@ -447,7 +447,7 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
@@ -463,7 +463,7 @@ spec:
                     type: array
                   backendId:
                     description: |-
-                      The load-balancer backend ID this frontend is attached to.
+                      The ID of the Load Balancer backend this frontend is attached to.
                       The load-balancer backend ID
                     type: string
                   backendIdRef:
@@ -542,7 +542,7 @@ spec:
                     type: object
                   certificateIds:
                     description: |-
-                      List of Certificate IDs that should be used by the frontend.
+                      List of certificate IDs that should be used by the frontend.
                       Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
@@ -555,17 +555,17 @@ spec:
                   externalAcls:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use lb_acl.
-                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
                       This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   inboundPort:
                     description: |-
-                      TCP port to listen on the front side.
+                      TCP port to listen to on the front side.
                       TCP port to listen on the front side
                     type: number
                   lbId:
                     description: |-
-                      The load-balancer ID this frontend is attached to.
+                      The ID of the Load Balancer this frontend is attached to.
                       The load-balancer ID
                     type: string
                   lbIdRef:
@@ -644,12 +644,12 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the load-balancer frontend.
+                      The name of the Load Balancer frontend.
                       The name of the frontend
                     type: string
                   timeoutClient:
                     description: |-
-                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Maximum inactivity time on the client side. (e.g. 1s)
                       Set the maximum inactivity time on the client side
                     type: string
                 type: object
@@ -832,7 +832,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the load-balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
                       ACL rules
                     items:
                       properties:
@@ -855,7 +855,7 @@ spec:
                                       type: number
                                     target:
                                       description: |-
-                                        An URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
                                         An URL can be used in case of a location redirect
                                       type: string
                                     type:
@@ -900,7 +900,7 @@ spec:
                               httpFilterValue:
                                 description: |-
                                   A list of possible values to match for the given HTTP filter.
-                                  Keep in mind that in the case of http_header_match the HTTP header field name is case-insensitive.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
                                   A list of possible values to match for the given HTTP filter
                                 items:
                                   type: string
@@ -912,7 +912,7 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
@@ -931,17 +931,17 @@ spec:
                     type: array
                   backendId:
                     description: |-
-                      The load-balancer backend ID this frontend is attached to.
+                      The ID of the Load Balancer backend this frontend is attached to.
                       The load-balancer backend ID
                     type: string
                   certificateId:
                     description: |-
-                      (Deprecated) first certificate ID used by the frontend.
+                      (Deprecated, use certificate_ids instead) First certificate ID used by the frontend.
                       Certificate ID
                     type: string
                   certificateIds:
                     description: |-
-                      List of Certificate IDs that should be used by the frontend.
+                      List of certificate IDs that should be used by the frontend.
                       Collection of Certificate IDs related to the load balancer and domain
                     items:
                       type: string
@@ -954,30 +954,30 @@ spec:
                   externalAcls:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use lb_acl.
-                      If external_acls is set to true, acl can not be set directly in the lb frontend.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
                       This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
                     type: boolean
                   id:
-                    description: The ID of the load-balancer frontend.
+                    description: The ID of the Load Balancer frontend.
                     type: string
                   inboundPort:
                     description: |-
-                      TCP port to listen on the front side.
+                      TCP port to listen to on the front side.
                       TCP port to listen on the front side
                     type: number
                   lbId:
                     description: |-
-                      The load-balancer ID this frontend is attached to.
+                      The ID of the Load Balancer this frontend is attached to.
                       The load-balancer ID
                     type: string
                   name:
                     description: |-
-                      The name of the load-balancer frontend.
+                      The name of the Load Balancer frontend.
                       The name of the frontend
                     type: string
                   timeoutClient:
                     description: |-
-                      Maximum inactivity time on the client side. (e.g.: 1s)
+                      Maximum inactivity time on the client side. (e.g. 1s)
                       Set the maximum inactivity time on the client side
                     type: string
                 type: object

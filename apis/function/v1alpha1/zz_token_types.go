@@ -21,7 +21,7 @@ type TokenInitParameters struct {
 	// The expiration date of the token.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the function.
+	// The unique identifier of the function.
 	// +crossplane:generate:reference:type=Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -33,7 +33,7 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The ID of the function namespace.
+	// The unique identifier of the Functions namespace.
 	// +crossplane:generate:reference:type=FunctionNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -45,7 +45,7 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -58,16 +58,16 @@ type TokenObservation struct {
 	// The expiration date of the token.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the function.
+	// The unique identifier of the function.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// The ID of the token.
+	// The unique identifier of the token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the function namespace.
+	// The unique identifier of the Functions namespace.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -82,7 +82,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the function.
+	// The unique identifier of the function.
 	// +crossplane:generate:reference:type=Function
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -95,7 +95,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The ID of the function namespace.
+	// The unique identifier of the Functions namespace.
 	// +crossplane:generate:reference:type=FunctionNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -108,7 +108,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

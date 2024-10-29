@@ -79,7 +79,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -158,58 +158,58 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit token.
+                      (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
                       The region you want to attach the resource to
                     type: string
                   scopes:
                     description: |-
-                      Allowed scopes.
+                      Scopes allowed, each with default values:
                       Endpoints
                     items:
                       properties:
                         queryLogs:
                           description: |-
-                            (Defaults to false) Query logs.
+                            (Defaults to false) Permission to query logs.
                             Query logs
                           type: boolean
                         queryMetrics:
                           description: |-
-                            (Defaults to false) Query metrics.
+                            (Defaults to false) Permission to query metrics.
                             Query metrics
                           type: boolean
                         queryTraces:
                           description: |-
-                            (Defaults to false) Query traces.
+                            (Defaults to false) Permission to query traces.
                             Query traces
                           type: boolean
                         setupAlerts:
                           description: |-
-                            (Defaults to false) Setup alerts.
+                            (Defaults to false) Permission to set up alerts.
                             Setup alerts
                           type: boolean
                         setupLogsRules:
                           description: |-
-                            (Defaults to false) Setup logs rules.
+                            (Defaults to false) Permission to set up logs rules.
                             Setup logs rules
                           type: boolean
                         setupMetricsRules:
                           description: |-
-                            (Defaults to false) Setup metrics rules.
+                            (Defaults to false) Permission to set up metrics rules.
                             Setup metrics rules
                           type: boolean
                         writeLogs:
                           description: |-
-                            (Defaults to true) Write logs.
+                            (Defaults to true) Permission to write logs.
                             Write logs
                           type: boolean
                         writeMetrics:
                           description: |-
-                            (Defaults to true) Write metrics.
+                            (Defaults to true) Permission to write metrics.
                             Write metrics
                           type: boolean
                         writeTraces:
                           description: |-
-                            (Defaults to false) Write traces.
+                            (Defaults to false) Permission to write traces.
                             Write traces
                           type: boolean
                       type: object
@@ -235,7 +235,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -314,58 +314,58 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit token.
+                      (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
                       The region you want to attach the resource to
                     type: string
                   scopes:
                     description: |-
-                      Allowed scopes.
+                      Scopes allowed, each with default values:
                       Endpoints
                     items:
                       properties:
                         queryLogs:
                           description: |-
-                            (Defaults to false) Query logs.
+                            (Defaults to false) Permission to query logs.
                             Query logs
                           type: boolean
                         queryMetrics:
                           description: |-
-                            (Defaults to false) Query metrics.
+                            (Defaults to false) Permission to query metrics.
                             Query metrics
                           type: boolean
                         queryTraces:
                           description: |-
-                            (Defaults to false) Query traces.
+                            (Defaults to false) Permission to query traces.
                             Query traces
                           type: boolean
                         setupAlerts:
                           description: |-
-                            (Defaults to false) Setup alerts.
+                            (Defaults to false) Permission to set up alerts.
                             Setup alerts
                           type: boolean
                         setupLogsRules:
                           description: |-
-                            (Defaults to false) Setup logs rules.
+                            (Defaults to false) Permission to set up logs rules.
                             Setup logs rules
                           type: boolean
                         setupMetricsRules:
                           description: |-
-                            (Defaults to false) Setup metrics rules.
+                            (Defaults to false) Permission to set up metrics rules.
                             Setup metrics rules
                           type: boolean
                         writeLogs:
                           description: |-
-                            (Defaults to true) Write logs.
+                            (Defaults to true) Permission to write logs.
                             Write logs
                           type: boolean
                         writeMetrics:
                           description: |-
-                            (Defaults to true) Write metrics.
+                            (Defaults to true) Permission to write metrics.
                             Write metrics
                           type: boolean
                         writeTraces:
                           description: |-
-                            (Defaults to false) Write traces.
+                            (Defaults to false) Permission to write traces.
                             Write traces
                           type: boolean
                       type: object
@@ -553,7 +553,7 @@ spec:
                       Token (Format ISO 8601)
                     type: string
                   id:
-                    description: The ID of the cockpit token.
+                    description: The ID of the Cockpit token.
                     type: string
                   name:
                     description: |-
@@ -562,63 +562,63 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the cockpit token.
+                      (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
                       The region you want to attach the resource to
                     type: string
                   scopes:
                     description: |-
-                      Allowed scopes.
+                      Scopes allowed, each with default values:
                       Endpoints
                     items:
                       properties:
                         queryLogs:
                           description: |-
-                            (Defaults to false) Query logs.
+                            (Defaults to false) Permission to query logs.
                             Query logs
                           type: boolean
                         queryMetrics:
                           description: |-
-                            (Defaults to false) Query metrics.
+                            (Defaults to false) Permission to query metrics.
                             Query metrics
                           type: boolean
                         queryTraces:
                           description: |-
-                            (Defaults to false) Query traces.
+                            (Defaults to false) Permission to query traces.
                             Query traces
                           type: boolean
                         setupAlerts:
                           description: |-
-                            (Defaults to false) Setup alerts.
+                            (Defaults to false) Permission to set up alerts.
                             Setup alerts
                           type: boolean
                         setupLogsRules:
                           description: |-
-                            (Defaults to false) Setup logs rules.
+                            (Defaults to false) Permission to set up logs rules.
                             Setup logs rules
                           type: boolean
                         setupMetricsRules:
                           description: |-
-                            (Defaults to false) Setup metrics rules.
+                            (Defaults to false) Permission to set up metrics rules.
                             Setup metrics rules
                           type: boolean
                         writeLogs:
                           description: |-
-                            (Defaults to true) Write logs.
+                            (Defaults to true) Permission to write logs.
                             Write logs
                           type: boolean
                         writeMetrics:
                           description: |-
-                            (Defaults to true) Write metrics.
+                            (Defaults to true) Permission to write metrics.
                             Write metrics
                           type: boolean
                         writeTraces:
                           description: |-
-                            (Defaults to false) Write traces.
+                            (Defaults to false) Permission to write traces.
                             Write traces
                           type: boolean
                       type: object

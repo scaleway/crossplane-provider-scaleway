@@ -36,7 +36,7 @@ type PolicyObservation struct {
 	// The bucket's name or regional ID.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The ID of the policy, which is the ID of the bucket.
+	// The unique identifier of the policy, which is the ID of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The policy document. This is a JSON formatted string.

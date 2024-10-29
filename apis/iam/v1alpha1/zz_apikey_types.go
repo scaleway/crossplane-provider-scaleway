@@ -15,8 +15,7 @@ import (
 
 type ApiKeyInitParameters struct {
 
-	// :  ID of the application attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// :  ID of the application attached to the API key.
 	// ID of the application attached to the api key
 	// +crossplane:generate:reference:type=Application
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
@@ -29,37 +28,36 @@ type ApiKeyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The default project ID to use with object storage.
+	// The default Project ID to use with Object Storage.
 	// The project_id you want to attach the resource to
 	DefaultProjectID *string `json:"defaultProjectId,omitempty" tf:"default_project_id,omitempty"`
 
-	// :  The description of the iam api key.
+	// :  The description of the API key.
 	// The description of the iam api key
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The date and time of the expiration of the iam api key. Please note that in case of change,
+	// The date and time of the expiration of the IAM API key. Please note that in case of any changes,
 	// the resource will be recreated.
 	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// ID of the user attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// ID of the user attached to the API key.
+	// -> Note You must specify at least one: application_id and/or user_id.
 	// ID of the user attached to the api key
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type ApiKeyObservation struct {
 
-	// The access key of the iam api key.
+	// The access key of the IAM API key.
 	// The access key of the iam api key
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
 
-	// :  ID of the application attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// :  ID of the application attached to the API key.
 	// ID of the application attached to the api key
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// The date and time of the creation of the iam api key.
+	// The date and time of the creation of the IAM API key.
 	// The date and time of the creation of the iam api key
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -67,19 +65,19 @@ type ApiKeyObservation struct {
 	// The IPv4 Address of the device which created the API key
 	CreationIP *string `json:"creationIp,omitempty" tf:"creation_ip,omitempty"`
 
-	// The default project ID to use with object storage.
+	// The default Project ID to use with Object Storage.
 	// The project_id you want to attach the resource to
 	DefaultProjectID *string `json:"defaultProjectId,omitempty" tf:"default_project_id,omitempty"`
 
-	// :  The description of the iam api key.
+	// :  The description of the API key.
 	// The description of the iam api key
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether the iam api key is editable.
+	// Whether the IAM API key is editable.
 	// Whether or not the iam api key is editable
 	Editable *bool `json:"editable,omitempty" tf:"editable,omitempty"`
 
-	// The date and time of the expiration of the iam api key. Please note that in case of change,
+	// The date and time of the expiration of the IAM API key. Please note that in case of any changes,
 	// the resource will be recreated.
 	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
@@ -87,20 +85,19 @@ type ApiKeyObservation struct {
 	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The date and time of the last update of the iam api key.
+	// The date and time of the last update of the IAM API key.
 	// The date and time of the last update of the iam api key
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// ID of the user attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// ID of the user attached to the API key.
+	// -> Note You must specify at least one: application_id and/or user_id.
 	// ID of the user attached to the api key
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type ApiKeyParameters struct {
 
-	// :  ID of the application attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// :  ID of the application attached to the API key.
 	// ID of the application attached to the api key
 	// +crossplane:generate:reference:type=Application
 	// +kubebuilder:validation:Optional
@@ -114,24 +111,24 @@ type ApiKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The default project ID to use with object storage.
+	// The default Project ID to use with Object Storage.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	DefaultProjectID *string `json:"defaultProjectId,omitempty" tf:"default_project_id,omitempty"`
 
-	// :  The description of the iam api key.
+	// :  The description of the API key.
 	// The description of the iam api key
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The date and time of the expiration of the iam api key. Please note that in case of change,
+	// The date and time of the expiration of the IAM API key. Please note that in case of any changes,
 	// the resource will be recreated.
 	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// ID of the user attached to the api key.
-	// Only one of the application_id and user_id should be specified.
+	// ID of the user attached to the API key.
+	// -> Note You must specify at least one: application_id and/or user_id.
 	// ID of the user attached to the api key
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`

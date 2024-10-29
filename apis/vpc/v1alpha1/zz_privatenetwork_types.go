@@ -26,11 +26,11 @@ type IPv4SubnetObservation struct {
 	// The network address of the subnet in dotted decimal notation, e.g., '192.168.0.0' for a '192.168.0.0/24' subnet
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The date and time of the creation of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the creation of the subnet
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	// The subnet ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -46,7 +46,7 @@ type IPv4SubnetObservation struct {
 	// The subnet mask expressed in dotted decimal notation, e.g., '255.255.255.0' for a /24 subnet
 	SubnetMask *string `json:"subnetMask,omitempty" tf:"subnet_mask,omitempty"`
 
-	// The date and time of the last update of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the last update of the subnet
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -72,11 +72,11 @@ type IPv6SubnetsObservation struct {
 	// The network address of the subnet in dotted decimal notation, e.g., '192.168.0.0' for a '192.168.0.0/24' subnet
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The date and time of the creation of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the creation of the subnet
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	// The subnet ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -92,7 +92,7 @@ type IPv6SubnetsObservation struct {
 	// The subnet mask expressed in dotted decimal notation, e.g., '255.255.255.0' for a /24 subnet
 	SubnetMask *string `json:"subnetMask,omitempty" tf:"subnet_mask,omitempty"`
 
-	// The date and time of the last update of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the last update of the subnet
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -107,7 +107,7 @@ type IPv6SubnetsParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
-	// The IPv4 subnet to associate with the private network.
+	// The IPv4 subnet to associate with the Private Network.
 	// The IPv4 subnet associated with the private network
 	IPv4Subnet []IPv4SubnetInitParameters `json:"ipv4Subnet,omitempty" tf:"ipv4_subnet,omitempty"`
 
@@ -115,27 +115,27 @@ type PrivateNetworkInitParameters struct {
 	// The IPv6 subnet associated with the private network
 	IPv6Subnets []IPv6SubnetsInitParameters `json:"ipv6Subnets,omitempty" tf:"ipv6_subnets,omitempty"`
 
-	// (Deprecated) The private networks are necessarily regional now.
+	// (Deprecated) Private Networks are now all necessarily regional.
 	// Defines whether the private network is Regional. By default, it will be Zonal
 	IsRegional *bool `json:"isRegional,omitempty" tf:"is_regional,omitempty"`
 
-	// The name of the private network. If not provided it will be randomly generated.
+	// The name of the Private Network. If not provided, it will be randomly generated.
 	// The name of the private network
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the private network is associated with.
+	// (Defaults to provider project_id) The ID of the Project the private network is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the private network.
+	// (Defaults to provider region) The region of the Private Network.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the private network.
+	// The tags associated with the Private Network.
 	// The tags associated with private network
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The VPC in which to create the private network.
+	// The VPC in which to create the Private Network.
 	// The VPC in which to create the private network
 	// +crossplane:generate:reference:type=VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -148,21 +148,21 @@ type PrivateNetworkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
-	// (Deprecated) please use region instead - (Defaults to provider zone) The zone in which the private network should be created.
+	// (Deprecated) Use region instead.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PrivateNetworkObservation struct {
 
-	// The date and time of the creation of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the private network.
+	// The ID of the Private Network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IPv4 subnet to associate with the private network.
+	// The IPv4 subnet to associate with the Private Network.
 	// The IPv4 subnet associated with the private network
 	IPv4Subnet []IPv4SubnetObservation `json:"ipv4Subnet,omitempty" tf:"ipv4_subnet,omitempty"`
 
@@ -170,46 +170,46 @@ type PrivateNetworkObservation struct {
 	// The IPv6 subnet associated with the private network
 	IPv6Subnets []IPv6SubnetsObservation `json:"ipv6Subnets,omitempty" tf:"ipv6_subnets,omitempty"`
 
-	// (Deprecated) The private networks are necessarily regional now.
+	// (Deprecated) Private Networks are now all necessarily regional.
 	// Defines whether the private network is Regional. By default, it will be Zonal
 	IsRegional *bool `json:"isRegional,omitempty" tf:"is_regional,omitempty"`
 
-	// The name of the private network. If not provided it will be randomly generated.
+	// The name of the Private Network. If not provided, it will be randomly generated.
 	// The name of the private network
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the private network is associated with.
+	// The Organization ID the Private Network is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the private network is associated with.
+	// (Defaults to provider project_id) The ID of the Project the private network is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the private network.
+	// (Defaults to provider region) The region of the Private Network.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the private network.
+	// The tags associated with the Private Network.
 	// The tags associated with private network
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The date and time of the last update of the subnet.
+	// The date and time of the creation of the Private Network (RFC 3339 format).
 	// The date and time of the last update of the private network
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// The VPC in which to create the private network.
+	// The VPC in which to create the Private Network.
 	// The VPC in which to create the private network
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
-	// (Deprecated) please use region instead - (Defaults to provider zone) The zone in which the private network should be created.
+	// (Deprecated) Use region instead.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
 
-	// The IPv4 subnet to associate with the private network.
+	// The IPv4 subnet to associate with the Private Network.
 	// The IPv4 subnet associated with the private network
 	// +kubebuilder:validation:Optional
 	IPv4Subnet []IPv4SubnetParameters `json:"ipv4Subnet,omitempty" tf:"ipv4_subnet,omitempty"`
@@ -219,32 +219,32 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6Subnets []IPv6SubnetsParameters `json:"ipv6Subnets,omitempty" tf:"ipv6_subnets,omitempty"`
 
-	// (Deprecated) The private networks are necessarily regional now.
+	// (Deprecated) Private Networks are now all necessarily regional.
 	// Defines whether the private network is Regional. By default, it will be Zonal
 	// +kubebuilder:validation:Optional
 	IsRegional *bool `json:"isRegional,omitempty" tf:"is_regional,omitempty"`
 
-	// The name of the private network. If not provided it will be randomly generated.
+	// The name of the Private Network. If not provided, it will be randomly generated.
 	// The name of the private network
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the private network is associated with.
+	// (Defaults to provider project_id) The ID of the Project the private network is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the private network.
+	// (Defaults to provider region) The region of the Private Network.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the private network.
+	// The tags associated with the Private Network.
 	// The tags associated with private network
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The VPC in which to create the private network.
+	// The VPC in which to create the Private Network.
 	// The VPC in which to create the private network
 	// +crossplane:generate:reference:type=VPC
 	// +kubebuilder:validation:Optional
@@ -258,7 +258,7 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
-	// (Deprecated) please use region instead - (Defaults to provider zone) The zone in which the private network should be created.
+	// (Deprecated) Use region instead.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

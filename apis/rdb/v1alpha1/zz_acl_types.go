@@ -19,7 +19,7 @@ type ACLInitParameters struct {
 	// List of ACL rules to apply
 	ACLRules []ACLRulesInitParameters `json:"aclRules,omitempty" tf:"acl_rules,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the ACL is applied
 	// +crossplane:generate:reference:type=Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -45,7 +45,7 @@ type ACLObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the ACL is applied
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -61,7 +61,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	ACLRules []ACLRulesParameters `json:"aclRules,omitempty" tf:"acl_rules,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the ACL is applied
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -87,7 +87,7 @@ type ACLRulesInitParameters struct {
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ip range to whitelist in CIDR notation
+	// The IP range to whitelist in CIDR notation
 	// Target IP of the rules
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
@@ -98,7 +98,7 @@ type ACLRulesObservation struct {
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ip range to whitelist in CIDR notation
+	// The IP range to whitelist in CIDR notation
 	// Target IP of the rules
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
@@ -110,7 +110,7 @@ type ACLRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ip range to whitelist in CIDR notation
+	// The IP range to whitelist in CIDR notation
 	// Target IP of the rules
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip" tf:"ip,omitempty"`

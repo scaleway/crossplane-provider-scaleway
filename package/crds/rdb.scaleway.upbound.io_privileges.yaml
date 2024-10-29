@@ -79,7 +79,7 @@ spec:
                     type: string
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the database is created
                     type: string
                   instanceIdRef:
@@ -192,7 +192,7 @@ spec:
                     type: string
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the database is created
                     type: string
                   instanceIdRef:
@@ -481,7 +481,7 @@ spec:
                     type: string
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the database is created
                     type: string
                   permission:

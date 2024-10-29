@@ -15,11 +15,11 @@ import (
 
 type CockpitInitParameters struct {
 
-	// Name or ID of the plan to use.
+	// Name of the plan to use. Available plans are: free, premium, and custom.
 	// Name or ID of the plan
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -35,21 +35,21 @@ type CockpitInitParameters struct {
 
 type CockpitObservation struct {
 
-	// Endpoints.
+	// (Deprecated) A list of endpoints related to Cockpit, each with specific URLs:
 	// Endpoints
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name or ID of the plan to use.
+	// Name of the plan to use. Available plans are: free, premium, and custom.
 	// Name or ID of the plan
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
-	// The ID of the current plan.
+	// (Deprecated) The ID of the current pricing plan.
 	// The plan ID of the cockpit
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -59,12 +59,12 @@ type CockpitObservation struct {
 
 type CockpitParameters struct {
 
-	// Name or ID of the plan to use.
+	// Name of the plan to use. Available plans are: free, premium, and custom.
 	// Name or ID of the plan
 	// +kubebuilder:validation:Optional
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
@@ -84,19 +84,19 @@ type EndpointsInitParameters struct {
 
 type EndpointsObservation struct {
 
-	// The alertmanager URL.
+	// (Deprecated) URL for the Alert manager.
 	AlertmanagerURL *string `json:"alertmanagerUrl,omitempty" tf:"alertmanager_url,omitempty"`
 
-	// The grafana URL.
+	// (Deprecated) URL for Grafana.
 	GrafanaURL *string `json:"grafanaUrl,omitempty" tf:"grafana_url,omitempty"`
 
-	// The logs URL.
+	// (Deprecated) URL for logs to retrieve in the Data sources tab of the Scaleway console.
 	LogsURL *string `json:"logsUrl,omitempty" tf:"logs_url,omitempty"`
 
-	// The metrics URL.
+	// (Deprecated) URL for metrics to retrieve in the Data sources tab of the Scaleway console.
 	MetricsURL *string `json:"metricsUrl,omitempty" tf:"metrics_url,omitempty"`
 
-	// The traces URL.
+	// (Deprecated) URL for traces to retrieve in the Data sources tab of the Scaleway console.
 	TracesURL *string `json:"tracesUrl,omitempty" tf:"traces_url,omitempty"`
 }
 
@@ -108,10 +108,10 @@ type PushURLInitParameters struct {
 
 type PushURLObservation struct {
 
-	// The logs URL.
+	// (Deprecated) URL for logs to retrieve in the Data sources tab of the Scaleway console.
 	PushLogsURL *string `json:"pushLogsUrl,omitempty" tf:"push_logs_url,omitempty"`
 
-	// The metrics URL.
+	// (Deprecated) URL for metrics to retrieve in the Data sources tab of the Scaleway console.
 	PushMetricsURL *string `json:"pushMetricsUrl,omitempty" tf:"push_metrics_url,omitempty"`
 }
 

@@ -74,7 +74,7 @@ spec:
                 properties:
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the user is created
                     type: string
                   instanceIdRef:
@@ -153,17 +153,17 @@ spec:
                     type: object
                   isAdmin:
                     description: |-
-                      Grant admin permissions to the Database User.
+                      Grant admin permissions to the database user.
                       Grant admin permissions to database user
                     type: boolean
                   name:
                     description: |-
-                      Database User name.
+                      database user name.
                       Database user name
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Database User password.
+                      database user password.
                       Database user password
                     properties:
                       key:
@@ -201,7 +201,7 @@ spec:
                 properties:
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the user is created
                     type: string
                   instanceIdRef:
@@ -280,17 +280,17 @@ spec:
                     type: object
                   isAdmin:
                     description: |-
-                      Grant admin permissions to the Database User.
+                      Grant admin permissions to the database user.
                       Grant admin permissions to database user
                     type: boolean
                   name:
                     description: |-
-                      Database User name.
+                      database user name.
                       Database user name
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Database User password.
+                      database user password.
                       Database user password
                     properties:
                       key:
@@ -501,17 +501,17 @@ spec:
                     type: string
                   instanceId:
                     description: |-
-                      UUID of the rdb instance.
+                      UUID of the Database Instance.
                       Instance on which the user is created
                     type: string
                   isAdmin:
                     description: |-
-                      Grant admin permissions to the Database User.
+                      Grant admin permissions to the database user.
                       Grant admin permissions to database user
                     type: boolean
                   name:
                     description: |-
-                      Database User name.
+                      database user name.
                       Database user name
                     type: string
                   region:

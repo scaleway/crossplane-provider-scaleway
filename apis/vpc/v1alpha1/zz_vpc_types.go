@@ -19,11 +19,11 @@ type VPCInitParameters struct {
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
-	// The name of the VPC. If not provided it will be randomly generated.
+	// The name for the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the VPC is associated with.
+	// (Defaults to provider project_id) The ID of the Project the VPC is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -31,7 +31,7 @@ type VPCInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the VPC.
+	// The tags to associate with the VPC.
 	// The tags associated with the VPC
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,15 +53,15 @@ type VPCObservation struct {
 	// Defines whether the VPC is the default one for its Project
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// The name of the VPC. If not provided it will be randomly generated.
+	// The name for the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the VPC is associated with.
+	// The Organization ID the VPC is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the VPC is associated with.
+	// (Defaults to provider project_id) The ID of the Project the VPC is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -69,7 +69,7 @@ type VPCObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the VPC.
+	// The tags to associate with the VPC.
 	// The tags associated with the VPC
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -85,12 +85,12 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
-	// The name of the VPC. If not provided it will be randomly generated.
+	// The name for the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the VPC is associated with.
+	// (Defaults to provider project_id) The ID of the Project the VPC is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -100,7 +100,7 @@ type VPCParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The tags associated with the VPC.
+	// The tags to associate with the VPC.
 	// The tags associated with the VPC
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

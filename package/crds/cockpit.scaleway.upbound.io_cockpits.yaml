@@ -74,12 +74,12 @@ spec:
                 properties:
                   plan:
                     description: |-
-                      Name or ID of the plan to use.
+                      Name of the plan to use. Available plans are: free, premium, and custom.
                       Name or ID of the plan
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -172,12 +172,12 @@ spec:
                 properties:
                   plan:
                     description: |-
-                      Name or ID of the plan to use.
+                      Name of the plan to use. Available plans are: free, premium, and custom.
                       Name or ID of the plan
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -429,24 +429,27 @@ spec:
                 properties:
                   endpoints:
                     description: |-
-                      Endpoints.
+                      (Deprecated) A list of endpoints related to Cockpit, each with specific URLs:
                       Endpoints
                     items:
                       properties:
                         alertmanagerUrl:
-                          description: The alertmanager URL.
+                          description: (Deprecated) URL for the Alert manager.
                           type: string
                         grafanaUrl:
-                          description: The grafana URL.
+                          description: (Deprecated) URL for Grafana.
                           type: string
                         logsUrl:
-                          description: The logs URL.
+                          description: (Deprecated) URL for logs to retrieve in the
+                            Data sources tab of the Scaleway console.
                           type: string
                         metricsUrl:
-                          description: The metrics URL.
+                          description: (Deprecated) URL for metrics to retrieve in
+                            the Data sources tab of the Scaleway console.
                           type: string
                         tracesUrl:
-                          description: The traces URL.
+                          description: (Deprecated) URL for traces to retrieve in
+                            the Data sources tab of the Scaleway console.
                           type: string
                       type: object
                     type: array
@@ -454,17 +457,17 @@ spec:
                     type: string
                   plan:
                     description: |-
-                      Name or ID of the plan to use.
+                      Name of the plan to use. Available plans are: free, premium, and custom.
                       Name or ID of the plan
                     type: string
                   planId:
                     description: |-
-                      The ID of the current plan.
+                      (Deprecated) The ID of the current pricing plan.
                       The plan ID of the cockpit
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   pushUrl:
@@ -472,10 +475,12 @@ spec:
                     items:
                       properties:
                         pushLogsUrl:
-                          description: The logs URL.
+                          description: (Deprecated) URL for logs to retrieve in the
+                            Data sources tab of the Scaleway console.
                           type: string
                         pushMetricsUrl:
-                          description: The metrics URL.
+                          description: (Deprecated) URL for metrics to retrieve in
+                            the Data sources tab of the Scaleway console.
                           type: string
                       type: object
                     type: array

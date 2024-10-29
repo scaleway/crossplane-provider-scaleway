@@ -22,10 +22,10 @@ type NodesObservation struct {
 	// ~> Important: Updates to this field will recreate a new resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The public IPv4.
+	// The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
-	// The public IPv6.
+	// The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)
 	PublicIPV6 *string `json:"publicIpV6,omitempty" tf:"public_ip_v6,omitempty"`
 
 	// The status of the pool.

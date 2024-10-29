@@ -467,8 +467,7 @@ spec:
                       The reverse domain name
                     type: string
                   id:
-                    description: The ID of the IPAM IP for which the DNS reverse is
-                      configured.
+                    description: The ID of the IPAM IP for which reverse DNS is configured.
                     type: string
                   ipamIpId:
                     description: |-

@@ -8,7 +8,47 @@ metadata:
   name: main
 spec:
   forProvider:
-    databaseName: ${data.scaleway_rdb_database.main.name}
+    databaseName: my-new-database
     instanceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: scaleway_rdb_instance
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/databasebackup
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: database
+
+---
+
+apiVersion: rdb.scaleway.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/databasebackup
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    disableBackup: true
+    engine: PostgreSQL-15
+    isHaCluster: true
+    name: test-rdb
+    nodeType: DB-DEV-S
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    userName: my_initial_user

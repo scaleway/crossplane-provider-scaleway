@@ -15,7 +15,7 @@ import (
 
 type PublicGatewayIPInitParameters struct {
 
-	// (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+	// (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -23,11 +23,11 @@ type PublicGatewayIPInitParameters struct {
 	// reverse domain name for the IP address
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
-	// The tags associated with the public gateway IP.
+	// The tags associated with the Public Gateway IP.
 	// The tags associated with public gateway IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway ip should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -38,18 +38,18 @@ type PublicGatewayIPObservation struct {
 	// the IP itself
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The date and time of the creation of the public gateway ip.
+	// The date and time of the creation of the Public Gateway IP.
 	// The date and time of the creation of the public gateway IP
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the public gateway IP.
+	// The ID of the Public Gateway IP.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The organization ID the public gateway ip is associated with.
+	// The Organization ID the Public Gateway IP is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+	// (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -57,22 +57,22 @@ type PublicGatewayIPObservation struct {
 	// reverse domain name for the IP address
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
-	// The tags associated with the public gateway IP.
+	// The tags associated with the Public Gateway IP.
 	// The tags associated with public gateway IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The date and time of the last update of the public gateway ip.
+	// The date and time of the last update of the Public Gateway IP.
 	// The date and time of the last update of the public gateway IP
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway ip should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PublicGatewayIPParameters struct {
 
-	// (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+	// (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -82,12 +82,12 @@ type PublicGatewayIPParameters struct {
 	// +kubebuilder:validation:Optional
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
-	// The tags associated with the public gateway IP.
+	// The tags associated with the Public Gateway IP.
 	// The tags associated with public gateway IP
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway ip should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

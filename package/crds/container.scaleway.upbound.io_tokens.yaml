@@ -73,7 +73,7 @@ spec:
               forProvider:
                 properties:
                   containerId:
-                    description: The ID of the container.
+                    description: The unique identifier of the container.
                     type: string
                   containerIdRef:
                     description: Reference to a Container to populate containerId.
@@ -156,7 +156,7 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   namespaceId:
-                    description: The ID of the container namespace.
+                    description: The unique identifier of the Containers namespace.
                     type: string
                   namespaceIdRef:
                     description: Reference to a ContainerNamespace to populate namespaceId.
@@ -234,7 +234,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -252,7 +252,7 @@ spec:
                   autoscaler.
                 properties:
                   containerId:
-                    description: The ID of the container.
+                    description: The unique identifier of the container.
                     type: string
                   containerIdRef:
                     description: Reference to a Container to populate containerId.
@@ -335,7 +335,7 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   namespaceId:
-                    description: The ID of the container namespace.
+                    description: The unique identifier of the Containers namespace.
                     type: string
                   namespaceIdRef:
                     description: Reference to a ContainerNamespace to populate namespaceId.
@@ -413,7 +413,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -590,7 +590,7 @@ spec:
               atProvider:
                 properties:
                   containerId:
-                    description: The ID of the container.
+                    description: The unique identifier of the container.
                     type: string
                   description:
                     description: The description of the token.
@@ -599,14 +599,14 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   id:
-                    description: The ID of the token.
+                    description: The unique identifier of the token.
                     type: string
                   namespaceId:
-                    description: The ID of the container namespace.
+                    description: The unique identifier of the Containers namespace.
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object

@@ -30,11 +30,11 @@ type UserObservation struct {
 	// The ID of the account root user associated with the iam user.
 	AccountRootUserID *string `json:"accountRootUserId,omitempty" tf:"account_root_user_id,omitempty"`
 
-	// The date and time of the creation of the iam user.
+	// The date and time of the creation of the IAM user.
 	// The date and time of the creation of the iam user
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Whether the iam user is deletable.
+	// Whether the IAM user is deletable.
 	// Whether or not the iam user is editable
 	Deletable *bool `json:"deletable,omitempty" tf:"deletable,omitempty"`
 
@@ -57,15 +57,15 @@ type UserObservation struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The status of user invitation. Check the possible values in the api doc.
+	// The status of user invitation. Check the possible values in the API doc.
 	// The status of user invitation.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The type of user. Check the possible values in the api doc.
+	// The type of user. Check the possible values in the API doc.
 	// The type of the iam user
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The date and time of the last update of the iam user.
+	// The date and time of the last update of the IAM user.
 	// The date and time of the last update of the iam user
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }

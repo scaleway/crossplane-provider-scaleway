@@ -15,11 +15,11 @@ import (
 
 type SnapshotInitParameters struct {
 
-	// The name of the snapshot. If not provided it will be randomly generated.
+	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the snapshot is associated with.
+	// (Defaults to the Project ID specified in the provider configuration). The ID of the Scaleway Project the snapshot is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -40,7 +40,7 @@ type SnapshotInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which the snapshot should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the snapshot should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -50,11 +50,11 @@ type SnapshotObservation struct {
 	// The ID of the snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the snapshot. If not provided it will be randomly generated.
+	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the snapshot is associated with.
+	// (Defaults to the Project ID specified in the provider configuration). The ID of the Scaleway Project the snapshot is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -66,19 +66,19 @@ type SnapshotObservation struct {
 	// ID of the volume from which creates a snapshot
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the snapshot should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the snapshot should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type SnapshotParameters struct {
 
-	// The name of the snapshot. If not provided it will be randomly generated.
+	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the snapshot is associated with.
+	// (Defaults to the Project ID specified in the provider configuration). The ID of the Scaleway Project the snapshot is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -102,7 +102,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which the snapshot should be created.
+	// (Defaults to the zone specified in the provider configuration). The zone in which the snapshot should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

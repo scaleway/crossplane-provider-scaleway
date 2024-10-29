@@ -87,17 +87,17 @@ spec:
                     x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      The unique name of the function namespace.
+                      The unique name of the Functions namespace.
                       The name of the function namespace
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
                       The project_id you want to attach the resource to
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -144,17 +144,17 @@ spec:
                     x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      The unique name of the function namespace.
+                      The unique name of the Functions namespace.
                       The name of the function namespace
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
                       The project_id you want to attach the resource to
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -348,26 +348,26 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   id:
-                    description: The ID of the namespace
+                    description: The unique identifier of the namespace.
                     type: string
                   name:
                     description: |-
-                      The unique name of the function namespace.
+                      The unique name of the Functions namespace.
                       The name of the function namespace
                     type: string
                   organizationId:
                     description: |-
-                      The organization ID the namespace is associated with.
+                      The Organization ID with which the namespace is associated.
                       The organization_id you want to attach the resource to
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
                       The project_id you want to attach the resource to
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   registryEndpoint:

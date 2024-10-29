@@ -23,14 +23,14 @@ type ProjectInitParameters struct {
 	// The name of the project
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
+	// The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
 type ProjectObservation struct {
 
-	// The Project creation time.
+	// The creation time of the Project.
 	// The date and time of the creation of the Project (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -38,18 +38,18 @@ type ProjectObservation struct {
 	// Description of the project
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the project (UUID format).
+	// The unique identifier of the project (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the Project.
 	// The name of the project
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
+	// The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The Project last update time.
+	// The last update time of the Project.
 	// The date and time of the last update of the Project (Format ISO 8601)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -66,7 +66,7 @@ type ProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the Project is associated with. Please note that any change in organization_id will recreate the resource.
+	// The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.
 	// The organization_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`

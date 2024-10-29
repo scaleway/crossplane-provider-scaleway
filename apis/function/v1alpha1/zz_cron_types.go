@@ -16,11 +16,10 @@ import (
 type CronInitParameters struct {
 
 	// The key-value mapping to define arguments that will be passed to your function’s event object
-	// during
 	// Functions arguments as json object to pass through during execution.
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The function ID to link with your cron.
+	// The unique identifier of the function to link to your CRON trigger.
 	// The ID of the function to create a cron for.
 	// +crossplane:generate:reference:type=Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -33,17 +32,16 @@ type CronInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The name of the cron. If not provided, the name is generated.
+	// The name of the function CRON trigger. If not provided, a random name is generated.
 	// The name of the cron job.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the function was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
@@ -51,32 +49,30 @@ type CronInitParameters struct {
 type CronObservation struct {
 
 	// The key-value mapping to define arguments that will be passed to your function’s event object
-	// during
 	// Functions arguments as json object to pass through during execution.
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The function ID to link with your cron.
+	// The unique identifier of the function to link to your CRON trigger.
 	// The ID of the function to create a cron for.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// The function CRON's ID.
+	// The unique identifier of the function's CRON trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the cron. If not provided, the name is generated.
+	// The name of the function CRON trigger. If not provided, a random name is generated.
 	// The name of the cron job.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the function was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The cron status.
+	// The CRON status.
 	// Cron job status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -84,12 +80,11 @@ type CronObservation struct {
 type CronParameters struct {
 
 	// The key-value mapping to define arguments that will be passed to your function’s event object
-	// during
 	// Functions arguments as json object to pass through during execution.
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The function ID to link with your cron.
+	// The unique identifier of the function to link to your CRON trigger.
 	// The ID of the function to create a cron for.
 	// +crossplane:generate:reference:type=Function
 	// +kubebuilder:validation:Optional
@@ -103,19 +98,18 @@ type CronParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
-	// The name of the cron. If not provided, the name is generated.
+	// The name of the function CRON trigger. If not provided, a random name is generated.
 	// The name of the cron job.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in where the job was created.
+	// in which the function was created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-	// executed.
+	// CRON format string (refer to the CRON schedule reference for more information).
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`

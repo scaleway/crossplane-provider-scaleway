@@ -74,12 +74,12 @@ spec:
                 properties:
                   data:
                     description: |-
-                      The content of the record (an IPv4 for an A, a string for a TXT...).
+                      The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                       The data of the record
                     type: string
                   dnsZone:
                     description: |-
-                      The DNS Zone of the domain. If the DNS zone doesn't exist, it will be automatically created.
+                      The DNS zone of the domain. If the domain has no DNS zone, one will be automatically created.
                       The zone you want to add the record in
                     type: string
                   dnsZoneRef:
@@ -158,33 +158,33 @@ spec:
                     type: object
                   geoIp:
                     description: |-
-                      The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example
+                      The Geo IP provides DNS resolution based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         matches:
                           description: |-
-                            The list of matches. (Can be more than 1)
+                            The list of matches. (Can be more than one).
                             The list of matches
                           items:
                             properties:
                               continents:
                                 description: |-
-                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code
+                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia, etc.). Check the list of all continent codes.
                                   List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code: https://api.scaleway.com/domain-private/v2beta1/continents
                                 items:
                                   type: string
                                 type: array
                               countries:
                                 description: |-
-                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code
+                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain, etc.). Check the list of all country codes.
                                   List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries
                                 items:
                                   type: string
                                 type: array
                               data:
                                 description: |-
-                                  The content of the record (an IPv4 for an A, a string for a TXT...).
+                                  The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                                   The data of the match result
                                 type: string
                             type: object
@@ -193,42 +193,42 @@ spec:
                     type: array
                   httpService:
                     description: |-
-                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs by excluding the ones not responding to the given string to check. Documentation and usage example
+                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs, by excluding the ones not responding to the given string to check. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         ips:
                           description: |-
-                            List of IPs to check
+                            List of IPs to check.
                             IPs to check
                           items:
                             type: string
                           type: array
                         mustContain:
                           description: |-
-                            Text to search
+                            Text to search.
                             Text to search
                           type: string
                         strategy:
                           description: |-
-                            Strategy to return an IP from the IPs list. Can be random, hashed or all
+                            Strategy to return an IP from the IPs list. Can be random, hashed, or all.
                             Strategy to return an IP from the IPs list
                           type: string
                         url:
                           description: |-
-                            URL to match the must_contain text to validate an IP
+                            URL to match the must_contain text to validate an IP.
                             URL to match the must_contain text to validate an IP
                           type: string
                         userAgent:
                           description: |-
-                            User-agent used when checking the URL
+                            User-agent used when checking the URL.
                             User-agent used when checking the URL
                           type: string
                       type: object
                     type: array
                   keepEmptyZone:
                     description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Please note, each zone not deleted will cost you money
+                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
                       When destroy a resource record, if a zone have only NS, delete the zone
                     type: boolean
                   name:
@@ -238,7 +238,7 @@ spec:
                     type: string
                   priority:
                     description: |-
-                      The priority of the record (mostly used with an MX record)
+                      The priority of the record (mostly used with an MX record).
                       The priority of the record
                     type: number
                   projectId:
@@ -258,31 +258,31 @@ spec:
                     type: string
                   view:
                     description: |-
-                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Documentation and usage example
+                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Check the documentation for more information.
                       Return record based on client subnet
                     items:
                       properties:
                         data:
                           description: |-
-                            The content of the record (an IPv4 for an A, a string for a TXT...).
+                            The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                             The data of the view record
                           type: string
                         subnet:
                           description: |-
-                            The subnet of the view
+                            The subnet of the view.
                             The subnet of the view
                           type: string
                       type: object
                     type: array
                   weighted:
                     description: |-
-                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with its related IP compared to the others in the list. (Can be more than 1) Documentation and usage example
+                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with their related IP compared to the others in the list. (Can be more than 1) Check the documentation for more information.
                       Return record based on weight
                     items:
                       properties:
                         ip:
                           description: |-
-                            The weighted IP
+                            The weighted IP.
                             The weighted IP
                           type: string
                         weight:
@@ -308,12 +308,12 @@ spec:
                 properties:
                   data:
                     description: |-
-                      The content of the record (an IPv4 for an A, a string for a TXT...).
+                      The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                       The data of the record
                     type: string
                   dnsZone:
                     description: |-
-                      The DNS Zone of the domain. If the DNS zone doesn't exist, it will be automatically created.
+                      The DNS zone of the domain. If the domain has no DNS zone, one will be automatically created.
                       The zone you want to add the record in
                     type: string
                   dnsZoneRef:
@@ -392,33 +392,33 @@ spec:
                     type: object
                   geoIp:
                     description: |-
-                      The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example
+                      The Geo IP provides DNS resolution based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         matches:
                           description: |-
-                            The list of matches. (Can be more than 1)
+                            The list of matches. (Can be more than one).
                             The list of matches
                           items:
                             properties:
                               continents:
                                 description: |-
-                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code
+                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia, etc.). Check the list of all continent codes.
                                   List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code: https://api.scaleway.com/domain-private/v2beta1/continents
                                 items:
                                   type: string
                                 type: array
                               countries:
                                 description: |-
-                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code
+                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain, etc.). Check the list of all country codes.
                                   List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries
                                 items:
                                   type: string
                                 type: array
                               data:
                                 description: |-
-                                  The content of the record (an IPv4 for an A, a string for a TXT...).
+                                  The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                                   The data of the match result
                                 type: string
                             type: object
@@ -427,42 +427,42 @@ spec:
                     type: array
                   httpService:
                     description: |-
-                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs by excluding the ones not responding to the given string to check. Documentation and usage example
+                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs, by excluding the ones not responding to the given string to check. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         ips:
                           description: |-
-                            List of IPs to check
+                            List of IPs to check.
                             IPs to check
                           items:
                             type: string
                           type: array
                         mustContain:
                           description: |-
-                            Text to search
+                            Text to search.
                             Text to search
                           type: string
                         strategy:
                           description: |-
-                            Strategy to return an IP from the IPs list. Can be random, hashed or all
+                            Strategy to return an IP from the IPs list. Can be random, hashed, or all.
                             Strategy to return an IP from the IPs list
                           type: string
                         url:
                           description: |-
-                            URL to match the must_contain text to validate an IP
+                            URL to match the must_contain text to validate an IP.
                             URL to match the must_contain text to validate an IP
                           type: string
                         userAgent:
                           description: |-
-                            User-agent used when checking the URL
+                            User-agent used when checking the URL.
                             User-agent used when checking the URL
                           type: string
                       type: object
                     type: array
                   keepEmptyZone:
                     description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Please note, each zone not deleted will cost you money
+                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
                       When destroy a resource record, if a zone have only NS, delete the zone
                     type: boolean
                   name:
@@ -472,7 +472,7 @@ spec:
                     type: string
                   priority:
                     description: |-
-                      The priority of the record (mostly used with an MX record)
+                      The priority of the record (mostly used with an MX record).
                       The priority of the record
                     type: number
                   projectId:
@@ -492,31 +492,31 @@ spec:
                     type: string
                   view:
                     description: |-
-                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Documentation and usage example
+                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Check the documentation for more information.
                       Return record based on client subnet
                     items:
                       properties:
                         data:
                           description: |-
-                            The content of the record (an IPv4 for an A, a string for a TXT...).
+                            The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                             The data of the view record
                           type: string
                         subnet:
                           description: |-
-                            The subnet of the view
+                            The subnet of the view.
                             The subnet of the view
                           type: string
                       type: object
                     type: array
                   weighted:
                     description: |-
-                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with its related IP compared to the others in the list. (Can be more than 1) Documentation and usage example
+                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with their related IP compared to the others in the list. (Can be more than 1) Check the documentation for more information.
                       Return record based on weight
                     items:
                       properties:
                         ip:
                           description: |-
-                            The weighted IP
+                            The weighted IP.
                             The weighted IP
                           type: string
                         weight:
@@ -710,12 +710,12 @@ spec:
                 properties:
                   data:
                     description: |-
-                      The content of the record (an IPv4 for an A, a string for a TXT...).
+                      The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                       The data of the record
                     type: string
                   dnsZone:
                     description: |-
-                      The DNS Zone of the domain. If the DNS zone doesn't exist, it will be automatically created.
+                      The DNS zone of the domain. If the domain has no DNS zone, one will be automatically created.
                       The zone you want to add the record in
                     type: string
                   fqdn:
@@ -725,33 +725,33 @@ spec:
                     type: string
                   geoIp:
                     description: |-
-                      The Geo IP feature provides DNS resolution, based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Documentation and usage example
+                      The Geo IP provides DNS resolution based on the user’s geographical location. You can define a default IP that resolves if no Geo IP rule matches, and specify IPs for each geographical zone. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         matches:
                           description: |-
-                            The list of matches. (Can be more than 1)
+                            The list of matches. (Can be more than one).
                             The list of matches
                           items:
                             properties:
                               continents:
                                 description: |-
-                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code
+                                  List of continents (eg: EU for Europe, NA for North America, AS for Asia, etc.). Check the list of all continent codes.
                                   List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code: https://api.scaleway.com/domain-private/v2beta1/continents
                                 items:
                                   type: string
                                 type: array
                               countries:
                                 description: |-
-                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code
+                                  List of countries (eg: FR for France, US for the United States, GB for Great Britain, etc.). Check the list of all country codes.
                                   List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries
                                 items:
                                   type: string
                                 type: array
                               data:
                                 description: |-
-                                  The content of the record (an IPv4 for an A, a string for a TXT...).
+                                  The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                                   The data of the match result
                                 type: string
                             type: object
@@ -760,35 +760,35 @@ spec:
                     type: array
                   httpService:
                     description: |-
-                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs by excluding the ones not responding to the given string to check. Documentation and usage example
+                      The DNS service checks the provided URL on the configured IPs and resolves the request to one of the IPs, by excluding the ones not responding to the given string to check. Check the documentation for more information.
                       Return record based on client localisation
                     items:
                       properties:
                         ips:
                           description: |-
-                            List of IPs to check
+                            List of IPs to check.
                             IPs to check
                           items:
                             type: string
                           type: array
                         mustContain:
                           description: |-
-                            Text to search
+                            Text to search.
                             Text to search
                           type: string
                         strategy:
                           description: |-
-                            Strategy to return an IP from the IPs list. Can be random, hashed or all
+                            Strategy to return an IP from the IPs list. Can be random, hashed, or all.
                             Strategy to return an IP from the IPs list
                           type: string
                         url:
                           description: |-
-                            URL to match the must_contain text to validate an IP
+                            URL to match the must_contain text to validate an IP.
                             URL to match the must_contain text to validate an IP
                           type: string
                         userAgent:
                           description: |-
-                            User-agent used when checking the URL
+                            User-agent used when checking the URL.
                             User-agent used when checking the URL
                           type: string
                       type: object
@@ -798,7 +798,7 @@ spec:
                     type: string
                   keepEmptyZone:
                     description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Please note, each zone not deleted will cost you money
+                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
                       When destroy a resource record, if a zone have only NS, delete the zone
                     type: boolean
                   name:
@@ -808,7 +808,7 @@ spec:
                     type: string
                   priority:
                     description: |-
-                      The priority of the record (mostly used with an MX record)
+                      The priority of the record (mostly used with an MX record).
                       The priority of the record
                     type: number
                   projectId:
@@ -831,31 +831,31 @@ spec:
                     type: string
                   view:
                     description: |-
-                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Documentation and usage example
+                      The answer to a DNS request is based on the client’s (resolver) subnet. (Can be more than 1) Check the documentation for more information.
                       Return record based on client subnet
                     items:
                       properties:
                         data:
                           description: |-
-                            The content of the record (an IPv4 for an A, a string for a TXT...).
+                            The content of the record (an IPv4 for an A record, a string for a TXT record, etc.).
                             The data of the view record
                           type: string
                         subnet:
                           description: |-
-                            The subnet of the view
+                            The subnet of the view.
                             The subnet of the view
                           type: string
                       type: object
                     type: array
                   weighted:
                     description: |-
-                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with its related IP compared to the others in the list. (Can be more than 1) Documentation and usage example
+                      You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with their related IP compared to the others in the list. (Can be more than 1) Check the documentation for more information.
                       Return record based on weight
                     items:
                       properties:
                         ip:
                           description: |-
-                            The weighted IP
+                            The weighted IP.
                             The weighted IP
                           type: string
                         weight:

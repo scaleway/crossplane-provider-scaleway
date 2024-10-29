@@ -74,7 +74,7 @@ spec:
                 properties:
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+                      (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:
@@ -84,14 +84,14 @@ spec:
                     type: string
                   tags:
                     description: |-
-                      The tags associated with the public gateway IP.
+                      The tags associated with the Public Gateway IP.
                       The tags associated with public gateway IP
                     items:
                       type: string
                     type: array
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the public gateway ip should be created.
+                      (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
                       The zone you want to attach the resource to
                     type: string
                 type: object
@@ -110,7 +110,7 @@ spec:
                 properties:
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+                      (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:
@@ -120,14 +120,14 @@ spec:
                     type: string
                   tags:
                     description: |-
-                      The tags associated with the public gateway IP.
+                      The tags associated with the Public Gateway IP.
                       The tags associated with public gateway IP
                     items:
                       type: string
                     type: array
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the public gateway ip should be created.
+                      (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
                       The zone you want to attach the resource to
                     type: string
                 type: object
@@ -310,20 +310,20 @@ spec:
                     type: string
                   createdAt:
                     description: |-
-                      The date and time of the creation of the public gateway ip.
+                      The date and time of the creation of the Public Gateway IP.
                       The date and time of the creation of the public gateway IP
                     type: string
                   id:
-                    description: The ID of the public gateway IP.
+                    description: The ID of the Public Gateway IP.
                     type: string
                   organizationId:
                     description: |-
-                      The organization ID the public gateway ip is associated with.
+                      The Organization ID the Public Gateway IP is associated with.
                       The organization_id you want to attach the resource to
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the public gateway ip is associated with.
+                      (Defaults to provider project_id) The ID of the Project the Public Gateway IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:
@@ -333,19 +333,19 @@ spec:
                     type: string
                   tags:
                     description: |-
-                      The tags associated with the public gateway IP.
+                      The tags associated with the Public Gateway IP.
                       The tags associated with public gateway IP
                     items:
                       type: string
                     type: array
                   updatedAt:
                     description: |-
-                      The date and time of the last update of the public gateway ip.
+                      The date and time of the last update of the Public Gateway IP.
                       The date and time of the last update of the public gateway IP
                     type: string
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the public gateway ip should be created.
+                      (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
                       The zone you want to attach the resource to
                     type: string
                 type: object

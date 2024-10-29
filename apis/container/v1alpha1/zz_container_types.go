@@ -15,11 +15,11 @@ import (
 
 type ContainerInitParameters struct {
 
-	// The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// Boolean controlling whether the container is on a production environment.
+	// Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
@@ -32,31 +32,31 @@ type ContainerInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-	// The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+	// The maximum number of simultaneous requests your container can handle at the same time.
+	// The maximum the number of simultaneous requests your container can handle at the same time.
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The maximum of number of instances this container can scale to. Default to 20.
-	// The maximum of number of instances this container can scale to. Default to 20.
+	// The maximum number of instances this container can scale to.
+	// The maximum of number of instances this container can scale to.
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory computing resources in MB to allocate to each container. Defaults to 256.
-	// The memory computing resources in MB to allocate to each container. Defaults to 128.
+	// The memory resources in MB to allocate to each container.
+	// The memory computing resources in MB to allocate to each container.
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
-	// The minimum of running container instances continuously. Defaults to 0.
-	// The minimum of running container instances continuously. Defaults to 0.
+	// The minimum number of container instances running continuously.
+	// The minimum of running container instances continuously.
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
 	// The unique name of the container name.
 	// The container name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The container namespace ID of the container.
+	// The Containers namespace ID of the container.
 	// The container namespace associated
 	// +crossplane:generate:reference:type=ContainerNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -69,11 +69,11 @@ type ContainerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// The port to expose the container. Defaults to 8080.
-	// The port to expose the container. Defaults to 8080
+	// The port to expose the container.
+	// The port to expose the container.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The privacy type define the way to authenticate to your container. Please check our dedicated section.
+	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
 	// The privacy type define the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
@@ -85,7 +85,7 @@ type ContainerInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
@@ -93,20 +93,24 @@ type ContainerInitParameters struct {
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
 
+	// Execution environment of the container.
+	// Execution environment of the container.
+	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
+
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
 	// The container status.
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+	// The maximum amount of time your container can spend processing a request before being stopped.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ContainerObservation struct {
 
-	// The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
@@ -114,7 +118,7 @@ type ContainerObservation struct {
 	// The cron status
 	CronStatus *string `json:"cronStatus,omitempty" tf:"cron_status,omitempty"`
 
-	// Boolean controlling whether the container is on a production environment.
+	// Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
@@ -135,42 +139,42 @@ type ContainerObservation struct {
 	// The error description
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 
-	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// The container's ID.
+	// The unique identifier of the container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-	// The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+	// The maximum number of simultaneous requests your container can handle at the same time.
+	// The maximum the number of simultaneous requests your container can handle at the same time.
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The maximum of number of instances this container can scale to. Default to 20.
-	// The maximum of number of instances this container can scale to. Default to 20.
+	// The maximum number of instances this container can scale to.
+	// The maximum of number of instances this container can scale to.
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory computing resources in MB to allocate to each container. Defaults to 256.
-	// The memory computing resources in MB to allocate to each container. Defaults to 128.
+	// The memory resources in MB to allocate to each container.
+	// The memory computing resources in MB to allocate to each container.
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
-	// The minimum of running container instances continuously. Defaults to 0.
-	// The minimum of running container instances continuously. Defaults to 0.
+	// The minimum number of container instances running continuously.
+	// The minimum of running container instances continuously.
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
 	// The unique name of the container name.
 	// The container name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The container namespace ID of the container.
+	// The Containers namespace ID of the container.
 	// The container namespace associated
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// The port to expose the container. Defaults to 8080.
-	// The port to expose the container. Defaults to 8080
+	// The port to expose the container.
+	// The port to expose the container.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The privacy type define the way to authenticate to your container. Please check our dedicated section.
+	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
 	// The privacy type define the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
@@ -182,7 +186,7 @@ type ContainerObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
@@ -190,23 +194,27 @@ type ContainerObservation struct {
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
 
+	// Execution environment of the container.
+	// Execution environment of the container.
+	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
+
 	// The container status.
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+	// The maximum amount of time your container can spend processing a request before being stopped.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ContainerParameters struct {
 
-	// The amount of vCPU computing resources to allocate to each container. Defaults to 140.
+	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	// +kubebuilder:validation:Optional
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// Boolean controlling whether the container is on a production environment.
+	// Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	// +kubebuilder:validation:Optional
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
@@ -222,28 +230,28 @@ type ContainerParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// Allow both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	// +kubebuilder:validation:Optional
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time. Defaults to 50.
-	// The maximum the number of simultaneous requests your container can handle at the same time. Defaults to 50.
+	// The maximum number of simultaneous requests your container can handle at the same time.
+	// The maximum the number of simultaneous requests your container can handle at the same time.
 	// +kubebuilder:validation:Optional
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The maximum of number of instances this container can scale to. Default to 20.
-	// The maximum of number of instances this container can scale to. Default to 20.
+	// The maximum number of instances this container can scale to.
+	// The maximum of number of instances this container can scale to.
 	// +kubebuilder:validation:Optional
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory computing resources in MB to allocate to each container. Defaults to 256.
-	// The memory computing resources in MB to allocate to each container. Defaults to 128.
+	// The memory resources in MB to allocate to each container.
+	// The memory computing resources in MB to allocate to each container.
 	// +kubebuilder:validation:Optional
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
-	// The minimum of running container instances continuously. Defaults to 0.
-	// The minimum of running container instances continuously. Defaults to 0.
+	// The minimum number of container instances running continuously.
+	// The minimum of running container instances continuously.
 	// +kubebuilder:validation:Optional
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
@@ -252,7 +260,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The container namespace ID of the container.
+	// The Containers namespace ID of the container.
 	// The container namespace associated
 	// +crossplane:generate:reference:type=ContainerNamespace
 	// +kubebuilder:validation:Optional
@@ -266,12 +274,12 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// The port to expose the container. Defaults to 8080.
-	// The port to expose the container. Defaults to 8080
+	// The port to expose the container.
+	// The port to expose the container.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The privacy type define the way to authenticate to your container. Please check our dedicated section.
+	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
 	// The privacy type define the way to authenticate to your container
 	// +kubebuilder:validation:Optional
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
@@ -286,7 +294,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address. e.g: "rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE".
+	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	// +kubebuilder:validation:Optional
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
@@ -295,6 +303,11 @@ type ContainerParameters struct {
 	// The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
 	// +kubebuilder:validation:Optional
 	RegistrySha256 *string `json:"registrySha256,omitempty" tf:"registry_sha256,omitempty"`
+
+	// Execution environment of the container.
+	// Execution environment of the container.
+	// +kubebuilder:validation:Optional
+	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
 	// The secret environment variables of the container.
 	// The secret environment variables to be injected into your container at runtime.
@@ -306,7 +319,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+	// The maximum amount of time your container can spend processing a request before being stopped.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`

@@ -74,7 +74,7 @@ spec:
                 properties:
                   backupSameRegion:
                     description: |-
-                      Boolean to store logical backups in the same region as the database instance.
+                      Boolean to store logical backups in the same region as the Database Instance.
                       Boolean to store logical backups in the same region as the database instance
                     type: boolean
                   backupScheduleFrequency:
@@ -89,8 +89,13 @@ spec:
                     type: number
                   disableBackup:
                     description: |-
-                      Disable automated backup for the database instance.
+                      Disable automated backup for the Database Instance.
                       Disable automated backup for the database instance
+                    type: boolean
+                  encryptionAtRest:
+                    description: |-
+                      Enable or disable encryption at rest for the Database Instance.
+                      Enable or disable encryption at rest for the database instance
                     type: boolean
                   engine:
                     description: |-
@@ -107,19 +112,19 @@ spec:
                     x-kubernetes-map-type: granular
                   isHaCluster:
                     description: |-
-                      Enable or disable high availability for the database instance.
+                      Enable or disable high availability for the Database Instance.
                       Enable or disable high availability for the database instance
                     type: boolean
                   loadBalancer:
                     description: |-
-                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
                       This block must be defined if you want a public endpoint in addition to your private endpoint.
                       Load balancer of the database instance
                     items:
                       properties:
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the load balancer.
+                            The ID of the endpoint of the Load Balancer.
                             The endpoint ID
                           type: string
                       type: object
@@ -145,12 +150,12 @@ spec:
                     type: string
                   nodeType:
                     description: |-
-                      The type of database instance you want to create (e.g. db-dev-s).
+                      The type of Database Instance you want to create (e.g. db-dev-s).
                       The type of database instance you want to create
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the database instance.
+                      Password for the first user of the Database Instance.
                       Password for the first user of the database instance
                     properties:
                       key:
@@ -169,7 +174,7 @@ spec:
                     type: object
                   privateNetwork:
                     description: |-
-                      List of private networks endpoints of the database instance.
+                      List of Private Networks endpoints of the Database Instance.
                       List of private network to expose your database instance
                     items:
                       properties:
@@ -185,7 +190,7 @@ spec:
                           type: string
                         pnId:
                           description: |-
-                            The ID of the private network.
+                            The ID of the Private Network.
                             The private network ID
                           type: string
                         pnIdRef:
@@ -303,7 +308,7 @@ spec:
                     type: array
                   userName:
                     description: |-
-                      Identifier for the first user of the database instance.
+                      Identifier for the first user of the Database Instance.
                       Identifier for the first user of the database instance
                     type: string
                   volumeSizeInGb:
@@ -332,7 +337,7 @@ spec:
                 properties:
                   backupSameRegion:
                     description: |-
-                      Boolean to store logical backups in the same region as the database instance.
+                      Boolean to store logical backups in the same region as the Database Instance.
                       Boolean to store logical backups in the same region as the database instance
                     type: boolean
                   backupScheduleFrequency:
@@ -347,8 +352,13 @@ spec:
                     type: number
                   disableBackup:
                     description: |-
-                      Disable automated backup for the database instance.
+                      Disable automated backup for the Database Instance.
                       Disable automated backup for the database instance
+                    type: boolean
+                  encryptionAtRest:
+                    description: |-
+                      Enable or disable encryption at rest for the Database Instance.
+                      Enable or disable encryption at rest for the database instance
                     type: boolean
                   engine:
                     description: |-
@@ -365,19 +375,19 @@ spec:
                     x-kubernetes-map-type: granular
                   isHaCluster:
                     description: |-
-                      Enable or disable high availability for the database instance.
+                      Enable or disable high availability for the Database Instance.
                       Enable or disable high availability for the database instance
                     type: boolean
                   loadBalancer:
                     description: |-
-                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
                       This block must be defined if you want a public endpoint in addition to your private endpoint.
                       Load balancer of the database instance
                     items:
                       properties:
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the load balancer.
+                            The ID of the endpoint of the Load Balancer.
                             The endpoint ID
                           type: string
                       type: object
@@ -403,12 +413,12 @@ spec:
                     type: string
                   nodeType:
                     description: |-
-                      The type of database instance you want to create (e.g. db-dev-s).
+                      The type of Database Instance you want to create (e.g. db-dev-s).
                       The type of database instance you want to create
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the database instance.
+                      Password for the first user of the Database Instance.
                       Password for the first user of the database instance
                     properties:
                       key:
@@ -427,7 +437,7 @@ spec:
                     type: object
                   privateNetwork:
                     description: |-
-                      List of private networks endpoints of the database instance.
+                      List of Private Networks endpoints of the Database Instance.
                       List of private network to expose your database instance
                     items:
                       properties:
@@ -443,7 +453,7 @@ spec:
                           type: string
                         pnId:
                           description: |-
-                            The ID of the private network.
+                            The ID of the Private Network.
                             The private network ID
                           type: string
                         pnIdRef:
@@ -561,7 +571,7 @@ spec:
                     type: array
                   userName:
                     description: |-
-                      Identifier for the first user of the database instance.
+                      Identifier for the first user of the Database Instance.
                       Identifier for the first user of the database instance
                     type: string
                   volumeSizeInGb:
@@ -758,7 +768,7 @@ spec:
                 properties:
                   backupSameRegion:
                     description: |-
-                      Boolean to store logical backups in the same region as the database instance.
+                      Boolean to store logical backups in the same region as the Database Instance.
                       Boolean to store logical backups in the same region as the database instance
                     type: boolean
                   backupScheduleFrequency:
@@ -773,22 +783,27 @@ spec:
                     type: number
                   certificate:
                     description: |-
-                      Certificate of the database instance.
+                      Certificate of the Database Instance.
                       Certificate of the database instance
                     type: string
                   disableBackup:
                     description: |-
-                      Disable automated backup for the database instance.
+                      Disable automated backup for the Database Instance.
                       Disable automated backup for the database instance
+                    type: boolean
+                  encryptionAtRest:
+                    description: |-
+                      Enable or disable encryption at rest for the Database Instance.
+                      Enable or disable encryption at rest for the database instance
                     type: boolean
                   endpointIp:
                     description: |-
-                      (Deprecated) The IP of the Database Instance.
+                      (Deprecated) The IP of the Database Instance. Please use the private_network or the load_balancer attribute.
                       Endpoint IP of the database instance
                     type: string
                   endpointPort:
                     description: |-
-                      (Deprecated) The port of the Database Instance.
+                      (Deprecated) The port of the Database Instance. Please use the private_network or the load_balancer attribute.
                       Endpoint port of the database instance
                     type: number
                   engine:
@@ -809,19 +824,19 @@ spec:
                     x-kubernetes-map-type: granular
                   isHaCluster:
                     description: |-
-                      Enable or disable high availability for the database instance.
+                      Enable or disable high availability for the Database Instance.
                       Enable or disable high availability for the database instance
                     type: boolean
                   loadBalancer:
                     description: |-
-                      List of load balancer endpoints of the database instance. A load-balancer endpoint will be set by default if no private network is.
+                      List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
                       This block must be defined if you want a public endpoint in addition to your private endpoint.
                       Load balancer of the database instance
                     items:
                       properties:
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the load balancer.
+                            The ID of the endpoint of the Load Balancer.
                             The endpoint ID
                           type: string
                         hostname:
@@ -867,7 +882,7 @@ spec:
                     type: string
                   nodeType:
                     description: |-
-                      The type of database instance you want to create (e.g. db-dev-s).
+                      The type of Database Instance you want to create (e.g. db-dev-s).
                       The type of database instance you want to create
                     type: string
                   organizationId:
@@ -877,7 +892,7 @@ spec:
                     type: string
                   privateNetwork:
                     description: |-
-                      List of private networks endpoints of the database instance.
+                      List of Private Networks endpoints of the Database Instance.
                       List of private network to expose your database instance
                     items:
                       properties:
@@ -888,7 +903,7 @@ spec:
                           type: boolean
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the load balancer.
+                            The ID of the endpoint of the Load Balancer.
                             The endpoint ID
                           type: string
                         hostname:
@@ -913,7 +928,7 @@ spec:
                           type: string
                         pnId:
                           description: |-
-                            The ID of the private network.
+                            The ID of the Private Network.
                             The private network ID
                           type: string
                         port:
@@ -934,7 +949,7 @@ spec:
                     type: string
                   readReplicas:
                     description: |-
-                      List of read replicas of the database instance.
+                      List of read replicas of the Database Instance.
                       Read replicas of the database instance
                     items:
                       properties:
@@ -972,7 +987,7 @@ spec:
                     type: array
                   userName:
                     description: |-
-                      Identifier for the first user of the database instance.
+                      Identifier for the first user of the Database Instance.
                       Identifier for the first user of the database instance
                     type: string
                   volumeSizeInGb:
