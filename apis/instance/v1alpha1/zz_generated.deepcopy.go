@@ -1504,6 +1504,11 @@ func (in *RootVolumeInitParameters) DeepCopyInto(out *RootVolumeInitParameters) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SbsIops != nil {
+		in, out := &in.SbsIops, &out.SbsIops
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
 		*out = new(float64)
@@ -1549,6 +1554,11 @@ func (in *RootVolumeObservation) DeepCopyInto(out *RootVolumeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SbsIops != nil {
+		in, out := &in.SbsIops, &out.SbsIops
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
 		*out = new(float64)
@@ -1587,6 +1597,11 @@ func (in *RootVolumeParameters) DeepCopyInto(out *RootVolumeParameters) {
 	if in.DeleteOnTermination != nil {
 		in, out := &in.DeleteOnTermination, &out.DeleteOnTermination
 		*out = new(bool)
+		**out = **in
+	}
+	if in.SbsIops != nil {
+		in, out := &in.SbsIops, &out.SbsIops
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SizeInGb != nil {

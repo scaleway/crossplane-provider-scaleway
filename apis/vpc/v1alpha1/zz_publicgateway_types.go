@@ -27,7 +27,7 @@ type PublicGatewayInitParameters struct {
 	// Enable SMTP on the gateway
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
-	// attach an existing flexible IP to the gateway.
+	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	// +crossplane:generate:reference:type=PublicGatewayIP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
@@ -40,7 +40,7 @@ type PublicGatewayInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
-	// The name of the public gateway. If not provided it will be randomly generated.
+	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -48,11 +48,11 @@ type PublicGatewayInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys on the Public Gateway by changing this field's value.
 	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
 	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
-	// The tags associated with the public gateway.
+	// The tags to associate with the Public Gateway.
 	// The tags associated with public gateway
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -60,11 +60,11 @@ type PublicGatewayInitParameters struct {
 	// gateway type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// override the gateway's default recursive DNS servers, if DNS features are enabled.
+	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -79,7 +79,7 @@ type PublicGatewayObservation struct {
 	// Port of the SSH bastion
 	BastionPort *float64 `json:"bastionPort,omitempty" tf:"bastion_port,omitempty"`
 
-	// The date and time of the creation of the public gateway.
+	// The date and time of the creation of the Public Gateway.
 	// The date and time of the creation of the public gateway
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -87,18 +87,18 @@ type PublicGatewayObservation struct {
 	// Enable SMTP on the gateway
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
-	// The ID of the public gateway.
+	// The ID of the Public Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// attach an existing flexible IP to the gateway.
+	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// The name of the public gateway. If not provided it will be randomly generated.
+	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the public gateway is associated with.
+	// The Organization ID the Public Gateway is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
@@ -106,7 +106,7 @@ type PublicGatewayObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys on the Public Gateway by changing this field's value.
 	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
 	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
@@ -114,7 +114,7 @@ type PublicGatewayObservation struct {
 	// The status of the public gateway
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The tags associated with the public gateway.
+	// The tags to associate with the Public Gateway.
 	// The tags associated with public gateway
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -122,15 +122,15 @@ type PublicGatewayObservation struct {
 	// gateway type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The date and time of the last update of the public gateway.
+	// The date and time of the last update of the Public Gateway.
 	// The date and time of the last update of the public gateway
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// override the gateway's default recursive DNS servers, if DNS features are enabled.
+	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -152,7 +152,7 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableSMTP *bool `json:"enableSmtp,omitempty" tf:"enable_smtp,omitempty"`
 
-	// attach an existing flexible IP to the gateway.
+	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	// +crossplane:generate:reference:type=PublicGatewayIP
 	// +kubebuilder:validation:Optional
@@ -166,7 +166,7 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
-	// The name of the public gateway. If not provided it will be randomly generated.
+	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -176,12 +176,12 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Trigger a refresh of the SSH keys on the public gateway by changing this field's value.
+	// Trigger a refresh of the SSH keys on the Public Gateway by changing this field's value.
 	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
 	// +kubebuilder:validation:Optional
 	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
-	// The tags associated with the public gateway.
+	// The tags to associate with the Public Gateway.
 	// The tags associated with public gateway
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -191,12 +191,12 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// override the gateway's default recursive DNS servers, if DNS features are enabled.
+	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	// +kubebuilder:validation:Optional
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the public gateway should be created.
+	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

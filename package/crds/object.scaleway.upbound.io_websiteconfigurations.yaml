@@ -80,7 +80,7 @@ spec:
                     type: string
                   errorDocument:
                     description: |-
-                      The name of the error document for the website detailed below.
+                      The name of the error file for the website detailed below.
                       The name of the error document for the website.
                     items:
                       properties:
@@ -92,13 +92,13 @@ spec:
                     type: array
                   indexDocument:
                     description: |-
-                      The name of the index document for the website detailed below.
+                      The name of the index file for the website detailed below.
                       The name of the index document for the website.
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request that
-                            is for a directory on the website endpoint.
+                          description: A suffix that is appended to a request targeting
+                            a specific directory on the website endpoint.
                           type: string
                       type: object
                     type: array
@@ -131,7 +131,7 @@ spec:
                     type: string
                   errorDocument:
                     description: |-
-                      The name of the error document for the website detailed below.
+                      The name of the error file for the website detailed below.
                       The name of the error document for the website.
                     items:
                       properties:
@@ -143,13 +143,13 @@ spec:
                     type: array
                   indexDocument:
                     description: |-
-                      The name of the index document for the website detailed below.
+                      The name of the index file for the website detailed below.
                       The name of the index document for the website.
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request that
-                            is for a directory on the website endpoint.
+                          description: A suffix that is appended to a request targeting
+                            a specific directory on the website endpoint.
                           type: string
                       type: object
                     type: array
@@ -351,7 +351,7 @@ spec:
                     type: string
                   errorDocument:
                     description: |-
-                      The name of the error document for the website detailed below.
+                      The name of the error file for the website detailed below.
                       The name of the error document for the website.
                     items:
                       properties:
@@ -362,17 +362,18 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The region and bucket separated by a slash (/)
+                    description: The region and bucket name, separated by a slash
+                      (e.g. fr-par/some-bucket)
                     type: string
                   indexDocument:
                     description: |-
-                      The name of the index document for the website detailed below.
+                      The name of the index file for the website detailed below.
                       The name of the index document for the website.
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request that
-                            is for a directory on the website endpoint.
+                          description: A suffix that is appended to a request targeting
+                            a specific directory on the website endpoint.
                           type: string
                       type: object
                     type: array

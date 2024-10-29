@@ -79,7 +79,7 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   functionId:
-                    description: The ID of the function.
+                    description: The unique identifier of the function.
                     type: string
                   functionIdRef:
                     description: Reference to a Function to populate functionId.
@@ -156,7 +156,7 @@ spec:
                         type: object
                     type: object
                   namespaceId:
-                    description: The ID of the function namespace.
+                    description: The unique identifier of the Functions namespace.
                     type: string
                   namespaceIdRef:
                     description: Reference to a FunctionNamespace to populate namespaceId.
@@ -234,7 +234,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -258,7 +258,7 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   functionId:
-                    description: The ID of the function.
+                    description: The unique identifier of the function.
                     type: string
                   functionIdRef:
                     description: Reference to a Function to populate functionId.
@@ -335,7 +335,7 @@ spec:
                         type: object
                     type: object
                   namespaceId:
-                    description: The ID of the function namespace.
+                    description: The unique identifier of the Functions namespace.
                     type: string
                   namespaceIdRef:
                     description: Reference to a FunctionNamespace to populate namespaceId.
@@ -413,7 +413,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -596,17 +596,17 @@ spec:
                     description: The expiration date of the token.
                     type: string
                   functionId:
-                    description: The ID of the function.
+                    description: The unique identifier of the function.
                     type: string
                   id:
-                    description: The ID of the token.
+                    description: The unique identifier of the token.
                     type: string
                   namespaceId:
-                    description: The ID of the function namespace.
+                    description: The unique identifier of the Functions namespace.
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace should be created.
+                      (Defaults to provider region). The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                 type: object

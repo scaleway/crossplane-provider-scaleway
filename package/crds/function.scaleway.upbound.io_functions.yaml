@@ -73,9 +73,8 @@ spec:
               forProvider:
                 properties:
                   deploy:
-                    description: |-
-                      define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
-                      define if the function should be deployed, provider will wait for function to be deployed
+                    description: Define whether the function should be deployed. Your
+                      function will be redeployed if you update the source zip file
                     type: boolean
                   description:
                     description: |-
@@ -92,7 +91,7 @@ spec:
                     x-kubernetes-map-type: granular
                   handler:
                     description: |-
-                      Handler of the function. Depends on the runtime (function guide)
+                      Handler of the function, depends on the runtime. Refer to the dedicated documentation for the list of supported runtimes.
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
@@ -100,27 +99,27 @@ spec:
                     type: string
                   maxScale:
                     description: |-
-                      Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
+                      The maximum number of instances this function can scale to. Default to 20. Your function will scale automatically based on the incoming workload, but will never exceed the configured max_scale value.
                       Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
                     type: number
                   memoryLimit:
                     description: |-
-                      Memory limit in MB for your function, defaults to 128MB
-                      Memory limit in MB for your function, defaults to 128MB
+                      The memory resources in MB to allocate to each function. Defaults to 256 MB.
+                      Memory limit in MB for your function, defaults to 256MB
                     type: number
                   minScale:
                     description: |-
-                      Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function container to run constantly.
+                      The minimum number of function instances running continuously. Defaults to 0. Functions are billed when executed, and using a min_scale greater than 0 will cause your function to run constantly.
                       Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function to run all the time.
                     type: number
                   name:
                     description: |-
-                      The unique name of the function.
+                      The unique name of the function name.
                       The name of the function
                     type: string
                   namespaceId:
                     description: |-
-                      The namespace ID the function is associated with.
+                      The Functions namespace ID of the function.
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
@@ -199,12 +198,12 @@ spec:
                     type: object
                   privacy:
                     description: |-
-                      Privacy of the function. Can be either private or public. Read more on authentication
+                      The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -214,8 +213,13 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
+                      Runtime of the function. Runtimes can be fetched using specific route
                       Runtime of the function
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the function.
+                      Execution environment of the function.
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     description: |-
@@ -234,18 +238,18 @@ spec:
                     type: object
                   timeout:
                     description: |-
-                      Holds the max duration (in seconds) the function is allowed for responding to a request
+                      The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
                       Holds the max duration (in seconds) the function is allowed for responding to a request
                     type: number
                   zipFile:
                     description: |-
-                      Location of the zip file to upload containing your function sources
+                      Path to the zip file containing your function sources to upload.
                       Location of the zip file to upload containing your function sources
                     type: string
                   zipHash:
-                    description: The hash of your source zip file, changing it will
-                      re-apply function. Can be any string, changing it will just
-                      trigger state change. Can be any string
+                    description: |-
+                      The hash of your source zip file, changing it will redeploy the function. Can be any string, changing it will simply trigger a state change.
+                      The hash of your source zip file, changing it will re-apply function. Can be any string
                     type: string
                 type: object
               initProvider:
@@ -262,9 +266,8 @@ spec:
                   autoscaler.
                 properties:
                   deploy:
-                    description: |-
-                      define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
-                      define if the function should be deployed, provider will wait for function to be deployed
+                    description: Define whether the function should be deployed. Your
+                      function will be redeployed if you update the source zip file
                     type: boolean
                   description:
                     description: |-
@@ -281,7 +284,7 @@ spec:
                     x-kubernetes-map-type: granular
                   handler:
                     description: |-
-                      Handler of the function. Depends on the runtime (function guide)
+                      Handler of the function, depends on the runtime. Refer to the dedicated documentation for the list of supported runtimes.
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
@@ -289,27 +292,27 @@ spec:
                     type: string
                   maxScale:
                     description: |-
-                      Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
+                      The maximum number of instances this function can scale to. Default to 20. Your function will scale automatically based on the incoming workload, but will never exceed the configured max_scale value.
                       Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
                     type: number
                   memoryLimit:
                     description: |-
-                      Memory limit in MB for your function, defaults to 128MB
-                      Memory limit in MB for your function, defaults to 128MB
+                      The memory resources in MB to allocate to each function. Defaults to 256 MB.
+                      Memory limit in MB for your function, defaults to 256MB
                     type: number
                   minScale:
                     description: |-
-                      Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function container to run constantly.
+                      The minimum number of function instances running continuously. Defaults to 0. Functions are billed when executed, and using a min_scale greater than 0 will cause your function to run constantly.
                       Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function to run all the time.
                     type: number
                   name:
                     description: |-
-                      The unique name of the function.
+                      The unique name of the function name.
                       The name of the function
                     type: string
                   namespaceId:
                     description: |-
-                      The namespace ID the function is associated with.
+                      The Functions namespace ID of the function.
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
@@ -388,12 +391,12 @@ spec:
                     type: object
                   privacy:
                     description: |-
-                      Privacy of the function. Can be either private or public. Read more on authentication
+                      The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -403,8 +406,13 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
+                      Runtime of the function. Runtimes can be fetched using specific route
                       Runtime of the function
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the function.
+                      Execution environment of the function.
                     type: string
                   secretEnvironmentVariablesSecretRef:
                     additionalProperties:
@@ -412,18 +420,18 @@ spec:
                     type: object
                   timeout:
                     description: |-
-                      Holds the max duration (in seconds) the function is allowed for responding to a request
+                      The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
                       Holds the max duration (in seconds) the function is allowed for responding to a request
                     type: number
                   zipFile:
                     description: |-
-                      Location of the zip file to upload containing your function sources
+                      Path to the zip file containing your function sources to upload.
                       Location of the zip file to upload containing your function sources
                     type: string
                   zipHash:
-                    description: The hash of your source zip file, changing it will
-                      re-apply function. Can be any string, changing it will just
-                      trigger state change. Can be any string
+                    description: |-
+                      The hash of your source zip file, changing it will redeploy the function. Can be any string, changing it will simply trigger a state change.
+                      The hash of your source zip file, changing it will re-apply function. Can be any string
                     type: string
                 type: object
               managementPolicies:
@@ -613,13 +621,12 @@ spec:
                 properties:
                   cpuLimit:
                     description: |-
-                      The CPU limit in mCPU for your function. More infos on resources here
+                      The CPU limit in mVCPU for your function.
                       CPU limit in mCPU for your function
                     type: number
                   deploy:
-                    description: |-
-                      define if the function should be deployed, provider will wait for function to be deployed. function will get deployed if you change source zip
-                      define if the function should be deployed, provider will wait for function to be deployed
+                    description: Define whether the function should be deployed. Your
+                      function will be redeployed if you update the source zip file
                     type: boolean
                   description:
                     description: |-
@@ -628,7 +635,7 @@ spec:
                     type: string
                   domainName:
                     description: |-
-                      The native domain name of the function
+                      The native domain name of the function.
                       The native function domain name.
                     type: string
                   environmentVariables:
@@ -641,38 +648,38 @@ spec:
                     x-kubernetes-map-type: granular
                   handler:
                     description: |-
-                      Handler of the function. Depends on the runtime (function guide)
+                      Handler of the function, depends on the runtime. Refer to the dedicated documentation for the list of supported runtimes.
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
                     description: HTTP traffic configuration
                     type: string
                   id:
-                    description: The ID of the function
+                    description: The unique identifier of the function.
                     type: string
                   maxScale:
                     description: |-
-                      Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
+                      The maximum number of instances this function can scale to. Default to 20. Your function will scale automatically based on the incoming workload, but will never exceed the configured max_scale value.
                       Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
                     type: number
                   memoryLimit:
                     description: |-
-                      Memory limit in MB for your function, defaults to 128MB
-                      Memory limit in MB for your function, defaults to 128MB
+                      The memory resources in MB to allocate to each function. Defaults to 256 MB.
+                      Memory limit in MB for your function, defaults to 256MB
                     type: number
                   minScale:
                     description: |-
-                      Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function container to run constantly.
+                      The minimum number of function instances running continuously. Defaults to 0. Functions are billed when executed, and using a min_scale greater than 0 will cause your function to run constantly.
                       Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function to run all the time.
                     type: number
                   name:
                     description: |-
-                      The unique name of the function.
+                      The unique name of the function name.
                       The name of the function
                     type: string
                   namespaceId:
                     description: |-
-                      The namespace ID the function is associated with.
+                      The Functions namespace ID of the function.
                       The namespace ID associated with this function
                     type: string
                   organizationId:
@@ -682,12 +689,12 @@ spec:
                     type: string
                   privacy:
                     description: |-
-                      Privacy of the function. Can be either private or public. Read more on authentication
+                      The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the namespace is associated with.
+                      (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -697,23 +704,28 @@ spec:
                     type: string
                   runtime:
                     description: |-
-                      Runtime of the function. Runtimes can be fetched using [specific route](https://www.scaleway.com/en/developers/api/serverless-functions/#get-f7de6a
+                      Runtime of the function. Runtimes can be fetched using specific route
                       Runtime of the function
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the function.
+                      Execution environment of the function.
                     type: string
                   timeout:
                     description: |-
-                      Holds the max duration (in seconds) the function is allowed for responding to a request
+                      The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
                       Holds the max duration (in seconds) the function is allowed for responding to a request
                     type: number
                   zipFile:
                     description: |-
-                      Location of the zip file to upload containing your function sources
+                      Path to the zip file containing your function sources to upload.
                       Location of the zip file to upload containing your function sources
                     type: string
                   zipHash:
-                    description: The hash of your source zip file, changing it will
-                      re-apply function. Can be any string, changing it will just
-                      trigger state change. Can be any string
+                    description: |-
+                      The hash of your source zip file, changing it will redeploy the function. Can be any string, changing it will simply trigger a state change.
+                      The hash of your source zip file, changing it will re-apply function. Can be any string
                     type: string
                 type: object
               conditions:

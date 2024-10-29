@@ -1167,6 +1167,11 @@ func (in *SourceObservation) DeepCopyInto(out *SourceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PushURL != nil {
+		in, out := &in.PushURL, &out.PushURL
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

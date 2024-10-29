@@ -18,15 +18,15 @@ type DirectAccessInitParameters struct {
 
 type DirectAccessObservation struct {
 
-	// The ID of the endpoint of the read replica.
+	// The ID of the endpoint of the Read Replica.
 	// UUID of the endpoint (UUID format).
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// Hostname of the endpoint. Only one of ip and hostname may be set.
+	// Hostname of the endpoint. Only one of IP and hostname may be set.
 	// Hostname of the endpoint. Only one of ip and hostname may be set.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+	// IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
 	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -61,12 +61,12 @@ type ReadReplicaInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Create an endpoint in a private network.
+	// Create an endpoint in a Private Netork.
 	// Private network endpoints
 	PrivateNetwork []ReadReplicaPrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in which the Database read replica should be created.
+	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -81,19 +81,19 @@ type ReadReplicaObservation struct {
 	// Direct access endpoint, it gives you an IP and a port to access your read-replica
 	DirectAccess []DirectAccessObservation `json:"directAccess,omitempty" tf:"direct_access,omitempty"`
 
-	// The ID of the Database read replica.
+	// The ID of the Read Replica.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// UUID of the rdb instance.
 	// Id of the rdb instance to replicate
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// Create an endpoint in a private network.
+	// Create an endpoint in a Private Netork.
 	// Private network endpoints
 	PrivateNetwork []ReadReplicaPrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in which the Database read replica should be created.
+	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -123,13 +123,13 @@ type ReadReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Create an endpoint in a private network.
+	// Create an endpoint in a Private Netork.
 	// Private network endpoints
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []ReadReplicaPrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider region) The region
-	// in which the Database read replica should be created.
+	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -146,7 +146,7 @@ type ReadReplicaPrivateNetworkInitParameters struct {
 	// Whether or not the private network endpoint should be configured with IPAM
 	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
 
-	// UUID of the private network to be connected to the read replica.
+	// UUID of the Private Netork to be connected to the Read Replica.
 	// UUID of the private network to be connected to the read replica (UUID format)
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
@@ -161,15 +161,15 @@ type ReadReplicaPrivateNetworkObservation struct {
 	// Whether or not the private network endpoint should be configured with IPAM
 	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
 
-	// The ID of the endpoint of the read replica.
+	// The ID of the endpoint of the Read Replica.
 	// UUID of the endpoint (UUID format).
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// Hostname of the endpoint. Only one of ip and hostname may be set.
+	// Hostname of the endpoint. Only one of IP and hostname may be set.
 	// Hostname of the endpoint. Only one of ip and hostname may be set
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+	// IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
 	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -181,7 +181,7 @@ type ReadReplicaPrivateNetworkObservation struct {
 	// TCP port of the endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// UUID of the private network to be connected to the read replica.
+	// UUID of the Private Netork to be connected to the Read Replica.
 	// UUID of the private network to be connected to the read replica (UUID format)
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
@@ -200,7 +200,7 @@ type ReadReplicaPrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableIpam *bool `json:"enableIpam,omitempty" tf:"enable_ipam,omitempty"`
 
-	// UUID of the private network to be connected to the read replica.
+	// UUID of the Private Netork to be connected to the Read Replica.
 	// UUID of the private network to be connected to the read replica (UUID format)
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`

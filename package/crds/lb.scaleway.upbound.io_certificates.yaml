@@ -74,7 +74,7 @@ spec:
                 properties:
                   customCertificate:
                     description: |-
-                      Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The custom type certificate type configuration
                     items:
                       properties:
@@ -87,7 +87,7 @@ spec:
                     type: array
                   lbId:
                     description: |-
-                      The load-balancer ID this certificate is attached to.
+                      The ID of the Load Balancer this certificate is attached to.
                       The load-balancer ID
                     type: string
                   lbIdRef:
@@ -166,7 +166,7 @@ spec:
                     type: object
                   letsencrypt:
                     description: |-
-                      Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The Let's Encrypt type certificate configuration
                     items:
                       properties:
@@ -177,7 +177,7 @@ spec:
                           type: string
                         subjectAlternativeName:
                           description: |-
-                            Array of alternative domain names.  A new certificate will be created if this field is changed.
+                            Array of alternative domain names. A new certificate will be created if this field is changed.
                             The alternative domain names of the certificate
                           items:
                             type: string
@@ -205,7 +205,7 @@ spec:
                 properties:
                   customCertificate:
                     description: |-
-                      Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The custom type certificate type configuration
                     items:
                       properties:
@@ -218,7 +218,7 @@ spec:
                     type: array
                   lbId:
                     description: |-
-                      The load-balancer ID this certificate is attached to.
+                      The ID of the Load Balancer this certificate is attached to.
                       The load-balancer ID
                     type: string
                   lbIdRef:
@@ -297,7 +297,7 @@ spec:
                     type: object
                   letsencrypt:
                     description: |-
-                      Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The Let's Encrypt type certificate configuration
                     items:
                       properties:
@@ -308,7 +308,7 @@ spec:
                           type: string
                         subjectAlternativeName:
                           description: |-
-                            Array of alternative domain names.  A new certificate will be created if this field is changed.
+                            Array of alternative domain names. A new certificate will be created if this field is changed.
                             The alternative domain names of the certificate
                           items:
                             type: string
@@ -500,7 +500,7 @@ spec:
                     type: string
                   customCertificate:
                     description: |-
-                      Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The custom type certificate type configuration
                     items:
                       properties:
@@ -517,16 +517,16 @@ spec:
                       The identifier (SHA-1) of the certificate
                     type: string
                   id:
-                    description: The ID of the load-balancer certificate.
+                    description: The ID of the Load Balancer certificate.
                     type: string
                   lbId:
                     description: |-
-                      The load-balancer ID this certificate is attached to.
+                      The ID of the Load Balancer this certificate is attached to.
                       The load-balancer ID
                     type: string
                   letsencrypt:
                     description: |-
-                      Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+                      Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
                       The Let's Encrypt type certificate configuration
                     items:
                       properties:
@@ -537,7 +537,7 @@ spec:
                           type: string
                         subjectAlternativeName:
                           description: |-
-                            Array of alternative domain names.  A new certificate will be created if this field is changed.
+                            Array of alternative domain names. A new certificate will be created if this field is changed.
                             The alternative domain names of the certificate
                           items:
                             type: string

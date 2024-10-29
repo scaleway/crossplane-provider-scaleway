@@ -15,7 +15,7 @@ import (
 
 type UserInitParameters struct {
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -28,15 +28,15 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Grant admin permissions to the Database User.
+	// Grant admin permissions to the database user.
 	// Grant admin permissions to database user
 	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
 
-	// Database User name.
+	// database user name.
 	// Database user name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Database User password.
+	// database user password.
 	// Database user password
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -50,15 +50,15 @@ type UserObservation struct {
 	// The ID of the user, which is of the form {region}/{instance_id}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/admin
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// Grant admin permissions to the Database User.
+	// Grant admin permissions to the database user.
 	// Grant admin permissions to database user
 	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
 
-	// Database User name.
+	// database user name.
 	// Database user name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -69,7 +69,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
@@ -83,17 +83,17 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Grant admin permissions to the Database User.
+	// Grant admin permissions to the database user.
 	// Grant admin permissions to database user
 	// +kubebuilder:validation:Optional
 	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
 
-	// Database User name.
+	// database user name.
 	// Database user name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Database User password.
+	// database user password.
 	// Database user password
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`

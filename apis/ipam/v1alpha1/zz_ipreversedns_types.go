@@ -51,7 +51,7 @@ type IPReverseDNSObservation struct {
 	// The reverse domain name
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// The ID of the IPAM IP for which the DNS reverse is configured.
+	// The ID of the IPAM IP for which reverse DNS is configured.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The IPAM IP ID.

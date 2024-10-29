@@ -15,11 +15,11 @@ import (
 
 type CertificateInitParameters struct {
 
-	// Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
 	CustomCertificate []CustomCertificateInitParameters `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
 
-	// The load-balancer ID this certificate is attached to.
+	// The ID of the Load Balancer this certificate is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
@@ -32,7 +32,7 @@ type CertificateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
-	// Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The Let's Encrypt type certificate configuration
 	Letsencrypt []LetsencryptInitParameters `json:"letsencrypt,omitempty" tf:"letsencrypt,omitempty"`
 
@@ -47,7 +47,7 @@ type CertificateObservation struct {
 	// The main domain name of the certificate
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
-	// Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
 	CustomCertificate []CustomCertificateObservation `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
 
@@ -55,14 +55,14 @@ type CertificateObservation struct {
 	// The identifier (SHA-1) of the certificate
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
-	// The ID of the load-balancer certificate.
+	// The ID of the Load Balancer certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The load-balancer ID this certificate is attached to.
+	// The ID of the Load Balancer this certificate is attached to.
 	// The load-balancer ID
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The Let's Encrypt type certificate configuration
 	Letsencrypt []LetsencryptObservation `json:"letsencrypt,omitempty" tf:"letsencrypt,omitempty"`
 
@@ -89,12 +89,12 @@ type CertificateObservation struct {
 
 type CertificateParameters struct {
 
-	// Configuration block for custom certificate chain. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
 	// +kubebuilder:validation:Optional
 	CustomCertificate []CustomCertificateParameters `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
 
-	// The load-balancer ID this certificate is attached to.
+	// The ID of the Load Balancer this certificate is attached to.
 	// The load-balancer ID
 	// +crossplane:generate:reference:type=LB
 	// +kubebuilder:validation:Optional
@@ -108,7 +108,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
-	// Configuration block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
+	// Block for Let's Encrypt configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The Let's Encrypt type certificate configuration
 	// +kubebuilder:validation:Optional
 	Letsencrypt []LetsencryptParameters `json:"letsencrypt,omitempty" tf:"letsencrypt,omitempty"`
@@ -147,7 +147,7 @@ type LetsencryptInitParameters struct {
 	// The main domain name of the certificate
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
-	// Array of alternative domain names.  A new certificate will be created if this field is changed.
+	// Array of alternative domain names. A new certificate will be created if this field is changed.
 	// The alternative domain names of the certificate
 	SubjectAlternativeName []*string `json:"subjectAlternativeName,omitempty" tf:"subject_alternative_name,omitempty"`
 }
@@ -158,7 +158,7 @@ type LetsencryptObservation struct {
 	// The main domain name of the certificate
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
-	// Array of alternative domain names.  A new certificate will be created if this field is changed.
+	// Array of alternative domain names. A new certificate will be created if this field is changed.
 	// The alternative domain names of the certificate
 	SubjectAlternativeName []*string `json:"subjectAlternativeName,omitempty" tf:"subject_alternative_name,omitempty"`
 }
@@ -170,7 +170,7 @@ type LetsencryptParameters struct {
 	// +kubebuilder:validation:Optional
 	CommonName *string `json:"commonName" tf:"common_name,omitempty"`
 
-	// Array of alternative domain names.  A new certificate will be created if this field is changed.
+	// Array of alternative domain names. A new certificate will be created if this field is changed.
 	// The alternative domain names of the certificate
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeName []*string `json:"subjectAlternativeName,omitempty" tf:"subject_alternative_name,omitempty"`

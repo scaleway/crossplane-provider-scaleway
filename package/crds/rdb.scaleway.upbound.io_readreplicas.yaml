@@ -160,7 +160,7 @@ spec:
                     type: object
                   privateNetwork:
                     description: |-
-                      Create an endpoint in a private network.
+                      Create an endpoint in a Private Netork.
                       Private network endpoints
                     items:
                       properties:
@@ -171,7 +171,7 @@ spec:
                           type: boolean
                         privateNetworkId:
                           description: |-
-                            UUID of the private network to be connected to the read replica.
+                            UUID of the Private Netork to be connected to the Read Replica.
                             UUID of the private network to be connected to the read replica (UUID format)
                           type: string
                         serviceIp:
@@ -184,7 +184,7 @@ spec:
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in which the Database read replica should be created.
+                      in which the Read Replica should be created.
                       The region you want to attach the resource to
                     type: string
                   sameZone:
@@ -294,7 +294,7 @@ spec:
                     type: object
                   privateNetwork:
                     description: |-
-                      Create an endpoint in a private network.
+                      Create an endpoint in a Private Netork.
                       Private network endpoints
                     items:
                       properties:
@@ -305,7 +305,7 @@ spec:
                           type: boolean
                         privateNetworkId:
                           description: |-
-                            UUID of the private network to be connected to the read replica.
+                            UUID of the Private Netork to be connected to the Read Replica.
                             UUID of the private network to be connected to the read replica (UUID format)
                           type: string
                         serviceIp:
@@ -318,7 +318,7 @@ spec:
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in which the Database read replica should be created.
+                      in which the Read Replica should be created.
                       The region you want to attach the resource to
                     type: string
                   sameZone:
@@ -507,17 +507,17 @@ spec:
                       properties:
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the read replica.
+                            The ID of the endpoint of the Read Replica.
                             UUID of the endpoint (UUID format).
                           type: string
                         hostname:
                           description: |-
-                            Hostname of the endpoint. Only one of ip and hostname may be set.
+                            Hostname of the endpoint. Only one of IP and hostname may be set.
                             Hostname of the endpoint. Only one of ip and hostname may be set.
                           type: string
                         ip:
                           description: |-
-                            IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+                            IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
                             IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
                           type: string
                         name:
@@ -533,7 +533,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The ID of the Database read replica.
+                    description: The ID of the Read Replica.
                     type: string
                   instanceId:
                     description: |-
@@ -542,7 +542,7 @@ spec:
                     type: string
                   privateNetwork:
                     description: |-
-                      Create an endpoint in a private network.
+                      Create an endpoint in a Private Netork.
                       Private network endpoints
                     items:
                       properties:
@@ -553,17 +553,17 @@ spec:
                           type: boolean
                         endpointId:
                           description: |-
-                            The ID of the endpoint of the read replica.
+                            The ID of the endpoint of the Read Replica.
                             UUID of the endpoint (UUID format).
                           type: string
                         hostname:
                           description: |-
-                            Hostname of the endpoint. Only one of ip and hostname may be set.
+                            Hostname of the endpoint. Only one of IP and hostname may be set.
                             Hostname of the endpoint. Only one of ip and hostname may be set
                           type: string
                         ip:
                           description: |-
-                            IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+                            IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
                             IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set
                           type: string
                         name:
@@ -578,7 +578,7 @@ spec:
                           type: number
                         privateNetworkId:
                           description: |-
-                            UUID of the private network to be connected to the read replica.
+                            UUID of the Private Netork to be connected to the Read Replica.
                             UUID of the private network to be connected to the read replica (UUID format)
                           type: string
                         serviceIp:
@@ -594,7 +594,7 @@ spec:
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in which the Database read replica should be created.
+                      in which the Read Replica should be created.
                       The region you want to attach the resource to
                     type: string
                   sameZone:

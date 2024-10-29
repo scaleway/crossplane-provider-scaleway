@@ -23,7 +23,7 @@ type SQLDatabaseInitParameters struct {
 	// The minimum number of CPU units for your Serverless SQL Database
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
-	// The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -34,11 +34,11 @@ type SQLDatabaseInitParameters struct {
 
 type SQLDatabaseObservation struct {
 
-	// Endpoint of the database
+	// The endpoint of the database.
 	// endpoint of the database
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum number of CPU units for your database. Defaults to 15.
@@ -49,7 +49,7 @@ type SQLDatabaseObservation struct {
 	// The minimum number of CPU units for your Serverless SQL Database
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
-	// The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -70,7 +70,7 @@ type SQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
-	// The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`

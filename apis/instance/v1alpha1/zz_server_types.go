@@ -86,6 +86,10 @@ type RootVolumeInitParameters struct {
 	// Force deletion of the root volume on instanceSDK termination
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
@@ -97,7 +101,7 @@ type RootVolumeInitParameters struct {
 	// Volume ID of the root volume
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
 	// Volume type of the root volume
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -115,6 +119,10 @@ type RootVolumeObservation struct {
 	// Name of the root volume
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
@@ -126,7 +134,7 @@ type RootVolumeObservation struct {
 	// Volume ID of the root volume
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
 	// Volume type of the root volume
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -142,6 +150,11 @@ type RootVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	// +kubebuilder:validation:Optional
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
@@ -155,7 +168,7 @@ type RootVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
 	// Volume type of the root volume
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -184,6 +197,7 @@ type ServerInitParameters struct {
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
 	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
@@ -313,6 +327,7 @@ type ServerObservation struct {
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
 	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
@@ -327,14 +342,17 @@ type ServerObservation struct {
 	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The default ipv6 address routed to the server. ( Only set when enable_ipv6 is set to true )
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// The default public IPv6 address routed to the server.
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
 	// The ipv6 gateway address. ( Only set when enable_ipv6 is set to true )
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// The IPv6 gateway address
 	IPv6Gateway *string `json:"ipv6Gateway,omitempty" tf:"ipv6_gateway,omitempty"`
 
 	// The prefix length of the ipv6 subnet routed to the server. ( Only set when enable_ipv6 is set to true )
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// The IPv6 prefix length routed to the server.
 	IPv6PrefixLength *float64 `json:"ipv6PrefixLength,omitempty" tf:"ipv6_prefix_length,omitempty"`
 
@@ -372,7 +390,7 @@ type ServerObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The public IP address of the server.
+	// The public IP address of the server (Deprecated use public_ips instead).
 	// The public IPv4 address of the server
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
@@ -451,6 +469,7 @@ type ServerParameters struct {
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
 	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	// +kubebuilder:validation:Optional
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`

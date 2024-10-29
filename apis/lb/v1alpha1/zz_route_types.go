@@ -15,7 +15,7 @@ import (
 
 type RouteInitParameters struct {
 
-	// The ID of the backend to which the route is associated.
+	// The ID of the backend the route is associated with.
 	// The backend ID destination of redirection
 	// +crossplane:generate:reference:type=Backend
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
@@ -28,7 +28,7 @@ type RouteInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
-	// The ID of the frontend to which the route is associated.
+	// The ID of the frontend the route is associated with.
 	// The frontend ID origin of redirection
 	// +crossplane:generate:reference:type=Frontend
 	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
@@ -54,15 +54,15 @@ type RouteInitParameters struct {
 
 type RouteObservation struct {
 
-	// The ID of the backend to which the route is associated.
+	// The ID of the backend the route is associated with.
 	// The backend ID destination of redirection
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// The date at which the route was created.
+	// The date on which the route was created.
 	// The date at which the route was created (RFC 3339 format)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the frontend to which the route is associated.
+	// The ID of the frontend the route is associated with.
 	// The frontend ID origin of redirection
 	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
 
@@ -79,14 +79,14 @@ type RouteObservation struct {
 	// Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
 
-	// The date at which the route was last updated.
+	// The date on which the route was last updated.
 	// The date at which the route was last updated (RFC 3339 format)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type RouteParameters struct {
 
-	// The ID of the backend to which the route is associated.
+	// The ID of the backend the route is associated with.
 	// The backend ID destination of redirection
 	// +crossplane:generate:reference:type=Backend
 	// +kubebuilder:validation:Optional
@@ -100,7 +100,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
-	// The ID of the frontend to which the route is associated.
+	// The ID of the frontend the route is associated with.
 	// The frontend ID origin of redirection
 	// +crossplane:generate:reference:type=Frontend
 	// +kubebuilder:validation:Optional

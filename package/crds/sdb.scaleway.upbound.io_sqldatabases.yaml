@@ -84,7 +84,7 @@ spec:
                     type: number
                   projectId:
                     description: |-
-                      The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+                      The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -118,7 +118,7 @@ spec:
                     type: number
                   projectId:
                     description: |-
-                      The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+                      The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -301,12 +301,12 @@ spec:
                 properties:
                   endpoint:
                     description: |-
-                      Endpoint of the database
+                      The endpoint of the database.
                       endpoint of the database
                     type: string
                   id:
-                    description: The ID of the database, which is of the form {region}/{id}
-                      e.g. fr-par/11111111-1111-1111-1111-111111111111
+                    description: The unique identifier of the database, which is of
+                      the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
                     type: string
                   maxCpu:
                     description: |-
@@ -320,7 +320,7 @@ spec:
                     type: number
                   projectId:
                     description: |-
-                      The ID of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111
+                      The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
                       The project_id you want to attach the resource to
                     type: string
                   region:

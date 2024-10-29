@@ -9,7 +9,8 @@ metadata:
 spec:
   forProvider:
     disableBackup: true
-    engine: PostgreSQL-11
+    encryptionAtRest: true
+    engine: PostgreSQL-15
     isHaCluster: true
     name: test-rdb
     nodeType: DB-DEV-S

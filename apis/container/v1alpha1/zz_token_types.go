@@ -15,7 +15,7 @@ import (
 
 type TokenInitParameters struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	// +crossplane:generate:reference:type=Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -33,7 +33,7 @@ type TokenInitParameters struct {
 	// The expiration date of the token.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the container namespace.
+	// The unique identifier of the Containers namespace.
 	// +crossplane:generate:reference:type=ContainerNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -45,14 +45,14 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TokenObservation struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
 	// The description of the token.
@@ -61,20 +61,20 @@ type TokenObservation struct {
 	// The expiration date of the token.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the token.
+	// The unique identifier of the token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the container namespace.
+	// The unique identifier of the Containers namespace.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TokenParameters struct {
 
-	// The ID of the container.
+	// The unique identifier of the container.
 	// +crossplane:generate:reference:type=Container
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
@@ -95,7 +95,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// The ID of the container namespace.
+	// The unique identifier of the Containers namespace.
 	// +crossplane:generate:reference:type=ContainerNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -108,7 +108,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace should be created.
+	// (Defaults to provider region). The region in which the namespace is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

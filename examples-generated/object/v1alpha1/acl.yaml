@@ -23,4 +23,4 @@ metadata:
   name: some-bucket
 spec:
   forProvider:
-    name: some-unique-name
+    name: unique-name

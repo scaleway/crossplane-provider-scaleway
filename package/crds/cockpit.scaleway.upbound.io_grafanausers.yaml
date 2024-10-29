@@ -74,12 +74,12 @@ spec:
                 properties:
                   login:
                     description: |-
-                      The login of the grafana user.
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
                       The login of the Grafana user
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -158,7 +158,7 @@ spec:
                     type: object
                   role:
                     description: |-
-                      The role of the grafana user. Must be editor or viewer.
+                      The role assigned to the Grafana user. Must be editor or viewer.
                       The role of the Grafana user
                     type: string
                 type: object
@@ -177,12 +177,12 @@ spec:
                 properties:
                   login:
                     description: |-
-                      The login of the grafana user.
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
                       The login of the Grafana user
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -261,7 +261,7 @@ spec:
                     type: object
                   role:
                     description: |-
-                      The role of the grafana user. Must be editor or viewer.
+                      The role assigned to the Grafana user. Must be editor or viewer.
                       The role of the Grafana user
                     type: string
                 type: object
@@ -450,17 +450,17 @@ spec:
                     type: string
                   login:
                     description: |-
-                      The login of the grafana user.
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
                       The login of the Grafana user
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   role:
                     description: |-
-                      The role of the grafana user. Must be editor or viewer.
+                      The role assigned to the Grafana user. Must be editor or viewer.
                       The role of the Grafana user
                     type: string
                 type: object

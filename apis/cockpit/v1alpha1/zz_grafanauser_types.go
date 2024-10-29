@@ -15,11 +15,11 @@ import (
 
 type GrafanaUserInitParameters struct {
 
-	// The login of the grafana user.
+	// The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
 	// The login of the Grafana user
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -32,7 +32,7 @@ type GrafanaUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// The role of the grafana user. Must be editor or viewer.
+	// The role assigned to the Grafana user. Must be editor or viewer.
 	// The role of the Grafana user
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
@@ -40,27 +40,27 @@ type GrafanaUserInitParameters struct {
 type GrafanaUserObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The login of the grafana user.
+	// The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
 	// The login of the Grafana user
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The role of the grafana user. Must be editor or viewer.
+	// The role assigned to the Grafana user. Must be editor or viewer.
 	// The role of the Grafana user
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type GrafanaUserParameters struct {
 
-	// The login of the grafana user.
+	// The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
 	// The login of the Grafana user
 	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
@@ -74,7 +74,7 @@ type GrafanaUserParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// The role of the grafana user. Must be editor or viewer.
+	// The role assigned to the Grafana user. Must be editor or viewer.
 	// The role of the Grafana user
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`

@@ -23,7 +23,7 @@ type DatabaseBackupInitParameters struct {
 	// Expiration date (Format ISO 8601). Cannot be removed.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -62,7 +62,7 @@ type DatabaseBackupObservation struct {
 	// The ID of the backup, which is of the form {region}/{id}, e.g. fr-par/11111111-1111-1111-1111-111111111111
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -99,7 +99,7 @@ type DatabaseBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the user is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional

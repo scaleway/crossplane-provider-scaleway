@@ -906,6 +906,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EncryptionAtRest != nil {
+		in, out := &in.EncryptionAtRest, &out.EncryptionAtRest
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -1092,6 +1097,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EncryptionAtRest != nil {
+		in, out := &in.EncryptionAtRest, &out.EncryptionAtRest
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EndpointIP != nil {
 		in, out := &in.EndpointIP, &out.EndpointIP
 		*out = new(string)
@@ -1260,6 +1270,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	}
 	if in.DisableBackup != nil {
 		in, out := &in.DisableBackup, &out.DisableBackup
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EncryptionAtRest != nil {
+		in, out := &in.EncryptionAtRest, &out.EncryptionAtRest
 		*out = new(bool)
 		**out = **in
 	}

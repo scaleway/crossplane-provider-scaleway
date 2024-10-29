@@ -15,15 +15,15 @@ import (
 
 type AlertManagerInitParameters struct {
 
-	// A list of contact points with email addresses for the alert receivers. Each map should contain a single key email.
+	// A list of contact points with email addresses that will receive alerts. Each map should contain a single key email.
 	// A list of contact points
 	ContactPoints []ContactPointsInitParameters `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Indicates whether the alert manager should be enabled. Defaults to true.
+	// Specifies whether the alert manager should be enabled. Defaults to true.
 	// Enable or disable the alert manager
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -36,49 +36,49 @@ type AlertManagerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region in which alert_manager should be created.
+	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AlertManagerObservation struct {
 
-	// Alert manager URL.
+	// The URL of the alert manager.
 	// Alert manager URL
 	AlertManagerURL *string `json:"alertManagerUrl,omitempty" tf:"alert_manager_url,omitempty"`
 
-	// A list of contact points with email addresses for the alert receivers. Each map should contain a single key email.
+	// A list of contact points with email addresses that will receive alerts. Each map should contain a single key email.
 	// A list of contact points
 	ContactPoints []ContactPointsObservation `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Indicates whether the alert manager should be enabled. Defaults to true.
+	// Specifies whether the alert manager should be enabled. Defaults to true.
 	// Enable or disable the alert manager
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which alert_manager should be created.
+	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AlertManagerParameters struct {
 
-	// A list of contact points with email addresses for the alert receivers. Each map should contain a single key email.
+	// A list of contact points with email addresses that will receive alerts. Each map should contain a single key email.
 	// A list of contact points
 	// +kubebuilder:validation:Optional
 	ContactPoints []ContactPointsParameters `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Indicates whether the alert manager should be enabled. Defaults to true.
+	// Specifies whether the alert manager should be enabled. Defaults to true.
 	// Enable or disable the alert manager
 	// +kubebuilder:validation:Optional
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the cockpit is associated with.
+	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type AlertManagerParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region in which alert_manager should be created.
+	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

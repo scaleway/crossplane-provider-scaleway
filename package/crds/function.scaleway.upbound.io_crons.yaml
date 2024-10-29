@@ -75,12 +75,11 @@ spec:
                   args:
                     description: |-
                       The key-value mapping to define arguments that will be passed to your function’s event object
-                      during
                       Functions arguments as json object to pass through during execution.
                     type: string
                   functionId:
                     description: |-
-                      The function ID to link with your cron.
+                      The unique identifier of the function to link to your CRON trigger.
                       The ID of the function to create a cron for.
                     type: string
                   functionIdRef:
@@ -159,19 +158,18 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the cron. If not provided, the name is generated.
+                      The name of the function CRON trigger. If not provided, a random name is generated.
                       The name of the cron job.
                     type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in where the job was created.
+                      in which the function was created.
                       The region you want to attach the resource to
                     type: string
                   schedule:
                     description: |-
-                      Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-                      executed.
+                      CRON format string (refer to the CRON schedule reference for more information).
                       Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
                     type: string
                 type: object
@@ -191,12 +189,11 @@ spec:
                   args:
                     description: |-
                       The key-value mapping to define arguments that will be passed to your function’s event object
-                      during
                       Functions arguments as json object to pass through during execution.
                     type: string
                   functionId:
                     description: |-
-                      The function ID to link with your cron.
+                      The unique identifier of the function to link to your CRON trigger.
                       The ID of the function to create a cron for.
                     type: string
                   functionIdRef:
@@ -275,19 +272,18 @@ spec:
                     type: object
                   name:
                     description: |-
-                      The name of the cron. If not provided, the name is generated.
+                      The name of the function CRON trigger. If not provided, a random name is generated.
                       The name of the cron job.
                     type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in where the job was created.
+                      in which the function was created.
                       The region you want to attach the resource to
                     type: string
                   schedule:
                     description: |-
-                      Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-                      executed.
+                      CRON format string (refer to the CRON schedule reference for more information).
                       Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
                     type: string
                 type: object
@@ -475,37 +471,35 @@ spec:
                   args:
                     description: |-
                       The key-value mapping to define arguments that will be passed to your function’s event object
-                      during
                       Functions arguments as json object to pass through during execution.
                     type: string
                   functionId:
                     description: |-
-                      The function ID to link with your cron.
+                      The unique identifier of the function to link to your CRON trigger.
                       The ID of the function to create a cron for.
                     type: string
                   id:
-                    description: The function CRON's ID.
+                    description: The unique identifier of the function's CRON trigger.
                     type: string
                   name:
                     description: |-
-                      The name of the cron. If not provided, the name is generated.
+                      The name of the function CRON trigger. If not provided, a random name is generated.
                       The name of the cron job.
                     type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region
-                      in where the job was created.
+                      in which the function was created.
                       The region you want to attach the resource to
                     type: string
                   schedule:
                     description: |-
-                      Cron format string, e.g. @hourly, as schedule time of its jobs to be created and
-                      executed.
+                      CRON format string (refer to the CRON schedule reference for more information).
                       Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
                     type: string
                   status:
                     description: |-
-                      The cron status.
+                      The CRON status.
                       Cron job status.
                     type: string
                 type: object

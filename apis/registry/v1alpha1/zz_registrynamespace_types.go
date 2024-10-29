@@ -57,7 +57,7 @@ type RegistryNamespaceObservation struct {
 	// The name of the container registry namespace
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the namespace is associated with.
+	// The Organization ID the namespace is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 

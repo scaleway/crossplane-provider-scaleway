@@ -101,6 +101,7 @@ spec:
                   enableIpv6:
                     description: |-
                       (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   image:
@@ -328,6 +329,11 @@ spec:
                             (Defaults to true) Forces deletion of the root volume on instance termination.
                             Force deletion of the root volume on instanceSDK termination
                           type: boolean
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
                         sizeInGb:
                           description: |-
                             Size of the root volume in gigabytes.
@@ -343,7 +349,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object
@@ -510,6 +516,7 @@ spec:
                   enableIpv6:
                     description: |-
                       (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   image:
@@ -737,6 +744,11 @@ spec:
                             (Defaults to true) Forces deletion of the root volume on instance termination.
                             Force deletion of the root volume on instanceSDK termination
                           type: boolean
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
                         sizeInGb:
                           description: |-
                             Size of the root volume in gigabytes.
@@ -752,7 +764,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object
@@ -1083,6 +1095,7 @@ spec:
                   enableIpv6:
                     description: |-
                       (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   id:
@@ -1108,16 +1121,19 @@ spec:
                   ipv6Address:
                     description: |-
                       The default ipv6 address routed to the server. ( Only set when enable_ipv6 is set to true )
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       The default public IPv6 address routed to the server.
                     type: string
                   ipv6Gateway:
                     description: |-
                       The ipv6 gateway address. ( Only set when enable_ipv6 is set to true )
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       The IPv6 gateway address
                     type: string
                   ipv6PrefixLength:
                     description: |-
                       The prefix length of the ipv6 subnet routed to the server. ( Only set when enable_ipv6 is set to true )
+                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       The IPv6 prefix length routed to the server.
                     type: number
                   name:
@@ -1186,7 +1202,7 @@ spec:
                     type: string
                   publicIp:
                     description: |-
-                      The public IP address of the server.
+                      The public IP address of the server (Deprecated use public_ips instead).
                       The public IPv4 address of the server
                     type: string
                   publicIps:
@@ -1231,6 +1247,11 @@ spec:
                             The name of the server.
                             Name of the root volume
                           type: string
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
                         sizeInGb:
                           description: |-
                             Size of the root volume in gigabytes.
@@ -1246,7 +1267,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd or l_ssd, default value depends on server type
+                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object

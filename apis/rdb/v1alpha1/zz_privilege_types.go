@@ -19,7 +19,7 @@ type PrivilegeInitParameters struct {
 	// Database name
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -54,7 +54,7 @@ type PrivilegeObservation struct {
 	// The ID of the user privileges, which is of the form {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -78,7 +78,7 @@ type PrivilegeParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// UUID of the rdb instance.
+	// UUID of the Database Instance.
 	// Instance on which the database is created
 	// +crossplane:generate:reference:type=Instance
 	// +kubebuilder:validation:Optional
