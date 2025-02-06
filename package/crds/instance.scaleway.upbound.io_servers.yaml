@@ -87,7 +87,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the bootscript to use  (set boot_type to bootscript).
+                      The ID of the server.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -339,7 +339,7 @@ spec:
                             Size of the root volume in gigabytes.
                             To find the right size use this endpoint and
                             check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-                            Updates to this field will recreate a new resource.
+                            Depending on volume_type, updates to this field may recreate a new resource.
                             Size of the root volume in gigabytes
                           type: number
                         volumeId:
@@ -357,7 +357,7 @@ spec:
                   routedIpEnabled:
                     description: |-
                       (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true if public_ips is used
+                      If server supports routed IPs, default to true
                     type: boolean
                   securityGroupId:
                     description: |-
@@ -502,7 +502,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the bootscript to use  (set boot_type to bootscript).
+                      The ID of the server.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -754,7 +754,7 @@ spec:
                             Size of the root volume in gigabytes.
                             To find the right size use this endpoint and
                             check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-                            Updates to this field will recreate a new resource.
+                            Depending on volume_type, updates to this field may recreate a new resource.
                             Size of the root volume in gigabytes
                           type: number
                         volumeId:
@@ -772,7 +772,7 @@ spec:
                   routedIpEnabled:
                     description: |-
                       (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true if public_ips is used
+                      If server supports routed IPs, default to true
                     type: boolean
                   securityGroupId:
                     description: |-
@@ -1081,7 +1081,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the bootscript to use  (set boot_type to bootscript).
+                      The ID of the server.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -1158,7 +1158,7 @@ spec:
                     type: boolean
                   privateIp:
                     description: |-
-                      The Scaleway internal IP address of the server.
+                      The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
                       The Scaleway internal IP address of the server
                     type: string
                   privateNetwork:
@@ -1257,7 +1257,7 @@ spec:
                             Size of the root volume in gigabytes.
                             To find the right size use this endpoint and
                             check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-                            Updates to this field will recreate a new resource.
+                            Depending on volume_type, updates to this field may recreate a new resource.
                             Size of the root volume in gigabytes
                           type: number
                         volumeId:
@@ -1275,7 +1275,7 @@ spec:
                   routedIpEnabled:
                     description: |-
                       (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true if public_ips is used
+                      If server supports routed IPs, default to true
                     type: boolean
                   securityGroupId:
                     description: |-

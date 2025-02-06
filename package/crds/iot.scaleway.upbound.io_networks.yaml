@@ -156,6 +156,11 @@ spec:
                       The name of the IoT Network you want to create (e.g. my-net).
                       The name of the network
                     type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the Network is attached to.
+                      The region you want to attach the resource to
+                    type: string
                   topicPrefix:
                     description: |-
                       The prefix that will be prepended to all topics for this Network.
@@ -263,6 +268,11 @@ spec:
                     description: |-
                       The name of the IoT Network you want to create (e.g. my-net).
                       The name of the network
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the Network is attached to.
+                      The region you want to attach the resource to
                     type: string
                   topicPrefix:
                     description: |-
@@ -478,6 +488,11 @@ spec:
                     description: |-
                       The name of the IoT Network you want to create (e.g. my-net).
                       The name of the network
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the Network is attached to.
+                      The region you want to attach the resource to
                     type: string
                   topicPrefix:
                     description: |-

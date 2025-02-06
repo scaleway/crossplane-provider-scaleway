@@ -124,6 +124,11 @@ spec:
                       ~> Important: Updates to os will reinstall the server.
                       The base image of the server
                     type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
                   passwordSecretRef:
                     description: |-
                       Password used for the installation. May be required depending on used os.
@@ -154,6 +159,13 @@ spec:
                             The id of the option to enable. Use this endpoint to find the available options IDs.
                             The private network ID
                           type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   projectId:
@@ -363,6 +375,11 @@ spec:
                       ~> Important: Updates to os will reinstall the server.
                       The base image of the server
                     type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
                   passwordSecretRef:
                     description: |-
                       Password used for the installation. May be required depending on used os.
@@ -393,6 +410,13 @@ spec:
                             The id of the option to enable. Use this endpoint to find the available options IDs.
                             The private network ID
                           type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   projectId:
@@ -861,6 +885,11 @@ spec:
                       The name of the os.
                       The base image name of the server
                     type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
@@ -877,6 +906,13 @@ spec:
                             The id of the option to enable. Use this endpoint to find the available options IDs.
                             The private network ID
                           type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
                         status:
                           description: |-
                             The private network status.

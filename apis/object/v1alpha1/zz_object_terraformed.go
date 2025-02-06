@@ -21,7 +21,7 @@ func (mg *Object) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Object
 func (tr *Object) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"sse_customer_key": "sseCustomerKeySecretRef"}
 }
 
 // GetObservation of this Object

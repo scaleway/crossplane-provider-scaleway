@@ -36,6 +36,10 @@ type SourceInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+	// The number of days to retain data, must be between 1 and 365.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
 	// The type of data source. Possible values are: metrics, logs, or traces.
 	// The type of the datasource
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -69,6 +73,10 @@ type SourceObservation struct {
 	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+	// The number of days to retain data, must be between 1 and 365.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Indicates whether the data source is synchronized with Grafana.
 	// Indicates whether the data source is synchronized with Grafana
@@ -113,6 +121,11 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+	// The number of days to retain data, must be between 1 and 365.
+	// +kubebuilder:validation:Optional
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
 	// The type of data source. Possible values are: metrics, logs, or traces.
 	// The type of the datasource
 	// +kubebuilder:validation:Optional
@@ -155,8 +168,9 @@ type SourceStatus struct {
 type Source struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SourceSpec   `json:"spec"`
-	Status            SourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDays) || (has(self.initProvider) && has(self.initProvider.retentionDays))",message="spec.forProvider.retentionDays is a required parameter"
+	Spec   SourceSpec   `json:"spec"`
+	Status SourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

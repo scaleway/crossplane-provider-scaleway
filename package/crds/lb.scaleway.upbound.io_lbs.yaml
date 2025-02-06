@@ -89,7 +89,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      (Deprecated) The ID of the associated Load Balancer IP. See below.
+                      (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
@@ -180,13 +180,13 @@ spec:
                     type: string
                   privateNetwork:
                     description: |-
-                      will recreate the attachment.
+                      List of private network to connect with your load balancer.
                       List of private network to connect with your load balancer
                     items:
                       properties:
                         dhcpConfig:
                           description: |-
-                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
                             Set to true if you want to let DHCP assign IP addresses
                           type: boolean
                         ipamIds:
@@ -217,7 +217,7 @@ spec:
                     type: string
                   releaseIp:
                     description: |-
-                      (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+                      (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
                       Release the IPs related to this load-balancer
                     type: boolean
                   sslCompatibilityLevel:
@@ -273,7 +273,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      (Deprecated) The ID of the associated Load Balancer IP. See below.
+                      (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
@@ -364,13 +364,13 @@ spec:
                     type: string
                   privateNetwork:
                     description: |-
-                      will recreate the attachment.
+                      List of private network to connect with your load balancer.
                       List of private network to connect with your load balancer
                     items:
                       properties:
                         dhcpConfig:
                           description: |-
-                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
                             Set to true if you want to let DHCP assign IP addresses
                           type: boolean
                         ipamIds:
@@ -401,7 +401,7 @@ spec:
                     type: string
                   releaseIp:
                     description: |-
-                      (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+                      (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
                       Release the IPs related to this load-balancer
                     type: boolean
                   sslCompatibilityLevel:
@@ -629,7 +629,7 @@ spec:
                     type: string
                   ipId:
                     description: |-
-                      (Deprecated) The ID of the associated Load Balancer IP. See below.
+                      (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
                       The load-balance public IP ID
                     type: string
                   ipIds:
@@ -656,13 +656,13 @@ spec:
                     type: string
                   privateNetwork:
                     description: |-
-                      will recreate the attachment.
+                      List of private network to connect with your load balancer.
                       List of private network to connect with your load balancer
                     items:
                       properties:
                         dhcpConfig:
                           description: |-
-                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+                            (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
                             Set to true if you want to let DHCP assign IP addresses
                           type: boolean
                         ipamIds:
@@ -685,7 +685,9 @@ spec:
                             type: string
                           type: array
                         status:
-                          description: The status of private network connection
+                          description: |-
+                            The status of the private network connection.
+                            The status of private network connection
                           type: string
                         zone:
                           description: (Defaults to provider zone) The zone of the
@@ -703,7 +705,7 @@ spec:
                     type: string
                   releaseIp:
                     description: |-
-                      (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+                      (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
                       Release the IPs related to this load-balancer
                     type: boolean
                   sslCompatibilityLevel:

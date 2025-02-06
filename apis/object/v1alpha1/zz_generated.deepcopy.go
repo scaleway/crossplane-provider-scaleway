@@ -9,6 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
+	"github.com/crossplane/crossplane-runtime/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -1808,6 +1809,11 @@ func (in *ObjectInitParameters) DeepCopyInto(out *ObjectInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SseCustomerKeySecretRef != nil {
+		in, out := &in.SseCustomerKeySecretRef, &out.SseCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageClass != nil {
 		in, out := &in.StorageClass, &out.StorageClass
 		*out = new(string)
@@ -2037,6 +2043,11 @@ func (in *ObjectParameters) DeepCopyInto(out *ObjectParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SseCustomerKeySecretRef != nil {
+		in, out := &in.SseCustomerKeySecretRef, &out.SseCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageClass != nil {

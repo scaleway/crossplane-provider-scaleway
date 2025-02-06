@@ -40,6 +40,9 @@ type ContainerNamespaceInitParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the container namespace
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ContainerNamespaceObservation struct {
@@ -82,6 +85,9 @@ type ContainerNamespaceObservation struct {
 	// The registry namespace ID of the namespace.
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the container namespace
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ContainerNamespaceParameters struct {
@@ -120,6 +126,10 @@ type ContainerNamespaceParameters struct {
 	// The secret environment variables of the container namespace
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.SecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the container namespace
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ContainerNamespaceSpec defines the desired state of ContainerNamespace

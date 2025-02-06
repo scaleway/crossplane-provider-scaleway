@@ -37,6 +37,9 @@ type FunctionNamespaceInitParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the function namespace
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FunctionNamespaceObservation struct {
@@ -76,6 +79,9 @@ type FunctionNamespaceObservation struct {
 	// The registry namespace ID of the namespace.
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the function namespace
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FunctionNamespaceParameters struct {
@@ -110,6 +116,10 @@ type FunctionNamespaceParameters struct {
 	// The environment variables of the function namespace
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.SecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// List of tags ["tag1", "tag2", ...] attached to the function namespace
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // FunctionNamespaceSpec defines the desired state of FunctionNamespace

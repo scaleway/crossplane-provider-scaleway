@@ -158,7 +158,7 @@ spec:
                     type: object
                   enableDhcp:
                     description: |-
-                      (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
@@ -452,7 +452,7 @@ spec:
                     type: object
                   enableDhcp:
                     description: |-
-                      (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
@@ -836,7 +836,7 @@ spec:
                     type: string
                   enableDhcp:
                     description: |-
-                      (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:

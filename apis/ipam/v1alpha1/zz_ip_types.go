@@ -13,11 +13,50 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomResourceInitParameters struct {
+
+	// The MAC address of the custom resource.
+	// MAC address of the custom resource
+	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CustomResourceObservation struct {
+
+	// The MAC address of the custom resource.
+	// MAC address of the custom resource
+	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CustomResourceParameters struct {
+
+	// The MAC address of the custom resource.
+	// MAC address of the custom resource
+	// +kubebuilder:validation:Optional
+	MacAddress *string `json:"macAddress" tf:"mac_address,omitempty"`
+
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type IPInitParameters struct {
 
 	// Request a specific IP in the specified source pool.
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The IP resource.
+	// The custom resource in which to book the IP
+	CustomResource []CustomResourceInitParameters `json:"customResource,omitempty" tf:"custom_resource,omitempty"`
 
 	// Defines whether to request an IPv6 address instead of IPv4.
 	// Request an IPv6 instead of an IPv4
@@ -49,6 +88,10 @@ type IPObservation struct {
 	// Date and time of IP's creation (RFC 3339 format).
 	// The date and time of the creation of the IP
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The IP resource.
+	// The custom resource in which to book the IP
+	CustomResource []CustomResourceObservation `json:"customResource,omitempty" tf:"custom_resource,omitempty"`
 
 	// The ID of the IP in IPAM.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -97,6 +140,11 @@ type IPParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// The IP resource.
+	// The custom resource in which to book the IP
+	// +kubebuilder:validation:Optional
+	CustomResource []CustomResourceParameters `json:"customResource,omitempty" tf:"custom_resource,omitempty"`
+
 	// Defines whether to request an IPv6 address instead of IPv4.
 	// Request an IPv6 instead of an IPv4
 	// +kubebuilder:validation:Optional
@@ -131,10 +179,10 @@ type ResourceObservation struct {
 	// The ID of the IP in IPAM.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The MAC address of the resource the IP is attached to.
+	// The MAC address of the custom resource.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
-	// The name of the resource the IP is attached to.
+	// When the resource is in a Private Network, a DNS record is available to resolve the resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The type of resource the IP is attached to.
