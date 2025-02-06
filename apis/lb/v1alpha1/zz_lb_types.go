@@ -27,7 +27,7 @@ type LBInitParameters struct {
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Deprecated) The ID of the associated Load Balancer IP. See below.
+	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=IP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
@@ -48,7 +48,7 @@ type LBInitParameters struct {
 	// Name of the lb
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// will recreate the attachment.
+	// List of private network to connect with your load balancer.
 	// List of private network to connect with your load balancer
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -56,7 +56,7 @@ type LBInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+	// (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
 	// Release the IPs related to this load-balancer
 	ReleaseIP *bool `json:"releaseIp,omitempty" tf:"release_ip,omitempty"`
 
@@ -98,7 +98,7 @@ type LBObservation struct {
 	// The load-balance public IPv4 address
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// (Deprecated) The ID of the associated Load Balancer IP. See below.
+	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
@@ -118,7 +118,7 @@ type LBObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// will recreate the attachment.
+	// List of private network to connect with your load balancer.
 	// List of private network to connect with your load balancer
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -129,7 +129,7 @@ type LBObservation struct {
 	// The region of the resource
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+	// (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
 	// Release the IPs related to this load-balancer
 	ReleaseIP *bool `json:"releaseIp,omitempty" tf:"release_ip,omitempty"`
 
@@ -167,7 +167,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Deprecated) The ID of the associated Load Balancer IP. See below.
+	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=IP
 	// +kubebuilder:validation:Optional
@@ -191,7 +191,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// will recreate the attachment.
+	// List of private network to connect with your load balancer.
 	// List of private network to connect with your load balancer
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -201,7 +201,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to false) The release_ip allow the release of the IP address associated with the Load Balancer.
+	// (Deprecated) The release_ip allow the release of the IP address associated with the Load Balancer.
 	// Release the IPs related to this load-balancer
 	// +kubebuilder:validation:Optional
 	ReleaseIP *bool `json:"releaseIp,omitempty" tf:"release_ip,omitempty"`
@@ -229,7 +229,7 @@ type LBParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
 	// Set to true if you want to let DHCP assign IP addresses
 	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
 
@@ -248,7 +248,7 @@ type PrivateNetworkInitParameters struct {
 
 type PrivateNetworkObservation struct {
 
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
 	// Set to true if you want to let DHCP assign IP addresses
 	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
 
@@ -264,6 +264,7 @@ type PrivateNetworkObservation struct {
 	// Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
 	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 
+	// The status of the private network connection.
 	// The status of private network connection
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -273,7 +274,7 @@ type PrivateNetworkObservation struct {
 
 type PrivateNetworkParameters struct {
 
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses. See below.
+	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
 	// Set to true if you want to let DHCP assign IP addresses
 	// +kubebuilder:validation:Optional
 	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`

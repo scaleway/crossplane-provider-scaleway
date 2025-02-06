@@ -32,7 +32,7 @@ type GatewayNetworkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
@@ -93,7 +93,7 @@ type GatewayNetworkObservation struct {
 	// The ID of the public gateway DHCP config
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
 
-	// (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
@@ -158,7 +158,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to true) WWhether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	// +kubebuilder:validation:Optional
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`

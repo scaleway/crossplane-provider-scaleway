@@ -118,6 +118,25 @@ spec:
                       The Scaleway region the bucket resides in.
                       The region you want to attach the resource to
                     type: string
+                  sseCustomerKeySecretRef:
+                    description: |-
+                      Customer's encryption keys to encrypt data (SSE-C)
+                      Customer's encryption keys to encrypt data (SSE-C)
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageClass:
                     description: |-
                       Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
@@ -196,6 +215,25 @@ spec:
                       The Scaleway region the bucket resides in.
                       The region you want to attach the resource to
                     type: string
+                  sseCustomerKeySecretRef:
+                    description: |-
+                      Customer's encryption keys to encrypt data (SSE-C)
+                      Customer's encryption keys to encrypt data (SSE-C)
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageClass:
                     description: |-
                       Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.

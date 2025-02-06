@@ -77,6 +77,24 @@ spec:
                       Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
+                  customResource:
+                    description: |-
+                      The IP resource.
+                      The custom resource in which to book the IP
+                    items:
+                      properties:
+                        macAddress:
+                          description: |-
+                            The MAC address of the custom resource.
+                            MAC address of the custom resource
+                          type: string
+                        name:
+                          description: |-
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name
+                          type: string
+                      type: object
+                    type: array
                   isIpv6:
                     description: |-
                       Defines whether to request an IPv6 address instead of IPv4.
@@ -217,6 +235,24 @@ spec:
                       Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
+                  customResource:
+                    description: |-
+                      The IP resource.
+                      The custom resource in which to book the IP
+                    items:
+                      properties:
+                        macAddress:
+                          description: |-
+                            The MAC address of the custom resource.
+                            MAC address of the custom resource
+                          type: string
+                        name:
+                          description: |-
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name
+                          type: string
+                      type: object
+                    type: array
                   isIpv6:
                     description: |-
                       Defines whether to request an IPv6 address instead of IPv4.
@@ -526,6 +562,24 @@ spec:
                       Date and time of IP's creation (RFC 3339 format).
                       The date and time of the creation of the IP
                     type: string
+                  customResource:
+                    description: |-
+                      The IP resource.
+                      The custom resource in which to book the IP
+                    items:
+                      properties:
+                        macAddress:
+                          description: |-
+                            The MAC address of the custom resource.
+                            MAC address of the custom resource
+                          type: string
+                        name:
+                          description: |-
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name.
+                            When the resource is in a Private Network, a DNS record is available to resolve the resource name
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the IP in IPAM.
                     type: string
@@ -554,12 +608,11 @@ spec:
                           description: The ID of the IP in IPAM.
                           type: string
                         macAddress:
-                          description: The MAC address of the resource the IP is attached
-                            to.
+                          description: The MAC address of the custom resource.
                           type: string
                         name:
-                          description: The name of the resource the IP is attached
-                            to.
+                          description: When the resource is in a Private Network,
+                            a DNS record is available to resolve the resource name.
                           type: string
                         type:
                           description: The type of resource the IP is attached to.

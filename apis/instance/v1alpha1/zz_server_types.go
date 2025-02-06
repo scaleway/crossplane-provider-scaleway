@@ -93,7 +93,7 @@ type RootVolumeInitParameters struct {
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Updates to this field will recreate a new resource.
+	// Depending on volume_type, updates to this field may recreate a new resource.
 	// Size of the root volume in gigabytes
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -126,7 +126,7 @@ type RootVolumeObservation struct {
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Updates to this field will recreate a new resource.
+	// Depending on volume_type, updates to this field may recreate a new resource.
 	// Size of the root volume in gigabytes
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -158,7 +158,7 @@ type RootVolumeParameters struct {
 	// Size of the root volume in gigabytes.
 	// To find the right size use this endpoint and
 	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Updates to this field will recreate a new resource.
+	// Depending on volume_type, updates to this field may recreate a new resource.
 	// Size of the root volume in gigabytes
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
@@ -185,7 +185,7 @@ type ServerInitParameters struct {
 	// The boot type of the server
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the bootscript to use  (set boot_type to bootscript).
+	// The ID of the server.
 	// ID of the target bootscript (set boot_type to bootscript)
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
 
@@ -261,7 +261,7 @@ type ServerInitParameters struct {
 	RootVolume []RootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true if public_ips is used
+	// If server supports routed IPs, default to true
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
@@ -315,7 +315,7 @@ type ServerObservation struct {
 	// The boot type of the server
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the bootscript to use  (set boot_type to bootscript).
+	// The ID of the server.
 	// ID of the target bootscript (set boot_type to bootscript)
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
 
@@ -377,7 +377,7 @@ type ServerObservation struct {
 	// True when the placement group policy is respected
 	PlacementGroupPolicyRespected *bool `json:"placementGroupPolicyRespected,omitempty" tf:"placement_group_policy_respected,omitempty"`
 
-	// The Scaleway internal IP address of the server.
+	// The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
 	// The Scaleway internal IP address of the server
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
@@ -407,7 +407,7 @@ type ServerObservation struct {
 	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true if public_ips is used
+	// If server supports routed IPs, default to true
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
@@ -454,7 +454,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the bootscript to use  (set boot_type to bootscript).
+	// The ID of the server.
 	// ID of the target bootscript (set boot_type to bootscript)
 	// +kubebuilder:validation:Optional
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
@@ -544,7 +544,7 @@ type ServerParameters struct {
 	RootVolume []RootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true if public_ips is used
+	// If server supports routed IPs, default to true
 	// +kubebuilder:validation:Optional
 	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 

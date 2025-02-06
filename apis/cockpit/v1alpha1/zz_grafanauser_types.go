@@ -38,6 +38,11 @@ type GrafanaUserInitParameters struct {
 }
 
 type GrafanaUserObservation struct {
+
+	// URL for Grafana.
+	// The grafana URL
+	GrafanaURL *string `json:"grafanaUrl,omitempty" tf:"grafana_url,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.

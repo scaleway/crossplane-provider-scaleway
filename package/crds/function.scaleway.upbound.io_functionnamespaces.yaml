@@ -115,6 +115,12 @@ spec:
                     - name
                     - namespace
                     type: object
+                  tags:
+                    description: List of tags ["tag1", "tag2", ...] attached to the
+                      function namespace
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -161,6 +167,12 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                  tags:
+                    description: List of tags ["tag1", "tag2", ...] attached to the
+                      function namespace
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -380,6 +392,12 @@ spec:
                       The registry namespace ID of the namespace.
                       The ID of the registry namespace
                     type: string
+                  tags:
+                    description: List of tags ["tag1", "tag2", ...] attached to the
+                      function namespace
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
