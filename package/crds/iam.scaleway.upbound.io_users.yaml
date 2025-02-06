@@ -82,6 +82,13 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -106,6 +113,13 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -327,6 +341,13 @@ spec:
                       The status of user invitation. Check the possible values in the API doc.
                       The status of user invitation.
                     type: string
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
                   type:
                     description: |-
                       The type of user. Check the possible values in the API doc.

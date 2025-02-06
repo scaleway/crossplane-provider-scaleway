@@ -51,6 +51,10 @@ type ObjectInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Customer's encryption keys to encrypt data (SSE-C)
+	// Customer's encryption keys to encrypt data (SSE-C)
+	SseCustomerKeySecretRef *v1.SecretKeySelector `json:"sseCustomerKeySecretRef,omitempty" tf:"-"`
+
 	// Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
@@ -166,6 +170,11 @@ type ObjectParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Customer's encryption keys to encrypt data (SSE-C)
+	// Customer's encryption keys to encrypt data (SSE-C)
+	// +kubebuilder:validation:Optional
+	SseCustomerKeySecretRef *v1.SecretKeySelector `json:"sseCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Scaleway storage class (STANDARD, GLACIER, or ONEZONE_IA) used to store the object.
 	// Specifies the Scaleway Object Storage class to which you want the object to transition

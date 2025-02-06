@@ -22,7 +22,7 @@ type BucketInitParameters struct {
 	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
 	CorsRule []CorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
 	// Delete objects in bucket
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -73,7 +73,7 @@ type BucketObservation struct {
 	// Endpoint of the bucket
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
 	// Delete objects in bucket
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -121,7 +121,7 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+	// Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
 	// Delete objects in bucket
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`

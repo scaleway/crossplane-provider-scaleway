@@ -446,6 +446,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  grafanaUrl:
+                    description: |-
+                      URL for Grafana.
+                      The grafana URL
+                    type: string
                   id:
                     type: string
                   login:

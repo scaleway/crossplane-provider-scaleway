@@ -22,6 +22,10 @@ type UserInitParameters struct {
 	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the user.
+	// The tags associated with the user
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type UserObservation struct {
@@ -61,6 +65,10 @@ type UserObservation struct {
 	// The status of user invitation.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The tags associated with the user.
+	// The tags associated with the user
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The type of user. Check the possible values in the API doc.
 	// The type of the iam user
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -81,6 +89,11 @@ type UserParameters struct {
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The tags associated with the user.
+	// The tags associated with the user
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // UserSpec defines the desired state of User

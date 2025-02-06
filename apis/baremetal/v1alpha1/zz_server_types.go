@@ -120,6 +120,10 @@ type PrivateNetworkInitParameters struct {
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
 	// The private network ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to assign to the server in the requested private network.
+	// List of IPAM IP IDs to attach to the server
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 }
 
 type PrivateNetworkObservation struct {
@@ -131,6 +135,10 @@ type PrivateNetworkObservation struct {
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
 	// The private network ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to assign to the server in the requested private network.
+	// List of IPAM IP IDs to attach to the server
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 
 	// The private network status.
 	// The private network status
@@ -151,6 +159,11 @@ type PrivateNetworkParameters struct {
 	// The private network ID
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to assign to the server in the requested private network.
+	// List of IPAM IP IDs to attach to the server
+	// +kubebuilder:validation:Optional
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 }
 
 type ServerInitParameters struct {
@@ -186,6 +199,10 @@ type ServerInitParameters struct {
 	// ~> Important: Updates to os will reinstall the server.
 	// The base image of the server
 	Os *string `json:"os,omitempty" tf:"os,omitempty"`
+
+	// The partitioning schema in JSON format
+	// The partitioning schema in json format
+	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
 	// Password used for the installation. May be required depending on used os.
 	// Password used for the installation.
@@ -309,6 +326,10 @@ type ServerObservation struct {
 	// The base image name of the server
 	OsName *string `json:"osName,omitempty" tf:"os_name,omitempty"`
 
+	// The partitioning schema in JSON format
+	// The partitioning schema in json format
+	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
+
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -386,6 +407,11 @@ type ServerParameters struct {
 	// The base image of the server
 	// +kubebuilder:validation:Optional
 	Os *string `json:"os,omitempty" tf:"os,omitempty"`
+
+	// The partitioning schema in JSON format
+	// The partitioning schema in json format
+	// +kubebuilder:validation:Optional
+	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
 	// Password used for the installation. May be required depending on used os.
 	// Password used for the installation.

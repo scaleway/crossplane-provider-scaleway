@@ -78,11 +78,25 @@ spec:
                       The custom type certificate type configuration
                     items:
                       properties:
-                        certificateChain:
+                        certificateChainSecretRef:
                           description: |-
                             Full PEM-formatted certificate chain.
                             The full PEM-formatted certificate chain
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   lbId:
@@ -209,11 +223,27 @@ spec:
                       The custom type certificate type configuration
                     items:
                       properties:
-                        certificateChain:
+                        certificateChainSecretRef:
                           description: |-
                             Full PEM-formatted certificate chain.
                             The full PEM-formatted certificate chain
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - certificateChainSecretRef
                       type: object
                     type: array
                   lbId:
@@ -504,11 +534,25 @@ spec:
                       The custom type certificate type configuration
                     items:
                       properties:
-                        certificateChain:
+                        certificateChainSecretRef:
                           description: |-
                             Full PEM-formatted certificate chain.
                             The full PEM-formatted certificate chain
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   fingerprint:

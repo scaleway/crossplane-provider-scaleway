@@ -111,7 +111,7 @@ spec:
                     type: array
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
                       Delete objects in bucket
                     type: boolean
                   lifecycleRule:
@@ -275,7 +275,7 @@ spec:
                     type: array
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
                       Delete objects in bucket
                     type: boolean
                   lifecycleRule:
@@ -613,7 +613,7 @@ spec:
                     type: string
                   forceDestroy:
                     description: |-
-                      Enable deletion of objects in the bucket before destroying, locked objects or under legal hold are also deleted and not recoverable
+                      Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.
                       Delete objects in bucket
                     type: boolean
                   id:
