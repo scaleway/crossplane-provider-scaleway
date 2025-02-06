@@ -4,7 +4,7 @@
 PROJECT_NAME := provider-scaleway
 PROJECT_REPO := github.com/scaleway/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION := 1.3.3
+export TERRAFORM_VERSION := 1.10.5
 
 export TERRAFORM_PROVIDER_SOURCE := scaleway/scaleway
 export TERRAFORM_PROVIDER_REPO := https://github.com/scaleway/terraform-provider-scaleway
@@ -38,8 +38,8 @@ NPROCS ?= 1
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
-GO_REQUIRED_VERSION ?= 1.21
-GOLANGCILINT_VERSION ?= 1.50.0
+GO_REQUIRED_VERSION ?= 1.23
+GOLANGCILINT_VERSION ?= 1.63.4
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
