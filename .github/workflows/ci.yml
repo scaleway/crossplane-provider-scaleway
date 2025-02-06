@@ -11,7 +11,7 @@ on:
 
 env:
   # Common versions
-  GO_VERSION: '1.21'
+  GO_VERSION: '1.23'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
   # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
