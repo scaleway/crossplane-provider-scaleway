@@ -53,7 +53,7 @@ UP_VERSION = v0.31.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.12.0
 -include build/makelib/k8s_tools.mk
-CROSSPLANE_VERSION = 1.16.0
+CROSSPLANE_VERSION = 1.18.0
 
 # ====================================================================================
 # Setup Images
