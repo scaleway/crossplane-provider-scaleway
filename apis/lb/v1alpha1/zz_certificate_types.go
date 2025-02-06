@@ -49,7 +49,7 @@ type CertificateObservation struct {
 
 	// Block for custom certificate chain configuration. Only one of letsencrypt and custom_certificate should be specified.
 	// The custom type certificate type configuration
-	CustomCertificate []CustomCertificateObservation `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
+	CustomCertificate []CustomCertificateParameters `json:"customCertificate,omitempty" tf:"custom_certificate,omitempty"`
 
 	// The identifier (SHA-1) of the certificate
 	// The identifier (SHA-1) of the certificate
@@ -123,14 +123,10 @@ type CustomCertificateInitParameters struct {
 
 	// Full PEM-formatted certificate chain.
 	// The full PEM-formatted certificate chain
-	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+	CertificateChainSecretRef v1.SecretKeySelector `json:"certificateChainSecretRef" tf:"-"`
 }
 
 type CustomCertificateObservation struct {
-
-	// Full PEM-formatted certificate chain.
-	// The full PEM-formatted certificate chain
-	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type CustomCertificateParameters struct {
@@ -138,7 +134,7 @@ type CustomCertificateParameters struct {
 	// Full PEM-formatted certificate chain.
 	// The full PEM-formatted certificate chain
 	// +kubebuilder:validation:Optional
-	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
+	CertificateChainSecretRef v1.SecretKeySelector `json:"certificateChainSecretRef" tf:"-"`
 }
 
 type LetsencryptInitParameters struct {

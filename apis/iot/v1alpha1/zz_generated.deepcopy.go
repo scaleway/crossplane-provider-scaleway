@@ -987,6 +987,11 @@ func (in *NetworkInitParameters) DeepCopyInto(out *NetworkInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicPrefix != nil {
 		in, out := &in.TopicPrefix, &out.TopicPrefix
 		*out = new(string)
@@ -1069,6 +1074,11 @@ func (in *NetworkObservation) DeepCopyInto(out *NetworkObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicPrefix != nil {
 		in, out := &in.TopicPrefix, &out.TopicPrefix
 		*out = new(string)
@@ -1111,6 +1121,11 @@ func (in *NetworkParameters) DeepCopyInto(out *NetworkParameters) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
 	}
