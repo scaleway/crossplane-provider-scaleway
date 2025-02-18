@@ -42,6 +42,7 @@ import (
 	image "github.com/scaleway/provider-scaleway/internal/controller/instance/image"
 	ipinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/ip"
 	placementgroup "github.com/scaleway/provider-scaleway/internal/controller/instance/placementgroup"
+	privatenic "github.com/scaleway/provider-scaleway/internal/controller/instance/privatenic"
 	securitygroup "github.com/scaleway/provider-scaleway/internal/controller/instance/securitygroup"
 	securitygrouprule "github.com/scaleway/provider-scaleway/internal/controller/instance/securitygrouprule"
 	serverinstance "github.com/scaleway/provider-scaleway/internal/controller/instance/server"
@@ -126,6 +127,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		image.Setup,
 		ipinstance.Setup,
 		placementgroup.Setup,
+		privatenic.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,
 		serverinstance.Setup,

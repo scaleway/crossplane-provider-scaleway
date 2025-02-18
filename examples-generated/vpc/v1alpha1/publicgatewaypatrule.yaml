@@ -19,6 +19,25 @@ spec:
 ---
 
 apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: PrivateNIC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: pnic01
+  name: pnic01
+spec:
+  forProvider:
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: srv01
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
 kind: SecurityGroup
 metadata:
   annotations:

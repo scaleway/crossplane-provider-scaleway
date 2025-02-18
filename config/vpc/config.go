@@ -60,6 +60,9 @@ func Configure(p *config.Provider) {
 		r.References["dhcp_id"] = config.Reference{
 			Type: "PublicGatewayDHCP",
 		}
+		r.References["ipam_ip_id"] = config.Reference{
+			TerraformName: "scaleway_ipam_ip",
+		}
 	})
 
 	p.AddResourceConfigurator("scaleway_vpc_public_gateway_dhcp", func(r *config.Resource) {

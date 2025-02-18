@@ -9,6 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/scaleway/provider-scaleway/apis/ipam/v1alpha1"
+	v1alpha11 "github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -50,6 +52,113 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.InitProvider.RootVolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RootVolumeIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PrivateNIC.
+func (mg *PrivateNIC) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IpamIPIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.IpamIPIdsRefs,
+		Selector:      mg.Spec.ForProvider.IpamIPIdsSelector,
+		To: reference.To{
+			List:    &v1alpha1.IPList{},
+			Managed: &v1alpha1.IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IpamIPIds")
+	}
+	mg.Spec.ForProvider.IpamIPIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.IpamIPIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.PrivateNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.PrivateNetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateNetworkID")
+	}
+	mg.Spec.ForProvider.PrivateNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateNetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServerIDRef,
+		Selector:     mg.Spec.ForProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IpamIPIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.IpamIPIdsRefs,
+		Selector:      mg.Spec.InitProvider.IpamIPIdsSelector,
+		To: reference.To{
+			List:    &v1alpha1.IPList{},
+			Managed: &v1alpha1.IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IpamIPIds")
+	}
+	mg.Spec.InitProvider.IpamIPIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IpamIPIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateNetworkID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PrivateNetworkIDRef,
+		Selector:     mg.Spec.InitProvider.PrivateNetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateNetworkID")
+	}
+	mg.Spec.InitProvider.PrivateNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateNetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
 
 	return nil
 }
