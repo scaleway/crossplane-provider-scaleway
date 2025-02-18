@@ -1,0 +1,85 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  name: vpc
+  annotations:
+    meta.upbound.io/example-id: ipam/pnic
+  labels:
+    example-name: example
+spec:
+  forProvider:
+    name: crossplane-vpc
+  providerConfigRef:
+    name: default
+---
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: ipam/pnic
+  labels:
+    resource-type: private-network
+    example-name: example
+spec:
+  forProvider:
+    vpcIdRef:
+      name: vpc
+    name: crossplane-private-network
+    ipv4Subnet:
+      - subnet: 172.16.32.0/22
+  providerConfigRef:
+    name: default
+---
+apiVersion: ipam.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  name: ipam-ip
+  annotations:
+    meta.upbound.io/example-id: ipam/pnic
+  labels:
+    resource-type: ip
+    example-name: example
+spec:
+  forProvider:
+    address: 172.16.32.4
+    source:
+      - privateNetworkIdRef:
+          name: example
+  providerConfigRef:
+    name: default
+---
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  name: instance-server
+  annotations:
+    meta.upbound.io/example-id: ipam/pnic
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    name: crossplane-instance-server
+    image: "ubuntu_focal"
+    type: "PRO2-S"
+  providerConfigRef:
+    name: default
+---
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: PrivateNIC
+metadata:
+  name: instance-pnic
+  annotations:
+    meta.upbound.io/example-id: ipam/pnic
+  labels:
+    example-name: example
+spec:
+  forProvider:
+    serverIdRef:
+      name: instance-server
+    privateNetworkIdRef:
+      name: example
+    ipamIpIdsRefs:
+      - name: ipam-ip
+  providerConfigRef:
+    name: default
