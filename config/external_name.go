@@ -43,6 +43,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_instance_image":                      config.NameAsIdentifier,
 	"scaleway_instance_ip":                         config.NameAsIdentifier,
 	"scaleway_instance_placement_group":            config.NameAsIdentifier,
+	"scaleway_instance_private_nic":                config.NameAsIdentifier,
 	"scaleway_instance_security_group":             config.NameAsIdentifier,
 	"scaleway_instance_security_group_rules":       config.NameAsIdentifier,
 	"scaleway_instance_server":                     config.NameAsIdentifier,

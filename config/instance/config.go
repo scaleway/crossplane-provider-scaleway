@@ -46,6 +46,14 @@ func Configure(p *config.Provider) {
 		r.References["server_id"] = config.Reference{
 			Type: "Server",
 		}
+
+		r.References["private_network_id"] = config.Reference{
+			TerraformName: "scaleway_vpc_private_network",
+		}
+
+		r.References["ipam_ip_ids"] = config.Reference{
+			TerraformName: "scaleway_ipam_ip",
+		}
 	})
 
 	p.AddResourceConfigurator("scaleway_instance_security_group", func(r *config.Resource) {
