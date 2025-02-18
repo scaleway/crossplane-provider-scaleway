@@ -16,6 +16,9 @@ func (tr *IP) Hub() {}
 func (tr *PlacementGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PrivateNIC) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SecurityGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -16,6 +16,9 @@ func Configure(p *config.Provider) {
 		r.References["ip_id"] = config.Reference{
 			Type: "IP",
 		}
+		r.References["ipam_ids"] = config.Reference{
+			TerraformName: "scaleway_ipam_ip",
+		}
 	})
 
 	p.AddResourceConfigurator("scaleway_lb_acl", func(r *config.Resource) {
