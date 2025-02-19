@@ -50,7 +50,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Instance"
 
 		r.References["private_network.pn_id"] = config.Reference{
-			Type: "github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork",
+			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork",
 		}
 	})
 
