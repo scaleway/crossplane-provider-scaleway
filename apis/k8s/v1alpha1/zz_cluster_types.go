@@ -250,7 +250,7 @@ type ClusterInitParameters struct {
 
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
@@ -440,7 +440,7 @@ type ClusterParameters struct {
 
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 

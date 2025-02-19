@@ -1,4 +1,4 @@
-module github.com/scaleway/provider-scaleway
+module github.com/scaleway/crossplane-provider-scaleway
 
 go 1.22.0
 

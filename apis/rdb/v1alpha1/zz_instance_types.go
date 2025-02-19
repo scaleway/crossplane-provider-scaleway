@@ -405,7 +405,7 @@ type PrivateNetworkInitParameters struct {
 
 	// The ID of the Private Network.
 	// The private network ID
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 
 	// Reference to a PrivateNetwork in vpc to populate pnId.
@@ -476,7 +476,7 @@ type PrivateNetworkParameters struct {
 
 	// The ID of the Private Network.
 	// The private network ID
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 

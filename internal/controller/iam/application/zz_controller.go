@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/scaleway/provider-scaleway/apis/iam/v1alpha1"
-	features "github.com/scaleway/provider-scaleway/internal/features"
+	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1"
+	features "github.com/scaleway/crossplane-provider-scaleway/internal/features"
 )
 
 // Setup adds a controller that reconciles Application managed resources.

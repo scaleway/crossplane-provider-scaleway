@@ -226,7 +226,7 @@ type ServerInitParameters struct {
 	//
 	// **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
 	// If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.SSHKey
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.SSHKey
 	SSHKeyIds []*string `json:"sshKeyIds,omitempty" tf:"ssh_key_ids,omitempty"`
 
 	// References to SSHKey in account to populate sshKeyIds.
@@ -439,7 +439,7 @@ type ServerParameters struct {
 	//
 	// **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
 	// If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.SSHKey
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.SSHKey
 	// +kubebuilder:validation:Optional
 	SSHKeyIds []*string `json:"sshKeyIds,omitempty" tf:"ssh_key_ids,omitempty"`
 

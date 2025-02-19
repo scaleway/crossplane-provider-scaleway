@@ -211,7 +211,7 @@ type SourceInitParameters struct {
 
 	// The Private Network of the IP (if the IP is a private IP).
 	// Private Network the IP lives in if the IP is a private IP
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
@@ -250,7 +250,7 @@ type SourceParameters struct {
 
 	// The Private Network of the IP (if the IP is a private IP).
 	// Private Network the IP lives in if the IP is a private IP
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 

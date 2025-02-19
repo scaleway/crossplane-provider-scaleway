@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/pipeline"
 
-	"github.com/scaleway/provider-scaleway/config"
+	"github.com/scaleway/crossplane-provider-scaleway/config"
 )
 
 func main() {

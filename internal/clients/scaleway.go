@@ -15,11 +15,11 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
-	"github.com/scaleway/provider-scaleway/internal/version"
+	"github.com/scaleway/crossplane-provider-scaleway/internal/version"
 
 	"github.com/crossplane/upjet/pkg/terraform"
 
-	"github.com/scaleway/provider-scaleway/apis/v1beta1"
+	"github.com/scaleway/crossplane-provider-scaleway/apis/v1beta1"
 )
 
 const (

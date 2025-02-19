@@ -34,12 +34,12 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/terraform"
 
-	"github.com/scaleway/provider-scaleway/apis"
-	"github.com/scaleway/provider-scaleway/apis/v1alpha1"
-	"github.com/scaleway/provider-scaleway/config"
-	"github.com/scaleway/provider-scaleway/internal/clients"
-	"github.com/scaleway/provider-scaleway/internal/controller"
-	"github.com/scaleway/provider-scaleway/internal/features"
+	"github.com/scaleway/crossplane-provider-scaleway/apis"
+	"github.com/scaleway/crossplane-provider-scaleway/apis/v1alpha1"
+	"github.com/scaleway/crossplane-provider-scaleway/config"
+	"github.com/scaleway/crossplane-provider-scaleway/internal/clients"
+	"github.com/scaleway/crossplane-provider-scaleway/internal/controller"
+	"github.com/scaleway/crossplane-provider-scaleway/internal/features"
 )
 
 func main() {
@@ -64,7 +64,7 @@ func main() {
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
-	log := logging.NewLogrLogger(zl.WithName("provider-scaleway"))
+	log := logging.NewLogrLogger(zl.WithName("crossplane-provider-scaleway"))
 	if *debug {
 		// The controller-runtime runs with a no-op logger by default. It is
 		// *very* verbose even at info level, so we only provide it a real
