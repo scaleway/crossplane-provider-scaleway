@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha1 "github.com/scaleway/provider-scaleway/apis/ipam/v1alpha1"
-	v1alpha11 "github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1"
+	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1"
+	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
