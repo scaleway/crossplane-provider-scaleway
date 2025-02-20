@@ -74,14 +74,14 @@ type SnapshotInitParameters struct {
 
 	// The ID of the volume to take a snapshot from.
 	// ID of the volume to take a snapshot from
-	// +crossplane:generate:reference:type=Volume
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Volume
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// Reference to a Volume to populate volumeId.
+	// Reference to a Volume in instance to populate volumeId.
 	// +kubebuilder:validation:Optional
 	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Volume to populate volumeId.
+	// Selector for a Volume in instance to populate volumeId.
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
@@ -171,15 +171,15 @@ type SnapshotParameters struct {
 
 	// The ID of the volume to take a snapshot from.
 	// ID of the volume to take a snapshot from
-	// +crossplane:generate:reference:type=Volume
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Volume
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// Reference to a Volume to populate volumeId.
+	// Reference to a Volume in instance to populate volumeId.
 	// +kubebuilder:validation:Optional
 	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Volume to populate volumeId.
+	// Selector for a Volume in instance to populate volumeId.
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 

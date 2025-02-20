@@ -52,14 +52,14 @@ type FunctionInitParameters struct {
 
 	// The Functions namespace ID of the function.
 	// The namespace ID associated with this function
-	// +crossplane:generate:reference:type=FunctionNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.FunctionNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a FunctionNamespace to populate namespaceId.
+	// Reference to a FunctionNamespace in function to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionNamespace to populate namespaceId.
+	// Selector for a FunctionNamespace in function to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
@@ -235,15 +235,15 @@ type FunctionParameters struct {
 
 	// The Functions namespace ID of the function.
 	// The namespace ID associated with this function
-	// +crossplane:generate:reference:type=FunctionNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.FunctionNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a FunctionNamespace to populate namespaceId.
+	// Reference to a FunctionNamespace in function to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionNamespace to populate namespaceId.
+	// Selector for a FunctionNamespace in function to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 

@@ -58,14 +58,14 @@ type ContainerInitParameters struct {
 
 	// The Containers namespace ID of the container.
 	// The container namespace associated
-	// +crossplane:generate:reference:type=ContainerNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a ContainerNamespace to populate namespaceId.
+	// Reference to a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a ContainerNamespace to populate namespaceId.
+	// Selector for a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
@@ -262,15 +262,15 @@ type ContainerParameters struct {
 
 	// The Containers namespace ID of the container.
 	// The container namespace associated
-	// +crossplane:generate:reference:type=ContainerNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a ContainerNamespace to populate namespaceId.
+	// Reference to a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a ContainerNamespace to populate namespaceId.
+	// Selector for a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 

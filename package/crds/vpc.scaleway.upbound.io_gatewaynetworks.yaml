@@ -83,7 +83,8 @@ spec:
                       The ID of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
-                    description: Reference to a PublicGatewayDHCP to populate dhcpId.
+                    description: Reference to a PublicGatewayDHCP in vpc to populate
+                      dhcpId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +118,8 @@ spec:
                     - name
                     type: object
                   dhcpIdSelector:
-                    description: Selector for a PublicGatewayDHCP to populate dhcpId.
+                    description: Selector for a PublicGatewayDHCP in vpc to populate
+                      dhcpId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -172,7 +174,7 @@ spec:
                       The ID of the public gateway where connect to
                     type: string
                   gatewayIdRef:
-                    description: Reference to a PublicGateway to populate gatewayId.
+                    description: Reference to a PublicGateway in vpc to populate gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -206,7 +208,7 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a PublicGateway to populate gatewayId.
+                    description: Selector for a PublicGateway in vpc to populate gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -269,7 +271,8 @@ spec:
                       The ID of the private network where connect to
                     type: string
                   privateNetworkIdRef:
-                    description: Reference to a PrivateNetwork to populate privateNetworkId.
+                    description: Reference to a PrivateNetwork in vpc to populate
+                      privateNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -303,7 +306,8 @@ spec:
                     - name
                     type: object
                   privateNetworkIdSelector:
-                    description: Selector for a PrivateNetwork to populate privateNetworkId.
+                    description: Selector for a PrivateNetwork in vpc to populate
+                      privateNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -377,7 +381,8 @@ spec:
                       The ID of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
-                    description: Reference to a PublicGatewayDHCP to populate dhcpId.
+                    description: Reference to a PublicGatewayDHCP in vpc to populate
+                      dhcpId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -411,7 +416,8 @@ spec:
                     - name
                     type: object
                   dhcpIdSelector:
-                    description: Selector for a PublicGatewayDHCP to populate dhcpId.
+                    description: Selector for a PublicGatewayDHCP in vpc to populate
+                      dhcpId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -466,7 +472,7 @@ spec:
                       The ID of the public gateway where connect to
                     type: string
                   gatewayIdRef:
-                    description: Reference to a PublicGateway to populate gatewayId.
+                    description: Reference to a PublicGateway in vpc to populate gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -500,7 +506,7 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a PublicGateway to populate gatewayId.
+                    description: Selector for a PublicGateway in vpc to populate gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -563,7 +569,8 @@ spec:
                       The ID of the private network where connect to
                     type: string
                   privateNetworkIdRef:
-                    description: Reference to a PrivateNetwork to populate privateNetworkId.
+                    description: Reference to a PrivateNetwork in vpc to populate
+                      privateNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -597,7 +604,8 @@ spec:
                     - name
                     type: object
                   privateNetworkIdSelector:
-                    description: Selector for a PrivateNetwork to populate privateNetworkId.
+                    description: Selector for a PrivateNetwork in vpc to populate
+                      privateNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

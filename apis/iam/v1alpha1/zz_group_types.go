@@ -17,15 +17,15 @@ type GroupInitParameters struct {
 
 	// The list of IDs of the applications attached to the group.
 	// List of IDs of the applications attached to the group
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	// +listType=set
 	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
-	// References to Application to populate applicationIds.
+	// References to Application in iam to populate applicationIds.
 	// +kubebuilder:validation:Optional
 	ApplicationIdsRefs []v1.Reference `json:"applicationIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Application to populate applicationIds.
+	// Selector for a list of Application in iam to populate applicationIds.
 	// +kubebuilder:validation:Optional
 	ApplicationIdsSelector *v1.Selector `json:"applicationIdsSelector,omitempty" tf:"-"`
 
@@ -100,16 +100,16 @@ type GroupParameters struct {
 
 	// The list of IDs of the applications attached to the group.
 	// List of IDs of the applications attached to the group
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
-	// References to Application to populate applicationIds.
+	// References to Application in iam to populate applicationIds.
 	// +kubebuilder:validation:Optional
 	ApplicationIdsRefs []v1.Reference `json:"applicationIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Application to populate applicationIds.
+	// Selector for a list of Application in iam to populate applicationIds.
 	// +kubebuilder:validation:Optional
 	ApplicationIdsSelector *v1.Selector `json:"applicationIdsSelector,omitempty" tf:"-"`
 

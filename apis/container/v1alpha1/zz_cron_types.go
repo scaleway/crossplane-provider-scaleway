@@ -21,14 +21,14 @@ type CronInitParameters struct {
 
 	// The unique identifier of the container to link to your CRON trigger.
 	// The Container ID to link with your trigger.
-	// +crossplane:generate:reference:type=Container
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Reference to a Container to populate containerId.
+	// Reference to a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Container to populate containerId.
+	// Selector for a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
@@ -86,15 +86,15 @@ type CronParameters struct {
 
 	// The unique identifier of the container to link to your CRON trigger.
 	// The Container ID to link with your trigger.
-	// +crossplane:generate:reference:type=Container
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Reference to a Container to populate containerId.
+	// Reference to a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Container to populate containerId.
+	// Selector for a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 

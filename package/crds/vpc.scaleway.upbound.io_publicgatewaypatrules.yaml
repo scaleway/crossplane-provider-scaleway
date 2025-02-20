@@ -79,7 +79,7 @@ spec:
                       The ID of the gateway this PAT rule is applied to
                     type: string
                   gatewayIdRef:
-                    description: Reference to a PublicGateway to populate gatewayId.
+                    description: Reference to a PublicGateway in vpc to populate gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a PublicGateway to populate gatewayId.
+                    description: Selector for a PublicGateway in vpc to populate gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -197,7 +197,7 @@ spec:
                       The ID of the gateway this PAT rule is applied to
                     type: string
                   gatewayIdRef:
-                    description: Reference to a PublicGateway to populate gatewayId.
+                    description: Reference to a PublicGateway in vpc to populate gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -231,7 +231,7 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a PublicGateway to populate gatewayId.
+                    description: Selector for a PublicGateway in vpc to populate gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
