@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Server"
 
 		r.References["ssh_key_ids"] = config.Reference{
-			Type: "github.com/scaleway/provider-scaleway/apis/account/v1alpha1.SSHKey",
+			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.SSHKey",
 		}
 		r.References["ipam_ip_ids"] = config.Reference{
 			TerraformName: "scaleway_ipam_ip",

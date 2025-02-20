@@ -21,7 +21,7 @@ type SourceInitParameters struct {
 
 	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
 	// The project_id you want to attach the resource to
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in account to populate projectId.
@@ -104,7 +104,7 @@ type SourceParameters struct {
 
 	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.
 	// The project_id you want to attach the resource to
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/account/v1alpha1.Project
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

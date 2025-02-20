@@ -20,7 +20,7 @@ type PrivateNICInitParameters struct {
 
 	// IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network.
 	// IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/ipam/v1alpha1.IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1.IP
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 
 	// References to IP in ipam to populate ipamIpIds.
@@ -33,7 +33,7 @@ type PrivateNICInitParameters struct {
 
 	// The ID of the private network attached to.
 	// The private network ID
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
@@ -107,7 +107,7 @@ type PrivateNICParameters struct {
 
 	// IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network.
 	// IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/ipam/v1alpha1.IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1.IP
 	// +kubebuilder:validation:Optional
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 
@@ -121,7 +121,7 @@ type PrivateNICParameters struct {
 
 	// The ID of the private network attached to.
 	// The private network ID
-	// +crossplane:generate:reference:type=github.com/scaleway/provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 

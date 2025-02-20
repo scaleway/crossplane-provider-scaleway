@@ -2,7 +2,7 @@
 # Setup Project
 
 PROJECT_NAME := provider-scaleway
-PROJECT_REPO := github.com/scaleway/$(PROJECT_NAME)
+PROJECT_REPO := github.com/scaleway/crossplane-provider-scaleway
 
 export TERRAFORM_VERSION := 1.10.5
 
