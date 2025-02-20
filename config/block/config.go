@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Snapshot"
 
 		r.References["volume_id"] = config.Reference{
-			Type: "Volume",
+			TerraformName: "scaleway_block_volume",
 		}
 	})
 
@@ -22,7 +22,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Volume"
 
 		r.References["snapshot_id"] = config.Reference{
-			Type: "Snapshot",
+			TerraformName: "scaleway_block_snapshot",
 		}
 	})
 }

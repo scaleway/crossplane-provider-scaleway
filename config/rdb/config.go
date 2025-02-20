@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ACL"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 
@@ -26,7 +26,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Database"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 
@@ -38,7 +38,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "DatabaseBackup"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 
@@ -50,7 +50,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Instance"
 
 		r.References["private_network.pn_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork",
+			TerraformName: "scaleway_vpc_private_network",
 		}
 	})
 
@@ -62,7 +62,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Privilege"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 
@@ -74,7 +74,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ReadReplica"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 
@@ -86,7 +86,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "User"
 
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "scaleway_rdb_instance",
 		}
 	})
 }

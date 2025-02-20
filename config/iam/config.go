@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ApiKey"
 
 		r.References["application_id"] = config.Reference{
-			Type: "Application",
+			TerraformName: "scaleway_iam_application",
 		}
 	})
 
@@ -34,7 +34,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Group"
 
 		r.References["application_ids"] = config.Reference{
-			Type: "Application",
+			TerraformName: "scaleway_iam_application",
 		}
 	})
 
@@ -46,10 +46,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "Policy"
 
 		r.References["application_id"] = config.Reference{
-			Type: "Application",
+			TerraformName: "scaleway_iam_application",
 		}
 		r.References["group_id"] = config.Reference{
-			Type: "Group",
+			TerraformName: "scaleway_iam_group",
 		}
 	})
 

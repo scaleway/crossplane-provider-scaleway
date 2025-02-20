@@ -22,7 +22,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Device"
 
 		r.References["hub_id"] = config.Reference{
-			Type: "Hub",
+			TerraformName: "scaleway_iot_hub",
 		}
 	})
 
@@ -34,7 +34,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Network"
 
 		r.References["hub_id"] = config.Reference{
-			Type: "Hub",
+			TerraformName: "scaleway_iot_hub",
 		}
 	})
 
@@ -46,7 +46,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Route"
 
 		r.References["hub_id"] = config.Reference{
-			Type: "Hub",
+			TerraformName: "scaleway_iot_hub",
 		}
 	})
 }

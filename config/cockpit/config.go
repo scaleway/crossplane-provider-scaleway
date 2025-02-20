@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Cockpit"
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project",
+			TerraformName: "scaleway_account_project",
 		}
 	})
 
@@ -26,7 +26,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Token"
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project",
+			TerraformName: "scaleway_account_project",
 		}
 	})
 
@@ -38,7 +38,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "GrafanaUser"
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project",
+			TerraformName: "scaleway_account_project",
 		}
 	})
 
@@ -48,7 +48,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Source"
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project",
+			TerraformName: "scaleway_account_project",
 		}
 	})
 
@@ -58,7 +58,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "AlertManager"
 
 		r.References["project_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project",
+			TerraformName: "scaleway_account_project",
 		}
 	})
 }

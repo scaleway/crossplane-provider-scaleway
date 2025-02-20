@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Container"
 
 		r.References["namespace_id"] = config.Reference{
-			Type: "ContainerNamespace",
+			TerraformName: "scaleway_container_namespace",
 		}
 	})
 
@@ -26,7 +26,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Cron"
 
 		r.References["container_id"] = config.Reference{
-			Type: "Container",
+			TerraformName: "scaleway_container",
 		}
 	})
 
@@ -38,7 +38,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Domain"
 
 		r.References["container_id"] = config.Reference{
-			Type: "Container",
+			TerraformName: "scaleway_container",
 		}
 	})
 
@@ -61,10 +61,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "Token"
 
 		r.References["container_id"] = config.Reference{
-			Type: "Container",
+			TerraformName: "scaleway_container",
 		}
 		r.References["namespace_id"] = config.Reference{
-			Type: "ContainerNamespace",
+			TerraformName: "scaleway_container_namespace",
 		}
 	})
 }
