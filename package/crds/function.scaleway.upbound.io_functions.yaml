@@ -123,7 +123,8 @@ spec:
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
-                    description: Reference to a FunctionNamespace to populate namespaceId.
+                    description: Reference to a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -157,7 +158,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a FunctionNamespace to populate namespaceId.
+                    description: Selector for a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -316,7 +318,8 @@ spec:
                       The namespace ID associated with this function
                     type: string
                   namespaceIdRef:
-                    description: Reference to a FunctionNamespace to populate namespaceId.
+                    description: Reference to a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -350,7 +353,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a FunctionNamespace to populate namespaceId.
+                    description: Selector for a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-

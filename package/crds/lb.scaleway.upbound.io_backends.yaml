@@ -208,7 +208,7 @@ spec:
                       The load-balancer ID
                     type: string
                   lbIdRef:
-                    description: Reference to a LB to populate lbId.
+                    description: Reference to a LB in lb to populate lbId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -242,7 +242,7 @@ spec:
                     - name
                     type: object
                   lbIdSelector:
-                    description: Selector for a LB to populate lbId.
+                    description: Selector for a LB in lb to populate lbId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -508,7 +508,7 @@ spec:
                       The load-balancer ID
                     type: string
                   lbIdRef:
-                    description: Reference to a LB to populate lbId.
+                    description: Reference to a LB in lb to populate lbId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -542,7 +542,7 @@ spec:
                     - name
                     type: object
                   lbIdSelector:
-                    description: Selector for a LB to populate lbId.
+                    description: Selector for a LB in lb to populate lbId.
                     properties:
                       matchControllerRef:
                         description: |-

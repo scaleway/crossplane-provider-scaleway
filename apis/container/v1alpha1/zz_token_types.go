@@ -16,14 +16,14 @@ import (
 type TokenInitParameters struct {
 
 	// The unique identifier of the container.
-	// +crossplane:generate:reference:type=Container
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Reference to a Container to populate containerId.
+	// Reference to a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Container to populate containerId.
+	// Selector for a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
@@ -34,14 +34,14 @@ type TokenInitParameters struct {
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the Containers namespace.
-	// +crossplane:generate:reference:type=ContainerNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a ContainerNamespace to populate namespaceId.
+	// Reference to a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a ContainerNamespace to populate namespaceId.
+	// Selector for a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
@@ -75,15 +75,15 @@ type TokenObservation struct {
 type TokenParameters struct {
 
 	// The unique identifier of the container.
-	// +crossplane:generate:reference:type=Container
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Reference to a Container to populate containerId.
+	// Reference to a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Container to populate containerId.
+	// Selector for a Container in container to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
@@ -96,15 +96,15 @@ type TokenParameters struct {
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the Containers namespace.
-	// +crossplane:generate:reference:type=ContainerNamespace
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Reference to a ContainerNamespace to populate namespaceId.
+	// Reference to a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a ContainerNamespace to populate namespaceId.
+	// Selector for a ContainerNamespace in container to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 

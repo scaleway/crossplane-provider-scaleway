@@ -131,7 +131,8 @@ spec:
                       The container namespace associated
                     type: string
                   namespaceIdRef:
-                    description: Reference to a ContainerNamespace to populate namespaceId.
+                    description: Reference to a ContainerNamespace in container to
+                      populate namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -165,7 +166,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a ContainerNamespace to populate namespaceId.
+                    description: Selector for a ContainerNamespace in container to
+                      populate namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -337,7 +339,8 @@ spec:
                       The container namespace associated
                     type: string
                   namespaceIdRef:
-                    description: Reference to a ContainerNamespace to populate namespaceId.
+                    description: Reference to a ContainerNamespace in container to
+                      populate namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -371,7 +374,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a ContainerNamespace to populate namespaceId.
+                    description: Selector for a ContainerNamespace in container to
+                      populate namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-

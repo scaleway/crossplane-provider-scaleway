@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Cluster"
 
 		r.References["private_network_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork",
+			TerraformName: "scaleway_vpc_private_network",
 		}
 	})
 
@@ -22,7 +22,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Pool"
 
 		r.References["cluster_id"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "scaleway_k8s_cluster",
 		}
 	})
 }

@@ -78,7 +78,7 @@ spec:
                       ID of the application attached to the api key
                     type: string
                   applicationIdRef:
-                    description: Reference to a Application to populate applicationId.
+                    description: Reference to a Application in iam to populate applicationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   applicationIdSelector:
-                    description: Selector for a Application to populate applicationId.
+                    description: Selector for a Application in iam to populate applicationId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -193,7 +193,7 @@ spec:
                       ID of the application attached to the api key
                     type: string
                   applicationIdRef:
-                    description: Reference to a Application to populate applicationId.
+                    description: Reference to a Application in iam to populate applicationId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -227,7 +227,7 @@ spec:
                     - name
                     type: object
                   applicationIdSelector:
-                    description: Selector for a Application to populate applicationId.
+                    description: Selector for a Application in iam to populate applicationId.
                     properties:
                       matchControllerRef:
                         description: |-

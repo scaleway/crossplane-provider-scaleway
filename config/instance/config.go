@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Image"
 
 		r.References["root_volume_id"] = config.Reference{
-			Type: "Snapshot",
+			TerraformName: "scaleway_instance_snapshot",
 		}
 	})
 
@@ -28,7 +28,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "IPReverseDNS"
 
 		r.References["ip_id"] = config.Reference{
-			Type: "IP",
+			TerraformName: "scaleway_instance_ip",
 		}
 	})
 
@@ -44,7 +44,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "PrivateNIC"
 
 		r.References["server_id"] = config.Reference{
-			Type: "Server",
+			TerraformName: "scaleway_instance_server",
 		}
 
 		r.References["private_network_id"] = config.Reference{
@@ -68,7 +68,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "SecurityGroupRule"
 
 		r.References["security_group_id"] = config.Reference{
-			Type: "SecurityGroup",
+			TerraformName: "scaleway_instance_security_group",
 		}
 	})
 
@@ -83,13 +83,13 @@ func Configure(p *config.Provider) {
 		}
 
 		r.References["ip_id"] = config.Reference{
-			Type: "IP",
-		}
-		r.References["security_group_id"] = config.Reference{
-			Type: "SecurityGroup",
+			TerraformName: "scaleway_instance_ip",
 		}
 		r.References["placement_group_id"] = config.Reference{
-			Type: "PlacementGroup",
+			TerraformName: "scaleway_instance_placement_group",
+		}
+		r.References["security_group_id"] = config.Reference{
+			TerraformName: "scaleway_instance_security_group",
 		}
 	})
 
@@ -99,7 +99,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Snapshot"
 
 		r.References["volume_id"] = config.Reference{
-			Type: "Volume",
+			TerraformName: "scaleway_instance_volume",
 		}
 	})
 
@@ -109,7 +109,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "UserData"
 
 		r.References["server_id"] = config.Reference{
-			Type: "Server",
+			TerraformName: "scaleway_instance_server",
 		}
 	})
 

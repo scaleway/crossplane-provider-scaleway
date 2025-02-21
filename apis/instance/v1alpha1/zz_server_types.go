@@ -203,14 +203,14 @@ type ServerInitParameters struct {
 
 	// The ID of the reserved IP that is attached to the server.
 	// The ID of the reserved IP for the server
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.IP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a IP to populate ipId.
+	// Reference to a IP in instance to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipId.
+	// Selector for a IP in instance to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
@@ -228,14 +228,14 @@ type ServerInitParameters struct {
 
 	// The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
 	// The placement group the server is attached to
-	// +crossplane:generate:reference:type=PlacementGroup
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.PlacementGroup
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// Reference to a PlacementGroup to populate placementGroupId.
+	// Reference to a PlacementGroup in instance to populate placementGroupId.
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDRef *v1.Reference `json:"placementGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a PlacementGroup to populate placementGroupId.
+	// Selector for a PlacementGroup in instance to populate placementGroupId.
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.Selector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
@@ -266,14 +266,14 @@ type ServerInitParameters struct {
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate securityGroupId.
+	// Reference to a SecurityGroup in instance to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate securityGroupId.
+	// Selector for a SecurityGroup in instance to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -476,15 +476,15 @@ type ServerParameters struct {
 
 	// The ID of the reserved IP that is attached to the server.
 	// The ID of the reserved IP for the server
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.IP
 	// +kubebuilder:validation:Optional
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a IP to populate ipId.
+	// Reference to a IP in instance to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipId.
+	// Selector for a IP in instance to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
@@ -505,15 +505,15 @@ type ServerParameters struct {
 
 	// The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
 	// The placement group the server is attached to
-	// +crossplane:generate:reference:type=PlacementGroup
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.PlacementGroup
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// Reference to a PlacementGroup to populate placementGroupId.
+	// Reference to a PlacementGroup in instance to populate placementGroupId.
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDRef *v1.Reference `json:"placementGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a PlacementGroup to populate placementGroupId.
+	// Selector for a PlacementGroup in instance to populate placementGroupId.
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.Selector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
@@ -550,15 +550,15 @@ type ServerParameters struct {
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate securityGroupId.
+	// Reference to a SecurityGroup in instance to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate securityGroupId.
+	// Selector for a SecurityGroup in instance to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 

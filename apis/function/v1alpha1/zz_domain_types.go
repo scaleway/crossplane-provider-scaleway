@@ -17,14 +17,14 @@ type DomainInitParameters struct {
 
 	// The unique identifier of the function.
 	// The ID of the function
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// Reference to a Function to populate functionId.
+	// Reference to a Function in function to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionId.
+	// Selector for a Function in function to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
@@ -63,15 +63,15 @@ type DomainParameters struct {
 
 	// The unique identifier of the function.
 	// The ID of the function
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.Function
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// Reference to a Function to populate functionId.
+	// Reference to a Function in function to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDRef *v1.Reference `json:"functionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionId.
+	// Selector for a Function in function to populate functionId.
 	// +kubebuilder:validation:Optional
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 

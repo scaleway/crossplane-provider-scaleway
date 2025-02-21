@@ -155,14 +155,14 @@ type RouteInitParameters struct {
 
 	// The hub ID to which the Route will be attached to.
 	// The ID of the route's hub
-	// +crossplane:generate:reference:type=Hub
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iot/v1alpha1.Hub
 	HubID *string `json:"hubId,omitempty" tf:"hub_id,omitempty"`
 
-	// Reference to a Hub to populate hubId.
+	// Reference to a Hub in iot to populate hubId.
 	// +kubebuilder:validation:Optional
 	HubIDRef *v1.Reference `json:"hubIdRef,omitempty" tf:"-"`
 
-	// Selector for a Hub to populate hubId.
+	// Selector for a Hub in iot to populate hubId.
 	// +kubebuilder:validation:Optional
 	HubIDSelector *v1.Selector `json:"hubIdSelector,omitempty" tf:"-"`
 
@@ -234,15 +234,15 @@ type RouteParameters struct {
 
 	// The hub ID to which the Route will be attached to.
 	// The ID of the route's hub
-	// +crossplane:generate:reference:type=Hub
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iot/v1alpha1.Hub
 	// +kubebuilder:validation:Optional
 	HubID *string `json:"hubId,omitempty" tf:"hub_id,omitempty"`
 
-	// Reference to a Hub to populate hubId.
+	// Reference to a Hub in iot to populate hubId.
 	// +kubebuilder:validation:Optional
 	HubIDRef *v1.Reference `json:"hubIdRef,omitempty" tf:"-"`
 
-	// Selector for a Hub to populate hubId.
+	// Selector for a Hub in iot to populate hubId.
 	// +kubebuilder:validation:Optional
 	HubIDSelector *v1.Selector `json:"hubIdSelector,omitempty" tf:"-"`
 

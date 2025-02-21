@@ -17,27 +17,27 @@ type RouteInitParameters struct {
 
 	// The ID of the backend the route is associated with.
 	// The backend ID destination of redirection
-	// +crossplane:generate:reference:type=Backend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Backend
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// Reference to a Backend to populate backendId.
+	// Reference to a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Backend to populate backendId.
+	// Selector for a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
 	// The ID of the frontend the route is associated with.
 	// The frontend ID origin of redirection
-	// +crossplane:generate:reference:type=Frontend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Frontend
 	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
 
-	// Reference to a Frontend to populate frontendId.
+	// Reference to a Frontend in lb to populate frontendId.
 	// +kubebuilder:validation:Optional
 	FrontendIDRef *v1.Reference `json:"frontendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Frontend to populate frontendId.
+	// Selector for a Frontend in lb to populate frontendId.
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 
@@ -88,29 +88,29 @@ type RouteParameters struct {
 
 	// The ID of the backend the route is associated with.
 	// The backend ID destination of redirection
-	// +crossplane:generate:reference:type=Backend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Backend
 	// +kubebuilder:validation:Optional
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// Reference to a Backend to populate backendId.
+	// Reference to a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Backend to populate backendId.
+	// Selector for a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
 	// The ID of the frontend the route is associated with.
 	// The frontend ID origin of redirection
-	// +crossplane:generate:reference:type=Frontend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Frontend
 	// +kubebuilder:validation:Optional
 	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
 
-	// Reference to a Frontend to populate frontendId.
+	// Reference to a Frontend in lb to populate frontendId.
 	// +kubebuilder:validation:Optional
 	FrontendIDRef *v1.Reference `json:"frontendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Frontend to populate frontendId.
+	// Selector for a Frontend in lb to populate frontendId.
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 

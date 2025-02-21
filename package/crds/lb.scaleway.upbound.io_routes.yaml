@@ -78,7 +78,7 @@ spec:
                       The backend ID destination of redirection
                     type: string
                   backendIdRef:
-                    description: Reference to a Backend to populate backendId.
+                    description: Reference to a Backend in lb to populate backendId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   backendIdSelector:
-                    description: Selector for a Backend to populate backendId.
+                    description: Selector for a Backend in lb to populate backendId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -157,7 +157,7 @@ spec:
                       The frontend ID origin of redirection
                     type: string
                   frontendIdRef:
-                    description: Reference to a Frontend to populate frontendId.
+                    description: Reference to a Frontend in lb to populate frontendId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -191,7 +191,7 @@ spec:
                     - name
                     type: object
                   frontendIdSelector:
-                    description: Selector for a Frontend to populate frontendId.
+                    description: Selector for a Frontend in lb to populate frontendId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -262,7 +262,7 @@ spec:
                       The backend ID destination of redirection
                     type: string
                   backendIdRef:
-                    description: Reference to a Backend to populate backendId.
+                    description: Reference to a Backend in lb to populate backendId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -296,7 +296,7 @@ spec:
                     - name
                     type: object
                   backendIdSelector:
-                    description: Selector for a Backend to populate backendId.
+                    description: Selector for a Backend in lb to populate backendId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -341,7 +341,7 @@ spec:
                       The frontend ID origin of redirection
                     type: string
                   frontendIdRef:
-                    description: Reference to a Frontend to populate frontendId.
+                    description: Reference to a Frontend in lb to populate frontendId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -375,7 +375,7 @@ spec:
                     - name
                     type: object
                   frontendIdSelector:
-                    description: Selector for a Frontend to populate frontendId.
+                    description: Selector for a Frontend in lb to populate frontendId.
                     properties:
                       matchControllerRef:
                         description: |-

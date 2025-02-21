@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "LB"
 
 		r.References["ip_id"] = config.Reference{
-			Type: "IP",
+			TerraformName: "scaleway_lb_ip",
 		}
 		r.References["ipam_ids"] = config.Reference{
 			TerraformName: "scaleway_ipam_ip",
@@ -29,7 +29,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ACL"
 
 		r.References["frontend_id"] = config.Reference{
-			Type: "Frontend",
+			TerraformName: "scaleway_lb_frontend",
 		}
 	})
 
@@ -39,7 +39,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Backend"
 
 		r.References["lb_id"] = config.Reference{
-			Type: "LB",
+			TerraformName: "scaleway_lb",
 		}
 	})
 
@@ -51,7 +51,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Certificate"
 
 		r.References["lb_id"] = config.Reference{
-			Type: "LB",
+			TerraformName: "scaleway_lb",
 		}
 	})
 
@@ -63,11 +63,11 @@ func Configure(p *config.Provider) {
 		r.Kind = "Frontend"
 
 		r.References["lb_id"] = config.Reference{
-			Type: "LB",
+			TerraformName: "scaleway_lb",
 		}
 
 		r.References["backend_id"] = config.Reference{
-			Type: "Backend",
+			TerraformName: "scaleway_lb_backend",
 		}
 	})
 
@@ -87,11 +87,11 @@ func Configure(p *config.Provider) {
 		r.Kind = "Route"
 
 		r.References["frontend_id"] = config.Reference{
-			Type: "Frontend",
+			TerraformName: "scaleway_lb_frontend",
 		}
 
 		r.References["backend_id"] = config.Reference{
-			Type: "Backend",
+			TerraformName: "scaleway_lb_backend",
 		}
 	})
 }

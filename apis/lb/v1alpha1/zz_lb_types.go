@@ -29,14 +29,14 @@ type LBInitParameters struct {
 
 	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.IP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a IP to populate ipId.
+	// Reference to a IP in lb to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipId.
+	// Selector for a IP in lb to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
@@ -169,15 +169,15 @@ type LBParameters struct {
 
 	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.IP
 	// +kubebuilder:validation:Optional
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a IP to populate ipId.
+	// Reference to a IP in lb to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipId.
+	// Selector for a IP in lb to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 

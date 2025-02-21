@@ -116,7 +116,7 @@ spec:
                       The ID of the reserved IP for the server
                     type: string
                   ipIdRef:
-                    description: Reference to a IP to populate ipId.
+                    description: Reference to a IP in instance to populate ipId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -150,7 +150,7 @@ spec:
                     - name
                     type: object
                   ipIdSelector:
-                    description: Selector for a IP to populate ipId.
+                    description: Selector for a IP in instance to populate ipId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -206,7 +206,8 @@ spec:
                       The placement group the server is attached to
                     type: string
                   placementGroupIdRef:
-                    description: Reference to a PlacementGroup to populate placementGroupId.
+                    description: Reference to a PlacementGroup in instance to populate
+                      placementGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -240,7 +241,8 @@ spec:
                     - name
                     type: object
                   placementGroupIdSelector:
-                    description: Selector for a PlacementGroup to populate placementGroupId.
+                    description: Selector for a PlacementGroup in instance to populate
+                      placementGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -365,7 +367,8 @@ spec:
                       The security group the server is attached to
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -399,7 +402,8 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -531,7 +535,7 @@ spec:
                       The ID of the reserved IP for the server
                     type: string
                   ipIdRef:
-                    description: Reference to a IP to populate ipId.
+                    description: Reference to a IP in instance to populate ipId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -565,7 +569,7 @@ spec:
                     - name
                     type: object
                   ipIdSelector:
-                    description: Selector for a IP to populate ipId.
+                    description: Selector for a IP in instance to populate ipId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -621,7 +625,8 @@ spec:
                       The placement group the server is attached to
                     type: string
                   placementGroupIdRef:
-                    description: Reference to a PlacementGroup to populate placementGroupId.
+                    description: Reference to a PlacementGroup in instance to populate
+                      placementGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -655,7 +660,8 @@ spec:
                     - name
                     type: object
                   placementGroupIdSelector:
-                    description: Selector for a PlacementGroup to populate placementGroupId.
+                    description: Selector for a PlacementGroup in instance to populate
+                      placementGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -780,7 +786,8 @@ spec:
                       The security group the server is attached to
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -814,7 +821,8 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-

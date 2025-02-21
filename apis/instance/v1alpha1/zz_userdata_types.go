@@ -21,14 +21,14 @@ type UserDataInitParameters struct {
 
 	// The ID of the server associated with.
 	// The ID of the server
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server to populate serverId.
+	// Reference to a Server in instance to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate serverId.
+	// Selector for a Server in instance to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
@@ -72,15 +72,15 @@ type UserDataParameters struct {
 
 	// The ID of the server associated with.
 	// The ID of the server
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server to populate serverId.
+	// Reference to a Server in instance to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate serverId.
+	// Selector for a Server in instance to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 

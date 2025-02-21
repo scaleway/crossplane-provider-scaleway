@@ -88,7 +88,7 @@ spec:
                       The IPAM IP ID
                     type: string
                   ipamIpIdRef:
-                    description: Reference to a IP to populate ipamIpId.
+                    description: Reference to a IP in ipam to populate ipamIpId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,7 +122,7 @@ spec:
                     - name
                     type: object
                   ipamIpIdSelector:
-                    description: Selector for a IP to populate ipamIpId.
+                    description: Selector for a IP in ipam to populate ipamIpId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -196,7 +196,7 @@ spec:
                       The IPAM IP ID
                     type: string
                   ipamIpIdRef:
-                    description: Reference to a IP to populate ipamIpId.
+                    description: Reference to a IP in ipam to populate ipamIpId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -230,7 +230,7 @@ spec:
                     - name
                     type: object
                   ipamIpIdSelector:
-                    description: Selector for a IP to populate ipamIpId.
+                    description: Selector for a IP in ipam to populate ipamIpId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -89,7 +89,7 @@ spec:
                       The ID of the cluster on which this pool will be created
                     type: string
                   clusterIdRef:
-                    description: Reference to a Cluster to populate clusterId.
+                    description: Reference to a Cluster in k8s to populate clusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -123,7 +123,7 @@ spec:
                     - name
                     type: object
                   clusterIdSelector:
-                    description: Selector for a Cluster to populate clusterId.
+                    description: Selector for a Cluster in k8s to populate clusterId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -297,7 +297,7 @@ spec:
                       The ID of the cluster on which this pool will be created
                     type: string
                   clusterIdRef:
-                    description: Reference to a Cluster to populate clusterId.
+                    description: Reference to a Cluster in k8s to populate clusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -331,7 +331,7 @@ spec:
                     - name
                     type: object
                   clusterIdSelector:
-                    description: Selector for a Cluster to populate clusterId.
+                    description: Selector for a Cluster in k8s to populate clusterId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -17,14 +17,14 @@ type ApiKeyInitParameters struct {
 
 	// :  ID of the application attached to the API key.
 	// ID of the application attached to the api key
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Reference to a Application to populate applicationId.
+	// Reference to a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Application to populate applicationId.
+	// Selector for a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
@@ -99,15 +99,15 @@ type ApiKeyParameters struct {
 
 	// :  ID of the application attached to the API key.
 	// ID of the application attached to the api key
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Reference to a Application to populate applicationId.
+	// Reference to a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Application to populate applicationId.
+	// Selector for a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 

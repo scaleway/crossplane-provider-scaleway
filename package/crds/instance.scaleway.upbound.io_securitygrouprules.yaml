@@ -158,7 +158,8 @@ spec:
                       The security group associated with this volume
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +193,8 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -331,7 +333,8 @@ spec:
                       The security group associated with this volume
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -365,7 +368,8 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-

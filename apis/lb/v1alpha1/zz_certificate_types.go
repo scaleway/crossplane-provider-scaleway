@@ -21,14 +21,14 @@ type CertificateInitParameters struct {
 
 	// The ID of the Load Balancer this certificate is attached to.
 	// The load-balancer ID
-	// +crossplane:generate:reference:type=LB
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.LB
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// Reference to a LB to populate lbId.
+	// Reference to a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
 
-	// Selector for a LB to populate lbId.
+	// Selector for a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
@@ -96,15 +96,15 @@ type CertificateParameters struct {
 
 	// The ID of the Load Balancer this certificate is attached to.
 	// The load-balancer ID
-	// +crossplane:generate:reference:type=LB
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.LB
 	// +kubebuilder:validation:Optional
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// Reference to a LB to populate lbId.
+	// Reference to a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
 
-	// Selector for a LB to populate lbId.
+	// Selector for a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 

@@ -21,14 +21,14 @@ type ACLInitParameters struct {
 
 	// UUID of the Database Instance.
 	// Instance on which the ACL is applied
-	// +crossplane:generate:reference:type=Instance
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/rdb/v1alpha1.Instance
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// Reference to a Instance to populate instanceId.
+	// Reference to a Instance in rdb to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Instance to populate instanceId.
+	// Selector for a Instance in rdb to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
@@ -63,15 +63,15 @@ type ACLParameters struct {
 
 	// UUID of the Database Instance.
 	// Instance on which the ACL is applied
-	// +crossplane:generate:reference:type=Instance
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/rdb/v1alpha1.Instance
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// Reference to a Instance to populate instanceId.
+	// Reference to a Instance in rdb to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Instance to populate instanceId.
+	// Selector for a Instance in rdb to populate instanceId.
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
