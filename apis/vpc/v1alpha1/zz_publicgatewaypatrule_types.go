@@ -17,14 +17,14 @@ type PublicGatewayPATRuleInitParameters struct {
 
 	// The ID of the Public Gateway.
 	// The ID of the gateway this PAT rule is applied to
-	// +crossplane:generate:reference:type=PublicGateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGateway
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a PublicGateway to populate gatewayId.
+	// Reference to a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGateway to populate gatewayId.
+	// Selector for a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -95,15 +95,15 @@ type PublicGatewayPATRuleParameters struct {
 
 	// The ID of the Public Gateway.
 	// The ID of the gateway this PAT rule is applied to
-	// +crossplane:generate:reference:type=PublicGateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGateway
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a PublicGateway to populate gatewayId.
+	// Reference to a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGateway to populate gatewayId.
+	// Selector for a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 

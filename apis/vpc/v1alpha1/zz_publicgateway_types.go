@@ -29,14 +29,14 @@ type PublicGatewayInitParameters struct {
 
 	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
-	// +crossplane:generate:reference:type=PublicGatewayIP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayIP
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a PublicGatewayIP to populate ipId.
+	// Reference to a PublicGatewayIP in vpc to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGatewayIP to populate ipId.
+	// Selector for a PublicGatewayIP in vpc to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
@@ -154,15 +154,15 @@ type PublicGatewayParameters struct {
 
 	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
-	// +crossplane:generate:reference:type=PublicGatewayIP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayIP
 	// +kubebuilder:validation:Optional
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// Reference to a PublicGatewayIP to populate ipId.
+	// Reference to a PublicGatewayIP in vpc to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDRef *v1.Reference `json:"ipIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGatewayIP to populate ipId.
+	// Selector for a PublicGatewayIP in vpc to populate ipId.
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 

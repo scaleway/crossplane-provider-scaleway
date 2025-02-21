@@ -17,14 +17,14 @@ type PolicyInitParameters struct {
 
 	// ID of the application the policy will be linked to
 	// Application id
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Reference to a Application to populate applicationId.
+	// Reference to a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Application to populate applicationId.
+	// Selector for a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
@@ -34,14 +34,14 @@ type PolicyInitParameters struct {
 
 	// ID of the group the policy will be linked to
 	// Group id
-	// +crossplane:generate:reference:type=Group
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Group
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
-	// Reference to a Group to populate groupId.
+	// Reference to a Group in iam to populate groupId.
 	// +kubebuilder:validation:Optional
 	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
 
-	// Selector for a Group to populate groupId.
+	// Selector for a Group in iam to populate groupId.
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
@@ -128,15 +128,15 @@ type PolicyParameters struct {
 
 	// ID of the application the policy will be linked to
 	// Application id
-	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Application
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Reference to a Application to populate applicationId.
+	// Reference to a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Application to populate applicationId.
+	// Selector for a Application in iam to populate applicationId.
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
@@ -147,15 +147,15 @@ type PolicyParameters struct {
 
 	// ID of the group the policy will be linked to
 	// Group id
-	// +crossplane:generate:reference:type=Group
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1.Group
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
-	// Reference to a Group to populate groupId.
+	// Reference to a Group in iam to populate groupId.
 	// +kubebuilder:validation:Optional
 	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
 
-	// Selector for a Group to populate groupId.
+	// Selector for a Group in iam to populate groupId.
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 

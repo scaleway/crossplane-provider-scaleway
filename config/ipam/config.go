@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "IPReverseDNS"
 
 		r.References["ipam_ip_id"] = config.Reference{
-			Type: "IP",
+			TerraformName: "scaleway_ipam_ip",
 		}
 
 	})
@@ -23,7 +23,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "IP"
 
 		r.References["source.private_network_id"] = config.Reference{
-			Type: "github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork",
+			TerraformName: "scaleway_vpc_private_network",
 		}
 	})
 }

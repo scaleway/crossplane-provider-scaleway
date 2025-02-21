@@ -81,7 +81,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   applicationIdsRefs:
-                    description: References to Application to populate applicationIds.
+                    description: References to Application in iam to populate applicationIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -118,7 +118,8 @@ spec:
                       type: object
                     type: array
                   applicationIdsSelector:
-                    description: Selector for a list of Application to populate applicationIds.
+                    description: Selector for a list of Application in iam to populate
+                      applicationIds.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -215,7 +216,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   applicationIdsRefs:
-                    description: References to Application to populate applicationIds.
+                    description: References to Application in iam to populate applicationIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -252,7 +253,8 @@ spec:
                       type: object
                     type: array
                   applicationIdsSelector:
-                    description: Selector for a list of Application to populate applicationIds.
+                    description: Selector for a list of Application in iam to populate
+                      applicationIds.
                     properties:
                       matchControllerRef:
                         description: |-

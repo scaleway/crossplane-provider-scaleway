@@ -33,14 +33,14 @@ type VolumeInitParameters struct {
 
 	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
 	// The snapshot to create the volume from
-	// +crossplane:generate:reference:type=Snapshot
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/block/v1alpha1.Snapshot
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Reference to a Snapshot to populate snapshotId.
+	// Reference to a Snapshot in block to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a Snapshot to populate snapshotId.
+	// Selector for a Snapshot in block to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
@@ -111,15 +111,15 @@ type VolumeParameters struct {
 
 	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
 	// The snapshot to create the volume from
-	// +crossplane:generate:reference:type=Snapshot
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/block/v1alpha1.Snapshot
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Reference to a Snapshot to populate snapshotId.
+	// Reference to a Snapshot in block to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a Snapshot to populate snapshotId.
+	// Selector for a Snapshot in block to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 

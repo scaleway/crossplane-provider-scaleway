@@ -83,7 +83,7 @@ spec:
                       The ID of the server
                     type: string
                   serverIdRef:
-                    description: Reference to a Server to populate serverId.
+                    description: Reference to a Server in instance to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a Server to populate serverId.
+                    description: Selector for a Server in instance to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -191,7 +191,7 @@ spec:
                       The ID of the server
                     type: string
                   serverIdRef:
-                    description: Reference to a Server to populate serverId.
+                    description: Reference to a Server in instance to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -225,7 +225,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a Server to populate serverId.
+                    description: Selector for a Server in instance to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-

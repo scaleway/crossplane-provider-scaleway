@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Record"
 
 		r.References["dns_zone"] = config.Reference{
-			Type: "Zone",
+			TerraformName: "scaleway_domain_zone",
 		}
 	})
 

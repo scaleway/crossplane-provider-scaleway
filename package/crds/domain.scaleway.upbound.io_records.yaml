@@ -83,7 +83,7 @@ spec:
                       The zone you want to add the record in
                     type: string
                   dnsZoneRef:
-                    description: Reference to a Zone to populate dnsZone.
+                    description: Reference to a Zone in domain to populate dnsZone.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   dnsZoneSelector:
-                    description: Selector for a Zone to populate dnsZone.
+                    description: Selector for a Zone in domain to populate dnsZone.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -317,7 +317,7 @@ spec:
                       The zone you want to add the record in
                     type: string
                   dnsZoneRef:
-                    description: Reference to a Zone to populate dnsZone.
+                    description: Reference to a Zone in domain to populate dnsZone.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -351,7 +351,7 @@ spec:
                     - name
                     type: object
                   dnsZoneSelector:
-                    description: Selector for a Zone to populate dnsZone.
+                    description: Selector for a Zone in domain to populate dnsZone.
                     properties:
                       matchControllerRef:
                         description: |-

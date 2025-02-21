@@ -23,7 +23,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "PrivateNetwork"
 
 		r.References["vpc_id"] = config.Reference{
-			Type: "VPC",
+			TerraformName: "scaleway_vpc",
 		}
 	})
 
@@ -35,7 +35,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "PublicGateway"
 
 		r.References["ip_id"] = config.Reference{
-			Type: "PublicGatewayIP",
+			TerraformName: "scaleway_vpc_public_gateway_ip",
 		}
 	})
 
@@ -52,13 +52,13 @@ func Configure(p *config.Provider) {
 		}
 
 		r.References["gateway_id"] = config.Reference{
-			Type: "PublicGateway",
+			TerraformName: "scaleway_vpc_public_gateway",
 		}
 		r.References["private_network_id"] = config.Reference{
-			Type: "PrivateNetwork",
+			TerraformName: "scaleway_vpc_private_network",
 		}
 		r.References["dhcp_id"] = config.Reference{
-			Type: "PublicGatewayDHCP",
+			TerraformName: "scaleway_vpc_public_gateway_dhcp",
 		}
 		r.References["ipam_ip_id"] = config.Reference{
 			TerraformName: "scaleway_ipam_ip",
@@ -89,7 +89,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "PublicGatewayPATRule"
 
 		r.References["gateway_id"] = config.Reference{
-			Type: "PublicGateway",
+			TerraformName: "scaleway_vpc_public_gateway",
 		}
 	})
 }

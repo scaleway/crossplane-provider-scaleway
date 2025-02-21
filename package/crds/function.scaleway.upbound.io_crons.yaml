@@ -83,7 +83,7 @@ spec:
                       The ID of the function to create a cron for.
                     type: string
                   functionIdRef:
-                    description: Reference to a Function to populate functionId.
+                    description: Reference to a Function in function to populate functionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,7 +117,7 @@ spec:
                     - name
                     type: object
                   functionIdSelector:
-                    description: Selector for a Function to populate functionId.
+                    description: Selector for a Function in function to populate functionId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -197,7 +197,7 @@ spec:
                       The ID of the function to create a cron for.
                     type: string
                   functionIdRef:
-                    description: Reference to a Function to populate functionId.
+                    description: Reference to a Function in function to populate functionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -231,7 +231,7 @@ spec:
                     - name
                     type: object
                   functionIdSelector:
-                    description: Selector for a Function to populate functionId.
+                    description: Selector for a Function in function to populate functionId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -120,7 +120,7 @@ spec:
                       The ID of the hub on which this device will be created
                     type: string
                   hubIdRef:
-                    description: Reference to a Hub to populate hubId.
+                    description: Reference to a Hub in iot to populate hubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -154,7 +154,7 @@ spec:
                     - name
                     type: object
                   hubIdSelector:
-                    description: Selector for a Hub to populate hubId.
+                    description: Selector for a Hub in iot to populate hubId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -311,7 +311,7 @@ spec:
                       The ID of the hub on which this device will be created
                     type: string
                   hubIdRef:
-                    description: Reference to a Hub to populate hubId.
+                    description: Reference to a Hub in iot to populate hubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -345,7 +345,7 @@ spec:
                     - name
                     type: object
                   hubIdSelector:
-                    description: Selector for a Hub to populate hubId.
+                    description: Selector for a Hub in iot to populate hubId.
                     properties:
                       matchControllerRef:
                         description: |-

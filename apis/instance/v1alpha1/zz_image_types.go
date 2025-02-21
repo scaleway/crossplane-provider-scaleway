@@ -86,14 +86,14 @@ type ImageInitParameters struct {
 
 	// The ID of the snapshot of the volume to be used as root in the image.
 	// UUID of the snapshot from which the image is to be created
-	// +crossplane:generate:reference:type=Snapshot
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Snapshot
 	RootVolumeID *string `json:"rootVolumeId,omitempty" tf:"root_volume_id,omitempty"`
 
-	// Reference to a Snapshot to populate rootVolumeId.
+	// Reference to a Snapshot in instance to populate rootVolumeId.
 	// +kubebuilder:validation:Optional
 	RootVolumeIDRef *v1.Reference `json:"rootVolumeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Snapshot to populate rootVolumeId.
+	// Selector for a Snapshot in instance to populate rootVolumeId.
 	// +kubebuilder:validation:Optional
 	RootVolumeIDSelector *v1.Selector `json:"rootVolumeIdSelector,omitempty" tf:"-"`
 
@@ -197,15 +197,15 @@ type ImageParameters struct {
 
 	// The ID of the snapshot of the volume to be used as root in the image.
 	// UUID of the snapshot from which the image is to be created
-	// +crossplane:generate:reference:type=Snapshot
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1.Snapshot
 	// +kubebuilder:validation:Optional
 	RootVolumeID *string `json:"rootVolumeId,omitempty" tf:"root_volume_id,omitempty"`
 
-	// Reference to a Snapshot to populate rootVolumeId.
+	// Reference to a Snapshot in instance to populate rootVolumeId.
 	// +kubebuilder:validation:Optional
 	RootVolumeIDRef *v1.Reference `json:"rootVolumeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Snapshot to populate rootVolumeId.
+	// Selector for a Snapshot in instance to populate rootVolumeId.
 	// +kubebuilder:validation:Optional
 	RootVolumeIDSelector *v1.Selector `json:"rootVolumeIdSelector,omitempty" tf:"-"`
 

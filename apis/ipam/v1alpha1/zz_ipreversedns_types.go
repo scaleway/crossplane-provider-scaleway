@@ -25,14 +25,14 @@ type IPReverseDNSInitParameters struct {
 
 	// The IPAM IP ID.
 	// The IPAM IP ID
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1.IP
 	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
 
-	// Reference to a IP to populate ipamIpId.
+	// Reference to a IP in ipam to populate ipamIpId.
 	// +kubebuilder:validation:Optional
 	IpamIPIDRef *v1.Reference `json:"ipamIpIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipamIpId.
+	// Selector for a IP in ipam to populate ipamIpId.
 	// +kubebuilder:validation:Optional
 	IpamIPIDSelector *v1.Selector `json:"ipamIpIdSelector,omitempty" tf:"-"`
 
@@ -77,15 +77,15 @@ type IPReverseDNSParameters struct {
 
 	// The IPAM IP ID.
 	// The IPAM IP ID
-	// +crossplane:generate:reference:type=IP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1.IP
 	// +kubebuilder:validation:Optional
 	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
 
-	// Reference to a IP to populate ipamIpId.
+	// Reference to a IP in ipam to populate ipamIpId.
 	// +kubebuilder:validation:Optional
 	IpamIPIDRef *v1.Reference `json:"ipamIpIdRef,omitempty" tf:"-"`
 
-	// Selector for a IP to populate ipamIpId.
+	// Selector for a IP in ipam to populate ipamIpId.
 	// +kubebuilder:validation:Optional
 	IpamIPIDSelector *v1.Selector `json:"ipamIpIdSelector,omitempty" tf:"-"`
 

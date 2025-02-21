@@ -161,14 +161,14 @@ type RecordInitParameters struct {
 
 	// The DNS zone of the domain. If the domain has no DNS zone, one will be automatically created.
 	// The zone you want to add the record in
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/domain/v1alpha1.Zone
 	DNSZone *string `json:"dnsZone,omitempty" tf:"dns_zone,omitempty"`
 
-	// Reference to a Zone to populate dnsZone.
+	// Reference to a Zone in domain to populate dnsZone.
 	// +kubebuilder:validation:Optional
 	DNSZoneRef *v1.Reference `json:"dnsZoneRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate dnsZone.
+	// Selector for a Zone in domain to populate dnsZone.
 	// +kubebuilder:validation:Optional
 	DNSZoneSelector *v1.Selector `json:"dnsZoneSelector,omitempty" tf:"-"`
 
@@ -282,15 +282,15 @@ type RecordParameters struct {
 
 	// The DNS zone of the domain. If the domain has no DNS zone, one will be automatically created.
 	// The zone you want to add the record in
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/domain/v1alpha1.Zone
 	// +kubebuilder:validation:Optional
 	DNSZone *string `json:"dnsZone,omitempty" tf:"dns_zone,omitempty"`
 
-	// Reference to a Zone to populate dnsZone.
+	// Reference to a Zone in domain to populate dnsZone.
 	// +kubebuilder:validation:Optional
 	DNSZoneRef *v1.Reference `json:"dnsZoneRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate dnsZone.
+	// Selector for a Zone in domain to populate dnsZone.
 	// +kubebuilder:validation:Optional
 	DNSZoneSelector *v1.Selector `json:"dnsZoneSelector,omitempty" tf:"-"`
 

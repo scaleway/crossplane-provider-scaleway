@@ -82,7 +82,7 @@ spec:
                     description: The unique identifier of the function.
                     type: string
                   functionIdRef:
-                    description: Reference to a Function to populate functionId.
+                    description: Reference to a Function in function to populate functionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   functionIdSelector:
-                    description: Selector for a Function to populate functionId.
+                    description: Selector for a Function in function to populate functionId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -159,7 +159,8 @@ spec:
                     description: The unique identifier of the Functions namespace.
                     type: string
                   namespaceIdRef:
-                    description: Reference to a FunctionNamespace to populate namespaceId.
+                    description: Reference to a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +194,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a FunctionNamespace to populate namespaceId.
+                    description: Selector for a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -261,7 +263,7 @@ spec:
                     description: The unique identifier of the function.
                     type: string
                   functionIdRef:
-                    description: Reference to a Function to populate functionId.
+                    description: Reference to a Function in function to populate functionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -295,7 +297,7 @@ spec:
                     - name
                     type: object
                   functionIdSelector:
-                    description: Selector for a Function to populate functionId.
+                    description: Selector for a Function in function to populate functionId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -338,7 +340,8 @@ spec:
                     description: The unique identifier of the Functions namespace.
                     type: string
                   namespaceIdRef:
-                    description: Reference to a FunctionNamespace to populate namespaceId.
+                    description: Reference to a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -372,7 +375,8 @@ spec:
                     - name
                     type: object
                   namespaceIdSelector:
-                    description: Selector for a FunctionNamespace to populate namespaceId.
+                    description: Selector for a FunctionNamespace in function to populate
+                      namespaceId.
                     properties:
                       matchControllerRef:
                         description: |-

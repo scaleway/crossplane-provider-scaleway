@@ -48,14 +48,14 @@ type PoolInitParameters struct {
 
 	// The ID of the Kubernetes cluster on which this pool will be created.
 	// The ID of the cluster on which this pool will be created
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/k8s/v1alpha1.Cluster
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Reference to a Cluster to populate clusterId.
+	// Reference to a Cluster in k8s to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterId.
+	// Selector for a Cluster in k8s to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
@@ -258,15 +258,15 @@ type PoolParameters struct {
 
 	// The ID of the Kubernetes cluster on which this pool will be created.
 	// The ID of the cluster on which this pool will be created
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/k8s/v1alpha1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Reference to a Cluster to populate clusterId.
+	// Reference to a Cluster in k8s to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterId.
+	// Selector for a Cluster in k8s to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 

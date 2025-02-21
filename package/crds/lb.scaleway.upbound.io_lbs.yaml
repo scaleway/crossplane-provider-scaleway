@@ -93,7 +93,7 @@ spec:
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
-                    description: Reference to a IP to populate ipId.
+                    description: Reference to a IP in lb to populate ipId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -127,7 +127,7 @@ spec:
                     - name
                     type: object
                   ipIdSelector:
-                    description: Selector for a IP to populate ipId.
+                    description: Selector for a IP in lb to populate ipId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -277,7 +277,7 @@ spec:
                       The load-balance public IP ID
                     type: string
                   ipIdRef:
-                    description: Reference to a IP to populate ipId.
+                    description: Reference to a IP in lb to populate ipId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -311,7 +311,7 @@ spec:
                     - name
                     type: object
                   ipIdSelector:
-                    description: Selector for a IP to populate ipId.
+                    description: Selector for a IP in lb to populate ipId.
                     properties:
                       matchControllerRef:
                         description: |-

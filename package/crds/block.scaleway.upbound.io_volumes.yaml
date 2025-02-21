@@ -98,7 +98,7 @@ spec:
                       The snapshot to create the volume from
                     type: string
                   snapshotIdRef:
-                    description: Reference to a Snapshot to populate snapshotId.
+                    description: Reference to a Snapshot in block to populate snapshotId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,7 +132,7 @@ spec:
                     - name
                     type: object
                   snapshotIdSelector:
-                    description: Selector for a Snapshot to populate snapshotId.
+                    description: Selector for a Snapshot in block to populate snapshotId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -223,7 +223,7 @@ spec:
                       The snapshot to create the volume from
                     type: string
                   snapshotIdRef:
-                    description: Reference to a Snapshot to populate snapshotId.
+                    description: Reference to a Snapshot in block to populate snapshotId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -257,7 +257,7 @@ spec:
                     - name
                     type: object
                   snapshotIdSelector:
-                    description: Selector for a Snapshot to populate snapshotId.
+                    description: Selector for a Snapshot in block to populate snapshotId.
                     properties:
                       matchControllerRef:
                         description: |-

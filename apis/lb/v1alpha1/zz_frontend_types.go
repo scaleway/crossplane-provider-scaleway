@@ -120,14 +120,14 @@ type FrontendInitParameters struct {
 
 	// The ID of the Load Balancer backend this frontend is attached to.
 	// The load-balancer backend ID
-	// +crossplane:generate:reference:type=Backend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Backend
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// Reference to a Backend to populate backendId.
+	// Reference to a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Backend to populate backendId.
+	// Selector for a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
@@ -150,14 +150,14 @@ type FrontendInitParameters struct {
 
 	// The ID of the Load Balancer this frontend is attached to.
 	// The load-balancer ID
-	// +crossplane:generate:reference:type=LB
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.LB
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// Reference to a LB to populate lbId.
+	// Reference to a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
 
-	// Selector for a LB to populate lbId.
+	// Selector for a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 
@@ -226,15 +226,15 @@ type FrontendParameters struct {
 
 	// The ID of the Load Balancer backend this frontend is attached to.
 	// The load-balancer backend ID
-	// +crossplane:generate:reference:type=Backend
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.Backend
 	// +kubebuilder:validation:Optional
 	BackendID *string `json:"backendId,omitempty" tf:"backend_id,omitempty"`
 
-	// Reference to a Backend to populate backendId.
+	// Reference to a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDRef *v1.Reference `json:"backendIdRef,omitempty" tf:"-"`
 
-	// Selector for a Backend to populate backendId.
+	// Selector for a Backend in lb to populate backendId.
 	// +kubebuilder:validation:Optional
 	BackendIDSelector *v1.Selector `json:"backendIdSelector,omitempty" tf:"-"`
 
@@ -261,15 +261,15 @@ type FrontendParameters struct {
 
 	// The ID of the Load Balancer this frontend is attached to.
 	// The load-balancer ID
-	// +crossplane:generate:reference:type=LB
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.LB
 	// +kubebuilder:validation:Optional
 	LBID *string `json:"lbId,omitempty" tf:"lb_id,omitempty"`
 
-	// Reference to a LB to populate lbId.
+	// Reference to a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDRef *v1.Reference `json:"lbIdRef,omitempty" tf:"-"`
 
-	// Selector for a LB to populate lbId.
+	// Selector for a LB in lb to populate lbId.
 	// +kubebuilder:validation:Optional
 	LBIDSelector *v1.Selector `json:"lbIdSelector,omitempty" tf:"-"`
 

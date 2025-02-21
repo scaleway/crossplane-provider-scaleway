@@ -21,14 +21,14 @@ type GatewayNetworkInitParameters struct {
 
 	// The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
-	// +crossplane:generate:reference:type=PublicGatewayDHCP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayDHCP
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
 
-	// Reference to a PublicGatewayDHCP to populate dhcpId.
+	// Reference to a PublicGatewayDHCP in vpc to populate dhcpId.
 	// +kubebuilder:validation:Optional
 	DHCPIDRef *v1.Reference `json:"dhcpIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGatewayDHCP to populate dhcpId.
+	// Selector for a PublicGatewayDHCP in vpc to populate dhcpId.
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
@@ -42,14 +42,14 @@ type GatewayNetworkInitParameters struct {
 
 	// The ID of the Public Gateway.
 	// The ID of the public gateway where connect to
-	// +crossplane:generate:reference:type=PublicGateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGateway
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a PublicGateway to populate gatewayId.
+	// Reference to a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGateway to populate gatewayId.
+	// Selector for a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -59,14 +59,14 @@ type GatewayNetworkInitParameters struct {
 
 	// The ID of the Private Network.
 	// The ID of the private network where connect to
-	// +crossplane:generate:reference:type=PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// Reference to a PrivateNetwork to populate privateNetworkId.
+	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDRef *v1.Reference `json:"privateNetworkIdRef,omitempty" tf:"-"`
 
-	// Selector for a PrivateNetwork to populate privateNetworkId.
+	// Selector for a PrivateNetwork in vpc to populate privateNetworkId.
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
@@ -146,15 +146,15 @@ type GatewayNetworkParameters struct {
 
 	// The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
-	// +crossplane:generate:reference:type=PublicGatewayDHCP
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayDHCP
 	// +kubebuilder:validation:Optional
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
 
-	// Reference to a PublicGatewayDHCP to populate dhcpId.
+	// Reference to a PublicGatewayDHCP in vpc to populate dhcpId.
 	// +kubebuilder:validation:Optional
 	DHCPIDRef *v1.Reference `json:"dhcpIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGatewayDHCP to populate dhcpId.
+	// Selector for a PublicGatewayDHCP in vpc to populate dhcpId.
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
@@ -170,15 +170,15 @@ type GatewayNetworkParameters struct {
 
 	// The ID of the Public Gateway.
 	// The ID of the public gateway where connect to
-	// +crossplane:generate:reference:type=PublicGateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGateway
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a PublicGateway to populate gatewayId.
+	// Reference to a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicGateway to populate gatewayId.
+	// Selector for a PublicGateway in vpc to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -189,15 +189,15 @@ type GatewayNetworkParameters struct {
 
 	// The ID of the Private Network.
 	// The ID of the private network where connect to
-	// +crossplane:generate:reference:type=PrivateNetwork
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// Reference to a PrivateNetwork to populate privateNetworkId.
+	// Reference to a PrivateNetwork in vpc to populate privateNetworkId.
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDRef *v1.Reference `json:"privateNetworkIdRef,omitempty" tf:"-"`
 
-	// Selector for a PrivateNetwork to populate privateNetworkId.
+	// Selector for a PrivateNetwork in vpc to populate privateNetworkId.
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 

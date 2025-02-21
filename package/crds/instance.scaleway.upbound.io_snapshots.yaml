@@ -120,7 +120,7 @@ spec:
                       ID of the volume to take a snapshot from
                     type: string
                   volumeIdRef:
-                    description: Reference to a Volume to populate volumeId.
+                    description: Reference to a Volume in instance to populate volumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -154,7 +154,7 @@ spec:
                     - name
                     type: object
                   volumeIdSelector:
-                    description: Selector for a Volume to populate volumeId.
+                    description: Selector for a Volume in instance to populate volumeId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -261,7 +261,7 @@ spec:
                       ID of the volume to take a snapshot from
                     type: string
                   volumeIdRef:
-                    description: Reference to a Volume to populate volumeId.
+                    description: Reference to a Volume in instance to populate volumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -295,7 +295,7 @@ spec:
                     - name
                     type: object
                   volumeIdSelector:
-                    description: Selector for a Volume to populate volumeId.
+                    description: Selector for a Volume in instance to populate volumeId.
                     properties:
                       matchControllerRef:
                         description: |-

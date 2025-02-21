@@ -78,7 +78,8 @@ spec:
                       Container the domain will be bound to
                     type: string
                   containerIdRef:
-                    description: Reference to a Container to populate containerId.
+                    description: Reference to a Container in container to populate
+                      containerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +113,8 @@ spec:
                     - name
                     type: object
                   containerIdSelector:
-                    description: Selector for a Container to populate containerId.
+                    description: Selector for a Container in container to populate
+                      containerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -181,7 +183,8 @@ spec:
                       Container the domain will be bound to
                     type: string
                   containerIdRef:
-                    description: Reference to a Container to populate containerId.
+                    description: Reference to a Container in container to populate
+                      containerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -215,7 +218,8 @@ spec:
                     - name
                     type: object
                   containerIdSelector:
-                    description: Selector for a Container to populate containerId.
+                    description: Selector for a Container in container to populate
+                      containerId.
                     properties:
                       matchControllerRef:
                         description: |-

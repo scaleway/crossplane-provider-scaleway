@@ -105,7 +105,7 @@ spec:
                       UUID of the snapshot from which the image is to be created
                     type: string
                   rootVolumeIdRef:
-                    description: Reference to a Snapshot to populate rootVolumeId.
+                    description: Reference to a Snapshot in instance to populate rootVolumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -139,7 +139,7 @@ spec:
                     - name
                     type: object
                   rootVolumeIdSelector:
-                    description: Selector for a Snapshot to populate rootVolumeId.
+                    description: Selector for a Snapshot in instance to populate rootVolumeId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -237,7 +237,7 @@ spec:
                       UUID of the snapshot from which the image is to be created
                     type: string
                   rootVolumeIdRef:
-                    description: Reference to a Snapshot to populate rootVolumeId.
+                    description: Reference to a Snapshot in instance to populate rootVolumeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -271,7 +271,7 @@ spec:
                     - name
                     type: object
                   rootVolumeIdSelector:
-                    description: Selector for a Snapshot to populate rootVolumeId.
+                    description: Selector for a Snapshot in instance to populate rootVolumeId.
                     properties:
                       matchControllerRef:
                         description: |-

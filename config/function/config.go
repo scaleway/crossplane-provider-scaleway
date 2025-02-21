@@ -14,7 +14,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Function"
 
 		r.References["namespace_id"] = config.Reference{
-			Type: "FunctionNamespace",
+			TerraformName: "scaleway_function_namespace",
 		}
 	})
 
@@ -26,7 +26,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Cron"
 
 		r.References["function_id"] = config.Reference{
-			Type: "Function",
+			TerraformName: "scaleway_function",
 		}
 	})
 
@@ -38,7 +38,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Domain"
 
 		r.References["function_id"] = config.Reference{
-			Type: "Function",
+			TerraformName: "scaleway_function",
 		}
 	})
 
@@ -61,10 +61,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "Token"
 
 		r.References["function_id"] = config.Reference{
-			Type: "Function",
+			TerraformName: "scaleway_function",
 		}
 		r.References["namespace_id"] = config.Reference{
-			Type: "FunctionNamespace",
+			TerraformName: "scaleway_function_namespace",
 		}
 	})
 }
