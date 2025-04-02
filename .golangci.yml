@@ -1,6 +1,14 @@
+version: "2"
+
 output:
   formats:
-    - format: colored-line-number
+    text:
+      colors: true
+
+formatters:
+  enable:
+    - gofmt  # We enable this as well as goimports for its simplify mode.
+    - goimports
 
 linters-settings:
   errcheck:
@@ -11,7 +19,6 @@ linters-settings:
     # report about assignment of errors to blank identifier: `num, _ := strconv.Atoi(numStr)`;
     # default is false: such cases aren't reported by default.
     check-blank: false
-
 
   govet:
     # report about shadowed variables
@@ -80,15 +87,12 @@ linters-settings:
 
 linters:
   enable:
-    - gosimple
     - staticcheck
     - unused
     - govet
     - gocyclo
     - gocritic
     - goconst
-    - goimports
-    - gofmt  # We enable this as well as goimports for its simplify mode.
     - prealloc
     - revive
     - unconvert
