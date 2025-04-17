@@ -86,8 +86,8 @@ func main() {
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		}, LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
-		LeaseDuration:                 func() *time.Duration { d := 60 * time.Second; return &d }(),
-		RenewDeadline:                 func() *time.Duration { d := 50 * time.Second; return &d }(),
+		LeaseDuration: func() *time.Duration { d := 60 * time.Second; return &d }(),
+		RenewDeadline: func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Scaleway APIs to scheme")
