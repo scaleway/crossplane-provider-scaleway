@@ -51,9 +51,19 @@ GO_SUBDIRS += cmd internal apis
 KIND_VERSION = v0.23.0
 UP_VERSION = v0.31.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.12.0
+UPTEST_LOCAL_VERSION ?= v0.13.0
+UPTEST_LOCAL_CHANNEL ?= stable
 -include build/makelib/k8s_tools.mk
 CROSSPLANE_VERSION = 1.16.0
+
+UPTEST_LOCAL := $(TOOLS_HOST_DIR)/uptest-$(UPTEST_LOCAL_VERSION)
+
+$(UPTEST_LOCAL):
+	@$(INFO) installing uptest $(UPTEST_LOCAL)
+	@mkdir -p $(TOOLS_HOST_DIR)
+	@curl -fsSLo $(UPTEST_LOCAL) https://s3.us-west-2.amazonaws.com/crossplane.uptest.releases/$(UPTEST_LOCAL_CHANNEL)/$(UPTEST_LOCAL_VERSION)/bin/$(SAFEHOST_PLATFORM)/uptest || $(FAIL)
+	@chmod +x $(UPTEST_LOCAL)
+	@$(OK) installing uptest $(UPTEST_LOCAL)
 
 # ====================================================================================
 # Setup Images
@@ -165,9 +175,9 @@ CROSSPLANE_NAMESPACE = upbound-system
 -include build/makelib/local.xpkg.mk
 -include build/makelib/controlplane.mk
 
-uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
+uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --setup-script=cluster/test/setup.sh || $(FAIL)
+	@CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST_LOCAL) e2e "${UPTEST_EXAMPLE_LIST}" --setup-script=cluster/test/setup.sh || $(FAIL)
 	@$(OK) running automated tests
 
 local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)
