@@ -13,7 +13,7 @@ import (
 	"text/template"
 
 	"github.com/pkg/errors"
-	"github.com/scaleway/provider-scaleway/config/tools"
+	"github.com/scaleway/crossplane-provider-scaleway/config/tools"
 )
 
 // ProviderGoFilePath is the path to the provider.go file where provider configurations are set.
