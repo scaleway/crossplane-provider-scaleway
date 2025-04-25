@@ -1,0 +1,40 @@
+name: Update Terraform Provider
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.22'
+
+      - name: Run update script
+        run: |
+          chmod +x scripts/update-provider.sh
+          scripts/update-provider.sh
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-tf-provider/${{ env.new_version }}
+          commit-message: "chore: bump Terraform provider to v${{ env.new_version }}"
+          title: "chore: bump Terraform provider to v${{ env.new_version }}"
+          body: |
+            - Bumped `TERRAFORM_PROVIDER_VERSION` to **v${{ env.new_version }}**
+            - Re-ran `make generate` and auto-generated new Crossplane resource configs
+
+          labels: automated, dependencies
