@@ -75,6 +75,6 @@ fi
 
 echo "🧹 Tidy & format Go modules"
 go mod tidy
-go fmt ./...
+golangci-lint run --fix
 
 echo "🎉 Done."

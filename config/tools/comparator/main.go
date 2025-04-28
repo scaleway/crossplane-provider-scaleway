@@ -18,6 +18,11 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+var groupAliases = map[string]string{
+	"transactionalemail": "tem",
+	"domainsanddns":      "domain",
+}
+
 // ProviderMetadata represents the structure of provider-metadata.yaml
 type ProviderMetadata struct {
 	Resources map[string]*registry.Resource `yaml:"resources"`
@@ -55,12 +60,7 @@ func main() {
 
 		raw := generatePackageName(resource.SubCategory)
 
-		aliases := map[string]string{
-			"transactionalemail": "tem",
-			"domainsanddns":      "domain",
-		}
-
-		pkg, ok := aliases[raw]
+		pkg, ok := groupAliases[raw]
 		if !ok {
 			pkg = raw
 		}

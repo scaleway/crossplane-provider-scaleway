@@ -1,33 +1,33 @@
 {{ define "initialConfigTemplate" }}
-    package {{ .PackageName }}
+package {{ .PackageName }}
 
-    import "github.com/crossplane/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
-    const shortGroup = "{{ .ShortGroup }}"
+const shortGroup = "{{ .ShortGroup }}"
 {{ end }}
 
 {{ define "resourceConfigTemplate" }}
-    // Configure adds configurations for {{ .ResourceName }} resource.
-    func Configure(p *config.Provider) {
+// Configure adds configurations for {{ .ResourceName }} resource.
+func Configure(p *config.Provider) {
     p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
-    r.ExternalName = config.IdentifierFromProvider
-    r.ShortGroup = shortGroup
-    r.Kind = "{{ .Kind }}"
-    {{ range $key, $value := .References }}
+        r.ExternalName = config.IdentifierFromProvider
+        r.ShortGroup = shortGroup
+        r.Kind = "{{ .Kind }}"
+        {{ range $key, $value := .References }}
         r.References["{{$key}}"] = config.Reference{
             TerraformName: "{{$value}}",
         }
-    {{ end }}
+        {{ end }}
     })
-    }
+}
 {{ end }}
 
 {{ define "updateExistingConfigTemplate" }}
     p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
-    r.ExternalName = config.IdentifierFromProvider
-    r.ShortGroup = "{{ .ShortGroup }}"
-    r.Kind = "{{ .Kind }}"
-    {{ range $key, $value := .References }}
+        r.ExternalName = config.IdentifierFromProvider
+        r.ShortGroup = "{{ .ShortGroup }}"
+        r.Kind = "{{ .Kind }}"
+        {{ range $key, $value := .References }}
         r.References["{{$key}}"] = config.Reference{
             TerraformName: "{{$value}}",
         }

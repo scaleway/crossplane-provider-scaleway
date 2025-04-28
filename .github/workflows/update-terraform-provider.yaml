@@ -21,6 +21,12 @@ jobs:
         with:
           go-version: '1.22'
 
+      - name: Install golangci-lint
+        uses: golangci/golangci-lint-action@v7
+        with:
+          version: latest
+          args: --timeout 10m
+
       - name: Run update script
         run: |
           chmod +x scripts/update-provider.sh
