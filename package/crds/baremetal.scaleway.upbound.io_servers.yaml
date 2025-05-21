@@ -94,7 +94,7 @@ spec:
                     type: string
                   offer:
                     description: |-
-                      The offer name or UUID of the baremetal server.
+                      The offer UUID of the baremetal server.
                       Use this endpoint to find the right offer.
                       ID or name of the server offer
                     type: string
@@ -157,7 +157,7 @@ spec:
                         id:
                           description: |-
                             The id of the option to enable. Use this endpoint to find the available options IDs.
-                            The private network ID
+                            The ID of the private network to associate with the server
                           type: string
                         ipamIpIds:
                           description: |-
@@ -345,7 +345,7 @@ spec:
                     type: string
                   offer:
                     description: |-
-                      The offer name or UUID of the baremetal server.
+                      The offer UUID of the baremetal server.
                       Use this endpoint to find the right offer.
                       ID or name of the server offer
                     type: string
@@ -408,7 +408,7 @@ spec:
                         id:
                           description: |-
                             The id of the option to enable. Use this endpoint to find the available options IDs.
-                            The private network ID
+                            The ID of the private network to associate with the server
                           type: string
                         ipamIpIds:
                           description: |-
@@ -767,7 +767,7 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The address of the IP.
+                          description: The private IP address.
                           type: string
                         id:
                           description: The id of the option to enable. Use this endpoint
@@ -788,7 +788,7 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The address of the IP.
+                          description: The private IP address.
                           type: string
                         id:
                           description: The id of the option to enable. Use this endpoint
@@ -809,7 +809,7 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The address of the IP.
+                          description: The private IP address.
                           type: string
                         id:
                           description: The id of the option to enable. Use this endpoint
@@ -830,7 +830,7 @@ spec:
                     type: string
                   offer:
                     description: |-
-                      The offer name or UUID of the baremetal server.
+                      The offer UUID of the baremetal server.
                       Use this endpoint to find the right offer.
                       ID or name of the server offer
                     type: string
@@ -890,6 +890,21 @@ spec:
                       The partitioning schema in JSON format
                       The partitioning schema in json format
                     type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The id of the option to enable. Use this endpoint
+                            to find the available options IDs.
+                          type: string
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
@@ -904,7 +919,7 @@ spec:
                         id:
                           description: |-
                             The id of the option to enable. Use this endpoint to find the available options IDs.
-                            The private network ID
+                            The ID of the private network to associate with the server
                           type: string
                         ipamIpIds:
                           description: |-
@@ -913,6 +928,11 @@ spec:
                           items:
                             type: string
                           type: array
+                        mappingId:
+                          description: |-
+                            The ID of the Server-to-Private Network mapping.
+                            The ID of the Server-to-Private Network mapping
+                          type: string
                         status:
                           description: |-
                             The private network status.

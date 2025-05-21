@@ -801,6 +801,20 @@ spec:
                       The MAC address of the private NIC.
                       MAC address of the NIC
                     type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The ID of the private NIC.
+                          type: string
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the private network attached to.

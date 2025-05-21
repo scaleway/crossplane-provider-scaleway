@@ -163,7 +163,7 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
                       The number of days to retain data, must be between 1 and 365.
                     type: number
                   type:
@@ -276,7 +276,7 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
                       The number of days to retain data, must be between 1 and 365.
                     type: number
                   type:
@@ -497,7 +497,7 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.
+                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
                       The number of days to retain data, must be between 1 and 365.
                     type: number
                   synchronizedWithGrafana:

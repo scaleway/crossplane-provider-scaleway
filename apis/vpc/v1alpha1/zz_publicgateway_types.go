@@ -15,6 +15,11 @@ import (
 
 type PublicGatewayInitParameters struct {
 
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+	// +listType=set
+	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
+
 	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
 	BastionEnabled *bool `json:"bastionEnabled,omitempty" tf:"bastion_enabled,omitempty"`
@@ -40,6 +45,9 @@ type PublicGatewayInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
+	// Put a Public Gateway in IPAM mode, so that it can be used with the Public Gateways API v2
+	MoveToIpam *bool `json:"moveToIpam,omitempty" tf:"move_to_ipam,omitempty"`
+
 	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -60,16 +68,20 @@ type PublicGatewayInitParameters struct {
 	// gateway type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
-	// override the gateway's default recursive DNS servers, if DNS features are enabled
-	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
-
 	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PublicGatewayObservation struct {
+
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+	// +listType=set
+	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
+
+	// The bandwidth available of the gateway
+	Bandwidth *float64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
@@ -93,6 +105,9 @@ type PublicGatewayObservation struct {
 	// Attach an existing flexible IP to the gateway.
 	// attach an existing IP to the gateway
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
+
+	// Put a Public Gateway in IPAM mode, so that it can be used with the Public Gateways API v2
+	MoveToIpam *bool `json:"moveToIpam,omitempty" tf:"move_to_ipam,omitempty"`
 
 	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
@@ -126,7 +141,7 @@ type PublicGatewayObservation struct {
 	// The date and time of the last update of the public gateway
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
+	// (Deprecated) Override the gateway's default recursive DNS servers, if DNS features are enabled.
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
@@ -136,6 +151,12 @@ type PublicGatewayObservation struct {
 }
 
 type PublicGatewayParameters struct {
+
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+	// Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
 
 	// Enable SSH bastion on the gateway.
 	// Enable SSH bastion on the gateway
@@ -166,6 +187,10 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
+	// Put a Public Gateway in IPAM mode, so that it can be used with the Public Gateways API v2
+	// +kubebuilder:validation:Optional
+	MoveToIpam *bool `json:"moveToIpam,omitempty" tf:"move_to_ipam,omitempty"`
+
 	// The name for the Public Gateway. If not provided it will be randomly generated.
 	// name of the gateway
 	// +kubebuilder:validation:Optional
@@ -190,11 +215,6 @@ type PublicGatewayParameters struct {
 	// gateway type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// Override the gateway's default recursive DNS servers, if DNS features are enabled.
-	// override the gateway's default recursive DNS servers, if DNS features are enabled
-	// +kubebuilder:validation:Optional
-	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to

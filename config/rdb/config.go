@@ -89,4 +89,14 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_rdb_instance",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_rdb_snapshot", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Snapshot"
+
+		r.References["instance_id"] = config.Reference{
+			TerraformName: "scaleway_rdb_instance",
+		}
+	})
 }

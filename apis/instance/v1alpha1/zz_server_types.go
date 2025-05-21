@@ -34,7 +34,7 @@ type PrivateNetworkObservation struct {
 	// The Private Network ID
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	// The ID of the NIC
 	PnicID *string `json:"pnicId,omitempty" tf:"pnic_id,omitempty"`
 
@@ -65,11 +65,11 @@ type PublicIpsInitParameters struct {
 
 type PublicIpsObservation struct {
 
-	// The address of the IP
+	// The private IP address.
 	// IP Address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	// ID of the IP
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -185,7 +185,7 @@ type ServerInitParameters struct {
 	// The boot type of the server
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	// ID of the target bootscript (set boot_type to bootscript)
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
 
@@ -196,7 +196,7 @@ type ServerInitParameters struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// (Defaults to false) Determines if IPv6 is enabled for the server.
 	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
@@ -248,6 +248,10 @@ type ServerInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Set to true to activate server protection option.
+	// If true, the instance is protected against accidental deletion via the Scaleway API.
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
+
 	// The list of public IPs of the server.
 	// List of public IPs attached to your instanceSDK
 	PublicIps []PublicIpsInitParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
@@ -259,10 +263,6 @@ type ServerInitParameters struct {
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
 	RootVolume []RootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
-
-	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true
-	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -315,7 +315,7 @@ type ServerObservation struct {
 	// The boot type of the server
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	// ID of the target bootscript (set boot_type to bootscript)
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
 
@@ -326,12 +326,12 @@ type ServerObservation struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// (Defaults to false) Determines if IPv6 is enabled for the server.
 	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the reserved IP that is attached to the server.
@@ -373,13 +373,17 @@ type ServerObservation struct {
 	// The placement group the server is attached to
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// True when the placement group policy is respected.
+	// (Deprecated) Always false, use instance_placement_group ressource to known when the placement group policy is respected.
 	// True when the placement group policy is respected
 	PlacementGroupPolicyRespected *bool `json:"placementGroupPolicyRespected,omitempty" tf:"placement_group_policy_respected,omitempty"`
 
 	// The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
 	// The Scaleway internal IP address of the server
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 addresses associated with the resource
+	PrivateIps []ServerPrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
@@ -389,6 +393,10 @@ type ServerObservation struct {
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true to activate server protection option.
+	// If true, the instance is protected against accidental deletion via the Scaleway API.
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// The public IP address of the server (Deprecated use public_ips instead).
 	// The public IPv4 address of the server
@@ -405,10 +413,6 @@ type ServerObservation struct {
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
 	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
-
-	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true
-	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -454,7 +458,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
 
-	// The ID of the server.
+	// The ID of the IP address resource.
 	// ID of the target bootscript (set boot_type to bootscript)
 	// +kubebuilder:validation:Optional
 	BootscriptID *string `json:"bootscriptId,omitempty" tf:"bootscript_id,omitempty"`
@@ -468,7 +472,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+	// (Defaults to false) Determines if IPv6 is enabled for the server.
 	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
 	// Determines if IPv6 is enabled for the server
 	// +kubebuilder:validation:Optional
@@ -528,6 +532,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Set to true to activate server protection option.
+	// If true, the instance is protected against accidental deletion via the Scaleway API.
+	// +kubebuilder:validation:Optional
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
+
 	// The list of public IPs of the server.
 	// List of public IPs attached to your instanceSDK
 	// +kubebuilder:validation:Optional
@@ -542,11 +551,6 @@ type ServerParameters struct {
 	// Root volume attached to the server on creation
 	// +kubebuilder:validation:Optional
 	RootVolume []RootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
-
-	// (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-	// If server supports routed IPs, default to true
-	// +kubebuilder:validation:Optional
-	RoutedIPEnabled *bool `json:"routedIpEnabled,omitempty" tf:"routed_ip_enabled,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -592,6 +596,21 @@ type ServerParameters struct {
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type ServerPrivateIpsInitParameters struct {
+}
+
+type ServerPrivateIpsObservation struct {
+
+	// The private IP address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the IP address resource.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type ServerPrivateIpsParameters struct {
 }
 
 // ServerSpec defines the desired state of Server

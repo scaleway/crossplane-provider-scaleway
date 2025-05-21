@@ -15,8 +15,9 @@ import (
 
 type CockpitInitParameters struct {
 
-	// Name of the plan to use. Available plans are: free, premium, and custom.
-	// Name or ID of the plan
+	// (Deprecated) Name of the plan to use. Available plans are: free, premium, and custom.
+	// ~> Important: The plan field is deprecated. Any modification or selection will have no effect.
+	// [DEPRECATED] The plan field is deprecated. Any modification or selection will have no effect.
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
@@ -36,31 +37,33 @@ type CockpitInitParameters struct {
 type CockpitObservation struct {
 
 	// (Deprecated) A list of endpoints related to Cockpit, each with specific URLs:
-	// Endpoints
+	// [DEPRECATED] Endpoints list. Please use 'scaleway_cockpit_source' instead.
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the plan to use. Available plans are: free, premium, and custom.
-	// Name or ID of the plan
+	// (Deprecated) Name of the plan to use. Available plans are: free, premium, and custom.
+	// ~> Important: The plan field is deprecated. Any modification or selection will have no effect.
+	// [DEPRECATED] The plan field is deprecated. Any modification or selection will have no effect.
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// (Deprecated) The ID of the current pricing plan.
-	// The plan ID of the cockpit
+	// [DEPRECATED] The plan ID of the cockpit. This field is no longer relevant.
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// (Defaults to the Project specified in the provider's configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Push_url
+	// [DEPRECATED] Push_url
 	PushURL []PushURLObservation `json:"pushUrl,omitempty" tf:"push_url,omitempty"`
 }
 
 type CockpitParameters struct {
 
-	// Name of the plan to use. Available plans are: free, premium, and custom.
-	// Name or ID of the plan
+	// (Deprecated) Name of the plan to use. Available plans are: free, premium, and custom.
+	// ~> Important: The plan field is deprecated. Any modification or selection will have no effect.
+	// [DEPRECATED] The plan field is deprecated. Any modification or selection will have no effect.
 	// +kubebuilder:validation:Optional
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 

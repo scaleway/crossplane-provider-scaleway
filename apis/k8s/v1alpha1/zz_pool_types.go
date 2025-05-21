@@ -18,9 +18,14 @@ type NodesInitParameters struct {
 
 type NodesObservation struct {
 
+	// The ID of the pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
 	// The name for the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the node.
+	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
@@ -42,7 +47,6 @@ type PoolInitParameters struct {
 	Autohealing *bool `json:"autohealing,omitempty" tf:"autohealing,omitempty"`
 
 	// (Defaults to false) Enables the autoscaling feature for this pool.
-	// ~> Important: When enabled, an update of the size will not be taken into account.
 	// Enable the autoscaling on the pool
 	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
 
@@ -60,7 +64,6 @@ type PoolInitParameters struct {
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// (Defaults to containerd) The container runtime of the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Container runtime for the pool
 	ContainerRuntime *string `json:"containerRuntime,omitempty" tf:"container_runtime,omitempty"`
 
@@ -78,7 +81,6 @@ type PoolInitParameters struct {
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The name of the cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -87,12 +89,10 @@ type PoolInitParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The placement group the nodes of the pool will be attached to.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Defines if the public IP should be removed from the nodes.
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
 
@@ -109,7 +109,6 @@ type PoolInitParameters struct {
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
 
 	// The size of the pool.
-	// ~> Important: This field will only be used at creation if autoscaling is enabled.
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -121,12 +120,11 @@ type PoolInitParameters struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// (Defaults to false) Whether to wait for the pool to be ready.
+	// (Defaults to true) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the pool should be created.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -138,7 +136,6 @@ type PoolObservation struct {
 	Autohealing *bool `json:"autohealing,omitempty" tf:"autohealing,omitempty"`
 
 	// (Defaults to false) Enables the autoscaling feature for this pool.
-	// ~> Important: When enabled, an update of the size will not be taken into account.
 	// Enable the autoscaling on the pool
 	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
 
@@ -147,7 +144,6 @@ type PoolObservation struct {
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// (Defaults to containerd) The container runtime of the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Container runtime for the pool
 	ContainerRuntime *string `json:"containerRuntime,omitempty" tf:"container_runtime,omitempty"`
 
@@ -175,7 +171,6 @@ type PoolObservation struct {
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The name of the cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -187,12 +182,10 @@ type PoolObservation struct {
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
 	// The placement group the nodes of the pool will be attached to.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Defines if the public IP should be removed from the nodes.
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
 
@@ -209,7 +202,6 @@ type PoolObservation struct {
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
 
 	// The size of the pool.
-	// ~> Important: This field will only be used at creation if autoscaling is enabled.
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -233,12 +225,11 @@ type PoolObservation struct {
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// (Defaults to false) Whether to wait for the pool to be ready.
+	// (Defaults to true) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the pool should be created.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -251,7 +242,6 @@ type PoolParameters struct {
 	Autohealing *bool `json:"autohealing,omitempty" tf:"autohealing,omitempty"`
 
 	// (Defaults to false) Enables the autoscaling feature for this pool.
-	// ~> Important: When enabled, an update of the size will not be taken into account.
 	// Enable the autoscaling on the pool
 	// +kubebuilder:validation:Optional
 	Autoscaling *bool `json:"autoscaling,omitempty" tf:"autoscaling,omitempty"`
@@ -271,7 +261,6 @@ type PoolParameters struct {
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// (Defaults to containerd) The container runtime of the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Container runtime for the pool
 	// +kubebuilder:validation:Optional
 	ContainerRuntime *string `json:"containerRuntime,omitempty" tf:"container_runtime,omitempty"`
@@ -293,7 +282,6 @@ type PoolParameters struct {
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The name of the cluster
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -304,13 +292,11 @@ type PoolParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The placement group the nodes of the pool will be attached to.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// ID of the placement group
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// Defines if the public IP should be removed from the nodes.
 	// +kubebuilder:validation:Optional
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
@@ -331,7 +317,6 @@ type PoolParameters struct {
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
 
 	// The size of the pool.
-	// ~> Important: This field will only be used at creation if autoscaling is enabled.
 	// Size of the pool
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
@@ -346,16 +331,30 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// (Defaults to false) Whether to wait for the pool to be ready.
+	// (Defaults to true) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
 	// +kubebuilder:validation:Optional
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the pool should be created.
-	// ~> Important: Updates to this field will recreate a new resource.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type PrivateIpsInitParameters struct {
+}
+
+type PrivateIpsObservation struct {
+
+	// The private IP address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIpsParameters struct {
 }
 
 type UpgradePolicyInitParameters struct {

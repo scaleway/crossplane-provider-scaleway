@@ -13,4 +13,27 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Domain"
 	})
+
+	p.AddResourceConfigurator("scaleway_tem_webhook", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Webhook"
+
+		r.References["domain_id"] = config.Reference{
+			TerraformName: "scaleway_tem_domain",
+		}
+		r.References["sns_arn"] = config.Reference{
+			TerraformName: "scaleway_mnq_sns_topic",
+		}
+	})
+
+	p.AddResourceConfigurator("scaleway_tem_blocked_list", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "List"
+
+		r.References["domain_id"] = config.Reference{
+			TerraformName: "scaleway_tem_domain",
+		}
+	})
 }

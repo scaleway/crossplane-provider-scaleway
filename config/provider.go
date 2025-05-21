@@ -16,15 +16,18 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/cockpit"
 	"github.com/scaleway/crossplane-provider-scaleway/config/container"
 	"github.com/scaleway/crossplane-provider-scaleway/config/domain"
+	"github.com/scaleway/crossplane-provider-scaleway/config/edgeservices"
 	"github.com/scaleway/crossplane-provider-scaleway/config/flexibleip"
 	"github.com/scaleway/crossplane-provider-scaleway/config/function"
 	"github.com/scaleway/crossplane-provider-scaleway/config/iam"
+	"github.com/scaleway/crossplane-provider-scaleway/config/inference"
 	"github.com/scaleway/crossplane-provider-scaleway/config/instance"
 	"github.com/scaleway/crossplane-provider-scaleway/config/iot"
 	"github.com/scaleway/crossplane-provider-scaleway/config/ipam"
 	"github.com/scaleway/crossplane-provider-scaleway/config/jobs"
 	"github.com/scaleway/crossplane-provider-scaleway/config/k8s"
 	"github.com/scaleway/crossplane-provider-scaleway/config/lb"
+	"github.com/scaleway/crossplane-provider-scaleway/config/mongodb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/object"
 	"github.com/scaleway/crossplane-provider-scaleway/config/rdb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/redis"
@@ -77,6 +80,9 @@ func GetProvider() *ujconfig.Provider {
 		registry.Configure,
 		tem.Configure,
 		vpc.Configure,
+		mongodb.Configure,
+		edgeservices.Configure,
+		inference.Configure,
 	} {
 		configure(pc)
 	}

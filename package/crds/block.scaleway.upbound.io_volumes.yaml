@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  instanceVolumeId:
+                    description: |-
+                      The ID of the volume.
+                      The instance volume to create the block volume from
+                    type: string
                   iops:
                     description: |-
                       The maximum IOPs expected, must match available options.
@@ -197,6 +202,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  instanceVolumeId:
+                    description: |-
+                      The ID of the volume.
+                      The instance volume to create the block volume from
+                    type: string
                   iops:
                     description: |-
                       The maximum IOPs expected, must match available options.
@@ -488,6 +498,11 @@ spec:
                 properties:
                   id:
                     description: The ID of the volume.
+                    type: string
+                  instanceVolumeId:
+                    description: |-
+                      The ID of the volume.
+                      The instance volume to create the block volume from
                     type: string
                   iops:
                     description: |-

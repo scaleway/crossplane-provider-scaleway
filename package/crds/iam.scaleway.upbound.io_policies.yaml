@@ -258,7 +258,7 @@ spec:
                       properties:
                         condition:
                           description: |-
-                            The condition of the IAM policy.
+                            The condition of the rule.
                             Conditions of the policy
                           type: string
                         organizationId:
@@ -495,7 +495,7 @@ spec:
                       properties:
                         condition:
                           description: |-
-                            The condition of the IAM policy.
+                            The condition of the rule.
                             Conditions of the policy
                           type: string
                         organizationId:
@@ -761,7 +761,7 @@ spec:
                       properties:
                         condition:
                           description: |-
-                            The condition of the IAM policy.
+                            The condition of the rule.
                             Conditions of the policy
                           type: string
                         organizationId:

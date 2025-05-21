@@ -36,7 +36,15 @@ type ContainerInitParameters struct {
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time.
+	// Health check configuration block of the container.
+	// Health check configuration of the container.
+	HealthCheck []HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
+	// Local storage limit of the container (in MB)
+	// Local storage limit of the container (in MB)
+	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
+
+	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
 	// The maximum the number of simultaneous requests your container can handle at the same time.
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
@@ -97,13 +105,17 @@ type ContainerInitParameters struct {
 	// Execution environment of the container.
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
+	// Configuration block used to decide when to scale up or down. Possible values:
+	// Configuration used to decide when to scale up or down.
+	ScalingOption []ScalingOptionInitParameters `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
+
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
 	// The container status.
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time your container can spend processing a request before being stopped.
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -143,10 +155,18 @@ type ContainerObservation struct {
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
+	// Health check configuration block of the container.
+	// Health check configuration of the container.
+	HealthCheck []HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
 	// The unique identifier of the container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time.
+	// Local storage limit of the container (in MB)
+	// Local storage limit of the container (in MB)
+	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
+
+	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
 	// The maximum the number of simultaneous requests your container can handle at the same time.
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
@@ -198,11 +218,15 @@ type ContainerObservation struct {
 	// Execution environment of the container.
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
+	// Configuration block used to decide when to scale up or down. Possible values:
+	// Configuration used to decide when to scale up or down.
+	ScalingOption []ScalingOptionObservation `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
+
 	// The container status.
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time your container can spend processing a request before being stopped.
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -235,7 +259,17 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// The maximum number of simultaneous requests your container can handle at the same time.
+	// Health check configuration block of the container.
+	// Health check configuration of the container.
+	// +kubebuilder:validation:Optional
+	HealthCheck []HealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
+	// Local storage limit of the container (in MB)
+	// Local storage limit of the container (in MB)
+	// +kubebuilder:validation:Optional
+	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
+
+	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
 	// The maximum the number of simultaneous requests your container can handle at the same time.
 	// +kubebuilder:validation:Optional
 	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
@@ -309,6 +343,11 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
+	// Configuration block used to decide when to scale up or down. Possible values:
+	// Configuration used to decide when to scale up or down.
+	// +kubebuilder:validation:Optional
+	ScalingOption []ScalingOptionParameters `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
+
 	// The secret environment variables of the container.
 	// The secret environment variables to be injected into your container at runtime.
 	// +kubebuilder:validation:Optional
@@ -319,10 +358,128 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The maximum amount of time your container can spend processing a request before being stopped.
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type HTTPInitParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type HTTPObservation struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type HTTPParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+}
+
+type HealthCheckInitParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive health check failures before considering the container unhealthy.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// HTTP health check configuration.
+	// HTTP health check configuration.
+	HTTP []HTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Period between health checks (in seconds).
+	// Period between health checks.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+}
+
+type HealthCheckObservation struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive health check failures before considering the container unhealthy.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// HTTP health check configuration.
+	// HTTP health check configuration.
+	HTTP []HTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Period between health checks (in seconds).
+	// Period between health checks.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+}
+
+type HealthCheckParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// +kubebuilder:validation:Optional
+	FailureThreshold *float64 `json:"failureThreshold" tf:"failure_threshold,omitempty"`
+
+	// HTTP health check configuration.
+	// HTTP health check configuration.
+	// +kubebuilder:validation:Optional
+	HTTP []HTTPParameters `json:"http" tf:"http,omitempty"`
+
+	// Period between health checks (in seconds).
+	// Period between health checks.
+	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval" tf:"interval,omitempty"`
+}
+
+type ScalingOptionInitParameters struct {
+
+	// Scale depending on the CPU usage of a container instance.
+	// Scale depending on the CPU usage of a container instance.
+	CPUUsageThreshold *float64 `json:"cpuUsageThreshold,omitempty" tf:"cpu_usage_threshold,omitempty"`
+
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	ConcurrentRequestsThreshold *float64 `json:"concurrentRequestsThreshold,omitempty" tf:"concurrent_requests_threshold,omitempty"`
+
+	// Scale depending on the memory usage of a container instance.
+	// Scale depending on the memory usage of a container instance.
+	MemoryUsageThreshold *float64 `json:"memoryUsageThreshold,omitempty" tf:"memory_usage_threshold,omitempty"`
+}
+
+type ScalingOptionObservation struct {
+
+	// Scale depending on the CPU usage of a container instance.
+	// Scale depending on the CPU usage of a container instance.
+	CPUUsageThreshold *float64 `json:"cpuUsageThreshold,omitempty" tf:"cpu_usage_threshold,omitempty"`
+
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	ConcurrentRequestsThreshold *float64 `json:"concurrentRequestsThreshold,omitempty" tf:"concurrent_requests_threshold,omitempty"`
+
+	// Scale depending on the memory usage of a container instance.
+	// Scale depending on the memory usage of a container instance.
+	MemoryUsageThreshold *float64 `json:"memoryUsageThreshold,omitempty" tf:"memory_usage_threshold,omitempty"`
+}
+
+type ScalingOptionParameters struct {
+
+	// Scale depending on the CPU usage of a container instance.
+	// Scale depending on the CPU usage of a container instance.
+	// +kubebuilder:validation:Optional
+	CPUUsageThreshold *float64 `json:"cpuUsageThreshold,omitempty" tf:"cpu_usage_threshold,omitempty"`
+
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	// Scale depending on the number of concurrent requests being processed per container instance.
+	// +kubebuilder:validation:Optional
+	ConcurrentRequestsThreshold *float64 `json:"concurrentRequestsThreshold,omitempty" tf:"concurrent_requests_threshold,omitempty"`
+
+	// Scale depending on the memory usage of a container instance.
+	// Scale depending on the memory usage of a container instance.
+	// +kubebuilder:validation:Optional
+	MemoryUsageThreshold *float64 `json:"memoryUsageThreshold,omitempty" tf:"memory_usage_threshold,omitempty"`
 }
 
 // ContainerSpec defines the desired state of Container

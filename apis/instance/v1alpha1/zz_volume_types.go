@@ -19,6 +19,9 @@ type VolumeInitParameters struct {
 	// Create a volume based on a image
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
 
+	// If true, consider that this volume may have been migrated and no longer exists.
+	MigrateToSbs *bool `json:"migrateToSbs,omitempty" tf:"migrate_to_sbs,omitempty"`
+
 	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -52,6 +55,9 @@ type VolumeObservation struct {
 
 	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// If true, consider that this volume may have been migrated and no longer exists.
+	MigrateToSbs *bool `json:"migrateToSbs,omitempty" tf:"migrate_to_sbs,omitempty"`
 
 	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume
@@ -92,6 +98,10 @@ type VolumeParameters struct {
 	// Create a volume based on a image
 	// +kubebuilder:validation:Optional
 	FromSnapshotID *string `json:"fromSnapshotId,omitempty" tf:"from_snapshot_id,omitempty"`
+
+	// If true, consider that this volume may have been migrated and no longer exists.
+	// +kubebuilder:validation:Optional
+	MigrateToSbs *bool `json:"migrateToSbs,omitempty" tf:"migrate_to_sbs,omitempty"`
 
 	// The name of the volume. If not provided it will be randomly generated.
 	// The name of the volume

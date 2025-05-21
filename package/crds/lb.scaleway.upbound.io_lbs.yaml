@@ -654,6 +654,20 @@ spec:
                       The ID of the Organization ID the Load Balancer is associated with.
                       The organization_id you want to attach the resource to
                     type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The ID of the Load Balancer.
+                          type: string
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       List of private network to connect with your load balancer.

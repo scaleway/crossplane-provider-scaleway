@@ -149,6 +149,10 @@ type ClusterObservation struct {
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// The list of private IPv4 addresses associated with the resource.
+	// List of private IPv4 addresses associated with the resource
+	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
@@ -275,6 +279,21 @@ type ClusterParameters struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
+type PrivateIpsInitParameters struct {
+}
+
+type PrivateIpsObservation struct {
+
+	// The private IPv4 address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The UUID of the endpoint.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIpsParameters struct {
+}
+
 type PrivateNetworkInitParameters struct {
 
 	// The UUID of the Private Network resource.
@@ -285,6 +304,7 @@ type PrivateNetworkInitParameters struct {
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 }
@@ -303,6 +323,7 @@ type PrivateNetworkObservation struct {
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 
@@ -323,6 +344,7 @@ type PrivateNetworkParameters struct {
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
 	// List of IPv4 addresses of the private network with a CIDR notation
 	// +kubebuilder:validation:Optional
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`

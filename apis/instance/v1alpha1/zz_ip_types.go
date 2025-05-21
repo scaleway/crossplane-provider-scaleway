@@ -23,7 +23,7 @@ type IPInitParameters struct {
 	// The tags associated with the ip
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+	// The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
 	// The type of instance IP
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -65,7 +65,7 @@ type IPObservation struct {
 	// The tags associated with the ip
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+	// The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
 	// The type of instance IP
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -86,7 +86,7 @@ type IPParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+	// The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
 	// The type of instance IP
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

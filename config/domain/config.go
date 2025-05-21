@@ -25,4 +25,10 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Zone"
 	})
+
+	p.AddResourceConfigurator("scaleway_domain_registration", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Registration"
+	})
 }

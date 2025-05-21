@@ -135,6 +135,10 @@ type FrontendInitParameters struct {
 	// Collection of Certificate IDs related to the load balancer and domain
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
+	// The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
+
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
@@ -187,6 +191,10 @@ type FrontendObservation struct {
 	// List of certificate IDs that should be used by the frontend.
 	// Collection of Certificate IDs related to the load balancer and domain
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
+
+	// The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
 
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
@@ -242,6 +250,11 @@ type FrontendParameters struct {
 	// Collection of Certificate IDs related to the load balancer and domain
 	// +kubebuilder:validation:Optional
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
+
+	// The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+	// +kubebuilder:validation:Optional
+	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
 
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol

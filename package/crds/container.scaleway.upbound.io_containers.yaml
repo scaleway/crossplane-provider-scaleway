@@ -95,14 +95,50 @@ spec:
                       The environment variables to be injected into your container at runtime.
                     type: object
                     x-kubernetes-map-type: granular
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
                   httpOption:
                     description: |-
                       Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time.
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
                       The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
@@ -241,6 +277,29 @@ spec:
                       Execution environment of the container.
                       Execution environment of the container.
                     type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
                   secretEnvironmentVariablesSecretRef:
                     description: |-
                       The secret environment variables of the container.
@@ -263,7 +322,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time your container can spend processing a request before being stopped.
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
@@ -303,14 +362,50 @@ spec:
                       The environment variables to be injected into your container at runtime.
                     type: object
                     x-kubernetes-map-type: granular
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
                   httpOption:
                     description: |-
                       Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time.
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
                       The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
@@ -449,6 +544,29 @@ spec:
                       Execution environment of the container.
                       Execution environment of the container.
                     type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
                   secretEnvironmentVariablesSecretRef:
                     additionalProperties:
                       type: string
@@ -460,7 +578,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time your container can spend processing a request before being stopped.
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object
@@ -674,6 +792,37 @@ spec:
                       The error message of the container.
                       The error description
                     type: string
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
                   httpOption:
                     description: |-
                       Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
@@ -682,9 +831,14 @@ spec:
                   id:
                     description: The unique identifier of the container.
                     type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
                   maxConcurrency:
                     description: |-
-                      The maximum number of simultaneous requests your container can handle at the same time.
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
                       The maximum the number of simultaneous requests your container can handle at the same time.
                     type: number
                   maxScale:
@@ -747,6 +901,29 @@ spec:
                       Execution environment of the container.
                       Execution environment of the container.
                     type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
                   status:
                     description: |-
                       The container status.
@@ -754,7 +931,7 @@ spec:
                     type: string
                   timeout:
                     description: |-
-                      The maximum amount of time your container can spend processing a request before being stopped.
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
                       The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
                     type: number
                 type: object

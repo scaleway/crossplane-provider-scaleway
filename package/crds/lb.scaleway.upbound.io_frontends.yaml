@@ -250,6 +250,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.
@@ -547,6 +552,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.
@@ -946,6 +956,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.

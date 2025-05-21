@@ -143,6 +143,7 @@ spec:
                             Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
                             scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
                             If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string
@@ -285,6 +286,7 @@ spec:
                             Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
                             scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
                             If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string
@@ -585,6 +587,20 @@ spec:
                       The type of Redis™ cluster you want to create (e.g. RED1-M).
                       Type of node to use for the cluster
                     type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: The private IPv4 address.
+                          type: string
+                        id:
+                          description: The UUID of the endpoint.
+                          type: string
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Describes the Private Network you want to connect to your cluster. If not set, a public
@@ -608,6 +624,7 @@ spec:
                             Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
                             scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
                             If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
                             List of IPv4 addresses of the private network with a CIDR notation
                           items:
                             type: string

@@ -27,6 +27,7 @@ type FunctionInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
@@ -120,6 +121,7 @@ type FunctionObservation struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
@@ -204,6 +206,7 @@ type FunctionParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	// +kubebuilder:validation:Optional
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`

@@ -15,6 +15,10 @@ import (
 
 type VolumeInitParameters struct {
 
+	// The ID of the volume.
+	// The instance volume to create the block volume from
+	InstanceVolumeID *string `json:"instanceVolumeId,omitempty" tf:"instance_volume_id,omitempty"`
+
 	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -58,6 +62,10 @@ type VolumeObservation struct {
 	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the volume.
+	// The instance volume to create the block volume from
+	InstanceVolumeID *string `json:"instanceVolumeId,omitempty" tf:"instance_volume_id,omitempty"`
+
 	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -88,6 +96,11 @@ type VolumeObservation struct {
 }
 
 type VolumeParameters struct {
+
+	// The ID of the volume.
+	// The instance volume to create the block volume from
+	// +kubebuilder:validation:Optional
+	InstanceVolumeID *string `json:"instanceVolumeId,omitempty" tf:"instance_volume_id,omitempty"`
 
 	// The maximum IOPs expected, must match available options.
 	// The maximum IO/s expected, must match available options

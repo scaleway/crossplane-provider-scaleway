@@ -456,7 +456,7 @@ type HealthCheckHTTPInitParameters struct {
 	// The HTTP method to use for HC requests
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTP endpoint URL to call for HC requests
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -475,7 +475,7 @@ type HealthCheckHTTPObservation struct {
 	// The HTTP method to use for HC requests
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTP endpoint URL to call for HC requests
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -497,7 +497,7 @@ type HealthCheckHTTPParameters struct {
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTP endpoint URL to call for HC requests
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
@@ -521,7 +521,7 @@ type HealthCheckHTTPSInitParameters struct {
 	// The SNI to use for HC requests over SSL
 	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTPS endpoint URL to call for HC requests
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -544,7 +544,7 @@ type HealthCheckHTTPSObservation struct {
 	// The SNI to use for HC requests over SSL
 	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTPS endpoint URL to call for HC requests
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -571,7 +571,7 @@ type HealthCheckHTTPSParameters struct {
 	// +kubebuilder:validation:Optional
 	Sni *string `json:"sni,omitempty" tf:"sni,omitempty"`
 
-	// The HTTP endpoint URL to call for health check requests.
+	// The path for health check requests.
 	// The HTTPS endpoint URL to call for HC requests
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
