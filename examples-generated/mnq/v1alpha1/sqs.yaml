@@ -1,0 +1,10 @@
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SQS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/sqs
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider: {}

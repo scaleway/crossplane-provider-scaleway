@@ -1,0 +1,14 @@
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: TLSStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/tlsstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    managedCertificate: true
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

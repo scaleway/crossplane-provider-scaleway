@@ -1,0 +1,16 @@
+apiVersion: inference.scaleway.upbound.io/v1alpha1
+kind: Model
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inference/v1alpha1/model
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: my-awesome-model
+    secretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    url: https://huggingface.co/agentica-org/DeepCoder-14B-Preview

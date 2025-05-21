@@ -17,20 +17,25 @@ import (
 	v1alpha1cockpit "github.com/scaleway/crossplane-provider-scaleway/apis/cockpit/v1alpha1"
 	v1alpha1container "github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1"
 	v1alpha1domain "github.com/scaleway/crossplane-provider-scaleway/apis/domain/v1alpha1"
+	v1alpha1edgeservices "github.com/scaleway/crossplane-provider-scaleway/apis/edgeservices/v1alpha1"
 	v1alpha1flexibleip "github.com/scaleway/crossplane-provider-scaleway/apis/flexibleip/v1alpha1"
 	v1alpha1function "github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1"
 	v1alpha1iam "github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1"
+	v1alpha1inference "github.com/scaleway/crossplane-provider-scaleway/apis/inference/v1alpha1"
 	v1alpha1instance "github.com/scaleway/crossplane-provider-scaleway/apis/instance/v1alpha1"
 	v1alpha1iot "github.com/scaleway/crossplane-provider-scaleway/apis/iot/v1alpha1"
 	v1alpha1ipam "github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1"
 	v1alpha1jobs "github.com/scaleway/crossplane-provider-scaleway/apis/jobs/v1alpha1"
 	v1alpha1k8s "github.com/scaleway/crossplane-provider-scaleway/apis/k8s/v1alpha1"
 	v1alpha1lb "github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1"
+	v1alpha1mnq "github.com/scaleway/crossplane-provider-scaleway/apis/mnq/v1alpha1"
+	v1alpha1mongodb "github.com/scaleway/crossplane-provider-scaleway/apis/mongodb/v1alpha1"
 	v1alpha1object "github.com/scaleway/crossplane-provider-scaleway/apis/object/v1alpha1"
 	v1alpha1rdb "github.com/scaleway/crossplane-provider-scaleway/apis/rdb/v1alpha1"
 	v1alpha1redis "github.com/scaleway/crossplane-provider-scaleway/apis/redis/v1alpha1"
 	v1alpha1registry "github.com/scaleway/crossplane-provider-scaleway/apis/registry/v1alpha1"
 	v1alpha1sdb "github.com/scaleway/crossplane-provider-scaleway/apis/sdb/v1alpha1"
+	v1alpha1secrets "github.com/scaleway/crossplane-provider-scaleway/apis/secrets/v1alpha1"
 	v1alpha1tem "github.com/scaleway/crossplane-provider-scaleway/apis/tem/v1alpha1"
 	v1alpha1apis "github.com/scaleway/crossplane-provider-scaleway/apis/v1alpha1"
 	v1beta1 "github.com/scaleway/crossplane-provider-scaleway/apis/v1beta1"
@@ -47,20 +52,25 @@ func init() {
 		v1alpha1cockpit.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
+		v1alpha1edgeservices.SchemeBuilder.AddToScheme,
 		v1alpha1flexibleip.SchemeBuilder.AddToScheme,
 		v1alpha1function.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
+		v1alpha1inference.SchemeBuilder.AddToScheme,
 		v1alpha1instance.SchemeBuilder.AddToScheme,
 		v1alpha1iot.SchemeBuilder.AddToScheme,
 		v1alpha1ipam.SchemeBuilder.AddToScheme,
 		v1alpha1jobs.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
+		v1alpha1mnq.SchemeBuilder.AddToScheme,
+		v1alpha1mongodb.SchemeBuilder.AddToScheme,
 		v1alpha1object.SchemeBuilder.AddToScheme,
 		v1alpha1rdb.SchemeBuilder.AddToScheme,
 		v1alpha1redis.SchemeBuilder.AddToScheme,
 		v1alpha1registry.SchemeBuilder.AddToScheme,
 		v1alpha1sdb.SchemeBuilder.AddToScheme,
+		v1alpha1secrets.SchemeBuilder.AddToScheme,
 		v1alpha1tem.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,

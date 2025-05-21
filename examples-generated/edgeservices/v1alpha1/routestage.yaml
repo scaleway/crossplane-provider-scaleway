@@ -1,0 +1,27 @@
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: RouteStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/routestage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    rule:
+    - backendStageIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: backend
+      ruleHttpMatch:
+      - methodFilters:
+        - get
+        - post
+        pathFilter:
+        - pathFilterType: regex
+          value: .*
+    wafStageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: waf

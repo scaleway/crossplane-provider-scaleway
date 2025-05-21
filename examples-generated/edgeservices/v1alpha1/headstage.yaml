@@ -1,0 +1,50 @@
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: HeadStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/headstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    headStageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: DNSStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/headstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    fqdns:
+    - subdomain.example.com
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    tlsStageId: ${scaleway_edge_services_tls_stage.main.id}
+
+---
+
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/headstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: pipeline description
+    name: my-edge_services-pipeline

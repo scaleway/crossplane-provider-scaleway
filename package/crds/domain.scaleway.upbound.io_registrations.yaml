@@ -1,0 +1,1245 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  name: registrations.domain.scaleway.upbound.io
+spec:
+  group: domain.scaleway.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Registration
+    listKind: RegistrationList
+    plural: registrations
+    singular: registration
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Registration is the Schema for the Registrations API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: RegistrationSpec defines the desired state of Registration
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  autoRenew:
+                    description: |-
+                      renewal.
+                      Enable or disable auto-renewal of the domain.
+                    type: boolean
+                  dnssec:
+                    description: |-
+                      : Enables or disables DNSSEC.
+                      Enable or disable dnssec for the domain.
+                    type: boolean
+                  domainNames:
+                    description: |-
+                      : A list of domain names to be registered.
+                      List of domain names to be managed.
+                    items:
+                      type: string
+                    type: array
+                  durationInYears:
+                    description: ': The registration period in years.'
+                    type: number
+                  ownerContact:
+                    description: |-
+                      : Details of the owner contact.
+                      Details of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    items:
+                      properties:
+                        addressLine1:
+                          description: |-
+                            : Primary address.
+                            Primary address line for the contact.
+                          type: string
+                        addressLine2:
+                          description: Secondary address line for the contact (optional).
+                          type: string
+                        city:
+                          description: |-
+                            : City.
+                            City of the contact's address.
+                          type: string
+                        companyIdentificationCode:
+                          description: |-
+                            : Company identification code.
+                            Company identification code (e.g., SIREN/SIRET in France) for the contact.
+                          type: string
+                        companyName:
+                          description: |-
+                            : Company name.
+                            Name of the company associated with the contact (if applicable).
+                          type: string
+                        country:
+                          description: |-
+                            : Country code (ISO format).
+                            Country code of the contact's address (ISO format).
+                          type: string
+                        email:
+                          description: |-
+                            : Primary email.
+                            Primary email address of the contact.
+                          type: string
+                        emailAlt:
+                          description: Alternative email address for the contact.
+                          type: string
+                        extensionEu:
+                          description: Details specific to European domain extensions.
+                          items:
+                            properties:
+                              europeanCitizenship:
+                                description: Indicates the European citizenship of
+                                  the contact.
+                                type: string
+                            type: object
+                          type: array
+                        extensionFr:
+                          description: Details specific to French domain extensions.
+                          items:
+                            properties:
+                              associationInfo:
+                                description: Association-specific information for
+                                  the domain (French extension).
+                                items:
+                                  properties:
+                                    publicationJo:
+                                      description: Publication date in the Official
+                                        Journal (RFC3339 format) for association information.
+                                      type: string
+                                    publicationJoPage:
+                                      description: Page number of the publication
+                                        in the Official Journal for association information.
+                                      type: number
+                                  type: object
+                                type: array
+                              codeAuthAfnicInfo:
+                                description: AFNIC authorization information for the
+                                  contact (French extension).
+                                items:
+                                  properties:
+                                    codeAuthAfnic:
+                                      description: AFNIC authorization code for the
+                                        contact (specific to French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              dunsInfo:
+                                description: DUNS information for the domain owner
+                                  (specific to French domains).
+                                items:
+                                  properties:
+                                    dunsId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        DUNS ID associated with the domain owner (for French domains).
+                                      type: string
+                                    localId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        Local identifier of the domain owner (for French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              individualInfo:
+                                description: Information about the individual registration
+                                  for French domains.
+                                items:
+                                  properties:
+                                    whoisOptIn:
+                                      description: Whether the individual contact
+                                        has opted into WHOIS publishing.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              mode:
+                                description: Mode of the French extension (e.g., 'individual',
+                                  'duns', 'association', etc.).
+                                type: string
+                              trademarkInfo:
+                                description: Trademark-related information for the
+                                  domain (French extension).
+                                items:
+                                  properties:
+                                    trademarkInpi:
+                                      description: Trademark information from INPI
+                                        (French extension).
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        extensionNl:
+                          description: Extension details specific to Dutch domain
+                            registrations.
+                          items:
+                            type: string
+                          type: array
+                        faxNumber:
+                          description: Fax number for the contact (if available).
+                          type: string
+                        firstname:
+                          description: |-
+                            : First name.
+                            First name of the contact.
+                          type: string
+                        lang:
+                          description: Preferred language of the contact (e.g., 'en_US',
+                            'fr_FR').
+                          type: string
+                        lastname:
+                          description: |-
+                            : Last name.
+                            Last name of the contact.
+                          type: string
+                        legalForm:
+                          description: |-
+                            : Legal form of the contact.
+                            Legal form of the contact (e.g., 'individual' or 'organization').
+                          type: string
+                        phoneNumber:
+                          description: |-
+                            : Primary phone number.
+                            Primary phone number of the contact.
+                          type: string
+                        resale:
+                          description: Indicates if the contact is used for resale
+                            purposes.
+                          type: boolean
+                        state:
+                          description: State or region of the contact.
+                          type: string
+                        vatIdentificationCode:
+                          description: |-
+                            : VAT identification code.
+                            VAT identification code of the contact, if applicable.
+                          type: string
+                        whoisOptIn:
+                          description: Indicates whether the contact has opted into
+                            WHOIS publishing.
+                          type: boolean
+                        zip:
+                          description: |-
+                            : Postal code.
+                            Postal code of the contact's address.
+                          type: string
+                      type: object
+                    type: array
+                  ownerContactId:
+                    description: |-
+                      : The ID of an existing owner contact.
+                      ID of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    type: string
+                  projectId:
+                    description: |-
+                      : The Scaleway project ID.
+                      The project_id you want to attach the resource to
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  autoRenew:
+                    description: |-
+                      renewal.
+                      Enable or disable auto-renewal of the domain.
+                    type: boolean
+                  dnssec:
+                    description: |-
+                      : Enables or disables DNSSEC.
+                      Enable or disable dnssec for the domain.
+                    type: boolean
+                  domainNames:
+                    description: |-
+                      : A list of domain names to be registered.
+                      List of domain names to be managed.
+                    items:
+                      type: string
+                    type: array
+                  durationInYears:
+                    description: ': The registration period in years.'
+                    type: number
+                  ownerContact:
+                    description: |-
+                      : Details of the owner contact.
+                      Details of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    items:
+                      properties:
+                        addressLine1:
+                          description: |-
+                            : Primary address.
+                            Primary address line for the contact.
+                          type: string
+                        addressLine2:
+                          description: Secondary address line for the contact (optional).
+                          type: string
+                        city:
+                          description: |-
+                            : City.
+                            City of the contact's address.
+                          type: string
+                        companyIdentificationCode:
+                          description: |-
+                            : Company identification code.
+                            Company identification code (e.g., SIREN/SIRET in France) for the contact.
+                          type: string
+                        companyName:
+                          description: |-
+                            : Company name.
+                            Name of the company associated with the contact (if applicable).
+                          type: string
+                        country:
+                          description: |-
+                            : Country code (ISO format).
+                            Country code of the contact's address (ISO format).
+                          type: string
+                        email:
+                          description: |-
+                            : Primary email.
+                            Primary email address of the contact.
+                          type: string
+                        emailAlt:
+                          description: Alternative email address for the contact.
+                          type: string
+                        extensionEu:
+                          description: Details specific to European domain extensions.
+                          items:
+                            properties:
+                              europeanCitizenship:
+                                description: Indicates the European citizenship of
+                                  the contact.
+                                type: string
+                            type: object
+                          type: array
+                        extensionFr:
+                          description: Details specific to French domain extensions.
+                          items:
+                            properties:
+                              associationInfo:
+                                description: Association-specific information for
+                                  the domain (French extension).
+                                items:
+                                  properties:
+                                    publicationJo:
+                                      description: Publication date in the Official
+                                        Journal (RFC3339 format) for association information.
+                                      type: string
+                                    publicationJoPage:
+                                      description: Page number of the publication
+                                        in the Official Journal for association information.
+                                      type: number
+                                  type: object
+                                type: array
+                              codeAuthAfnicInfo:
+                                description: AFNIC authorization information for the
+                                  contact (French extension).
+                                items:
+                                  properties:
+                                    codeAuthAfnic:
+                                      description: AFNIC authorization code for the
+                                        contact (specific to French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              dunsInfo:
+                                description: DUNS information for the domain owner
+                                  (specific to French domains).
+                                items:
+                                  properties:
+                                    dunsId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        DUNS ID associated with the domain owner (for French domains).
+                                      type: string
+                                    localId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        Local identifier of the domain owner (for French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              individualInfo:
+                                description: Information about the individual registration
+                                  for French domains.
+                                items:
+                                  properties:
+                                    whoisOptIn:
+                                      description: Whether the individual contact
+                                        has opted into WHOIS publishing.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              mode:
+                                description: Mode of the French extension (e.g., 'individual',
+                                  'duns', 'association', etc.).
+                                type: string
+                              trademarkInfo:
+                                description: Trademark-related information for the
+                                  domain (French extension).
+                                items:
+                                  properties:
+                                    trademarkInpi:
+                                      description: Trademark information from INPI
+                                        (French extension).
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        extensionNl:
+                          description: Extension details specific to Dutch domain
+                            registrations.
+                          items:
+                            type: string
+                          type: array
+                        faxNumber:
+                          description: Fax number for the contact (if available).
+                          type: string
+                        firstname:
+                          description: |-
+                            : First name.
+                            First name of the contact.
+                          type: string
+                        lang:
+                          description: Preferred language of the contact (e.g., 'en_US',
+                            'fr_FR').
+                          type: string
+                        lastname:
+                          description: |-
+                            : Last name.
+                            Last name of the contact.
+                          type: string
+                        legalForm:
+                          description: |-
+                            : Legal form of the contact.
+                            Legal form of the contact (e.g., 'individual' or 'organization').
+                          type: string
+                        phoneNumber:
+                          description: |-
+                            : Primary phone number.
+                            Primary phone number of the contact.
+                          type: string
+                        resale:
+                          description: Indicates if the contact is used for resale
+                            purposes.
+                          type: boolean
+                        state:
+                          description: State or region of the contact.
+                          type: string
+                        vatIdentificationCode:
+                          description: |-
+                            : VAT identification code.
+                            VAT identification code of the contact, if applicable.
+                          type: string
+                        whoisOptIn:
+                          description: Indicates whether the contact has opted into
+                            WHOIS publishing.
+                          type: boolean
+                        zip:
+                          description: |-
+                            : Postal code.
+                            Postal code of the contact's address.
+                          type: string
+                      type: object
+                    type: array
+                  ownerContactId:
+                    description: |-
+                      : The ID of an existing owner contact.
+                      ID of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    type: string
+                  projectId:
+                    description: |-
+                      : The Scaleway project ID.
+                      The project_id you want to attach the resource to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.domainNames is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.domainNames)
+                || (has(self.initProvider) && has(self.initProvider.domainNames))'
+          status:
+            description: RegistrationStatus defines the observed state of Registration.
+            properties:
+              atProvider:
+                properties:
+                  administrativeContact:
+                    description: |-
+                      (Computed, List): Administrative contact information.
+                      Details of the administrative contact.
+                    items:
+                      properties:
+                        addressLine1:
+                          description: ': Primary address.'
+                          type: string
+                        addressLine2:
+                          type: string
+                        city:
+                          description: ': City.'
+                          type: string
+                        companyIdentificationCode:
+                          description: ': Company identification code.'
+                          type: string
+                        companyName:
+                          description: ': Company name.'
+                          type: string
+                        country:
+                          description: ': Country code (ISO format).'
+                          type: string
+                        email:
+                          description: ': Primary email.'
+                          type: string
+                        emailAlt:
+                          type: string
+                        extensionEu:
+                          items:
+                            properties:
+                              europeanCitizenship:
+                                type: string
+                            type: object
+                          type: array
+                        extensionFr:
+                          items:
+                            properties:
+                              associationInfo:
+                                items:
+                                  properties:
+                                    publicationJo:
+                                      type: string
+                                    publicationJoPage:
+                                      type: number
+                                  type: object
+                                type: array
+                              codeAuthAfnicInfo:
+                                items:
+                                  properties:
+                                    codeAuthAfnic:
+                                      type: string
+                                  type: object
+                                type: array
+                              dunsInfo:
+                                items:
+                                  properties:
+                                    dunsId:
+                                      description: ': The ID of the domain registration.'
+                                      type: string
+                                    localId:
+                                      description: ': The ID of the domain registration.'
+                                      type: string
+                                  type: object
+                                type: array
+                              individualInfo:
+                                items:
+                                  properties:
+                                    whoisOptIn:
+                                      type: boolean
+                                  type: object
+                                type: array
+                              mode:
+                                type: string
+                              trademarkInfo:
+                                items:
+                                  properties:
+                                    trademarkInpi:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        extensionNl:
+                          items:
+                            type: string
+                          type: array
+                        faxNumber:
+                          type: string
+                        firstname:
+                          description: ': First name.'
+                          type: string
+                        lang:
+                          type: string
+                        lastname:
+                          description: ': Last name.'
+                          type: string
+                        legalForm:
+                          description: ': Legal form of the contact.'
+                          type: string
+                        phoneNumber:
+                          description: ': Primary phone number.'
+                          type: string
+                        resale:
+                          type: boolean
+                        state:
+                          type: string
+                        vatIdentificationCode:
+                          description: ': VAT identification code.'
+                          type: string
+                        whoisOptIn:
+                          type: boolean
+                        zip:
+                          description: ': Postal code.'
+                          type: string
+                      type: object
+                    type: array
+                  autoRenew:
+                    description: |-
+                      renewal.
+                      Enable or disable auto-renewal of the domain.
+                    type: boolean
+                  dnssec:
+                    description: |-
+                      : Enables or disables DNSSEC.
+                      Enable or disable dnssec for the domain.
+                    type: boolean
+                  domainNames:
+                    description: |-
+                      : A list of domain names to be registered.
+                      List of domain names to be managed.
+                    items:
+                      type: string
+                    type: array
+                  dsRecord:
+                    description: |-
+                      : DNSSEC DS record configuration.
+                      dnssec DS record configuration.
+                    items:
+                      properties:
+                        algorithm:
+                          type: string
+                        digest:
+                          items:
+                            properties:
+                              digest:
+                                type: string
+                              publicKey:
+                                items:
+                                  properties:
+                                    key:
+                                      type: string
+                                  type: object
+                                type: array
+                              type:
+                                type: string
+                            type: object
+                          type: array
+                        keyId:
+                          description: ': The ID of the domain registration.'
+                          type: number
+                        publicKey:
+                          items:
+                            properties:
+                              key:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  durationInYears:
+                    description: ': The registration period in years.'
+                    type: number
+                  id:
+                    description: ': The ID of the domain registration.'
+                    type: string
+                  ownerContact:
+                    description: |-
+                      : Details of the owner contact.
+                      Details of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    items:
+                      properties:
+                        addressLine1:
+                          description: |-
+                            : Primary address.
+                            Primary address line for the contact.
+                          type: string
+                        addressLine2:
+                          description: Secondary address line for the contact (optional).
+                          type: string
+                        city:
+                          description: |-
+                            : City.
+                            City of the contact's address.
+                          type: string
+                        companyIdentificationCode:
+                          description: |-
+                            : Company identification code.
+                            Company identification code (e.g., SIREN/SIRET in France) for the contact.
+                          type: string
+                        companyName:
+                          description: |-
+                            : Company name.
+                            Name of the company associated with the contact (if applicable).
+                          type: string
+                        country:
+                          description: |-
+                            : Country code (ISO format).
+                            Country code of the contact's address (ISO format).
+                          type: string
+                        email:
+                          description: |-
+                            : Primary email.
+                            Primary email address of the contact.
+                          type: string
+                        emailAlt:
+                          description: Alternative email address for the contact.
+                          type: string
+                        extensionEu:
+                          description: Details specific to European domain extensions.
+                          items:
+                            properties:
+                              europeanCitizenship:
+                                description: Indicates the European citizenship of
+                                  the contact.
+                                type: string
+                            type: object
+                          type: array
+                        extensionFr:
+                          description: Details specific to French domain extensions.
+                          items:
+                            properties:
+                              associationInfo:
+                                description: Association-specific information for
+                                  the domain (French extension).
+                                items:
+                                  properties:
+                                    publicationJo:
+                                      description: Publication date in the Official
+                                        Journal (RFC3339 format) for association information.
+                                      type: string
+                                    publicationJoPage:
+                                      description: Page number of the publication
+                                        in the Official Journal for association information.
+                                      type: number
+                                  type: object
+                                type: array
+                              codeAuthAfnicInfo:
+                                description: AFNIC authorization information for the
+                                  contact (French extension).
+                                items:
+                                  properties:
+                                    codeAuthAfnic:
+                                      description: AFNIC authorization code for the
+                                        contact (specific to French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              dunsInfo:
+                                description: DUNS information for the domain owner
+                                  (specific to French domains).
+                                items:
+                                  properties:
+                                    dunsId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        DUNS ID associated with the domain owner (for French domains).
+                                      type: string
+                                    localId:
+                                      description: |-
+                                        : The ID of the domain registration.
+                                        Local identifier of the domain owner (for French domains).
+                                      type: string
+                                  type: object
+                                type: array
+                              individualInfo:
+                                description: Information about the individual registration
+                                  for French domains.
+                                items:
+                                  properties:
+                                    whoisOptIn:
+                                      description: Whether the individual contact
+                                        has opted into WHOIS publishing.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              mode:
+                                description: Mode of the French extension (e.g., 'individual',
+                                  'duns', 'association', etc.).
+                                type: string
+                              trademarkInfo:
+                                description: Trademark-related information for the
+                                  domain (French extension).
+                                items:
+                                  properties:
+                                    trademarkInpi:
+                                      description: Trademark information from INPI
+                                        (French extension).
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        extensionNl:
+                          description: Extension details specific to Dutch domain
+                            registrations.
+                          items:
+                            type: string
+                          type: array
+                        faxNumber:
+                          description: Fax number for the contact (if available).
+                          type: string
+                        firstname:
+                          description: |-
+                            : First name.
+                            First name of the contact.
+                          type: string
+                        lang:
+                          description: Preferred language of the contact (e.g., 'en_US',
+                            'fr_FR').
+                          type: string
+                        lastname:
+                          description: |-
+                            : Last name.
+                            Last name of the contact.
+                          type: string
+                        legalForm:
+                          description: |-
+                            : Legal form of the contact.
+                            Legal form of the contact (e.g., 'individual' or 'organization').
+                          type: string
+                        phoneNumber:
+                          description: |-
+                            : Primary phone number.
+                            Primary phone number of the contact.
+                          type: string
+                        resale:
+                          description: Indicates if the contact is used for resale
+                            purposes.
+                          type: boolean
+                        state:
+                          description: State or region of the contact.
+                          type: string
+                        vatIdentificationCode:
+                          description: |-
+                            : VAT identification code.
+                            VAT identification code of the contact, if applicable.
+                          type: string
+                        whoisOptIn:
+                          description: Indicates whether the contact has opted into
+                            WHOIS publishing.
+                          type: boolean
+                        zip:
+                          description: |-
+                            : Postal code.
+                            Postal code of the contact's address.
+                          type: string
+                      type: object
+                    type: array
+                  ownerContactId:
+                    description: |-
+                      : The ID of an existing owner contact.
+                      ID of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
+                    type: string
+                  projectId:
+                    description: |-
+                      : The Scaleway project ID.
+                      The project_id you want to attach the resource to
+                    type: string
+                  taskId:
+                    description: |-
+                      : ID of the task that created the domain.
+                      ID of the task that created the domain.
+                    type: string
+                  technicalContact:
+                    description: |-
+                      (Computed, List): Technical contact information.
+                      Details of the technical contact.
+                    items:
+                      properties:
+                        addressLine1:
+                          description: ': Primary address.'
+                          type: string
+                        addressLine2:
+                          type: string
+                        city:
+                          description: ': City.'
+                          type: string
+                        companyIdentificationCode:
+                          description: ': Company identification code.'
+                          type: string
+                        companyName:
+                          description: ': Company name.'
+                          type: string
+                        country:
+                          description: ': Country code (ISO format).'
+                          type: string
+                        email:
+                          description: ': Primary email.'
+                          type: string
+                        emailAlt:
+                          type: string
+                        extensionEu:
+                          items:
+                            properties:
+                              europeanCitizenship:
+                                type: string
+                            type: object
+                          type: array
+                        extensionFr:
+                          items:
+                            properties:
+                              associationInfo:
+                                items:
+                                  properties:
+                                    publicationJo:
+                                      type: string
+                                    publicationJoPage:
+                                      type: number
+                                  type: object
+                                type: array
+                              codeAuthAfnicInfo:
+                                items:
+                                  properties:
+                                    codeAuthAfnic:
+                                      type: string
+                                  type: object
+                                type: array
+                              dunsInfo:
+                                items:
+                                  properties:
+                                    dunsId:
+                                      description: ': The ID of the domain registration.'
+                                      type: string
+                                    localId:
+                                      description: ': The ID of the domain registration.'
+                                      type: string
+                                  type: object
+                                type: array
+                              individualInfo:
+                                items:
+                                  properties:
+                                    whoisOptIn:
+                                      type: boolean
+                                  type: object
+                                type: array
+                              mode:
+                                type: string
+                              trademarkInfo:
+                                items:
+                                  properties:
+                                    trademarkInpi:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        extensionNl:
+                          items:
+                            type: string
+                          type: array
+                        faxNumber:
+                          type: string
+                        firstname:
+                          description: ': First name.'
+                          type: string
+                        lang:
+                          type: string
+                        lastname:
+                          description: ': Last name.'
+                          type: string
+                        legalForm:
+                          description: ': Legal form of the contact.'
+                          type: string
+                        phoneNumber:
+                          description: ': Primary phone number.'
+                          type: string
+                        resale:
+                          type: boolean
+                        state:
+                          type: string
+                        vatIdentificationCode:
+                          description: ': VAT identification code.'
+                          type: string
+                        whoisOptIn:
+                          type: boolean
+                        zip:
+                          description: ': Postal code.'
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

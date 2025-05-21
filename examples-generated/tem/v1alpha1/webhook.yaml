@@ -1,0 +1,20 @@
+apiVersion: tem.scaleway.upbound.io/v1alpha1
+kind: Webhook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tem/v1alpha1/webhook
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventTypes:
+    - email_delivered
+    - email_bounced
+    name: example-webhook
+    snsArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

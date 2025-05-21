@@ -19,8 +19,11 @@ import (
 )
 
 var groupAliases = map[string]string{
-	"transactionalemail": "tem",
-	"domainsanddns":      "domain",
+	"transactionalemail":  "tem",
+	"domainsanddns":       "domain",
+	"databases":           "rdb",
+	"kubernetes":          "k8s",
+	"messagingandqueuing": "mnq",
 }
 
 // ProviderMetadata represents the structure of provider-metadata.yaml

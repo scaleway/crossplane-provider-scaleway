@@ -27,11 +27,13 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/jobs"
 	"github.com/scaleway/crossplane-provider-scaleway/config/k8s"
 	"github.com/scaleway/crossplane-provider-scaleway/config/lb"
+	"github.com/scaleway/crossplane-provider-scaleway/config/mnq"
 	"github.com/scaleway/crossplane-provider-scaleway/config/mongodb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/object"
 	"github.com/scaleway/crossplane-provider-scaleway/config/rdb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/redis"
 	"github.com/scaleway/crossplane-provider-scaleway/config/registry"
+	"github.com/scaleway/crossplane-provider-scaleway/config/secrets"
 	"github.com/scaleway/crossplane-provider-scaleway/config/tem"
 	"github.com/scaleway/crossplane-provider-scaleway/config/vpc"
 )
@@ -65,24 +67,26 @@ func GetProvider() *ujconfig.Provider {
 		cockpit.Configure,
 		container.Configure,
 		domain.Configure,
+		edgeservices.Configure,
 		flexibleip.Configure,
 		function.Configure,
 		iam.Configure,
+		inference.Configure,
 		instance.Configure,
 		iot.Configure,
 		ipam.Configure,
 		jobs.Configure,
 		k8s.Configure,
 		lb.Configure,
+		mnq.Configure,
+		mongodb.Configure,
 		object.Configure,
 		rdb.Configure,
 		redis.Configure,
 		registry.Configure,
+		secrets.Configure,
 		tem.Configure,
 		vpc.Configure,
-		mongodb.Configure,
-		edgeservices.Configure,
-		inference.Configure,
 	} {
 		configure(pc)
 	}

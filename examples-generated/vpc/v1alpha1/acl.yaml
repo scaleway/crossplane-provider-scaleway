@@ -1,0 +1,39 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: Acl
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/acl
+  labels:
+    testing.upbound.io/example-name: acl01
+  name: acl01
+spec:
+  forProvider:
+    defaultPolicy: drop
+    isIpv6: false
+    rules:
+    - action: accept
+      description: Allow HTTP traffic from any source
+      destination: 0.0.0.0/0
+      dstPortHigh: 80
+      dstPortLow: 80
+      protocol: TCP
+      source: 0.0.0.0/0
+      srcPortHigh: 0
+      srcPortLow: 0
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/acl
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+spec:
+  forProvider:
+    name: tf-vpc-acl

@@ -12,6 +12,48 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this Acl.
+func (mg *Acl) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VPCIDRef,
+		Selector:     mg.Spec.ForProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCID")
+	}
+	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this GatewayNetwork.
 func (mg *GatewayNetwork) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -240,6 +282,48 @@ func (mg *PublicGatewayPATRule) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.InitProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GatewayIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Route.
+func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VPCIDRef,
+		Selector:     mg.Spec.ForProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCID")
+	}
+	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &VPCList{},
+			Managed: &VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
 
 	return nil
 }

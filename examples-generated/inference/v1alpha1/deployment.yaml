@@ -1,0 +1,15 @@
+apiVersion: inference.scaleway.upbound.io/v1alpha1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inference/v1alpha1/deployment
+  labels:
+    testing.upbound.io/example-name: deployment
+  name: deployment
+spec:
+  forProvider:
+    acceptEula: true
+    name: tf-inference-deployment
+    nodeType: L4
+    publicEndpoint:
+    - isEnabled: true

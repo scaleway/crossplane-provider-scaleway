@@ -1,0 +1,15 @@
+apiVersion: mongodb.scaleway.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    expiresAt: "2024-12-31T23:59:59Z"
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: name-snapshot
