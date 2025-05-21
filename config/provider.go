@@ -33,6 +33,7 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/rdb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/redis"
 	"github.com/scaleway/crossplane-provider-scaleway/config/registry"
+	"github.com/scaleway/crossplane-provider-scaleway/config/sdb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/secrets"
 	"github.com/scaleway/crossplane-provider-scaleway/config/tem"
 	"github.com/scaleway/crossplane-provider-scaleway/config/vpc"
@@ -84,6 +85,7 @@ func GetProvider() *ujconfig.Provider {
 		rdb.Configure,
 		redis.Configure,
 		registry.Configure,
+		sdb.Configure,
 		secrets.Configure,
 		tem.Configure,
 		vpc.Configure,

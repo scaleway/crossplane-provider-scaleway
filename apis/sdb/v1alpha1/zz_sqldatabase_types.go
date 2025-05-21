@@ -23,6 +23,10 @@ type SQLDatabaseInitParameters struct {
 	// The minimum number of CPU units for your Serverless SQL Database
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
+	// The name of the database (e.g. my-new-database).
+	// The database name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -49,6 +53,10 @@ type SQLDatabaseObservation struct {
 	// The minimum number of CPU units for your Serverless SQL Database
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
+	// The name of the database (e.g. my-new-database).
+	// The database name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -69,6 +77,11 @@ type SQLDatabaseParameters struct {
 	// The minimum number of CPU units for your Serverless SQL Database
 	// +kubebuilder:validation:Optional
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
+
+	// The name of the database (e.g. my-new-database).
+	// The database name
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
 	// The project_id you want to attach the resource to
@@ -117,8 +130,9 @@ type SQLDatabaseStatus struct {
 type SQLDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLDatabaseSpec   `json:"spec"`
-	Status            SQLDatabaseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   SQLDatabaseSpec   `json:"spec"`
+	Status SQLDatabaseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
