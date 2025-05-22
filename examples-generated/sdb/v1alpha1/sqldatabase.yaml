@@ -10,3 +10,4 @@ spec:
   forProvider:
     maxCpu: 8
     minCpu: 0
+    name: my-database

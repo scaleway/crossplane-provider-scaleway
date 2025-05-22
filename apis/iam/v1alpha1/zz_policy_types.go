@@ -192,7 +192,7 @@ type PolicyParameters struct {
 
 type RuleInitParameters struct {
 
-	// The condition of the IAM policy.
+	// The condition of the rule.
 	// Conditions of the policy
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -212,7 +212,7 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// The condition of the IAM policy.
+	// The condition of the rule.
 	// Conditions of the policy
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -232,7 +232,7 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
-	// The condition of the IAM policy.
+	// The condition of the rule.
 	// Conditions of the policy
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`

@@ -82,6 +82,11 @@ spec:
                       The minimum number of CPU units for your database. Defaults to 0.
                       The minimum number of CPU units for your Serverless SQL Database
                     type: number
+                  name:
+                    description: |-
+                      The name of the database (e.g. my-new-database).
+                      The database name
+                    type: string
                   projectId:
                     description: |-
                       The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
@@ -116,6 +121,11 @@ spec:
                       The minimum number of CPU units for your database. Defaults to 0.
                       The minimum number of CPU units for your Serverless SQL Database
                     type: number
+                  name:
+                    description: |-
+                      The name of the database (e.g. my-new-database).
+                      The database name
+                    type: string
                   projectId:
                     description: |-
                       The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.
@@ -294,6 +304,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: SQLDatabaseStatus defines the observed state of SQLDatabase.
             properties:
@@ -318,6 +333,11 @@ spec:
                       The minimum number of CPU units for your database. Defaults to 0.
                       The minimum number of CPU units for your Serverless SQL Database
                     type: number
+                  name:
+                    description: |-
+                      The name of the database (e.g. my-new-database).
+                      The database name
+                    type: string
                   projectId:
                     description: |-
                       The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.

@@ -18,7 +18,7 @@ type IPv4InitParameters struct {
 
 type IPv4Observation struct {
 
-	// The address of the IP.
+	// The private IP address.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
@@ -39,7 +39,7 @@ type IPv6InitParameters struct {
 
 type IPv6Observation struct {
 
-	// The address of the IP.
+	// The private IP address.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
@@ -60,7 +60,7 @@ type IpsInitParameters struct {
 
 type IpsObservation struct {
 
-	// The address of the IP.
+	// The private IP address.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
@@ -115,10 +115,25 @@ type OptionsParameters struct {
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
+type PrivateIpsInitParameters struct {
+}
+
+type PrivateIpsObservation struct {
+
+	// The private IP address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The id of the option to enable. Use this endpoint to find the available options IDs.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIpsParameters struct {
+}
+
 type PrivateNetworkInitParameters struct {
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
-	// The private network ID
+	// The ID of the private network to associate with the server
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of IPAM IP IDs to assign to the server in the requested private network.
@@ -133,12 +148,16 @@ type PrivateNetworkObservation struct {
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
-	// The private network ID
+	// The ID of the private network to associate with the server
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of IPAM IP IDs to assign to the server in the requested private network.
 	// List of IPAM IP IDs to attach to the server
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
+
+	// The ID of the Server-to-Private Network mapping.
+	// The ID of the Server-to-Private Network mapping
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
 
 	// The private network status.
 	// The private network status
@@ -156,7 +175,7 @@ type PrivateNetworkObservation struct {
 type PrivateNetworkParameters struct {
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
-	// The private network ID
+	// The ID of the private network to associate with the server
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
@@ -184,7 +203,7 @@ type ServerInitParameters struct {
 	// Name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The offer name or UUID of the baremetal server.
+	// The offer UUID of the baremetal server.
 	// Use this endpoint to find the right offer.
 	// ID or name of the server offer
 	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
@@ -294,7 +313,7 @@ type ServerObservation struct {
 	// Name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The offer name or UUID of the baremetal server.
+	// The offer UUID of the baremetal server.
 	// Use this endpoint to find the right offer.
 	// ID or name of the server offer
 	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
@@ -329,6 +348,10 @@ type ServerObservation struct {
 	// The partitioning schema in JSON format
 	// The partitioning schema in json format
 	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
@@ -389,7 +412,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The offer name or UUID of the baremetal server.
+	// The offer UUID of the baremetal server.
 	// Use this endpoint to find the right offer.
 	// ID or name of the server offer
 	// +kubebuilder:validation:Optional

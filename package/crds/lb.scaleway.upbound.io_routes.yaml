@@ -233,15 +233,26 @@ spec:
                   matchHostHeader:
                     description: |-
                       The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Specifies the host of the server to which the request is being sent
+                    type: string
+                  matchPathBegin:
+                    description: |-
+                      The value to match in the URL beginning path from an incoming request.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
+                      Value to match in the URL beginning path from an incoming request
                     type: string
                   matchSni:
                     description: |-
                       The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
                     type: string
+                  matchSubdomains:
+                    description: |-
+                      (Default: false) If true, all subdomains will match.
+                      If true, all subdomains will match
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -417,15 +428,26 @@ spec:
                   matchHostHeader:
                     description: |-
                       The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Specifies the host of the server to which the request is being sent
+                    type: string
+                  matchPathBegin:
+                    description: |-
+                      The value to match in the URL beginning path from an incoming request.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
+                      Value to match in the URL beginning path from an incoming request
                     type: string
                   matchSni:
                     description: |-
                       The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
                     type: string
+                  matchSubdomains:
+                    description: |-
+                      (Default: false) If true, all subdomains will match.
+                      If true, all subdomains will match
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -620,15 +642,26 @@ spec:
                   matchHostHeader:
                     description: |-
                       The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Specifies the host of the server to which the request is being sent
+                    type: string
+                  matchPathBegin:
+                    description: |-
+                      The value to match in the URL beginning path from an incoming request.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
+                      Value to match in the URL beginning path from an incoming request
                     type: string
                   matchSni:
                     description: |-
                       The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-                      Only one of match_sni and match_host_header should be specified.
+                      Only one of match_sni, match_host_header and match_path_begin should be specified.
                       Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
                     type: string
+                  matchSubdomains:
+                    description: |-
+                      (Default: false) If true, all subdomains will match.
+                      If true, all subdomains will match
+                    type: boolean
                   updatedAt:
                     description: |-
                       The date on which the route was last updated.

@@ -8,3 +8,9 @@ package v1alpha1
 
 // Hub marks this type as a conversion hub.
 func (tr *Domain) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *List) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Webhook) Hub() {}

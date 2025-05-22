@@ -95,7 +95,9 @@ spec:
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   maxScale:
                     description: |-
@@ -290,7 +292,9 @@ spec:
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   maxScale:
                     description: |-
@@ -656,7 +660,9 @@ spec:
                       Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
                     type: string
                   httpOption:
-                    description: HTTP traffic configuration
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
                     type: string
                   id:
                     description: The unique identifier of the function.

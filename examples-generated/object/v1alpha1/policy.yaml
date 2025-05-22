@@ -11,14 +11,14 @@ spec:
     bucket: some-unique-name
     policy: |-
       ${jsonencode({
-          Version   = "2023-04-17",
+          Version = "2023-04-17",
           Id      = "MyBucketPolicy",
           Statement = [
             {
-              Effect = "Allow"
-              Action = ["s3:*"]
+              Effect    = "Allow"
+              Action    = ["s3:*"]
               Principal = { SCW = "user_id:${data.scaleway_iam_user.user.id}" }
-              Resource  = [
+              Resource = [
                 scaleway_object_bucket.bucket.name,
                 "${scaleway_object_bucket.bucket.name}/*",
               ]

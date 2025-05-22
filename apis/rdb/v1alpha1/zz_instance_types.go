@@ -87,6 +87,10 @@ type InstanceInitParameters struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
 	// The tags associated with the Database Instance.
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -99,7 +103,7 @@ type InstanceInitParameters struct {
 	// Volume size (in GB) when volume_type is not lssd
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
+	// Type of volume where data are stored (lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -174,6 +178,10 @@ type InstanceObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource
+	PrivateIP []PrivateIPObservation `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -197,6 +205,10 @@ type InstanceObservation struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
 	// The tags associated with the Database Instance.
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -209,7 +221,7 @@ type InstanceObservation struct {
 	// Volume size (in GB) when volume_type is not lssd
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
+	// Type of volume where data are stored (lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -305,6 +317,11 @@ type InstanceParameters struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	// +kubebuilder:validation:Optional
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
 	// The tags associated with the Database Instance.
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	// +kubebuilder:validation:Optional
@@ -320,7 +337,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 
-	// Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).
+	// Type of volume where data are stored (lssd, sbs_5k or sbs_15k).
 	// Type of volume where data are stored
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -391,6 +408,21 @@ type LogsPolicyParameters struct {
 	// The max disk size of remote logs to keep on the Database Instance.
 	// +kubebuilder:validation:Optional
 	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
+}
+
+type PrivateIPInitParameters struct {
+}
+
+type PrivateIPObservation struct {
+
+	// The private IPv4 address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the Database Instance.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIPParameters struct {
 }
 
 type PrivateNetworkInitParameters struct {
@@ -552,7 +584,6 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine) || (has(self.initProvider) && has(self.initProvider.engine))",message="spec.forProvider.engine is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
 	Spec   InstanceSpec   `json:"spec"`
 	Status InstanceStatus `json:"status,omitempty"`

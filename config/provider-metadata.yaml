@@ -62,8 +62,10 @@ resources:
                   "type": "M1-M"
                 }
         argumentDocs:
+            commitment_type: '(Optional, Default: duration_24h): Activate commitment for this server'
             created_at: '- The date and time of the creation of the Apple Silicon server.'
             deleted_at: '- The minimal date and time on which you can delete this server due to Apple licence.'
+            enable_vpc: '- (Optional, Default: false): Enables the VPC option when set to true.'
             id: '- The ID of the server.'
             ip: '- IPv4 address of the server (IPv4 address).'
             name: '- (Optional) The name of the server.'
@@ -78,6 +80,7 @@ resources:
                 resource.
             updated_at: '- The date and time of the last update of the Apple Silicon server.'
             vnc_url: '- URL of the VNC.'
+            vpc_status: '- The current status of the VPC option.'
             zone: |-
                 - (Defaults to provider zone) The zone in which
                 the server should be created.
@@ -87,16 +90,18 @@ resources:
         name: scaleway_baremetal_server
         title: scaleway_baremetal_server
         examples:
-            - name: base
+            - name: my_server
               manifest: |-
                 {
-                  "offer": "GP-BM1-S",
+                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
                   "os": "d17d6872-0412-45d9-a198-af82c34d3c5c",
                   "ssh_key_ids": [
-                    "${data.scaleway_account_ssh_key.main.id}"
+                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
                   ],
                   "zone": "fr-par-2"
                 }
+              references:
+                offer: data.scaleway_baremetal_offer.my_offer.offer_id
             - name: base
               manifest: |-
                 {
@@ -111,7 +116,7 @@ resources:
                   ],
                   "os": "${data.scaleway_baremetal_os.my_os.os_id}",
                   "ssh_key_ids": [
-                    "${data.scaleway_account_ssh_key.main.id}"
+                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
                   ],
                   "zone": "fr-par-2"
                 }
@@ -119,7 +124,7 @@ resources:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
                 options.id: data.scaleway_baremetal_option.remote_access.option_id
                 os: data.scaleway_baremetal_os.my_os.os_id
-            - name: base
+            - name: my_server
               manifest: |-
                 {
                   "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
@@ -135,7 +140,7 @@ resources:
                     }
                   ],
                   "ssh_key_ids": [
-                    "${data.scaleway_account_ssh_key.main.id}"
+                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
                   ],
                   "zone": "fr-par-2"
                 }
@@ -150,7 +155,7 @@ resources:
                       "name": "baremetal_private_network",
                       "region": "fr-par"
                     }
-            - name: base
+            - name: my_server
               manifest: |-
                 {
                   "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
@@ -169,7 +174,7 @@ resources:
                     }
                   ],
                   "ssh_key_ids": [
-                    "${data.scaleway_account_ssh_key.my_key.id}"
+                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
                   ],
                   "zone": "fr-par-2"
                 }
@@ -202,7 +207,7 @@ resources:
                       "name": "private_network_baremetal",
                       "vpc_id": "${scaleway_vpc.vpc01.id}"
                     }
-            - name: base
+            - name: my_server
               manifest: |-
                 {
                   "install_config_afterward": true,
@@ -211,16 +216,16 @@ resources:
                 }
               references:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
-            - name: base
+            - name: my_server
               manifest: |-
                 {
                   "description": "test a description",
-                  "name": "%s",
-                  "offer": "EM-B220E-NVME",
+                  "name": "my_super_server",
+                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
                   "os": "${data.scaleway_baremetal_os.my_os.os_id}",
                   "partitioning": "${var.configCustomPartitioning}",
                   "ssh_key_ids": [
-                    "${scaleway_iam_ssh_key.main.id}"
+                    "${scaleway_iam_ssh_key.my_ssh_key.id}"
                   ],
                   "tags": [
                     "terraform-test",
@@ -230,15 +235,37 @@ resources:
                   "zone": "fr-par-1"
                 }
               references:
+                offer: data.scaleway_baremetal_offer.my_offer.offer_id
                 os: data.scaleway_baremetal_os.my_os.os_id
                 partitioning: var.configCustomPartitioning
               dependencies:
-                scaleway_iam_ssh_key.main: |-
+                scaleway_iam_ssh_key.my_ssh_key: |-
                     {
-                      "name": "main"
+                      "name": "my_ssh_key",
+                      "public_key": "ssh XXXXXXXXXXX"
                     }
+            - name: my_server
+              manifest: |-
+                {
+                  "install_config_afterward": true,
+                  "name": "UpdateSubscriptionPeriod",
+                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
+                  "zone": "%s"
+                }
+              references:
+                offer: data.scaleway_baremetal_offer.my_offer.offer_id
+            - name: my_server
+              manifest: |-
+                {
+                  "install_config_afterward": true,
+                  "name": "UpdateSubscriptionPeriod",
+                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
+                  "zone": "fr-par-1"
+                }
+              references:
+                offer: data.scaleway_baremetal_offer.my_offer.offer_id
         argumentDocs:
-            address: '- The address of the IP.'
+            address: '- The private IP address.'
             created_at: '- The date and time of the creation of the private network.'
             description: '- (Optional) A description for the server.'
             domain: '- The domain of the server.'
@@ -250,9 +277,10 @@ resources:
             ips: '- (List of) The IPs of the server.'
             ipv4: '- (List of) The IPv4 addresses of the server.'
             ipv6: '- (List of) The IPv6 addresses of the server.'
+            mapping_id: '- The ID of the Server-to-Private Network mapping.'
             name: '- (Optional) The name of the server.'
             offer: |-
-                - (Required) The offer name or UUID of the baremetal server.
+                - (Required) The offer UUID of the baremetal server.
                 Use this endpoint to find the right offer.
             offer_id: '- The ID of the offer.'
             offer_name: '- The name of the offer.'
@@ -267,6 +295,7 @@ resources:
             os_name: '- The name of the os.'
             partitioning: (Optional) The partitioning schema in JSON format
             password: '- (Optional) Password used for the installation. May be required depending on used os.'
+            private_ips: '- The list of private IPv4 and IPv6 addresses associated with the resource.'
             private_network: '- (Required) The private networks to attach to the server. For more information, see the documentation'
             project_id: '- (Defaults to provider project_id) The ID of the project the server is associated with.'
             reinstall_on_config_changes: |-
@@ -400,7 +429,9 @@ resources:
             grafana_url: '- (Deprecated) URL for Grafana.'
             logs_url: '- (Deprecated) URL for logs to retrieve in the Data sources tab of the Scaleway console.'
             metrics_url: '- (Deprecated) URL for metrics to retrieve in the Data sources tab of the Scaleway console.'
-            plan: '- (Optional) Name of the plan to use. Available plans are: free, premium, and custom.'
+            plan: |-
+                - (Deprecated) Name of the plan to use. Available plans are: free, premium, and custom.
+                ~> Important: The plan field is deprecated. Any modification or selection will have no effect.
             plan_id: '- (Deprecated) The ID of the current pricing plan.'
             project_id: '- (Defaults to the Project specified in the provider''s configuration) The ID of the Project the Cockpit is associated with.'
             traces_url: '- (Deprecated) URL for traces to retrieve in the Data sources tab of the Scaleway console.'
@@ -492,7 +523,7 @@ resources:
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.'
             push_url: '- The URL endpoint used for pushing data to the Cockpit data source.'
             region: '- (Defaults to the region specified in the provider configuration) The region where the data source is located.'
-            retention_days: '- (Optional, Defaults to 6) The number of days to retain data in the data source. Must be a value between 1 and 365. Changes to this field will force the creation of a new resource.'
+            retention_days: '- (Required) The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.'
             synchronized_with_grafana: '- Indicates whether the data source is synchronized with Grafana.'
             type: '- (Required) The type of data source. Possible values are: metrics, logs, or traces.'
             updated_at: '- The date and time the data source was last updated (in RFC 3339 format).'
@@ -594,6 +625,38 @@ resources:
                       "description": "test container",
                       "name": "my-ns-test"
                     }
+            - name: main
+              manifest: |-
+                {
+                  "health_check": [
+                    {
+                      "failure_threshold": 40,
+                      "http": [
+                        {
+                          "path": "/ping"
+                        }
+                      ],
+                      "interval": "5s"
+                    }
+                  ],
+                  "name": "my-container-02",
+                  "namespace_id": "${scaleway_container_namespace.main.id}"
+                }
+              references:
+                namespace_id: scaleway_container_namespace.main.id
+            - name: main
+              manifest: |-
+                {
+                  "name": "my-container-02",
+                  "namespace_id": "${scaleway_container_namespace.main.id}",
+                  "scaling_option": [
+                    {
+                      "concurrent_requests_threshold": 15
+                    }
+                  ]
+                }
+              references:
+                namespace_id: scaleway_container_namespace.main.id
         argumentDocs:
             cpu_limit: '- (Optional) The amount of vCPU computing resources to allocate to each container.'
             cron_status: '- The cron status of the container.'
@@ -603,15 +666,21 @@ resources:
             environment_variables: '- (Optional) The environment variables of the container.'
             error_message: '- The error message of the container.'
             h2c: ': HTTP/2 over TCP.'
+            health_check: '- (Optional) Health check configuration block of the container.'
+            health_check.failure_threshold: '- Number of consecutive health check failures before considering the container unhealthy.'
+            health_check.http: '- HTTP health check configuration.'
+            health_check.interval: '- Period between health checks (in seconds).'
             http_option: '- (Optional) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.'
             http1: ': Hypertext Transfer Protocol.'
             id: '- The unique identifier of the container.'
-            max_concurrency: '- (Optional) The maximum number of simultaneous requests your container can handle at the same time.'
+            local_storage_limit: '- Local storage limit of the container (in MB)'
+            max_concurrency: '- (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.'
             max_scale: '- (Optional) The maximum number of instances this container can scale to.'
             memory_limit: '- (Optional) The memory resources in MB to allocate to each container.'
             min_scale: '- (Optional) The minimum number of container instances running continuously.'
             name: '- (Required) The unique name of the container name.'
             namespace_id: '- (Required) The Containers namespace ID of the container.'
+            path: '- Path to use for the HTTP health check.'
             port: '- (Optional) The port to expose the container.'
             privacy: '- (Optional) The privacy type defines the way to authenticate to your container. Please check our dedicated section.'
             protocol: '- (Optional) The communication protocol http1 or h2c. Defaults to http1.'
@@ -619,9 +688,13 @@ resources:
             registry_image: '- (Optional) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
             registry_sha256: '- (Optional) The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.'
             sandbox: '- (Optional) Execution environment of the container.'
+            scaling_option: '- (Optional) Configuration block used to decide when to scale up or down. Possible values:'
+            scaling_option.concurrent_requests_threshold: '- Scale depending on the number of concurrent requests being processed per container instance.'
+            scaling_option.cpu_usage_threshold: '- Scale depending on the CPU usage of a container instance.'
+            scaling_option.memory_usage_threshold: '- Scale depending on the memory usage of a container instance.'
             secret_environment_variables: '- (Optional) The secret environment variables of the container.'
             status: '- The container status.'
-            timeout: '- (Optional) The maximum amount of time your container can spend processing a request before being stopped.'
+            timeout: '- (Optional) The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.'
         importStatements: []
     scaleway_container_cron:
         subCategory: Containers
@@ -631,7 +704,7 @@ resources:
             - name: main
               manifest: |-
                 {
-                  "args": "${jsonencode(\n    {\n        address   = {\n            city    = \"Paris\"\n            country = \"FR\"\n        }\n        age       = 23\n        firstName = \"John\"\n        isAlive   = true\n        lastName  = \"Smith\"\n        # minScale: 1\n        # memoryLimit: 256\n        # maxScale: 2\n        # timeout: 20000\n        # Local environment variables - used only in given function\n    }\n    )}",
+                  "args": "${jsonencode(\n    {\n      address = {\n        city    = \"Paris\"\n        country = \"FR\"\n      }\n      age       = 23\n      firstName = \"John\"\n      isAlive   = true\n      lastName  = \"Smith\"\n      # minScale: 1\n      # memoryLimit: 256\n      # maxScale: 2\n      # timeout: 20000\n      # Local environment variables - used only in given function\n    }\n  )}",
                   "container_id": "${scaleway_container.main.id}",
                   "name": "my-cron-name",
                   "schedule": "5 4 1 * *"
@@ -1100,6 +1173,116 @@ resources:
             weighted: '- (Optional) You provide a list of IPs with their corresponding weights. These weights are used to proportionally direct requests to each IP. Depending on the weight of a record more or fewer requests are answered with their related IP compared to the others in the list. (Can be more than 1) Check the documentation for more information.'
             www.domain.tld: domain, pointing to 1.2.3.4 and another one pointing to 1.2.3.5
         importStatements: []
+    scaleway_domain_registration:
+        subCategory: Domains and DNS
+        name: scaleway_domain_registration
+        title: ""
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "domain_names": [
+                    "example.com"
+                  ],
+                  "duration_in_years": 1,
+                  "owner_contact": [
+                    {
+                      "address_line_1": "123 Main Street",
+                      "city": "Paris",
+                      "company_identification_code": "123456789",
+                      "country": "FR",
+                      "email": "john.doe@example.com",
+                      "firstname": "John",
+                      "lastname": "DOE",
+                      "legal_form": "individual",
+                      "phone_number": "+1.23456789",
+                      "vat_identification_code": "FR12345678901",
+                      "zip": "75001"
+                    }
+                  ]
+                }
+            - name: test
+              manifest: |-
+                {
+                  "auto_renew": true,
+                  "dnssec": true,
+                  "domain_names": [
+                    "example.com"
+                  ],
+                  "duration_in_years": 1,
+                  "owner_contact": [
+                    {
+                      "address_line_1": "123 Main Street",
+                      "city": "Paris",
+                      "company_identification_code": "123456789",
+                      "country": "FR",
+                      "email": "john.doe@example.com",
+                      "firstname": "John",
+                      "lastname": "DOE",
+                      "legal_form": "individual",
+                      "phone_number": "+1.23456789",
+                      "vat_identification_code": "FR12345678901",
+                      "zip": "75001"
+                    }
+                  ]
+                }
+            - name: multi
+              manifest: |-
+                {
+                  "domain_names": [
+                    "domain1.com",
+                    "domain2.com",
+                    "domain3.com"
+                  ],
+                  "duration_in_years": 1,
+                  "owner_contact": [
+                    {
+                      "address_line_1": "123 Main Street",
+                      "city": "Paris",
+                      "company_identification_code": "123456789",
+                      "country": "FR",
+                      "email": "john.doe@example.com",
+                      "firstname": "John",
+                      "lastname": "DOE",
+                      "legal_form": "individual",
+                      "phone_number": "+1.23456789",
+                      "vat_identification_code": "FR12345678901",
+                      "zip": "75001"
+                    }
+                  ]
+                }
+        argumentDocs:
+            address_line_1: '(Required, String): Primary address.'
+            administrative_contact: '(Computed, List): Administrative contact information.'
+            auto_renew: '(Optional, Boolean, Default: false): Enables or disables auto-renewal.'
+            city: '(Required, String): City.'
+            company_identification_code: '(Required, String): Company identification code.'
+            company_name: '(Optional, String): Company name.'
+            country: '(Required, String): Country code (ISO format).'
+            dns_zones: ': List of DNS zones associated with the domain.'
+            dnssec: '(Optional, Boolean, Default: false): Enables or disables DNSSEC.'
+            domain_names: '(Required, List of String): A list of domain names to be registered.'
+            ds_record: ': DNSSEC DS record configuration.'
+            duration_in_years: '(Optional, Integer, Default: 1): The registration period in years.'
+            email: '(Required, String): Primary email.'
+            epp_code: ': EPP code(s) associated with the domain.'
+            expired_at: ': Expiration date/time of the domain registration.'
+            firstname: '(Required, String): First name.'
+            id: ': The ID of the domain registration.'
+            lastname: '(Required, String): Last name.'
+            legal_form: '(Required, String): Legal form of the contact.'
+            owner_contact: '(Optional, List): Details of the owner contact.'
+            owner_contact_id: '(Optional, String): The ID of an existing owner contact.'
+            phone_number: '(Required, String): Primary phone number.'
+            project_id: '(Optional, String): The Scaleway project ID.'
+            registrar: ': Name of the registrar.'
+            status: ': Status of the domain registration.'
+            task_id: ': ID of the task that created the domain.'
+            technical_contact: '(Computed, List): Technical contact information.'
+            updated_at: ': Timestamp of the last update.'
+            vat_identification_code: '(Required, String): VAT identification code.'
+            zip: '(Required, String): Postal code.'
+        importStatements: []
     scaleway_domain_zone:
         subCategory: Domains and DNS
         name: scaleway_domain_zone
@@ -1122,6 +1305,423 @@ resources:
             status: '- The status of the domain zone.'
             subdomain: '- (Required) The name of the subdomain (zone name) to create within the domain.'
             updated_at: '- The date and time at which the DNS zone was last updated.'
+        importStatements: []
+    scaleway_edge_services_backend_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_backend_stage
+        title: scaleway_edge_services_backend_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                  "s3_backend_config": [
+                    {
+                      "bucket_name": "${scaleway_object_bucket.main.name}",
+                      "bucket_region": "fr-par"
+                    }
+                  ]
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+                s3_backend_config.bucket_name: scaleway_object_bucket.main.name
+              dependencies:
+                scaleway_edge_services_pipeline.main: |-
+                    {
+                      "name": "my-pipeline"
+                    }
+                scaleway_object_bucket.main: |-
+                    {
+                      "name": "my-bucket-name",
+                      "tags": {
+                        "foo": "bar"
+                      }
+                    }
+            - name: main
+              manifest: |-
+                {
+                  "lb_backend_config": [
+                    {
+                      "lb_config": [
+                        {
+                          "frontend_id": "${scaleway_lb_frontend.id}",
+                          "id": "${scaleway_lb.main.id}",
+                          "is_ssl": true,
+                          "zone": "fr-par-1"
+                        }
+                      ]
+                    }
+                  ],
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                lb_backend_config.lb_config.frontend_id: scaleway_lb_frontend.id
+                lb_backend_config.lb_config.id: scaleway_lb.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+              dependencies:
+                scaleway_edge_services_pipeline.main: |-
+                    {
+                      "name": "my-pipeline"
+                    }
+                scaleway_lb.main: |-
+                    {
+                      "ip_ids": [
+                        "${scaleway_lb_ip.main.id}"
+                      ],
+                      "type": "LB-S",
+                      "zone": "fr-par-1"
+                    }
+                scaleway_lb_frontend.main: |-
+                    {
+                      "backend_id": "${scaleway_lb_backend.main.id}",
+                      "certificate_ids": [
+                        "${scaleway_lb_certificate.cert01.id}"
+                      ],
+                      "inbound_port": "443",
+                      "lb_id": "${scaleway_lb.main.id}",
+                      "name": "frontend01"
+                    }
+        argumentDocs:
+            bucket_name: '- The name of the Bucket.'
+            bucket_region: '- The region of the Bucket.'
+            created_at: '- The date and time of the creation of the backend stage.'
+            domain_name: '- The Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer.'
+            frontend_id: '- The ID of the frontend.'
+            id: '- The ID of the Load Balancer.'
+            is_ssl: '- Defines whether the Load Balancer''s frontend handles SSL connections.'
+            is_website: '- Defines whether the bucket website feature is enabled.'
+            lb_backend_config: '- (Optional) The Scaleway Load Balancer linked to the backend stage.'
+            lb_config: '- The Load Balancer config.'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the backend stage is associated with.'
+            s3_backend_config: '- (Optional) The Scaleway Object Storage origin bucket (S3) linked to the backend stage.'
+            updated_at: '- The date and time of the last update of the backend stage.'
+            zone: '- (Defaults to provider zone) The zone of the Load Balancer.'
+        importStatements: []
+    scaleway_edge_services_cache_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_cache_stage
+        title: scaleway_edge_services_cache_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "backend_stage_id": "${scaleway_edge_services_backend_stage.main.id}",
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                backend_stage_id: scaleway_edge_services_backend_stage.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+            - name: main
+              manifest: |-
+                {
+                  "backend_stage_id": "${scaleway_edge_services_backend_stage.main.id}",
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                  "purge": [
+                    {
+                      "all": true,
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                    }
+                  ]
+                }
+              references:
+                backend_stage_id: scaleway_edge_services_backend_stage.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+                purge.pipeline_id: scaleway_edge_services_pipeline.main.id
+        argumentDocs:
+            all: '- Defines whether to purge all content.'
+            assets: '- The list of asserts to purge.'
+            backend_stage_id: '- (Optional) The backend stage ID the cache stage will be linked to. Only one of backend_stage_id, route_stage_id and waf_stage_id should be specified.'
+            created_at: '- The date and time of the creation of the cache stage.'
+            fallback_ttl: '- (Optional) The Time To Live (TTL) in seconds. Defines how long content is cached.'
+            id: '- The ID of the cache stage (UUID format).'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the cache stage is associated with.'
+            purge_requests: '- (Optional) The Scaleway Object Storage origin bucket (S3) linked to the backend stage.'
+            refresh_cache: '- (Optional) Trigger a refresh of the cache by changing this field''s value.'
+            route_stage_id: '- (Optional) The route stage ID the cache stage will be linked to. Only one of backend_stage_id, route_stage_id and waf_stage_id should be specified.'
+            updated_at: '- The date and time of the last update of the cache stage.'
+            waf_stage_id: '- (Optional) The WAF stage ID the cache stage will be linked to. Only one of backend_stage_id, route_stage_id and waf_stage_id should be specified.'
+        importStatements: []
+    scaleway_edge_services_dns_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_dns_stage
+        title: scaleway_edge_services_dns_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "fqdns": [
+                    "subdomain.example.com"
+                  ],
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+        argumentDocs:
+            backend_stage_id: '- (Optional) The backend stage ID the DNS stage will be linked to. Only one of backend_stage_id, cache_stage_id and tls_stage_id should be specified.'
+            cache_stage_id: '- (Optional) The cache stage ID the DNS stage will be linked to. Only one of backend_stage_id, cache_stage_id and tls_stage_id should be specified.'
+            created_at: '- The date and time of the creation of the DNS stage.'
+            fqdns: '- (Optional) Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage.'
+            id: '- The ID of the DNS stage (UUID format).'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the DNS stage is associated with.'
+            tls_stage_id: '- (Optional) The TLS stage ID the DNS stage will be linked to. Only one of backend_stage_id, cache_stage_id and tls_stage_id should be specified.'
+            type: '- The type of the stage.'
+            updated_at: '- The date and time of the last update of the DNS stage.'
+        importStatements: []
+    scaleway_edge_services_head_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_head_stage
+        title: scaleway_edge_services_head_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "head_stage_id": "${scaleway_edge_services_dns_stage.main.id}",
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                head_stage_id: scaleway_edge_services_dns_stage.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+              dependencies:
+                scaleway_edge_services_dns_stage.main: |-
+                    {
+                      "fqdns": [
+                        "subdomain.example.com"
+                      ],
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                      "tls_stage_id": "${scaleway_edge_services_tls_stage.main.id}"
+                    }
+                scaleway_edge_services_pipeline.main: |-
+                    {
+                      "description": "pipeline description",
+                      "name": "my-edge_services-pipeline"
+                    }
+        argumentDocs:
+            head_stage_id: '- (Required) The ID of head stage of the pipeline.'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+        importStatements: []
+    scaleway_edge_services_pipeline:
+        subCategory: Edge Services
+        name: scaleway_edge_services_pipeline
+        title: scaleway_edge_services_pipeline
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "description": "pipeline description",
+                  "name": "pipeline-name"
+                }
+            - name: main
+              manifest: |-
+                {
+                  "description": "pipeline description",
+                  "name": "pipeline-name"
+                }
+              dependencies:
+                scaleway_edge_services_backend_stage.main: |-
+                    {
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                      "s3_backend_config": [
+                        {
+                          "bucket_name": "my-bucket-name",
+                          "bucket_region": "fr-par"
+                        }
+                      ]
+                    }
+                scaleway_edge_services_cache_stage.main: |-
+                    {
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                      "route_stage_id": "${scaleway_edge_services_route_stage.main.id}"
+                    }
+                scaleway_edge_services_dns_stage.main: |-
+                    {
+                      "fqdns": [
+                        "subdomain.example.com"
+                      ],
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                      "tls_stage_id": "${scaleway_edge_services_tls_stage.main.id}"
+                    }
+                scaleway_edge_services_head_stage.main: |-
+                    {
+                      "head_stage_id": "${scaleway_edge_services_dns_stage.main.id}",
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                    }
+                scaleway_edge_services_route_stage.main: |-
+                    {
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                      "rule": [
+                        {
+                          "backend_stage_id": "${scaleway_edge_services_backend_stage.main.id}",
+                          "rule_http_match": [
+                            {
+                              "method_filters": [
+                                "get",
+                                "post"
+                              ],
+                              "path_filter": [
+                                {
+                                  "path_filter_type": "regex",
+                                  "value": ".*"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "waf_stage_id": "${scaleway_edge_services_waf_stage.main.id}"
+                    }
+                scaleway_edge_services_tls_stage.main: |-
+                    {
+                      "cache_stage_id": "${scaleway_edge_services_cache_stage.main.id}",
+                      "managed_certificate": true,
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                    }
+                scaleway_edge_services_waf_stage.main: |-
+                    {
+                      "backend_stage_id": "${scaleway_edge_services_backend_stage.main.id}",
+                      "mode": "enable",
+                      "paranoia_level": 3,
+                      "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                    }
+        argumentDocs:
+            created_at: '- The date and time of the creation of the pipeline.'
+            description: '- (Optional) The description of the pipeline.'
+            id: '- The ID of the pipeline (UUID format).'
+            name: '- (Optional) The name of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the pipeline is associated with.'
+            status: '- The status of user pipeline.'
+            updated_at: '- The date and time of the last update of the pipeline.'
+        importStatements: []
+    scaleway_edge_services_plan:
+        subCategory: Edge Services
+        name: scaleway_edge_services_plan
+        title: scaleway_edge_services_plan
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "name": "starter"
+                }
+        argumentDocs:
+            name: '- (Optional) The name of the plan.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the plan is associated with.'
+        importStatements: []
+    scaleway_edge_services_route_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_route_stage
+        title: scaleway_edge_services_route_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                  "rule": [
+                    {
+                      "backend_stage_id": "${scaleway_edge_services_backend_stage.backend.id}",
+                      "rule_http_match": [
+                        {
+                          "method_filters": [
+                            "get",
+                            "post"
+                          ],
+                          "path_filter": [
+                            {
+                              "path_filter_type": "regex",
+                              "value": ".*"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "waf_stage_id": "${scaleway_edge_services_waf_stage.waf.id}"
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+                rule.backend_stage_id: scaleway_edge_services_backend_stage.backend.id
+                waf_stage_id: scaleway_edge_services_waf_stage.waf.id
+        argumentDocs:
+            backend_stage_id: (Required) The ID of the backend stage that requests matching the rule should be forwarded to.
+            created_at: '- The date and time of the creation of the route stage.'
+            id: '- The ID of the route stage (UUID format).'
+            method_filters: (Optional) HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are get, post, put, patch, delete, head, options. All methods will match if none is provided.
+            path_filter: (Optional) HTTP URL path to filter for. A request whose path matches the given filter will be considered to match the rule. All paths will match if none is provided.
+            path_filter_type: (Required) The type of filter to match for the HTTP URL path. For now, all path filters must be written in regex and use the regex type.
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the route stage is associated with.'
+            rule: '- (Optional) The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.'
+            rule_http_match: (Optional) The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+            updated_at: '- The date and time of the last update of the route stage.'
+            value: (Required) The value to be matched for the HTTP URL path.
+            waf_stage_id: '- (Optional) The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.'
+        importStatements: []
+    scaleway_edge_services_tls_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_tls_stage
+        title: scaleway_edge_services_tls_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "managed_certificate": true,
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+            - name: main
+              manifest: |-
+                {
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}",
+                  "secrets": [
+                    {
+                      "region": "fr-par",
+                      "secret_id": "11111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+        argumentDocs:
+            backend_stage_id: '- (Optional) The backend stage ID the TLS stage will be linked to. Only one of backend_stage_id, cache_stage_id, route_stage_id and waf_stage_id should be specified.'
+            bucket_name: '- The ID of the secret.'
+            cache_stage_id: '- (Optional) The cache stage ID the TLS stage will be linked to. Only one of backend_stage_id, cache_stage_id, route_stage_id and waf_stage_id should be specified.'
+            certificate_expires_at: '- The expiration date of the certificate.'
+            created_at: '- The date and time of the creation of the TLS stage.'
+            id: '- The ID of the TLS stage (UUID format).'
+            managed_certificate: '- (Optional) Set to true when Scaleway generates and manages a Let''s Encrypt certificate for the TLS stage/custom endpoint.'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the TLS stage is associated with.'
+            region: '- The region of the secret.'
+            route_stage_id: '- (Optional) The route stage ID the TLS stage will be linked to. Only one of backend_stage_id, cache_stage_id, route_stage_id and waf_stage_id should be specified.'
+            secrets: '- (Optional) The TLS secrets.'
+            updated_at: '- The date and time of the last update of the TLS stage.'
+            waf_stage_id: '- (Optional) The WAF stage ID the TLS stage will be linked to. Only one of backend_stage_id, cache_stage_id, route_stage_id and waf_stage_id should be specified.'
+        importStatements: []
+    scaleway_edge_services_waf_stage:
+        subCategory: Edge Services
+        name: scaleway_edge_services_waf_stage
+        title: scaleway_edge_services_waf_stage
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "mode": "enable",
+                  "paranoia_level": 3,
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+        argumentDocs:
+            backend_stage_id: '- (Optional) The ID of the backend stage to forward requests to after the WAF stage.'
+            created_at: '- The date and time of the creation of the WAF stage.'
+            id: '- The ID of the WAF stage (UUID format).'
+            mode: '- (Optional) The mode defining WAF behavior (disable/log_only/enable).'
+            paranoia_level: '- (Required) The sensitivity level (1,2,3,4) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.'
+            pipeline_id: '- (Required) The ID of the pipeline.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the WAF stage is associated with.'
+            updated_at: '- The date and time of the last update of the WAF stage.'
         importStatements: []
     scaleway_flexible_ip:
         subCategory: Elastic Metal
@@ -1177,7 +1777,7 @@ resources:
             status: '- The status of the flexible IP.'
             tags: '- (Optional) A list of tags to apply to the flexible IP.'
             updated_at: '- The date and time of the last update of the Flexible IP (Format ISO 8601).'
-            zone: '- The zone of the Flexible IP.'
+            zone: -(Defaults to provider zone) The zone of the Flexible IP.
         importStatements: []
     scaleway_flexible_ip_mac_address:
         subCategory: Elastic Metal
@@ -1286,6 +1886,7 @@ resources:
             domain_name: '- The native domain name of the function.'
             environment_variables: '- (Optional) The environment variables of the function.'
             handler: '- Handler of the function, depends on the runtime. Refer to the dedicated documentation for the list of supported runtimes.'
+            http_option: '- (Optional) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.'
             id: '- The unique identifier of the function.'
             max_scale: '- (Optional) The maximum number of instances this function can scale to. Default to 20. Your function will scale automatically based on the incoming workload, but will never exceed the configured max_scale value.'
             memory_limit: '- (Optional) The memory resources in MB to allocate to each function. Defaults to 256 MB.'
@@ -1311,7 +1912,7 @@ resources:
             - name: main
               manifest: |-
                 {
-                  "args": "${jsonencode({test = \"scw\"})}",
+                  "args": "${jsonencode({ test = \"scw\" })}",
                   "function_id": "${scaleway_function.main.id}",
                   "name": "test-cron",
                   "schedule": "0 0 * * *"
@@ -1334,7 +1935,7 @@ resources:
             - name: func
               manifest: |-
                 {
-                  "args": "${jsonencode({my_var = \"terraform\"})}",
+                  "args": "${jsonencode({ my_var = \"terraform\" })}",
                   "function_id": "${scaleway_function.main.id}",
                   "schedule": "0 1 * * *"
                 }
@@ -1791,7 +2392,7 @@ resources:
                 }
         argumentDocs:
             application_id: '- ID of the application the policy will be linked to'
-            condition: '- (Optional) The condition of the IAM policy.'
+            condition: '- (Optional) The condition of the rule.'
             created_at: '- The date and time of the creation of the policy.'
             description: '- (Optional) The description of the IAM policy.'
             editable: '- Whether the policy is editable.'
@@ -1807,7 +2408,7 @@ resources:
             updated_at: '- The date and time of the last update of the policy.'
             user_id: '- ID of the user the policy will be linked to'
         importStatements:
-            - scw IAM permission-set list
+            - scw iam permission-set list
     scaleway_iam_ssh_key:
         subCategory: IAM
         name: scaleway_iam_ssh_key
@@ -1874,7 +2475,7 @@ resources:
               manifest: |-
                 {
                   "accept_eula": true,
-                  "model_name": "meta/llama-3.1-8b-instruct:fp8",
+                  "model_name": "${data.scaleway_inference_model.my_model.id}",
                   "name": "tf-inference-deployment",
                   "node_type": "L4",
                   "public_endpoint": [
@@ -1883,6 +2484,8 @@ resources:
                     }
                   ]
                 }
+              references:
+                model_name: data.scaleway_inference_model.my_model.id
         argumentDocs:
             accept_eula: '- (Optional) Some models (e.g Meta Llama) require end-user license agreements. Set true to accept.'
             created_at: '- The date and time of the creation of the deployment.'
@@ -1891,8 +2494,8 @@ resources:
             is_enabled: '- (Optional) Enable or disable public endpoint.'
             max_size: '- (Optional) The maximum size of the pool.'
             min_size: '- (Optional) The minimum size of the pool.'
-            model_id: '- The model id used for the deployment.'
-            model_name: '- (Required) The model name to use for the deployment. Model names can be found in Console or using Scaleway''s CLI (scw inference model list)'
+            model_id: '- (Required) The model id used for the deployment.'
+            model_name: '- The model name used for the deployment. Model names can be found in Console or using Scaleway''s CLI (scw inference model list)'
             name: '- (Optional) The deployment name.'
             node_type: '- (Required) The node type to use for the deployment. Node types can be found using Scaleway''s CLI (scw inference node-type list)'
             private_endpoint: '- (Optional) Configuration of the deployment''s private endpoint.'
@@ -1905,6 +2508,59 @@ resources:
             tags: '- (Optional) The tags associated with the deployment.'
             updated_at: '- The date and time of the last update of the deployment.'
             url: '- (Optional) The URL of the endpoint.'
+        importStatements: []
+    scaleway_inference_model:
+        subCategory: Inference
+        name: scaleway_inference_model
+        title: scaleway_inference_model
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "name": "my-awesome-model",
+                  "secret": "my-secret-token",
+                  "url": "https://huggingface.co/agentica-org/DeepCoder-14B-Preview"
+                }
+            - name: my_model
+              manifest: |-
+                {
+                  "name": "my-awesome-model",
+                  "secret": "my-secret-token",
+                  "url": "https://huggingface.co/agentica-org/DeepCoder-14B-Preview"
+                }
+              dependencies:
+                scaleway_inference_deployment.my_deployment: |-
+                    {
+                      "accept_eula": true,
+                      "model_id": "${scaleway_inference_model.my_model.id}",
+                      "name": "test-inference-deployment-basic",
+                      "node_type": "H100",
+                      "public_endpoint": [
+                        {
+                          "is_enabled": true
+                        }
+                      ]
+                    }
+        argumentDocs:
+            description: '- A textual description of the model (if available).'
+            has_eula: '- Whether the model requires end-user license agreement acceptance before use.'
+            id: '- The unique identifier of the model.'
+            name: '- (Required) The name of the model. This must be unique within the project.'
+            nodes_support: |-
+                - List of supported node types and their quantization options. Each entry contains:
+                - node_type_name - The type of node supported.
+                - quantization - A list of supported quantization options, including:
+                - quantization_bits -  Number of bits used for quantization (e.g., 8, 16).
+                - allowed - Whether this quantization is allowed.
+                - max_context_size - Maximum context length supported by this quantization.
+            parameter_size_bits: '- Size, in bits, of the model parameters.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the deployment is associated with.'
+            region: '- (Defaults to provider region) The region in which the deployment is created.'
+            secret: '- (Optional, Sensitive) Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission).'
+            size_bytes: '- Total size, in bytes, of the model archive.'
+            status: '- The current status of the model (e.g., ready, error, etc.).'
+            tags: '- Tags associated with the model.'
+            url: '- (Required) The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret'
         importStatements: []
     scaleway_instance_image:
         subCategory: Instances
@@ -2026,7 +2682,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the IP is associated with.'
             reverse: '- The reverse dns attached to this IP'
             tags: '- The tags associated with the IP.'
-            type: '- (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation'
+            type: '- The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation'
             zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_instance_ip_reverse_dns:
@@ -2153,9 +2809,11 @@ resources:
                       "vpc_id": "${scaleway_vpc.vpc01.id}"
                     }
         argumentDocs:
+            address: '- The private IP address.'
             id: '- The ID of the private NIC.'
             ipam_ip_ids: '- (Optional) IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network.'
             mac_address: '- The MAC address of the private NIC.'
+            private_ips: '- The list of private IPv4 and IPv6 addresses associated with the resource.'
             private_network_id: '- (Required) The ID of the private network attached to.'
             server_id: '- (Required) The ID of the server associated with.'
             tags: '- (Optional) The tags associated with the private NIC.'
@@ -2388,7 +3046,7 @@ resources:
               manifest: |-
                 {
                   "additional_volume_ids": [
-                    "${scaleway_instance_volume.data.id}"
+                    "${scaleway_block_volume.data.id}"
                   ],
                   "image": "ubuntu_jammy",
                   "root_volume": [
@@ -2403,10 +3061,10 @@ resources:
                   "type": "DEV1-S"
                 }
               dependencies:
-                scaleway_instance_volume.data: |-
+                scaleway_block_volume.data: |-
                     {
-                      "size_in_gb": 100,
-                      "type": "b_ssd"
+                      "iops": 5000,
+                      "size_in_gb": 100
                     }
             - name: web
               manifest: |-
@@ -2493,8 +3151,7 @@ resources:
                   "image": "ubuntu_jammy",
                   "root_volume": [
                     {
-                      "size_in_gb": 100,
-                      "volume_type": "b_ssd"
+                      "size_in_gb": 100
                     }
                   ],
                   "type": "PRO2-XXS"
@@ -2504,18 +3161,19 @@ resources:
                 {
                   "root_volume": [
                     {
-                      "volume_id": "${scaleway_instance_volume.from_snapshot.id}"
+                      "volume_id": "${scaleway_block_volume.from_snapshot.id}",
+                      "volume_type": "sbs_volume"
                     }
                   ],
                   "type": "PRO2-XXS"
                 }
               references:
-                root_volume.volume_id: scaleway_instance_volume.from_snapshot.id
+                root_volume.volume_id: scaleway_block_volume.from_snapshot.id
               dependencies:
-                scaleway_instance_volume.from_snapshot: |-
+                scaleway_block_volume.from_snapshot: |-
                     {
-                      "from_snapshot_id": "${data.scaleway_instance_snapshot.snapshot.id}",
-                      "type": "b_ssd"
+                      "iops": 5000,
+                      "snapshot_id": "${data.scaleway_block_snapshot.snapshot.id}"
                     }
             - name: server
               manifest: |-
@@ -2534,14 +3192,14 @@ resources:
             additional_volume_ids: |-
                 - (Optional) The additional volumes
                 attached to the server. Updates to this field will trigger a stop/start of the server.
-            address: '- The address of the IP'
+            address: '- The private IP address.'
             boot_type: '- The boot Type of the server. Possible values are: local, bootscript or rescue.'
             delete_on_termination: '- (Defaults to true) Forces deletion of the root volume on instance termination.'
             enable_dynamic_ip: '- (Defaults to false) If true a dynamic IP will be attached to the server.'
             enable_ipv6: |-
-                - (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                - (Defaults to false) Determines if IPv6 is enabled for the server.
                 Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-            id: '- The ID of the server.'
+            id: '- The ID of the IP address resource.'
             image: |-
                 - (Optional) The UUID or the label of the base image used by the server. You can use this endpoint
                 to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
@@ -2560,18 +3218,19 @@ resources:
             name: '- (Optional) The name of the server.'
             organization_id: '- The organization ID the server is associated with.'
             placement_group_id: '- (Optional) The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.'
-            placement_group_policy_respected: '- True when the placement group policy is respected.'
+            placement_group_policy_respected: '- (Deprecated) Always false, use instance_placement_group ressource to known when the placement group policy is respected.'
             pn_id: '- (Required) The private network ID where to connect.'
             private_ip: '- The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).'
+            private_ips: '- The list of private IPv4 and IPv6 addresses associated with the resource.'
             private_network: |-
                 - (Optional) The private network associated with the server.
                 Use the pn_id key to attach a private_network on your instance.
             project_id: '- (Defaults to provider project_id) The ID of the project the server is associated with.'
+            protected: '- (Optional) Set to true to activate server protection option.'
             public_ip: '-  The public IP address of the server (Deprecated use public_ips instead).'
             public_ips: '- The list of public IPs of the server.'
             replace_on_type_change: '- (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.'
             root_volume: '- (Optional) Root volume attached to the server on creation.'
-            routed_ip_enabled: '- (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.'
             sbs_iops: '- (Optional) Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.'
             security_group_id: '- (Optional) The security group the server is attached to.'
             size_in_gb: |-
@@ -3196,12 +3855,43 @@ resources:
                   "name": "testjob",
                   "timeout": "10m"
                 }
+            - name: main
+              manifest: |-
+                {
+                  "command": "ls",
+                  "cpu_limit": 140,
+                  "cron": [
+                    {
+                      "schedule": "5 4 1 * *",
+                      "timezone": "Europe/Paris"
+                    }
+                  ],
+                  "image_uri": "docker.io/alpine:latest",
+                  "memory_limit": 256,
+                  "name": "testjob",
+                  "secret_reference": [
+                    {
+                      "file": "/home/dev/secret_file",
+                      "secret_id": "11111111-1111-1111-1111-111111111111"
+                    },
+                    {
+                      "environment": "FOO",
+                      "secret_id": "${scaleway_secret.job_secret.id}",
+                      "secret_version": "1"
+                    }
+                  ],
+                  "timeout": "10m"
+                }
+              references:
+                secret_reference.secret_id: scaleway_secret.job_secret.id
         argumentDocs:
             command: '- (Optional) The command that will be run in the container if specified.'
             cpu_limit: '- (Required) The amount of vCPU computing resources to allocate to each container running the job.'
             cron: '- (Optional) The cron configuration'
             description: '- (Optional) The description of the job'
             env: '- (Optional) The environment variables of the container.'
+            environment: '- (Optional) An environment variable containing the secret value. Must be specified if file is not specified.'
+            file: '- (Optional) The absolute file path where the secret will be mounted. Must be specified if environment is not specified.'
             id: '- The ID of the Job Definition.'
             image_uri: '- (Required) The uri of the container image that will be used for the job run.'
             memory_limit: '- (Required) The memory computing resources in MB to allocate to each container running the job.'
@@ -3209,8 +3899,75 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the Job is associated with.'
             region: '- (Defaults to provider region) The region of the Job.'
             schedule: '- Cron format string.'
+            secret_id: '- (Required) The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition. You could reference the same secret multiple times in the same job definition.'
+            secret_reference: '- (Optional) A reference to a secret stored in Secret Manager.'
+            secret_reference_id: '- The secret reference UUID that is automatically generated by the provider.'
+            secret_version: '- (Default: latest) The secret version.'
             timeout: '- (Optional) The job run timeout, in Go Time format (ex: 2h30m25s)'
             timezone: '- The timezone, must be a canonical TZ identifier as found in this list.'
+        importStatements: []
+    scaleway_k8s_acl:
+        subCategory: Kubernetes
+        name: scaleway_k8s_acl
+        title: scaleway_k8s_acl
+        examples:
+            - name: acl_basic
+              manifest: |-
+                {
+                  "acl_rules": [
+                    {
+                      "description": "Allow 1.2.3.4",
+                      "ip": "1.2.3.4/32"
+                    },
+                    {
+                      "description": "Allow all Scaleway ranges",
+                      "scaleway_ranges": true
+                    }
+                  ],
+                  "cluster_id": "${scaleway_k8s_cluster.acl_basic.id}"
+                }
+              references:
+                cluster_id: scaleway_k8s_cluster.acl_basic.id
+              dependencies:
+                scaleway_k8s_cluster.acl_basic: |-
+                    {
+                      "cni": "cilium",
+                      "delete_additional_resources": true,
+                      "name": "acl-basic",
+                      "private_network_id": "${scaleway_vpc_private_network.acl_basic.id}",
+                      "version": "1.32.2"
+                    }
+                scaleway_vpc_private_network.acl_basic: '{}'
+            - name: acl_basic
+              manifest: |-
+                {
+                  "cluster_id": "${scaleway_k8s_cluster.acl_basic.id}",
+                  "no_ip_allowed": true
+                }
+              references:
+                cluster_id: scaleway_k8s_cluster.acl_basic.id
+              dependencies:
+                scaleway_k8s_cluster.acl_basic: |-
+                    {
+                      "cni": "cilium",
+                      "delete_additional_resources": true,
+                      "name": "acl-basic",
+                      "private_network_id": "${scaleway_vpc_private_network.acl_basic.id}",
+                      "version": "1.32.2"
+                    }
+                scaleway_vpc_private_network.acl_basic: '{}'
+        argumentDocs:
+            acl_rules.#.id: '- The ID of each individual ACL rule.'
+            acl_rules.acl_rules: '- (Optional) A list of ACLs (structure is described below)'
+            acl_rules.description: '- (Optional) A text describing this rule.'
+            acl_rules.ip: '- (Optional) The IP range to whitelist in CIDR notation'
+            acl_rules.scaleway_ranges: |-
+                - (Optional) Allow access to cluster from all Scaleway ranges as defined in Scaleway Network Information - IP ranges used by Scaleway.
+                Only one rule with this field set to true can be added.
+            cluster_id: '- (Required) UUID of the cluster. The ID of the cluster is also the ID of the ACL resource, as there can only be one per cluster.'
+            id: '- The ID of the ACL resource. It is the same as the ID of the cluster.'
+            no_ip_allowed: '- (Optional) If set to true, no IP will be allowed and the cluster will be in full-isolation.'
+            no_ip_allowed.region: '- (Defaults to provider region) The region in which the ACL rule should be created.'
         importStatements: []
     scaleway_k8s_cluster:
         subCategory: Kubernetes
@@ -3561,14 +4318,11 @@ resources:
               references:
                 cluster_id: scaleway_k8s_cluster.kubernetes_cluster.id
         argumentDocs:
+            address: '- The private IP address.'
             autohealing: '- (Defaults to false) Enables the autohealing feature for this pool.'
-            autoscaling: |-
-                - (Defaults to false) Enables the autoscaling feature for this pool.
-                ~> Important: When enabled, an update of the size will not be taken into account.
+            autoscaling: '- (Defaults to false) Enables the autoscaling feature for this pool.'
             cluster_id: '- (Required) The ID of the Kubernetes cluster on which this pool will be created.'
-            container_runtime: |-
-                - (Defaults to containerd) The container runtime of the pool.
-                ~> Important: Updates to this field will recreate a new resource.
+            container_runtime: '- (Defaults to containerd) The container runtime of the pool.'
             created_at: '- The creation date of the pool.'
             current_size: '- The size of the pool at the time the terraform state was updated.'
             id: '- The ID of the pool.'
@@ -3577,34 +4331,25 @@ resources:
             max_surge: '- (Defaults to 0) The maximum number of nodes to be created during the upgrade'
             max_unavailable: '- (Defaults to 1) The maximum number of nodes that can be not ready at the same time'
             min_size: '- (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.'
-            name: |-
-                - (Required) The name for the pool.
-                ~> Important: Updates to this field will recreate a new resource.
+            name: '- (Required) The name for the pool.'
             node_type: '- (Required) The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.'
             nodes: '- (List of) The nodes in the default pool.'
-            placement_group_id: |-
-                - (Optional) The placement group the nodes of the pool will be attached to.
-                ~> Important: Updates to this field will recreate a new resource.
+            placement_group_id: '- (Optional) The placement group the nodes of the pool will be attached to.'
+            private_ips: '- The list of private IPv4 and IPv6 addresses associated with the node.'
             public_ip: '- The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
-            public_ip_disabled: |-
-                - (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
-                ~> Important: Updates to this field will recreate a new resource.
+            public_ip_disabled: '- (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.'
             public_ip_v6: '- The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
             region: '- (Defaults to provider region) The region in which the pool should be created.'
             root_volume_size_in_gb: '- (Optional) The size of the system volume of the nodes in gigabyte'
             root_volume_type: '- (Optional) System volume type of the nodes composing the pool'
-            size: |-
-                - (Required) The size of the pool.
-                ~> Important: This field will only be used at creation if autoscaling is enabled.
+            size: '- (Required) The size of the pool.'
             status: '- The status of the pool.'
             tags: '- (Optional) The tags associated with the pool.'
             updated_at: '- The last update date of the pool.'
             upgrade_policy: '- (Optional) The Pool upgrade policy'
             version: '- The version of the pool.'
-            wait_for_pool_ready: '- (Defaults to false) Whether to wait for the pool to be ready.'
-            zone: |-
-                - (Defaults to provider zone) The zone in which the pool should be created.
-                ~> Important: Updates to this field will recreate a new resource.
+            wait_for_pool_ready: '- (Defaults to true) Whether to wait for the pool to be ready.'
+            zone: '- (Defaults to provider zone) The zone in which the pool should be created.'
         importStatements: []
     scaleway_lb:
         subCategory: Load Balancers
@@ -3694,6 +4439,7 @@ resources:
                       "vpc_id": "${scaleway_vpc.vpc01.id}"
                     }
         argumentDocs:
+            address: '- The private IP address.'
             assign_flexible_ip: '- (Optional) Defines whether to automatically assign a flexible public IPv4 to the Load Balancer.'
             assign_flexible_ipv6: '- (Optional) Defines whether to automatically assign a flexible public IPv6 to the Load Balancer.'
             description: '- (Optional) The description of the Load Balancer.'
@@ -3706,6 +4452,7 @@ resources:
             ipv6_address: '-  The Load Balancer public IPv6 address.'
             name: '- (Optional) The name of the Load Balancer.'
             organization_id: '- The ID of the Organization ID the Load Balancer is associated with.'
+            private_ips: '- The list of private IPv4 and IPv6 addresses associated with the resource.'
             private_network: '- (Optional) List of private network to connect with your load balancer.'
             private_network_id: '- (Required) The ID of the Private Network to attach to.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the Load Balancer is associated with.'
@@ -3791,7 +4538,7 @@ resources:
                   "forward_protocol": "http",
                   "health_check_http": [
                     {
-                      "uri": "www.test.com/health"
+                      "uri": "/health"
                     }
                   ],
                   "lb_id": "${scaleway_lb.lb01.id}",
@@ -3840,7 +4587,7 @@ resources:
             timeout_queue: '- (Optional) Maximum time for a request to be left pending in queue when max_connections is reached. (e.g.: 1s)'
             timeout_server: '- (Optional) Maximum server connection inactivity time. (e.g. 1s)'
             timeout_tunnel: '- (Optional) Maximum tunnel inactivity time. (e.g. 1s)'
-            uri: '- (Required) The HTTP endpoint URL to call for health check requests.'
+            uri: '- (Required) The path for health check requests.'
             zone: '- (Defaults to provider zone) The zone in which the Load Balancer was created.'
         importStatements: []
     scaleway_lb_certificate:
@@ -3953,7 +4700,7 @@ resources:
                       "lb_id": "${scaleway_lb.lb01.id}",
                       "letsencrypt": [
                         {
-                          "common_name": "${replace(scaleway_lb_ip.ip01.ip_address,\".\", \"-\")}.lb.${scaleway_lb.lb01.region}.scw.cloud"
+                          "common_name": "${replace(scaleway_lb_ip.ip01.ip_address, \".\", \"-\")}.lb.${scaleway_lb.lb01.region}.scw.cloud"
                         }
                       ],
                       "lifecycle": [
@@ -4096,6 +4843,7 @@ resources:
             certificate_id: '- (Deprecated, use certificate_ids instead) First certificate ID used by the frontend.'
             certificate_ids: '- (Optional) List of certificate IDs that should be used by the frontend.'
             code: '- (Optional) The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.'
+            connection_rate_limit: '- (Optional) The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.'
             enable_http3: '- (Default: false) Activates HTTP/3 protocol.'
             http_filter: |-
                 - (Optional) The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
@@ -4209,6 +4957,82 @@ resources:
                       "lb_id": "${scaleway_lb.lb01.id}"
                     }
                 scaleway_lb_ip.ip01: '{}'
+            - name: admin_route
+              manifest: |-
+                {
+                  "backend_id": "${scaleway_lb_backend.admin.id}",
+                  "frontend_id": "${scaleway_lb_frontend.frontend.id}",
+                  "match_path_begin": "/admin"
+                }
+              references:
+                backend_id: scaleway_lb_backend.admin.id
+                frontend_id: scaleway_lb_frontend.frontend.id
+              dependencies:
+                scaleway_lb.lb: |-
+                    {
+                      "ip_id": "${scaleway_lb_ip.ip.id}",
+                      "name": "my-lb",
+                      "type": "lb-s"
+                    }
+                scaleway_lb_backend.admin: |-
+                    {
+                      "forward_port": 8080,
+                      "forward_protocol": "http",
+                      "lb_id": "${scaleway_lb.lb.id}",
+                      "proxy_protocol": "none"
+                    }
+                scaleway_lb_backend.app: |-
+                    {
+                      "forward_port": 80,
+                      "forward_protocol": "http",
+                      "lb_id": "${scaleway_lb.lb.id}",
+                      "proxy_protocol": "none"
+                    }
+                scaleway_lb_frontend.frontend: |-
+                    {
+                      "backend_id": "${scaleway_lb_backend.app.id}",
+                      "inbound_port": 80,
+                      "lb_id": "${scaleway_lb.lb.id}"
+                    }
+                scaleway_lb_ip.ip: '{}'
+            - name: default_route
+              manifest: |-
+                {
+                  "backend_id": "${scaleway_lb_backend.app.id}",
+                  "frontend_id": "${scaleway_lb_frontend.frontend.id}",
+                  "match_path_begin": "/"
+                }
+              references:
+                backend_id: scaleway_lb_backend.app.id
+                frontend_id: scaleway_lb_frontend.frontend.id
+              dependencies:
+                scaleway_lb.lb: |-
+                    {
+                      "ip_id": "${scaleway_lb_ip.ip.id}",
+                      "name": "my-lb",
+                      "type": "lb-s"
+                    }
+                scaleway_lb_backend.admin: |-
+                    {
+                      "forward_port": 8080,
+                      "forward_protocol": "http",
+                      "lb_id": "${scaleway_lb.lb.id}",
+                      "proxy_protocol": "none"
+                    }
+                scaleway_lb_backend.app: |-
+                    {
+                      "forward_port": 80,
+                      "forward_protocol": "http",
+                      "lb_id": "${scaleway_lb.lb.id}",
+                      "proxy_protocol": "none"
+                    }
+                scaleway_lb_frontend.frontend: |-
+                    {
+                      "backend_id": "${scaleway_lb_backend.app.id}",
+                      "inbound_port": 80,
+                      "lb_id": "${scaleway_lb.lb.id}"
+                    }
+                scaleway_lb_ip.ip: '{}'
         argumentDocs:
             backend_id: '- (Required) The ID of the backend the route is associated with.'
             created_at: '- The date on which the route was created.'
@@ -4216,10 +5040,14 @@ resources:
             id: '- The ID of the route'
             match_host_header: |-
                 - The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-                Only one of match_sni and match_host_header should be specified.
+                Only one of match_sni, match_host_header and match_path_begin should be specified.
+            match_path_begin: |-
+                - The value to match in the URL beginning path from an incoming request.
+                Only one of match_sni, match_host_header and match_path_begin should be specified.
             match_sni: |-
                 - The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-                Only one of match_sni and match_host_header should be specified.
+                Only one of match_sni, match_host_header and match_path_begin should be specified.
+            match_subdomains: '- (Default: false) If true, all subdomains will match.'
             updated_at: '- The date on which the route was last updated.'
             zone: '- (Defaults to provider zone) The zone in which the Load Balancer was created.'
         importStatements: []
@@ -4321,7 +5149,7 @@ resources:
             can_receive: '- (Optional). Defines whether the user can receive messages from the service.'
             id: '- The ID of the credentials'
             name: '- (Optional) The unique name of the SNS credentials.'
-            permissions: '- (Optional). List of permissions associated with these credentials. Only one of the following permissions may be set:'
+            permissions: '- (Optional). List of permissions associated with these credentials.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SNS is enabled.'
             region: '- (Defaults to provider region). The region in which SNS is enabled.'
             secret_key: '- The secret value of the key.'
@@ -4475,7 +5303,7 @@ resources:
             can_receive: '- (Optional). Defines whether the user can receive messages from the service.'
             id: '- The ID of the credentials'
             name: '- (Optional) The unique name of the SQS credentials.'
-            permissions: '- (Optional). List of permissions associated with these credentials. Only one of the following permissions may be set:'
+            permissions: '- (Optional). List of permissions associated with these credentials.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SQS is enabled.'
             region: '- (Defaults to provider region). The region in which SQS is enabled.'
             secret_key: '- The secret value of the key.'
@@ -4546,6 +5374,28 @@ resources:
                   "version": "7.0.12",
                   "volume_size_in_gb": 5
                 }
+            - name: main
+              manifest: |-
+                {
+                  "name": "test-mongodb-basic1",
+                  "node_number": 1,
+                  "node_type": "MGDB-PLAY2-NANO",
+                  "password": "thiZ_is_v\u0026ry_s3cret",
+                  "private_network": [
+                    {
+                      "pn_id": "${scaleway_vpc_private_network.pn02.id}"
+                    }
+                  ],
+                  "user_name": "my_initial_user",
+                  "version": "7.0.12",
+                  "volume_size_in_gb": 5
+                }
+              dependencies:
+                scaleway_vpc_private_network.pn01: |-
+                    {
+                      "name": "my_private_network",
+                      "region": "fr-par"
+                    }
             - name: restored_instance
               manifest: |-
                 {
@@ -4556,10 +5406,15 @@ resources:
                 }
         argumentDocs:
             created_at: '- The date and time of the creation of the MongoDB® instance.'
+            dns_records: '- List of DNS records for your endpoint.'
             id: '- The ID of the MongoDB® instance.'
+            ips: '- List of IP addresses for your endpoint.'
             name: '- (Optional) Name of the MongoDB® instance.'
             node_type: '- (Required) The type of MongoDB® intance to create.'
             password: '- (Optional) Password of the user.'
+            pn_id: '- (Required) The ID of the Private Network.'
+            port: '- TCP port of the endpoint.'
+            private_network: '- (Optional) Private Network endpoints of the Database Instance.'
             public_network: '- (Optional) Public network specs details.'
             snapshot_id: '- (Optional) Snapshot ID to restore the MongoDB® instance from.'
             tags: '- (Optional) List of tags attached to the MongoDB® instance.'
@@ -4726,7 +5581,7 @@ resources:
             endpoint: '- The endpoint URL of the bucket.'
             expiration: '- (Optional) Specifies a period of expiration for the object. The expiration object supports the following:'
             expose_headers: (Optional) Specifies header exposure in the response.
-            force_destroy: '- (Optional) Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has object lock enabled.'
+            force_destroy: '- (Optional) Boolean that, when set to true, allows the deletion of all objects (including locked objects) when the bucket is destroyed. This operation is irreversible, and the objects cannot be recovered. The default is false.'
             id: '- (Optional) Unique identifier for the rule. Must be less than or equal to 255 characters in length.'
             key/value: |-
                 tags yet, so only the tags' values will be displayed.
@@ -4866,7 +5721,7 @@ resources:
               manifest: |-
                 {
                   "bucket": "${scaleway_object_bucket.bucket.name}",
-                  "policy": "${jsonencode({\n    Version   = \"2023-04-17\",\n    Id      = \"MyBucketPolicy\",\n    Statement = [\n      {\n        Effect = \"Allow\"\n        Action = [\"s3:*\"]\n        Principal = { SCW = \"user_id:${data.scaleway_iam_user.user.id}\" }\n        Resource  = [\n          scaleway_object_bucket.bucket.name,\n          \"${scaleway_object_bucket.bucket.name}/*\",\n        ]\n      },\n    ]\n  })}"
+                  "policy": "${jsonencode({\n    Version = \"2023-04-17\",\n    Id      = \"MyBucketPolicy\",\n    Statement = [\n      {\n        Effect    = \"Allow\"\n        Action    = [\"s3:*\"]\n        Principal = { SCW = \"user_id:${data.scaleway_iam_user.user.id}\" }\n        Resource = [\n          scaleway_object_bucket.bucket.name,\n          \"${scaleway_object_bucket.bucket.name}/*\",\n        ]\n      },\n    ]\n  })}"
                 }
               references:
                 bucket: scaleway_object_bucket.bucket.name
@@ -4940,7 +5795,7 @@ resources:
               manifest: |-
                 {
                   "bucket": "${scaleway_object_bucket.bucket.name}",
-                  "policy": "${jsonencode({\n    Version   = \"2012-10-17\",\n    Statement = [\n      {\n        Effect = \"Allow\"\n        Action = [\n          \"s3:ListBucket\",\n          \"s3:GetObjectTagging\"\n        ]\n        Principal = { SCW = \"project_id:${data.scaleway_account_project.default.id}\" }\n        Resource  = [\n          scaleway_object_bucket.bucket.name,\n          \"${scaleway_object_bucket.bucket.name}/*\",\n        ]\n      },\n    ]\n  })}"
+                  "policy": "${jsonencode({\n    Version = \"2012-10-17\",\n    Statement = [\n      {\n        Effect = \"Allow\"\n        Action = [\n          \"s3:ListBucket\",\n          \"s3:GetObjectTagging\"\n        ]\n        Principal = { SCW = \"project_id:${data.scaleway_account_project.default.id}\" }\n        Resource = [\n          scaleway_object_bucket.bucket.name,\n          \"${scaleway_object_bucket.bucket.name}/*\",\n        ]\n      },\n    ]\n  })}"
                 }
               references:
                 bucket: scaleway_object_bucket.bucket.name
@@ -5001,7 +5856,7 @@ resources:
                 scaleway_object_bucket_policy.main: |-
                     {
                       "bucket": "${scaleway_object_bucket.main.id}",
-                      "policy": "${jsonencode(\n    {\n        \"Version\" = \"2012-10-17\",\n        \"Id\" = \"MyPolicy\",\n        \"Statement\" = [\n        {\n           \"Sid\" = \"GrantToEveryone\",\n           \"Effect\" = \"Allow\",\n           \"Principal\" = \"*\",\n           \"Action\" = [\n              \"s3:GetObject\"\n           ],\n           \"Resource\":[\n              \"\u003cbucket-name\u003e/*\"\n           ]\n        }\n        ]\n    })}"
+                      "policy": "${jsonencode(\n    {\n      \"Version\" = \"2012-10-17\",\n      \"Id\"      = \"MyPolicy\",\n      \"Statement\" = [\n        {\n          \"Sid\"       = \"GrantToEveryone\",\n          \"Effect\"    = \"Allow\",\n          \"Principal\" = \"*\",\n          \"Action\" = [\n            \"s3:GetObject\"\n          ],\n          \"Resource\" : [\n            \"\u003cbucket-name\u003e/*\"\n          ]\n        }\n      ]\n  })}"
                     }
         argumentDocs:
             bucket: '- (Required, forces new resource) The name of the bucket.'
@@ -5242,6 +6097,7 @@ resources:
                   "node_type": "db-dev-s"
                 }
         argumentDocs:
+            address: '- The private IPv4 address.'
             backup_same_region: '- (Optional) Boolean to store logical backups in the same region as the Database Instance.'
             backup_schedule_frequency: '- (Optional) Backup schedule frequency in hours.'
             backup_schedule_retention: '- (Optional) Backup schedule retention in days.'
@@ -5268,6 +6124,7 @@ resources:
             password: '- (Optional) Password for the first user of the Database Instance.'
             pn_id: '- (Required) The ID of the Private Network.'
             port: '- Port of the replica.'
+            private_ip: '- The private IPv4 address associated with the resource.'
             private_network: '- List of Private Networks endpoints of the Database Instance.'
             project_id: |-
                 - (Defaults to provider project_id) The ID of the project the Database
@@ -5277,10 +6134,11 @@ resources:
                 - (Defaults to provider region) The region
                 in which the Database Instance should be created.
             settings: '- (Optional) Map of engine settings to be set. Using this option will override default config.'
+            snapshot_id: '- (Optional) The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.'
             tags: '- (Optional) The tags associated with the Database Instance.'
             user_name: '- (Optional) Identifier for the first user of the Database Instance.'
             volume_size_in_gb: '- (Optional) Volume size (in GB). Cannot be used when volume_type is set to lssd.'
-            volume_type: '- (Optional, default to lssd) Type of volume where data are stored (bssd, lssd, sbs_5k or sbs_15k).'
+            volume_type: '- (Optional, default to lssd) Type of volume where data are stored (lssd, sbs_5k or sbs_15k).'
         importStatements: []
     scaleway_rdb_privilege:
         subCategory: Databases
@@ -5431,6 +6289,86 @@ resources:
             same_zone: '- (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.'
             service_ip: '- (Optional) The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.'
         importStatements: []
+    scaleway_rdb_snapshot:
+        subCategory: Databases
+        name: scaleway_rdb_snapshot
+        title: scaleway_rdb_snapshot
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "depends_on": [
+                    "${scaleway_rdb_instance.main}"
+                  ],
+                  "instance_id": "${scaleway_rdb_instance.main.id}",
+                  "name": "initial-snapshot"
+                }
+              references:
+                instance_id: scaleway_rdb_instance.main.id
+              dependencies:
+                scaleway_rdb_instance.main: |-
+                    {
+                      "disable_backup": true,
+                      "engine": "PostgreSQL-15",
+                      "is_ha_cluster": false,
+                      "name": "test-rdb-instance",
+                      "node_type": "db-dev-s",
+                      "password": "thiZ_is_v\u0026ry_s3cret",
+                      "tags": [
+                        "terraform-test",
+                        "scaleway_rdb_instance",
+                        "minimal"
+                      ],
+                      "user_name": "my_initial_user",
+                      "volume_size_in_gb": 10,
+                      "volume_type": "sbs_5k"
+                    }
+            - name: snapshot_with_expiration
+              manifest: |-
+                {
+                  "expires_at": "2025-01-31T00:00:00Z",
+                  "instance_id": "${scaleway_rdb_instance.main.id}",
+                  "name": "snapshot-with-expiration"
+                }
+              references:
+                instance_id: scaleway_rdb_instance.main.id
+            - name: snapshot_a
+              manifest: |-
+                {
+                  "depends_on": [
+                    "${scaleway_rdb_instance.main}"
+                  ],
+                  "instance_id": "${scaleway_rdb_instance.main.id}",
+                  "name": "snapshot_a"
+                }
+              references:
+                instance_id: scaleway_rdb_instance.main.id
+            - name: snapshot_b
+              manifest: |-
+                {
+                  "depends_on": [
+                    "${scaleway_rdb_instance.main}"
+                  ],
+                  "expires_at": "2025-02-07T00:00:00Z",
+                  "instance_id": "${scaleway_rdb_instance.main.id}",
+                  "name": "snapshot_b"
+                }
+              references:
+                instance_id: scaleway_rdb_instance.main.id
+        argumentDocs:
+            created_at: '- The timestamp when the snapshot was created, in ISO 8601 format.'
+            depends_on: argument when creating snapshots right after creating an instance to ensure proper dependency management.
+            expires_at: '- (Optional) Expiration date of the snapshot in ISO 8601 format (e.g., 2025-01-31T00:00:00Z). If not set, the snapshot will not expire automatically.'
+            id: '- The unique ID of the snapshot.'
+            instance_id: '- (Required) The UUID of the database instance for which the snapshot is created.'
+            name: '- (Required) The name of the snapshot.'
+            node_type: '- The type of the database instance for which the snapshot was created.'
+            region: '- The region where the snapshot is stored. Defaults to the region set in the provider configuration.'
+            size: '- The size of the snapshot in bytes.'
+            status: '- The current status of the snapshot (e.g., ready, creating, error).'
+            updated_at: '- The timestamp when the snapshot was last updated, in ISO 8601 format.'
+            volume_type: '- The type of volume used by the snapshot.'
+        importStatements: []
     scaleway_rdb_user:
         subCategory: Databases
         name: scaleway_rdb_user
@@ -5543,6 +6481,7 @@ resources:
             acl.ip: |-
                 - (Required) The IP range to whitelist
                 in CIDR notation
+            address: '- The private IPv4 address.'
             certificate: '- The PEM of the certificate used by redis, only when tls_enabled is true'
             cluster_size: '- (Optional) The number of nodes in the Redis™ cluster.'
             created_at: '- The date and time of creation of the Redis™ cluster.'
@@ -5551,6 +6490,7 @@ resources:
             name: '- (Optional) The name of the Redis™ cluster.'
             node_type: '- (Required) The type of Redis™ cluster you want to create (e.g. RED1-M).'
             password: '- (Required) Password for the first user of the Redis™ cluster.'
+            private_ips: '- The list of private IPv4 addresses associated with the resource.'
             private_network: |-
                 - (Optional) Describes the Private Network you want to connect to your cluster. If not set, a public
                 network will be provided. More details on the Private Network section
@@ -5565,6 +6505,7 @@ resources:
                 Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
                 scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
                 If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
             project_id: |-
                 - (Defaults to provider project_id) The ID of the project the Redis™ cluster is
                 associated with.
@@ -5742,6 +6683,31 @@ resources:
             status: '- The status of the secret version.'
             updated_at: '- The date and time of the secret version''s last update (in RFC 3339 format).'
         importStatements: []
+    scaleway_tem_blocked_list:
+        subCategory: Transactional Email
+        name: scaleway_tem_blocked_list
+        title: scaleway_tem_blocked_list
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "domain_id": "fr-par/12345678-1234-1234-1234-123456789abc",
+                  "email": "spam@example.com",
+                  "reason": "Spam detected",
+                  "region": "fr-par",
+                  "type": "mailbox_full"
+                }
+        argumentDocs:
+            domain_id: '- (Required) The ID of the domain affected by the blocklist. Must be in the format {region}/{domain_id}.'
+            email: '- (Required) The email address to block.'
+            id: '- The ID of the blocklist, in the format {region}/{id}.'
+            mailbox_full: — The recipient's mailbox is full.
+            mailbox_not_found: — The recipient's mailbox does not exist.
+            project_id: '- (Optional) The ID of the project this blocklist belongs to. Defaults to the provider''s project ID.'
+            reason: '- (Optional, Default: manual_block) Reason for blocking the email address.'
+            region: '- (Optional) The region in which the blocklist is created. Defaults to the provider''s region.'
+            type: '- (Required) Type of the blocklist. Possible values are:'
+        importStatements: []
     scaleway_tem_domain:
         subCategory: Transactional Email
         name: scaleway_tem_domain
@@ -5902,6 +6868,55 @@ resources:
             tags: '- (Optional) The tags to associate with the VPC.'
             updated_at: '- Date and time of VPC''s last update (RFC 3339 format).'
         importStatements: []
+    scaleway_vpc_acl:
+        subCategory: VPC
+        name: scaleway_vpc_acl
+        title: scaleway_vpc_acl
+        examples:
+            - name: acl01
+              manifest: |-
+                {
+                  "default_policy": "drop",
+                  "is_ipv6": false,
+                  "rules": [
+                    {
+                      "action": "accept",
+                      "description": "Allow HTTP traffic from any source",
+                      "destination": "0.0.0.0/0",
+                      "dst_port_high": 80,
+                      "dst_port_low": 80,
+                      "protocol": "TCP",
+                      "source": "0.0.0.0/0",
+                      "src_port_high": 0,
+                      "src_port_low": 0
+                    }
+                  ],
+                  "vpc_id": "${scaleway_vpc.vpc01.id}"
+                }
+              references:
+                vpc_id: scaleway_vpc.vpc01.id
+              dependencies:
+                scaleway_vpc.vpc01: |-
+                    {
+                      "name": "tf-vpc-acl"
+                    }
+        argumentDocs:
+            action: '- (Optional) The policy to apply to the packet.'
+            default_policy: '- (Required) The action to take for packets which do not match any rules.'
+            description: '- (Optional) The rule description.'
+            destination: '- (Optional) The destination IP range to which this rule applies (CIDR notation with subnet mask).'
+            dst_port_high: '- (Optional) The ending port of the destination port range to which this rule applies (inclusive).'
+            dst_port_low: '- (Optional) The starting port of the destination port range to which this rule applies (inclusive).'
+            id: '- The ID of the ACL.'
+            is_ipv6: '- (Optional) Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type.'
+            protocol: '- (Optional) The protocol to which this rule applies. Default value: ANY.'
+            region: '- (Defaults to provider region) The region of the ACL.'
+            rules: '- (Optional) The list of Network ACL rules.'
+            source: '- (Optional) The Source IP range to which this rule applies (CIDR notation with subnet mask).'
+            src_port_high: '- (Optional) The ending port of the source port range to which this rule applies (inclusive).'
+            src_port_low: '- (Optional) The starting port of the source port range to which this rule applies (inclusive).'
+            vpc_id: '- (Required) The VPC ID the ACL belongs to.'
+        importStatements: []
     scaleway_vpc_gateway_network:
         subCategory: VPC
         name: scaleway_vpc_gateway_network
@@ -5988,72 +7003,22 @@ resources:
                       "name": "foobar",
                       "type": "VPC-GW-S"
                     }
-            - name: main
-              manifest: |-
-                {
-                  "cleanup_dhcp": true,
-                  "dhcp_id": "${scaleway_vpc_public_gateway_dhcp.dhcp01.id}",
-                  "enable_masquerade": true,
-                  "gateway_id": "${scaleway_vpc_public_gateway.pg01.id}",
-                  "private_network_id": "${scaleway_vpc_private_network.pn01.id}"
-                }
-              references:
-                dhcp_id: scaleway_vpc_public_gateway_dhcp.dhcp01.id
-                gateway_id: scaleway_vpc_public_gateway.pg01.id
-                private_network_id: scaleway_vpc_private_network.pn01.id
-              dependencies:
-                scaleway_vpc_private_network.pn01: |-
-                    {
-                      "name": "pn_test_network"
-                    }
-                scaleway_vpc_public_gateway.pg01: |-
-                    {
-                      "ip_id": "${scaleway_vpc_public_gateway_ip.gw01.id}",
-                      "name": "foobar",
-                      "type": "VPC-GW-S"
-                    }
-                scaleway_vpc_public_gateway_dhcp.dhcp01: |-
-                    {
-                      "push_default_route": true,
-                      "subnet": "192.168.1.0/24"
-                    }
-                scaleway_vpc_public_gateway_ip.gw01: '{}'
-            - name: main
-              manifest: |-
-                {
-                  "enable_dhcp": false,
-                  "enable_masquerade": true,
-                  "gateway_id": "${scaleway_vpc_public_gateway.pg01.id}",
-                  "private_network_id": "${scaleway_vpc_private_network.pn01.id}",
-                  "static_address": "192.168.1.42/24"
-                }
-              references:
-                gateway_id: scaleway_vpc_public_gateway.pg01.id
-                private_network_id: scaleway_vpc_private_network.pn01.id
-              dependencies:
-                scaleway_vpc_private_network.pn01: |-
-                    {
-                      "name": "pn_test_network"
-                    }
-                scaleway_vpc_public_gateway.pg01: |-
-                    {
-                      "name": "foobar",
-                      "type": "VPC-GW-S"
-                    }
         argumentDocs:
-            cleanup_dhcp: '- (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.'
+            address: '- The private IPv4 address.'
+            cleanup_dhcp: '- (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.'
             created_at: '- The date and time of the creation of the GatewayNetwork.'
-            dhcp_id: '- (Required) The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.'
-            enable_dhcp: '- (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.'
-            enable_masquerade: '- (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork'
+            dhcp_id: '- (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.'
+            enable_dhcp: '- (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.'
+            enable_masquerade: '- (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.'
             gateway_id: '- (Required) The ID of the Public Gateway.'
             id: '- The ID of the GatewayNetwork'
             ipam_config: '- Auto-configure the GatewayNetwork using Scaleway''s IPAM (IP address management service). Only one of dhcp_id, static_address and ipam_config should be specified.'
             ipam_ip_id: '- Use this IPAM-booked IP ID as the Gateway''s IP in this Private Network.'
             mac_address: '- The MAC address of the GatewayNetwork.'
+            private_ip: '- The private IPv4 address associated with the resource.'
             private_network_id: '- (Required) The ID of the Private Network.'
             push_default_route: '- Defines whether to enable the default route on the GatewayNetwork.'
-            static_address: '- Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.'
+            static_address: '- (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.'
             status: '- The status of the Public Gateway''s connection to the Private Network.'
             updated_at: '- The date and time of the last update of the GatewayNetwork.'
             zone: '- (Defaults to provider zone) The zone in which the gateway network should be created.'
@@ -6128,7 +7093,34 @@ resources:
                   ],
                   "type": "VPC-GW-S"
                 }
+            - name: main
+              manifest: |-
+                {
+                  "bastion_enabled": true,
+                  "bastion_port": 61000,
+                  "name": "public_gateway_demo",
+                  "refresh_ssh_keys": "${local.ssh_keys_hash}",
+                  "tags": [
+                    "demo",
+                    "terraform"
+                  ],
+                  "type": "VPC-GW-S"
+                }
+              references:
+                refresh_ssh_keys: local.ssh_keys_hash
+              dependencies:
+                scaleway_iam_ssh_key.key1: |-
+                    {
+                      "name": "key1",
+                      "public_key": "${file(\"~/.ssh/id_rsa.pub\")}"
+                    }
+                scaleway_iam_ssh_key.key2: |-
+                    {
+                      "name": "key2",
+                      "public_key": "${file(\"~/.ssh/another_key.pub\")}"
+                    }
         argumentDocs:
+            allowed_ip_ranges: '- (Optional) Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.'
             bastion_enabled: '- (Optional) Enable SSH bastion on the gateway.'
             bastion_port: '- (Optional) The port on which the SSH bastion will listen.'
             created_at: '- The date and time of the creation of the Public Gateway.'
@@ -6143,7 +7135,7 @@ resources:
             tags: '- (Optional) The tags to associate with the Public Gateway.'
             type: '- (Required) The gateway type.'
             updated_at: '- The date and time of the last update of the Public Gateway.'
-            upstream_dns_servers: '- (Optional) Override the gateway''s default recursive DNS servers, if DNS features are enabled.'
+            upstream_dns_servers: '- (Deprecated) Override the gateway''s default recursive DNS servers, if DNS features are enabled.'
             zone: '- (Defaults to provider zone) The zone in which the Public Gateway should be created.'
         importStatements: []
     scaleway_vpc_public_gateway_dhcp:
@@ -6432,6 +7424,55 @@ resources:
                       "name": "tf-pn-vpn",
                       "vpc_id": "${scaleway_vpc.vpc01.id}"
                     }
+            - name: rt01
+              manifest: |-
+                {
+                  "description": "tf-route-vpn",
+                  "destination": "10.0.0.0/24",
+                  "nexthop_resource_id": "${scaleway_baremetal_server.my_server.private_network.0.mapping_id}",
+                  "tags": [
+                    "tf",
+                    "route"
+                  ],
+                  "vpc_id": "${scaleway_vpc.vpc01.id}"
+                }
+              references:
+                nexthop_resource_id: scaleway_baremetal_server.my_server.private_network.0.mapping_id
+                vpc_id: scaleway_vpc.vpc01.id
+              dependencies:
+                scaleway_baremetal_server.my_server: |-
+                    {
+                      "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
+                      "options": [
+                        {
+                          "id": "${data.scaleway_baremetal_option.private_network.option_id}"
+                        }
+                      ],
+                      "os": "${data.scaleway_baremetal_os.my_os.os_id}",
+                      "private_network": [
+                        {
+                          "id": "${scaleway_vpc_private_network.pn01.id}"
+                        }
+                      ],
+                      "ssh_key_ids": [
+                        "${data.scaleway_iam_ssh_key.my_key.id}"
+                      ],
+                      "zone": "fr-par-2"
+                    }
+                scaleway_vpc.vpc01: |-
+                    {
+                      "name": "tf-vpc-vpn"
+                    }
+                scaleway_vpc_private_network.pn01: |-
+                    {
+                      "ipv4_subnet": [
+                        {
+                          "subnet": "172.16.64.0/22"
+                        }
+                      ],
+                      "name": "tf-pn-vpn",
+                      "vpc_id": "${scaleway_vpc.vpc01.id}"
+                    }
         argumentDocs:
             created_at: '- The date and time of the creation of the route (RFC 3339 format).'
             description: '- (Optional) The route description.'
@@ -6477,7 +7518,7 @@ resources:
             offer_name: '- The name of the active offer.'
             option_ids: '- (Optional) The IDs of the selected options for the hosting.'
             options: '- The active options of the hosting.'
-            organization_id: '- The organization ID the hosting is associated with.'
+            organization_id: '- (Deprecated) The organization ID the hosting is associated with.'
             platform_hostname: '- The hostname of the host platform.'
             platform_number: '- The number of the host platform.'
             project_id: '- (Defaults to provider project_id) The ID of the project the VPC is associated with.'

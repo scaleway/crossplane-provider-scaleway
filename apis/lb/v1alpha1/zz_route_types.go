@@ -42,14 +42,23 @@ type RouteInitParameters struct {
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 
 	// The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Specifies the host of the server to which the request is being sent
 	MatchHostHeader *string `json:"matchHostHeader,omitempty" tf:"match_host_header,omitempty"`
 
+	// The value to match in the URL beginning path from an incoming request.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
+	// Value to match in the URL beginning path from an incoming request
+	MatchPathBegin *string `json:"matchPathBegin,omitempty" tf:"match_path_begin,omitempty"`
+
 	// The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
+
+	// (Default: false) If true, all subdomains will match.
+	// If true, all subdomains will match
+	MatchSubdomains *bool `json:"matchSubdomains,omitempty" tf:"match_subdomains,omitempty"`
 }
 
 type RouteObservation struct {
@@ -70,14 +79,23 @@ type RouteObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Specifies the host of the server to which the request is being sent
 	MatchHostHeader *string `json:"matchHostHeader,omitempty" tf:"match_host_header,omitempty"`
 
+	// The value to match in the URL beginning path from an incoming request.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
+	// Value to match in the URL beginning path from an incoming request
+	MatchPathBegin *string `json:"matchPathBegin,omitempty" tf:"match_path_begin,omitempty"`
+
 	// The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
+
+	// (Default: false) If true, all subdomains will match.
+	// If true, all subdomains will match
+	MatchSubdomains *bool `json:"matchSubdomains,omitempty" tf:"match_subdomains,omitempty"`
 
 	// The date on which the route was last updated.
 	// The date at which the route was last updated (RFC 3339 format)
@@ -115,16 +133,27 @@ type RouteParameters struct {
 	FrontendIDSelector *v1.Selector `json:"frontendIdSelector,omitempty" tf:"-"`
 
 	// The HTTP host header to match. Value to match in the HTTP Host request header from an incoming connection.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Specifies the host of the server to which the request is being sent
 	// +kubebuilder:validation:Optional
 	MatchHostHeader *string `json:"matchHostHeader,omitempty" tf:"match_host_header,omitempty"`
 
+	// The value to match in the URL beginning path from an incoming request.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
+	// Value to match in the URL beginning path from an incoming request
+	// +kubebuilder:validation:Optional
+	MatchPathBegin *string `json:"matchPathBegin,omitempty" tf:"match_path_begin,omitempty"`
+
 	// The Server Name Indication (SNI) value to match. Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer.
-	// Only one of match_sni and match_host_header should be specified.
+	// Only one of match_sni, match_host_header and match_path_begin should be specified.
 	// Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
 	// +kubebuilder:validation:Optional
 	MatchSni *string `json:"matchSni,omitempty" tf:"match_sni,omitempty"`
+
+	// (Default: false) If true, all subdomains will match.
+	// If true, all subdomains will match
+	// +kubebuilder:validation:Optional
+	MatchSubdomains *bool `json:"matchSubdomains,omitempty" tf:"match_subdomains,omitempty"`
 }
 
 // RouteSpec defines the desired state of Route

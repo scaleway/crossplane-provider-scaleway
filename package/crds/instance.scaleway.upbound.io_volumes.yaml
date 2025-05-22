@@ -77,6 +77,10 @@ spec:
                       If set, the new volume will be created from this snapshot. Only one of size_in_gb and from_snapshot_id should be specified.
                       Create a volume based on a image
                     type: string
+                  migrateToSbs:
+                    description: If true, consider that this volume may have been
+                      migrated and no longer exists.
+                    type: boolean
                   name:
                     description: |-
                       The name of the volume. If not provided it will be randomly generated.
@@ -128,6 +132,10 @@ spec:
                       If set, the new volume will be created from this snapshot. Only one of size_in_gb and from_snapshot_id should be specified.
                       Create a volume based on a image
                     type: string
+                  migrateToSbs:
+                    description: If true, consider that this volume may have been
+                      migrated and no longer exists.
+                    type: boolean
                   name:
                     description: |-
                       The name of the volume. If not provided it will be randomly generated.
@@ -346,6 +354,10 @@ spec:
                   id:
                     description: The ID of the volume.
                     type: string
+                  migrateToSbs:
+                    description: If true, consider that this volume may have been
+                      migrated and no longer exists.
+                    type: boolean
                   name:
                     description: |-
                       The name of the volume. If not provided it will be randomly generated.

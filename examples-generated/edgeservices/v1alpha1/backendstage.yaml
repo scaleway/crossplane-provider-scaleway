@@ -1,0 +1,46 @@
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: BackendStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/backendstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    s3BackendConfig:
+    - bucketName: some-unique-name
+      bucketRegion: fr-par
+
+---
+
+apiVersion: edgeservices.scaleway.upbound.io/v1alpha1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/backendstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-pipeline
+
+---
+
+apiVersion: object.scaleway.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/backendstage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-bucket-name
+    tags:
+      foo: bar

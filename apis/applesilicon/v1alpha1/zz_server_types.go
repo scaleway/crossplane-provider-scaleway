@@ -13,11 +13,67 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateNetworkInitParameters struct {
+
+	// The ID of the server.
+	// The private network ID
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to attach to the server
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
+}
+
+type PrivateNetworkObservation struct {
+
+	// The date and time of the creation of the Apple Silicon server.
+	// The date and time of the creation of the private network
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// The ID of the server.
+	// The private network ID
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to attach to the server
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
+
+	// The private network status
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The date and time of the last update of the Apple Silicon server.
+	// The date and time of the last update of the private network
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// The VLAN ID associated to the private network
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+}
+
+type PrivateNetworkParameters struct {
+
+	// The ID of the server.
+	// The private network ID
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// List of IPAM IP IDs to attach to the server
+	// +kubebuilder:validation:Optional
+	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
+}
+
 type ServerInitParameters struct {
+
+	// The commitment period of the server
+	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
+
+	// : Enables the VPC option when set to true.
+	// Whether or not to enable VPC access
+	EnableVPC *bool `json:"enableVpc,omitempty" tf:"enable_vpc,omitempty"`
 
 	// The name of the server.
 	// Name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The private networks to attach to the server
+	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.
@@ -38,12 +94,19 @@ type ServerInitParameters struct {
 
 type ServerObservation struct {
 
+	// The commitment period of the server
+	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
+
 	// The date and time of the creation of the Apple Silicon server.
 	// The date and time of the creation of the server
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// The minimal date and time on which you can delete this server due to Apple licence
 	DeletableAt *string `json:"deletableAt,omitempty" tf:"deletable_at,omitempty"`
+
+	// : Enables the VPC option when set to true.
+	// Whether or not to enable VPC access
+	EnableVPC *bool `json:"enableVpc,omitempty" tf:"enable_vpc,omitempty"`
 
 	// The ID of the server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -59,6 +122,9 @@ type ServerObservation struct {
 	// The organization ID the server is associated with.
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The private networks to attach to the server
+	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.
@@ -79,6 +145,14 @@ type ServerObservation struct {
 	// The date and time of the last update of the server
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
+	// The name of the server.
+	// The username of the server
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The current status of the VPC option.
+	// The VPC status of the server
+	VPCStatus *string `json:"vpcStatus,omitempty" tf:"vpc_status,omitempty"`
+
 	// URL of the VNC.
 	// VNC url use to connect remotely to the desktop GUI
 	VncURL *string `json:"vncUrl,omitempty" tf:"vnc_url,omitempty"`
@@ -91,10 +165,23 @@ type ServerObservation struct {
 
 type ServerParameters struct {
 
+	// The commitment period of the server
+	// +kubebuilder:validation:Optional
+	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
+
+	// : Enables the VPC option when set to true.
+	// Whether or not to enable VPC access
+	// +kubebuilder:validation:Optional
+	EnableVPC *bool `json:"enableVpc,omitempty" tf:"enable_vpc,omitempty"`
+
 	// The name of the server.
 	// Name of the server
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The private networks to attach to the server
+	// +kubebuilder:validation:Optional
+	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.

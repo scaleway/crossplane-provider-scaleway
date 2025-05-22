@@ -25,4 +25,7 @@ func (tr *Privilege) Hub() {}
 func (tr *ReadReplica) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Snapshot) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}

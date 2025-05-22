@@ -4,12 +4,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: baremetal/v1alpha1/server
   labels:
-    testing.upbound.io/example-name: base
-  name: base
+    testing.upbound.io/example-name: my_server
+  name: my-server
 spec:
   forProvider:
-    offer: GP-BM1-S
+    offer: ${data.scaleway_baremetal_offer.my_offer.offer_id}
     os: d17d6872-0412-45d9-a198-af82c34d3c5c
     sshKeyIdsRefs:
-    - name: scaleway_account_ssh_key
+    - name: scaleway_iam_ssh_key
     zone: fr-par-2

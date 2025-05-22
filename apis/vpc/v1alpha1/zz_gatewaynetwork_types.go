@@ -15,11 +15,11 @@ import (
 
 type GatewayNetworkInitParameters struct {
 
-	// (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
 	// Remove DHCP config on this network on destroy
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
-	// The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayDHCP
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
@@ -32,11 +32,11 @@ type GatewayNetworkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
-	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
 	// Enable masquerade on this network
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
 
@@ -70,7 +70,7 @@ type GatewayNetworkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
@@ -81,7 +81,7 @@ type GatewayNetworkInitParameters struct {
 
 type GatewayNetworkObservation struct {
 
-	// (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
 	// Remove DHCP config on this network on destroy
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
@@ -89,15 +89,15 @@ type GatewayNetworkObservation struct {
 	// The date and time of the creation of the gateway network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
 	DHCPID *string `json:"dhcpId,omitempty" tf:"dhcp_id,omitempty"`
 
-	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
-	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
 	// Enable masquerade on this network
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
 
@@ -116,11 +116,15 @@ type GatewayNetworkObservation struct {
 	// The mac address on this network
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource.
+	PrivateIP []PrivateIPObservation `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// The ID of the Private Network.
 	// The ID of the private network where connect to
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
@@ -139,12 +143,12 @@ type GatewayNetworkObservation struct {
 
 type GatewayNetworkParameters struct {
 
-	// (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
 	// Remove DHCP config on this network on destroy
 	// +kubebuilder:validation:Optional
 	CleanupDHCP *bool `json:"cleanupDhcp,omitempty" tf:"cleanup_dhcp,omitempty"`
 
-	// The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The ID of the public gateway DHCP config
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PublicGatewayDHCP
 	// +kubebuilder:validation:Optional
@@ -158,12 +162,12 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCPIDSelector *v1.Selector `json:"dhcpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+	// (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
 	// Enable DHCP config on this network
 	// +kubebuilder:validation:Optional
 	EnableDHCP *bool `json:"enableDhcp,omitempty" tf:"enable_dhcp,omitempty"`
 
-	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+	// (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
 	// Enable masquerade on this network
 	// +kubebuilder:validation:Optional
 	EnableMasquerade *bool `json:"enableMasquerade,omitempty" tf:"enable_masquerade,omitempty"`
@@ -201,7 +205,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
@@ -245,6 +249,21 @@ type IpamConfigParameters struct {
 	// Defines whether the default route is enabled on that Gateway Network
 	// +kubebuilder:validation:Optional
 	PushDefaultRoute *bool `json:"pushDefaultRoute,omitempty" tf:"push_default_route,omitempty"`
+}
+
+type PrivateIPInitParameters struct {
+}
+
+type PrivateIPObservation struct {
+
+	// The private IPv4 address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the GatewayNetwork
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIPParameters struct {
 }
 
 // GatewayNetworkSpec defines the desired state of GatewayNetwork

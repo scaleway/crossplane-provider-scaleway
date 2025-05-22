@@ -10,4 +10,7 @@ package v1alpha1
 func (tr *Record) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Registration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Zone) Hub() {}

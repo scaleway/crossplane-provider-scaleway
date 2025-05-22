@@ -87,7 +87,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the server.
+                      The ID of the IP address resource.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -100,7 +100,7 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      (Defaults to false) Determines if IPv6 is enabled for the server.
                       Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
@@ -305,6 +305,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
@@ -356,11 +361,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  routedIpEnabled:
-                    description: |-
-                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true
-                    type: boolean
                   securityGroupId:
                     description: |-
                       The security group the server is attached to.
@@ -506,7 +506,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the server.
+                      The ID of the IP address resource.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -519,7 +519,7 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      (Defaults to false) Determines if IPv6 is enabled for the server.
                       Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
@@ -724,6 +724,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
@@ -775,11 +780,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  routedIpEnabled:
-                    description: |-
-                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true
-                    type: boolean
                   securityGroupId:
                     description: |-
                       The security group the server is attached to.
@@ -1089,7 +1089,7 @@ spec:
                     type: string
                   bootscriptId:
                     description: |-
-                      The ID of the server.
+                      The ID of the IP address resource.
                       ID of the target bootscript (set boot_type to bootscript)
                     type: string
                   cloudInit:
@@ -1102,12 +1102,12 @@ spec:
                     type: boolean
                   enableIpv6:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server. Useful only with routed_ip_enabled as false, otherwise ipv6 is always supported.
+                      (Defaults to false) Determines if IPv6 is enabled for the server.
                       Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
                       Determines if IPv6 is enabled for the server
                     type: boolean
                   id:
-                    description: The ID of the server.
+                    description: The ID of the IP address resource.
                     type: string
                   image:
                     description: |-
@@ -1161,7 +1161,7 @@ spec:
                     type: string
                   placementGroupPolicyRespected:
                     description: |-
-                      True when the placement group policy is respected.
+                      (Deprecated) Always false, use instance_placement_group ressource to known when the placement group policy is respected.
                       True when the placement group policy is respected
                     type: boolean
                   privateIp:
@@ -1169,6 +1169,20 @@ spec:
                       The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
                       The Scaleway internal IP address of the server
                     type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The ID of the IP address resource.
+                          type: string
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private network associated with the server.
@@ -1188,7 +1202,7 @@ spec:
                           type: string
                         pnicId:
                           description: |-
-                            The ID of the server.
+                            The ID of the IP address resource.
                             The ID of the NIC
                           type: string
                         status:
@@ -1208,6 +1222,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   publicIp:
                     description: |-
                       The public IP address of the server (Deprecated use public_ips instead).
@@ -1221,12 +1240,12 @@ spec:
                       properties:
                         address:
                           description: |-
-                            The address of the IP
+                            The private IP address.
                             IP Address
                           type: string
                         id:
                           description: |-
-                            The ID of the server.
+                            The ID of the IP address resource.
                             ID of the IP
                           type: string
                       type: object
@@ -1280,11 +1299,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  routedIpEnabled:
-                    description: |-
-                      (Defaults to true) If true, the server will support routed ips only. Changing it to true will migrate the server and its IP to routed type.
-                      If server supports routed IPs, default to true
-                    type: boolean
                   securityGroupId:
                     description: |-
                       The security group the server is attached to.

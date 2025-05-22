@@ -8,7 +8,7 @@ metadata:
   name: main
 spec:
   forProvider:
-    args: ${jsonencode({test = "scw"})}
+    args: ${jsonencode({ test = "scw" })}
     functionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main

@@ -86,7 +86,7 @@ spec:
                     type: array
                   type:
                     description: |-
-                      (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+                      The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
                       The type of instance IP
                     type: string
                   zone:
@@ -122,7 +122,7 @@ spec:
                     type: array
                   type:
                     description: |-
-                      (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+                      The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
                       The type of instance IP
                     type: string
                   zone:
@@ -345,7 +345,7 @@ spec:
                     type: array
                   type:
                     description: |-
-                      (Defaults to nat) The type of the IP (nat, routed_ipv4, routed_ipv6), more information in the documentation
+                      The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation
                       The type of instance IP
                     type: string
                   zone:

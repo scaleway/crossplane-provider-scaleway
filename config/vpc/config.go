@@ -92,4 +92,24 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_vpc_public_gateway",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_vpc_route", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Route"
+
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "scaleway_vpc",
+		}
+	})
+
+	p.AddResourceConfigurator("scaleway_vpc_acl", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Acl"
+
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "scaleway_vpc",
+		}
+	})
 }

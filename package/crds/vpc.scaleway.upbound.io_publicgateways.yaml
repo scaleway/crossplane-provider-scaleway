@@ -72,6 +72,14 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowedIpRanges:
+                    description: |-
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   bastionEnabled:
                     description: |-
                       Enable SSH bastion on the gateway.
@@ -168,6 +176,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  moveToIpam:
+                    description: Put a Public Gateway in IPAM mode, so that it can
+                      be used with the Public Gateways API v2
+                    type: boolean
                   name:
                     description: |-
                       The name for the Public Gateway. If not provided it will be randomly generated.
@@ -195,13 +207,6 @@ spec:
                       The gateway type.
                       gateway type
                     type: string
-                  upstreamDnsServers:
-                    description: |-
-                      Override the gateway's default recursive DNS servers, if DNS features are enabled.
-                      override the gateway's default recursive DNS servers, if DNS features are enabled
-                    items:
-                      type: string
-                    type: array
                   zone:
                     description: |-
                       (Defaults to provider zone) The zone in which the Public Gateway should be created.
@@ -221,6 +226,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  allowedIpRanges:
+                    description: |-
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   bastionEnabled:
                     description: |-
                       Enable SSH bastion on the gateway.
@@ -317,6 +330,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  moveToIpam:
+                    description: Put a Public Gateway in IPAM mode, so that it can
+                      be used with the Public Gateways API v2
+                    type: boolean
                   name:
                     description: |-
                       The name for the Public Gateway. If not provided it will be randomly generated.
@@ -344,13 +361,6 @@ spec:
                       The gateway type.
                       gateway type
                     type: string
-                  upstreamDnsServers:
-                    description: |-
-                      Override the gateway's default recursive DNS servers, if DNS features are enabled.
-                      override the gateway's default recursive DNS servers, if DNS features are enabled
-                    items:
-                      type: string
-                    type: array
                   zone:
                     description: |-
                       (Defaults to provider zone) The zone in which the Public Gateway should be created.
@@ -534,6 +544,17 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowedIpRanges:
+                    description: |-
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
+                      Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  bandwidth:
+                    description: The bandwidth available of the gateway
+                    type: number
                   bastionEnabled:
                     description: |-
                       Enable SSH bastion on the gateway.
@@ -562,6 +583,10 @@ spec:
                       Attach an existing flexible IP to the gateway.
                       attach an existing IP to the gateway
                     type: string
+                  moveToIpam:
+                    description: Put a Public Gateway in IPAM mode, so that it can
+                      be used with the Public Gateways API v2
+                    type: boolean
                   name:
                     description: |-
                       The name for the Public Gateway. If not provided it will be randomly generated.
@@ -606,7 +631,7 @@ spec:
                     type: string
                   upstreamDnsServers:
                     description: |-
-                      Override the gateway's default recursive DNS servers, if DNS features are enabled.
+                      (Deprecated) Override the gateway's default recursive DNS servers, if DNS features are enabled.
                       override the gateway's default recursive DNS servers, if DNS features are enabled
                     items:
                       type: string

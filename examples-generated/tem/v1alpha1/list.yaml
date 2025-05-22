@@ -1,0 +1,17 @@
+apiVersion: tem.scaleway.upbound.io/v1alpha1
+kind: List
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tem/v1alpha1/list
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    email: spam@example.com
+    reason: Spam detected
+    region: fr-par
+    type: mailbox_full

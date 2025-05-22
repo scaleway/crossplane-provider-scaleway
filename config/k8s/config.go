@@ -25,4 +25,14 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_k8s_cluster",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_k8s_acl", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Acl"
+
+		r.References["cluster_id"] = config.Reference{
+			TerraformName: "scaleway_k8s_cluster",
+		}
+	})
 }

@@ -1,0 +1,84 @@
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SNSTopicSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopicsubscription
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    accessKeySecretRef:
+      key: attribute.access_key
+      name: example-mnq-sns-credentials
+      namespace: upbound-system
+    endpoint: http://example.com
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    protocol: http
+    secretKeySecretRef:
+      key: attribute.secret_key
+      name: example-mnq-sns-credentials
+      namespace: upbound-system
+    topicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topic
+
+---
+
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SNS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopicsubscription
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SNSCredentials
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopicsubscription
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    permissions:
+    - canManage: true
+      canPublish: true
+      canReceive: true
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SNSTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopicsubscription
+  labels:
+    testing.upbound.io/example-name: topic
+  name: topic
+spec:
+  forProvider:
+    accessKeySecretRef:
+      key: attribute.access_key
+      name: example-mnq-sns-credentials
+      namespace: upbound-system
+    name: my-topic
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    secretKeySecretRef:
+      key: attribute.secret_key
+      name: example-mnq-sns-credentials
+      namespace: upbound-system

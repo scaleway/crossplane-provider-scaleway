@@ -52,6 +52,11 @@ func (in *SQLDatabaseInitParameters) DeepCopyInto(out *SQLDatabaseInitParameters
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -129,6 +134,11 @@ func (in *SQLDatabaseObservation) DeepCopyInto(out *SQLDatabaseObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -162,6 +172,11 @@ func (in *SQLDatabaseParameters) DeepCopyInto(out *SQLDatabaseParameters) {
 	if in.MinCPU != nil {
 		in, out := &in.MinCPU, &out.MinCPU
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
 		**out = **in
 	}
 	if in.ProjectID != nil {

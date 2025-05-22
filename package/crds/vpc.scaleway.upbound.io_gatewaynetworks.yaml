@@ -74,12 +74,12 @@ spec:
                 properties:
                   cleanupDhcp:
                     description: |-
-                      (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
                       Remove DHCP config on this network on destroy
                     type: boolean
                   dhcpId:
                     description: |-
-                      The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The ID of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
@@ -160,12 +160,12 @@ spec:
                     type: object
                   enableDhcp:
                     description: |-
-                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
                     description: |-
-                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
                       Enable masquerade on this network
                     type: boolean
                   gatewayId:
@@ -348,7 +348,7 @@ spec:
                     type: object
                   staticAddress:
                     description: |-
-                      Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   zone:
@@ -372,12 +372,12 @@ spec:
                 properties:
                   cleanupDhcp:
                     description: |-
-                      (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
                       Remove DHCP config on this network on destroy
                     type: boolean
                   dhcpId:
                     description: |-
-                      The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The ID of the public gateway DHCP config
                     type: string
                   dhcpIdRef:
@@ -458,12 +458,12 @@ spec:
                     type: object
                   enableDhcp:
                     description: |-
-                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
                     description: |-
-                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
                       Enable masquerade on this network
                     type: boolean
                   gatewayId:
@@ -646,7 +646,7 @@ spec:
                     type: object
                   staticAddress:
                     description: |-
-                      Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   zone:
@@ -829,7 +829,7 @@ spec:
                 properties:
                   cleanupDhcp:
                     description: |-
-                      (Defaults to false) Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether to remove DHCP configuration on this GatewayNetwork upon destroy. Requires DHCP ID.
                       Remove DHCP config on this network on destroy
                     type: boolean
                   createdAt:
@@ -839,17 +839,17 @@ spec:
                     type: string
                   dhcpId:
                     description: |-
-                      The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. The ID of the Public Gateway DHCP configuration. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The ID of the public gateway DHCP config
                     type: string
                   enableDhcp:
                     description: |-
-                      (Defaults to true) Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
+                      (Deprecated) Please use ipam_config. Whether a DHCP configuration should be enabled on this GatewayNetwork. Requires a DHCP ID.
                       Enable DHCP config on this network
                     type: boolean
                   enableMasquerade:
                     description: |-
-                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork
+                      (Defaults to true) Whether masquerade (dynamic NAT) should be enabled on this GatewayNetwork.
                       Enable masquerade on this network
                     type: boolean
                   gatewayId:
@@ -883,6 +883,20 @@ spec:
                       The MAC address of the GatewayNetwork.
                       The mac address on this network
                     type: string
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the resource.
+                      The private IPv4 address associated with the resource.
+                    items:
+                      properties:
+                        address:
+                          description: The private IPv4 address.
+                          type: string
+                        id:
+                          description: The ID of the GatewayNetwork
+                          type: string
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the Private Network.
@@ -890,7 +904,7 @@ spec:
                     type: string
                   staticAddress:
                     description: |-
-                      Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   status:

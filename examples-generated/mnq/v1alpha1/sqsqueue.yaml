@@ -1,0 +1,59 @@
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SQSQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/sqsqueue
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    accessKeySecretRef:
+      key: attribute.access_key
+      name: example-mnq-sqs-credentials
+      namespace: upbound-system
+    name: my-queue
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    secretKeySecretRef:
+      key: attribute.secret_key
+      name: example-mnq-sqs-credentials
+      namespace: upbound-system
+    sqsEndpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SQS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/sqsqueue
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: SQSCredentials
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/sqsqueue
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: sqs-credentials
+    permissions:
+    - canManage: true
+      canPublish: false
+      canReceive: false
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

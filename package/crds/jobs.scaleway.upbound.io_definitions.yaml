@@ -125,6 +125,34 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  secretReference:
+                    description: |-
+                      A reference to a secret stored in Secret Manager.
+                      A reference to a Secret Manager secret.
+                    items:
+                      properties:
+                        environment:
+                          description: |-
+                            An environment variable containing the secret value. Must be specified if file is not specified.
+                            An environment variable containing the secret value.
+                          type: string
+                        file:
+                          description: |-
+                            The absolute file path where the secret will be mounted. Must be specified if environment is not specified.
+                            The absolute file path where the secret will be mounted.
+                          type: string
+                        secretId:
+                          description: |-
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition. You could reference the same secret multiple times in the same job definition.
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
+                          type: string
+                        secretVersion:
+                          description: |-
+                            (Default: latest) The secret version.
+                            The secret version.
+                          type: string
+                      type: object
+                    type: array
                   timeout:
                     description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
                     type: string
@@ -195,6 +223,34 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  secretReference:
+                    description: |-
+                      A reference to a secret stored in Secret Manager.
+                      A reference to a Secret Manager secret.
+                    items:
+                      properties:
+                        environment:
+                          description: |-
+                            An environment variable containing the secret value. Must be specified if file is not specified.
+                            An environment variable containing the secret value.
+                          type: string
+                        file:
+                          description: |-
+                            The absolute file path where the secret will be mounted. Must be specified if environment is not specified.
+                            The absolute file path where the secret will be mounted.
+                          type: string
+                        secretId:
+                          description: |-
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition. You could reference the same secret multiple times in the same job definition.
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
+                          type: string
+                        secretVersion:
+                          description: |-
+                            (Default: latest) The secret version.
+                            The secret version.
+                          type: string
+                      type: object
+                    type: array
                   timeout:
                     description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
                     type: string
@@ -436,6 +492,39 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  secretReference:
+                    description: |-
+                      A reference to a secret stored in Secret Manager.
+                      A reference to a Secret Manager secret.
+                    items:
+                      properties:
+                        environment:
+                          description: |-
+                            An environment variable containing the secret value. Must be specified if file is not specified.
+                            An environment variable containing the secret value.
+                          type: string
+                        file:
+                          description: |-
+                            The absolute file path where the secret will be mounted. Must be specified if environment is not specified.
+                            The absolute file path where the secret will be mounted.
+                          type: string
+                        secretId:
+                          description: |-
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition. You could reference the same secret multiple times in the same job definition.
+                            The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
+                          type: string
+                        secretReferenceId:
+                          description: |-
+                            The secret reference UUID that is automatically generated by the provider.
+                            The secret reference UUID
+                          type: string
+                        secretVersion:
+                          description: |-
+                            (Default: latest) The secret version.
+                            The secret version.
+                          type: string
+                      type: object
+                    type: array
                   timeout:
                     description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
                     type: string

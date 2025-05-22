@@ -11,21 +11,21 @@ spec:
     args: |-
       ${jsonencode(
           {
-              address   = {
-                  city    = "Paris"
-                  country = "FR"
-              }
-              age       = 23
-              firstName = "John"
-              isAlive   = true
-              lastName  = "Smith"
-              # minScale: 1
-              # memoryLimit: 256
-              # maxScale: 2
-              # timeout: 20000
-              # Local environment variables - used only in given function
+            address = {
+              city    = "Paris"
+              country = "FR"
+            }
+            age       = 23
+            firstName = "John"
+            isAlive   = true
+            lastName  = "Smith"
+            # minScale: 1
+            # memoryLimit: 256
+            # maxScale: 2
+            # timeout: 20000
+            # Local environment variables - used only in given function
           }
-          )}
+        )}
     containerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main

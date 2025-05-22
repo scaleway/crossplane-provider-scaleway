@@ -72,11 +72,35 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  commitment:
+                    description: The commitment period of the server
+                    type: string
+                  enableVpc:
+                    description: |-
+                      : Enables the VPC option when set to true.
+                      Whether or not to enable VPC access
+                    type: boolean
                   name:
                     description: |-
                       The name of the server.
                       Name of the server
                     type: string
+                  privateNetwork:
+                    description: The private networks to attach to the server
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The ID of the server.
+                            The private network ID
+                          type: string
+                        ipamIpIds:
+                          description: List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
@@ -110,11 +134,35 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  commitment:
+                    description: The commitment period of the server
+                    type: string
+                  enableVpc:
+                    description: |-
+                      : Enables the VPC option when set to true.
+                      Whether or not to enable VPC access
+                    type: boolean
                   name:
                     description: |-
                       The name of the server.
                       Name of the server
                     type: string
+                  privateNetwork:
+                    description: The private networks to attach to the server
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The ID of the server.
+                            The private network ID
+                          type: string
+                        ipamIpIds:
+                          description: List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
@@ -312,6 +360,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  commitment:
+                    description: The commitment period of the server
+                    type: string
                   createdAt:
                     description: |-
                       The date and time of the creation of the Apple Silicon server.
@@ -321,6 +372,11 @@ spec:
                     description: The minimal date and time on which you can delete
                       this server due to Apple licence
                     type: string
+                  enableVpc:
+                    description: |-
+                      : Enables the VPC option when set to true.
+                      Whether or not to enable VPC access
+                    type: boolean
                   id:
                     description: The ID of the server.
                     type: string
@@ -339,6 +395,38 @@ spec:
                       The organization ID the server is associated with.
                       The organization_id you want to attach the resource to
                     type: string
+                  privateNetwork:
+                    description: The private networks to attach to the server
+                    items:
+                      properties:
+                        createdAt:
+                          description: |-
+                            The date and time of the creation of the Apple Silicon server.
+                            The date and time of the creation of the private network
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the server.
+                            The private network ID
+                          type: string
+                        ipamIpIds:
+                          description: List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                        status:
+                          description: The private network status
+                          type: string
+                        updatedAt:
+                          description: |-
+                            The date and time of the last update of the Apple Silicon server.
+                            The date and time of the last update of the private network
+                          type: string
+                        vlan:
+                          description: The VLAN ID associated to the private network
+                          type: number
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
@@ -362,10 +450,20 @@ spec:
                       The date and time of the last update of the Apple Silicon server.
                       The date and time of the last update of the server
                     type: string
+                  username:
+                    description: |-
+                      The name of the server.
+                      The username of the server
+                    type: string
                   vncUrl:
                     description: |-
                       URL of the VNC.
                       VNC url use to connect remotely to the desktop GUI
+                    type: string
+                  vpcStatus:
+                    description: |-
+                      The current status of the VPC option.
+                      The VPC status of the server
                     type: string
                   zone:
                     description: |-

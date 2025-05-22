@@ -1,0 +1,11 @@
+apiVersion: mnq.scaleway.upbound.io/v1alpha1
+kind: NATSAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/natsaccount
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: nats-account

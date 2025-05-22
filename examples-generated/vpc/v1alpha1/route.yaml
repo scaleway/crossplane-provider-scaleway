@@ -1,0 +1,87 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: rt01
+  name: rt01
+spec:
+  forProvider:
+    description: tf-route-vpn
+    destination: 10.0.0.0/24
+    nexthopResourceId: ${scaleway_instance_private_nic.pnic01.id}
+    tags:
+    - tf
+    - route
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: PrivateNIC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: pnic01
+  name: pnic01
+spec:
+  forProvider:
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: server01
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: server01
+  name: server01
+spec:
+  forProvider:
+    image: openvpn
+    name: tf-server-vpn
+    type: PLAY2-MICRO
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+spec:
+  forProvider:
+    name: tf-vpc-vpn
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+spec:
+  forProvider:
+    ipv4Subnet:
+    - subnet: 172.16.64.0/22
+    name: tf-pn-vpn
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01

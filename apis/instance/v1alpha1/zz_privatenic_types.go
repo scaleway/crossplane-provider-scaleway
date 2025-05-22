@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateIpsInitParameters struct {
+}
+
+type PrivateIpsObservation struct {
+
+	// The private IP address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the private NIC.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIpsParameters struct {
+}
+
 type PrivateNICInitParameters struct {
 
 	// IPAM ip list, should be for internal use only
@@ -81,6 +96,10 @@ type PrivateNICObservation struct {
 	// The MAC address of the private NIC.
 	// MAC address of the NIC
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The ID of the private network attached to.
 	// The private network ID

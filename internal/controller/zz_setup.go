@@ -26,7 +26,17 @@ import (
 	domain "github.com/scaleway/crossplane-provider-scaleway/internal/controller/container/domain"
 	tokencontainer "github.com/scaleway/crossplane-provider-scaleway/internal/controller/container/token"
 	record "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/record"
+	registration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/registration"
 	zone "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/zone"
+	backendstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/backendstage"
+	cachestage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/cachestage"
+	dnsstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/dnsstage"
+	headstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/headstage"
+	pipeline "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/pipeline"
+	plan "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/plan"
+	routestage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/routestage"
+	tlsstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/tlsstage"
+	wafstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/wafstage"
 	ip "github.com/scaleway/crossplane-provider-scaleway/internal/controller/flexibleip/ip"
 	cronfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/function/cron"
 	domainfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/function/domain"
@@ -39,6 +49,8 @@ import (
 	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/policy"
 	sshkeyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/sshkey"
 	user "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/user"
+	deployment "github.com/scaleway/crossplane-provider-scaleway/internal/controller/inference/deployment"
+	model "github.com/scaleway/crossplane-provider-scaleway/internal/controller/inference/model"
 	image "github.com/scaleway/crossplane-provider-scaleway/internal/controller/instance/image"
 	ipinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/instance/ip"
 	placementgroup "github.com/scaleway/crossplane-provider-scaleway/internal/controller/instance/placementgroup"
@@ -56,6 +68,7 @@ import (
 	ipipam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/ipam/ip"
 	ipreversedns "github.com/scaleway/crossplane-provider-scaleway/internal/controller/ipam/ipreversedns"
 	definition "github.com/scaleway/crossplane-provider-scaleway/internal/controller/jobs/definition"
+	acl "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/acl"
 	cluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/cluster"
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/pool"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/backend"
@@ -64,7 +77,18 @@ import (
 	iplb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/ip"
 	lb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/lb"
 	routelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/route"
-	acl "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/acl"
+	natsaccount "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/natsaccount"
+	natscredentials "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/natscredentials"
+	sns "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/sns"
+	snscredentials "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/snscredentials"
+	snstopic "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/snstopic"
+	snstopicsubscription "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/snstopicsubscription"
+	sqs "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/sqs"
+	sqscredentials "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/sqscredentials"
+	sqsqueue "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/sqsqueue"
+	instance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mongodb/instance"
+	snapshotmongodb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mongodb/snapshot"
+	aclobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/acl"
 	bucket "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/bucket"
 	lockconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/lockconfiguration"
 	object "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/object"
@@ -74,20 +98,27 @@ import (
 	aclrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/acl"
 	database "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/database"
 	databasebackup "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/databasebackup"
-	instance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/instance"
+	instancerdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/instance"
 	privilege "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/privilege"
 	readreplica "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/readreplica"
+	snapshotrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/snapshot"
 	userrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/user"
 	clusterredis "github.com/scaleway/crossplane-provider-scaleway/internal/controller/redis/cluster"
 	registrynamespace "github.com/scaleway/crossplane-provider-scaleway/internal/controller/registry/registrynamespace"
 	sqldatabase "github.com/scaleway/crossplane-provider-scaleway/internal/controller/sdb/sqldatabase"
+	secret "github.com/scaleway/crossplane-provider-scaleway/internal/controller/secrets/secret"
+	version "github.com/scaleway/crossplane-provider-scaleway/internal/controller/secrets/version"
 	domaintem "github.com/scaleway/crossplane-provider-scaleway/internal/controller/tem/domain"
+	list "github.com/scaleway/crossplane-provider-scaleway/internal/controller/tem/list"
+	webhook "github.com/scaleway/crossplane-provider-scaleway/internal/controller/tem/webhook"
+	aclvpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/acl"
 	gatewaynetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/gatewaynetwork"
 	privatenetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/privatenetwork"
 	publicgateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgateway"
 	publicgatewaydhcp "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgatewaydhcp"
 	publicgatewayip "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgatewayip"
 	publicgatewaypatrule "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgatewaypatrule"
+	routevpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/route"
 	vpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/vpc"
 )
 
@@ -112,7 +143,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domain.Setup,
 		tokencontainer.Setup,
 		record.Setup,
+		registration.Setup,
 		zone.Setup,
+		backendstage.Setup,
+		cachestage.Setup,
+		dnsstage.Setup,
+		headstage.Setup,
+		pipeline.Setup,
+		plan.Setup,
+		routestage.Setup,
+		tlsstage.Setup,
+		wafstage.Setup,
 		ip.Setup,
 		cronfunction.Setup,
 		domainfunction.Setup,
@@ -125,6 +166,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		sshkeyiam.Setup,
 		user.Setup,
+		deployment.Setup,
+		model.Setup,
 		image.Setup,
 		ipinstance.Setup,
 		placementgroup.Setup,
@@ -142,6 +185,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		ipipam.Setup,
 		ipreversedns.Setup,
 		definition.Setup,
+		acl.Setup,
 		cluster.Setup,
 		pool.Setup,
 		backend.Setup,
@@ -150,7 +194,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iplb.Setup,
 		lb.Setup,
 		routelb.Setup,
-		acl.Setup,
+		natsaccount.Setup,
+		natscredentials.Setup,
+		sns.Setup,
+		snscredentials.Setup,
+		snstopic.Setup,
+		snstopicsubscription.Setup,
+		sqs.Setup,
+		sqscredentials.Setup,
+		sqsqueue.Setup,
+		instance.Setup,
+		snapshotmongodb.Setup,
+		aclobject.Setup,
 		bucket.Setup,
 		lockconfiguration.Setup,
 		object.Setup,
@@ -160,20 +215,27 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		aclrdb.Setup,
 		database.Setup,
 		databasebackup.Setup,
-		instance.Setup,
+		instancerdb.Setup,
 		privilege.Setup,
 		readreplica.Setup,
+		snapshotrdb.Setup,
 		userrdb.Setup,
 		clusterredis.Setup,
 		registrynamespace.Setup,
 		sqldatabase.Setup,
+		secret.Setup,
+		version.Setup,
 		domaintem.Setup,
+		list.Setup,
+		webhook.Setup,
+		aclvpc.Setup,
 		gatewaynetwork.Setup,
 		privatenetwork.Setup,
 		publicgateway.Setup,
 		publicgatewaydhcp.Setup,
 		publicgatewayip.Setup,
 		publicgatewaypatrule.Setup,
+		routevpc.Setup,
 		vpc.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
