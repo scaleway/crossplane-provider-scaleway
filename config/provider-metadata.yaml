@@ -102,6 +102,7 @@ resources:
                 }
               references:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
+                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
             - name: base
               manifest: |-
                 {
@@ -124,6 +125,7 @@ resources:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
                 options.id: data.scaleway_baremetal_option.remote_access.option_id
                 os: data.scaleway_baremetal_os.my_os.os_id
+                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
             - name: my_server
               manifest: |-
                 {
@@ -149,6 +151,7 @@ resources:
                 options.id: data.scaleway_baremetal_option.private_network.option_id
                 os: data.scaleway_baremetal_os.my_os.os_id
                 private_network.id: scaleway_vpc_private_network.pn.id
+                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
               dependencies:
                 scaleway_vpc_private_network.pn: |-
                     {
@@ -183,6 +186,8 @@ resources:
                 options.id: data.scaleway_baremetal_option.private_network.option_id
                 os: data.scaleway_baremetal_os.my_os.os_id
                 private_network.id: scaleway_vpc_private_network.pn01.id
+                private_network.ipam_ip_ids: scaleway_ipam_ip.ip01.id
+                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
               dependencies:
                 scaleway_ipam_ip.ip01: |-
                     {
@@ -238,6 +243,7 @@ resources:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
                 os: data.scaleway_baremetal_os.my_os.os_id
                 partitioning: var.configCustomPartitioning
+                ssh_key_ids: scaleway_iam_ssh_key.my_ssh_key.id
               dependencies:
                 scaleway_iam_ssh_key.my_ssh_key: |-
                     {
@@ -1806,6 +1812,7 @@ resources:
                 }
               references:
                 flexible_ip_id: scaleway_flexible_ip.ip01.id
+                flexible_ip_ids_to_duplicate: scaleway_flexible_ip.ip02.id
               dependencies:
                 scaleway_baremetal_server.base: |-
                     {
@@ -2235,6 +2242,8 @@ resources:
                   "name": "iam_group_with_app",
                   "user_ids": []
                 }
+              references:
+                application_ids: scaleway_iam_application.app.id
               dependencies:
                 scaleway_iam_application.app: '{}'
             - name: with_users
@@ -2323,6 +2332,7 @@ resources:
                 }
               references:
                 application_id: scaleway_iam_application.app.id
+                rule.project_ids: data.scaleway_account_project.default.id
               dependencies:
                 scaleway_iam_application.app: |-
                     {
@@ -2369,6 +2379,7 @@ resources:
                 }
               references:
                 group_id: scaleway_iam_group.with_users.id
+                rule.project_ids: data.scaleway_account_project.project.id
               dependencies:
                 scaleway_iam_group.with_users: |-
                     {
@@ -2613,6 +2624,7 @@ resources:
                   "root_volume_id": "${scaleway_instance_snapshot.server_snapshot.id}"
                 }
               references:
+                additional_volumes: scaleway_instance_snapshot.volume_snapshot.id
                 root_volume_id: scaleway_instance_snapshot.server_snapshot.id
               dependencies:
                 scaleway_instance_server.server: |-
@@ -2777,6 +2789,7 @@ resources:
                   "server_id": "${scaleway_instance_server.server01.id}"
                 }
               references:
+                ipam_ip_ids: scaleway_ipam_ip.ip01.id
                 private_network_id: scaleway_vpc_private_network.pn01.id
                 server_id: scaleway_instance_server.server01.id
               dependencies:
@@ -3060,6 +3073,8 @@ resources:
                   ],
                   "type": "DEV1-S"
                 }
+              references:
+                additional_volume_ids: scaleway_block_volume.data.id
               dependencies:
                 scaleway_block_volume.data: |-
                     {
@@ -4366,6 +4381,7 @@ resources:
                   "zone": "${scaleway_lb_ip.main.zone}"
                 }
               references:
+                ip_ids: scaleway_lb_ip.main.id
                 zone: scaleway_lb_ip.main.zone
               dependencies:
                 scaleway_lb_ip.main: |-
@@ -4389,6 +4405,8 @@ resources:
                   "name": "ipv6-lb",
                   "type": "LB-S"
                 }
+              references:
+                ip_ids: scaleway_lb_ip.v4.id
               dependencies:
                 scaleway_lb_ip.v4: '{}'
                 scaleway_lb_ip.v6: |-
@@ -4413,6 +4431,8 @@ resources:
                   "type": "LB-S"
                 }
               references:
+                ip_ids: scaleway_lb_ip.v4.id
+                private_network.ipam_ids: scaleway_ipam_ip.ip01.id
                 private_network.private_network_id: scaleway_vpc_private_network.pn01.id
               dependencies:
                 scaleway_ipam_ip.ip01: |-
@@ -4680,6 +4700,7 @@ resources:
                 }
               references:
                 backend_id: scaleway_lb_backend.bkd01.id
+                certificate_ids: scaleway_lb_certificate.cert01.id
                 lb_id: scaleway_lb.lb01.id
               dependencies:
                 scaleway_lb.lb01: |-

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: servers.baremetal.scaleway.upbound.io
 spec:
   group: baremetal.scaleway.upbound.io
@@ -207,7 +207,6 @@ spec:
                     description: |-
                       List of SSH keys allowed to connect to the server.
                       Array of SSH key IDs allowed to SSH to the server
-
 
                       **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
                       If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
@@ -458,7 +457,6 @@ spec:
                     description: |-
                       List of SSH keys allowed to connect to the server.
                       Array of SSH key IDs allowed to SSH to the server
-
 
                       **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
                       If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
@@ -970,7 +968,6 @@ spec:
                     description: |-
                       List of SSH keys allowed to connect to the server.
                       Array of SSH key IDs allowed to SSH to the server
-
 
                       **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
                       If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.

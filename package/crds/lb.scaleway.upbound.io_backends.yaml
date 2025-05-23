@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: backends.lb.scaleway.upbound.io
 spec:
   group: lb.scaleway.upbound.io
@@ -78,7 +78,6 @@ spec:
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
-
 
                       **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
                       E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
@@ -378,7 +377,6 @@ spec:
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
-
 
                       **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
                       E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
@@ -846,7 +844,6 @@ spec:
                       ~> Note: Only the host part of the Scaleway S3 bucket website is expected:
                       e.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
                       Scaleway S3 bucket website to be served in case all backend servers are down
-
 
                       **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
                       E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
