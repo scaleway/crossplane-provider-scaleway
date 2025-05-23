@@ -3,7 +3,7 @@ module github.com/scaleway/crossplane-provider-scaleway
 go 1.24.1
 
 require (
-	dario.cat/mergo v1.0.1
+	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime v1.20.0-rc.0.0.20250509113121-26da25aff65f
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
