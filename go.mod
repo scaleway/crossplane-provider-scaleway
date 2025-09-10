@@ -11,7 +11,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	golang.org/x/text v0.29.0
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/apimachinery v0.34.0
+	k8s.io/apimachinery v0.34.1
 	k8s.io/client-go v0.34.0
 	sigs.k8s.io/controller-runtime v0.21.0
 	sigs.k8s.io/controller-tools v0.18.0
