@@ -5,7 +5,7 @@ on:
     types: [created]
 
 env:
-  GO_VERSION: "1.23.6"
+  GO_VERSION: "1.25"
 
 jobs:
   check-permissions:
