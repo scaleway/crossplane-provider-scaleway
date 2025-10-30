@@ -122,6 +122,7 @@ $ kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl 
 | `organization_id` | The [organization ID](https://console.scaleway.com/organization/settings) that will be used as default value for organization-scoped resources.                  |
 | `region`          | The [region](https://developers.scaleway.com/en/quickstart/#region-and-zone)  that will be used as default value for all resources. (`fr-par` if none specified) |
 | `zone`            | The [zone](https://developers.scaleway.com/en/quickstart/#region-and-zone) that will be used as default value for all resources. (`fr-par-1` if none specified)  |
+| `api_url`         | The URL of the API                                                                                                                                               |
 
 ### Create a ProviderConfig
 
@@ -154,6 +155,23 @@ The `spec.secretRef` describes the parameters of the secret to use.
 * `name` is the name of the Kubernetes `secret` object.
 * `key` is the `Data` field from `kubectl describe secret`.
 
+### SCW config support
+
+This provider can read the standard SCW config file (`~/.config/scw/config.yaml`) and environment variables. Precedence is:
+
+1. ProviderConfig credentials
+2. Environment variables (`SCW_*`)
+3. SCW config file
+
+You can control behavior in `ProviderConfig.spec.scw`:
+
+```yaml
+spec:
+  scw:
+    useScwConfig: true
+    # path: /home/me/.config/scw/config.yaml
+    # profile: myProfile
+```
 ### Create a managed resource
 
 1. Create a managed resource to see if the provider is properly functioning.
