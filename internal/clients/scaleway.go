@@ -126,12 +126,22 @@ func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profil
 		return nil, nil
 	}
 
-	var (
-		cfg *scw.Config
-		err error
-	)
+	cfg, err := loadScwConfigFile(pc)
+	if err != nil {
+		return nil, err
+	}
+	if cfg == nil {
+		return nil, nil
+	}
 
-	if pc.Spec.Scw != nil && pc.Spec.Scw.Path != nil && *pc.Spec.Scw.Path != "" {
+	return selectScwProfile(pc, cfg)
+}
+
+func loadScwConfigFile(pc *v1beta1.ProviderConfig) (*scw.Config, error) {
+	var cfg *scw.Config
+	var err error
+
+	if hasScwPath(pc) {
 		cfg, err = scw.LoadConfigFromPath(*pc.Spec.Scw.Path)
 	} else {
 		cfg, err = scw.LoadConfig()
@@ -141,11 +151,16 @@ func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profil
 	if err != nil && !errors.As(err, &notFound) {
 		return nil, errors.Wrap(err, errLoadSCWConfig)
 	}
+
+	return cfg, nil
+}
+
+func selectScwProfile(pc *v1beta1.ProviderConfig, cfg *scw.Config) (*scw.Profile, error) {
 	if cfg == nil {
 		return nil, nil
 	}
 
-	if pc.Spec.Scw != nil && pc.Spec.Scw.Profile != nil && *pc.Spec.Scw.Profile != "" {
+	if hasScwProfile(pc) {
 		prof, err := cfg.GetProfile(*pc.Spec.Scw.Profile)
 		if err != nil {
 			return nil, errors.Wrap(err, errGetSCWProfile)
@@ -158,6 +173,14 @@ func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profil
 		return nil, errors.Wrap(err, errGetSCWProfile)
 	}
 	return prof, nil
+}
+
+func hasScwPath(pc *v1beta1.ProviderConfig) bool {
+	return pc.Spec.Scw != nil && pc.Spec.Scw.Path != nil && *pc.Spec.Scw.Path != ""
+}
+
+func hasScwProfile(pc *v1beta1.ProviderConfig) bool {
+	return pc.Spec.Scw != nil && pc.Spec.Scw.Profile != nil && *pc.Spec.Scw.Profile != ""
 }
 
 func shouldUseScwConfig(pc *v1beta1.ProviderConfig) bool {
