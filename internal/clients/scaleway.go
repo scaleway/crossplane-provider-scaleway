@@ -42,88 +42,6 @@ const (
 	keyInsecure       = "insecure"
 )
 
-func mapProfileToConfig(cfg map[string]any, p *scw.Profile) {
-	if p == nil {
-		return
-	}
-
-	if p.AccessKey != nil && *p.AccessKey != "" {
-		cfg[keyAccessKey] = *p.AccessKey
-	}
-	if p.SecretKey != nil && *p.SecretKey != "" {
-		cfg[keySecretKey] = *p.SecretKey
-	}
-	if p.DefaultProjectID != nil && *p.DefaultProjectID != "" {
-		cfg[keyProjectID] = *p.DefaultProjectID
-	}
-	if p.DefaultOrganizationID != nil && *p.DefaultOrganizationID != "" {
-		cfg[keyOrganizationID] = *p.DefaultOrganizationID
-	}
-	if p.DefaultRegion != nil && *p.DefaultRegion != "" {
-		cfg[keyRegion] = *p.DefaultRegion
-	}
-	if p.DefaultZone != nil && *p.DefaultZone != "" {
-		cfg[keyZone] = *p.DefaultZone
-	}
-	if p.APIURL != nil && *p.APIURL != "" {
-		cfg[keyAPIURL] = *p.APIURL
-	}
-	if p.Insecure != nil {
-		cfg[keyInsecure] = *p.Insecure
-	}
-}
-
-// overlayCredentials overlays non-empty Secret values over existing config
-func overlayCredentials(cfg map[string]any, vals map[string]string) {
-	for _, k := range []string{
-		keyAccessKey, keySecretKey, keyProjectID, keyOrganizationID,
-		keyRegion, keyZone, keyAPIURL, keyInsecure,
-	} {
-		if v, ok := vals[k]; ok && v != "" {
-			cfg[k] = v
-		}
-	}
-}
-
-// loadSCWProfile loads and merges Scaleway config + Env
-func loadSCWProfile(pc *v1beta1.ProviderConfig) (*scw.Profile, error) {
-	useFile := true
-	if pc.Spec.Scw != nil && pc.Spec.Scw.UseScwConfig != nil {
-		useFile = *pc.Spec.Scw.UseScwConfig
-	}
-
-	var fileProf *scw.Profile
-	var err error
-
-	if useFile {
-		var cfg *scw.Config
-		if pc.Spec.Scw != nil && pc.Spec.Scw.Path != nil && *pc.Spec.Scw.Path != "" {
-			cfg, err = scw.LoadConfigFromPath(*pc.Spec.Scw.Path)
-		} else {
-			cfg, err = scw.LoadConfig()
-		}
-
-		var notFound *scw.ConfigFileNotFoundError
-		if err != nil && !errors.As(err, &notFound) {
-			return nil, errors.Wrap(err, errLoadSCWConfig)
-		}
-
-		if cfg != nil {
-			if pc.Spec.Scw != nil && pc.Spec.Scw.Profile != nil && *pc.Spec.Scw.Profile != "" {
-				fileProf, err = cfg.GetProfile(*pc.Spec.Scw.Profile)
-			} else {
-				fileProf, err = cfg.GetActiveProfile()
-			}
-			if err != nil && !errors.As(err, &notFound) {
-				return nil, errors.Wrap(err, errGetSCWProfile)
-			}
-		}
-	}
-
-	envProf := scw.LoadEnvProfile()
-	return scw.MergeProfiles(fileProf, envProf), nil
-}
-
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
 func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) terraform.SetupFn {
@@ -152,11 +70,11 @@ func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) te
 		}
 
 		// Load Scaleway config file + Env (Env > File)
-		profile, err := loadSCWProfile(pc)
+		profile, err := resolveScwProfile(pc)
 		if err != nil {
 			return ps, err
 		}
-		mapProfileToConfig(ps.Configuration, profile)
+		fillConfigFromProfile(ps.Configuration, profile)
 
 		// Overlay Secret (if any). Secret > Env > File
 		data, err := resource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
@@ -176,5 +94,100 @@ func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) te
 		}
 
 		return ps, nil
+	}
+}
+
+// overlayCredentials overlays non-empty Secret values over existing config
+func overlayCredentials(cfg map[string]any, vals map[string]string) {
+	for _, k := range []string{
+		keyAccessKey, keySecretKey, keyProjectID, keyOrganizationID,
+		keyRegion, keyZone, keyAPIURL, keyInsecure,
+	} {
+		if v, ok := vals[k]; ok && v != "" {
+			cfg[k] = v
+		}
+	}
+}
+
+func resolveScwProfile(pc *v1beta1.ProviderConfig) (*scw.Profile, error) {
+	useFile := shouldUseScwConfig(pc)
+
+	fileProf, err := readScwConfigProfile(pc, useFile)
+	if err != nil {
+		return nil, err
+	}
+
+	envProf := scw.LoadEnvProfile()
+	return scw.MergeProfiles(fileProf, envProf), nil
+}
+
+func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profile, error) {
+	if !useFile {
+		return nil, nil
+	}
+
+	var (
+		cfg *scw.Config
+		err error
+	)
+
+	if pc.Spec.Scw != nil && pc.Spec.Scw.Path != nil && *pc.Spec.Scw.Path != "" {
+		cfg, err = scw.LoadConfigFromPath(*pc.Spec.Scw.Path)
+	} else {
+		cfg, err = scw.LoadConfig()
+	}
+
+	var notFound *scw.ConfigFileNotFoundError
+	if err != nil && !errors.As(err, &notFound) {
+		return nil, errors.Wrap(err, errLoadSCWConfig)
+	}
+	if cfg == nil {
+		return nil, nil
+	}
+
+	if pc.Spec.Scw != nil && pc.Spec.Scw.Profile != nil && *pc.Spec.Scw.Profile != "" {
+		prof, err := cfg.GetProfile(*pc.Spec.Scw.Profile)
+		if err != nil {
+			return nil, errors.Wrap(err, errGetSCWProfile)
+		}
+		return prof, nil
+	}
+
+	prof, err := cfg.GetActiveProfile()
+	if err != nil {
+		return nil, errors.Wrap(err, errGetSCWProfile)
+	}
+	return prof, nil
+}
+
+func shouldUseScwConfig(pc *v1beta1.ProviderConfig) bool {
+	if pc.Spec.Scw != nil && pc.Spec.Scw.UseScwConfig != nil {
+		return *pc.Spec.Scw.UseScwConfig
+	}
+	return true
+}
+
+// fillConfigFromProfile copies non-empty profile fields into cfg
+func fillConfigFromProfile(cfg map[string]any, p *scw.Profile) {
+	if cfg == nil || p == nil {
+		return
+	}
+
+	assign := func(key string, val *string) {
+		if val != nil && *val != "" {
+			cfg[key] = *val
+		}
+	}
+
+	assign(keyAccessKey, p.AccessKey)
+	assign(keySecretKey, p.SecretKey)
+	assign(keyProjectID, p.DefaultProjectID)
+	assign(keyOrganizationID, p.DefaultOrganizationID)
+	assign(keyRegion, p.DefaultRegion)
+	assign(keyZone, p.DefaultZone)
+	assign(keyAPIURL, p.APIURL)
+
+	if p.Insecure != nil {
+		cfg[keyInsecure] = *p.Insecure
 	}
 }
