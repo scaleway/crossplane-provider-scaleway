@@ -45,7 +45,19 @@ UXP 1.9.0-up.3 installed
 
 ### Install the provider
 
-1. Install the provider into the Kubernetes cluster with a Kubernetes
+1. If it does not already exist, run the following command to create a `crossplane-system` namespace:
+
+```shell
+kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl apply -f -
+```
+
+2. Install Crossplane CRDs into the Kubernetes cluster
+
+```shell
+helm install crossplane --namespace crossplane-system crossplane-stable/crossplane
+```
+
+3. Install the provider into the Kubernetes cluster with a Kubernetes
 configuration file.
 
 ```yaml
@@ -55,11 +67,11 @@ kind: Provider
 metadata:
   name: provider-scaleway
 spec:
-  package: xpkg.upbound.io/scaleway/provider-scaleway:v0.1.0
+  package: xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0
 EOF
 ```
 
-2. Run `kubectl get providers` to verify the installed provider. The `INSTALLED` value should return as `True`. 
+3. Run `kubectl get providers` to verify the installed provider. The `INSTALLED` value should return as `True`. 
 
 _Note:_  The procedure may take up to 5 minutes for `HEALTHY` to report true.
 
@@ -68,7 +80,7 @@ You should get an output similar to the following one, providing details about t
 ```shell
 $ kubectl get provider
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
-provider-scaleway   True        True   xpkg.upbound.io/scaleway/provider-scaleway:v0.1.0        11s
+provider-scaleway   True        True   xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0        11s
 ```
 
 If there are any issue during the process of downloading and installing the provider, the `INSTALLED` field will return as empty. In that case, run `kubectl describe providers` to get more information.
@@ -76,7 +88,7 @@ If there are any issue during the process of downloading and installing the prov
 ```shell
 $ kubectl get providers
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
-provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.1.0      76s
+provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0      76s
 ```
 
 ### Create a Kubernetes secret resource for Scaleway
@@ -104,12 +116,6 @@ stringData:
       "region": "fr-par",
       "zone": "fr-par-1"
     }
-```
-
-2. If it does not already exist, run the following command to create a `crossplane-system` namespace:
-
-```shell
-$ kubectl create namespace crossplane-system --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 #### Configuration reference
