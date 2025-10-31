@@ -1,5 +1,4 @@
 //go:build generate
-// +build generate
 
 /*
 Copyright 2021 Upbound Inc.
