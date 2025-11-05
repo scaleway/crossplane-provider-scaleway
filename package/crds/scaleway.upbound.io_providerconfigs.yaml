@@ -52,7 +52,9 @@ spec:
             description: A ProviderConfigSpec defines the desired state of a ProviderConfig.
             properties:
               credentials:
-                description: Credentials required to authenticate to this provider.
+                description: |-
+                  Credentials required to authenticate to this provider.
+                  You may set source: None to rely on env/file config.
                 properties:
                   env:
                     description: |-
@@ -106,6 +108,26 @@ spec:
                     type: string
                 required:
                 - source
+                type: object
+              scw:
+                description: |-
+                  Scw controls how the Scaleway shared config is discovered and selected.
+                  Optional; if omitted, file discovery is enabled by default and the SDK
+                  will use its active profile (env can still override).
+                properties:
+                  path:
+                    description: Path to a specific config file. If unset, SDK discovery
+                      is used.
+                    type: string
+                  profile:
+                    description: |-
+                      Profile name to select from the config file. If unset, SDK active profile is used.
+                      Note: SCW_* environment variables still override file values.
+                    type: string
+                  useScwConfig:
+                    description: UseScwConfig toggles loading of the SCW config file.
+                      Defaults to true if nil.
+                    type: boolean
                 type: object
             required:
             - credentials
