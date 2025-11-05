@@ -13,7 +13,13 @@ import (
 // A ProviderConfigSpec defines the desired state of a ProviderConfig.
 type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
+	// You may set source: None to rely on env/file config.
 	Credentials ProviderCredentials `json:"credentials"`
+
+	// Scw controls how the Scaleway shared config is discovered and selected.
+	// Optional; if omitted, file discovery is enabled by default and the SDK
+	// will use its active profile (env can still override).
+	Scw *ScwConfig `json:"scw,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
@@ -23,6 +29,18 @@ type ProviderCredentials struct {
 	Source xpv1.CredentialsSource `json:"source"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
+}
+
+type ScwConfig struct {
+	// UseScwConfig toggles loading of the SCW config file. Defaults to true if nil.
+	UseScwConfig *bool `json:"useScwConfig,omitempty"`
+
+	// Path to a specific config file. If unset, SDK discovery is used.
+	Path *string `json:"path,omitempty"`
+
+	// Profile name to select from the config file. If unset, SDK active profile is used.
+	// Note: SCW_* environment variables still override file values.
+	Profile *string `json:"profile,omitempty"`
 }
 
 // A ProviderConfigStatus reflects the observed state of a ProviderConfig.
