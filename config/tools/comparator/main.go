@@ -3,6 +3,7 @@ package main
 import (
 	_ "embed"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
 	"regexp"
@@ -32,28 +33,52 @@ type ProviderMetadata struct {
 }
 
 func main() {
-	currentProviderMetadata := os.Getenv("CURRENT_METADATA")
-	newProviderMetadata := os.Getenv("NEW_METADATA")
+	var currentFile, newFile string
+	flag.StringVar(&currentFile, "current", "", "Path to current provider-metadata.yaml file")
+	flag.StringVar(&newFile, "new", "", "Path to new provider-metadata.yaml file")
+	flag.Parse()
 
-	currentResources, err := parseProviderMetadata(currentProviderMetadata)
+	currentData, err := os.ReadFile(currentFile)
 	if err != nil {
-		fmt.Printf("Error parsing current provider metadata: %v\n", err)
-		return
+		fmt.Printf("Error reading current metadata file: %v\n", err)
+		os.Exit(1)
 	}
 
-	newResources, err := parseProviderMetadata(newProviderMetadata)
+	newData, err := os.ReadFile(newFile)
+	if err != nil {
+		fmt.Printf("Error reading new metadata file: %v\n", err)
+		os.Exit(1)
+	}
+
+	currentResources, err := parseProviderMetadata(string(currentData))
+	if err != nil {
+		fmt.Printf("Error parsing current provider metadata: %v\n", err)
+		os.Exit(1)
+	}
+
+	newResources, err := parseProviderMetadata(string(newData))
 	if err != nil {
 		fmt.Printf("Error parsing new provider metadata: %v\n", err)
-		return
+		os.Exit(1)
 	}
 
 	addedResources := findNewResources(currentResources, newResources)
+	resourceConfigs := buildResourceConfigs(addedResources)
+
+	jsonData, err := json.Marshal(resourceConfigs)
+	if err != nil {
+		fmt.Printf("Error marshaling resource configuration: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(string(jsonData))
+}
+
+func buildResourceConfigs(addedResources []*registry.Resource) []tools.ResourceConfig {
 	fmt.Println("New resources found:")
 	resourceConfigs := make([]tools.ResourceConfig, 0, len(addedResources))
 
 	for _, resource := range addedResources {
 		references := make(map[string]string)
-
 		for _, example := range resource.Examples {
 			for refKey, refValue := range example.References {
 				resourceType := strings.Split(refValue, ".")[0]
@@ -62,7 +87,6 @@ func main() {
 		}
 
 		raw := generatePackageName(resource.SubCategory)
-
 		pkg, ok := groupAliases[raw]
 		if !ok {
 			pkg = raw
@@ -80,12 +104,7 @@ func main() {
 		fmt.Println(resource.Name)
 	}
 
-	jsonData, err := json.Marshal(resourceConfigs)
-	if err != nil {
-		fmt.Printf("Error marshaling resource configuration: %v\n", err)
-		return
-	}
-	fmt.Println(string(jsonData))
+	return resourceConfigs
 }
 
 func parseProviderMetadata(metadata string) (map[string]*registry.Resource, error) {
