@@ -55,8 +55,6 @@ echo "🔄 Regenerating provider metadata…"
 make generate
 
 echo "🔍 Diffing metadata for new resources…"
-export CURRENT_METADATA="$(< config/provider-metadata.old.yaml)"
-export NEW_METADATA="$(< config/provider-metadata.yaml)"
 # run comparator and capture its JSON output
 raw=$(
   go run ./config/tools/comparator/main.go \
