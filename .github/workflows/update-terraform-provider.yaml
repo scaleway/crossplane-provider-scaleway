@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   update:
@@ -49,5 +50,5 @@ jobs:
           body: |
             - Bumped `TERRAFORM_PROVIDER_VERSION` to **v${{ env.new_version }}**
             - Re-ran `make generate` and auto-generated new Crossplane resource configs
-
           labels: automated, dependencies
+          delete-branch: true
