@@ -184,10 +184,6 @@ type RecordInitParameters struct {
 	// Return record based on client localisation
 	HTTPService []HTTPServiceInitParameters `json:"httpService,omitempty" tf:"http_service,omitempty"`
 
-	// When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-	// When destroy a resource record, if a zone have only NS, delete the zone
-	KeepEmptyZone *bool `json:"keepEmptyZone,omitempty" tf:"keep_empty_zone,omitempty"`
-
 	// The name of the record (can be an empty string for a root record).
 	// The name of the record
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -241,10 +237,6 @@ type RecordObservation struct {
 
 	// The ID of the record.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-	// When destroy a resource record, if a zone have only NS, delete the zone
-	KeepEmptyZone *bool `json:"keepEmptyZone,omitempty" tf:"keep_empty_zone,omitempty"`
 
 	// The name of the record (can be an empty string for a root record).
 	// The name of the record
@@ -308,11 +300,6 @@ type RecordParameters struct {
 	// Return record based on client localisation
 	// +kubebuilder:validation:Optional
 	HTTPService []HTTPServiceParameters `json:"httpService,omitempty" tf:"http_service,omitempty"`
-
-	// When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-	// When destroy a resource record, if a zone have only NS, delete the zone
-	// +kubebuilder:validation:Optional
-	KeepEmptyZone *bool `json:"keepEmptyZone,omitempty" tf:"keep_empty_zone,omitempty"`
 
 	// The name of the record (can be an empty string for a root record).
 	// The name of the record

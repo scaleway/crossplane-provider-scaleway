@@ -135,6 +135,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DKIMName != nil {
+		in, out := &in.DKIMName, &out.DKIMName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DmarcConfig != nil {
 		in, out := &in.DmarcConfig, &out.DmarcConfig
 		*out = new(string)
@@ -162,6 +167,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.MxBlackhole != nil {
 		in, out := &in.MxBlackhole, &out.MxBlackhole
+		*out = new(string)
+		**out = **in
+	}
+	if in.MxConfig != nil {
+		in, out := &in.MxConfig, &out.MxConfig
 		*out = new(string)
 		**out = **in
 	}
@@ -234,6 +244,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.SpfConfig != nil {
 		in, out := &in.SpfConfig, &out.SpfConfig
+		*out = new(string)
+		**out = **in
+	}
+	if in.SpfValue != nil {
+		in, out := &in.SpfValue, &out.SpfValue
 		*out = new(string)
 		**out = **in
 	}

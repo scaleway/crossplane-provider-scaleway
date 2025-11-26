@@ -245,6 +245,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  podCidr:
+                    description: |-
+                      The subnet used for the Pod CIDR.
+                      The subnet used for the Pod CIDR.
+                    type: string
                   privateNetworkId:
                     description: |-
                       The ID of the private network of the cluster.
@@ -335,6 +340,16 @@ spec:
                     description: |-
                       (Defaults to provider region) The region in which the cluster should be created.
                       The region you want to attach the resource to
+                    type: string
+                  serviceCidr:
+                    description: |-
+                      The subnet used for the Service CIDR.
+                      The subnet used for the Service CIDR.
+                    type: string
+                  serviceDnsIp:
+                    description: |-
+                      The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+                      The IP used for the DNS Service.
                     type: string
                   tags:
                     description: |-
@@ -540,6 +555,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  podCidr:
+                    description: |-
+                      The subnet used for the Pod CIDR.
+                      The subnet used for the Pod CIDR.
+                    type: string
                   privateNetworkId:
                     description: |-
                       The ID of the private network of the cluster.
@@ -630,6 +650,16 @@ spec:
                     description: |-
                       (Defaults to provider region) The region in which the cluster should be created.
                       The region you want to attach the resource to
+                    type: string
+                  serviceCidr:
+                    description: |-
+                      The subnet used for the Service CIDR.
+                      The subnet used for the Service CIDR.
+                    type: string
+                  serviceDnsIp:
+                    description: |-
+                      The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+                      The IP used for the DNS Service.
                     type: string
                   tags:
                     description: |-
@@ -1029,6 +1059,11 @@ spec:
                       The organization ID the cluster is associated with.
                       The organization_id you want to attach the resource to
                     type: string
+                  podCidr:
+                    description: |-
+                      The subnet used for the Pod CIDR.
+                      The subnet used for the Pod CIDR.
+                    type: string
                   privateNetworkId:
                     description: |-
                       The ID of the private network of the cluster.
@@ -1043,6 +1078,16 @@ spec:
                     description: |-
                       (Defaults to provider region) The region in which the cluster should be created.
                       The region you want to attach the resource to
+                    type: string
+                  serviceCidr:
+                    description: |-
+                      The subnet used for the Service CIDR.
+                      The subnet used for the Service CIDR.
+                    type: string
+                  serviceDnsIp:
+                    description: |-
+                      The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+                      The IP used for the DNS Service.
                     type: string
                   status:
                     description: |-

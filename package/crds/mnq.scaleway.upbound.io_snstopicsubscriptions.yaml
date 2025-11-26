@@ -215,12 +215,14 @@ spec:
                       SNS endpoint
                     type: string
                   topicArn:
-                    description: The ARN of the topic. Either topic_id or topic_arn
-                      is required.
+                    description: |-
+                      The ARN of the topic. Either topic_id or topic_arn is required.
+                      ARN of the topic
                     type: string
                   topicId:
-                    description: The ID of the topic. Either topic_id or topic_arn
-                      is required. Conflicts with topic_arn.
+                    description: |-
+                      The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+                      ID of the topic
                     type: string
                   topicIdRef:
                     description: Reference to a SNSTopic in mnq to populate topicId.
@@ -452,12 +454,14 @@ spec:
                       SNS endpoint
                     type: string
                   topicArn:
-                    description: The ARN of the topic. Either topic_id or topic_arn
-                      is required.
+                    description: |-
+                      The ARN of the topic. Either topic_id or topic_arn is required.
+                      ARN of the topic
                     type: string
                   topicId:
-                    description: The ID of the topic. Either topic_id or topic_arn
-                      is required. Conflicts with topic_arn.
+                    description: |-
+                      The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+                      ID of the topic
                     type: string
                   topicIdRef:
                     description: Reference to a SNSTopic in mnq to populate topicId.
@@ -759,12 +763,14 @@ spec:
                       SNS endpoint
                     type: string
                   topicArn:
-                    description: The ARN of the topic. Either topic_id or topic_arn
-                      is required.
+                    description: |-
+                      The ARN of the topic. Either topic_id or topic_arn is required.
+                      ARN of the topic
                     type: string
                   topicId:
-                    description: The ID of the topic. Either topic_id or topic_arn
-                      is required. Conflicts with topic_arn.
+                    description: |-
+                      The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+                      ID of the topic
                     type: string
                 type: object
               conditions:

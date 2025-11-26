@@ -21,7 +21,7 @@ func (mg *User) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this User
 func (tr *User) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this User

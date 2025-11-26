@@ -94,4 +94,22 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_lb_backend",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_lb_private_network", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "PrivateNetwork"
+
+		r.References["ipam_ip_ids"] = config.Reference{
+			TerraformName: "scaleway_ipam_ip",
+		}
+
+		r.References["lb_id"] = config.Reference{
+			TerraformName: "scaleway_lb",
+		}
+
+		r.References["private_network_id"] = config.Reference{
+			TerraformName: "scaleway_vpc_private_network",
+		}
+	})
 }

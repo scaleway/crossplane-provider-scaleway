@@ -79,7 +79,7 @@ spec:
                     type: string
                   customResource:
                     description: |-
-                      The IP resource.
+                      The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
                       The custom resource in which to book the IP
                     items:
                       properties:
@@ -237,7 +237,7 @@ spec:
                     type: string
                   customResource:
                     description: |-
-                      The IP resource.
+                      The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
                       The custom resource in which to book the IP
                     items:
                       properties:
@@ -564,7 +564,7 @@ spec:
                     type: string
                   customResource:
                     description: |-
-                      The IP resource.
+                      The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
                       The custom resource in which to book the IP
                     items:
                       properties:

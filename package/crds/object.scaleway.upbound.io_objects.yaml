@@ -85,6 +85,11 @@ spec:
                       The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
                       Content of the file to upload, should be base64 encoded
                     type: string
+                  contentType:
+                    description: |-
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+                    type: string
                   file:
                     description: |-
                       The name of the file to upload, defaults to an empty file.
@@ -181,6 +186,11 @@ spec:
                     description: |-
                       The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
                       Content of the file to upload, should be base64 encoded
+                    type: string
+                  contentType:
+                    description: |-
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
                     type: string
                   file:
                     description: |-
@@ -446,6 +456,11 @@ spec:
                     description: |-
                       The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
                       Content of the file to upload, should be base64 encoded
+                    type: string
+                  contentType:
+                    description: |-
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+                      The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
                     type: string
                   file:
                     description: |-

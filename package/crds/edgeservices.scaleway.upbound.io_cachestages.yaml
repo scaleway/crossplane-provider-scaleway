@@ -158,6 +158,11 @@ spec:
                       The Time To Live (TTL) in seconds. Defines how long content is cached.
                       The Time To Live (TTL) in seconds. Defines how long content is cached
                     type: number
+                  includeCookies:
+                    description: |-
+                      Defines whether responses to requests with cookies must be stored in the cache.
+                      Defines whether responses to requests with cookies must be stored in the cache
+                    type: boolean
                   pipelineId:
                     description: |-
                       The ID of the pipeline.
@@ -245,8 +250,9 @@ spec:
                       The project_id you want to attach the resource to
                     type: string
                   purgeRequests:
-                    description: The Scaleway Object Storage origin bucket (S3) linked
-                      to the backend stage.
+                    description: |-
+                      The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+                      Set of purge requests
                     items:
                       properties:
                         all:
@@ -383,6 +389,11 @@ spec:
                       The Time To Live (TTL) in seconds. Defines how long content is cached.
                       The Time To Live (TTL) in seconds. Defines how long content is cached
                     type: number
+                  includeCookies:
+                    description: |-
+                      Defines whether responses to requests with cookies must be stored in the cache.
+                      Defines whether responses to requests with cookies must be stored in the cache
+                    type: boolean
                   pipelineId:
                     description: |-
                       The ID of the pipeline.
@@ -470,8 +481,9 @@ spec:
                       The project_id you want to attach the resource to
                     type: string
                   purgeRequests:
-                    description: The Scaleway Object Storage origin bucket (S3) linked
-                      to the backend stage.
+                    description: |-
+                      The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+                      Set of purge requests
                     items:
                       properties:
                         all:
@@ -699,6 +711,11 @@ spec:
                   id:
                     description: The ID of the cache stage (UUID format).
                     type: string
+                  includeCookies:
+                    description: |-
+                      Defines whether responses to requests with cookies must be stored in the cache.
+                      Defines whether responses to requests with cookies must be stored in the cache
+                    type: boolean
                   pipelineId:
                     description: |-
                       The ID of the pipeline.
@@ -710,8 +727,9 @@ spec:
                       The project_id you want to attach the resource to
                     type: string
                   purgeRequests:
-                    description: The Scaleway Object Storage origin bucket (S3) linked
-                      to the backend stage.
+                    description: |-
+                      The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+                      Set of purge requests
                     items:
                       properties:
                         all:

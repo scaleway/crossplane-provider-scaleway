@@ -13,7 +13,77 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExportInitParameters struct {
+
+	// Bucket containing qcow
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type ExportObservation struct {
+
+	// Bucket containing qcow
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type ExportParameters struct {
+
+	// Bucket containing qcow
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+}
+
+type ImportInitParameters struct {
+
+	// Bucket containing qcow
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type ImportObservation struct {
+
+	// Bucket containing qcow
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type ImportParameters struct {
+
+	// Bucket containing qcow
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+
+	// Key of the qcow file in the specified bucket
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+}
+
 type SnapshotInitParameters struct {
+
+	// Use this block to export the volume as a QCOW file to Object Storage.
+	// - bucket –  The name of the bucket where the QCOW file will be saved.
+	// - key –  The desired key (path) for the QCOW file within the bucket.
+	// Export snapshot to a qcow
+	Export []ExportInitParameters `json:"export,omitempty" tf:"export,omitempty"`
+
+	// Use this block to import a QCOW image from Object Storage to create a volume.
+	// - bucket –  The name of the bucket containing the QCOW file.
+	// - key –  The key of the QCOW file within the bucket.
+	// Import snapshot from a qcow
+	Import []ImportInitParameters `json:"import,omitempty" tf:"import,omitempty"`
 
 	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
@@ -47,8 +117,20 @@ type SnapshotInitParameters struct {
 
 type SnapshotObservation struct {
 
+	// Use this block to export the volume as a QCOW file to Object Storage.
+	// - bucket –  The name of the bucket where the QCOW file will be saved.
+	// - key –  The desired key (path) for the QCOW file within the bucket.
+	// Export snapshot to a qcow
+	Export []ExportObservation `json:"export,omitempty" tf:"export,omitempty"`
+
 	// The ID of the snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Use this block to import a QCOW image from Object Storage to create a volume.
+	// - bucket –  The name of the bucket containing the QCOW file.
+	// - key –  The key of the QCOW file within the bucket.
+	// Import snapshot from a qcow
+	Import []ImportObservation `json:"import,omitempty" tf:"import,omitempty"`
 
 	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
@@ -72,6 +154,20 @@ type SnapshotObservation struct {
 }
 
 type SnapshotParameters struct {
+
+	// Use this block to export the volume as a QCOW file to Object Storage.
+	// - bucket –  The name of the bucket where the QCOW file will be saved.
+	// - key –  The desired key (path) for the QCOW file within the bucket.
+	// Export snapshot to a qcow
+	// +kubebuilder:validation:Optional
+	Export []ExportParameters `json:"export,omitempty" tf:"export,omitempty"`
+
+	// Use this block to import a QCOW image from Object Storage to create a volume.
+	// - bucket –  The name of the bucket containing the QCOW file.
+	// - key –  The key of the QCOW file within the bucket.
+	// Import snapshot from a qcow
+	// +kubebuilder:validation:Optional
+	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
 	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name

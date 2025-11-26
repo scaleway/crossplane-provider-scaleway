@@ -16,6 +16,7 @@ import (
 type TokenInitParameters struct {
 
 	// The unique identifier of the container.
+	// Container ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -28,12 +29,15 @@ type TokenInitParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The description of the token.
+	// Description of the token.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// Expiration date of the token (TimeRFC3339)
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the Containers namespace.
+	// Namespace ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -53,18 +57,22 @@ type TokenInitParameters struct {
 type TokenObservation struct {
 
 	// The unique identifier of the container.
+	// Container ID
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
 	// The description of the token.
+	// Description of the token.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// Expiration date of the token (TimeRFC3339)
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The unique identifier of the Containers namespace.
+	// Namespace ID
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// (Defaults to provider region). The region in which the namespace is created.
@@ -75,6 +83,7 @@ type TokenObservation struct {
 type TokenParameters struct {
 
 	// The unique identifier of the container.
+	// Container ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.Container
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
@@ -88,14 +97,17 @@ type TokenParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The description of the token.
+	// Description of the token.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// Expiration date of the token (TimeRFC3339)
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the Containers namespace.
+	// Namespace ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1.ContainerNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`

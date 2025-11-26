@@ -27,6 +27,11 @@ type LBInitParameters struct {
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Defaults to false) A boolean to specify whether to use lb_private_network.
+	// If external_private_networks is set to true, private_network can not be set directly in the Load Balancer.
+	// This boolean determines if private network attachments should be managed externally through the `scaleway_lb_private_network` resource. When set, `private_network` must not be configured in this resource
+	ExternalPrivateNetworks *bool `json:"externalPrivateNetworks,omitempty" tf:"external_private_networks,omitempty"`
+
 	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.IP
@@ -90,6 +95,11 @@ type LBObservation struct {
 	// The description of the Load Balancer.
 	// The description of the lb
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (Defaults to false) A boolean to specify whether to use lb_private_network.
+	// If external_private_networks is set to true, private_network can not be set directly in the Load Balancer.
+	// This boolean determines if private network attachments should be managed externally through the `scaleway_lb_private_network` resource. When set, `private_network` must not be configured in this resource
+	ExternalPrivateNetworks *bool `json:"externalPrivateNetworks,omitempty" tf:"external_private_networks,omitempty"`
 
 	// The ID of the Load Balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -171,6 +181,12 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Defaults to false) A boolean to specify whether to use lb_private_network.
+	// If external_private_networks is set to true, private_network can not be set directly in the Load Balancer.
+	// This boolean determines if private network attachments should be managed externally through the `scaleway_lb_private_network` resource. When set, `private_network` must not be configured in this resource
+	// +kubebuilder:validation:Optional
+	ExternalPrivateNetworks *bool `json:"externalPrivateNetworks,omitempty" tf:"external_private_networks,omitempty"`
+
 	// (Deprecated) Please use ip_ids. The ID of the associated Load Balancer IP. See below.
 	// The load-balance public IP ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1.IP
@@ -248,10 +264,6 @@ type PrivateIpsParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
-	// Set to true if you want to let DHCP assign IP addresses
-	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
-
 	// IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network.
 	// IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network
 	IpamIds []*string `json:"ipamIds,omitempty" tf:"ipam_ids,omitempty"`
@@ -259,15 +271,10 @@ type PrivateNetworkInitParameters struct {
 	// The ID of the Private Network to attach to.
 	// The Private Network ID
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
-
-	// (Deprecated) Please use ipam_ids. Define a local ip address of your choice for the load balancer instance.
-	// Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
-	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 }
 
 type PrivateNetworkObservation struct {
 
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
 	// Set to true if you want to let DHCP assign IP addresses
 	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
 
@@ -279,7 +286,6 @@ type PrivateNetworkObservation struct {
 	// The Private Network ID
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// (Deprecated) Please use ipam_ids. Define a local ip address of your choice for the load balancer instance.
 	// Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
 	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 
@@ -288,15 +294,11 @@ type PrivateNetworkObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// (Defaults to provider zone) The zone of the Load Balancer.
+	// Zone
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
-
-	// (Deprecated) Please use ipam_ids. Set to true if you want to let DHCP assign IP addresses.
-	// Set to true if you want to let DHCP assign IP addresses
-	// +kubebuilder:validation:Optional
-	DHCPConfig *bool `json:"dhcpConfig,omitempty" tf:"dhcp_config,omitempty"`
 
 	// IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network.
 	// IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network
@@ -307,11 +309,6 @@ type PrivateNetworkParameters struct {
 	// The Private Network ID
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
-
-	// (Deprecated) Please use ipam_ids. Define a local ip address of your choice for the load balancer instance.
-	// Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
-	// +kubebuilder:validation:Optional
-	StaticConfig []*string `json:"staticConfig,omitempty" tf:"static_config,omitempty"`
 }
 
 // LBSpec defines the desired state of LB

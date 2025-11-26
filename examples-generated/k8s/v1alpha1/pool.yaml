@@ -35,4 +35,4 @@ spec:
   forProvider:
     cni: cilium
     name: jack
-    version: 1.24.3
+    version: 1.32.3

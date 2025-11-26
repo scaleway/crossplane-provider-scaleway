@@ -86,6 +86,7 @@ spec:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
                       If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+                      External rules for this security group
                     type: boolean
                   inboundDefaultPolicy:
                     description: |-
@@ -105,7 +106,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -155,7 +156,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -232,6 +233,7 @@ spec:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
                       If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+                      External rules for this security group
                     type: boolean
                   inboundDefaultPolicy:
                     description: |-
@@ -251,7 +253,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -301,7 +303,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -537,6 +539,7 @@ spec:
                     description: |-
                       (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
                       If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+                      External rules for this security group
                     type: boolean
                   id:
                     description: The ID of the security group.
@@ -559,7 +562,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -614,7 +617,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:

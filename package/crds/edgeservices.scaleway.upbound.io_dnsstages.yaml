@@ -490,6 +490,11 @@ spec:
                       The date and time of the creation of the DNS stage.
                       The date and time of the creation of the DNS stage
                     type: string
+                  defaultFqdn:
+                    description: |-
+                      The Default Fully Qualified Domain Name attached to the stage.
+                      Default Fully Qualified Domain Name attached to the stage
+                    type: string
                   fqdns:
                     description: |-
                       Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage.

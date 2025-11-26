@@ -14,6 +14,26 @@ import (
 )
 
 type DirectAccessInitParameters struct {
+
+	// The ID of the endpoint of the Read Replica.
+	// UUID of the endpoint (UUID format).
+	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
+
+	// Hostname of the endpoint. Only one of IP and hostname may be set.
+	// Hostname of the endpoint. Only one of ip and hostname may be set.
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
+	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
+	// Name of the endpoint.
+	// Name of the endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type DirectAccessObservation struct {
@@ -40,6 +60,31 @@ type DirectAccessObservation struct {
 }
 
 type DirectAccessParameters struct {
+
+	// The ID of the endpoint of the Read Replica.
+	// UUID of the endpoint (UUID format).
+	// +kubebuilder:validation:Optional
+	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
+
+	// Hostname of the endpoint. Only one of IP and hostname may be set.
+	// Hostname of the endpoint. Only one of ip and hostname may be set.
+	// +kubebuilder:validation:Optional
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
+	// IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+	// +kubebuilder:validation:Optional
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
+	// Name of the endpoint.
+	// Name of the endpoint.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ReadReplicaInitParameters struct {

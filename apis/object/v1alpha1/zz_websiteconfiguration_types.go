@@ -16,18 +16,21 @@ import (
 type ErrorDocumentInitParameters struct {
 
 	// The object key name to use when a 4XX class error occurs.
+	// Key for the object to use as an error document.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ErrorDocumentObservation struct {
 
 	// The object key name to use when a 4XX class error occurs.
+	// Key for the object to use as an error document.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ErrorDocumentParameters struct {
 
 	// The object key name to use when a 4XX class error occurs.
+	// Key for the object to use as an error document.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 }
@@ -35,18 +38,21 @@ type ErrorDocumentParameters struct {
 type IndexDocumentInitParameters struct {
 
 	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
+	// Suffix that will be added to the index.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentObservation struct {
 
 	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
+	// Suffix that will be added to the index.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentParameters struct {
 
 	// A suffix that is appended to a request targeting a specific directory on the website endpoint.
+	// Suffix that will be added to the index.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
 }

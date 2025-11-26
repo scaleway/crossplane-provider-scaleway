@@ -73,42 +73,55 @@ spec:
               forProvider:
                 properties:
                   command:
-                    description: The command that will be run in the container if
-                      specified.
+                    description: |-
+                      The command that will be run in the container if specified.
+                      Command to use for the job
                     type: string
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container running the job.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container running the job.
+                      CPU limit of the job
                     type: number
                   cron:
-                    description: The cron configuration
+                    description: |-
+                      The cron configuration
+                      Cron expression
                     items:
                       properties:
                         schedule:
-                          description: Cron format string.
+                          description: |-
+                            Cron format string.
+                            UNIX cron schedule to run job
                           type: string
                         timezone:
-                          description: The timezone, must be a canonical TZ identifier
-                            as found in this list.
+                          description: |-
+                            The timezone, must be a canonical TZ identifier as found in this list.
+                            Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
                           type: string
                       type: object
                     type: array
                   description:
-                    description: The description of the job
+                    description: |-
+                      The description of the job
+                      The job description
                     type: string
                   env:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container.
+                    description: |-
+                      The environment variables of the container.
+                      Environment variables to pass to the job
                     type: object
                     x-kubernetes-map-type: granular
                   imageUri:
-                    description: The uri of the container image that will be used
-                      for the job run.
+                    description: |-
+                      The uri of the container image that will be used for the job run.
+                      Image URI to use for the job
                     type: string
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container running the job.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container running the job.
+                      Memory limit of the job
                     type: number
                   name:
                     description: |-
@@ -154,7 +167,9 @@ spec:
                       type: object
                     type: array
                   timeout:
-                    description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
+                    description: |-
+                      The job run timeout, in Go Time format (ex: 2h30m25s)
+                      Timeout for the job in seconds
                     type: string
                 type: object
               initProvider:
@@ -171,42 +186,55 @@ spec:
                   autoscaler.
                 properties:
                   command:
-                    description: The command that will be run in the container if
-                      specified.
+                    description: |-
+                      The command that will be run in the container if specified.
+                      Command to use for the job
                     type: string
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container running the job.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container running the job.
+                      CPU limit of the job
                     type: number
                   cron:
-                    description: The cron configuration
+                    description: |-
+                      The cron configuration
+                      Cron expression
                     items:
                       properties:
                         schedule:
-                          description: Cron format string.
+                          description: |-
+                            Cron format string.
+                            UNIX cron schedule to run job
                           type: string
                         timezone:
-                          description: The timezone, must be a canonical TZ identifier
-                            as found in this list.
+                          description: |-
+                            The timezone, must be a canonical TZ identifier as found in this list.
+                            Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
                           type: string
                       type: object
                     type: array
                   description:
-                    description: The description of the job
+                    description: |-
+                      The description of the job
+                      The job description
                     type: string
                   env:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container.
+                    description: |-
+                      The environment variables of the container.
+                      Environment variables to pass to the job
                     type: object
                     x-kubernetes-map-type: granular
                   imageUri:
-                    description: The uri of the container image that will be used
-                      for the job run.
+                    description: |-
+                      The uri of the container image that will be used for the job run.
+                      Image URI to use for the job
                     type: string
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container running the job.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container running the job.
+                      Memory limit of the job
                     type: number
                   name:
                     description: |-
@@ -252,7 +280,9 @@ spec:
                       type: object
                     type: array
                   timeout:
-                    description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
+                    description: |-
+                      The job run timeout, in Go Time format (ex: 2h30m25s)
+                      Timeout for the job in seconds
                     type: string
                 type: object
               managementPolicies:
@@ -437,45 +467,58 @@ spec:
               atProvider:
                 properties:
                   command:
-                    description: The command that will be run in the container if
-                      specified.
+                    description: |-
+                      The command that will be run in the container if specified.
+                      Command to use for the job
                     type: string
                   cpuLimit:
-                    description: The amount of vCPU computing resources to allocate
-                      to each container running the job.
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container running the job.
+                      CPU limit of the job
                     type: number
                   cron:
-                    description: The cron configuration
+                    description: |-
+                      The cron configuration
+                      Cron expression
                     items:
                       properties:
                         schedule:
-                          description: Cron format string.
+                          description: |-
+                            Cron format string.
+                            UNIX cron schedule to run job
                           type: string
                         timezone:
-                          description: The timezone, must be a canonical TZ identifier
-                            as found in this list.
+                          description: |-
+                            The timezone, must be a canonical TZ identifier as found in this list.
+                            Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
                           type: string
                       type: object
                     type: array
                   description:
-                    description: The description of the job
+                    description: |-
+                      The description of the job
+                      The job description
                     type: string
                   env:
                     additionalProperties:
                       type: string
-                    description: The environment variables of the container.
+                    description: |-
+                      The environment variables of the container.
+                      Environment variables to pass to the job
                     type: object
                     x-kubernetes-map-type: granular
                   id:
                     description: The ID of the Job Definition.
                     type: string
                   imageUri:
-                    description: The uri of the container image that will be used
-                      for the job run.
+                    description: |-
+                      The uri of the container image that will be used for the job run.
+                      Image URI to use for the job
                     type: string
                   memoryLimit:
-                    description: The memory computing resources in MB to allocate
-                      to each container running the job.
+                    description: |-
+                      The memory computing resources in MB to allocate to each container running the job.
+                      Memory limit of the job
                     type: number
                   name:
                     description: |-
@@ -526,7 +569,9 @@ spec:
                       type: object
                     type: array
                   timeout:
-                    description: 'The job run timeout, in Go Time format (ex: 2h30m25s)'
+                    description: |-
+                      The job run timeout, in Go Time format (ex: 2h30m25s)
+                      Timeout for the job in seconds
                     type: string
                 type: object
               conditions:

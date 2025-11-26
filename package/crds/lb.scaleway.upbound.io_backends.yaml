@@ -103,9 +103,9 @@ spec:
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enables HTTP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTP Health check
                     items:
                       properties:
                         code:
@@ -131,9 +131,9 @@ spec:
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTPS Health check
                     items:
                       properties:
                         code:
@@ -179,9 +179,9 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enables TCP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      TCP Health check
                     items:
                       type: object
                     type: array
@@ -402,9 +402,9 @@ spec:
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enables HTTP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTP Health check
                     items:
                       properties:
                         code:
@@ -430,9 +430,9 @@ spec:
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTPS Health check
                     items:
                       properties:
                         code:
@@ -478,9 +478,9 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enables TCP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      TCP Health check
                     items:
                       type: object
                     type: array
@@ -869,9 +869,9 @@ spec:
                       Interval between two HC requests
                     type: string
                   healthCheckHttp:
-                    description: This block enables HTTP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTP Health check
                     items:
                       properties:
                         code:
@@ -897,9 +897,9 @@ spec:
                       type: object
                     type: array
                   healthCheckHttps:
-                    description: This block enable HTTPS health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      HTTPS Health check
                     items:
                       properties:
                         code:
@@ -945,9 +945,9 @@ spec:
                       Defines whether proxy protocol should be activated for the health check
                     type: boolean
                   healthCheckTcp:
-                    description: This block enables TCP health checks. Only one of
-                      health_check_tcp, health_check_http and health_check_https should
-                      be specified.
+                    description: |-
+                      This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+                      TCP Health check
                     items:
                       type: object
                     type: array

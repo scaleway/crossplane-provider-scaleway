@@ -8,6 +8,13 @@ metadata:
   name: main
 spec:
   forProvider:
+    args:
+    - some
+    - args
+    command:
+    - bash
+    - -c
+    - script.sh
     cpuLimit: 140
     deploy: true
     description: environment variables test
@@ -29,6 +36,9 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
+    tags:
+    - tag1
+    - tag2
     timeout: 600
 
 ---

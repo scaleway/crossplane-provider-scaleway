@@ -67,7 +67,7 @@ kind: Provider
 metadata:
   name: provider-scaleway
 spec:
-  package: xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0
+  package: xpkg.upbound.io/scaleway/provider-scaleway:v0.5.0
 EOF
 ```
 
@@ -80,7 +80,7 @@ You should get an output similar to the following one, providing details about t
 ```shell
 $ kubectl get provider
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
-provider-scaleway   True        True   xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0        11s
+provider-scaleway   True        True   xpkg.upbound.io/scaleway/provider-scaleway:v0.5.0        11s
 ```
 
 If there are any issue during the process of downloading and installing the provider, the `INSTALLED` field will return as empty. In that case, run `kubectl describe providers` to get more information.
@@ -88,7 +88,7 @@ If there are any issue during the process of downloading and installing the prov
 ```shell
 $ kubectl get providers
 NAME                INSTALLED   HEALTHY   PACKAGE                                             AGE
-provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.4.0      76s
+provider-scaleway                      xpkg.upbound.io/scaleway/provider-scaleway:v0.5.0      76s
 ```
 
 ### Create a Kubernetes secret resource for Scaleway

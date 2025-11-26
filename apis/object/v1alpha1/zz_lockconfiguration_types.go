@@ -122,18 +122,21 @@ type LockConfigurationParameters struct {
 type RuleInitParameters struct {
 
 	// The default retention for the lock.
+	// Default retention.
 	DefaultRetention []DefaultRetentionInitParameters `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
 }
 
 type RuleObservation struct {
 
 	// The default retention for the lock.
+	// Default retention.
 	DefaultRetention []DefaultRetentionObservation `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
 }
 
 type RuleParameters struct {
 
 	// The default retention for the lock.
+	// Default retention.
 	// +kubebuilder:validation:Optional
 	DefaultRetention []DefaultRetentionParameters `json:"defaultRetention" tf:"default_retention,omitempty"`
 }

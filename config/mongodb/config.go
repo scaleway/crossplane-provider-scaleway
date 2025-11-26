@@ -20,4 +20,14 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_mongodb_instance",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_mongodb_user", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "User"
+
+		r.References["instance_id"] = config.Reference{
+			TerraformName: "scaleway_mongodb_instance",
+		}
+	})
 }

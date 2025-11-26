@@ -46,6 +46,9 @@ type DomainObservation struct {
 	// DKIM public key, as should be recorded in the DNS zone
 	DKIMConfig *string `json:"dkimConfig,omitempty" tf:"dkim_config,omitempty"`
 
+	// DKIM name for the domain, as should be recorded in the DNS zone
+	DKIMName *string `json:"dkimName,omitempty" tf:"dkim_name,omitempty"`
+
 	// DMARC record for the domain, as should be recorded in the DNS zone
 	DmarcConfig *string `json:"dmarcConfig,omitempty" tf:"dmarc_config,omitempty"`
 
@@ -62,6 +65,9 @@ type DomainObservation struct {
 
 	// The Scaleway's blackhole MX server to use
 	MxBlackhole *string `json:"mxBlackhole,omitempty" tf:"mx_blackhole,omitempty"`
+
+	// MX record configuration for the domain blackhole
+	MxConfig *string `json:"mxConfig,omitempty" tf:"mx_config,omitempty"`
 
 	// The domain name used when sending emails
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -105,6 +111,9 @@ type DomainObservation struct {
 
 	// Snippet of the SPF record that should be registered in the DNS zone
 	SpfConfig *string `json:"spfConfig,omitempty" tf:"spf_config,omitempty"`
+
+	// Complete SPF record value for the domain, as should be recorded in the DNS zone
+	SpfValue *string `json:"spfValue,omitempty" tf:"spf_value,omitempty"`
 
 	// Status of the domain
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

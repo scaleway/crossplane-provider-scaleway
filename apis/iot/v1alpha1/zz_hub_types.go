@@ -21,7 +21,7 @@ type HubInitParameters struct {
 	// Whether to enable the hub events or not
 	DisableEvents *bool `json:"disableEvents,omitempty" tf:"disable_events,omitempty"`
 
-	// Wether the IoT Hub instance should be enabled or not.
+	// Whether the IoT Hub instance should be enabled or not.
 	// Whether to enable the hub or not
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -71,7 +71,7 @@ type HubObservation struct {
 	// Whether to enable the hub events or not
 	DisableEvents *bool `json:"disableEvents,omitempty" tf:"disable_events,omitempty"`
 
-	// Wether the IoT Hub instance should be enabled or not.
+	// Whether the IoT Hub instance should be enabled or not.
 	// Whether to enable the hub or not
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -91,7 +91,7 @@ type HubObservation struct {
 	// The ID of the Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The MQTT certificat content
+	// The MQTT certificate content
 	// The MQTT certificat content
 	MqttCA *string `json:"mqttCa,omitempty" tf:"mqtt_ca,omitempty"`
 
@@ -138,7 +138,7 @@ type HubParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableEvents *bool `json:"disableEvents,omitempty" tf:"disable_events,omitempty"`
 
-	// Wether the IoT Hub instance should be enabled or not.
+	// Whether the IoT Hub instance should be enabled or not.
 	// Whether to enable the hub or not
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`

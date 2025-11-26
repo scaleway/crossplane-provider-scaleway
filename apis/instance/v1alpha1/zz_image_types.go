@@ -18,26 +18,11 @@ type AdditionalVolumesInitParameters struct {
 
 type AdditionalVolumesObservation struct {
 
-	// Date of the volume creation.
-	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
-
-	// The export URI of the volume.
-	ExportURI *string `json:"exportUri,omitempty" tf:"export_uri,omitempty"`
-
 	// The ID of the volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Date of volume latest update.
-	ModificationDate *string `json:"modificationDate,omitempty" tf:"modification_date,omitempty"`
-
 	// The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The organization ID the volume is associated with.
-	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
-
-	// ID of the project the volume is associated with
-	Project *string `json:"project,omitempty" tf:"project,omitempty"`
 
 	// Description of the server containing the volume (in case the image is a backup from a server).
 	// +mapType=granular
@@ -46,17 +31,11 @@ type AdditionalVolumesObservation struct {
 	// The size of the volume.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// State of the volume.
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
-
 	// List of tags associated with the volume.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of volume, possible values are l_ssd and b_ssd.
+	// The type of volume, possible values are l_ssd and sbs_snapshot.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
-
-	// The zone in which the volume is.
-	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type AdditionalVolumesParameters struct {
@@ -151,6 +130,10 @@ type ImageObservation struct {
 	// If true, the image will be public
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
+	// The description of the root volume attached to the image.
+	// Specs of the additional volumes attached to the image
+	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+
 	// The ID of the snapshot of the volume to be used as root in the image.
 	// UUID of the snapshot from which the image is to be created
 	RootVolumeID *string `json:"rootVolumeId,omitempty" tf:"root_volume_id,omitempty"`
@@ -218,6 +201,27 @@ type ImageParameters struct {
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type RootVolumeInitParameters struct {
+}
+
+type RootVolumeObservation struct {
+
+	// The ID of the volume.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the volume.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The size of the volume.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The type of volume, possible values are l_ssd and sbs_snapshot.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type RootVolumeParameters struct {
 }
 
 // ImageSpec defines the desired state of Image

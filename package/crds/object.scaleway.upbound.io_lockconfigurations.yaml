@@ -90,7 +90,9 @@ spec:
                     items:
                       properties:
                         defaultRetention:
-                          description: The default retention for the lock.
+                          description: |-
+                            The default retention for the lock.
+                            Default retention.
                           items:
                             properties:
                               days:
@@ -144,7 +146,9 @@ spec:
                     items:
                       properties:
                         defaultRetention:
-                          description: The default retention for the lock.
+                          description: |-
+                            The default retention for the lock.
+                            Default retention.
                           items:
                             properties:
                               days:
@@ -369,7 +373,9 @@ spec:
                     items:
                       properties:
                         defaultRetention:
-                          description: The default retention for the lock.
+                          description: |-
+                            The default retention for the lock.
+                            Default retention.
                           items:
                             properties:
                               days:

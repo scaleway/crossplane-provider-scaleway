@@ -15,6 +15,10 @@ import (
 
 type ContainerNamespaceInitParameters struct {
 
+	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
+
 	// The description of the namespace.
 	// The description of the container namespace
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -41,11 +45,16 @@ type ContainerNamespaceInitParameters struct {
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the container namespace
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ContainerNamespaceObservation struct {
+
+	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the container namespace
@@ -86,11 +95,17 @@ type ContainerNamespaceObservation struct {
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the container namespace
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ContainerNamespaceParameters struct {
+
+	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	// +kubebuilder:validation:Optional
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the container namespace
@@ -127,6 +142,7 @@ type ContainerNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.SecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the container namespace
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

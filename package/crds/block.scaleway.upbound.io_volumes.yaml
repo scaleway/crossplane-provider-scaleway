@@ -94,12 +94,12 @@ spec:
                     type: string
                   sizeInGb:
                     description: |-
-                      The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+                      The size of the volume in gigabytes.
                       The volume size in GB
                     type: number
                   snapshotId:
                     description: |-
-                      If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+                      If set, the new volume will be created from this snapshot.
                       The snapshot to create the volume from
                     type: string
                   snapshotIdRef:
@@ -224,12 +224,12 @@ spec:
                     type: string
                   sizeInGb:
                     description: |-
-                      The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+                      The size of the volume in gigabytes.
                       The volume size in GB
                     type: number
                   snapshotId:
                     description: |-
-                      If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+                      If set, the new volume will be created from this snapshot.
                       The snapshot to create the volume from
                     type: string
                   snapshotIdRef:
@@ -521,12 +521,12 @@ spec:
                     type: string
                   sizeInGb:
                     description: |-
-                      The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+                      The size of the volume in gigabytes.
                       The volume size in GB
                     type: number
                   snapshotId:
                     description: |-
-                      If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+                      If set, the new volume will be created from this snapshot.
                       The snapshot to create the volume from
                     type: string
                   tags:

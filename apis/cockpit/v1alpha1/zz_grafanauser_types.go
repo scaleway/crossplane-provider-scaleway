@@ -19,7 +19,7 @@ type GrafanaUserInitParameters struct {
 	// The login of the Grafana user
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+	// (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -49,7 +49,7 @@ type GrafanaUserObservation struct {
 	// The login of the Grafana user
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+	// (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -65,7 +65,7 @@ type GrafanaUserParameters struct {
 	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+	// (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional

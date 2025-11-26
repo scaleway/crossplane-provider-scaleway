@@ -32,6 +32,10 @@ type CacheStageInitParameters struct {
 	// The Time To Live (TTL) in seconds. Defines how long content is cached
 	FallbackTTL *float64 `json:"fallbackTtl,omitempty" tf:"fallback_ttl,omitempty"`
 
+	// Defines whether responses to requests with cookies must be stored in the cache.
+	// Defines whether responses to requests with cookies must be stored in the cache
+	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
+
 	// The ID of the pipeline.
 	// The ID of the pipeline
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/edgeservices/v1alpha1.Pipeline
@@ -50,6 +54,7 @@ type CacheStageInitParameters struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+	// Set of purge requests
 	PurgeRequests []PurgeRequestsInitParameters `json:"purgeRequests,omitempty" tf:"purge_requests,omitempty"`
 
 	// Trigger a refresh of the cache by changing this field's value.
@@ -82,6 +87,10 @@ type CacheStageObservation struct {
 	// The ID of the cache stage (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Defines whether responses to requests with cookies must be stored in the cache.
+	// Defines whether responses to requests with cookies must be stored in the cache
+	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
+
 	// The ID of the pipeline.
 	// The ID of the pipeline
 	PipelineID *string `json:"pipelineId,omitempty" tf:"pipeline_id,omitempty"`
@@ -91,6 +100,7 @@ type CacheStageObservation struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+	// Set of purge requests
 	PurgeRequests []PurgeRequestsObservation `json:"purgeRequests,omitempty" tf:"purge_requests,omitempty"`
 
 	// Trigger a refresh of the cache by changing this field's value.
@@ -131,6 +141,11 @@ type CacheStageParameters struct {
 	// +kubebuilder:validation:Optional
 	FallbackTTL *float64 `json:"fallbackTtl,omitempty" tf:"fallback_ttl,omitempty"`
 
+	// Defines whether responses to requests with cookies must be stored in the cache.
+	// Defines whether responses to requests with cookies must be stored in the cache
+	// +kubebuilder:validation:Optional
+	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
+
 	// The ID of the pipeline.
 	// The ID of the pipeline
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/edgeservices/v1alpha1.Pipeline
@@ -151,6 +166,7 @@ type CacheStageParameters struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// The Scaleway Object Storage origin bucket (S3) linked to the backend stage.
+	// Set of purge requests
 	// +kubebuilder:validation:Optional
 	PurgeRequests []PurgeRequestsParameters `json:"purgeRequests,omitempty" tf:"purge_requests,omitempty"`
 

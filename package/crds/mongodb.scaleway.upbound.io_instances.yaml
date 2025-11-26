@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  isSnapshotScheduleEnabled:
+                    description: |-
+                      Enable or disable automatic snapshot scheduling.
+                      Enable or disable automatic snapshot scheduling
+                    type: boolean
                   name:
                     description: |-
                       Name of the MongoDB® instance.
@@ -82,7 +87,7 @@ spec:
                     type: number
                   nodeType:
                     description: |-
-                      The type of MongoDB® intance to create.
+                      The type of MongoDB® instance to create.
                       Type of node to use for the instance
                     type: string
                   passwordSecretRef:
@@ -104,6 +109,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the instance.
+                      The private IPv4 address associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Private Network endpoints of the Database Instance.
@@ -119,18 +131,34 @@ spec:
                     type: array
                   projectId:
                     description: |-
-                      The ID of the MongoDB® instance.
+                      (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network specs details.
+                      Public network endpoint configuration (no arguments).
                       Public network specs details
                     items:
+                      properties:
+                        dnsRecord:
+                          description: The DNS record of your endpoint
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the MongoDB® instance.
+                            ID of the public network
+                          type: string
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
                       type: object
                     type: array
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region you want to attach the resource to
                     type: string
                   settings:
                     additionalProperties:
@@ -143,6 +171,16 @@ spec:
                       Snapshot ID to restore the MongoDB® instance from.
                       Snapshot ID to restore the MongoDB instance from
                     type: string
+                  snapshotScheduleFrequencyHours:
+                    description: |-
+                      Snapshot schedule frequency in hours.
+                      Snapshot schedule frequency in hours
+                    type: number
+                  snapshotScheduleRetentionDays:
+                    description: |-
+                      Snapshot schedule retention in days.
+                      Snapshot schedule retention in days
+                    type: number
                   tags:
                     description: |-
                       List of tags attached to the MongoDB® instance.
@@ -152,7 +190,7 @@ spec:
                     type: array
                   userName:
                     description: |-
-                      Name of the user created when the intance is created.
+                      Name of the user created when the instance is created.
                       Name of the user created when the cluster is created
                     type: string
                   version:
@@ -184,6 +222,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  isSnapshotScheduleEnabled:
+                    description: |-
+                      Enable or disable automatic snapshot scheduling.
+                      Enable or disable automatic snapshot scheduling
+                    type: boolean
                   name:
                     description: |-
                       Name of the MongoDB® instance.
@@ -194,7 +237,7 @@ spec:
                     type: number
                   nodeType:
                     description: |-
-                      The type of MongoDB® intance to create.
+                      The type of MongoDB® instance to create.
                       Type of node to use for the instance
                     type: string
                   passwordSecretRef:
@@ -216,6 +259,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the instance.
+                      The private IPv4 address associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Private Network endpoints of the Database Instance.
@@ -231,18 +281,34 @@ spec:
                     type: array
                   projectId:
                     description: |-
-                      The ID of the MongoDB® instance.
+                      (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network specs details.
+                      Public network endpoint configuration (no arguments).
                       Public network specs details
                     items:
+                      properties:
+                        dnsRecord:
+                          description: The DNS record of your endpoint
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the MongoDB® instance.
+                            ID of the public network
+                          type: string
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
                       type: object
                     type: array
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region you want to attach the resource to
                     type: string
                   settings:
                     additionalProperties:
@@ -255,6 +321,16 @@ spec:
                       Snapshot ID to restore the MongoDB® instance from.
                       Snapshot ID to restore the MongoDB instance from
                     type: string
+                  snapshotScheduleFrequencyHours:
+                    description: |-
+                      Snapshot schedule frequency in hours.
+                      Snapshot schedule frequency in hours
+                    type: number
+                  snapshotScheduleRetentionDays:
+                    description: |-
+                      Snapshot schedule retention in days.
+                      Snapshot schedule retention in days
+                    type: number
                   tags:
                     description: |-
                       List of tags attached to the MongoDB® instance.
@@ -264,7 +340,7 @@ spec:
                     type: array
                   userName:
                     description: |-
-                      Name of the user created when the intance is created.
+                      Name of the user created when the instance is created.
                       Name of the user created when the cluster is created
                     type: string
                   version:
@@ -472,6 +548,11 @@ spec:
                   id:
                     description: The ID of the MongoDB® instance.
                     type: string
+                  isSnapshotScheduleEnabled:
+                    description: |-
+                      Enable or disable automatic snapshot scheduling.
+                      Enable or disable automatic snapshot scheduling
+                    type: boolean
                   name:
                     description: |-
                       Name of the MongoDB® instance.
@@ -482,9 +563,27 @@ spec:
                     type: number
                   nodeType:
                     description: |-
-                      The type of MongoDB® intance to create.
+                      The type of MongoDB® instance to create.
                       Type of node to use for the instance
                     type: string
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the instance.
+                      The private IPv4 address associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the MongoDB® instance.
+                            The ID of the IPv4 address resource
+                          type: string
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Private Network endpoints of the Database Instance.
@@ -524,12 +623,12 @@ spec:
                     type: array
                   projectId:
                     description: |-
-                      The ID of the MongoDB® instance.
+                      (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network specs details.
+                      Public network endpoint configuration (no arguments).
                       Public network specs details
                     items:
                       properties:
@@ -549,7 +648,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region you want to attach the resource to
                     type: string
                   settings:
                     additionalProperties:
@@ -562,6 +663,16 @@ spec:
                       Snapshot ID to restore the MongoDB® instance from.
                       Snapshot ID to restore the MongoDB instance from
                     type: string
+                  snapshotScheduleFrequencyHours:
+                    description: |-
+                      Snapshot schedule frequency in hours.
+                      Snapshot schedule frequency in hours
+                    type: number
+                  snapshotScheduleRetentionDays:
+                    description: |-
+                      Snapshot schedule retention in days.
+                      Snapshot schedule retention in days
+                    type: number
                   tags:
                     description: |-
                       List of tags attached to the MongoDB® instance.
@@ -569,6 +680,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  tlsCertificate:
+                    description: |-
+                      The PEM-encoded TLS certificate for the MongoDB® instance, if available.
+                      PEM-encoded TLS certificate for MongoDB
+                    type: string
                   updatedAt:
                     description: |-
                       The date and time of the last update of the MongoDB® instance.
@@ -576,7 +692,7 @@ spec:
                     type: string
                   userName:
                     description: |-
-                      Name of the user created when the intance is created.
+                      Name of the user created when the instance is created.
                       Name of the user created when the cluster is created
                     type: string
                   version:

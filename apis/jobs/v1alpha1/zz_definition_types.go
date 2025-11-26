@@ -16,28 +16,34 @@ import (
 type CronInitParameters struct {
 
 	// Cron format string.
+	// UNIX cron schedule to run job
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The timezone, must be a canonical TZ identifier as found in this list.
+	// Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type CronObservation struct {
 
 	// Cron format string.
+	// UNIX cron schedule to run job
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The timezone, must be a canonical TZ identifier as found in this list.
+	// Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type CronParameters struct {
 
 	// Cron format string.
+	// UNIX cron schedule to run job
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
 
 	// The timezone, must be a canonical TZ identifier as found in this list.
+	// Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
 }
@@ -45,25 +51,32 @@ type CronParameters struct {
 type DefinitionInitParameters struct {
 
 	// The amount of vCPU computing resources to allocate to each container running the job.
+	// CPU limit of the job
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
 	// The command that will be run in the container if specified.
+	// Command to use for the job
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron configuration
+	// Cron expression
 	Cron []CronInitParameters `json:"cron,omitempty" tf:"cron,omitempty"`
 
 	// The description of the job
+	// The job description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The environment variables of the container.
+	// Environment variables to pass to the job
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
 	// The uri of the container image that will be used for the job run.
+	// Image URI to use for the job
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// The memory computing resources in MB to allocate to each container running the job.
+	// Memory limit of the job
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
 	// The name of the job.
@@ -83,24 +96,30 @@ type DefinitionInitParameters struct {
 	SecretReference []SecretReferenceInitParameters `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
 
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
+	// Timeout for the job in seconds
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type DefinitionObservation struct {
 
 	// The amount of vCPU computing resources to allocate to each container running the job.
+	// CPU limit of the job
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
 	// The command that will be run in the container if specified.
+	// Command to use for the job
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron configuration
+	// Cron expression
 	Cron []CronObservation `json:"cron,omitempty" tf:"cron,omitempty"`
 
 	// The description of the job
+	// The job description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The environment variables of the container.
+	// Environment variables to pass to the job
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
@@ -108,9 +127,11 @@ type DefinitionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The uri of the container image that will be used for the job run.
+	// Image URI to use for the job
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// The memory computing resources in MB to allocate to each container running the job.
+	// Memory limit of the job
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
 	// The name of the job.
@@ -130,37 +151,45 @@ type DefinitionObservation struct {
 	SecretReference []SecretReferenceObservation `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
 
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
+	// Timeout for the job in seconds
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type DefinitionParameters struct {
 
 	// The amount of vCPU computing resources to allocate to each container running the job.
+	// CPU limit of the job
 	// +kubebuilder:validation:Optional
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
 	// The command that will be run in the container if specified.
+	// Command to use for the job
 	// +kubebuilder:validation:Optional
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron configuration
+	// Cron expression
 	// +kubebuilder:validation:Optional
 	Cron []CronParameters `json:"cron,omitempty" tf:"cron,omitempty"`
 
 	// The description of the job
+	// The job description
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The environment variables of the container.
+	// Environment variables to pass to the job
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
 	// The uri of the container image that will be used for the job run.
+	// Image URI to use for the job
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// The memory computing resources in MB to allocate to each container running the job.
+	// Memory limit of the job
 	// +kubebuilder:validation:Optional
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
@@ -185,6 +214,7 @@ type DefinitionParameters struct {
 	SecretReference []SecretReferenceParameters `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
 
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
+	// Timeout for the job in seconds
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

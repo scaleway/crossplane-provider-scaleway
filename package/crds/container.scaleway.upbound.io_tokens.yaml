@@ -73,7 +73,9 @@ spec:
               forProvider:
                 properties:
                   containerId:
-                    description: The unique identifier of the container.
+                    description: |-
+                      The unique identifier of the container.
+                      Container ID
                     type: string
                   containerIdRef:
                     description: Reference to a Container in container to populate
@@ -152,13 +154,19 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      Description of the token.
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      Expiration date of the token (TimeRFC3339)
                     type: string
                   namespaceId:
-                    description: The unique identifier of the Containers namespace.
+                    description: |-
+                      The unique identifier of the Containers namespace.
+                      Namespace ID
                     type: string
                   namespaceIdRef:
                     description: Reference to a ContainerNamespace in container to
@@ -256,7 +264,9 @@ spec:
                   autoscaler.
                 properties:
                   containerId:
-                    description: The unique identifier of the container.
+                    description: |-
+                      The unique identifier of the container.
+                      Container ID
                     type: string
                   containerIdRef:
                     description: Reference to a Container in container to populate
@@ -335,13 +345,19 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      Description of the token.
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      Expiration date of the token (TimeRFC3339)
                     type: string
                   namespaceId:
-                    description: The unique identifier of the Containers namespace.
+                    description: |-
+                      The unique identifier of the Containers namespace.
+                      Namespace ID
                     type: string
                   namespaceIdRef:
                     description: Reference to a ContainerNamespace in container to
@@ -598,19 +614,27 @@ spec:
               atProvider:
                 properties:
                   containerId:
-                    description: The unique identifier of the container.
+                    description: |-
+                      The unique identifier of the container.
+                      Container ID
                     type: string
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      Description of the token.
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      Expiration date of the token (TimeRFC3339)
                     type: string
                   id:
                     description: The unique identifier of the token.
                     type: string
                   namespaceId:
-                    description: The unique identifier of the Containers namespace.
+                    description: |-
+                      The unique identifier of the Containers namespace.
+                      Namespace ID
                     type: string
                   region:
                     description: |-

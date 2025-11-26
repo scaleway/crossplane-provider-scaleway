@@ -63,6 +63,10 @@ type DNSStageObservation struct {
 	// The date and time of the creation of the DNS stage
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The Default Fully Qualified Domain Name attached to the stage.
+	// Default Fully Qualified Domain Name attached to the stage
+	DefaultFqdn *string `json:"defaultFqdn,omitempty" tf:"default_fqdn,omitempty"`
+
 	// Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage.
 	// Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`

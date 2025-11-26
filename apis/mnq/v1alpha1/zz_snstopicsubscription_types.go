@@ -57,9 +57,11 @@ type SNSTopicSubscriptionInitParameters struct {
 	SnsEndpoint *string `json:"snsEndpoint,omitempty" tf:"sns_endpoint,omitempty"`
 
 	// The ARN of the topic. Either topic_id or topic_arn is required.
+	// ARN of the topic
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+	// ID of the topic
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/mnq/v1alpha1.SNSTopic
 	TopicID *string `json:"topicId,omitempty" tf:"topic_id,omitempty"`
 
@@ -106,9 +108,11 @@ type SNSTopicSubscriptionObservation struct {
 	SnsEndpoint *string `json:"snsEndpoint,omitempty" tf:"sns_endpoint,omitempty"`
 
 	// The ARN of the topic. Either topic_id or topic_arn is required.
+	// ARN of the topic
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+	// ID of the topic
 	TopicID *string `json:"topicId,omitempty" tf:"topic_id,omitempty"`
 }
 
@@ -164,10 +168,12 @@ type SNSTopicSubscriptionParameters struct {
 	SnsEndpoint *string `json:"snsEndpoint,omitempty" tf:"sns_endpoint,omitempty"`
 
 	// The ARN of the topic. Either topic_id or topic_arn is required.
+	// ARN of the topic
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// The ID of the topic. Either topic_id or topic_arn is required. Conflicts with topic_arn.
+	// ID of the topic
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/mnq/v1alpha1.SNSTopic
 	// +kubebuilder:validation:Optional
 	TopicID *string `json:"topicId,omitempty" tf:"topic_id,omitempty"`

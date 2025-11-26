@@ -265,6 +265,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the resource.
+                      The private IPv4 address associated with the resource.
+                    items:
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the Private Network.
@@ -348,7 +355,7 @@ spec:
                     type: object
                   staticAddress:
                     description: |-
-                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   zone:
@@ -563,6 +570,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the resource.
+                      The private IPv4 address associated with the resource.
+                    items:
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the Private Network.
@@ -646,7 +660,7 @@ spec:
                     type: object
                   staticAddress:
                     description: |-
-                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   zone:
@@ -890,10 +904,14 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The private IPv4 address.
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address.
                           type: string
                         id:
-                          description: The ID of the GatewayNetwork
+                          description: |-
+                            The ID of the GatewayNetwork
+                            The ID of the IPv4 address resource.
                           type: string
                       type: object
                     type: array
@@ -904,7 +922,7 @@ spec:
                     type: string
                   staticAddress:
                     description: |-
-                      (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+                      (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
                       The static IP address in CIDR on this network
                     type: string
                   status:

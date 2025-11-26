@@ -103,6 +103,7 @@ type ACLParameters struct {
 type AccessControlPolicyInitParameters struct {
 
 	// Set of grant configuration blocks documented below.
+	// Grant
 	Grant []GrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
 	// Configuration block of the bucket owner's display name and ID documented below.
@@ -113,6 +114,7 @@ type AccessControlPolicyInitParameters struct {
 type AccessControlPolicyObservation struct {
 
 	// Set of grant configuration blocks documented below.
+	// Grant
 	Grant []GrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 
 	// Configuration block of the bucket owner's display name and ID documented below.
@@ -123,6 +125,7 @@ type AccessControlPolicyObservation struct {
 type AccessControlPolicyParameters struct {
 
 	// Set of grant configuration blocks documented below.
+	// Grant
 	// +kubebuilder:validation:Optional
 	Grant []GrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
@@ -173,23 +176,32 @@ type GranteeInitParameters struct {
 	// The project ID owner of the grantee.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of grantee. Valid values: CanonicalUser.
-	// Type of grantee. Valid values: `CanonicalUser`
+	// Type of grantee. Valid values: CanonicalUser, Group.
+	// Type of grantee. Valid values: `CanonicalUser`, `Group`
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The uri of the grantee if type is Group.
+	// The uri of the grantee if you are granting permissions to a predefined group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GranteeObservation struct {
 
 	// The display name of the owner.
+	// Display name of the grantee to grant access to.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the project owner.
 	// The project ID owner of the grantee.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of grantee. Valid values: CanonicalUser.
-	// Type of grantee. Valid values: `CanonicalUser`
+	// Type of grantee. Valid values: CanonicalUser, Group.
+	// Type of grantee. Valid values: `CanonicalUser`, `Group`
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The uri of the grantee if type is Group.
+	// The uri of the grantee if you are granting permissions to a predefined group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GranteeParameters struct {
@@ -197,12 +209,17 @@ type GranteeParameters struct {
 	// The ID of the project owner.
 	// The project ID owner of the grantee.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of grantee. Valid values: CanonicalUser.
-	// Type of grantee. Valid values: `CanonicalUser`
+	// Type of grantee. Valid values: CanonicalUser, Group.
+	// Type of grantee. Valid values: `CanonicalUser`, `Group`
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The uri of the grantee if type is Group.
+	// The uri of the grantee if you are granting permissions to a predefined group.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type OwnerInitParameters struct {

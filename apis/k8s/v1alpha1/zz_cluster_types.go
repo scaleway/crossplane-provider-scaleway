@@ -248,6 +248,10 @@ type ClusterInitParameters struct {
 	// The OpenID Connect configuration of the cluster
 	OpenIDConnectConfig []OpenIDConnectConfigInitParameters `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
 
+	// The subnet used for the Pod CIDR.
+	// The subnet used for the Pod CIDR.
+	PodCidr *string `json:"podCidr,omitempty" tf:"pod_cidr,omitempty"`
+
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
@@ -268,6 +272,14 @@ type ClusterInitParameters struct {
 	// (Defaults to provider region) The region in which the cluster should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The subnet used for the Service CIDR.
+	// The subnet used for the Service CIDR.
+	ServiceCidr *string `json:"serviceCidr,omitempty" tf:"service_cidr,omitempty"`
+
+	// The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+	// The IP used for the DNS Service.
+	ServiceDNSIP *string `json:"serviceDnsIp,omitempty" tf:"service_dns_ip,omitempty"`
 
 	// The tags associated with the Kubernetes cluster.
 	// The tags associated with the cluster
@@ -342,6 +354,10 @@ type ClusterObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The subnet used for the Pod CIDR.
+	// The subnet used for the Pod CIDR.
+	PodCidr *string `json:"podCidr,omitempty" tf:"pod_cidr,omitempty"`
+
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
@@ -353,6 +369,14 @@ type ClusterObservation struct {
 	// (Defaults to provider region) The region in which the cluster should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The subnet used for the Service CIDR.
+	// The subnet used for the Service CIDR.
+	ServiceCidr *string `json:"serviceCidr,omitempty" tf:"service_cidr,omitempty"`
+
+	// The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+	// The IP used for the DNS Service.
+	ServiceDNSIP *string `json:"serviceDnsIp,omitempty" tf:"service_dns_ip,omitempty"`
 
 	// The status of the Kubernetes cluster.
 	// The status of the cluster
@@ -438,6 +462,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig []OpenIDConnectConfigParameters `json:"openIdConnectConfig,omitempty" tf:"open_id_connect_config,omitempty"`
 
+	// The subnet used for the Pod CIDR.
+	// The subnet used for the Pod CIDR.
+	// +kubebuilder:validation:Optional
+	PodCidr *string `json:"podCidr,omitempty" tf:"pod_cidr,omitempty"`
+
 	// The ID of the private network of the cluster.
 	// The ID of the cluster's private network
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
@@ -461,6 +490,16 @@ type ClusterParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The subnet used for the Service CIDR.
+	// The subnet used for the Service CIDR.
+	// +kubebuilder:validation:Optional
+	ServiceCidr *string `json:"serviceCidr,omitempty" tf:"service_cidr,omitempty"`
+
+	// The IP used for the DNS Service. If unset, defaults to Service CIDR's network + 10.
+	// The IP used for the DNS Service.
+	// +kubebuilder:validation:Optional
+	ServiceDNSIP *string `json:"serviceDnsIp,omitempty" tf:"service_dns_ip,omitempty"`
 
 	// The tags associated with the Kubernetes cluster.
 	// The tags associated with the cluster

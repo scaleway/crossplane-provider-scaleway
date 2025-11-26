@@ -119,7 +119,7 @@ spec:
                           type: string
                         match:
                           description: |-
-                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
                             The ACL match rule
                           items:
                             properties:
@@ -150,11 +150,16 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
                             type: object
                           type: array
                         name:
@@ -255,6 +260,11 @@ spec:
                       The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
                       Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
                     type: number
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.
@@ -421,7 +431,7 @@ spec:
                           type: string
                         match:
                           description: |-
-                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
                             The ACL match rule
                           items:
                             properties:
@@ -452,11 +462,16 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
                             type: object
                           type: array
                         name:
@@ -557,6 +572,11 @@ spec:
                       The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
                       Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
                     type: number
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.
@@ -883,15 +903,16 @@ spec:
                             type: object
                           type: array
                         createdAt:
-                          description: IsDate and time of ACL's creation (RFC 3339
-                            format)
+                          description: |-
+                            The date and time the frontend was created.
+                            IsDate and time of ACL's creation (RFC 3339 format)
                           type: string
                         description:
                           description: Description of the ACL
                           type: string
                         match:
                           description: |-
-                            The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
                             The ACL match rule
                           items:
                             properties:
@@ -922,11 +943,16 @@ spec:
                                 type: boolean
                               ipSubnet:
                                 description: |-
-                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
                                   A list of IPs or CIDR v4/v6 addresses of the client of the session to match
                                 items:
                                   type: string
                                 type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
                             type: object
                           type: array
                         name:
@@ -935,7 +961,9 @@ spec:
                             The ACL name
                           type: string
                         updatedAt:
-                          description: IsDate and time of ACL's update (RFC 3339 format)
+                          description: |-
+                            The date and time the frontend resource was updated.
+                            IsDate and time of ACL's update (RFC 3339 format)
                           type: string
                       type: object
                     type: array
@@ -961,6 +989,16 @@ spec:
                       The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
                       Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
                     type: number
+                  createdAt:
+                    description: |-
+                      The date and time the frontend was created.
+                      The date and time of the creation of the frontend
+                    type: string
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
                   enableHttp3:
                     description: |-
                       (Default: false) Activates HTTP/3 protocol.
@@ -994,6 +1032,11 @@ spec:
                     description: |-
                       Maximum inactivity time on the client side. (e.g. 1s)
                       Set the maximum inactivity time on the client side
+                    type: string
+                  updatedAt:
+                    description: |-
+                      The date and time the frontend resource was updated.
+                      The date and time of the last update of the frontend
                     type: string
                 type: object
               conditions:

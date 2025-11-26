@@ -315,6 +315,10 @@ spec:
                     description: DKIM public key, as should be recorded in the DNS
                       zone
                     type: string
+                  dkimName:
+                    description: DKIM name for the domain, as should be recorded in
+                      the DNS zone
+                    type: string
                   dmarcConfig:
                     description: DMARC record for the domain, as should be recorded
                       in the DNS zone
@@ -334,6 +338,9 @@ spec:
                     type: string
                   mxBlackhole:
                     description: The Scaleway's blackhole MX server to use
+                    type: string
+                  mxConfig:
+                    description: MX record configuration for the domain blackhole
                     type: string
                   name:
                     description: The domain name used when sending emails
@@ -397,6 +404,10 @@ spec:
                   spfConfig:
                     description: Snippet of the SPF record that should be registered
                       in the DNS zone
+                    type: string
+                  spfValue:
+                    description: Complete SPF record value for the domain, as should
+                      be recorded in the DNS zone
                     type: string
                   status:
                     description: Status of the domain

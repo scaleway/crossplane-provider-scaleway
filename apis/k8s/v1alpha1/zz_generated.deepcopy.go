@@ -727,6 +727,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PodCidr != nil {
+		in, out := &in.PodCidr, &out.PodCidr
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
 		*out = new(string)
@@ -749,6 +754,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceCidr != nil {
+		in, out := &in.ServiceCidr, &out.ServiceCidr
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceDNSIP != nil {
+		in, out := &in.ServiceDNSIP, &out.ServiceDNSIP
 		*out = new(string)
 		**out = **in
 	}
@@ -914,6 +929,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PodCidr != nil {
+		in, out := &in.PodCidr, &out.PodCidr
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
 		*out = new(string)
@@ -926,6 +946,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceCidr != nil {
+		in, out := &in.ServiceCidr, &out.ServiceCidr
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceDNSIP != nil {
+		in, out := &in.ServiceDNSIP, &out.ServiceDNSIP
 		*out = new(string)
 		**out = **in
 	}
@@ -1059,6 +1089,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PodCidr != nil {
+		in, out := &in.PodCidr, &out.PodCidr
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateNetworkID != nil {
 		in, out := &in.PrivateNetworkID, &out.PrivateNetworkID
 		*out = new(string)
@@ -1081,6 +1116,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceCidr != nil {
+		in, out := &in.ServiceCidr, &out.ServiceCidr
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceDNSIP != nil {
+		in, out := &in.ServiceDNSIP, &out.ServiceDNSIP
 		*out = new(string)
 		**out = **in
 	}
@@ -1601,6 +1646,11 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupID != nil {
+		in, out := &in.SecurityGroupID, &out.SecurityGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
 		*out = new(float64)
@@ -1784,6 +1834,11 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupID != nil {
+		in, out := &in.SecurityGroupID, &out.SecurityGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
 		*out = new(float64)
@@ -1935,6 +1990,11 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 	}
 	if in.RootVolumeType != nil {
 		in, out := &in.RootVolumeType, &out.RootVolumeType
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityGroupID != nil {
+		in, out := &in.SecurityGroupID, &out.SecurityGroupID
 		*out = new(string)
 		**out = **in
 	}

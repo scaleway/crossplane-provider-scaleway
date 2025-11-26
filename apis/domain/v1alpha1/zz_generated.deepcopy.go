@@ -2108,11 +2108,6 @@ func (in *RecordInitParameters) DeepCopyInto(out *RecordInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.KeepEmptyZone != nil {
-		in, out := &in.KeepEmptyZone, &out.KeepEmptyZone
-		*out = new(bool)
-		**out = **in
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -2233,11 +2228,6 @@ func (in *RecordObservation) DeepCopyInto(out *RecordObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.KeepEmptyZone != nil {
-		in, out := &in.KeepEmptyZone, &out.KeepEmptyZone
-		*out = new(bool)
-		**out = **in
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -2330,11 +2320,6 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.KeepEmptyZone != nil {
-		in, out := &in.KeepEmptyZone, &out.KeepEmptyZone
-		*out = new(bool)
-		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

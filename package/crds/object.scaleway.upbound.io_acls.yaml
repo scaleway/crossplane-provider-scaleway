@@ -79,8 +79,9 @@ spec:
                     items:
                       properties:
                         grant:
-                          description: Set of grant configuration blocks documented
-                            below.
+                          description: |-
+                            Set of grant configuration blocks documented below.
+                            Grant
                           items:
                             properties:
                               grantee:
@@ -96,8 +97,13 @@ spec:
                                       type: string
                                     type:
                                       description: |-
-                                        Type of grantee. Valid values: CanonicalUser.
-                                        Type of grantee. Valid values: `CanonicalUser`
+                                        Type of grantee. Valid values: CanonicalUser, Group.
+                                        Type of grantee. Valid values: `CanonicalUser`, `Group`
+                                      type: string
+                                    uri:
+                                      description: |-
+                                        The uri of the grantee if type is Group.
+                                        The uri of the grantee if you are granting permissions to a predefined group.
                                       type: string
                                   type: object
                                 type: array
@@ -172,8 +178,9 @@ spec:
                     items:
                       properties:
                         grant:
-                          description: Set of grant configuration blocks documented
-                            below.
+                          description: |-
+                            Set of grant configuration blocks documented below.
+                            Grant
                           items:
                             properties:
                               grantee:
@@ -189,8 +196,13 @@ spec:
                                       type: string
                                     type:
                                       description: |-
-                                        Type of grantee. Valid values: CanonicalUser.
-                                        Type of grantee. Valid values: `CanonicalUser`
+                                        Type of grantee. Valid values: CanonicalUser, Group.
+                                        Type of grantee. Valid values: `CanonicalUser`, `Group`
+                                      type: string
+                                    uri:
+                                      description: |-
+                                        The uri of the grantee if type is Group.
+                                        The uri of the grantee if you are granting permissions to a predefined group.
                                       type: string
                                   type: object
                                 type: array
@@ -429,8 +441,9 @@ spec:
                     items:
                       properties:
                         grant:
-                          description: Set of grant configuration blocks documented
-                            below.
+                          description: |-
+                            Set of grant configuration blocks documented below.
+                            Grant
                           items:
                             properties:
                               grantee:
@@ -440,7 +453,9 @@ spec:
                                 items:
                                   properties:
                                     displayName:
-                                      description: The display name of the owner.
+                                      description: |-
+                                        The display name of the owner.
+                                        Display name of the grantee to grant access to.
                                       type: string
                                     id:
                                       description: |-
@@ -449,8 +464,13 @@ spec:
                                       type: string
                                     type:
                                       description: |-
-                                        Type of grantee. Valid values: CanonicalUser.
-                                        Type of grantee. Valid values: `CanonicalUser`
+                                        Type of grantee. Valid values: CanonicalUser, Group.
+                                        Type of grantee. Valid values: `CanonicalUser`, `Group`
+                                      type: string
+                                    uri:
+                                      description: |-
+                                        The uri of the grantee if type is Group.
+                                        The uri of the grantee if you are granting permissions to a predefined group.
                                       type: string
                                   type: object
                                 type: array

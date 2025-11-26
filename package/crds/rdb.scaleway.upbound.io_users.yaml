@@ -163,7 +163,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      database user password.
+                      database user password. The password must meet the following requirements based on ISO27001 standards:
                       Database user password
                     properties:
                       key:
@@ -290,7 +290,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      database user password.
+                      database user password. The password must meet the following requirements based on ISO27001 standards:
                       Database user password
                     properties:
                       key:

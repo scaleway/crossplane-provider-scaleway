@@ -24,7 +24,7 @@ const ProviderGoFilePath = "config/provider.go"
 const ExternalNameGoFilePath = "config/external_name.go"
 
 func parseTemplates() (*template.Template, error) {
-	templatePath := "config/config_templates.tmpl"
+	templatePath := "config/tools/generator/config_templates.tmpl"
 	tmpl, err := template.ParseFiles(templatePath)
 	if err != nil {
 		log.Fatalf("Failed to parse templates: %v", err)

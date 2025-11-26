@@ -538,6 +538,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PrivateIps != nil {
+		in, out := &in.PrivateIps, &out.PrivateIps
+		*out = make([]PrivateIpsInitParameters, len(*in))
+		copy(*out, *in)
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkInitParameters, len(*in))
@@ -548,6 +553,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
+		**out = **in
+	}
+	if in.Protected != nil {
+		in, out := &in.Protected, &out.Protected
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ReinstallOnConfigChanges != nil {
@@ -768,6 +778,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Protected != nil {
+		in, out := &in.Protected, &out.Protected
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ReinstallOnConfigChanges != nil {
 		in, out := &in.ReinstallOnConfigChanges, &out.ReinstallOnConfigChanges
 		*out = new(bool)
@@ -872,6 +887,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PrivateIps != nil {
+		in, out := &in.PrivateIps, &out.PrivateIps
+		*out = make([]PrivateIpsParameters, len(*in))
+		copy(*out, *in)
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkParameters, len(*in))
@@ -882,6 +902,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
+		**out = **in
+	}
+	if in.Protected != nil {
+		in, out := &in.Protected, &out.Protected
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ReinstallOnConfigChanges != nil {

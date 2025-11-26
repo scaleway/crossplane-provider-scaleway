@@ -68,6 +68,10 @@ type FunctionInitParameters struct {
 	// Privacy of the function. Can be either `private` or `public`
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the function is connected to.
+	// ID of the Private Network the container is connected to
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -85,6 +89,10 @@ type FunctionInitParameters struct {
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// The list of tags associated with the function.
+	// List of tags ["tag1", "tag2", ...] attached to the function.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
 	// Holds the max duration (in seconds) the function is allowed for responding to a request
@@ -160,6 +168,10 @@ type FunctionObservation struct {
 	// Privacy of the function. Can be either `private` or `public`
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the function is connected to.
+	// ID of the Private Network the container is connected to
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -175,6 +187,10 @@ type FunctionObservation struct {
 	// Execution environment of the function.
 	// Execution environment of the function.
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
+
+	// The list of tags associated with the function.
+	// List of tags ["tag1", "tag2", ...] attached to the function.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
 	// Holds the max duration (in seconds) the function is allowed for responding to a request
@@ -255,6 +271,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the function is connected to.
+	// ID of the Private Network the container is connected to
+	// +kubebuilder:validation:Optional
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
@@ -279,6 +300,11 @@ type FunctionParameters struct {
 	// The secret environment variables to be injected into your function at runtime.
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.SecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
+	// The list of tags associated with the function.
+	// List of tags ["tag1", "tag2", ...] attached to the function.
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
 	// Holds the max duration (in seconds) the function is allowed for responding to a request

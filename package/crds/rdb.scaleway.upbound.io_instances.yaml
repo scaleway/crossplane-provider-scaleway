@@ -99,8 +99,8 @@ spec:
                     type: boolean
                   engine:
                     description: |-
-                      Database Instance's engine version (e.g. PostgreSQL-11).
-                      Database's engine version id
+                      Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+                      Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
                     type: string
                   initSettings:
                     additionalProperties:
@@ -172,6 +172,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the resource.
+                      The private IPv4 address associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       List of Private Networks endpoints of the Database Instance.
@@ -367,8 +374,8 @@ spec:
                     type: boolean
                   engine:
                     description: |-
-                      Database Instance's engine version (e.g. PostgreSQL-11).
-                      Database's engine version id
+                      Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+                      Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
                     type: string
                   initSettings:
                     additionalProperties:
@@ -440,6 +447,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the resource.
+                      The private IPv4 address associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       List of Private Networks endpoints of the Database Instance.
@@ -814,8 +828,8 @@ spec:
                     type: number
                   engine:
                     description: |-
-                      Database Instance's engine version (e.g. PostgreSQL-11).
-                      Database's engine version id
+                      Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+                      Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
                     type: string
                   id:
                     description: The ID of the Database Instance.
@@ -903,10 +917,14 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The private IPv4 address.
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
                           type: string
                         id:
-                          description: The ID of the Database Instance.
+                          description: |-
+                            The ID of the Database Instance.
+                            The ID of the IPv4 address resource
                           type: string
                       type: object
                     type: array
@@ -1009,6 +1027,26 @@ spec:
                       List of tags ["tag1", "tag2", ...] attached to a database instance
                     items:
                       type: string
+                    type: array
+                  upgradableVersions:
+                    description: |-
+                      List of available engine versions for upgrade. Each version contains:
+                      List of available engine versions for upgrade
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Database Instance.
+                          type: string
+                        minorVersion:
+                          description: Minor version string (e.g., 15.5.0).
+                          type: string
+                        name:
+                          description: The name of the Database Instance.
+                          type: string
+                        version:
+                          description: Version string (e.g., 15.5).
+                          type: string
+                      type: object
                     type: array
                   userName:
                     description: |-

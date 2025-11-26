@@ -15,6 +15,10 @@ import (
 
 type InstanceInitParameters struct {
 
+	// Enable or disable automatic snapshot scheduling.
+	// Enable or disable automatic snapshot scheduling
+	IsSnapshotScheduleEnabled *bool `json:"isSnapshotScheduleEnabled,omitempty" tf:"is_snapshot_schedule_enabled,omitempty"`
+
 	// Name of the MongoDB® instance.
 	// Name of the MongoDB cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -22,7 +26,7 @@ type InstanceInitParameters struct {
 	// Number of nodes in the instance
 	NodeNumber *float64 `json:"nodeNumber,omitempty" tf:"node_number,omitempty"`
 
-	// The type of MongoDB® intance to create.
+	// The type of MongoDB® instance to create.
 	// Type of node to use for the instance
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -30,18 +34,23 @@ type InstanceInitParameters struct {
 	// Password of the user
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// The private IPv4 address associated with the instance.
+	// The private IPv4 address associated with the resource
+	PrivateIP []PrivateIPInitParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// Private Network endpoints of the Database Instance.
 	// Private network to expose your mongodb instance
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// The ID of the MongoDB® instance.
+	// (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network specs details.
+	// Public network endpoint configuration (no arguments).
 	// Public network specs details
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
+	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -53,11 +62,19 @@ type InstanceInitParameters struct {
 	// Snapshot ID to restore the MongoDB instance from
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// Snapshot schedule frequency in hours.
+	// Snapshot schedule frequency in hours
+	SnapshotScheduleFrequencyHours *float64 `json:"snapshotScheduleFrequencyHours,omitempty" tf:"snapshot_schedule_frequency_hours,omitempty"`
+
+	// Snapshot schedule retention in days.
+	// Snapshot schedule retention in days
+	SnapshotScheduleRetentionDays *float64 `json:"snapshotScheduleRetentionDays,omitempty" tf:"snapshot_schedule_retention_days,omitempty"`
+
 	// List of tags attached to the MongoDB® instance.
 	// List of tags ["tag1", "tag2", ...] attached to a MongoDB instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Name of the user created when the intance is created.
+	// Name of the user created when the instance is created.
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -83,6 +100,10 @@ type InstanceObservation struct {
 	// The ID of the MongoDB® instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Enable or disable automatic snapshot scheduling.
+	// Enable or disable automatic snapshot scheduling
+	IsSnapshotScheduleEnabled *bool `json:"isSnapshotScheduleEnabled,omitempty" tf:"is_snapshot_schedule_enabled,omitempty"`
+
 	// Name of the MongoDB® instance.
 	// Name of the MongoDB cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -90,22 +111,27 @@ type InstanceObservation struct {
 	// Number of nodes in the instance
 	NodeNumber *float64 `json:"nodeNumber,omitempty" tf:"node_number,omitempty"`
 
-	// The type of MongoDB® intance to create.
+	// The type of MongoDB® instance to create.
 	// Type of node to use for the instance
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// The private IPv4 address associated with the instance.
+	// The private IPv4 address associated with the resource
+	PrivateIP []PrivateIPObservation `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// Private Network endpoints of the Database Instance.
 	// Private network to expose your mongodb instance
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// The ID of the MongoDB® instance.
+	// (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network specs details.
+	// Public network endpoint configuration (no arguments).
 	// Public network specs details
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
+	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -117,6 +143,18 @@ type InstanceObservation struct {
 	// Snapshot ID to restore the MongoDB instance from
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// Snapshot schedule frequency in hours.
+	// Snapshot schedule frequency in hours
+	SnapshotScheduleFrequencyHours *float64 `json:"snapshotScheduleFrequencyHours,omitempty" tf:"snapshot_schedule_frequency_hours,omitempty"`
+
+	// Snapshot schedule retention in days.
+	// Snapshot schedule retention in days
+	SnapshotScheduleRetentionDays *float64 `json:"snapshotScheduleRetentionDays,omitempty" tf:"snapshot_schedule_retention_days,omitempty"`
+
+	// The PEM-encoded TLS certificate for the MongoDB® instance, if available.
+	// PEM-encoded TLS certificate for MongoDB
+	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
+
 	// List of tags attached to the MongoDB® instance.
 	// List of tags ["tag1", "tag2", ...] attached to a MongoDB instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -125,7 +163,7 @@ type InstanceObservation struct {
 	// The date and time of the last update of the MongoDB instance
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// Name of the user created when the intance is created.
+	// Name of the user created when the instance is created.
 	// Name of the user created when the cluster is created
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -144,6 +182,11 @@ type InstanceObservation struct {
 
 type InstanceParameters struct {
 
+	// Enable or disable automatic snapshot scheduling.
+	// Enable or disable automatic snapshot scheduling
+	// +kubebuilder:validation:Optional
+	IsSnapshotScheduleEnabled *bool `json:"isSnapshotScheduleEnabled,omitempty" tf:"is_snapshot_schedule_enabled,omitempty"`
+
 	// Name of the MongoDB® instance.
 	// Name of the MongoDB cluster
 	// +kubebuilder:validation:Optional
@@ -153,7 +196,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeNumber *float64 `json:"nodeNumber,omitempty" tf:"node_number,omitempty"`
 
-	// The type of MongoDB® intance to create.
+	// The type of MongoDB® instance to create.
 	// Type of node to use for the instance
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -163,21 +206,27 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// The private IPv4 address associated with the instance.
+	// The private IPv4 address associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIP []PrivateIPParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// Private Network endpoints of the Database Instance.
 	// Private network to expose your mongodb instance
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// The ID of the MongoDB® instance.
+	// (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network specs details.
+	// Public network endpoint configuration (no arguments).
 	// Public network specs details
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
+	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -192,12 +241,22 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// Snapshot schedule frequency in hours.
+	// Snapshot schedule frequency in hours
+	// +kubebuilder:validation:Optional
+	SnapshotScheduleFrequencyHours *float64 `json:"snapshotScheduleFrequencyHours,omitempty" tf:"snapshot_schedule_frequency_hours,omitempty"`
+
+	// Snapshot schedule retention in days.
+	// Snapshot schedule retention in days
+	// +kubebuilder:validation:Optional
+	SnapshotScheduleRetentionDays *float64 `json:"snapshotScheduleRetentionDays,omitempty" tf:"snapshot_schedule_retention_days,omitempty"`
+
 	// List of tags attached to the MongoDB® instance.
 	// List of tags ["tag1", "tag2", ...] attached to a MongoDB instance
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Name of the user created when the intance is created.
+	// Name of the user created when the instance is created.
 	// Name of the user created when the cluster is created
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
@@ -216,6 +275,23 @@ type InstanceParameters struct {
 	// Volume type of the instance
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type PrivateIPInitParameters struct {
+}
+
+type PrivateIPObservation struct {
+
+	// The private IPv4 address.
+	// The private IPv4 address
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the MongoDB® instance.
+	// The ID of the IPv4 address resource
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIPParameters struct {
 }
 
 type PrivateNetworkInitParameters struct {
@@ -257,6 +333,17 @@ type PrivateNetworkParameters struct {
 }
 
 type PublicNetworkInitParameters struct {
+
+	// The DNS record of your endpoint
+	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
+
+	// The ID of the MongoDB® instance.
+	// ID of the public network
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type PublicNetworkObservation struct {
@@ -274,6 +361,20 @@ type PublicNetworkObservation struct {
 }
 
 type PublicNetworkParameters struct {
+
+	// The DNS record of your endpoint
+	// +kubebuilder:validation:Optional
+	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
+
+	// The ID of the MongoDB® instance.
+	// ID of the public network
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 // InstanceSpec defines the desired state of Instance

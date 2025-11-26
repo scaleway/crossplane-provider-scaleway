@@ -80,6 +80,13 @@ spec:
                     items:
                       type: string
                     type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
                   bootType:
                     description: |-
                       The boot Type of the server. Possible values are: local, bootscript or rescue.
@@ -98,12 +105,19 @@ spec:
                       (Defaults to false) If true a dynamic IP will be attached to the server.
                       Enable dynamic IP on the server
                     type: boolean
-                  enableIpv6:
+                  filesystems:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      Determines if IPv6 is enabled for the server
-                    type: boolean
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                      type: object
+                    type: array
                   image:
                     description: |-
                       The UUID or the label of the base image used by the server. You can use this endpoint
@@ -190,8 +204,9 @@ spec:
                         type: object
                     type: object
                   ipIds:
-                    description: List of ID of reserved IPs that are attached to the
-                      server. Cannot be used with ip_id.
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
                     items:
                       type: string
                     type: array
@@ -281,11 +296,18 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instanceSDK
+                      List of private network to connect with your instance
                     items:
                       properties:
                         pnId:
@@ -313,7 +335,7 @@ spec:
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instanceSDK
+                      List of private IPv4 and IPv6 addresses attached to your instance
                     items:
                       type: object
                     type: array
@@ -334,8 +356,13 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instanceSDK termination
+                            Force deletion of the root volume on instance termination
                           type: boolean
+                        name:
+                          description: |-
+                            The name of the server.
+                            Name of the root volume
+                          type: string
                         sbsIops:
                           description: |-
                             Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
@@ -356,7 +383,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object
@@ -460,7 +487,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instanceSDK type of the server
+                      The instance type of the server
                     type: string
                   userData:
                     additionalProperties:
@@ -499,6 +526,13 @@ spec:
                     items:
                       type: string
                     type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
                   bootType:
                     description: |-
                       The boot Type of the server. Possible values are: local, bootscript or rescue.
@@ -517,12 +551,19 @@ spec:
                       (Defaults to false) If true a dynamic IP will be attached to the server.
                       Enable dynamic IP on the server
                     type: boolean
-                  enableIpv6:
+                  filesystems:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      Determines if IPv6 is enabled for the server
-                    type: boolean
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                      type: object
+                    type: array
                   image:
                     description: |-
                       The UUID or the label of the base image used by the server. You can use this endpoint
@@ -609,8 +650,9 @@ spec:
                         type: object
                     type: object
                   ipIds:
-                    description: List of ID of reserved IPs that are attached to the
-                      server. Cannot be used with ip_id.
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
                     items:
                       type: string
                     type: array
@@ -700,11 +742,18 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instanceSDK
+                      List of private network to connect with your instance
                     items:
                       properties:
                         pnId:
@@ -732,7 +781,7 @@ spec:
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instanceSDK
+                      List of private IPv4 and IPv6 addresses attached to your instance
                     items:
                       type: object
                     type: array
@@ -753,8 +802,13 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instanceSDK termination
+                            Force deletion of the root volume on instance termination
                           type: boolean
+                        name:
+                          description: |-
+                            The name of the server.
+                            Name of the root volume
+                          type: string
                         sbsIops:
                           description: |-
                             Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
@@ -775,7 +829,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object
@@ -879,7 +933,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instanceSDK type of the server
+                      The instance type of the server
                     type: string
                   userData:
                     additionalProperties:
@@ -1082,6 +1136,13 @@ spec:
                     items:
                       type: string
                     type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
                   bootType:
                     description: |-
                       The boot Type of the server. Possible values are: local, bootscript or rescue.
@@ -1100,12 +1161,24 @@ spec:
                       (Defaults to false) If true a dynamic IP will be attached to the server.
                       Enable dynamic IP on the server
                     type: boolean
-                  enableIpv6:
+                  filesystems:
                     description: |-
-                      (Defaults to false) Determines if IPv6 is enabled for the server.
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      Determines if IPv6 is enabled for the server
-                    type: boolean
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                        status:
+                          description: |-
+                            The private NIC state.
+                            The state of the filesystem
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the IP address resource.
                     type: string
@@ -1121,29 +1194,12 @@ spec:
                       The ID of the reserved IP for the server
                     type: string
                   ipIds:
-                    description: List of ID of reserved IPs that are attached to the
-                      server. Cannot be used with ip_id.
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
                     items:
                       type: string
                     type: array
-                  ipv6Address:
-                    description: |-
-                      The default ipv6 address routed to the server. ( Only set when enable_ipv6 is set to true )
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      The default public IPv6 address routed to the server.
-                    type: string
-                  ipv6Gateway:
-                    description: |-
-                      The ipv6 gateway address. ( Only set when enable_ipv6 is set to true )
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      The IPv6 gateway address
-                    type: string
-                  ipv6PrefixLength:
-                    description: |-
-                      The prefix length of the ipv6 subnet routed to the server. ( Only set when enable_ipv6 is set to true )
-                      Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-                      The IPv6 prefix length routed to the server.
-                    type: number
                   name:
                     description: |-
                       The name of the server.
@@ -1161,25 +1217,24 @@ spec:
                     type: string
                   placementGroupPolicyRespected:
                     description: |-
-                      (Deprecated) Always false, use instance_placement_group ressource to known when the placement group policy is respected.
+                      (Deprecated) Always false, use instance_placement_group resource to known when the placement group policy is respected.
                       True when the placement group policy is respected
                     type: boolean
-                  privateIp:
-                    description: |-
-                      The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
-                      The Scaleway internal IP address of the server
-                    type: string
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the resource.
-                      List of private IPv4 addresses associated with the resource
+                      List of private IPv4 and IPv6 addresses associated with the resource
                     items:
                       properties:
                         address:
-                          description: The private IP address.
+                          description: |-
+                            The private IP address.
+                            The private IP address
                           type: string
                         id:
-                          description: The ID of the IP address resource.
+                          description: |-
+                            The ID of the IP address resource.
+                            The ID of the IP address resource
                           type: string
                       type: object
                     type: array
@@ -1187,7 +1242,7 @@ spec:
                     description: |-
                       The private network associated with the server.
                       Use the pn_id key to attach a private_network on your instance.
-                      List of private network to connect with your instanceSDK
+                      List of private network to connect with your instance
                     items:
                       properties:
                         macAddress:
@@ -1227,15 +1282,10 @@ spec:
                       Set to true to activate server protection option.
                       If true, the instance is protected against accidental deletion via the Scaleway API.
                     type: boolean
-                  publicIp:
-                    description: |-
-                      The public IP address of the server (Deprecated use public_ips instead).
-                      The public IPv4 address of the server
-                    type: string
                   publicIps:
                     description: |-
                       The list of public IPs of the server.
-                      List of public IPs attached to your instanceSDK
+                      List of private IPv4 and IPv6 addresses attached to your instance
                     items:
                       properties:
                         address:
@@ -1243,10 +1293,35 @@ spec:
                             The private IP address.
                             IP Address
                           type: string
+                        dynamic:
+                          description: |-
+                            Whether the IP is dynamic.
+                            Whether the IP is dynamic
+                          type: boolean
+                        family:
+                          description: |-
+                            The IP address' family.
+                            IP address family (inet or inet6)
+                          type: string
+                        gateway:
+                          description: |-
+                            The IP of the Gateway associated with the IP.
+                            Gateway's IP address
+                          type: string
                         id:
                           description: |-
                             The ID of the IP address resource.
                             ID of the IP
+                          type: string
+                        netmask:
+                          description: |-
+                            The CIDR netmask of the IP.
+                            CIDR netmask
+                          type: string
+                        provisioningMode:
+                          description: |-
+                            The provisioning mode of the IP
+                            Provisioning mode of the IP address
                           type: string
                       type: object
                     type: array
@@ -1267,7 +1342,7 @@ spec:
                         deleteOnTermination:
                           description: |-
                             (Defaults to true) Forces deletion of the root volume on instance termination.
-                            Force deletion of the root volume on instanceSDK termination
+                            Force deletion of the root volume on instance termination
                           type: boolean
                         name:
                           description: |-
@@ -1294,7 +1369,7 @@ spec:
                           type: string
                         volumeType:
                           description: |-
-                            Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
                             Volume type of the root volume
                           type: string
                       type: object
@@ -1322,7 +1397,7 @@ spec:
                       You find all the available types on the pricing page.
                       Updates to this field will migrate the server, local storage constraint must be respected. More info.
                       Use replace_on_type_change to trigger replacement instead of migration.
-                      The instanceSDK type of the server
+                      The instance type of the server
                     type: string
                   userData:
                     additionalProperties:

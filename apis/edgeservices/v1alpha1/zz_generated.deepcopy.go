@@ -309,6 +309,11 @@ func (in *CacheStageInitParameters) DeepCopyInto(out *CacheStageInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
+	if in.IncludeCookies != nil {
+		in, out := &in.IncludeCookies, &out.IncludeCookies
+		*out = new(bool)
+		**out = **in
+	}
 	if in.PipelineID != nil {
 		in, out := &in.PipelineID, &out.PipelineID
 		*out = new(string)
@@ -418,6 +423,11 @@ func (in *CacheStageObservation) DeepCopyInto(out *CacheStageObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IncludeCookies != nil {
+		in, out := &in.IncludeCookies, &out.IncludeCookies
+		*out = new(bool)
+		**out = **in
+	}
 	if in.PipelineID != nil {
 		in, out := &in.PipelineID, &out.PipelineID
 		*out = new(string)
@@ -488,6 +498,11 @@ func (in *CacheStageParameters) DeepCopyInto(out *CacheStageParameters) {
 	if in.FallbackTTL != nil {
 		in, out := &in.FallbackTTL, &out.FallbackTTL
 		*out = new(float64)
+		**out = **in
+	}
+	if in.IncludeCookies != nil {
+		in, out := &in.IncludeCookies, &out.IncludeCookies
+		*out = new(bool)
 		**out = **in
 	}
 	if in.PipelineID != nil {
@@ -714,6 +729,11 @@ func (in *DNSStageObservation) DeepCopyInto(out *DNSStageObservation) {
 	}
 	if in.CreatedAt != nil {
 		in, out := &in.CreatedAt, &out.CreatedAt
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultFqdn != nil {
+		in, out := &in.DefaultFqdn, &out.DefaultFqdn
 		*out = new(string)
 		**out = **in
 	}

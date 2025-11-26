@@ -12,12 +12,15 @@ import (
 
 	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/account/v1alpha1"
 	v1alpha1applesilicon "github.com/scaleway/crossplane-provider-scaleway/apis/applesilicon/v1alpha1"
+	v1alpha1autoscaling "github.com/scaleway/crossplane-provider-scaleway/apis/autoscaling/v1alpha1"
 	v1alpha1baremetal "github.com/scaleway/crossplane-provider-scaleway/apis/baremetal/v1alpha1"
 	v1alpha1block "github.com/scaleway/crossplane-provider-scaleway/apis/block/v1alpha1"
 	v1alpha1cockpit "github.com/scaleway/crossplane-provider-scaleway/apis/cockpit/v1alpha1"
 	v1alpha1container "github.com/scaleway/crossplane-provider-scaleway/apis/container/v1alpha1"
+	v1alpha1datawarehouse "github.com/scaleway/crossplane-provider-scaleway/apis/datawarehouse/v1alpha1"
 	v1alpha1domain "github.com/scaleway/crossplane-provider-scaleway/apis/domain/v1alpha1"
 	v1alpha1edgeservices "github.com/scaleway/crossplane-provider-scaleway/apis/edgeservices/v1alpha1"
+	v1alpha1file "github.com/scaleway/crossplane-provider-scaleway/apis/file/v1alpha1"
 	v1alpha1flexibleip "github.com/scaleway/crossplane-provider-scaleway/apis/flexibleip/v1alpha1"
 	v1alpha1function "github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1"
 	v1alpha1iam "github.com/scaleway/crossplane-provider-scaleway/apis/iam/v1alpha1"
@@ -27,6 +30,7 @@ import (
 	v1alpha1ipam "github.com/scaleway/crossplane-provider-scaleway/apis/ipam/v1alpha1"
 	v1alpha1jobs "github.com/scaleway/crossplane-provider-scaleway/apis/jobs/v1alpha1"
 	v1alpha1k8s "github.com/scaleway/crossplane-provider-scaleway/apis/k8s/v1alpha1"
+	v1alpha1keymanager "github.com/scaleway/crossplane-provider-scaleway/apis/keymanager/v1alpha1"
 	v1alpha1lb "github.com/scaleway/crossplane-provider-scaleway/apis/lb/v1alpha1"
 	v1alpha1mnq "github.com/scaleway/crossplane-provider-scaleway/apis/mnq/v1alpha1"
 	v1alpha1mongodb "github.com/scaleway/crossplane-provider-scaleway/apis/mongodb/v1alpha1"
@@ -47,12 +51,15 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1applesilicon.SchemeBuilder.AddToScheme,
+		v1alpha1autoscaling.SchemeBuilder.AddToScheme,
 		v1alpha1baremetal.SchemeBuilder.AddToScheme,
 		v1alpha1block.SchemeBuilder.AddToScheme,
 		v1alpha1cockpit.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
+		v1alpha1datawarehouse.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1edgeservices.SchemeBuilder.AddToScheme,
+		v1alpha1file.SchemeBuilder.AddToScheme,
 		v1alpha1flexibleip.SchemeBuilder.AddToScheme,
 		v1alpha1function.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
@@ -62,6 +69,7 @@ func init() {
 		v1alpha1ipam.SchemeBuilder.AddToScheme,
 		v1alpha1jobs.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
+		v1alpha1keymanager.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
 		v1alpha1mnq.SchemeBuilder.AddToScheme,
 		v1alpha1mongodb.SchemeBuilder.AddToScheme,

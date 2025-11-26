@@ -508,28 +508,11 @@ spec:
                       Specs of the additional volumes attached to the image
                     items:
                       properties:
-                        creationDate:
-                          description: Date of the volume creation.
-                          type: string
-                        exportUri:
-                          description: The export URI of the volume.
-                          type: string
                         id:
                           description: The ID of the volume.
                           type: string
-                        modificationDate:
-                          description: Date of volume latest update.
-                          type: string
                         name:
                           description: The name of the volume.
-                          type: string
-                        organization:
-                          description: The organization ID the volume is associated
-                            with.
-                          type: string
-                        project:
-                          description: ID of the project the volume is associated
-                            with
                           type: string
                         server:
                           additionalProperties:
@@ -541,9 +524,6 @@ spec:
                         size:
                           description: The size of the volume.
                           type: number
-                        state:
-                          description: State of the volume.
-                          type: string
                         tags:
                           description: List of tags associated with the volume.
                           items:
@@ -551,10 +531,7 @@ spec:
                           type: array
                         volumeType:
                           description: The type of volume, possible values are l_ssd
-                            and b_ssd.
-                          type: string
-                        zone:
-                          description: The zone in which the volume is.
+                            and sbs_snapshot.
                           type: string
                       type: object
                     type: array
@@ -601,6 +578,27 @@ spec:
                       Set to true if the image is public.
                       If true, the image will be public
                     type: boolean
+                  rootVolume:
+                    description: |-
+                      The description of the root volume attached to the image.
+                      Specs of the additional volumes attached to the image
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the volume.
+                          type: string
+                        name:
+                          description: The name of the volume.
+                          type: string
+                        size:
+                          description: The size of the volume.
+                          type: number
+                        volumeType:
+                          description: The type of volume, possible values are l_ssd
+                            and sbs_snapshot.
+                          type: string
+                      type: object
+                    type: array
                   rootVolumeId:
                     description: |-
                       The ID of the snapshot of the volume to be used as root in the image.

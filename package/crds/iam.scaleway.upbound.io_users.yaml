@@ -74,14 +74,63 @@ spec:
                 properties:
                   email:
                     description: |-
-                      The email of the IAM user.
-                      The description of the iam user
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
+                    type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
                     type: string
                   organizationId:
                     description: |-
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  passwordSecretRef:
+                    description: |-
+                      The password for first access.
+                      The member's password for first access
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
                   tags:
                     description: |-
                       The tags associated with the user.
@@ -89,6 +138,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -105,14 +159,63 @@ spec:
                 properties:
                   email:
                     description: |-
-                      The email of the IAM user.
-                      The description of the iam user
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
+                    type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
                     type: string
                   organizationId:
                     description: |-
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  passwordSecretRef:
+                    description: |-
+                      The password for first access.
+                      The member's password for first access
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
                   tags:
                     description: |-
                       The tags associated with the user.
@@ -120,6 +223,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -293,6 +401,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
                 || (has(self.initProvider) && has(self.initProvider.email))'
+            - message: spec.forProvider.username is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)
+                || (has(self.initProvider) && has(self.initProvider.username))'
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -301,7 +413,7 @@ spec:
                   accountRootUserId:
                     description: |-
                       The ID of the account root user associated with the user.
-                      The ID of the account root user associated with the iam user.
+                      The ID of the account root user associated with the iam user
                     type: string
                   createdAt:
                     description: |-
@@ -315,8 +427,13 @@ spec:
                     type: boolean
                   email:
                     description: |-
-                      The email of the IAM user.
-                      The description of the iam user
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
                     type: string
                   id:
                     description: The ID of the user (UUID format).
@@ -326,6 +443,21 @@ spec:
                       The date of the last login.
                       The date and time of last login of the iam user
                     type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
+                    type: string
+                  locked:
+                    description: |-
+                      Whether the user is locked.
+                      Defines whether the user is locked
+                    type: boolean
                   mfa:
                     description: |-
                       Whether the MFA is enabled.
@@ -336,10 +468,25 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
                   status:
                     description: |-
                       The status of user invitation. Check the possible values in the API doc.
-                      The status of user invitation.
+                      The status of user invitation
                     type: string
                   tags:
                     description: |-
@@ -357,6 +504,11 @@ spec:
                     description: |-
                       The date and time of the last update of the IAM user.
                       The date and time of the last update of the iam user
+                    type: string
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
                     type: string
                 type: object
               conditions:

@@ -15,6 +15,10 @@ import (
 
 type VPCInitParameters struct {
 
+	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// Defines whether the VPC advertises custom routes between its Private Networks
+	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
+
 	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
@@ -41,6 +45,10 @@ type VPCObservation struct {
 	// Date and time of VPC's creation (RFC 3339 format).
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// Defines whether the VPC advertises custom routes between its Private Networks
+	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
 
 	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
 	// Enable routing between Private Networks in the VPC
@@ -79,6 +87,11 @@ type VPCObservation struct {
 }
 
 type VPCParameters struct {
+
+	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// Defines whether the VPC advertises custom routes between its Private Networks
+	// +kubebuilder:validation:Optional
+	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
 
 	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
 	// Enable routing between Private Networks in the VPC

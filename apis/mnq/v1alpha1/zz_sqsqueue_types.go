@@ -13,6 +13,41 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeadLetterQueueInitParameters struct {
+
+	// The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+	// The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+	// The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+	MaxReceiveCount *float64 `json:"maxReceiveCount,omitempty" tf:"max_receive_count,omitempty"`
+}
+
+type DeadLetterQueueObservation struct {
+
+	// The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+	// The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+	// The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+	MaxReceiveCount *float64 `json:"maxReceiveCount,omitempty" tf:"max_receive_count,omitempty"`
+}
+
+type DeadLetterQueueParameters struct {
+
+	// The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+	// The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+	// The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+	// +kubebuilder:validation:Optional
+	MaxReceiveCount *float64 `json:"maxReceiveCount" tf:"max_receive_count,omitempty"`
+}
+
 type SQSQueueInitParameters struct {
 
 	// The access key of the SQS queue.
@@ -22,6 +57,10 @@ type SQSQueueInitParameters struct {
 	// Specifies whether to enable content-based deduplication. Defaults to false.
 	// Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
+
+	// Configuration for the dead letter queue. See Dead Letter Queue below for details.
+	// Configuration for the dead-letter queue
+	DeadLetterQueue []DeadLetterQueueInitParameters `json:"deadLetterQueue,omitempty" tf:"dead_letter_queue,omitempty"`
 
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo
@@ -89,9 +128,16 @@ type SQSQueueInitParameters struct {
 
 type SQSQueueObservation struct {
 
+	// The ARN of the queue
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Specifies whether to enable content-based deduplication. Defaults to false.
 	// Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
+
+	// Configuration for the dead letter queue. See Dead Letter Queue below for details.
+	// Configuration for the dead-letter queue
+	DeadLetterQueue []DeadLetterQueueObservation `json:"deadLetterQueue,omitempty" tf:"dead_letter_queue,omitempty"`
 
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo
@@ -152,6 +198,11 @@ type SQSQueueParameters struct {
 	// Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
 	// +kubebuilder:validation:Optional
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
+
+	// Configuration for the dead letter queue. See Dead Letter Queue below for details.
+	// Configuration for the dead-letter queue
+	// +kubebuilder:validation:Optional
+	DeadLetterQueue []DeadLetterQueueParameters `json:"deadLetterQueue,omitempty" tf:"dead_letter_queue,omitempty"`
 
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.
 	// Whether the queue is a FIFO queue. If true, the queue name must end with .fifo

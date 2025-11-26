@@ -38,7 +38,7 @@ type VolumeInitParameters struct {
 	// The tags associated with the volume
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume. The possible values are: b_ssd (Block SSD), l_ssd (Local SSD), scratch (Local Scratch SSD).
+	// The type of the volume. The possible values are: l_ssd (Local SSD), scratch (Local Scratch SSD).
 	// The volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -83,7 +83,7 @@ type VolumeObservation struct {
 	// The tags associated with the volume
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume. The possible values are: b_ssd (Block SSD), l_ssd (Local SSD), scratch (Local Scratch SSD).
+	// The type of the volume. The possible values are: l_ssd (Local SSD), scratch (Local Scratch SSD).
 	// The volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -123,7 +123,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume. The possible values are: b_ssd (Block SSD), l_ssd (Local SSD), scratch (Local Scratch SSD).
+	// The type of the volume. The possible values are: l_ssd (Local SSD), scratch (Local Scratch SSD).
 	// The volume type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

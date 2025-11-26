@@ -22,7 +22,7 @@ type ACLInitParameters struct {
 	// Description of the ACL
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+	// The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
 	// The ACL match rule
 	Match []MatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -37,13 +37,14 @@ type ACLObservation struct {
 	// Action to undertake when an ACL filter matches
 	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
+	// The date and time the frontend was created.
 	// IsDate and time of ACL's creation (RFC 3339 format)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// Description of the ACL
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+	// The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
 	// The ACL match rule
 	Match []MatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -51,6 +52,7 @@ type ACLObservation struct {
 	// The ACL name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The date and time the frontend resource was updated.
 	// IsDate and time of ACL's update (RFC 3339 format)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -66,7 +68,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ACL match rule. At least ip_subnet or http_filter and http_filter_value are required.
+	// The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
 	// The ACL match rule
 	// +kubebuilder:validation:Optional
 	Match []MatchParameters `json:"match" tf:"match,omitempty"`
@@ -139,6 +141,10 @@ type FrontendInitParameters struct {
 	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
 	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
 
+	// (Default: false) Defines whether to enable access logs on the frontend.
+	// Defines whether to enable access logs on the frontend
+	EnableAccessLogs *bool `json:"enableAccessLogs,omitempty" tf:"enable_access_logs,omitempty"`
+
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
@@ -196,6 +202,14 @@ type FrontendObservation struct {
 	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
 	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
 
+	// The date and time the frontend was created.
+	// The date and time of the creation of the frontend
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// (Default: false) Defines whether to enable access logs on the frontend.
+	// Defines whether to enable access logs on the frontend
+	EnableAccessLogs *bool `json:"enableAccessLogs,omitempty" tf:"enable_access_logs,omitempty"`
+
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
 	EnableHttp3 *bool `json:"enableHttp3,omitempty" tf:"enable_http3,omitempty"`
@@ -223,6 +237,10 @@ type FrontendObservation struct {
 	// Maximum inactivity time on the client side. (e.g. 1s)
 	// Set the maximum inactivity time on the client side
 	TimeoutClient *string `json:"timeoutClient,omitempty" tf:"timeout_client,omitempty"`
+
+	// The date and time the frontend resource was updated.
+	// The date and time of the last update of the frontend
+	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type FrontendParameters struct {
@@ -255,6 +273,11 @@ type FrontendParameters struct {
 	// Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
 	// +kubebuilder:validation:Optional
 	ConnectionRateLimit *float64 `json:"connectionRateLimit,omitempty" tf:"connection_rate_limit,omitempty"`
+
+	// (Default: false) Defines whether to enable access logs on the frontend.
+	// Defines whether to enable access logs on the frontend
+	// +kubebuilder:validation:Optional
+	EnableAccessLogs *bool `json:"enableAccessLogs,omitempty" tf:"enable_access_logs,omitempty"`
 
 	// (Default: false) Activates HTTP/3 protocol.
 	// Activates HTTP/3 protocol
@@ -314,13 +337,17 @@ type MatchInitParameters struct {
 	// A list of possible values to match for the given HTTP filter
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
 
 	// If set to true, the condition will be of type "unless".
 	// If set to true, the condition will be of type "unless"
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+	// Defines whether Edge Services IPs should be matched
+	IpsEdgeServices *bool `json:"ipsEdgeServices,omitempty" tf:"ips_edge_services,omitempty"`
 }
 
 type MatchObservation struct {
@@ -340,13 +367,17 @@ type MatchObservation struct {
 	// A list of possible values to match for the given HTTP filter
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
 
 	// If set to true, the condition will be of type "unless".
 	// If set to true, the condition will be of type "unless"
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+	// Defines whether Edge Services IPs should be matched
+	IpsEdgeServices *bool `json:"ipsEdgeServices,omitempty" tf:"ips_edge_services,omitempty"`
 }
 
 type MatchParameters struct {
@@ -369,7 +400,7 @@ type MatchParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPFilterValue []*string `json:"httpFilterValue,omitempty" tf:"http_filter_value,omitempty"`
 
-	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match.
+	// A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
 	// A list of IPs or CIDR v4/v6 addresses of the client of the session to match
 	// +kubebuilder:validation:Optional
 	IPSubnet []*string `json:"ipSubnet,omitempty" tf:"ip_subnet,omitempty"`
@@ -378,6 +409,11 @@ type MatchParameters struct {
 	// If set to true, the condition will be of type "unless"
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
+
+	// Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+	// Defines whether Edge Services IPs should be matched
+	// +kubebuilder:validation:Optional
+	IpsEdgeServices *bool `json:"ipsEdgeServices,omitempty" tf:"ips_edge_services,omitempty"`
 }
 
 type RedirectInitParameters struct {

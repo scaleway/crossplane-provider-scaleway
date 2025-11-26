@@ -15,6 +15,10 @@ import (
 
 type FunctionNamespaceInitParameters struct {
 
+	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
+
 	// The description of the namespace.
 	// The description of the function namespace
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -38,11 +42,16 @@ type FunctionNamespaceInitParameters struct {
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the function namespace
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FunctionNamespaceObservation struct {
+
+	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the function namespace
@@ -80,11 +89,17 @@ type FunctionNamespaceObservation struct {
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the function namespace
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FunctionNamespaceParameters struct {
+
+	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
+	// Activate VPC integration for the namespace
+	// +kubebuilder:validation:Optional
+	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the function namespace
@@ -117,6 +132,7 @@ type FunctionNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.SecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
+	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the function namespace
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

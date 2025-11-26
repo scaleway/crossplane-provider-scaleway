@@ -26,6 +26,10 @@ type ObjectInitParameters struct {
 	// Content of the file to upload, should be base64 encoded
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
 
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
 	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file
 	File *string `json:"file,omitempty" tf:"file,omitempty"`
@@ -81,6 +85,10 @@ type ObjectObservation struct {
 	// The base64-encoded content of the file to upload. Only one of file, content or content_base64 can be defined.
 	// Content of the file to upload, should be base64 encoded
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
+
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file
@@ -139,6 +147,11 @@ type ObjectParameters struct {
 	// Content of the file to upload, should be base64 encoded
 	// +kubebuilder:validation:Optional
 	ContentBase64 *string `json:"contentBase64,omitempty" tf:"content_base64,omitempty"`
+
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	// The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// The name of the file to upload, defaults to an empty file.
 	// Path of the file to upload, defaults to an empty file

@@ -226,11 +226,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  keepEmptyZone:
-                    description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-                      When destroy a resource record, if a zone have only NS, delete the zone
-                    type: boolean
                   name:
                     description: |-
                       The name of the record (can be an empty string for a root record).
@@ -460,11 +455,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  keepEmptyZone:
-                    description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-                      When destroy a resource record, if a zone have only NS, delete the zone
-                    type: boolean
                   name:
                     description: |-
                       The name of the record (can be an empty string for a root record).
@@ -796,11 +786,6 @@ spec:
                   id:
                     description: The ID of the record.
                     type: string
-                  keepEmptyZone:
-                    description: |-
-                      When destroying a resource, if only NS records remain and this is set to false, the zone will be deleted. Note that each zone not deleted will be billed.
-                      When destroy a resource record, if a zone have only NS, delete the zone
-                    type: boolean
                   name:
                     description: |-
                       The name of the record (can be an empty string for a root record).

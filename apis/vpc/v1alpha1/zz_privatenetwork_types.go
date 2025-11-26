@@ -107,6 +107,10 @@ type IPv6SubnetsParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
+	// Defines whether default v4 and v6 routes are propagated for this Private Network.
+	// Defines whether default v4 and v6 routes are propagated for this Private Network
+	EnableDefaultRoutePropagation *bool `json:"enableDefaultRoutePropagation,omitempty" tf:"enable_default_route_propagation,omitempty"`
+
 	// The IPv4 subnet to associate with the Private Network.
 	// The IPv4 subnet associated with the private network
 	IPv4Subnet []IPv4SubnetInitParameters `json:"ipv4Subnet,omitempty" tf:"ipv4_subnet,omitempty"`
@@ -159,6 +163,10 @@ type PrivateNetworkObservation struct {
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Defines whether default v4 and v6 routes are propagated for this Private Network.
+	// Defines whether default v4 and v6 routes are propagated for this Private Network
+	EnableDefaultRoutePropagation *bool `json:"enableDefaultRoutePropagation,omitempty" tf:"enable_default_route_propagation,omitempty"`
+
 	// The ID of the Private Network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -208,6 +216,11 @@ type PrivateNetworkObservation struct {
 }
 
 type PrivateNetworkParameters struct {
+
+	// Defines whether default v4 and v6 routes are propagated for this Private Network.
+	// Defines whether default v4 and v6 routes are propagated for this Private Network
+	// +kubebuilder:validation:Optional
+	EnableDefaultRoutePropagation *bool `json:"enableDefaultRoutePropagation,omitempty" tf:"enable_default_route_propagation,omitempty"`
 
 	// The IPv4 subnet to associate with the Private Network.
 	// The IPv4 subnet associated with the private network

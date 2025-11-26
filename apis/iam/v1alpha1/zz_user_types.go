@@ -15,23 +15,55 @@ import (
 
 type UserInitParameters struct {
 
-	// The email of the IAM user.
-	// The description of the iam user
+	// The email of the IAM user. For Guest users, this argument is not editable.
+	// The email of the user
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The user's first name.
+	// The member's first name
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// The user's last name.
+	// The member's last name
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The user's locale (e.g., en_US).
+	// The member's locale
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
 	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The password for first access.
+	// The member's password for first access
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The user's phone number.
+	// The member's phone number
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// Whether or not to send an email containing the password for first access.
+	// Whether or not to send an email containing the member's password
+	SendPasswordEmail *bool `json:"sendPasswordEmail,omitempty" tf:"send_password_email,omitempty"`
+
+	// Whether or not to send a welcome email that includes onboarding information.
+	// Whether or not to send a welcome email that includes onboarding information
+	SendWelcomeEmail *bool `json:"sendWelcomeEmail,omitempty" tf:"send_welcome_email,omitempty"`
+
 	// The tags associated with the user.
 	// The tags associated with the user
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The username of the IAM user.
+	// The member's username
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserObservation struct {
 
 	// The ID of the account root user associated with the user.
-	// The ID of the account root user associated with the iam user.
+	// The ID of the account root user associated with the iam user
 	AccountRootUserID *string `json:"accountRootUserId,omitempty" tf:"account_root_user_id,omitempty"`
 
 	// The date and time of the creation of the IAM user.
@@ -42,9 +74,13 @@ type UserObservation struct {
 	// Whether or not the iam user is editable
 	Deletable *bool `json:"deletable,omitempty" tf:"deletable,omitempty"`
 
-	// The email of the IAM user.
-	// The description of the iam user
+	// The email of the IAM user. For Guest users, this argument is not editable.
+	// The email of the user
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The user's first name.
+	// The member's first name
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// The ID of the user (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -52,6 +88,18 @@ type UserObservation struct {
 	// The date of the last login.
 	// The date and time of last login of the iam user
 	LastLoginAt *string `json:"lastLoginAt,omitempty" tf:"last_login_at,omitempty"`
+
+	// The user's last name.
+	// The member's last name
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The user's locale (e.g., en_US).
+	// The member's locale
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
+
+	// Whether the user is locked.
+	// Defines whether the user is locked
+	Locked *bool `json:"locked,omitempty" tf:"locked,omitempty"`
 
 	// Whether the MFA is enabled.
 	// Whether or not the MFA is enabled
@@ -61,8 +109,20 @@ type UserObservation struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The user's phone number.
+	// The member's phone number
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// Whether or not to send an email containing the password for first access.
+	// Whether or not to send an email containing the member's password
+	SendPasswordEmail *bool `json:"sendPasswordEmail,omitempty" tf:"send_password_email,omitempty"`
+
+	// Whether or not to send a welcome email that includes onboarding information.
+	// Whether or not to send a welcome email that includes onboarding information
+	SendWelcomeEmail *bool `json:"sendWelcomeEmail,omitempty" tf:"send_welcome_email,omitempty"`
+
 	// The status of user invitation. Check the possible values in the API doc.
-	// The status of user invitation.
+	// The status of user invitation
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The tags associated with the user.
@@ -76,24 +136,68 @@ type UserObservation struct {
 	// The date and time of the last update of the IAM user.
 	// The date and time of the last update of the iam user
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// The username of the IAM user.
+	// The member's username
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserParameters struct {
 
-	// The email of the IAM user.
-	// The description of the iam user
+	// The email of the IAM user. For Guest users, this argument is not editable.
+	// The email of the user
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The user's first name.
+	// The member's first name
+	// +kubebuilder:validation:Optional
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// The user's last name.
+	// The member's last name
+	// +kubebuilder:validation:Optional
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// The user's locale (e.g., en_US).
+	// The member's locale
+	// +kubebuilder:validation:Optional
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
 	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
 	// ID of organization the resource is associated to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The password for first access.
+	// The member's password for first access
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The user's phone number.
+	// The member's phone number
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// Whether or not to send an email containing the password for first access.
+	// Whether or not to send an email containing the member's password
+	// +kubebuilder:validation:Optional
+	SendPasswordEmail *bool `json:"sendPasswordEmail,omitempty" tf:"send_password_email,omitempty"`
+
+	// Whether or not to send a welcome email that includes onboarding information.
+	// Whether or not to send a welcome email that includes onboarding information
+	// +kubebuilder:validation:Optional
+	SendWelcomeEmail *bool `json:"sendWelcomeEmail,omitempty" tf:"send_welcome_email,omitempty"`
+
 	// The tags associated with the user.
 	// The tags associated with the user
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The username of the IAM user.
+	// The member's username
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -133,6 +237,7 @@ type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email) || (has(self.initProvider) && has(self.initProvider.email))",message="spec.forProvider.email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || (has(self.initProvider) && has(self.initProvider.username))",message="spec.forProvider.username is a required parameter"
 	Spec   UserSpec   `json:"spec"`
 	Status UserStatus `json:"status,omitempty"`
 }

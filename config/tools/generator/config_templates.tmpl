@@ -17,7 +17,7 @@ func Configure(p *config.Provider) {
         r.References["{{$key}}"] = config.Reference{
             TerraformName: "{{$value}}",
         }
-        {{ end }}
+        {{- end }}
     })
 }
 {{ end }}
@@ -25,12 +25,12 @@ func Configure(p *config.Provider) {
 {{ define "updateExistingConfigTemplate" }}
     p.AddResourceConfigurator("{{ .TerraformResourceName }}", func(r *config.Resource) {
         r.ExternalName = config.IdentifierFromProvider
-        r.ShortGroup = "{{ .ShortGroup }}"
+        r.ShortGroup = shortGroup
         r.Kind = "{{ .Kind }}"
         {{ range $key, $value := .References }}
         r.References["{{$key}}"] = config.Reference{
             TerraformName: "{{$value}}",
         }
-    {{ end }}
+        {{- end }}
     })
 {{ end }}

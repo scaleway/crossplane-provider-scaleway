@@ -72,6 +72,20 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
                   cpuLimit:
                     description: |-
                       The amount of vCPU computing resources to allocate to each container.
@@ -251,6 +265,11 @@ spec:
                     description: |-
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
+                    type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
                     type: string
                   protocol:
                     description: |-
@@ -320,6 +339,13 @@ spec:
                       The container status.
                       The container status
                     type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
@@ -339,6 +365,20 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
                   cpuLimit:
                     description: |-
                       The amount of vCPU computing resources to allocate to each container.
@@ -519,6 +559,11 @@ spec:
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
                     type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
                   protocol:
                     description: |-
                       The communication protocol http1 or h2c. Defaults to http1.
@@ -576,6 +621,13 @@ spec:
                       The container status.
                       The container status
                     type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
@@ -754,6 +806,20 @@ spec:
             properties:
               atProvider:
                 properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
                   cpuLimit:
                     description: |-
                       The amount of vCPU computing resources to allocate to each container.
@@ -876,6 +942,11 @@ spec:
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
                       The privacy type define the way to authenticate to your container
                     type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
                   protocol:
                     description: |-
                       The communication protocol http1 or h2c. Defaults to http1.
@@ -929,6 +1000,13 @@ spec:
                       The container status.
                       The container status
                     type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.

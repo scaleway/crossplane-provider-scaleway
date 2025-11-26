@@ -1,0 +1,83 @@
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: lbpn01
+  name: lbpn01
+spec:
+  forProvider:
+    ipamIpIdsRefs:
+    - name: ip01
+    lbIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb01
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+
+---
+
+apiVersion: ipam.scaleway.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: ip01
+  name: ip01
+spec:
+  forProvider:
+    address: 172.16.32.7
+    source:
+    - privateNetworkIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: pn01
+
+---
+
+apiVersion: lb.scaleway.upbound.io/v1alpha1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: lb01
+  name: lb01
+spec:
+  forProvider:
+    name: test-lb-private-network
+    type: LB-S
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+spec:
+  forProvider:
+    name: my vpc
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+spec:
+  forProvider:
+    ipv4Subnet:
+    - subnet: 172.16.32.0/22
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01

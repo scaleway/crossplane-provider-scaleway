@@ -11,12 +11,15 @@ import (
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/scaleway/crossplane-provider-scaleway/config/account"
 	"github.com/scaleway/crossplane-provider-scaleway/config/applesilicon"
+	"github.com/scaleway/crossplane-provider-scaleway/config/autoscaling"
 	"github.com/scaleway/crossplane-provider-scaleway/config/baremetal"
 	"github.com/scaleway/crossplane-provider-scaleway/config/block"
 	"github.com/scaleway/crossplane-provider-scaleway/config/cockpit"
 	"github.com/scaleway/crossplane-provider-scaleway/config/container"
+	"github.com/scaleway/crossplane-provider-scaleway/config/datawarehouse"
 	"github.com/scaleway/crossplane-provider-scaleway/config/domain"
 	"github.com/scaleway/crossplane-provider-scaleway/config/edgeservices"
+	"github.com/scaleway/crossplane-provider-scaleway/config/file"
 	"github.com/scaleway/crossplane-provider-scaleway/config/flexibleip"
 	"github.com/scaleway/crossplane-provider-scaleway/config/function"
 	"github.com/scaleway/crossplane-provider-scaleway/config/iam"
@@ -26,6 +29,7 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/ipam"
 	"github.com/scaleway/crossplane-provider-scaleway/config/jobs"
 	"github.com/scaleway/crossplane-provider-scaleway/config/k8s"
+	"github.com/scaleway/crossplane-provider-scaleway/config/keymanager"
 	"github.com/scaleway/crossplane-provider-scaleway/config/lb"
 	"github.com/scaleway/crossplane-provider-scaleway/config/mnq"
 	"github.com/scaleway/crossplane-provider-scaleway/config/mongodb"
@@ -63,12 +67,15 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		account.Configure,
 		applesilicon.Configure,
+		autoscaling.Configure,
 		baremetal.Configure,
 		block.Configure,
 		cockpit.Configure,
 		container.Configure,
+		datawarehouse.Configure,
 		domain.Configure,
 		edgeservices.Configure,
+		file.Configure,
 		flexibleip.Configure,
 		function.Configure,
 		iam.Configure,
@@ -78,6 +85,7 @@ func GetProvider() *ujconfig.Provider {
 		ipam.Configure,
 		jobs.Configure,
 		k8s.Configure,
+		keymanager.Configure,
 		lb.Configure,
 		mnq.Configure,
 		mongodb.Configure,
