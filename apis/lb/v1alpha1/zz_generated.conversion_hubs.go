@@ -22,4 +22,7 @@ func (tr *IP) Hub() {}
 func (tr *LB) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PrivateNetwork) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Route) Hub() {}

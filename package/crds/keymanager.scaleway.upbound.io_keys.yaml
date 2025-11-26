@@ -1,0 +1,565 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.19.0
+  name: keys.keymanager.scaleway.upbound.io
+spec:
+  group: keymanager.scaleway.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Key
+    listKind: KeyList
+    plural: keys
+    singular: key
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Key is the Schema for the Keys API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: KeySpec defines the desired state of Key
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  algorithm:
+                    description: |-
+                      (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
+                      Algorithm to use for the key. The valid algorithms depend on the usage type.
+                    type: string
+                  description:
+                    description: |-
+                      (String, Optional) – A description for the key.
+                      Description of the key.
+                    type: string
+                  name:
+                    description: |-
+                      (String) – The name of the key.
+                      Name of the key.
+                    type: string
+                  origin:
+                    description: |-
+                      (String, Optional) – The origin of the key. Valid values are:
+                      Origin of the key material. Possible values: scaleway_kms (Key Manager generates the key material), external (key material comes from an external source).
+                    type: string
+                  projectId:
+                    description: |-
+                      (String, Optional) – The ID of the project the key belongs to.
+                      The project_id you want to attach the resource to
+                    type: string
+                  region:
+                    description: |-
+                      par).
+                      The region you want to attach the resource to
+                    type: string
+                  rotationPolicy:
+                    description: |-
+                      (Block, Optional) – Rotation policy for the key:
+                      Key rotation policy.
+                    items:
+                      properties:
+                        nextRotationAt:
+                          description: |-
+                            – The date and time of the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation.
+                          type: string
+                        rotationPeriod:
+                          description: |-
+                            (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+                            Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    description: |-
+                      (List of String, Optional) – A list of tags to assign to the key.
+                      List of the key's tags.
+                    items:
+                      type: string
+                    type: array
+                  unprotected:
+                    description: |-
+                      (Boolean, Optional) – If true, the key can be deleted. Defaults to false (protected).
+                      If true, the key is not protected against deletion.
+                    type: boolean
+                  usage:
+                    description: |-
+                      (String, Required) – The usage type of the key. Valid values:
+                      Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  algorithm:
+                    description: |-
+                      (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
+                      Algorithm to use for the key. The valid algorithms depend on the usage type.
+                    type: string
+                  description:
+                    description: |-
+                      (String, Optional) – A description for the key.
+                      Description of the key.
+                    type: string
+                  name:
+                    description: |-
+                      (String) – The name of the key.
+                      Name of the key.
+                    type: string
+                  origin:
+                    description: |-
+                      (String, Optional) – The origin of the key. Valid values are:
+                      Origin of the key material. Possible values: scaleway_kms (Key Manager generates the key material), external (key material comes from an external source).
+                    type: string
+                  projectId:
+                    description: |-
+                      (String, Optional) – The ID of the project the key belongs to.
+                      The project_id you want to attach the resource to
+                    type: string
+                  region:
+                    description: |-
+                      par).
+                      The region you want to attach the resource to
+                    type: string
+                  rotationPolicy:
+                    description: |-
+                      (Block, Optional) – Rotation policy for the key:
+                      Key rotation policy.
+                    items:
+                      properties:
+                        nextRotationAt:
+                          description: |-
+                            – The date and time of the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation.
+                          type: string
+                        rotationPeriod:
+                          description: |-
+                            (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+                            Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    description: |-
+                      (List of String, Optional) – A list of tags to assign to the key.
+                      List of the key's tags.
+                    items:
+                      type: string
+                    type: array
+                  unprotected:
+                    description: |-
+                      (Boolean, Optional) – If true, the key can be deleted. Defaults to false (protected).
+                      If true, the key is not protected against deletion.
+                    type: boolean
+                  usage:
+                    description: |-
+                      (String, Required) – The usage type of the key. Valid values:
+                      Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.algorithm is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.algorithm)
+                || (has(self.initProvider) && has(self.initProvider.algorithm))'
+            - message: spec.forProvider.usage is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.usage)
+                || (has(self.initProvider) && has(self.initProvider.usage))'
+          status:
+            description: KeyStatus defines the observed state of Key.
+            properties:
+              atProvider:
+                properties:
+                  algorithm:
+                    description: |-
+                      (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
+                      Algorithm to use for the key. The valid algorithms depend on the usage type.
+                    type: string
+                  createdAt:
+                    description: |-
+                      – The date and time when the key was created.
+                      Key creation date.
+                    type: string
+                  description:
+                    description: |-
+                      (String, Optional) – A description for the key.
+                      Description of the key.
+                    type: string
+                  id:
+                    description: – The ID of the key.
+                    type: string
+                  locked:
+                    description: |-
+                      – Whether the key is locked.
+                      Returns true if the key is locked.
+                    type: boolean
+                  name:
+                    description: |-
+                      (String) – The name of the key.
+                      Name of the key.
+                    type: string
+                  origin:
+                    description: |-
+                      (String, Optional) – The origin of the key. Valid values are:
+                      Origin of the key material. Possible values: scaleway_kms (Key Manager generates the key material), external (key material comes from an external source).
+                    type: string
+                  projectId:
+                    description: |-
+                      (String, Optional) – The ID of the project the key belongs to.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      – Whether the key is protected from deletion.
+                      Returns true if key protection is applied to the key.
+                    type: boolean
+                  region:
+                    description: |-
+                      par).
+                      The region you want to attach the resource to
+                    type: string
+                  rotatedAt:
+                    description: |-
+                      – The date and time when the key was last rotated.
+                      Key last rotation date.
+                    type: string
+                  rotationCount:
+                    description: |-
+                      – The number of times the key has been rotated.
+                      The rotation count tracks the number of times the key has been rotated.
+                    type: number
+                  rotationPolicy:
+                    description: |-
+                      (Block, Optional) – Rotation policy for the key:
+                      Key rotation policy.
+                    items:
+                      properties:
+                        nextRotationAt:
+                          description: |-
+                            – The date and time of the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation.
+                          type: string
+                        rotationPeriod:
+                          description: |-
+                            (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+                            Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
+                          type: string
+                      type: object
+                    type: array
+                  state:
+                    description: |-
+                      – The state of the key (e.g., enabled).
+                      State of the key. See the Key.State enum for possible values.
+                    type: string
+                  tags:
+                    description: |-
+                      (List of String, Optional) – A list of tags to assign to the key.
+                      List of the key's tags.
+                    items:
+                      type: string
+                    type: array
+                  unprotected:
+                    description: |-
+                      (Boolean, Optional) – If true, the key can be deleted. Defaults to false (protected).
+                      If true, the key is not protected against deletion.
+                    type: boolean
+                  updatedAt:
+                    description: |-
+                      – The date and time when the key was last updated.
+                      Key last modification date.
+                    type: string
+                  usage:
+                    description: |-
+                      (String, Required) – The usage type of the key. Valid values:
+                      Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

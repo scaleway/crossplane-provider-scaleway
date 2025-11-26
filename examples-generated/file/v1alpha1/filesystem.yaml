@@ -1,0 +1,12 @@
+apiVersion: file.scaleway.upbound.io/v1alpha1
+kind: Filesystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: file/v1alpha1/filesystem
+  labels:
+    testing.upbound.io/example-name: file
+  name: file
+spec:
+  forProvider:
+    name: my-nfs-filesystem
+    sizeInGb: 100

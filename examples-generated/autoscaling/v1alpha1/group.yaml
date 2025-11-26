@@ -1,0 +1,30 @@
+apiVersion: autoscaling.scaleway.upbound.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    capacity:
+    - cooldownDelay: "300"
+      maxReplicas: 5
+      minReplicas: 1
+    loadBalancer:
+    - backendIdsRefs:
+      - name: main
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+      privateNetworkIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+    name: asg-group
+    tags:
+    - terraform-test
+    - instance-group
+    templateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

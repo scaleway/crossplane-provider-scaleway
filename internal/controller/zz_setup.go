@@ -12,6 +12,9 @@ import (
 	project "github.com/scaleway/crossplane-provider-scaleway/internal/controller/account/project"
 	sshkey "github.com/scaleway/crossplane-provider-scaleway/internal/controller/account/sshkey"
 	server "github.com/scaleway/crossplane-provider-scaleway/internal/controller/applesilicon/server"
+	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/autoscaling/group"
+	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/autoscaling/policy"
+	template "github.com/scaleway/crossplane-provider-scaleway/internal/controller/autoscaling/template"
 	serverbaremetal "github.com/scaleway/crossplane-provider-scaleway/internal/controller/baremetal/server"
 	snapshot "github.com/scaleway/crossplane-provider-scaleway/internal/controller/block/snapshot"
 	volume "github.com/scaleway/crossplane-provider-scaleway/internal/controller/block/volume"
@@ -25,6 +28,9 @@ import (
 	cron "github.com/scaleway/crossplane-provider-scaleway/internal/controller/container/cron"
 	domain "github.com/scaleway/crossplane-provider-scaleway/internal/controller/container/domain"
 	tokencontainer "github.com/scaleway/crossplane-provider-scaleway/internal/controller/container/token"
+	database "github.com/scaleway/crossplane-provider-scaleway/internal/controller/datawarehouse/database"
+	deployment "github.com/scaleway/crossplane-provider-scaleway/internal/controller/datawarehouse/deployment"
+	user "github.com/scaleway/crossplane-provider-scaleway/internal/controller/datawarehouse/user"
 	record "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/record"
 	registration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/registration"
 	zone "github.com/scaleway/crossplane-provider-scaleway/internal/controller/domain/zone"
@@ -37,6 +43,7 @@ import (
 	routestage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/routestage"
 	tlsstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/tlsstage"
 	wafstage "github.com/scaleway/crossplane-provider-scaleway/internal/controller/edgeservices/wafstage"
+	filesystem "github.com/scaleway/crossplane-provider-scaleway/internal/controller/file/filesystem"
 	ip "github.com/scaleway/crossplane-provider-scaleway/internal/controller/flexibleip/ip"
 	cronfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/function/cron"
 	domainfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/function/domain"
@@ -45,11 +52,11 @@ import (
 	tokenfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/function/token"
 	apikey "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/apikey"
 	application "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/application"
-	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/group"
-	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/policy"
+	groupiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/group"
+	policyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/policy"
 	sshkeyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/sshkey"
-	user "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/user"
-	deployment "github.com/scaleway/crossplane-provider-scaleway/internal/controller/inference/deployment"
+	useriam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/iam/user"
+	deploymentinference "github.com/scaleway/crossplane-provider-scaleway/internal/controller/inference/deployment"
 	model "github.com/scaleway/crossplane-provider-scaleway/internal/controller/inference/model"
 	image "github.com/scaleway/crossplane-provider-scaleway/internal/controller/instance/image"
 	ipinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/instance/ip"
@@ -71,11 +78,13 @@ import (
 	acl "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/acl"
 	cluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/cluster"
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/k8s/pool"
+	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/keymanager/key"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/backend"
 	certificate "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/certificate"
 	frontend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/frontend"
 	iplb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/ip"
 	lb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/lb"
+	privatenetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/privatenetwork"
 	routelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/lb/route"
 	natsaccount "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/natsaccount"
 	natscredentials "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/natscredentials"
@@ -88,6 +97,7 @@ import (
 	sqsqueue "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mnq/sqsqueue"
 	instance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mongodb/instance"
 	snapshotmongodb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mongodb/snapshot"
+	usermongodb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/mongodb/user"
 	aclobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/acl"
 	bucket "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/bucket"
 	lockconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/lockconfiguration"
@@ -96,7 +106,7 @@ import (
 	websiteconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/object/websiteconfiguration"
 	providerconfig "github.com/scaleway/crossplane-provider-scaleway/internal/controller/providerconfig"
 	aclrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/acl"
-	database "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/database"
+	databaserdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/database"
 	databasebackup "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/databasebackup"
 	instancerdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/instance"
 	privilege "github.com/scaleway/crossplane-provider-scaleway/internal/controller/rdb/privilege"
@@ -113,7 +123,7 @@ import (
 	webhook "github.com/scaleway/crossplane-provider-scaleway/internal/controller/tem/webhook"
 	aclvpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/acl"
 	gatewaynetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/gatewaynetwork"
-	privatenetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/privatenetwork"
+	privatenetworkvpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/privatenetwork"
 	publicgateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgateway"
 	publicgatewaydhcp "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgatewaydhcp"
 	publicgatewayip "github.com/scaleway/crossplane-provider-scaleway/internal/controller/vpc/publicgatewayip"
@@ -129,6 +139,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		project.Setup,
 		sshkey.Setup,
 		server.Setup,
+		group.Setup,
+		policy.Setup,
+		template.Setup,
 		serverbaremetal.Setup,
 		snapshot.Setup,
 		volume.Setup,
@@ -142,6 +155,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cron.Setup,
 		domain.Setup,
 		tokencontainer.Setup,
+		database.Setup,
+		deployment.Setup,
+		user.Setup,
 		record.Setup,
 		registration.Setup,
 		zone.Setup,
@@ -154,6 +170,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routestage.Setup,
 		tlsstage.Setup,
 		wafstage.Setup,
+		filesystem.Setup,
 		ip.Setup,
 		cronfunction.Setup,
 		domainfunction.Setup,
@@ -162,11 +179,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		tokenfunction.Setup,
 		apikey.Setup,
 		application.Setup,
-		group.Setup,
-		policy.Setup,
+		groupiam.Setup,
+		policyiam.Setup,
 		sshkeyiam.Setup,
-		user.Setup,
-		deployment.Setup,
+		useriam.Setup,
+		deploymentinference.Setup,
 		model.Setup,
 		image.Setup,
 		ipinstance.Setup,
@@ -188,11 +205,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		acl.Setup,
 		cluster.Setup,
 		pool.Setup,
+		key.Setup,
 		backend.Setup,
 		certificate.Setup,
 		frontend.Setup,
 		iplb.Setup,
 		lb.Setup,
+		privatenetwork.Setup,
 		routelb.Setup,
 		natsaccount.Setup,
 		natscredentials.Setup,
@@ -205,6 +224,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqsqueue.Setup,
 		instance.Setup,
 		snapshotmongodb.Setup,
+		usermongodb.Setup,
 		aclobject.Setup,
 		bucket.Setup,
 		lockconfiguration.Setup,
@@ -213,7 +233,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		websiteconfiguration.Setup,
 		providerconfig.Setup,
 		aclrdb.Setup,
-		database.Setup,
+		databaserdb.Setup,
 		databasebackup.Setup,
 		instancerdb.Setup,
 		privilege.Setup,
@@ -230,7 +250,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		webhook.Setup,
 		aclvpc.Setup,
 		gatewaynetwork.Setup,
-		privatenetwork.Setup,
+		privatenetworkvpc.Setup,
 		publicgateway.Setup,
 		publicgatewaydhcp.Setup,
 		publicgatewayip.Setup,

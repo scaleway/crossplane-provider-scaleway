@@ -1,0 +1,1018 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.19.0
+  name: templates.autoscaling.scaleway.upbound.io
+spec:
+  group: autoscaling.scaleway.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Template
+    listKind: TemplateList
+    plural: templates
+    singular: template
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Template is the Schema for the Templates API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: TemplateSpec defines the desired state of Template
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  cloudInit:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Cloud-config to apply to each instance (will be passed in Base64 format)
+                    type: string
+                  commercialType:
+                    description: |-
+                      The name of Instance commercial type.
+                      Name of Instance commercial type
+                    type: string
+                  imageId:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with `volume` and `commercial_type` template
+                    type: string
+                  name:
+                    description: |-
+                      The Instance group template.
+                      The Instance template name
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone.
+                      Instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone
+                    type: string
+                  privateNetworkIds:
+                    description: |-
+                      The private Network IDs to attach to the new Instance.
+                      Private Network IDs to attach to the new Instance
+                    items:
+                      type: string
+                    type: array
+                  privateNetworkIdsRefs:
+                    description: References to PrivateNetwork in vpc to populate privateNetworkIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  privateNetworkIdsSelector:
+                    description: Selector for a list of PrivateNetwork in vpc to populate
+                      privateNetworkIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the Project the Instance template is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicIpsV4Count:
+                    description: |-
+                      The number of flexible IPv4 addresses to attach to the new Instance.
+                      Number of flexible IPv4 addresses to attach to the new Instance
+                    type: number
+                  publicIpsV6Count:
+                    description: |-
+                      The number of flexible IPv6 addresses to attach to the new Instance.
+                      Number of flexible IPv6 addresses to attach to the new Instance
+                    type: number
+                  securityGroupId:
+                    description: |-
+                      The instance security group ID.
+                      Instance security group ID
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the Instance template.
+                      The tags associated with the Instance template
+                    items:
+                      type: string
+                    type: array
+                  volumes:
+                    description: |-
+                      The template of Instance volume.
+                      The IPv4 subnet associated with the private network
+                    items:
+                      properties:
+                        boot:
+                          description: |-
+                            Force the Instance to boot on this volume.
+                            Force the Instance to boot on this volume
+                          type: boolean
+                        fromEmpty:
+                          description: Volume instance template from empty
+                          items:
+                            properties:
+                              size:
+                                description: Size in GB of the new empty volume
+                                type: number
+                            type: object
+                          type: array
+                        fromSnapshot:
+                          description: Volume instance template from snapshot
+                          items:
+                            properties:
+                              size:
+                                description: Override size (in GB) of the cloned volume
+                                type: number
+                              snapshotId:
+                                description: |-
+                                  The ID of the Instance group.
+                                  ID of the snapshot to clone
+                                type: string
+                              snapshotIdRef:
+                                description: Reference to a Snapshot in block to populate
+                                  snapshotId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              snapshotIdSelector:
+                                description: Selector for a Snapshot in block to populate
+                                  snapshotId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The Instance group template.
+                            The name of the volume
+                          type: string
+                        perfIops:
+                          description: |-
+                            The maximum IO/s expected, according to the different options available in stock (5000 | 15000).
+                            The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`)
+                          type: number
+                        tags:
+                          description: |-
+                            The tags associated with the Instance template.
+                            List of tags assigned to the volume
+                          items:
+                            type: string
+                          type: array
+                        volumeType:
+                          description: |-
+                            The type of the volume.
+                            Type of the volume
+                          type: string
+                      type: object
+                    type: array
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the Instance template exists.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  cloudInit:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Cloud-config to apply to each instance (will be passed in Base64 format)
+                    type: string
+                  commercialType:
+                    description: |-
+                      The name of Instance commercial type.
+                      Name of Instance commercial type
+                    type: string
+                  imageId:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with `volume` and `commercial_type` template
+                    type: string
+                  name:
+                    description: |-
+                      The Instance group template.
+                      The Instance template name
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone.
+                      Instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone
+                    type: string
+                  privateNetworkIds:
+                    description: |-
+                      The private Network IDs to attach to the new Instance.
+                      Private Network IDs to attach to the new Instance
+                    items:
+                      type: string
+                    type: array
+                  privateNetworkIdsRefs:
+                    description: References to PrivateNetwork in vpc to populate privateNetworkIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  privateNetworkIdsSelector:
+                    description: Selector for a list of PrivateNetwork in vpc to populate
+                      privateNetworkIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the Project the Instance template is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicIpsV4Count:
+                    description: |-
+                      The number of flexible IPv4 addresses to attach to the new Instance.
+                      Number of flexible IPv4 addresses to attach to the new Instance
+                    type: number
+                  publicIpsV6Count:
+                    description: |-
+                      The number of flexible IPv6 addresses to attach to the new Instance.
+                      Number of flexible IPv6 addresses to attach to the new Instance
+                    type: number
+                  securityGroupId:
+                    description: |-
+                      The instance security group ID.
+                      Instance security group ID
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the Instance template.
+                      The tags associated with the Instance template
+                    items:
+                      type: string
+                    type: array
+                  volumes:
+                    description: |-
+                      The template of Instance volume.
+                      The IPv4 subnet associated with the private network
+                    items:
+                      properties:
+                        boot:
+                          description: |-
+                            Force the Instance to boot on this volume.
+                            Force the Instance to boot on this volume
+                          type: boolean
+                        fromEmpty:
+                          description: Volume instance template from empty
+                          items:
+                            properties:
+                              size:
+                                description: Size in GB of the new empty volume
+                                type: number
+                            type: object
+                          type: array
+                        fromSnapshot:
+                          description: Volume instance template from snapshot
+                          items:
+                            properties:
+                              size:
+                                description: Override size (in GB) of the cloned volume
+                                type: number
+                              snapshotId:
+                                description: |-
+                                  The ID of the Instance group.
+                                  ID of the snapshot to clone
+                                type: string
+                              snapshotIdRef:
+                                description: Reference to a Snapshot in block to populate
+                                  snapshotId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              snapshotIdSelector:
+                                description: Selector for a Snapshot in block to populate
+                                  snapshotId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The Instance group template.
+                            The name of the volume
+                          type: string
+                        perfIops:
+                          description: |-
+                            The maximum IO/s expected, according to the different options available in stock (5000 | 15000).
+                            The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`)
+                          type: number
+                        tags:
+                          description: |-
+                            The tags associated with the Instance template.
+                            List of tags assigned to the volume
+                          items:
+                            type: string
+                          type: array
+                        volumeType:
+                          description: |-
+                            The type of the volume.
+                            Type of the volume
+                          type: string
+                      type: object
+                    type: array
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the Instance template exists.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.commercialType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.commercialType)
+                || (has(self.initProvider) && has(self.initProvider.commercialType))'
+          status:
+            description: TemplateStatus defines the observed state of Template.
+            properties:
+              atProvider:
+                properties:
+                  cloudInit:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Cloud-config to apply to each instance (will be passed in Base64 format)
+                    type: string
+                  commercialType:
+                    description: |-
+                      The name of Instance commercial type.
+                      Name of Instance commercial type
+                    type: string
+                  createdAt:
+                    description: |-
+                      Date and time of Instance group's creation (RFC 3339 format).
+                      The date and time of the creation of the Instance template
+                    type: string
+                  id:
+                    description: The ID of the Instance group.
+                    type: string
+                  imageId:
+                    description: |-
+                      The instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with volume and commercial_type template.
+                      Instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with `volume` and `commercial_type` template
+                    type: string
+                  name:
+                    description: |-
+                      The Instance group template.
+                      The Instance template name
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone.
+                      Instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone
+                    type: string
+                  privateNetworkIds:
+                    description: |-
+                      The private Network IDs to attach to the new Instance.
+                      Private Network IDs to attach to the new Instance
+                    items:
+                      type: string
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the Project the Instance template is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicIpsV4Count:
+                    description: |-
+                      The number of flexible IPv4 addresses to attach to the new Instance.
+                      Number of flexible IPv4 addresses to attach to the new Instance
+                    type: number
+                  publicIpsV6Count:
+                    description: |-
+                      The number of flexible IPv6 addresses to attach to the new Instance.
+                      Number of flexible IPv6 addresses to attach to the new Instance
+                    type: number
+                  securityGroupId:
+                    description: |-
+                      The instance security group ID.
+                      Instance security group ID
+                    type: string
+                  status:
+                    description: The Instance template status
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the Instance template.
+                      The tags associated with the Instance template
+                    items:
+                      type: string
+                    type: array
+                  updatedAt:
+                    description: |-
+                      Date and time of Instance group's last update (RFC 3339 format).
+                      The date and time of the last update of the Instance template
+                    type: string
+                  volumes:
+                    description: |-
+                      The template of Instance volume.
+                      The IPv4 subnet associated with the private network
+                    items:
+                      properties:
+                        boot:
+                          description: |-
+                            Force the Instance to boot on this volume.
+                            Force the Instance to boot on this volume
+                          type: boolean
+                        fromEmpty:
+                          description: Volume instance template from empty
+                          items:
+                            properties:
+                              size:
+                                description: Size in GB of the new empty volume
+                                type: number
+                            type: object
+                          type: array
+                        fromSnapshot:
+                          description: Volume instance template from snapshot
+                          items:
+                            properties:
+                              size:
+                                description: Override size (in GB) of the cloned volume
+                                type: number
+                              snapshotId:
+                                description: |-
+                                  The ID of the Instance group.
+                                  ID of the snapshot to clone
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The Instance group template.
+                            The name of the volume
+                          type: string
+                        perfIops:
+                          description: |-
+                            The maximum IO/s expected, according to the different options available in stock (5000 | 15000).
+                            The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`)
+                          type: number
+                        tags:
+                          description: |-
+                            The tags associated with the Instance template.
+                            List of tags assigned to the volume
+                          items:
+                            type: string
+                          type: array
+                        volumeType:
+                          description: |-
+                            The type of the volume.
+                            Type of the volume
+                          type: string
+                      type: object
+                    type: array
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the Instance template exists.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

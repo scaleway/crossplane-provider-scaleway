@@ -1,0 +1,20 @@
+apiVersion: datawarehouse.scaleway.upbound.io/v1alpha1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datawarehouse/v1alpha1/deployment
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cpuMax: 4
+    cpuMin: 2
+    name: my-datawarehouse
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    ramPerCpu: 4
+    replicaCount: 1
+    version: v25
