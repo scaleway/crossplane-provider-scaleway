@@ -90,7 +90,9 @@ spec:
                       type: string
                     type: array
                   durationInYears:
-                    description: ': The registration period in years.'
+                    description: |-
+                      : The registration period in years.
+                      Duration of the registration period in years.
                     type: number
                   ownerContact:
                     description: |-
@@ -317,7 +319,9 @@ spec:
                       type: string
                     type: array
                   durationInYears:
-                    description: ': The registration period in years.'
+                    description: |-
+                      : The registration period in years.
+                      Duration of the registration period in years.
                     type: number
                   ownerContact:
                     description: |-
@@ -861,7 +865,9 @@ spec:
                       type: object
                     type: array
                   durationInYears:
-                    description: ': The registration period in years.'
+                    description: |-
+                      : The registration period in years.
+                      Duration of the registration period in years.
                     type: number
                   id:
                     description: ': The ID of the domain registration.'

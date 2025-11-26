@@ -125,6 +125,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Describes the Private Network you want to connect to your cluster. If not set, a public
@@ -162,6 +169,24 @@ spec:
                       ~> The public_network block exports:
                       Public network specs details
                     items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
                       type: object
                     type: array
                   settings:
@@ -268,6 +293,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       Describes the Private Network you want to connect to your cluster. If not set, a public
@@ -305,6 +337,24 @@ spec:
                       ~> The public_network block exports:
                       Public network specs details
                     items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
                       type: object
                     type: array
                   settings:
@@ -594,10 +644,14 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The private IPv4 address.
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
                           type: string
                         id:
-                          description: The UUID of the endpoint.
+                          description: |-
+                            The UUID of the endpoint.
+                            The ID of the IPv4 address resource
                           type: string
                       type: object
                     type: array
@@ -618,6 +672,18 @@ spec:
                             The UUID of the Private Network resource.
                             UUID of the private network to be connected to the cluster
                           type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
                         serviceIps:
                           description: |-
                             Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
@@ -651,10 +717,14 @@ spec:
                     items:
                       properties:
                         id:
-                          description: The UUID of the endpoint.
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
                           type: string
                         ips:
-                          description: Lis of IPv4 address of the endpoint (IP address).
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
                           items:
                             type: string
                           type: array

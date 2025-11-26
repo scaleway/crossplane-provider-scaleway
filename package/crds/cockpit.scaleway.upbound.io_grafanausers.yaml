@@ -79,7 +79,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -182,7 +182,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   projectIdRef:
@@ -460,7 +460,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      (Defaults to Project ID speficied in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   role:

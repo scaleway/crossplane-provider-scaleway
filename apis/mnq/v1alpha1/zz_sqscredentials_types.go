@@ -20,6 +20,7 @@ type SQSCredentialsInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	Permissions []SQSCredentialsPermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the Project in which SQS is enabled.
@@ -50,6 +51,7 @@ type SQSCredentialsObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	Permissions []SQSCredentialsPermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the Project in which SQS is enabled.
@@ -69,6 +71,7 @@ type SQSCredentialsParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	// +kubebuilder:validation:Optional
 	Permissions []SQSCredentialsPermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 

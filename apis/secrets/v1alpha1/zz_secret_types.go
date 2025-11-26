@@ -68,6 +68,7 @@ type SecretInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
+	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	EphemeralPolicy []EphemeralPolicyInitParameters `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
 
 	// Name of the secret (e.g. my-secret).
@@ -96,6 +97,7 @@ type SecretInitParameters struct {
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of the secret. If not specified, the type is Opaque. Available values can be found in SDK Constants.
+	// Type of the secret could be any value among: [unknown_type opaque certificate key_value basic_credentials database_credentials ssh_key]
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -109,6 +111,7 @@ type SecretObservation struct {
 	// Description of the secret
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	EphemeralPolicy []EphemeralPolicyObservation `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
 
@@ -144,6 +147,7 @@ type SecretObservation struct {
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of the secret. If not specified, the type is Opaque. Available values can be found in SDK Constants.
+	// Type of the secret could be any value among: [unknown_type opaque certificate key_value basic_credentials database_credentials ssh_key]
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Date and time of the secret's last update (in RFC 3339 format).
@@ -154,6 +158,7 @@ type SecretObservation struct {
 	// The number of versions for this Secret
 	VersionCount *float64 `json:"versionCount,omitempty" tf:"version_count,omitempty"`
 
+	// List of the versions of the secret
 	Versions []VersionsObservation `json:"versions,omitempty" tf:"versions,omitempty"`
 }
 
@@ -164,6 +169,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	// +kubebuilder:validation:Optional
 	EphemeralPolicy []EphemeralPolicyParameters `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
@@ -200,6 +206,7 @@ type SecretParameters struct {
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of the secret. If not specified, the type is Opaque. Available values can be found in SDK Constants.
+	// Type of the secret could be any value among: [unknown_type opaque certificate key_value basic_credentials database_credentials ssh_key]
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

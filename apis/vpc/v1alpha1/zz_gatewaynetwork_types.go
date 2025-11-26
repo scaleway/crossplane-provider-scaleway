@@ -57,6 +57,10 @@ type GatewayNetworkInitParameters struct {
 	// Auto-configure the Gateway Network using IPAM (IP address management service)
 	IpamConfig []IpamConfigInitParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
 
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource.
+	PrivateIP []PrivateIPInitParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// The ID of the Private Network.
 	// The ID of the private network where connect to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
@@ -70,7 +74,7 @@ type GatewayNetworkInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
@@ -124,7 +128,7 @@ type GatewayNetworkObservation struct {
 	// The ID of the private network where connect to
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
-	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
@@ -191,6 +195,11 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamConfig []IpamConfigParameters `json:"ipamConfig,omitempty" tf:"ipam_config,omitempty"`
 
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource.
+	// +kubebuilder:validation:Optional
+	PrivateIP []PrivateIPParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// The ID of the Private Network.
 	// The ID of the private network where connect to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/vpc/v1alpha1.PrivateNetwork
@@ -205,7 +214,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
-	// (Deprecated) Please use ipam_config. Enable DHCP configration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
+	// (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.
 	// The static IP address in CIDR on this network
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
@@ -257,9 +266,11 @@ type PrivateIPInitParameters struct {
 type PrivateIPObservation struct {
 
 	// The private IPv4 address.
+	// The private IPv4 address.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The ID of the GatewayNetwork
+	// The ID of the IPv4 address resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

@@ -35,8 +35,8 @@ type InstanceInitParameters struct {
 	// Enable or disable encryption at rest for the database instance
 	EncryptionAtRest *bool `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 
-	// Database Instance's engine version (e.g. PostgreSQL-11).
-	// Database's engine version id
+	// Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+	// Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Map of engine settings to be set at database initialisation.
@@ -67,6 +67,10 @@ type InstanceInitParameters struct {
 	// Password for the first user of the Database Instance.
 	// Password for the first user of the database instance
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource
+	PrivateIP []PrivateIPInitParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
@@ -142,8 +146,8 @@ type InstanceObservation struct {
 	// Endpoint port of the database instance
 	EndpointPort *float64 `json:"endpointPort,omitempty" tf:"endpoint_port,omitempty"`
 
-	// Database Instance's engine version (e.g. PostgreSQL-11).
-	// Database's engine version id
+	// Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+	// Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The ID of the Database Instance.
@@ -213,6 +217,10 @@ type InstanceObservation struct {
 	// List of tags ["tag1", "tag2", ...] attached to a database instance
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// List of available engine versions for upgrade. Each version contains:
+	// List of available engine versions for upgrade
+	UpgradableVersions []UpgradableVersionsObservation `json:"upgradableVersions,omitempty" tf:"upgradable_versions,omitempty"`
+
 	// Identifier for the first user of the Database Instance.
 	// Identifier for the first user of the database instance
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
@@ -253,8 +261,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtRest *bool `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 
-	// Database Instance's engine version (e.g. PostgreSQL-11).
-	// Database's engine version id
+	// Database Instance's engine version name (e.g. PostgreSQL-16, MySQL-8).
+	// Database's engine version name (e.g., 'PostgreSQL-16', 'MySQL-8'). Changing this value triggers a blue/green upgrade using MajorUpgradeWorkflow with automatic endpoint migration
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -293,6 +301,11 @@ type InstanceParameters struct {
 	// Password for the first user of the database instance
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The private IPv4 address associated with the resource.
+	// The private IPv4 address associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIP []PrivateIPParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// List of Private Networks endpoints of the Database Instance.
 	// List of private network to expose your database instance
@@ -416,9 +429,11 @@ type PrivateIPInitParameters struct {
 type PrivateIPObservation struct {
 
 	// The private IPv4 address.
+	// The private IPv4 address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The ID of the Database Instance.
+	// The ID of the IPv4 address resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -546,6 +561,27 @@ type ReadReplicasObservation struct {
 }
 
 type ReadReplicasParameters struct {
+}
+
+type UpgradableVersionsInitParameters struct {
+}
+
+type UpgradableVersionsObservation struct {
+
+	// The ID of the Database Instance.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Minor version string (e.g., 15.5.0).
+	MinorVersion *string `json:"minorVersion,omitempty" tf:"minor_version,omitempty"`
+
+	// The name of the Database Instance.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Version string (e.g., 15.5).
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type UpgradableVersionsParameters struct {
 }
 
 // InstanceSpec defines the desired state of Instance

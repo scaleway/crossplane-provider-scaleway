@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  enableCustomRoutesPropagation:
+                    description: |-
+                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      Defines whether the VPC advertises custom routes between its Private Networks
+                    type: boolean
                   enableRouting:
                     description: |-
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
@@ -113,6 +118,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  enableCustomRoutesPropagation:
+                    description: |-
+                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      Defines whether the VPC advertises custom routes between its Private Networks
+                    type: boolean
                   enableRouting:
                     description: |-
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
@@ -318,6 +328,11 @@ spec:
                       Date and time of VPC's creation (RFC 3339 format).
                       The date and time of the creation of the private network
                     type: string
+                  enableCustomRoutesPropagation:
+                    description: |-
+                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      Defines whether the VPC advertises custom routes between its Private Networks
+                    type: boolean
                   enableRouting:
                     description: |-
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.

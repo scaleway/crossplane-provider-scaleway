@@ -85,8 +85,9 @@ spec:
                     items:
                       properties:
                         key:
-                          description: The object key name to use when a 4XX class
-                            error occurs.
+                          description: |-
+                            The object key name to use when a 4XX class error occurs.
+                            Key for the object to use as an error document.
                           type: string
                       type: object
                     type: array
@@ -97,8 +98,9 @@ spec:
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request targeting
-                            a specific directory on the website endpoint.
+                          description: |-
+                            A suffix that is appended to a request targeting a specific directory on the website endpoint.
+                            Suffix that will be added to the index.
                           type: string
                       type: object
                     type: array
@@ -136,8 +138,9 @@ spec:
                     items:
                       properties:
                         key:
-                          description: The object key name to use when a 4XX class
-                            error occurs.
+                          description: |-
+                            The object key name to use when a 4XX class error occurs.
+                            Key for the object to use as an error document.
                           type: string
                       type: object
                     type: array
@@ -148,8 +151,9 @@ spec:
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request targeting
-                            a specific directory on the website endpoint.
+                          description: |-
+                            A suffix that is appended to a request targeting a specific directory on the website endpoint.
+                            Suffix that will be added to the index.
                           type: string
                       type: object
                     type: array
@@ -356,8 +360,9 @@ spec:
                     items:
                       properties:
                         key:
-                          description: The object key name to use when a 4XX class
-                            error occurs.
+                          description: |-
+                            The object key name to use when a 4XX class error occurs.
+                            Key for the object to use as an error document.
                           type: string
                       type: object
                     type: array
@@ -372,8 +377,9 @@ spec:
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request targeting
-                            a specific directory on the website endpoint.
+                          description: |-
+                            A suffix that is appended to a request targeting a specific directory on the website endpoint.
+                            Suffix that will be added to the index.
                           type: string
                       type: object
                     type: array

@@ -119,6 +119,16 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_vpc_public_gateway_dhcp":             config.NameAsIdentifier,
 	"scaleway_vpc_public_gateway_ip":               config.NameAsIdentifier,
 	"scaleway_vpc_public_gateway_pat_rule":         config.NameAsIdentifier,
+	"scaleway_key_manager_key":                     config.NameAsIdentifier,
+	"scaleway_datawarehouse_user":                  config.NameAsIdentifier,
+	"scaleway_datawarehouse_database":              config.NameAsIdentifier,
+	"scaleway_datawarehouse_deployment":            config.NameAsIdentifier,
+	"scaleway_file_filesystem":                     config.NameAsIdentifier,
+	"scaleway_lb_private_network":                  config.NameAsIdentifier,
+	"scaleway_autoscaling_instance_template":       config.NameAsIdentifier,
+	"scaleway_autoscaling_instance_group":          config.NameAsIdentifier,
+	"scaleway_mongodb_user":                        config.NameAsIdentifier,
+	"scaleway_autoscaling_instance_policy":         config.NameAsIdentifier,
 	"scaleway_vpc_route":                           config.NameAsIdentifier,
 }
 

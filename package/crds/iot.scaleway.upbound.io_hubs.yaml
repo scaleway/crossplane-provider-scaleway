@@ -81,7 +81,7 @@ spec:
                     type: boolean
                   enabled:
                     description: |-
-                      Wether the IoT Hub instance should be enabled or not.
+                      Whether the IoT Hub instance should be enabled or not.
                       Whether to enable the hub or not
                     type: boolean
                   eventsTopicPrefix:
@@ -136,7 +136,7 @@ spec:
                     type: boolean
                   enabled:
                     description: |-
-                      Wether the IoT Hub instance should be enabled or not.
+                      Whether the IoT Hub instance should be enabled or not.
                       Whether to enable the hub or not
                     type: boolean
                   eventsTopicPrefix:
@@ -374,7 +374,7 @@ spec:
                     type: boolean
                   enabled:
                     description: |-
-                      Wether the IoT Hub instance should be enabled or not.
+                      Whether the IoT Hub instance should be enabled or not.
                       Whether to enable the hub or not
                     type: boolean
                   endpoint:
@@ -396,7 +396,7 @@ spec:
                     type: string
                   mqttCa:
                     description: |-
-                      The MQTT certificat content
+                      The MQTT certificate content
                       The MQTT certificat content
                     type: string
                   mqttCaUrl:

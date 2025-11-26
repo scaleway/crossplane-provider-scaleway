@@ -13,6 +13,32 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FilesystemsInitParameters struct {
+
+	// The unique ID of the filesystem attached to the server.
+	// The filesystem ID attached to the server
+	FilesystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
+}
+
+type FilesystemsObservation struct {
+
+	// The unique ID of the filesystem attached to the server.
+	// The filesystem ID attached to the server
+	FilesystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
+
+	// The private NIC state.
+	// The state of the filesystem
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type FilesystemsParameters struct {
+
+	// The unique ID of the filesystem attached to the server.
+	// The filesystem ID attached to the server
+	// +kubebuilder:validation:Optional
+	FilesystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
+}
+
 type PrivateNetworkInitParameters struct {
 
 	// The private network ID where to connect.
@@ -69,109 +95,32 @@ type PublicIpsObservation struct {
 	// IP Address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// Whether the IP is dynamic.
+	// Whether the IP is dynamic
+	Dynamic *bool `json:"dynamic,omitempty" tf:"dynamic,omitempty"`
+
+	// The IP address' family.
+	// IP address family (inet or inet6)
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	// The IP of the Gateway associated with the IP.
+	// Gateway's IP address
+	Gateway *string `json:"gateway,omitempty" tf:"gateway,omitempty"`
+
 	// The ID of the IP address resource.
 	// ID of the IP
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The CIDR netmask of the IP.
+	// CIDR netmask
+	Netmask *string `json:"netmask,omitempty" tf:"netmask,omitempty"`
+
+	// The provisioning mode of the IP
+	// Provisioning mode of the IP address
+	ProvisioningMode *string `json:"provisioningMode,omitempty" tf:"provisioning_mode,omitempty"`
 }
 
 type PublicIpsParameters struct {
-}
-
-type RootVolumeInitParameters struct {
-
-	// Set the volume where the boot the server
-	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
-
-	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instanceSDK termination
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
-	// SBS Volume IOPS, only with volume_type as sbs_volume
-	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
-
-	// Size of the root volume in gigabytes.
-	// To find the right size use this endpoint and
-	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Depending on volume_type, updates to this field may recreate a new resource.
-	// Size of the root volume in gigabytes
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
-
-	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
-	// Volume ID of the root volume
-	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
-
-	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
-	// Volume type of the root volume
-	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
-}
-
-type RootVolumeObservation struct {
-
-	// Set the volume where the boot the server
-	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
-
-	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instanceSDK termination
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// The name of the server.
-	// Name of the root volume
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
-	// SBS Volume IOPS, only with volume_type as sbs_volume
-	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
-
-	// Size of the root volume in gigabytes.
-	// To find the right size use this endpoint and
-	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Depending on volume_type, updates to this field may recreate a new resource.
-	// Size of the root volume in gigabytes
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
-
-	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
-	// Volume ID of the root volume
-	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
-
-	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
-	// Volume type of the root volume
-	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
-}
-
-type RootVolumeParameters struct {
-
-	// Set the volume where the boot the server
-	// +kubebuilder:validation:Optional
-	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
-
-	// (Defaults to true) Forces deletion of the root volume on instance termination.
-	// Force deletion of the root volume on instanceSDK termination
-	// +kubebuilder:validation:Optional
-	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
-
-	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
-	// SBS Volume IOPS, only with volume_type as sbs_volume
-	// +kubebuilder:validation:Optional
-	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
-
-	// Size of the root volume in gigabytes.
-	// To find the right size use this endpoint and
-	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
-	// Depending on volume_type, updates to this field may recreate a new resource.
-	// Size of the root volume in gigabytes
-	// +kubebuilder:validation:Optional
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
-
-	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
-	// Volume ID of the root volume
-	// +kubebuilder:validation:Optional
-	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
-
-	// Volume type of root volume, can be b_ssd, l_ssd or sbs_volume, default value depends on server type
-	// Volume type of the root volume
-	// +kubebuilder:validation:Optional
-	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type ServerInitParameters struct {
@@ -180,6 +129,12 @@ type ServerInitParameters struct {
 	// attached to the server. Updates to this field will trigger a stop/start of the server.
 	// The additional volumes attached to the server
 	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
+
+	// The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+	// Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+	// When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+	AdminPasswordEncryptionSSHKeyID *string `json:"adminPasswordEncryptionSshKeyId,omitempty" tf:"admin_password_encryption_ssh_key_id,omitempty"`
 
 	// The boot Type of the server. Possible values are: local, bootscript or rescue.
 	// The boot type of the server
@@ -196,10 +151,9 @@ type ServerInitParameters struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// Determines if IPv6 is enabled for the server
-	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
+	// List of filesystems attached to the server.
+	// Filesystems attach to the server
+	Filesystems []FilesystemsInitParameters `json:"filesystems,omitempty" tf:"filesystems,omitempty"`
 
 	// The ID of the reserved IP that is attached to the server.
 	// The ID of the reserved IP for the server
@@ -215,6 +169,7 @@ type ServerInitParameters struct {
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
 	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	// The IDs of the reserved IP for the server
 	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
 	// The UUID or the label of the base image used by the server. You can use this endpoint
@@ -239,9 +194,13 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.Selector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	PrivateIps []ServerPrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instanceSDK
+	// List of private network to connect with your instance
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -253,7 +212,7 @@ type ServerInitParameters struct {
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instanceSDK
+	// List of private IPv4 and IPv6 addresses attached to your instance
 	PublicIps []PublicIpsInitParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
@@ -262,7 +221,7 @@ type ServerInitParameters struct {
 
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
-	RootVolume []RootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+	RootVolume []ServerRootVolumeInitParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -289,7 +248,7 @@ type ServerInitParameters struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instanceSDK type of the server
+	// The instance type of the server
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The user data associated with the server.
@@ -311,6 +270,12 @@ type ServerObservation struct {
 	// The additional volumes attached to the server
 	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
 
+	// The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+	// Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+	// When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+	AdminPasswordEncryptionSSHKeyID *string `json:"adminPasswordEncryptionSshKeyId,omitempty" tf:"admin_password_encryption_ssh_key_id,omitempty"`
+
 	// The boot Type of the server. Possible values are: local, bootscript or rescue.
 	// The boot type of the server
 	BootType *string `json:"bootType,omitempty" tf:"boot_type,omitempty"`
@@ -326,10 +291,9 @@ type ServerObservation struct {
 	// Enable dynamic IP on the server
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// Determines if IPv6 is enabled for the server
-	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
+	// List of filesystems attached to the server.
+	// Filesystems attach to the server
+	Filesystems []FilesystemsObservation `json:"filesystems,omitempty" tf:"filesystems,omitempty"`
 
 	// The ID of the IP address resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -339,22 +303,8 @@ type ServerObservation struct {
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
 	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	// The IDs of the reserved IP for the server
 	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
-
-	// The default ipv6 address routed to the server. ( Only set when enable_ipv6 is set to true )
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// The default public IPv6 address routed to the server.
-	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
-
-	// The ipv6 gateway address. ( Only set when enable_ipv6 is set to true )
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// The IPv6 gateway address
-	IPv6Gateway *string `json:"ipv6Gateway,omitempty" tf:"ipv6_gateway,omitempty"`
-
-	// The prefix length of the ipv6 subnet routed to the server. ( Only set when enable_ipv6 is set to true )
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// The IPv6 prefix length routed to the server.
-	IPv6PrefixLength *float64 `json:"ipv6PrefixLength,omitempty" tf:"ipv6_prefix_length,omitempty"`
 
 	// The UUID or the label of the base image used by the server. You can use this endpoint
 	// to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
@@ -373,21 +323,17 @@ type ServerObservation struct {
 	// The placement group the server is attached to
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// (Deprecated) Always false, use instance_placement_group ressource to known when the placement group policy is respected.
+	// (Deprecated) Always false, use instance_placement_group resource to known when the placement group policy is respected.
 	// True when the placement group policy is respected
 	PlacementGroupPolicyRespected *bool `json:"placementGroupPolicyRespected,omitempty" tf:"placement_group_policy_respected,omitempty"`
 
-	// The Scaleway internal IP address of the server (Deprecated use ipam_ip datasource instead).
-	// The Scaleway internal IP address of the server
-	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
-
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
-	// List of private IPv4 addresses associated with the resource
+	// List of private IPv4 and IPv6 addresses associated with the resource
 	PrivateIps []ServerPrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instanceSDK
+	// List of private network to connect with your instance
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -398,12 +344,8 @@ type ServerObservation struct {
 	// If true, the instance is protected against accidental deletion via the Scaleway API.
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
-	// The public IP address of the server (Deprecated use public_ips instead).
-	// The public IPv4 address of the server
-	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
-
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instanceSDK
+	// List of private IPv4 and IPv6 addresses attached to your instance
 	PublicIps []PublicIpsObservation `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
@@ -412,7 +354,7 @@ type ServerObservation struct {
 
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
-	RootVolume []RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+	RootVolume []ServerRootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -430,7 +372,7 @@ type ServerObservation struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instanceSDK type of the server
+	// The instance type of the server
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The user data associated with the server.
@@ -453,6 +395,13 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalVolumeIds []*string `json:"additionalVolumeIds,omitempty" tf:"additional_volume_ids,omitempty"`
 
+	// The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+	// Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+	// When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+	// +kubebuilder:validation:Optional
+	AdminPasswordEncryptionSSHKeyID *string `json:"adminPasswordEncryptionSshKeyId,omitempty" tf:"admin_password_encryption_ssh_key_id,omitempty"`
+
 	// The boot Type of the server. Possible values are: local, bootscript or rescue.
 	// The boot type of the server
 	// +kubebuilder:validation:Optional
@@ -472,11 +421,10 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDynamicIP *bool `json:"enableDynamicIp,omitempty" tf:"enable_dynamic_ip,omitempty"`
 
-	// (Defaults to false) Determines if IPv6 is enabled for the server.
-	// Deprecated: Please use a scaleway_instance_ip with a routed_ipv6 type.
-	// Determines if IPv6 is enabled for the server
+	// List of filesystems attached to the server.
+	// Filesystems attach to the server
 	// +kubebuilder:validation:Optional
-	EnableIPv6 *bool `json:"enableIpv6,omitempty" tf:"enable_ipv6,omitempty"`
+	Filesystems []FilesystemsParameters `json:"filesystems,omitempty" tf:"filesystems,omitempty"`
 
 	// The ID of the reserved IP that is attached to the server.
 	// The ID of the reserved IP for the server
@@ -493,6 +441,7 @@ type ServerParameters struct {
 	IPIDSelector *v1.Selector `json:"ipIdSelector,omitempty" tf:"-"`
 
 	// List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+	// The IDs of the reserved IP for the server
 	// +kubebuilder:validation:Optional
 	IPIds []*string `json:"ipIds,omitempty" tf:"ip_ids,omitempty"`
 
@@ -521,9 +470,14 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.Selector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIps []ServerPrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// The private network associated with the server.
 	// Use the pn_id key to attach a private_network on your instance.
-	// List of private network to connect with your instanceSDK
+	// List of private network to connect with your instance
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -538,7 +492,7 @@ type ServerParameters struct {
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// The list of public IPs of the server.
-	// List of public IPs attached to your instanceSDK
+	// List of private IPv4 and IPv6 addresses attached to your instance
 	// +kubebuilder:validation:Optional
 	PublicIps []PublicIpsParameters `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
@@ -550,7 +504,7 @@ type ServerParameters struct {
 	// Root volume attached to the server on creation.
 	// Root volume attached to the server on creation
 	// +kubebuilder:validation:Optional
-	RootVolume []RootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
+	RootVolume []ServerRootVolumeParameters `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// The security group the server is attached to.
 	// The security group the server is attached to
@@ -580,7 +534,7 @@ type ServerParameters struct {
 	// You find all the available types on the pricing page.
 	// Updates to this field will migrate the server, local storage constraint must be respected. More info.
 	// Use replace_on_type_change to trigger replacement instead of migration.
-	// The instanceSDK type of the server
+	// The instance type of the server
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -604,13 +558,121 @@ type ServerPrivateIpsInitParameters struct {
 type ServerPrivateIpsObservation struct {
 
 	// The private IP address.
+	// The private IP address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The ID of the IP address resource.
+	// The ID of the IP address resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ServerPrivateIpsParameters struct {
+}
+
+type ServerRootVolumeInitParameters struct {
+
+	// Set the volume where the boot the server
+	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
+
+	// (Defaults to true) Forces deletion of the root volume on instance termination.
+	// Force deletion of the root volume on instance termination
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// The name of the server.
+	// Name of the root volume
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
+	// Size of the root volume in gigabytes.
+	// To find the right size use this endpoint and
+	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+	// Depending on volume_type, updates to this field may recreate a new resource.
+	// Size of the root volume in gigabytes
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+	// Volume ID of the root volume
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+	// Volume type of the root volume
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type ServerRootVolumeObservation struct {
+
+	// Set the volume where the boot the server
+	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
+
+	// (Defaults to true) Forces deletion of the root volume on instance termination.
+	// Force deletion of the root volume on instance termination
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// The name of the server.
+	// Name of the root volume
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
+	// Size of the root volume in gigabytes.
+	// To find the right size use this endpoint and
+	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+	// Depending on volume_type, updates to this field may recreate a new resource.
+	// Size of the root volume in gigabytes
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+	// Volume ID of the root volume
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+	// Volume type of the root volume
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type ServerRootVolumeParameters struct {
+
+	// Set the volume where the boot the server
+	// +kubebuilder:validation:Optional
+	Boot *bool `json:"boot,omitempty" tf:"boot,omitempty"`
+
+	// (Defaults to true) Forces deletion of the root volume on instance termination.
+	// Force deletion of the root volume on instance termination
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// The name of the server.
+	// Name of the root volume
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+	// SBS Volume IOPS, only with volume_type as sbs_volume
+	// +kubebuilder:validation:Optional
+	SbsIops *float64 `json:"sbsIops,omitempty" tf:"sbs_iops,omitempty"`
+
+	// Size of the root volume in gigabytes.
+	// To find the right size use this endpoint and
+	// check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+	// Depending on volume_type, updates to this field may recreate a new resource.
+	// Size of the root volume in gigabytes
+	// +kubebuilder:validation:Optional
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+	// Volume ID of the root volume
+	// +kubebuilder:validation:Optional
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+	// Volume type of the root volume
+	// +kubebuilder:validation:Optional
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 // ServerSpec defines the desired state of Server

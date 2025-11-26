@@ -36,7 +36,7 @@ type UserInitParameters struct {
 	// Database user name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// database user password.
+	// database user password. The password must meet the following requirements based on ISO27001 standards:
 	// Database user password
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -93,7 +93,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// database user password.
+	// database user password. The password must meet the following requirements based on ISO27001 standards:
 	// Database user password
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`

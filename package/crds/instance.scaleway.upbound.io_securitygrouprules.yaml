@@ -85,7 +85,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -125,7 +125,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -260,7 +260,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -300,7 +300,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -597,7 +597,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:
@@ -637,7 +637,7 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+                            (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
                             Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
                           type: string
                         ipRange:

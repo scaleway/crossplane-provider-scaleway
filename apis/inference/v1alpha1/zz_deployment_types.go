@@ -52,6 +52,10 @@ type DeploymentInitParameters struct {
 	// List of endpoints
 	PrivateEndpoint []PrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
+	// The private IPv4 address associated with the deployment.
+	// The private IPv4 address associated with the deployment
+	PrivateIP []PrivateIPInitParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -112,6 +116,10 @@ type DeploymentObservation struct {
 	// Configuration of the deployment's private endpoint.
 	// List of endpoints
 	PrivateEndpoint []PrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// The private IPv4 address associated with the deployment.
+	// The private IPv4 address associated with the deployment
+	PrivateIP []PrivateIPObservation `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
@@ -191,6 +199,11 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateEndpoint []PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
+	// The private IPv4 address associated with the deployment.
+	// The private IPv4 address associated with the deployment
+	// +kubebuilder:validation:Optional
+	PrivateIP []PrivateIPParameters `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
@@ -257,6 +270,23 @@ type PrivateEndpointParameters struct {
 	// The id of the private network
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+}
+
+type PrivateIPInitParameters struct {
+}
+
+type PrivateIPObservation struct {
+
+	// The private IPv4 address.
+	// The private IPv4 address
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The ID of the deployment.
+	// The ID of the IPv4 address resource
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIPParameters struct {
 }
 
 type PublicEndpointInitParameters struct {

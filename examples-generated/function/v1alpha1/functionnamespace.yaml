@@ -10,3 +10,6 @@ spec:
   forProvider:
     description: Main function namespace
     name: main-function-namespace
+    tags:
+    - tag1
+    - tag2

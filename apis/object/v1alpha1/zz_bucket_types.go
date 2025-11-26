@@ -20,6 +20,7 @@ type BucketInitParameters struct {
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
+	// List of CORS rules
 	CorsRule []CorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
 	// Boolean that, when set to true, allows the deletion of all objects (including locked objects) when the bucket is destroyed. This operation is irreversible, and the objects cannot be recovered. The default is false.
@@ -67,6 +68,7 @@ type BucketObservation struct {
 	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
 
 	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
+	// List of CORS rules
 	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
 	// The endpoint URL of the bucket.
@@ -118,6 +120,7 @@ type BucketParameters struct {
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A rule of Cross-Origin Resource Sharing. The CORS object supports the following:
+	// List of CORS rules
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
@@ -166,58 +169,73 @@ type BucketParameters struct {
 type CorsRuleInitParameters struct {
 
 	// Specifies which headers are allowed.
+	// Allowed headers in the CORS rule
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
+	// Allowed HTTP methods allowed in the CORS rule
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
+	// Allowed origins allowed in the CORS rule
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Specifies header exposure in the response.
+	// Exposed headers in the CORS rule
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Specifies time in seconds that the browser can cache the response for a preflight request.
+	// Max age of the CORS rule
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type CorsRuleObservation struct {
 
 	// Specifies which headers are allowed.
+	// Allowed headers in the CORS rule
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
+	// Allowed HTTP methods allowed in the CORS rule
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
+	// Allowed origins allowed in the CORS rule
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Specifies header exposure in the response.
+	// Exposed headers in the CORS rule
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Specifies time in seconds that the browser can cache the response for a preflight request.
+	// Max age of the CORS rule
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type CorsRuleParameters struct {
 
 	// Specifies which headers are allowed.
+	// Allowed headers in the CORS rule
 	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Specifies which methods are allowed (GET, PUT, POST, DELETE or HEAD).
+	// Allowed HTTP methods allowed in the CORS rule
 	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Specifies which origins are allowed.
+	// Allowed origins allowed in the CORS rule
 	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Specifies header exposure in the response.
+	// Exposed headers in the CORS rule
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Specifies time in seconds that the browser can cache the response for a preflight request.
+	// Max age of the CORS rule
 	// +kubebuilder:validation:Optional
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }

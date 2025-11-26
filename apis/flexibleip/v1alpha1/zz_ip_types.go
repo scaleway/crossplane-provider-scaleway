@@ -23,7 +23,7 @@ type IpInitParameters struct {
 	// Defines whether the flexible IP has an IPv6 address
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// The project of the Flexible IP.
+	// (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -69,7 +69,7 @@ type IpObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The project of the Flexible IP.
+	// (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -110,7 +110,7 @@ type IpParameters struct {
 	// +kubebuilder:validation:Optional
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// The project of the Flexible IP.
+	// (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`

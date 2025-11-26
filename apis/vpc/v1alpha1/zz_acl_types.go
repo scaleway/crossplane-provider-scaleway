@@ -270,10 +270,8 @@ type AclStatus struct {
 type Acl struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultPolicy) || (has(self.initProvider) && has(self.initProvider.defaultPolicy))",message="spec.forProvider.defaultPolicy is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || (has(self.initProvider) && has(self.initProvider.rules))",message="spec.forProvider.rules is a required parameter"
-	Spec   AclSpec   `json:"spec"`
-	Status AclStatus `json:"status,omitempty"`
+	Spec              AclSpec   `json:"spec"`
+	Status            AclStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

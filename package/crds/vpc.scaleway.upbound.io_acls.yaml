@@ -548,15 +548,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.defaultPolicy is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultPolicy)
-                || (has(self.initProvider) && has(self.initProvider.defaultPolicy))'
-            - message: spec.forProvider.rules is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rules)
-                || (has(self.initProvider) && has(self.initProvider.rules))'
           status:
             description: AclStatus defines the observed state of Acl.
             properties:

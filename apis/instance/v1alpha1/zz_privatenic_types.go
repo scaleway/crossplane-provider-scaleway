@@ -19,9 +19,11 @@ type PrivateIpsInitParameters struct {
 type PrivateIpsObservation struct {
 
 	// The private IP address.
+	// The private IP address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The ID of the private NIC.
+	// The ID of the IP address resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -45,6 +47,10 @@ type PrivateNICInitParameters struct {
 	// Selector for a list of IP in ipam to populate ipamIpIds.
 	// +kubebuilder:validation:Optional
 	IpamIPIdsSelector *v1.Selector `json:"ipamIpIdsSelector,omitempty" tf:"-"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The ID of the private network attached to.
 	// The private network ID
@@ -137,6 +143,11 @@ type PrivateNICParameters struct {
 	// Selector for a list of IP in ipam to populate ipamIpIds.
 	// +kubebuilder:validation:Optional
 	IpamIPIdsSelector *v1.Selector `json:"ipamIpIdsSelector,omitempty" tf:"-"`
+
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIps []PrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The ID of the private network attached to.
 	// The private network ID

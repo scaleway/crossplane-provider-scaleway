@@ -84,7 +84,7 @@ spec:
                     type: boolean
                   projectId:
                     description: |-
-                      The project of the Flexible IP.
+                      (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:
@@ -135,7 +135,7 @@ spec:
                     type: boolean
                   projectId:
                     description: |-
-                      The project of the Flexible IP.
+                      (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:
@@ -363,7 +363,7 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      The project of the Flexible IP.
+                      (Defaults to provider project_id) The ID of the Project the Flexible IP is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   reverse:

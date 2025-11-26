@@ -161,6 +161,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the private network attached to.
@@ -436,6 +443,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetworkId:
                     description: |-
                       The ID of the private network attached to.
@@ -808,10 +822,14 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The private IP address.
+                          description: |-
+                            The private IP address.
+                            The private IP address
                           type: string
                         id:
-                          description: The ID of the private NIC.
+                          description: |-
+                            The ID of the private NIC.
+                            The ID of the IP address resource
                           type: string
                       type: object
                     type: array

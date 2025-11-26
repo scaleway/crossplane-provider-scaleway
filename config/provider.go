@@ -5,6 +5,12 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/scaleway/crossplane-provider-scaleway/config/autoscaling"
+	"github.com/scaleway/crossplane-provider-scaleway/config/datawarehouse"
+	"github.com/scaleway/crossplane-provider-scaleway/config/file"
+	"github.com/scaleway/crossplane-provider-scaleway/config/keymanager"
+	"github.com/scaleway/crossplane-provider-scaleway/config/loadbalancers"
+
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -89,6 +95,11 @@ func GetProvider() *ujconfig.Provider {
 		secrets.Configure,
 		tem.Configure,
 		vpc.Configure,
+		keymanager.Configure,
+		datawarehouse.Configure,
+		file.Configure,
+		loadbalancers.Configure,
+		autoscaling.Configure,
 	} {
 		configure(pc)
 	}

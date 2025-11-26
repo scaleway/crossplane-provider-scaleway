@@ -695,6 +695,7 @@ type RegistrationInitParameters struct {
 	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 
 	// : The registration period in years.
+	// Duration of the registration period in years.
 	DurationInYears *float64 `json:"durationInYears,omitempty" tf:"duration_in_years,omitempty"`
 
 	// : Details of the owner contact.
@@ -733,6 +734,7 @@ type RegistrationObservation struct {
 	DsRecord []DsRecordObservation `json:"dsRecord,omitempty" tf:"ds_record,omitempty"`
 
 	// : The registration period in years.
+	// Duration of the registration period in years.
 	DurationInYears *float64 `json:"durationInYears,omitempty" tf:"duration_in_years,omitempty"`
 
 	// : The ID of the domain registration.
@@ -777,6 +779,7 @@ type RegistrationParameters struct {
 	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 
 	// : The registration period in years.
+	// Duration of the registration period in years.
 	// +kubebuilder:validation:Optional
 	DurationInYears *float64 `json:"durationInYears,omitempty" tf:"duration_in_years,omitempty"`
 

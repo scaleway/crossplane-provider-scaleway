@@ -15,9 +15,17 @@ import (
 
 type ContainerInitParameters struct {
 
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
+
+	// Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+	// Command executed when the container starts. Overrides the command from the container image.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
@@ -85,6 +93,10 @@ type ContainerInitParameters struct {
 	// The privacy type define the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the container is connected to.
+	// ID of the Private Network the container is connected to
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// The communication protocol http1 or h2c. Defaults to http1.
 	// The communication protocol http1 or h2c. Defaults to http1.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -115,6 +127,10 @@ type ContainerInitParameters struct {
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The list of tags associated with the container.
+	// List of tags ["tag1", "tag2", ...] attached to the container.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
@@ -122,9 +138,17 @@ type ContainerInitParameters struct {
 
 type ContainerObservation struct {
 
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
+
+	// Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+	// Command executed when the container starts. Overrides the command from the container image.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron status of the container.
 	// The cron status
@@ -198,6 +222,10 @@ type ContainerObservation struct {
 	// The privacy type define the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the container is connected to.
+	// ID of the Private Network the container is connected to
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// The communication protocol http1 or h2c. Defaults to http1.
 	// The communication protocol http1 or h2c. Defaults to http1.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -226,6 +254,10 @@ type ContainerObservation struct {
 	// The container status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// The list of tags associated with the container.
+	// List of tags ["tag1", "tag2", ...] attached to the container.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
@@ -233,10 +265,20 @@ type ContainerObservation struct {
 
 type ContainerParameters struct {
 
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+	// +kubebuilder:validation:Optional
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container.
 	// The amount of vCPU computing resources to allocate to each container. Defaults to 70.
 	// +kubebuilder:validation:Optional
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
+
+	// Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+	// Command executed when the container starts. Overrides the command from the container image.
+	// +kubebuilder:validation:Optional
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
@@ -318,6 +360,11 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
+	// The ID of the Private Network the container is connected to.
+	// ID of the Private Network the container is connected to
+	// +kubebuilder:validation:Optional
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// The communication protocol http1 or h2c. Defaults to http1.
 	// The communication protocol http1 or h2c. Defaults to http1.
 	// +kubebuilder:validation:Optional
@@ -357,6 +404,11 @@ type ContainerParameters struct {
 	// The container status
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The list of tags associated with the container.
+	// List of tags ["tag1", "tag2", ...] attached to the container.
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
 	// The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.

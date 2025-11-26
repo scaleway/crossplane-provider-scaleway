@@ -13,12 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateIpsInitParameters struct {
+}
+
+type PrivateIpsObservation struct {
+
+	// The private IP address.
+	// The private IP address
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The private network ID
+	// The ID of the IP address resource
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type PrivateIpsParameters struct {
+}
+
 type PrivateNetworkInitParameters struct {
 
-	// The ID of the server.
+	// The private network ID
 	// The private network ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of IPAM IP IDs to attach to the server.
 	// List of IPAM IP IDs to attach to the server
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 }
@@ -29,13 +47,15 @@ type PrivateNetworkObservation struct {
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the server.
+	// The private network ID
 	// The private network ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of IPAM IP IDs to attach to the server.
 	// List of IPAM IP IDs to attach to the server
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
 
+	// The current status of the private network.
 	// The private network status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -43,17 +63,19 @@ type PrivateNetworkObservation struct {
 	// The date and time of the last update of the private network
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
+	// The VLAN ID associated with the private network.
 	// The VLAN ID associated to the private network
 	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
 
-	// The ID of the server.
+	// The private network ID
 	// The private network ID
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
+	// A list of IPAM IP IDs to attach to the server.
 	// List of IPAM IP IDs to attach to the server
 	// +kubebuilder:validation:Optional
 	IpamIPIds []*string `json:"ipamIpIds,omitempty" tf:"ipam_ip_ids,omitempty"`
@@ -72,6 +94,11 @@ type ServerInitParameters struct {
 	// Name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the server.
+	// List of private IPv4 and IPv6 addresses associated with the server
+	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
+	// The private networks to attach to the server
 	// The private networks to attach to the server
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -79,6 +106,10 @@ type ServerInitParameters struct {
 	// associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
+	// The public bandwidth of the server in bits per second
+	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
 
 	// The commercial type of the server. You find all the available types on
 	// the pricing page. Updates to this field will recreate a new
@@ -108,7 +139,7 @@ type ServerObservation struct {
 	// Whether or not to enable VPC access
 	EnableVPC *bool `json:"enableVpc,omitempty" tf:"enable_vpc,omitempty"`
 
-	// The ID of the server.
+	// The private network ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// IPv4 address of the server (IPv4 address).
@@ -123,6 +154,11 @@ type ServerObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the server.
+	// List of private IPv4 and IPv6 addresses associated with the server
+	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
+	// The private networks to attach to the server
 	// The private networks to attach to the server
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -130,6 +166,10 @@ type ServerObservation struct {
 	// associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
+	// The public bandwidth of the server in bits per second
+	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
 
 	// The state of the server.
 	// The state of the server
@@ -179,6 +219,12 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the server.
+	// List of private IPv4 and IPv6 addresses associated with the server
+	// +kubebuilder:validation:Optional
+	PrivateIps []PrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
+	// The private networks to attach to the server
 	// The private networks to attach to the server
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -188,6 +234,11 @@ type ServerParameters struct {
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
+	// The public bandwidth of the server in bits per second
+	// +kubebuilder:validation:Optional
+	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
 
 	// The commercial type of the server. You find all the available types on
 	// the pricing page. Updates to this field will recreate a new

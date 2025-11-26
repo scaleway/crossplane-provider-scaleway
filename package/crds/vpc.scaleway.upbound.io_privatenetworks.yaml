@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  enableDefaultRoutePropagation:
+                    description: |-
+                      Defines whether default v4 and v6 routes are propagated for this Private Network.
+                      Defines whether default v4 and v6 routes are propagated for this Private Network
+                    type: boolean
                   ipv4Subnet:
                     description: |-
                       The IPv4 subnet to associate with the Private Network.
@@ -223,6 +228,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  enableDefaultRoutePropagation:
+                    description: |-
+                      Defines whether default v4 and v6 routes are propagated for this Private Network.
+                      Defines whether default v4 and v6 routes are propagated for this Private Network
+                    type: boolean
                   ipv4Subnet:
                     description: |-
                       The IPv4 subnet to associate with the Private Network.
@@ -538,6 +548,11 @@ spec:
                       The date and time of the creation of the Private Network (RFC 3339 format).
                       The date and time of the creation of the private network
                     type: string
+                  enableDefaultRoutePropagation:
+                    description: |-
+                      Defines whether default v4 and v6 routes are propagated for this Private Network.
+                      Defines whether default v4 and v6 routes are propagated for this Private Network
+                    type: boolean
                   id:
                     description: The ID of the Private Network.
                     type: string

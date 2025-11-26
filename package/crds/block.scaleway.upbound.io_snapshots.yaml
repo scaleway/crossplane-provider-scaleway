@@ -72,6 +72,38 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  export:
+                    description: |-
+                      Use this block to export the volume as a QCOW file to Object Storage.
+                      - bucket –  The name of the bucket where the QCOW file will be saved.
+                      - key –  The desired key (path) for the QCOW file within the bucket.
+                      Export snapshot to a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
+                  import:
+                    description: |-
+                      Use this block to import a QCOW image from Object Storage to create a volume.
+                      - bucket –  The name of the bucket containing the QCOW file.
+                      - key –  The key of the QCOW file within the bucket.
+                      Import snapshot from a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the snapshot. If not provided, a name will be randomly generated.
@@ -187,6 +219,38 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  export:
+                    description: |-
+                      Use this block to export the volume as a QCOW file to Object Storage.
+                      - bucket –  The name of the bucket where the QCOW file will be saved.
+                      - key –  The desired key (path) for the QCOW file within the bucket.
+                      Export snapshot to a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
+                  import:
+                    description: |-
+                      Use this block to import a QCOW image from Object Storage to create a volume.
+                      - bucket –  The name of the bucket containing the QCOW file.
+                      - key –  The key of the QCOW file within the bucket.
+                      Import snapshot from a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the snapshot. If not provided, a name will be randomly generated.
@@ -461,9 +525,41 @@ spec:
             properties:
               atProvider:
                 properties:
+                  export:
+                    description: |-
+                      Use this block to export the volume as a QCOW file to Object Storage.
+                      - bucket –  The name of the bucket where the QCOW file will be saved.
+                      - key –  The desired key (path) for the QCOW file within the bucket.
+                      Export snapshot to a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the snapshot.
                     type: string
+                  import:
+                    description: |-
+                      Use this block to import a QCOW image from Object Storage to create a volume.
+                      - bucket –  The name of the bucket containing the QCOW file.
+                      - key –  The key of the QCOW file within the bucket.
+                      Import snapshot from a qcow
+                    items:
+                      properties:
+                        bucket:
+                          description: Bucket containing qcow
+                          type: string
+                        key:
+                          description: Key of the qcow file in the specified bucket
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the snapshot. If not provided, a name will be randomly generated.

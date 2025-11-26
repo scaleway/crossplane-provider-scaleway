@@ -68,6 +68,7 @@ type SNSCredentialsInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the Project in which SNS is enabled.
@@ -98,6 +99,7 @@ type SNSCredentialsObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	Permissions []PermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the Project in which SNS is enabled.
@@ -117,6 +119,7 @@ type SNSCredentialsParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// . List of permissions associated with these credentials.
+	// The permissions attached to the credentials
 	// +kubebuilder:validation:Optional
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 

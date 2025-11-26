@@ -54,7 +54,7 @@ type IPInitParameters struct {
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The IP resource.
+	// The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
 	// The custom resource in which to book the IP
 	CustomResource []CustomResourceInitParameters `json:"customResource,omitempty" tf:"custom_resource,omitempty"`
 
@@ -89,7 +89,7 @@ type IPObservation struct {
 	// The date and time of the creation of the IP
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The IP resource.
+	// The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
 	// The custom resource in which to book the IP
 	CustomResource []CustomResourceObservation `json:"customResource,omitempty" tf:"custom_resource,omitempty"`
 
@@ -140,7 +140,7 @@ type IPParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The IP resource.
+	// The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.
 	// The custom resource in which to book the IP
 	// +kubebuilder:validation:Optional
 	CustomResource []CustomResourceParameters `json:"customResource,omitempty" tf:"custom_resource,omitempty"`

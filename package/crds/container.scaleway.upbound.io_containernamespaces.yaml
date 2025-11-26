@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  activateVpcIntegration:
+                    description: |-
+                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+                      Activate VPC integration for the namespace
+                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -120,8 +125,9 @@ spec:
                     - namespace
                     type: object
                   tags:
-                    description: List of tags ["tag1", "tag2", ...] attached to the
-                      container namespace
+                    description: |-
+                      The list of tags associated with the namespace.
+                      List of tags ["tag1", "tag2", ...] attached to the container namespace
                     items:
                       type: string
                     type: array
@@ -139,6 +145,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  activateVpcIntegration:
+                    description: |-
+                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+                      Activate VPC integration for the namespace
+                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -175,8 +186,9 @@ spec:
                       type: string
                     type: object
                   tags:
-                    description: List of tags ["tag1", "tag2", ...] attached to the
-                      container namespace
+                    description: |-
+                      The list of tags associated with the namespace.
+                      List of tags ["tag1", "tag2", ...] attached to the container namespace
                     items:
                       type: string
                     type: array
@@ -353,6 +365,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  activateVpcIntegration:
+                    description: |-
+                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
+                      Activate VPC integration for the namespace
+                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -403,8 +420,9 @@ spec:
                       The ID of the registry namespace
                     type: string
                   tags:
-                    description: List of tags ["tag1", "tag2", ...] attached to the
-                      container namespace
+                    description: |-
+                      The list of tags associated with the namespace.
+                      List of tags ["tag1", "tag2", ...] attached to the container namespace
                     items:
                       type: string
                     type: array

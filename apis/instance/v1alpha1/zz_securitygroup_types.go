@@ -19,7 +19,7 @@ type InboundRuleInitParameters struct {
 	// Action when rule match request (drop or accept)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -48,7 +48,7 @@ type InboundRuleObservation struct {
 	// Action when rule match request (drop or accept)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -78,7 +78,7 @@ type InboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
@@ -112,7 +112,7 @@ type OutboundRuleInitParameters struct {
 	// Action when rule match request (drop or accept)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -141,7 +141,7 @@ type OutboundRuleObservation struct {
 	// Action when rule match request (drop or accept)
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
@@ -171,7 +171,7 @@ type OutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
+	// (Deprecated) The ip this rule apply to. If no ip nor ip_range are specified, rule will apply to all ip. Only one of ip and ip_range should be specified.
 	// Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
@@ -211,6 +211,7 @@ type SecurityGroupInitParameters struct {
 
 	// (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
 	// If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+	// External rules for this security group
 	ExternalRules *bool `json:"externalRules,omitempty" tf:"external_rules,omitempty"`
 
 	// (Defaults to accept) The default policy on incoming traffic. Possible values are: accept or drop.
@@ -262,6 +263,7 @@ type SecurityGroupObservation struct {
 
 	// (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
 	// If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+	// External rules for this security group
 	ExternalRules *bool `json:"externalRules,omitempty" tf:"external_rules,omitempty"`
 
 	// The ID of the security group.
@@ -322,6 +324,7 @@ type SecurityGroupParameters struct {
 
 	// (Defaults to false) A boolean to specify whether to use instance_security_group_rules.
 	// If external_rules is set to true, inbound_rule and outbound_rule can not be set directly in the security group.
+	// External rules for this security group
 	// +kubebuilder:validation:Optional
 	ExternalRules *bool `json:"externalRules,omitempty" tf:"external_rules,omitempty"`
 

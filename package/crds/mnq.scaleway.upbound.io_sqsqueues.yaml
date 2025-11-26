@@ -96,6 +96,24 @@ spec:
                       Specifies whether to enable content-based deduplication. Defaults to false.
                       Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
                     type: boolean
+                  deadLetterQueue:
+                    description: |-
+                      Configuration for the dead letter queue. See Dead Letter Queue below for details.
+                      Configuration for the dead-letter queue
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+                            The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+                          type: string
+                        maxReceiveCount:
+                          description: |-
+                            The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+                            The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+                          type: number
+                      type: object
+                    type: array
                   fifoQueue:
                     description: |-
                       Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.
@@ -351,6 +369,24 @@ spec:
                       Specifies whether to enable content-based deduplication. Defaults to false.
                       Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
                     type: boolean
+                  deadLetterQueue:
+                    description: |-
+                      Configuration for the dead letter queue. See Dead Letter Queue below for details.
+                      Configuration for the dead-letter queue
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+                            The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+                          type: string
+                        maxReceiveCount:
+                          description: |-
+                            The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+                            The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+                          type: number
+                      type: object
+                    type: array
                   fifoQueue:
                     description: |-
                       Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.
@@ -751,11 +787,32 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The ARN of the queue
+                    type: string
                   contentBasedDeduplication:
                     description: |-
                       Specifies whether to enable content-based deduplication. Defaults to false.
                       Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
                     type: boolean
+                  deadLetterQueue:
+                    description: |-
+                      Configuration for the dead letter queue. See Dead Letter Queue below for details.
+                      Configuration for the dead-letter queue
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The ID of the dead letter queue. Can be either in the format {region}/{project-id}/{queue-name} or arn:scw:sqs:{region}:project-{project-id}:{queue-name}.
+                            The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
+                          type: string
+                        maxReceiveCount:
+                          description: |-
+                            The number of times a message is delivered to the source queue before being moved to the dead letter queue. Must be between 1 and 1000.
+                            The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
+                          type: number
+                      type: object
+                    type: array
                   fifoQueue:
                     description: |-
                       Whether the queue is a FIFO queue. If true, the queue name must end with .fifo. Defaults to false.

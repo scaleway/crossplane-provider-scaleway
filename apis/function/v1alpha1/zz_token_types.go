@@ -16,12 +16,15 @@ import (
 type TokenInitParameters struct {
 
 	// The description of the token.
+	// The description of the function
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// The date after which the token expires RFC3339
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the function.
+	// The ID of the function
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -34,6 +37,7 @@ type TokenInitParameters struct {
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
 	// The unique identifier of the Functions namespace.
+	// The ID of the namespace
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.FunctionNamespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -53,18 +57,22 @@ type TokenInitParameters struct {
 type TokenObservation struct {
 
 	// The description of the token.
+	// The description of the function
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// The date after which the token expires RFC3339
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the function.
+	// The ID of the function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// The unique identifier of the token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The unique identifier of the Functions namespace.
+	// The ID of the namespace
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// (Defaults to provider region). The region in which the namespace is created.
@@ -75,14 +83,17 @@ type TokenObservation struct {
 type TokenParameters struct {
 
 	// The description of the token.
+	// The description of the function
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The expiration date of the token.
+	// The date after which the token expires RFC3339
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	// The unique identifier of the function.
+	// The ID of the function
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.Function
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -96,6 +107,7 @@ type TokenParameters struct {
 	FunctionIDSelector *v1.Selector `json:"functionIdSelector,omitempty" tf:"-"`
 
 	// The unique identifier of the Functions namespace.
+	// The ID of the namespace
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/function/v1alpha1.FunctionNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`

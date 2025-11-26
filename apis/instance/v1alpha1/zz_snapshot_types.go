@@ -67,7 +67,7 @@ type SnapshotInitParameters struct {
 	// The tags associated with the snapshot
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The snapshot's volume type.  The possible values are: b_ssd (Block SSD), l_ssd (Local SSD) and unified.
+	// (Default to l_ssd) The snapshot's volume type.  The possible values are: l_ssd (Local SSD).
 	// Updates to this field will recreate a new resource.
 	// The snapshot's volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -125,7 +125,7 @@ type SnapshotObservation struct {
 	// The tags associated with the snapshot
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The snapshot's volume type.  The possible values are: b_ssd (Block SSD), l_ssd (Local SSD) and unified.
+	// (Default to l_ssd) The snapshot's volume type.  The possible values are: l_ssd (Local SSD).
 	// Updates to this field will recreate a new resource.
 	// The snapshot's volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -163,7 +163,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The snapshot's volume type.  The possible values are: b_ssd (Block SSD), l_ssd (Local SSD) and unified.
+	// (Default to l_ssd) The snapshot's volume type.  The possible values are: l_ssd (Local SSD).
 	// Updates to this field will recreate a new resource.
 	// The snapshot's volume type
 	// +kubebuilder:validation:Optional

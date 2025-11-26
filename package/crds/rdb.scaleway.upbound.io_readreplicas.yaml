@@ -77,6 +77,32 @@ spec:
                       Creates a direct access endpoint to rdb replica.
                       Direct access endpoint, it gives you an IP and a port to access your read-replica
                     items:
+                      properties:
+                        endpointId:
+                          description: |-
+                            The ID of the endpoint of the Read Replica.
+                            UUID of the endpoint (UUID format).
+                          type: string
+                        hostname:
+                          description: |-
+                            Hostname of the endpoint. Only one of IP and hostname may be set.
+                            Hostname of the endpoint. Only one of ip and hostname may be set.
+                          type: string
+                        ip:
+                          description: |-
+                            IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
+                            IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+                          type: string
+                        name:
+                          description: |-
+                            Name of the endpoint.
+                            Name of the endpoint.
+                          type: string
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint.
+                          type: number
                       type: object
                     type: array
                   instanceId:
@@ -211,6 +237,32 @@ spec:
                       Creates a direct access endpoint to rdb replica.
                       Direct access endpoint, it gives you an IP and a port to access your read-replica
                     items:
+                      properties:
+                        endpointId:
+                          description: |-
+                            The ID of the endpoint of the Read Replica.
+                            UUID of the endpoint (UUID format).
+                          type: string
+                        hostname:
+                          description: |-
+                            Hostname of the endpoint. Only one of IP and hostname may be set.
+                            Hostname of the endpoint. Only one of ip and hostname may be set.
+                          type: string
+                        ip:
+                          description: |-
+                            IPv4 address of the endpoint (IP address). Only one of IP and hostname may be set.
+                            IPv4 address of the endpoint (IP address). Only one of ip and hostname may be set.
+                          type: string
+                        name:
+                          description: |-
+                            Name of the endpoint.
+                            Name of the endpoint.
+                          type: string
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint.
+                          type: number
                       type: object
                     type: array
                   instanceId:

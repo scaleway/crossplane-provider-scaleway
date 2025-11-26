@@ -77,6 +77,10 @@ type ClusterInitParameters struct {
 	// Password of the user
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// The list of private IPv4 addresses associated with the resource.
+	// List of private IPv4 addresses associated with the resource
+	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
@@ -227,6 +231,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// The list of private IPv4 addresses associated with the resource.
+	// List of private IPv4 addresses associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIps []PrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// Describes the Private Network you want to connect to your cluster. If not set, a public
 	// network will be provided. More details on the Private Network section
 	// Private network specs details
@@ -285,9 +294,11 @@ type PrivateIpsInitParameters struct {
 type PrivateIpsObservation struct {
 
 	// The private IPv4 address.
+	// The private IPv4 address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The UUID of the endpoint.
+	// The ID of the IPv4 address resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -318,6 +329,14 @@ type PrivateNetworkObservation struct {
 	// The UUID of the Private Network resource.
 	// UUID of the private network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint
+	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
@@ -351,14 +370,28 @@ type PrivateNetworkParameters struct {
 }
 
 type PublicNetworkInitParameters struct {
+
+	// The UUID of the endpoint.
+	// UUID of the public network to be connected to the cluster
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint
+	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type PublicNetworkObservation struct {
 
 	// The UUID of the endpoint.
+	// UUID of the public network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// TCP port of the endpoint.
@@ -367,6 +400,21 @@ type PublicNetworkObservation struct {
 }
 
 type PublicNetworkParameters struct {
+
+	// The UUID of the endpoint.
+	// UUID of the public network to be connected to the cluster
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint
+	// +kubebuilder:validation:Optional
+	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
+
+	// TCP port of the endpoint.
+	// TCP port of the endpoint
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

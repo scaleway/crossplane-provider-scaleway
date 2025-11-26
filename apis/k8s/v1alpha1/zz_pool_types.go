@@ -108,6 +108,10 @@ type PoolInitParameters struct {
 	// System volume type of the nodes composing the pool
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
 
+	// The ID of the security group
+	// The ID of the security group
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
 	// The size of the pool.
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
@@ -179,6 +183,7 @@ type PoolObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// (List of) The nodes in the default pool.
+	// List of nodes in the pool
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
 	// The placement group the nodes of the pool will be attached to.
@@ -200,6 +205,10 @@ type PoolObservation struct {
 	// System volume type of the nodes composing the pool
 	// System volume type of the nodes composing the pool
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
+
+	// The ID of the security group
+	// The ID of the security group
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// The size of the pool.
 	// Size of the pool
@@ -315,6 +324,11 @@ type PoolParameters struct {
 	// System volume type of the nodes composing the pool
 	// +kubebuilder:validation:Optional
 	RootVolumeType *string `json:"rootVolumeType,omitempty" tf:"root_volume_type,omitempty"`
+
+	// The ID of the security group
+	// The ID of the security group
+	// +kubebuilder:validation:Optional
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// The size of the pool.
 	// Size of the pool

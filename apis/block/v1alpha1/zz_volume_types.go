@@ -31,11 +31,11 @@ type VolumeInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes.
 	// The volume size in GB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot.
 	// The snapshot to create the volume from
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/block/v1alpha1.Snapshot
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
@@ -78,11 +78,11 @@ type VolumeObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes.
 	// The volume size in GB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot.
 	// The snapshot to create the volume from
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -117,12 +117,12 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes. Only one of size_in_gb, and snapshot_id should be specified.
+	// The size of the volume in gigabytes.
 	// The volume size in GB
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
-	// If set, the new volume will be created from this snapshot. Only one of size_in_gb, snapshot_id should be specified.
+	// If set, the new volume will be created from this snapshot.
 	// The snapshot to create the volume from
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/block/v1alpha1.Snapshot
 	// +kubebuilder:validation:Optional

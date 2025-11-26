@@ -219,6 +219,11 @@ spec:
                       System volume type of the nodes composing the pool
                       System volume type of the nodes composing the pool
                     type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group
+                      The ID of the security group
+                    type: string
                   size:
                     description: |-
                       The size of the pool.
@@ -419,6 +424,11 @@ spec:
                     description: |-
                       System volume type of the nodes composing the pool
                       System volume type of the nodes composing the pool
+                    type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group
+                      The ID of the security group
                     type: string
                   size:
                     description: |-
@@ -706,7 +716,9 @@ spec:
                       Server type of the pool servers
                     type: string
                   nodes:
-                    description: (List of) The nodes in the default pool.
+                    description: |-
+                      (List of) The nodes in the default pool.
+                      List of nodes in the pool
                     items:
                       properties:
                         id:
@@ -767,6 +779,11 @@ spec:
                     description: |-
                       System volume type of the nodes composing the pool
                       System volume type of the nodes composing the pool
+                    type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group
+                      The ID of the security group
                     type: string
                   size:
                     description: |-

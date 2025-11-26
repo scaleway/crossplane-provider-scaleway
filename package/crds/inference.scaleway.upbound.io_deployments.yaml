@@ -194,6 +194,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
@@ -367,6 +374,13 @@ spec:
                             The ID of the private network to use.
                             The id of the private network
                           type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
                       type: object
                     type: array
                   projectId:
@@ -654,6 +668,24 @@ spec:
                           description: |-
                             The URL of the endpoint.
                             The URL of the endpoint.
+                          type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the deployment.
+                            The ID of the IPv4 address resource
                           type: string
                       type: object
                     type: array

@@ -205,6 +205,11 @@ spec:
                       The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the function is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
@@ -240,6 +245,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  tags:
+                    description: |-
+                      The list of tags associated with the function.
+                      List of tags ["tag1", "tag2", ...] attached to the function.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
@@ -402,6 +414,11 @@ spec:
                       The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the function is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
@@ -426,6 +443,13 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                  tags:
+                    description: |-
+                      The list of tags associated with the function.
+                      List of tags ["tag1", "tag2", ...] attached to the function.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.
@@ -702,6 +726,11 @@ spec:
                       The privacy type defines the way to authenticate to your function. Please check our dedicated section.
                       Privacy of the function. Can be either `private` or `public`
                     type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the function is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the functions namespace is associated with.
@@ -722,6 +751,13 @@ spec:
                       Execution environment of the function.
                       Execution environment of the function.
                     type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the function.
+                      List of tags ["tag1", "tag2", ...] attached to the function.
+                    items:
+                      type: string
+                    type: array
                   timeout:
                     description: |-
                       The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.

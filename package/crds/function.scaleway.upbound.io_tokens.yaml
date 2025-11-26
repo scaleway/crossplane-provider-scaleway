@@ -73,13 +73,19 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      The description of the function
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      The date after which the token expires RFC3339
                     type: string
                   functionId:
-                    description: The unique identifier of the function.
+                    description: |-
+                      The unique identifier of the function.
+                      The ID of the function
                     type: string
                   functionIdRef:
                     description: Reference to a Function in function to populate functionId.
@@ -156,7 +162,9 @@ spec:
                         type: object
                     type: object
                   namespaceId:
-                    description: The unique identifier of the Functions namespace.
+                    description: |-
+                      The unique identifier of the Functions namespace.
+                      The ID of the namespace
                     type: string
                   namespaceIdRef:
                     description: Reference to a FunctionNamespace in function to populate
@@ -254,13 +262,19 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      The description of the function
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      The date after which the token expires RFC3339
                     type: string
                   functionId:
-                    description: The unique identifier of the function.
+                    description: |-
+                      The unique identifier of the function.
+                      The ID of the function
                     type: string
                   functionIdRef:
                     description: Reference to a Function in function to populate functionId.
@@ -337,7 +351,9 @@ spec:
                         type: object
                     type: object
                   namespaceId:
-                    description: The unique identifier of the Functions namespace.
+                    description: |-
+                      The unique identifier of the Functions namespace.
+                      The ID of the namespace
                     type: string
                   namespaceIdRef:
                     description: Reference to a FunctionNamespace in function to populate
@@ -594,19 +610,27 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: The description of the token.
+                    description: |-
+                      The description of the token.
+                      The description of the function
                     type: string
                   expiresAt:
-                    description: The expiration date of the token.
+                    description: |-
+                      The expiration date of the token.
+                      The date after which the token expires RFC3339
                     type: string
                   functionId:
-                    description: The unique identifier of the function.
+                    description: |-
+                      The unique identifier of the function.
+                      The ID of the function
                     type: string
                   id:
                     description: The unique identifier of the token.
                     type: string
                   namespaceId:
-                    description: The unique identifier of the Functions namespace.
+                    description: |-
+                      The unique identifier of the Functions namespace.
+                      The ID of the namespace
                     type: string
                   region:
                     description: |-

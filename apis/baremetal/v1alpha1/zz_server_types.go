@@ -121,9 +121,11 @@ type PrivateIpsInitParameters struct {
 type PrivateIpsObservation struct {
 
 	// The private IP address.
+	// The private IP address
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The id of the option to enable. Use this endpoint to find the available options IDs.
+	// The ID of the IP address resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -227,6 +229,10 @@ type ServerInitParameters struct {
 	// Password used for the installation.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -234,6 +240,10 @@ type ServerInitParameters struct {
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true to activate server protection option.
+	// If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// If True, this boolean allows to reinstall the server on install config changes.
 	// ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
@@ -284,6 +294,7 @@ type ServerObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The domain of the server.
+	// Domain associated with the server
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// The hostname of the server.
@@ -360,6 +371,10 @@ type ServerObservation struct {
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true to activate server protection option.
+	// If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// If True, this boolean allows to reinstall the server on install config changes.
 	// ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
@@ -441,6 +456,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// The list of private IPv4 and IPv6 addresses associated with the resource.
+	// List of private IPv4 and IPv6 addresses associated with the resource
+	// +kubebuilder:validation:Optional
+	PrivateIps []PrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
+
 	// The private networks to attach to the server. For more information, see the documentation
 	// The private networks to attach to the server
 	// +kubebuilder:validation:Optional
@@ -450,6 +470,11 @@ type ServerParameters struct {
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Set to true to activate server protection option.
+	// If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+	// +kubebuilder:validation:Optional
+	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
 	// If True, this boolean allows to reinstall the server on install config changes.
 	// ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.

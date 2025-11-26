@@ -41,9 +41,11 @@ type BackendInitParameters struct {
 	HealthCheckDelay *string `json:"healthCheckDelay,omitempty" tf:"health_check_delay,omitempty"`
 
 	// This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTP Health check
 	HealthCheckHTTP []HealthCheckHTTPInitParameters `json:"healthCheckHttp,omitempty" tf:"health_check_http,omitempty"`
 
 	// This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTPS Health check
 	HealthCheckHTTPS []HealthCheckHTTPSInitParameters `json:"healthCheckHttps,omitempty" tf:"health_check_https,omitempty"`
 
 	// (Default: 2) Number of allowed failed health check requests before the backend server is marked as down.
@@ -59,6 +61,7 @@ type BackendInitParameters struct {
 	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
 
 	// This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// TCP Health check
 	HealthCheckTCP []HealthCheckTCPInitParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
 
 	// (Default: 30s) Timeout before we consider a health check request failed.
@@ -176,9 +179,11 @@ type BackendObservation struct {
 	HealthCheckDelay *string `json:"healthCheckDelay,omitempty" tf:"health_check_delay,omitempty"`
 
 	// This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTP Health check
 	HealthCheckHTTP []HealthCheckHTTPObservation `json:"healthCheckHttp,omitempty" tf:"health_check_http,omitempty"`
 
 	// This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTPS Health check
 	HealthCheckHTTPS []HealthCheckHTTPSObservation `json:"healthCheckHttps,omitempty" tf:"health_check_https,omitempty"`
 
 	// (Default: 2) Number of allowed failed health check requests before the backend server is marked as down.
@@ -194,6 +199,7 @@ type BackendObservation struct {
 	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
 
 	// This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// TCP Health check
 	HealthCheckTCP []HealthCheckTCPParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
 
 	// (Default: 30s) Timeout before we consider a health check request failed.
@@ -310,10 +316,12 @@ type BackendParameters struct {
 	HealthCheckDelay *string `json:"healthCheckDelay,omitempty" tf:"health_check_delay,omitempty"`
 
 	// This block enables HTTP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTP Health check
 	// +kubebuilder:validation:Optional
 	HealthCheckHTTP []HealthCheckHTTPParameters `json:"healthCheckHttp,omitempty" tf:"health_check_http,omitempty"`
 
 	// This block enable HTTPS health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// HTTPS Health check
 	// +kubebuilder:validation:Optional
 	HealthCheckHTTPS []HealthCheckHTTPSParameters `json:"healthCheckHttps,omitempty" tf:"health_check_https,omitempty"`
 
@@ -333,6 +341,7 @@ type BackendParameters struct {
 	HealthCheckSendProxy *bool `json:"healthCheckSendProxy,omitempty" tf:"health_check_send_proxy,omitempty"`
 
 	// This block enables TCP health checks. Only one of health_check_tcp, health_check_http and health_check_https should be specified.
+	// TCP Health check
 	// +kubebuilder:validation:Optional
 	HealthCheckTCP []HealthCheckTCPParameters `json:"healthCheckTcp,omitempty" tf:"health_check_tcp,omitempty"`
 

@@ -148,6 +148,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
@@ -173,6 +180,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   reinstallOnConfigChanges:
                     description: |-
                       If True, this boolean allows to reinstall the server on install config changes.
@@ -398,6 +410,13 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
@@ -423,6 +442,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   reinstallOnConfigChanges:
                     description: |-
                       If True, this boolean allows to reinstall the server on install config changes.
@@ -742,7 +766,9 @@ spec:
                       Some description to associate to the server, max 255 characters
                     type: string
                   domain:
-                    description: The domain of the server.
+                    description: |-
+                      The domain of the server.
+                      Domain associated with the server
                     type: string
                   hostname:
                     description: |-
@@ -895,11 +921,14 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The private IP address.
+                          description: |-
+                            The private IP address.
+                            The private IP address
                           type: string
                         id:
-                          description: The id of the option to enable. Use this endpoint
-                            to find the available options IDs.
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            The ID of the IP address resource
                           type: string
                       type: object
                     type: array
@@ -953,6 +982,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the server is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
                   reinstallOnConfigChanges:
                     description: |-
                       If True, this boolean allows to reinstall the server on install config changes.
