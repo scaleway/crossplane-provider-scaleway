@@ -25,6 +25,7 @@ var groupAliases = map[string]string{
 	"databases":           "rdb",
 	"kubernetes":          "k8s",
 	"messagingandqueuing": "mnq",
+	"loadbalancers":       "lb",
 }
 
 // ProviderMetadata represents the structure of provider-metadata.yaml

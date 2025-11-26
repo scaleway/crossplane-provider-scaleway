@@ -10,6 +10,5 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
 		r.Kind = "Filesystem"
-
 	})
 }

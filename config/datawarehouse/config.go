@@ -14,7 +14,6 @@ func Configure(p *config.Provider) {
 		r.References["deployment_id"] = config.Reference{
 			TerraformName: "scaleway_datawarehouse_deployment",
 		}
-
 	})
 
 	p.AddResourceConfigurator("scaleway_datawarehouse_database", func(r *config.Resource) {
@@ -31,6 +30,5 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
 		r.Kind = "Deployment"
-
 	})
 }
