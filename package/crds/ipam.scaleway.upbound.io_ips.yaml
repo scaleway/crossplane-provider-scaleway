@@ -557,6 +557,11 @@ spec:
                       Request a specific IP in the specified source pool.
                       Request a specific IP in the requested source pool
                     type: string
+                  addressCidr:
+                    description: |-
+                      the IP address in CIDR notation.
+                      The IP address with a CIDR notation
+                    type: string
                   createdAt:
                     description: |-
                       Date and time of IP's creation (RFC 3339 format).

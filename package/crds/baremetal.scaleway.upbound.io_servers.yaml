@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  cloudInit:
+                    description: |-
+                      Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+                      Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+                    type: string
                   description:
                     description: |-
                       A description for the server.
@@ -334,6 +339,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  cloudInit:
+                    description: |-
+                      Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+                      Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+                    type: string
                   description:
                     description: |-
                       A description for the server.
@@ -760,6 +770,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  cloudInit:
+                    description: |-
+                      Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+                      Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+                    type: string
                   description:
                     description: |-
                       A description for the server.

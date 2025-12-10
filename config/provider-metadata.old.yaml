@@ -469,36 +469,6 @@ resources:
                 options.id: data.scaleway_baremetal_option.remote_access.option_id
                 os: data.scaleway_baremetal_os.my_os.os_id
                 ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
-            - name: my_server_ci
-              manifest: |-
-                {
-                  "cloud_init": "${file(\"userdata.yaml\")}",
-                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
-                  "os": "${data.scaleway_baremetal_os.my_os.os_id}",
-                  "ssh_key_ids": [
-                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
-                  ],
-                  "zone": "fr-par-2"
-                }
-              references:
-                offer: data.scaleway_baremetal_offer.my_offer.offer_id
-                os: data.scaleway_baremetal_os.my_os.os_id
-                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
-            - name: my_server_ci
-              manifest: |-
-                {
-                  "cloud_init": "#cloud-config\npackages:\n  - htop\n  - curl\n\nruncmd:\n  - echo \"Hello from raw cloud-init!\" \u003e /home/ubuntu/message.txt\n",
-                  "offer": "${data.scaleway_baremetal_offer.my_offer.offer_id}",
-                  "os": "${data.scaleway_baremetal_os.my_os.os_id}",
-                  "ssh_key_ids": [
-                    "${data.scaleway_iam_ssh_key.my_ssh_key.id}"
-                  ],
-                  "zone": "fr-par-2"
-                }
-              references:
-                offer: data.scaleway_baremetal_offer.my_offer.offer_id
-                os: data.scaleway_baremetal_os.my_os.os_id
-                ssh_key_ids: data.scaleway_iam_ssh_key.my_ssh_key.id
             - name: my_server
               manifest: |-
                 {
@@ -645,7 +615,6 @@ resources:
                 offer: data.scaleway_baremetal_offer.my_offer.offer_id
         argumentDocs:
             address: '- The private IP address.'
-            cloud_init: '- (Optional) Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.'
             created_at: '- The date and time of the creation of the private network.'
             description: '- (Optional) A description for the server.'
             domain: '- The domain of the server.'
@@ -4399,7 +4368,6 @@ resources:
                     }
         argumentDocs:
             address: '- (Optional) Request a specific IP in the specified source pool.'
-            address_cidr: '- the IP address in CIDR notation.'
             created_at: '- Date and time of IP''s creation (RFC 3339 format).'
             custom_resource: '- (Optional) The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.'
             depends_on: relations, or moving the declarations to another Terraform module. Otherwise, other resources may take the requested address first, blocking the whole Terraform setup. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
