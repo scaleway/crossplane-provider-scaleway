@@ -118,6 +118,9 @@ func resolveScwProfile(pc *v1beta1.ProviderConfig) (*scw.Profile, error) {
 	}
 
 	envProf := scw.LoadEnvProfile()
+	if fileProf == nil {
+		return envProf, nil
+	}
 	return scw.MergeProfiles(fileProf, envProf), nil
 }
 
