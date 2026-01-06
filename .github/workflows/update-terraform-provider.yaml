@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.1
         with:
           submodules: true
 
@@ -41,7 +41,7 @@ jobs:
           scripts/update-provider.sh
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-tf-provider/${{ env.new_version }}
@@ -52,3 +52,4 @@ jobs:
             - Re-ran `make generate` and auto-generated new Crossplane resource configs
           labels: automated, dependencies
           delete-branch: true
+          sign-commits: true
