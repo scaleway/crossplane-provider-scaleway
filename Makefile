@@ -84,7 +84,8 @@ XPKGS = $(PROJECT_NAME)
 
 # NOTE(hasheddan): we force image building to happen prior to xpkg build so that
 # we ensure image is present in daemon.
-xpkg.build.provider-scaleway: do.build.images
+# NOTE: CROSSPLANE_CLI must be built before xpkg build
+xpkg.build.provider-scaleway: do.build.images $(CROSSPLANE_CLI)
 
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
