@@ -1,0 +1,13 @@
+apiVersion: iot.scaleway.m.upbound.io/v1alpha1
+kind: Hub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/hub
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test-iot
+    productPlan: plan_shared

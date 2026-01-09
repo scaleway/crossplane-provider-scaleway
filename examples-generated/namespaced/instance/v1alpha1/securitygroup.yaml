@@ -1,0 +1,11 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_all
+  name: allow-all
+  namespace: upbound-system
+spec:
+  forProvider: {}

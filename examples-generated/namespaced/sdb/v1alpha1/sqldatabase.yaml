@@ -1,0 +1,14 @@
+apiVersion: sdb.scaleway.m.upbound.io/v1alpha1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sdb/v1alpha1/sqldatabase
+  labels:
+    testing.upbound.io/example-name: database
+  name: database
+  namespace: upbound-system
+spec:
+  forProvider:
+    maxCpu: 8
+    minCpu: 0
+    name: my-database

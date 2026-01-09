@@ -1,0 +1,958 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: servers.baremetal.scaleway.m.upbound.io
+spec:
+  group: baremetal.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Server
+    listKind: ServerList
+    plural: servers
+    singular: server
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Server is the Schema for the Servers API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ServerSpec defines the desired state of Server
+            properties:
+              forProvider:
+                properties:
+                  description:
+                    description: |-
+                      A description for the server.
+                      Some description to associate to the server, max 255 characters
+                    type: string
+                  hostname:
+                    description: |-
+                      The hostname of the server.
+                      Hostname of the server
+                    type: string
+                  installConfigAfterward:
+                    description: |-
+                      If True, this boolean allows to create a server without the install config if you want to provide it later.
+                      If True, this boolean allows to create a server without the install config if you want to provide it later
+                    type: boolean
+                  name:
+                    description: |-
+                      The name of the server.
+                      Name of the server
+                    type: string
+                  offer:
+                    description: |-
+                      The offer UUID of the baremetal server.
+                      Use this endpoint to find the right offer.
+                      ID or name of the server offer
+                    type: string
+                  options:
+                    description: |-
+                      The options to enable on the server.
+                      ~> The options block supports:
+                      The options to enable on server
+                    items:
+                      properties:
+                        expiresAt:
+                          description: |-
+                            The auto expiration date for compatible options
+                            Auto expire the option after this date
+                          type: string
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            IDs of the options
+                          type: string
+                      type: object
+                    type: array
+                  os:
+                    description: |-
+                      The UUID of the os to install on the server.
+                      Use this endpoint to find the right OS ID.
+                      ~> Important: Updates to os will reinstall the server.
+                      The base image of the server
+                    type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      Password used for the installation. May be required depending on used os.
+                      Password used for the installation.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private networks to attach to the server. For more information, see the documentation
+                      The private networks to attach to the server
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            The ID of the private network to associate with the server
+                          type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  reinstallOnConfigChanges:
+                    description: |-
+                      If True, this boolean allows to reinstall the server on install config changes.
+                      ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
+                      If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
+                    type: boolean
+                  servicePasswordSecretRef:
+                    description: |-
+                      Password used for the service to install. May be required depending on used os.
+                      Password used for the service to install.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  serviceUser:
+                    description: |-
+                      User used for the service to install.
+                      User used for the service to install.
+                    type: string
+                  sshKeyIds:
+                    description: |-
+                      List of SSH keys allowed to connect to the server.
+                      Array of SSH key IDs allowed to SSH to the server
+
+                      **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
+                      If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
+                    items:
+                      type: string
+                    type: array
+                  sshKeyIdsRefs:
+                    description: References to SSHKey in account to populate sshKeyIds.
+                    items:
+                      description: A NamespacedReference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        namespace:
+                          description: Namespace of the referenced object
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  sshKeyIdsSelector:
+                    description: Selector for a list of SSHKey in account to populate
+                      sshKeyIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      Array of tags to associate with the server
+                    items:
+                      type: string
+                    type: array
+                  user:
+                    description: |-
+                      User used for the installation.
+                      User used for the installation.
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  description:
+                    description: |-
+                      A description for the server.
+                      Some description to associate to the server, max 255 characters
+                    type: string
+                  hostname:
+                    description: |-
+                      The hostname of the server.
+                      Hostname of the server
+                    type: string
+                  installConfigAfterward:
+                    description: |-
+                      If True, this boolean allows to create a server without the install config if you want to provide it later.
+                      If True, this boolean allows to create a server without the install config if you want to provide it later
+                    type: boolean
+                  name:
+                    description: |-
+                      The name of the server.
+                      Name of the server
+                    type: string
+                  offer:
+                    description: |-
+                      The offer UUID of the baremetal server.
+                      Use this endpoint to find the right offer.
+                      ID or name of the server offer
+                    type: string
+                  options:
+                    description: |-
+                      The options to enable on the server.
+                      ~> The options block supports:
+                      The options to enable on server
+                    items:
+                      properties:
+                        expiresAt:
+                          description: |-
+                            The auto expiration date for compatible options
+                            Auto expire the option after this date
+                          type: string
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            IDs of the options
+                          type: string
+                      type: object
+                    type: array
+                  os:
+                    description: |-
+                      The UUID of the os to install on the server.
+                      Use this endpoint to find the right OS ID.
+                      ~> Important: Updates to os will reinstall the server.
+                      The base image of the server
+                    type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      Password used for the installation. May be required depending on used os.
+                      Password used for the installation.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private networks to attach to the server. For more information, see the documentation
+                      The private networks to attach to the server
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            The ID of the private network to associate with the server
+                          type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  reinstallOnConfigChanges:
+                    description: |-
+                      If True, this boolean allows to reinstall the server on install config changes.
+                      ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
+                      If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
+                    type: boolean
+                  servicePasswordSecretRef:
+                    description: |-
+                      Password used for the service to install. May be required depending on used os.
+                      Password used for the service to install.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  serviceUser:
+                    description: |-
+                      User used for the service to install.
+                      User used for the service to install.
+                    type: string
+                  sshKeyIds:
+                    description: |-
+                      List of SSH keys allowed to connect to the server.
+                      Array of SSH key IDs allowed to SSH to the server
+
+                      **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
+                      If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
+                    items:
+                      type: string
+                    type: array
+                  sshKeyIdsRefs:
+                    description: References to SSHKey in account to populate sshKeyIds.
+                    items:
+                      description: A NamespacedReference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        namespace:
+                          description: Namespace of the referenced object
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  sshKeyIdsSelector:
+                    description: Selector for a list of SSHKey in account to populate
+                      sshKeyIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      Array of tags to associate with the server
+                    items:
+                      type: string
+                    type: array
+                  user:
+                    description: |-
+                      User used for the installation.
+                      User used for the installation.
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.offer is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.offer)
+                || (has(self.initProvider) && has(self.initProvider.offer))'
+          status:
+            description: ServerStatus defines the observed state of Server.
+            properties:
+              atProvider:
+                properties:
+                  description:
+                    description: |-
+                      A description for the server.
+                      Some description to associate to the server, max 255 characters
+                    type: string
+                  domain:
+                    description: |-
+                      The domain of the server.
+                      Domain associated with the server
+                    type: string
+                  hostname:
+                    description: |-
+                      The hostname of the server.
+                      Hostname of the server
+                    type: string
+                  id:
+                    description: The id of the option to enable. Use this endpoint
+                      to find the available options IDs.
+                    type: string
+                  installConfigAfterward:
+                    description: |-
+                      If True, this boolean allows to create a server without the install config if you want to provide it later.
+                      If True, this boolean allows to create a server without the install config if you want to provide it later
+                    type: boolean
+                  ips:
+                    description: |-
+                      (List of) The IPs of the server.
+                      IP addresses attached to the server.
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The id of the option to enable. Use this endpoint
+                            to find the available options IDs.
+                          type: string
+                        reverse:
+                          description: The reverse of the IP.
+                          type: string
+                        version:
+                          description: The type of the IP.
+                          type: string
+                      type: object
+                    type: array
+                  ipv4:
+                    description: |-
+                      (List of) The IPv4 addresses of the server.
+                      IPv4 addresses attached to the server
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The id of the option to enable. Use this endpoint
+                            to find the available options IDs.
+                          type: string
+                        reverse:
+                          description: The reverse of the IP.
+                          type: string
+                        version:
+                          description: The type of the IP.
+                          type: string
+                      type: object
+                    type: array
+                  ipv6:
+                    description: |-
+                      (List of) The IPv6 addresses of the server.
+                      IPv6 addresses attached to the server
+                    items:
+                      properties:
+                        address:
+                          description: The private IP address.
+                          type: string
+                        id:
+                          description: The id of the option to enable. Use this endpoint
+                            to find the available options IDs.
+                          type: string
+                        reverse:
+                          description: The reverse of the IP.
+                          type: string
+                        version:
+                          description: The type of the IP.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: |-
+                      The name of the server.
+                      Name of the server
+                    type: string
+                  offer:
+                    description: |-
+                      The offer UUID of the baremetal server.
+                      Use this endpoint to find the right offer.
+                      ID or name of the server offer
+                    type: string
+                  offerId:
+                    description: |-
+                      The ID of the offer.
+                      ID of the server offer
+                    type: string
+                  offerName:
+                    description: |-
+                      The name of the offer.
+                      Name of the server offer
+                    type: string
+                  options:
+                    description: |-
+                      The options to enable on the server.
+                      ~> The options block supports:
+                      The options to enable on server
+                    items:
+                      properties:
+                        expiresAt:
+                          description: |-
+                            The auto expiration date for compatible options
+                            Auto expire the option after this date
+                          type: string
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            IDs of the options
+                          type: string
+                        name:
+                          description: |-
+                            The name of the server.
+                            name of the option
+                          type: string
+                      type: object
+                    type: array
+                  organizationId:
+                    description: |-
+                      The organization ID the server is associated with.
+                      The organization_id you want to attach the resource to
+                    type: string
+                  os:
+                    description: |-
+                      The UUID of the os to install on the server.
+                      Use this endpoint to find the right OS ID.
+                      ~> Important: Updates to os will reinstall the server.
+                      The base image of the server
+                    type: string
+                  osName:
+                    description: |-
+                      The name of the os.
+                      The base image name of the server
+                    type: string
+                  partitioning:
+                    description: |-
+                      The partitioning schema in JSON format
+                      The partitioning schema in json format
+                    type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IP address.
+                            The private IP address
+                          type: string
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            The ID of the IP address resource
+                          type: string
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private networks to attach to the server. For more information, see the documentation
+                      The private networks to attach to the server
+                    items:
+                      properties:
+                        createdAt:
+                          description: |-
+                            The date and time of the creation of the private network.
+                            The date and time of the creation of the private network
+                          type: string
+                        id:
+                          description: |-
+                            The id of the option to enable. Use this endpoint to find the available options IDs.
+                            The ID of the private network to associate with the server
+                          type: string
+                        ipamIpIds:
+                          description: |-
+                            List of IPAM IP IDs to assign to the server in the requested private network.
+                            List of IPAM IP IDs to attach to the server
+                          items:
+                            type: string
+                          type: array
+                        mappingId:
+                          description: |-
+                            The ID of the Server-to-Private Network mapping.
+                            The ID of the Server-to-Private Network mapping
+                          type: string
+                        status:
+                          description: |-
+                            The private network status.
+                            The private network status
+                          type: string
+                        updatedAt:
+                          description: |-
+                            The date and time of the last update of the private network.
+                            The date and time of the last update of the private network
+                          type: string
+                        vlan:
+                          description: |-
+                            The VLAN ID associated to the private network.
+                            The VLAN ID associated to the private network
+                          type: number
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  reinstallOnConfigChanges:
+                    description: |-
+                      If True, this boolean allows to reinstall the server on install config changes.
+                      ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
+                      If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
+                    type: boolean
+                  serviceUser:
+                    description: |-
+                      User used for the service to install.
+                      User used for the service to install.
+                    type: string
+                  sshKeyIds:
+                    description: |-
+                      List of SSH keys allowed to connect to the server.
+                      Array of SSH key IDs allowed to SSH to the server
+
+                      **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
+                      If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      Array of tags to associate with the server
+                    items:
+                      type: string
+                    type: array
+                  user:
+                    description: |-
+                      User used for the installation.
+                      User used for the installation.
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

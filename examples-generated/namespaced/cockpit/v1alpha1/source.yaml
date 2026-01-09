@@ -1,0 +1,32 @@
+apiVersion: cockpit.scaleway.m.upbound.io/v1alpha1
+kind: Source
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/source
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-data-source
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: project
+    retentionDays: 6
+    type: metrics
+
+---
+
+apiVersion: account.scaleway.m.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/source
+  labels:
+    testing.upbound.io/example-name: project
+  name: project
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test project data source

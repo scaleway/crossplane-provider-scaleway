@@ -1,0 +1,15 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/vpc
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-vpc
+    tags:
+    - demo
+    - terraform

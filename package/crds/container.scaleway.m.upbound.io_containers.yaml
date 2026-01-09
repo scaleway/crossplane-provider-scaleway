@@ -1,0 +1,961 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: containers.container.scaleway.m.upbound.io
+spec:
+  group: container.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Container
+    listKind: ContainerList
+    plural: containers
+    singular: container
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Container is the Schema for the Containers API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ContainerSpec defines the desired state of Container
+            properties:
+              forProvider:
+                properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
+                  cpuLimit:
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
+                    type: number
+                  deploy:
+                    description: |-
+                      Boolean indicating whether the container is in a production environment.
+                      This allows you to control your production environment
+                    type: boolean
+                  description:
+                    description: |-
+                      The description of the container.
+                      The container description
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
+                  httpOption:
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
+                    type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
+                  maxConcurrency:
+                    description: |-
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
+                    type: number
+                  maxScale:
+                    description: |-
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
+                    type: number
+                  memoryLimit:
+                    description: |-
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
+                    type: number
+                  minScale:
+                    description: |-
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
+                    type: number
+                  name:
+                    description: |-
+                      The unique name of the container name.
+                      The container name
+                    type: string
+                  namespaceId:
+                    description: |-
+                      The Containers namespace ID of the container.
+                      The container namespace associated
+                    type: string
+                  namespaceIdRef:
+                    description: Reference to a ContainerNamespace in container to
+                      populate namespaceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  namespaceIdSelector:
+                    description: Selector for a ContainerNamespace in container to
+                      populate namespaceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  port:
+                    description: |-
+                      The port to expose the container.
+                      The port to expose the container.
+                    type: number
+                  privacy:
+                    description: |-
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
+                    type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
+                  protocol:
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
+                    type: string
+                  registryImage:
+                    description: |-
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The scaleway registry image address
+                    type: string
+                  registrySha256:
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
+                    type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
+                  secretEnvironmentVariablesSecretRef:
+                    description: |-
+                      The secret environment variables of the container.
+                      The secret environment variables to be injected into your container at runtime.
+                    properties:
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  status:
+                    description: |-
+                      The container status.
+                      The container status
+                    type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
+                  timeout:
+                    description: |-
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                    type: number
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
+                  cpuLimit:
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
+                    type: number
+                  deploy:
+                    description: |-
+                      Boolean indicating whether the container is in a production environment.
+                      This allows you to control your production environment
+                    type: boolean
+                  description:
+                    description: |-
+                      The description of the container.
+                      The container description
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
+                  httpOption:
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
+                    type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
+                  maxConcurrency:
+                    description: |-
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
+                    type: number
+                  maxScale:
+                    description: |-
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
+                    type: number
+                  memoryLimit:
+                    description: |-
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
+                    type: number
+                  minScale:
+                    description: |-
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
+                    type: number
+                  name:
+                    description: |-
+                      The unique name of the container name.
+                      The container name
+                    type: string
+                  namespaceId:
+                    description: |-
+                      The Containers namespace ID of the container.
+                      The container namespace associated
+                    type: string
+                  namespaceIdRef:
+                    description: Reference to a ContainerNamespace in container to
+                      populate namespaceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  namespaceIdSelector:
+                    description: Selector for a ContainerNamespace in container to
+                      populate namespaceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  port:
+                    description: |-
+                      The port to expose the container.
+                      The port to expose the container.
+                    type: number
+                  privacy:
+                    description: |-
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
+                    type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
+                  protocol:
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
+                    type: string
+                  registryImage:
+                    description: |-
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The scaleway registry image address
+                    type: string
+                  registrySha256:
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
+                    type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
+                  secretEnvironmentVariablesSecretRef:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  status:
+                    description: |-
+                      The container status.
+                      The container status
+                    type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
+                  timeout:
+                    description: |-
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                    type: number
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: ContainerStatus defines the observed state of Container.
+            properties:
+              atProvider:
+                properties:
+                  args:
+                    description: |-
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command from the command "field". Overrides the arguments from the container image.
+                    items:
+                      type: string
+                    type: array
+                  command:
+                    description: |-
+                      Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+                      Command executed when the container starts. Overrides the command from the container image.
+                    items:
+                      type: string
+                    type: array
+                  cpuLimit:
+                    description: |-
+                      The amount of vCPU computing resources to allocate to each container.
+                      The amount of vCPU computing resources to allocate to each container. Defaults to 70.
+                    type: number
+                  cronStatus:
+                    description: |-
+                      The cron status of the container.
+                      The cron status
+                    type: string
+                  deploy:
+                    description: |-
+                      Boolean indicating whether the container is in a production environment.
+                      This allows you to control your production environment
+                    type: boolean
+                  description:
+                    description: |-
+                      The description of the container.
+                      The container description
+                    type: string
+                  domainName:
+                    description: |-
+                      The native domain name of the container
+                      The native container domain name.
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The environment variables of the container.
+                      The environment variables to be injected into your container at runtime.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  errorMessage:
+                    description: |-
+                      The error message of the container.
+                      The error description
+                    type: string
+                  healthCheck:
+                    description: |-
+                      Health check configuration block of the container.
+                      Health check configuration of the container.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive health check failures before considering the container unhealthy.
+                          type: number
+                        http:
+                          description: |-
+                            HTTP health check configuration.
+                            HTTP health check configuration.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Period between health checks (in seconds).
+                            Period between health checks.
+                          type: string
+                      type: object
+                    type: array
+                  httpOption:
+                    description: |-
+                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      HTTP traffic configuration
+                    type: string
+                  id:
+                    description: The unique identifier of the container.
+                    type: string
+                  localStorageLimit:
+                    description: |-
+                      Local storage limit of the container (in MB)
+                      Local storage limit of the container (in MB)
+                    type: number
+                  maxConcurrency:
+                    description: |-
+                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
+                      The maximum the number of simultaneous requests your container can handle at the same time.
+                    type: number
+                  maxScale:
+                    description: |-
+                      The maximum number of instances this container can scale to.
+                      The maximum of number of instances this container can scale to.
+                    type: number
+                  memoryLimit:
+                    description: |-
+                      The memory resources in MB to allocate to each container.
+                      The memory computing resources in MB to allocate to each container.
+                    type: number
+                  minScale:
+                    description: |-
+                      The minimum number of container instances running continuously.
+                      The minimum of running container instances continuously.
+                    type: number
+                  name:
+                    description: |-
+                      The unique name of the container name.
+                      The container name
+                    type: string
+                  namespaceId:
+                    description: |-
+                      The Containers namespace ID of the container.
+                      The container namespace associated
+                    type: string
+                  port:
+                    description: |-
+                      The port to expose the container.
+                      The port to expose the container.
+                    type: number
+                  privacy:
+                    description: |-
+                      The privacy type defines the way to authenticate to your container. Please check our dedicated section.
+                      The privacy type define the way to authenticate to your container
+                    type: string
+                  privateNetworkId:
+                    description: |-
+                      The ID of the Private Network the container is connected to.
+                      ID of the Private Network the container is connected to
+                    type: string
+                  protocol:
+                    description: |-
+                      The communication protocol http1 or h2c. Defaults to http1.
+                      The communication protocol http1 or h2c. Defaults to http1.
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the container was created.
+                      The region you want to attach the resource to
+                    type: string
+                  registryImage:
+                    description: |-
+                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The scaleway registry image address
+                    type: string
+                  registrySha256:
+                    description: |-
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.
+                      The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
+                    type: string
+                  sandbox:
+                    description: |-
+                      Execution environment of the container.
+                      Execution environment of the container.
+                    type: string
+                  scalingOption:
+                    description: |-
+                      Configuration block used to decide when to scale up or down. Possible values:
+                      Configuration used to decide when to scale up or down.
+                    items:
+                      properties:
+                        concurrentRequestsThreshold:
+                          description: |-
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                            Scale depending on the number of concurrent requests being processed per container instance.
+                          type: number
+                        cpuUsageThreshold:
+                          description: |-
+                            Scale depending on the CPU usage of a container instance.
+                            Scale depending on the CPU usage of a container instance.
+                          type: number
+                        memoryUsageThreshold:
+                          description: |-
+                            Scale depending on the memory usage of a container instance.
+                            Scale depending on the memory usage of a container instance.
+                          type: number
+                      type: object
+                    type: array
+                  status:
+                    description: |-
+                      The container status.
+                      The container status
+                    type: string
+                  tags:
+                    description: |-
+                      The list of tags associated with the container.
+                      List of tags ["tag1", "tag2", ...] attached to the container.
+                    items:
+                      type: string
+                    type: array
+                  timeout:
+                    description: |-
+                      The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                      The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
+                    type: number
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

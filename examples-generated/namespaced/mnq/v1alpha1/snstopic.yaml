@@ -1,0 +1,54 @@
+apiVersion: mnq.scaleway.m.upbound.io/v1alpha1
+kind: SNSTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopic
+  labels:
+    testing.upbound.io/example-name: topic
+  name: topic
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessKeySecretRef:
+      key: attribute.access_key
+      name: example-mnq-sns-credentials
+    name: my-topic
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    secretKeySecretRef:
+      key: attribute.secret_key
+      name: example-mnq-sns-credentials
+
+---
+
+apiVersion: mnq.scaleway.m.upbound.io/v1alpha1
+kind: SNS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopic
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: mnq.scaleway.m.upbound.io/v1alpha1
+kind: SNSCredentials
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mnq/v1alpha1/snstopic
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    permissions:
+    - canManage: true
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

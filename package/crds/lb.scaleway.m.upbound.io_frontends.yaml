@@ -1,0 +1,1003 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: frontends.lb.scaleway.m.upbound.io
+spec:
+  group: lb.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Frontend
+    listKind: FrontendList
+    plural: frontends
+    singular: frontend
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Frontend is the Schema for the Frontends API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FrontendSpec defines the desired state of Frontend
+            properties:
+              forProvider:
+                properties:
+                  acl:
+                    description: |-
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      ACL rules
+                    items:
+                      properties:
+                        action:
+                          description: |-
+                            Action to undertake when an ACL filter matches.
+                            Action to undertake when an ACL filter matches
+                          items:
+                            properties:
+                              redirect:
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
+                                items:
+                                  properties:
+                                    code:
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
+                                        The HTTP redirect code to use
+                                      type: number
+                                    target:
+                                      description: |-
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
+                                      type: string
+                                    type:
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
+                                      type: string
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
+                                type: string
+                            type: object
+                          type: array
+                        description:
+                          description: Description of the ACL
+                          type: string
+                        match:
+                          description: |-
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
+                            The ACL match rule
+                          items:
+                            properties:
+                              httpFilter:
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
+                                type: string
+                              httpFilterOption:
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
+                                type: string
+                              httpFilterValue:
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
+                                  A list of possible values to match for the given HTTP filter
+                                items:
+                                  type: string
+                                type: array
+                              invert:
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
+                                type: boolean
+                              ipSubnet:
+                                description: |-
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
+                                items:
+                                  type: string
+                                type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
+                          type: string
+                      type: object
+                    type: array
+                  backendId:
+                    description: |-
+                      The ID of the Load Balancer backend this frontend is attached to.
+                      The load-balancer backend ID
+                    type: string
+                  backendIdRef:
+                    description: Reference to a Backend in lb to populate backendId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  backendIdSelector:
+                    description: Selector for a Backend in lb to populate backendId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  certificateIds:
+                    description: |-
+                      List of certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
+                    items:
+                      type: string
+                    type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
+                  enableHttp3:
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
+                    type: boolean
+                  externalAcls:
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
+                    type: boolean
+                  inboundPort:
+                    description: |-
+                      TCP port to listen to on the front side.
+                      TCP port to listen on the front side
+                    type: number
+                  lbId:
+                    description: |-
+                      The ID of the Load Balancer this frontend is attached to.
+                      The load-balancer ID
+                    type: string
+                  lbIdRef:
+                    description: Reference to a LB in lb to populate lbId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  lbIdSelector:
+                    description: Selector for a LB in lb to populate lbId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      The name of the Load Balancer frontend.
+                      The name of the frontend
+                    type: string
+                  timeoutClient:
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g. 1s)
+                      Set the maximum inactivity time on the client side
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  acl:
+                    description: |-
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      ACL rules
+                    items:
+                      properties:
+                        action:
+                          description: |-
+                            Action to undertake when an ACL filter matches.
+                            Action to undertake when an ACL filter matches
+                          items:
+                            properties:
+                              redirect:
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
+                                items:
+                                  properties:
+                                    code:
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
+                                        The HTTP redirect code to use
+                                      type: number
+                                    target:
+                                      description: |-
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
+                                      type: string
+                                    type:
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
+                                      type: string
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
+                                type: string
+                            type: object
+                          type: array
+                        description:
+                          description: Description of the ACL
+                          type: string
+                        match:
+                          description: |-
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
+                            The ACL match rule
+                          items:
+                            properties:
+                              httpFilter:
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
+                                type: string
+                              httpFilterOption:
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
+                                type: string
+                              httpFilterValue:
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
+                                  A list of possible values to match for the given HTTP filter
+                                items:
+                                  type: string
+                                type: array
+                              invert:
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
+                                type: boolean
+                              ipSubnet:
+                                description: |-
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
+                                items:
+                                  type: string
+                                type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
+                          type: string
+                      type: object
+                    type: array
+                  backendId:
+                    description: |-
+                      The ID of the Load Balancer backend this frontend is attached to.
+                      The load-balancer backend ID
+                    type: string
+                  backendIdRef:
+                    description: Reference to a Backend in lb to populate backendId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  backendIdSelector:
+                    description: Selector for a Backend in lb to populate backendId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  certificateIds:
+                    description: |-
+                      List of certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
+                    items:
+                      type: string
+                    type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
+                  enableHttp3:
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
+                    type: boolean
+                  externalAcls:
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
+                    type: boolean
+                  inboundPort:
+                    description: |-
+                      TCP port to listen to on the front side.
+                      TCP port to listen on the front side
+                    type: number
+                  lbId:
+                    description: |-
+                      The ID of the Load Balancer this frontend is attached to.
+                      The load-balancer ID
+                    type: string
+                  lbIdRef:
+                    description: Reference to a LB in lb to populate lbId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  lbIdSelector:
+                    description: Selector for a LB in lb to populate lbId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      The name of the Load Balancer frontend.
+                      The name of the frontend
+                    type: string
+                  timeoutClient:
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g. 1s)
+                      Set the maximum inactivity time on the client side
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.inboundPort is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.inboundPort)
+                || (has(self.initProvider) && has(self.initProvider.inboundPort))'
+          status:
+            description: FrontendStatus defines the observed state of Frontend.
+            properties:
+              atProvider:
+                properties:
+                  acl:
+                    description: |-
+                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      ACL rules
+                    items:
+                      properties:
+                        action:
+                          description: |-
+                            Action to undertake when an ACL filter matches.
+                            Action to undertake when an ACL filter matches
+                          items:
+                            properties:
+                              redirect:
+                                description: |-
+                                  Redirect parameters when using an ACL with redirect action.
+                                  Redirect parameters when using an ACL with `redirect` action
+                                items:
+                                  properties:
+                                    code:
+                                      description: |-
+                                        The HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
+                                        The HTTP redirect code to use
+                                      type: number
+                                    target:
+                                      description: |-
+                                        A URL can be used in case of a location redirect (e.g. https://scaleway.com will redirect to this same URL). A scheme name (e.g. https, http, ftp, git) will replace the request's original scheme.
+                                        An URL can be used in case of a location redirect
+                                      type: string
+                                    type:
+                                      description: |-
+                                        The action type. Possible values are: allow or deny or redirect.
+                                        The redirect type
+                                      type: string
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  The action type. Possible values are: allow or deny or redirect.
+                                  The action type
+                                type: string
+                            type: object
+                          type: array
+                        createdAt:
+                          description: |-
+                            The date and time the frontend was created.
+                            IsDate and time of ACL's creation (RFC 3339 format)
+                          type: string
+                        description:
+                          description: Description of the ACL
+                          type: string
+                        match:
+                          description: |-
+                            The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.
+                            The ACL match rule
+                          items:
+                            properties:
+                              httpFilter:
+                                description: |-
+                                  The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
+                                  It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
+                                  Possible values are: acl_http_filter_none, path_begin, path_end, http_header_match or regex.
+                                  The HTTP filter to match
+                                type: string
+                              httpFilterOption:
+                                description: |-
+                                  If you have http_filter at http_header_match, you can use this field to filter on the HTTP header's value.
+                                  You can use this field with http_header_match acl type to set the header name to filter
+                                type: string
+                              httpFilterValue:
+                                description: |-
+                                  A list of possible values to match for the given HTTP filter.
+                                  Keep in mind that in the case of http_header_match the HTTP header field name is case insensitive.
+                                  A list of possible values to match for the given HTTP filter
+                                items:
+                                  type: string
+                                type: array
+                              invert:
+                                description: |-
+                                  If set to true, the condition will be of type "unless".
+                                  If set to true, the condition will be of type "unless"
+                                type: boolean
+                              ipSubnet:
+                                description: |-
+                                  A list of IPs, or CIDR v4/v6 addresses of the session client, to match. Only one of ip_subnet and ips_edge_services should be specified.
+                                  A list of IPs or CIDR v4/v6 addresses of the client of the session to match
+                                items:
+                                  type: string
+                                type: array
+                              ipsEdgeServices:
+                                description: |-
+                                  Defines whether Edge Services IPs should be matched. Only one of ip_subnet and ips_edge_services should be specified.
+                                  Defines whether Edge Services IPs should be matched
+                                type: boolean
+                            type: object
+                          type: array
+                        name:
+                          description: |-
+                            The ACL name. If not provided it will be randomly generated.
+                            The ACL name
+                          type: string
+                        updatedAt:
+                          description: |-
+                            The date and time the frontend resource was updated.
+                            IsDate and time of ACL's update (RFC 3339 format)
+                          type: string
+                      type: object
+                    type: array
+                  backendId:
+                    description: |-
+                      The ID of the Load Balancer backend this frontend is attached to.
+                      The load-balancer backend ID
+                    type: string
+                  certificateId:
+                    description: |-
+                      (Deprecated, use certificate_ids instead) First certificate ID used by the frontend.
+                      Certificate ID
+                    type: string
+                  certificateIds:
+                    description: |-
+                      List of certificate IDs that should be used by the frontend.
+                      Collection of Certificate IDs related to the load balancer and domain
+                    items:
+                      type: string
+                    type: array
+                  connectionRateLimit:
+                    description: |-
+                      The rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
+                      Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second
+                    type: number
+                  createdAt:
+                    description: |-
+                      The date and time the frontend was created.
+                      The date and time of the creation of the frontend
+                    type: string
+                  enableAccessLogs:
+                    description: |-
+                      (Default: false) Defines whether to enable access logs on the frontend.
+                      Defines whether to enable access logs on the frontend
+                    type: boolean
+                  enableHttp3:
+                    description: |-
+                      (Default: false) Activates HTTP/3 protocol.
+                      Activates HTTP/3 protocol
+                    type: boolean
+                  externalAcls:
+                    description: |-
+                      (Defaults to false) A boolean to specify whether to use lb_acl.
+                      If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
+                      This boolean determines if ACLs should be managed externally through the 'lb_acl' resource. If set to `true`, `acl` attribute cannot be set directly in the lb frontend
+                    type: boolean
+                  id:
+                    description: The ID of the Load Balancer frontend.
+                    type: string
+                  inboundPort:
+                    description: |-
+                      TCP port to listen to on the front side.
+                      TCP port to listen on the front side
+                    type: number
+                  lbId:
+                    description: |-
+                      The ID of the Load Balancer this frontend is attached to.
+                      The load-balancer ID
+                    type: string
+                  name:
+                    description: |-
+                      The name of the Load Balancer frontend.
+                      The name of the frontend
+                    type: string
+                  timeoutClient:
+                    description: |-
+                      Maximum inactivity time on the client side. (e.g. 1s)
+                      Set the maximum inactivity time on the client side
+                    type: string
+                  updatedAt:
+                    description: |-
+                      The date and time the frontend resource was updated.
+                      The date and time of the last update of the frontend
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,17 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNIC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/privatenic
+  labels:
+    testing.upbound.io/example-name: pnic01
+  name: pnic01
+  namespace: upbound-system
+spec:
+  forProvider:
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

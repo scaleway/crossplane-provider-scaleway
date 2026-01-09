@@ -1,0 +1,33 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/securitygrouprule
+  labels:
+    testing.upbound.io/example-name: sgrs01
+  name: sgrs01
+  namespace: upbound-system
+spec:
+  forProvider:
+    inboundRule:
+    - action: accept
+      ipRange: 0.0.0.0/0
+      port: 80
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sg01
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/securitygrouprule
+  labels:
+    testing.upbound.io/example-name: sg01
+  name: sg01
+  namespace: upbound-system
+spec:
+  forProvider:
+    externalRules: true

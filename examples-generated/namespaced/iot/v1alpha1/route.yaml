@@ -1,0 +1,64 @@
+apiVersion: iot.scaleway.m.upbound.io/v1alpha1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    database:
+    - dbname: rdb
+      host: ${scaleway_rdb_instance.iot.endpoint_ip}
+      passwordSecretRef:
+        key: attribute.password
+        name: example-rdb-instance
+      port: ${scaleway_rdb_instance.iot.endpoint_port}
+      query: "INSERT INTO measurements(\n\tpush_time,\n\treport_time,\n\tstation_id,\n\ttemperature,\n\thumidity\n)
+        VALUES (\n\tNOW(),\n\tTIMESTAMP 'epoch' + (($PAYLOAD::jsonb->'last_reported')::integer
+        * INTERVAL '1 second'),\n\t($PAYLOAD::jsonb->'station_id')::uuid,\n\t($PAYLOAD::jsonb->'temperature')::decimal,\n\t($PAYLOAD::jsonb->'humidity'):decimal:\n);\n"
+      username: ${scaleway_rdb_instance.iot.user_name}
+    hubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: default
+    topic: '#'
+
+---
+
+apiVersion: iot.scaleway.m.upbound.io/v1alpha1
+kind: Hub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: main
+    productPlan: plan_shared
+
+---
+
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: iot
+  name: iot
+  namespace: upbound-system
+spec:
+  forProvider:
+    engine: PostgreSQL-12
+    name: iot
+    nodeType: db-dev-s
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    userName: root

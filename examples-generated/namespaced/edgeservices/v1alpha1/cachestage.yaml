@@ -1,0 +1,17 @@
+apiVersion: edgeservices.scaleway.m.upbound.io/v1alpha1
+kind: CacheStage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: edgeservices/v1alpha1/cachestage
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    backendStageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    pipelineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

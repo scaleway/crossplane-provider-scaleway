@@ -1,0 +1,52 @@
+apiVersion: k8s.scaleway.m.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: cluster
+  name: cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    cni: cilium
+    deleteAdditionalResources: false
+    name: tf-cluster
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn
+    version: 1.32.3
+
+---
+
+apiVersion: k8s.scaleway.m.upbound.io/v1alpha1
+kind: Pool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: pool
+  name: pool
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cluster
+    name: tf-pool
+    nodeType: DEV1-M
+    size: 1
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: pn
+  name: pn
+  namespace: upbound-system
+spec:
+  forProvider: {}

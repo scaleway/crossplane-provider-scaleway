@@ -1,0 +1,26 @@
+apiVersion: domain.scaleway.m.upbound.io/v1alpha1
+kind: Registration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: domain/v1alpha1/registration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainNames:
+    - example.com
+    durationInYears: 1
+    ownerContact:
+    - addressLine1: 123 Main Street
+      city: Paris
+      companyIdentificationCode: "123456789"
+      country: FR
+      email: john.doe@example.com
+      firstname: John
+      lastname: DOE
+      legalForm: individual
+      phoneNumber: "+1.23456789"
+      vatIdentificationCode: FR12345678901
+      zip: "75001"

@@ -1,0 +1,80 @@
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Privilege
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/privilege
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseName: my-new-database
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    permission: all
+    userName: devtools
+
+---
+
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/privilege
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: database
+
+---
+
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/privilege
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    disableBackup: true
+    engine: PostgreSQL-11
+    isHaCluster: true
+    name: rdb
+    nodeType: DB-DEV-S
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    userName: my_initial_user
+
+---
+
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/privilege
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    isAdmin: false
+    name: my-db-user
+    passwordSecretRef:
+      key: example-key
+      name: example-secret

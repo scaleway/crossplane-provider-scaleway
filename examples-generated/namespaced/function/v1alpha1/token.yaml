@@ -1,0 +1,50 @@
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: Token
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: namespace
+  name: namespace
+  namespace: upbound-system
+spec:
+  forProvider:
+    expiresAt: "2022-10-18T11:35:15+02:00"
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    handler: Handle
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    privacy: private
+    runtime: go118
+
+---
+
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: FunctionNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test-function-token-ns

@@ -1,0 +1,92 @@
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: rt01
+  name: rt01
+  namespace: upbound-system
+spec:
+  forProvider:
+    backendIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bkd01
+    frontendIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: frt01
+    matchSni: sni.scaleway.com
+
+---
+
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: lb01
+  name: lb01
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ip01
+    name: test-lb
+    type: lb-s
+
+---
+
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: Backend
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: bkd01
+  name: bkd01
+  namespace: upbound-system
+spec:
+  forProvider:
+    forwardPort: 80
+    forwardProtocol: tcp
+    lbIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb01
+    proxyProtocol: none
+
+---
+
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: Frontend
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: frt01
+  name: frt01
+  namespace: upbound-system
+spec:
+  forProvider:
+    backendIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bkd01
+    inboundPort: 80
+    lbIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb01
+
+---
+
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: ip01
+  name: ip01
+  namespace: upbound-system
+spec:
+  forProvider: {}

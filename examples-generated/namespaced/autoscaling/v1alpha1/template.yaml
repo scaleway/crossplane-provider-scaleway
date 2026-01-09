@@ -1,0 +1,28 @@
+apiVersion: autoscaling.scaleway.m.upbound.io/v1alpha1
+kind: Template
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1alpha1/template
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    commercialType: PLAY2-MICRO
+    name: asg-template
+    privateNetworkIdsRefs:
+    - name: main
+    publicIpsV4Count: 1
+    tags:
+    - terraform-test
+    - basic
+    volumes:
+    - boot: true
+      fromSnapshot:
+      - snapshotIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: main
+      name: as-volume
+      perfIops: 5000
+      volumeType: sbs

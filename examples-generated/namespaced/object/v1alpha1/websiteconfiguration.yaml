@@ -1,0 +1,51 @@
+apiVersion: object.scaleway.m.upbound.io/v1alpha1
+kind: WebsiteConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/websiteconfiguration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucket: some-unique-name
+    errorDocument:
+    - key: error.html
+    indexDocument:
+    - suffix: index.html
+
+---
+
+apiVersion: object.scaleway.m.upbound.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/websiteconfiguration
+  labels:
+    testing.upbound.io/example-name: some_file
+  name: some-file
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucket: my-bucket
+    contentType: text/html
+    file: index.html
+    key: index.html
+    visibility: public-read
+
+---
+
+apiVersion: object.scaleway.m.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/websiteconfiguration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    acl: public-read
+    name: my-bucket

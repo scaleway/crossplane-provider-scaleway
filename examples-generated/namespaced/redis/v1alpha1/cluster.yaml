@@ -1,0 +1,26 @@
+apiVersion: redis.scaleway.m.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redis/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    acl:
+    - description: Allow all
+      ip: 0.0.0.0/0
+    clusterSize: 1
+    name: test_redis_basic
+    nodeType: RED1-MICRO
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    tags:
+    - test
+    - redis
+    tlsEnabled: "true"
+    userName: my_initial_user
+    version: 6.2.7

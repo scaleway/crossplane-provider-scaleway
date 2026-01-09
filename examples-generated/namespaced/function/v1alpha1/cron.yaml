@@ -1,0 +1,53 @@
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: Cron
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    args: ${jsonencode({ test = "scw" })}
+    functionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: test-cron
+    schedule: 0 0 * * *
+
+---
+
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    handler: handler.handle
+    name: test-cron
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    privacy: private
+    runtime: node14
+
+---
+
+apiVersion: function.scaleway.m.upbound.io/v1alpha1
+kind: FunctionNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/cron
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test-cron

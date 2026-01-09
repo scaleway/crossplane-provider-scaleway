@@ -1,0 +1,44 @@
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: initial-snapshot
+
+---
+
+apiVersion: rdb.scaleway.m.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rdb/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    disableBackup: true
+    engine: PostgreSQL-15
+    isHaCluster: false
+    name: test-rdb-instance
+    nodeType: db-dev-s
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    tags:
+    - terraform-test
+    - scaleway_rdb_instance
+    - minimal
+    userName: my_initial_user
+    volumeSizeInGb: 10
+    volumeType: sbs_5k

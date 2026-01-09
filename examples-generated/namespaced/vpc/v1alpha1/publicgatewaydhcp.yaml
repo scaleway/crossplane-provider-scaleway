@@ -1,0 +1,12 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGatewayDHCP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaydhcp
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    subnet: 192.168.1.0/24

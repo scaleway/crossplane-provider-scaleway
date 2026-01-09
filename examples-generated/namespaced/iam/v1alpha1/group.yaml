@@ -1,0 +1,15 @@
+apiVersion: iam.scaleway.m.upbound.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: basic
+  name: basic
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationIdsRefs: []
+    description: basic description
+    name: iam_group_basic
+    userIds: []

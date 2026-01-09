@@ -1,0 +1,15 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: some-snapshot-name
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

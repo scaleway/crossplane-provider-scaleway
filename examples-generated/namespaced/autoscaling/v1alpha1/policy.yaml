@@ -1,0 +1,26 @@
+apiVersion: autoscaling.scaleway.m.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: up
+  name: up
+  namespace: upbound-system
+spec:
+  forProvider:
+    action: scale_up
+    instanceGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    metric:
+    - aggregate: aggregate_average
+      managedMetric: managed_metric_instance_cpu
+      name: cpu scale up
+      operator: operator_greater_than
+      samplingRangeMin: 5
+      threshold: 70
+    name: scale-up-if-cpu-high
+    priority: 1
+    type: flat_count
+    value: 1

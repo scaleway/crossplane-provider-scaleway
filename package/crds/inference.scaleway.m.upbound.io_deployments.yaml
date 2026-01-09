@@ -1,0 +1,706 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: deployments.inference.scaleway.m.upbound.io
+spec:
+  group: inference.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Deployment
+    listKind: DeploymentList
+    plural: deployments
+    singular: deployment
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Deployment is the Schema for the Deployments API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: DeploymentSpec defines the desired state of Deployment
+            properties:
+              forProvider:
+                properties:
+                  acceptEula:
+                    description: |-
+                      Some models (e.g Meta Llama) require end-user license agreements. Set true to accept.
+                      Whether or not the deployment is accepting eula
+                    type: boolean
+                  maxSize:
+                    description: |-
+                      The maximum size of the pool.
+                      The maximum size of the pool
+                    type: number
+                  minSize:
+                    description: |-
+                      The minimum size of the pool.
+                      The minimum size of the pool
+                    type: number
+                  modelId:
+                    description: |-
+                      The model id used for the deployment.
+                      The model id used for the deployment
+                    type: string
+                  modelIdRef:
+                    description: Reference to a Model in inference to populate modelId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  modelIdSelector:
+                    description: Selector for a Model in inference to populate modelId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      The deployment name.
+                      The deployment name
+                    type: string
+                  nodeType:
+                    description: |-
+                      The node type to use for the deployment. Node types can be found using Scaleway's CLI (scw inference node-type list)
+                      The node type to use for the deployment
+                    type: string
+                  privateEndpoint:
+                    description: |-
+                      Configuration of the deployment's private endpoint.
+                      List of endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        privateNetworkId:
+                          description: |-
+                            The ID of the private network to use.
+                            The id of the private network
+                          type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the deployment is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicEndpoint:
+                    description: |-
+                      Configuration of the deployment's public endpoint.
+                      Public endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        isEnabled:
+                          description: |-
+                            Enable or disable public endpoint.
+                            Enable or disable public endpoint
+                          type: boolean
+                      type: object
+                    type: array
+                  quantization:
+                    description: The number of bits each model parameter should be
+                      quantized to
+                    type: number
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the deployment is created.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the deployment.
+                      The tags associated with the deployment
+                    items:
+                      type: string
+                    type: array
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  acceptEula:
+                    description: |-
+                      Some models (e.g Meta Llama) require end-user license agreements. Set true to accept.
+                      Whether or not the deployment is accepting eula
+                    type: boolean
+                  maxSize:
+                    description: |-
+                      The maximum size of the pool.
+                      The maximum size of the pool
+                    type: number
+                  minSize:
+                    description: |-
+                      The minimum size of the pool.
+                      The minimum size of the pool
+                    type: number
+                  modelId:
+                    description: |-
+                      The model id used for the deployment.
+                      The model id used for the deployment
+                    type: string
+                  modelIdRef:
+                    description: Reference to a Model in inference to populate modelId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  modelIdSelector:
+                    description: Selector for a Model in inference to populate modelId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      The deployment name.
+                      The deployment name
+                    type: string
+                  nodeType:
+                    description: |-
+                      The node type to use for the deployment. Node types can be found using Scaleway's CLI (scw inference node-type list)
+                      The node type to use for the deployment
+                    type: string
+                  privateEndpoint:
+                    description: |-
+                      Configuration of the deployment's private endpoint.
+                      List of endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        privateNetworkId:
+                          description: |-
+                            The ID of the private network to use.
+                            The id of the private network
+                          type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the deployment is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicEndpoint:
+                    description: |-
+                      Configuration of the deployment's public endpoint.
+                      Public endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        isEnabled:
+                          description: |-
+                            Enable or disable public endpoint.
+                            Enable or disable public endpoint
+                          type: boolean
+                      type: object
+                    type: array
+                  quantization:
+                    description: The number of bits each model parameter should be
+                      quantized to
+                    type: number
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the deployment is created.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the deployment.
+                      The tags associated with the deployment
+                    items:
+                      type: string
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.nodeType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || (has(self.initProvider) && has(self.initProvider.nodeType))'
+          status:
+            description: DeploymentStatus defines the observed state of Deployment.
+            properties:
+              atProvider:
+                properties:
+                  acceptEula:
+                    description: |-
+                      Some models (e.g Meta Llama) require end-user license agreements. Set true to accept.
+                      Whether or not the deployment is accepting eula
+                    type: boolean
+                  createdAt:
+                    description: |-
+                      The date and time of the creation of the deployment.
+                      The date and time of the creation of the deployment
+                    type: string
+                  id:
+                    description: The ID of the deployment.
+                    type: string
+                  maxSize:
+                    description: |-
+                      The maximum size of the pool.
+                      The maximum size of the pool
+                    type: number
+                  minSize:
+                    description: |-
+                      The minimum size of the pool.
+                      The minimum size of the pool
+                    type: number
+                  modelId:
+                    description: |-
+                      The model id used for the deployment.
+                      The model id used for the deployment
+                    type: string
+                  modelName:
+                    description: |-
+                      The model name used for the deployment. Model names can be found in Console or using Scaleway's CLI (scw inference model list)
+                      The model name to use for the deployment
+                    type: string
+                  name:
+                    description: |-
+                      The deployment name.
+                      The deployment name
+                    type: string
+                  nodeType:
+                    description: |-
+                      The node type to use for the deployment. Node types can be found using Scaleway's CLI (scw inference node-type list)
+                      The node type to use for the deployment
+                    type: string
+                  privateEndpoint:
+                    description: |-
+                      Configuration of the deployment's private endpoint.
+                      List of endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        id:
+                          description: |-
+                            The ID of the deployment.
+                            The id of the private endpoint
+                          type: string
+                        privateNetworkId:
+                          description: |-
+                            The ID of the private network to use.
+                            The id of the private network
+                          type: string
+                        url:
+                          description: |-
+                            The URL of the endpoint.
+                            The URL of the endpoint.
+                          type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: |-
+                      The private IPv4 address associated with the deployment.
+                      The private IPv4 address associated with the deployment
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the deployment.
+                            The ID of the IPv4 address resource
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the deployment is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicEndpoint:
+                    description: |-
+                      Configuration of the deployment's public endpoint.
+                      Public endpoints
+                    items:
+                      properties:
+                        disableAuth:
+                          description: |-
+                            Disable the authentication on the endpoint.
+                            Disable the authentication on the endpoint.
+                          type: boolean
+                        id:
+                          description: |-
+                            The ID of the deployment.
+                            The id of the public endpoint
+                          type: string
+                        isEnabled:
+                          description: |-
+                            Enable or disable public endpoint.
+                            Enable or disable public endpoint
+                          type: boolean
+                        url:
+                          description: |-
+                            The URL of the endpoint.
+                            The URL of the endpoint.
+                          type: string
+                      type: object
+                    type: array
+                  quantization:
+                    description: The number of bits each model parameter should be
+                      quantized to
+                    type: number
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the deployment is created.
+                      The region you want to attach the resource to
+                    type: string
+                  size:
+                    description: |-
+                      The size of the pool.
+                      The size of the pool
+                    type: number
+                  status:
+                    description: |-
+                      The status of the deployment.
+                      The status of the deployment
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the deployment.
+                      The tags associated with the deployment
+                    items:
+                      type: string
+                    type: array
+                  updatedAt:
+                    description: |-
+                      The date and time of the last update of the deployment.
+                      The date and time of the last update of the deployment
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

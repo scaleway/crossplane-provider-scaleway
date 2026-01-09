@@ -1,0 +1,15 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/privatenetwork
+  labels:
+    testing.upbound.io/example-name: pn_priv
+  name: pn-priv
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: subnet_demo
+    tags:
+    - demo
+    - terraform

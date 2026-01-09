@@ -1,0 +1,11 @@
+apiVersion: cockpit.scaleway.m.upbound.io/v1alpha1
+kind: Cockpit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/cockpit
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider: {}
