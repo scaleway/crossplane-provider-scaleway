@@ -1,6 +1,6 @@
 package mnq
 
-import "github.com/crossplane/upjet/pkg/config"
+import "github.com/crossplane/upjet/v2/pkg/config"
 
 const shortGroup = "mnq"
 
@@ -12,14 +12,14 @@ func Configure(p *config.Provider) {
 
 		r.References["access_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("access_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("access_key",false)`,
 		}
 		r.References["project_id"] = config.Reference{
 			TerraformName: "scaleway_account_project",
 		}
 		r.References["secret_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("secret_key",false)`,
 		}
 		r.References["topic_id"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_topic",
@@ -69,14 +69,14 @@ func Configure(p *config.Provider) {
 
 		r.References["access_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("access_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("access_key",false)`,
 		}
 		r.References["project_id"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns",
 		}
 		r.References["secret_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("secret_key",false)`,
 		}
 	})
 
@@ -87,18 +87,18 @@ func Configure(p *config.Provider) {
 
 		r.References["access_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sqs_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("access_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("access_key",false)`,
 		}
 		r.References["project_id"] = config.Reference{
 			TerraformName: "scaleway_account_project",
 		}
 		r.References["secret_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sqs_credentials",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_key",false)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("secret_key",false)`,
 		}
 		r.References["sqs_endpoint"] = config.Reference{
 			TerraformName: "scaleway_mnq_sqs",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint",true)`,
 		}
 	})
 
