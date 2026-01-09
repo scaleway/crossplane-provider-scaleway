@@ -87,9 +87,9 @@ XPKGS = $(PROJECT_NAME)
 # NOTE: CROSSPLANE_CLI must be built before xpkg build
 xpkg.build.provider-scaleway: do.build.images $(CROSSPLANE_CLI)
 
-# NOTE(hasheddan): we ensure up is installed prior to running platform-specific
-# build steps in parallel to avoid encountering an installation race condition.
-build.init: $(UP)
+# NOTE(hasheddan): we ensure up and crossplane-cli are installed prior to running
+# platform-specific build steps in parallel to avoid encountering an installation race condition.
+build.init: $(UP) $(CROSSPLANE_CLI)
 
 # ====================================================================================
 # Fallthrough
