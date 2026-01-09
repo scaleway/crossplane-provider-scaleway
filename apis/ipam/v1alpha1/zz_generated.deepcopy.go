@@ -215,11 +215,6 @@ func (in *IPObservation) DeepCopyInto(out *IPObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.AddressCidr != nil {
-		in, out := &in.AddressCidr, &out.AddressCidr
-		*out = new(string)
-		**out = **in
-	}
 	if in.CreatedAt != nil {
 		in, out := &in.CreatedAt, &out.CreatedAt
 		*out = new(string)
