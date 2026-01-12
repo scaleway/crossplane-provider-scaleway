@@ -52,3 +52,4 @@ jobs:
             - Re-ran `make generate` and auto-generated new Crossplane resource configs
           labels: automated, dependencies
           delete-branch: true
+          sign-commits: true
