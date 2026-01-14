@@ -1,0 +1,74 @@
+name: Nightly E2E Tests
+
+permissions:
+  contents: read
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  nightly:
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - examples/instance/server.yaml
+          - examples/vpc/vpc.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup Disk
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          large-packages: false
+          swap-storage: false
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
+        with:
+          platforms: all
+
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4.2.2
+        with:
+          submodules: true
+
+      - name: Setup Go
+        uses: actions/setup-go@c0137caad775660c0844396c52da96e560aba63d # v5.4.0
+        with:
+          go-version: stable
+
+      - name: Vendor Dependencies
+        run: make vendor vendor.check
+
+      - name: Run Uptest
+        id: run-uptest
+        env:
+          UPTEST_CLOUD_CREDENTIALS: ${{ secrets.UPTEST_CLOUD_CREDENTIALS }}
+          UPTEST_EXAMPLE_LIST: ${{ matrix.example }}
+          UPTEST_TEST_DIR: ./_output/controlplane-dump
+          UPTEST_DATASOURCE_PATH: .work/uptest-datasource.yaml
+          UPTEST_UPDATE_PARAMETER: ""
+        run: |
+          mkdir -p .work && echo "${{ secrets.UPTEST_DATASOURCE }}" > .work/uptest-datasource.yaml
+          make e2e
+
+      - name: Collect Cluster Dump
+        if: always()
+        run: |
+          make controlplane.dump
+
+      - name: Upload Cluster Dump
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: controlplane-dump-${{ strategy.job-index }}
+          path: ./_output/controlplane-dump
+
+      - name: Cleanup
+        if: always()
+        run: |
+          eval "$(make --no-print-directory build.vars)"
+          ${KUBECTL} delete managed --all || true
