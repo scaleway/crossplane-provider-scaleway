@@ -85,6 +85,10 @@ type IPObservation struct {
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// the IP address in CIDR notation.
+	// The IP address with a CIDR notation
+	AddressCidr *string `json:"addressCidr,omitempty" tf:"address_cidr,omitempty"`
+
 	// Date and time of IP's creation (RFC 3339 format).
 	// The date and time of the creation of the IP
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`

@@ -85,9 +85,17 @@ spec:
                     type: array
                   enableManagedAlerts:
                     description: |-
-                      Specifies whether the alert manager should be enabled. Defaults to true.
-                      Enable or disable the alert manager
+                      Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+                      Enable or disable the alert manager (deprecated)
                     type: boolean
+                  preconfiguredAlertIds:
+                    description: |-
+                      A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                      List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   projectId:
                     description: |-
                       (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
@@ -199,9 +207,17 @@ spec:
                     type: array
                   enableManagedAlerts:
                     description: |-
-                      Specifies whether the alert manager should be enabled. Defaults to true.
-                      Enable or disable the alert manager
+                      Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+                      Enable or disable the alert manager (deprecated)
                     type: boolean
+                  preconfiguredAlertIds:
+                    description: |-
+                      A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                      List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   projectId:
                     description: |-
                       (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
@@ -477,11 +493,19 @@ spec:
                     type: array
                   enableManagedAlerts:
                     description: |-
-                      Specifies whether the alert manager should be enabled. Defaults to true.
-                      Enable or disable the alert manager
+                      Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+                      Enable or disable the alert manager (deprecated)
                     type: boolean
                   id:
                     type: string
+                  preconfiguredAlertIds:
+                    description: |-
+                      A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                      List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   projectId:
                     description: |-
                       (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.

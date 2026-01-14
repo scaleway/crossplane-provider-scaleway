@@ -21,7 +21,7 @@ func (mg *Version) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Version
 func (tr *Version) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"data": "dataSecretRef"}
+	return map[string]string{"data": "dataSecretRef", "data_wo": "dataWoSecretRef"}
 }
 
 // GetObservation of this Version
