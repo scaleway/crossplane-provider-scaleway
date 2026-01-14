@@ -1,0 +1,11 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: PlacementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/placementgroup
+  labels:
+    testing.upbound.io/example-name: availability_group
+  name: availability-group
+  namespace: upbound-system
+spec:
+  forProvider: {}

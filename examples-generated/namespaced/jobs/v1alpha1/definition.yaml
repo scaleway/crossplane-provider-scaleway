@@ -1,0 +1,22 @@
+apiVersion: jobs.scaleway.m.upbound.io/v1alpha1
+kind: Definition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: jobs/v1alpha1/definition
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    command: ls
+    cpuLimit: 140
+    cron:
+    - schedule: 5 4 1 * *
+      timezone: Europe/Paris
+    env:
+      foo: bar
+    imageUri: docker.io/alpine:latest
+    memoryLimit: 256
+    name: testjob
+    timeout: 10m

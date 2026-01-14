@@ -1,0 +1,30 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: web
+  name: web
+  namespace: upbound-system
+spec:
+  forProvider:
+    image: ubuntu_jammy
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: public_ip
+    type: DEV1-S
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: IP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: public_ip
+  name: public-ip
+  namespace: upbound-system
+spec:
+  forProvider: {}

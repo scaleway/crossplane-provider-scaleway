@@ -12,7 +12,7 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 
-	"github.com/crossplane/upjet/pkg/registry"
+	"github.com/crossplane/upjet/v2/pkg/registry"
 	"github.com/pkg/errors"
 	"github.com/scaleway/crossplane-provider-scaleway/config/tools"
 

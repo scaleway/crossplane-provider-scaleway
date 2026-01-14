@@ -1,0 +1,20 @@
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/certificate
+  labels:
+    testing.upbound.io/example-name: cert01
+  name: cert01
+  namespace: upbound-system
+spec:
+  forProvider:
+    lbIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb01
+    letsencrypt:
+    - commonName: example.org
+      subjectAlternativeName:
+      - sub1.example.com
+      - sub2.example.com
+    name: cert1

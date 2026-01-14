@@ -1,0 +1,23 @@
+apiVersion: keymanager.scaleway.m.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keymanager/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: symmetric
+  name: symmetric
+  namespace: upbound-system
+spec:
+  forProvider:
+    algorithm: aes_256_gcm
+    description: Key for encrypting secrets
+    name: my-kms-key
+    projectId: your-project-id
+    region: fr-par
+    rotationPolicy:
+    - rotationPeriod: 720h
+    tags:
+    - env:prod
+    - kms
+    unprotected: true
+    usage: symmetric_encryption

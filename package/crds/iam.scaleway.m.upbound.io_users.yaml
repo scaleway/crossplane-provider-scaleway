@@ -1,0 +1,441 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: users.iam.scaleway.m.upbound.io
+spec:
+  group: iam.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: User
+    listKind: UserList
+    plural: users
+    singular: user
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: User is the Schema for the Users API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: UserSpec defines the desired state of User
+            properties:
+              forProvider:
+                properties:
+                  email:
+                    description: |-
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
+                    type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
+                    type: string
+                  organizationId:
+                    description: |-
+                      (Defaults to provider organization_id) The ID of the organization the user is associated with.
+                      ID of organization the resource is associated to.
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      The password for first access.
+                      The member's password for first access
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  email:
+                    description: |-
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
+                    type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
+                    type: string
+                  organizationId:
+                    description: |-
+                      (Defaults to provider organization_id) The ID of the organization the user is associated with.
+                      ID of organization the resource is associated to.
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      The password for first access.
+                      The member's password for first access
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.email is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
+                || (has(self.initProvider) && has(self.initProvider.email))'
+            - message: spec.forProvider.username is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)
+                || (has(self.initProvider) && has(self.initProvider.username))'
+          status:
+            description: UserStatus defines the observed state of User.
+            properties:
+              atProvider:
+                properties:
+                  accountRootUserId:
+                    description: |-
+                      The ID of the account root user associated with the user.
+                      The ID of the account root user associated with the iam user
+                    type: string
+                  createdAt:
+                    description: |-
+                      The date and time of the creation of the IAM user.
+                      The date and time of the creation of the iam user
+                    type: string
+                  deletable:
+                    description: |-
+                      Whether the IAM user is deletable.
+                      Whether or not the iam user is editable
+                    type: boolean
+                  email:
+                    description: |-
+                      The email of the IAM user. For Guest users, this argument is not editable.
+                      The email of the user
+                    type: string
+                  firstName:
+                    description: |-
+                      The user's first name.
+                      The member's first name
+                    type: string
+                  id:
+                    description: The ID of the user (UUID format).
+                    type: string
+                  lastLoginAt:
+                    description: |-
+                      The date of the last login.
+                      The date and time of last login of the iam user
+                    type: string
+                  lastName:
+                    description: |-
+                      The user's last name.
+                      The member's last name
+                    type: string
+                  locale:
+                    description: |-
+                      The user's locale (e.g., en_US).
+                      The member's locale
+                    type: string
+                  locked:
+                    description: |-
+                      Whether the user is locked.
+                      Defines whether the user is locked
+                    type: boolean
+                  mfa:
+                    description: |-
+                      Whether the MFA is enabled.
+                      Whether or not the MFA is enabled
+                    type: boolean
+                  organizationId:
+                    description: |-
+                      (Defaults to provider organization_id) The ID of the organization the user is associated with.
+                      ID of organization the resource is associated to.
+                    type: string
+                  phoneNumber:
+                    description: |-
+                      The user's phone number.
+                      The member's phone number
+                    type: string
+                  sendPasswordEmail:
+                    description: |-
+                      Whether or not to send an email containing the password for first access.
+                      Whether or not to send an email containing the member's password
+                    type: boolean
+                  sendWelcomeEmail:
+                    description: |-
+                      Whether or not to send a welcome email that includes onboarding information.
+                      Whether or not to send a welcome email that includes onboarding information
+                    type: boolean
+                  status:
+                    description: |-
+                      The status of user invitation. Check the possible values in the API doc.
+                      The status of user invitation
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the user.
+                      The tags associated with the user
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: |-
+                      The type of user. Check the possible values in the API doc.
+                      The type of the iam user
+                    type: string
+                  updatedAt:
+                    description: |-
+                      The date and time of the last update of the IAM user.
+                      The date and time of the last update of the iam user
+                    type: string
+                  username:
+                    description: |-
+                      The username of the IAM user.
+                      The member's username
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

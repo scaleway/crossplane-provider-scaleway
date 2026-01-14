@@ -8,7 +8,7 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
-	ujconfig "github.com/crossplane/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/scaleway/crossplane-provider-scaleway/config/account"
 	"github.com/scaleway/crossplane-provider-scaleway/config/applesilicon"
 	"github.com/scaleway/crossplane-provider-scaleway/config/autoscaling"
@@ -54,17 +54,9 @@ var providerSchema string
 //go:embed provider-metadata.yaml
 var providerMetadata string
 
-// GetProvider returns provider configuration
-func GetProvider() *ujconfig.Provider {
-	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithIncludeList(ExternalNameConfigured()),
-		ujconfig.WithFeaturesPackage("internal/features"),
-		ujconfig.WithDefaultResourceOptions(
-			ExternalNameConfigurations(),
-		))
-
-	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
+// resourceConfigurers returns the list of resource configuration functions
+func resourceConfigurers() []func(provider *ujconfig.Provider) {
+	return []func(provider *ujconfig.Provider){
 		account.Configure,
 		applesilicon.Configure,
 		autoscaling.Configure,
@@ -97,7 +89,38 @@ func GetProvider() *ujconfig.Provider {
 		secrets.Configure,
 		tem.Configure,
 		vpc.Configure,
-	} {
+	}
+}
+
+// GetProvider returns provider configuration for cluster-scoped resources
+func GetProvider() *ujconfig.Provider {
+	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
+		ujconfig.WithRootGroup("scaleway.upbound.io"),
+		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		ujconfig.WithFeaturesPackage("internal/features"),
+		ujconfig.WithDefaultResourceOptions(
+			ExternalNameConfigurations(),
+		))
+
+	for _, configure := range resourceConfigurers() {
+		configure(pc)
+	}
+
+	pc.ConfigureResources()
+	return pc
+}
+
+// GetProviderNamespaced returns provider configuration for namespace-scoped resources
+func GetProviderNamespaced() *ujconfig.Provider {
+	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
+		ujconfig.WithRootGroup("scaleway.m.upbound.io"),
+		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		ujconfig.WithFeaturesPackage("internal/features"),
+		ujconfig.WithDefaultResourceOptions(
+			ExternalNameConfigurations(),
+		))
+
+	for _, configure := range resourceConfigurers() {
 		configure(pc)
 	}
 

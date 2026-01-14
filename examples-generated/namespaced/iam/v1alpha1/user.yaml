@@ -1,0 +1,17 @@
+apiVersion: iam.scaleway.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: user
+  name: user
+  namespace: upbound-system
+spec:
+  forProvider:
+    email: foo@test.com
+    firstName: Foo
+    lastName: Bar
+    tags:
+    - test-tag
+    username: foo

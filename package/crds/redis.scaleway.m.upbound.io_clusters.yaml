@@ -1,0 +1,708 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: clusters.redis.scaleway.m.upbound.io
+spec:
+  group: redis.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Cluster
+    listKind: ClusterList
+    plural: clusters
+    singular: cluster
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Cluster is the Schema for the Clusters API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ClusterSpec defines the desired state of Cluster
+            properties:
+              forProvider:
+                properties:
+                  acl:
+                    description: |-
+                      List of acl rules, this is cluster's authorized IPs. More details on the ACL section.
+                      List of acl rules.
+                    items:
+                      properties:
+                        description:
+                          description: |-
+                            A text describing this rule. Default description: Allow IP
+                            Description of the rule.
+                          type: string
+                        ip:
+                          description: |-
+                            The IP range to whitelist
+                            in CIDR notation
+                            IPv4 network address of the rule (IP network in a CIDR format).
+                          type: string
+                      type: object
+                    type: array
+                  clusterSize:
+                    description: |-
+                      The number of nodes in the Redis™ cluster.
+                      Number of nodes for the cluster.
+                    type: number
+                  name:
+                    description: |-
+                      The name of the Redis™ cluster.
+                      Name of the redis cluster
+                    type: string
+                  nodeType:
+                    description: |-
+                      The type of Redis™ cluster you want to create (e.g. RED1-M).
+                      Type of node to use for the cluster
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      Password for the first user of the Redis™ cluster.
+                      Password of the user
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      Describes the Private Network you want to connect to your cluster. If not set, a public
+                      network will be provided. More details on the Private Network section
+                      Private network specs details
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the Private Network resource.
+                            UUID of the private network to be connected to the cluster
+                          type: string
+                        serviceIps:
+                          description: |-
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
+                            List of IPv4 addresses of the private network with a CIDR notation
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the Redis™ cluster is
+                      associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicNetwork:
+                    description: |-
+                      Public network details. Only one of private_network and public_network may be set.
+                      ~> The public_network block exports:
+                      Public network specs details
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
+                      type: object
+                    type: array
+                  settings:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
+                      with scaleway API or CLI
+                      Map of settings to define for the cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tags:
+                    description: |-
+                      The tags associated with the Redis™ cluster.
+                      List of tags ["tag1", "tag2", ...] attached to a redis cluster
+                    items:
+                      type: string
+                    type: array
+                  tlsEnabled:
+                    description: |-
+                      (Defaults to false) Whether TLS is enabled or not.
+                      Whether or not TLS is enabled.
+                    type: boolean
+                  userName:
+                    description: |-
+                      Identifier for the first user of the Redis™ cluster.
+                      Name of the user created when the cluster is created
+                    type: string
+                  version:
+                    description: |-
+                      Redis™ cluster's version (e.g. 6.2.7).
+                      Redis version of the cluster
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the
+                      Redis™ cluster should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  acl:
+                    description: |-
+                      List of acl rules, this is cluster's authorized IPs. More details on the ACL section.
+                      List of acl rules.
+                    items:
+                      properties:
+                        description:
+                          description: |-
+                            A text describing this rule. Default description: Allow IP
+                            Description of the rule.
+                          type: string
+                        ip:
+                          description: |-
+                            The IP range to whitelist
+                            in CIDR notation
+                            IPv4 network address of the rule (IP network in a CIDR format).
+                          type: string
+                      type: object
+                    type: array
+                  clusterSize:
+                    description: |-
+                      The number of nodes in the Redis™ cluster.
+                      Number of nodes for the cluster.
+                    type: number
+                  name:
+                    description: |-
+                      The name of the Redis™ cluster.
+                      Name of the redis cluster
+                    type: string
+                  nodeType:
+                    description: |-
+                      The type of Redis™ cluster you want to create (e.g. RED1-M).
+                      Type of node to use for the cluster
+                    type: string
+                  passwordSecretRef:
+                    description: |-
+                      Password for the first user of the Redis™ cluster.
+                      Password of the user
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      Describes the Private Network you want to connect to your cluster. If not set, a public
+                      network will be provided. More details on the Private Network section
+                      Private network specs details
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the Private Network resource.
+                            UUID of the private network to be connected to the cluster
+                          type: string
+                        serviceIps:
+                          description: |-
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
+                            List of IPv4 addresses of the private network with a CIDR notation
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the Redis™ cluster is
+                      associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicNetwork:
+                    description: |-
+                      Public network details. Only one of private_network and public_network may be set.
+                      ~> The public_network block exports:
+                      Public network specs details
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
+                      type: object
+                    type: array
+                  settings:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
+                      with scaleway API or CLI
+                      Map of settings to define for the cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tags:
+                    description: |-
+                      The tags associated with the Redis™ cluster.
+                      List of tags ["tag1", "tag2", ...] attached to a redis cluster
+                    items:
+                      type: string
+                    type: array
+                  tlsEnabled:
+                    description: |-
+                      (Defaults to false) Whether TLS is enabled or not.
+                      Whether or not TLS is enabled.
+                    type: boolean
+                  userName:
+                    description: |-
+                      Identifier for the first user of the Redis™ cluster.
+                      Name of the user created when the cluster is created
+                    type: string
+                  version:
+                    description: |-
+                      Redis™ cluster's version (e.g. 6.2.7).
+                      Redis version of the cluster
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the
+                      Redis™ cluster should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                required:
+                - passwordSecretRef
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.nodeType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || (has(self.initProvider) && has(self.initProvider.nodeType))'
+            - message: spec.forProvider.passwordSecretRef is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
+            - message: spec.forProvider.userName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)
+                || (has(self.initProvider) && has(self.initProvider.userName))'
+            - message: spec.forProvider.version is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || (has(self.initProvider) && has(self.initProvider.version))'
+          status:
+            description: ClusterStatus defines the observed state of Cluster.
+            properties:
+              atProvider:
+                properties:
+                  acl:
+                    description: |-
+                      List of acl rules, this is cluster's authorized IPs. More details on the ACL section.
+                      List of acl rules.
+                    items:
+                      properties:
+                        description:
+                          description: |-
+                            A text describing this rule. Default description: Allow IP
+                            Description of the rule.
+                          type: string
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            ID of the rule (UUID format).
+                          type: string
+                        ip:
+                          description: |-
+                            The IP range to whitelist
+                            in CIDR notation
+                            IPv4 network address of the rule (IP network in a CIDR format).
+                          type: string
+                      type: object
+                    type: array
+                  certificate:
+                    description: |-
+                      The PEM of the certificate used by redis, only when tls_enabled is true
+                      public TLS certificate used by redis cluster, empty if tls is disabled
+                    type: string
+                  clusterSize:
+                    description: |-
+                      The number of nodes in the Redis™ cluster.
+                      Number of nodes for the cluster.
+                    type: number
+                  createdAt:
+                    description: |-
+                      The date and time of creation of the Redis™ cluster.
+                      The date and time of the creation of the Redis cluster
+                    type: string
+                  id:
+                    description: The ID of the Redis™ cluster.
+                    type: string
+                  name:
+                    description: |-
+                      The name of the Redis™ cluster.
+                      Name of the redis cluster
+                    type: string
+                  nodeType:
+                    description: |-
+                      The type of Redis™ cluster you want to create (e.g. RED1-M).
+                      Type of node to use for the cluster
+                    type: string
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 addresses associated with the resource.
+                      List of private IPv4 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IPv4 address.
+                            The private IPv4 address
+                          type: string
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            The ID of the IPv4 address resource
+                          type: string
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      Describes the Private Network you want to connect to your cluster. If not set, a public
+                      network will be provided. More details on the Private Network section
+                      Private network specs details
+                    items:
+                      properties:
+                        endpointId:
+                          description: |-
+                            The ID of the endpoint.
+                            UUID of the endpoint to be connected to the cluster
+                          type: string
+                        id:
+                          description: |-
+                            The UUID of the Private Network resource.
+                            UUID of the private network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
+                        serviceIps:
+                          description: |-
+                            Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+                            Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
+                            scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
+                            If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
+                            ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
+                            List of IPv4 addresses of the private network with a CIDR notation
+                          items:
+                            type: string
+                          type: array
+                        zone:
+                          description: |-
+                            (Defaults to provider zone) The zone in which the
+                            Redis™ cluster should be created.
+                            The zone of the resource
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the Redis™ cluster is
+                      associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  publicNetwork:
+                    description: |-
+                      Public network details. Only one of private_network and public_network may be set.
+                      ~> The public_network block exports:
+                      Public network specs details
+                    items:
+                      properties:
+                        id:
+                          description: |-
+                            The UUID of the endpoint.
+                            UUID of the public network to be connected to the cluster
+                          type: string
+                        ips:
+                          description: |-
+                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint
+                          items:
+                            type: string
+                          type: array
+                        port:
+                          description: |-
+                            TCP port of the endpoint.
+                            TCP port of the endpoint
+                          type: number
+                      type: object
+                    type: array
+                  settings:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
+                      with scaleway API or CLI
+                      Map of settings to define for the cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tags:
+                    description: |-
+                      The tags associated with the Redis™ cluster.
+                      List of tags ["tag1", "tag2", ...] attached to a redis cluster
+                    items:
+                      type: string
+                    type: array
+                  tlsEnabled:
+                    description: |-
+                      (Defaults to false) Whether TLS is enabled or not.
+                      Whether or not TLS is enabled.
+                    type: boolean
+                  updatedAt:
+                    description: |-
+                      The date and time of the last update of the Redis™ cluster.
+                      The date and time of the last update of the Redis cluster
+                    type: string
+                  userName:
+                    description: |-
+                      Identifier for the first user of the Redis™ cluster.
+                      Name of the user created when the cluster is created
+                    type: string
+                  version:
+                    description: |-
+                      Redis™ cluster's version (e.g. 6.2.7).
+                      Redis version of the cluster
+                    type: string
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the
+                      Redis™ cluster should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

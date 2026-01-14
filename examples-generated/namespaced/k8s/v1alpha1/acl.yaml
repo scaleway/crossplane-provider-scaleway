@@ -1,0 +1,54 @@
+apiVersion: k8s.scaleway.m.upbound.io/v1alpha1
+kind: Acl
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/acl
+  labels:
+    testing.upbound.io/example-name: acl_basic
+  name: acl-basic
+  namespace: upbound-system
+spec:
+  forProvider:
+    aclRules:
+    - description: Allow 1.2.3.4
+      ip: 1.2.3.4/32
+    - description: Allow all Scaleway ranges
+      scalewayRanges: true
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: acl_basic
+
+---
+
+apiVersion: k8s.scaleway.m.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/acl
+  labels:
+    testing.upbound.io/example-name: acl_basic
+  name: acl-basic
+  namespace: upbound-system
+spec:
+  forProvider:
+    cni: cilium
+    deleteAdditionalResources: true
+    name: acl-basic
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: acl_basic
+    version: 1.32.2
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/acl
+  labels:
+    testing.upbound.io/example-name: acl_basic
+  name: acl-basic
+  namespace: upbound-system
+spec:
+  forProvider: {}

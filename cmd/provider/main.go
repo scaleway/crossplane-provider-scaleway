@@ -13,32 +13,35 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 
 	"sigs.k8s.io/controller-runtime/pkg/cache"
+	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	kerrors "k8s.io/apimachinery/pkg/api/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	authv1 "k8s.io/api/authorization/v1"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	"github.com/alecthomas/kingpin/v2"
-	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
-	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/gate"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/customresourcesgate"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
+	"github.com/pkg/errors"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	"github.com/crossplane/crossplane-runtime/pkg/certificates"
-	xpcontroller "github.com/crossplane/crossplane-runtime/pkg/controller"
-	"github.com/crossplane/crossplane-runtime/pkg/feature"
-	"github.com/crossplane/crossplane-runtime/pkg/logging"
-	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
-	tjcontroller "github.com/crossplane/upjet/pkg/controller"
-	"github.com/crossplane/upjet/pkg/terraform"
+	xpcontroller "github.com/crossplane/crossplane-runtime/v2/pkg/controller"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/feature"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
+	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 
-	"github.com/scaleway/crossplane-provider-scaleway/apis"
-	"github.com/scaleway/crossplane-provider-scaleway/apis/v1alpha1"
+	apisCluster "github.com/scaleway/crossplane-provider-scaleway/apis/cluster"
+	apisNamespaced "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced"
 	"github.com/scaleway/crossplane-provider-scaleway/config"
 	"github.com/scaleway/crossplane-provider-scaleway/internal/clients"
-	"github.com/scaleway/crossplane-provider-scaleway/internal/controller"
+	controllerCluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster"
+	controllerNamespaced "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced"
 	"github.com/scaleway/crossplane-provider-scaleway/internal/features"
 )
 
@@ -55,10 +58,7 @@ func main() {
 		providerVersion         = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("2").Int()
 
-		namespace                  = app.Flag("registry_namespace.yaml", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
-		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
-		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
-		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("false").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("false").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
@@ -90,7 +90,10 @@ func main() {
 		RenewDeadline: func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
-	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Scaleway APIs to scheme")
+
+	kingpin.FatalIfError(apisCluster.AddToScheme(mgr.GetScheme()), "Cannot add cluster-scoped Scaleway APIs to scheme")
+	kingpin.FatalIfError(apisNamespaced.AddToScheme(mgr.GetScheme()), "Cannot add namespaced Scaleway APIs to scheme")
+	kingpin.FatalIfError(apiextensionsv1.AddToScheme(mgr.GetScheme()), "Cannot add apiextensions to scheme")
 
 	metricRecorder := managed.NewMRMetricRecorder()
 	stateMetrics := statemetrics.NewMRStateMetrics()
@@ -105,7 +108,9 @@ func main() {
 	}
 
 	featureFlags := &feature.Flags{}
-	o := tjcontroller.Options{
+
+	// Create cluster-scoped controller options
+	clusterOpts := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
 			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
@@ -114,47 +119,83 @@ func main() {
 			Features:                featureFlags,
 			MetricOptions:           metricOptions,
 		},
-		Provider: config.GetProvider(),
-		// use the following WorkspaceStoreOption to enable the shared gRPC mode
-		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
+		Provider:       config.GetProvider(),
+		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithFeatures(featureFlags)),
+		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
+		PollJitter:     pollJitter,
+	}
+
+	// Create namespaced controller options
+	namespacedOpts := tjcontroller.Options{
+		Options: xpcontroller.Options{
+			Logger:                  log,
+			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
+			PollInterval:            *pollInterval,
+			MaxConcurrentReconciles: 1,
+			Features:                featureFlags,
+			MetricOptions:           metricOptions,
+		},
+		Provider:       config.GetProviderNamespaced(),
 		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithFeatures(featureFlags)),
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
 		PollJitter:     pollJitter,
 	}
 
 	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableBetaManagementPolicies)
+		clusterOpts.Features.Enable(features.EnableBetaManagementPolicies)
+		namespacedOpts.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
-	if *enableExternalSecretStores {
-		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
-		log.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
+	canSafeStart, err := canWatchCRD(context.TODO(), mgr)
+	kingpin.FatalIfError(err, "SafeStart precheck failed")
 
-		o.ESSOptions = &tjcontroller.ESSOptions{}
-		if *essTLSCertsPath != "" {
-			log.Info("ESS TLS certificates path is set. Loading mTLS configuration.")
-			tCfg, err := certificates.LoadMTLSConfig(filepath.Join(*essTLSCertsPath, "ca.crt"), filepath.Join(*essTLSCertsPath, "tls.crt"), filepath.Join(*essTLSCertsPath, "tls.key"), false)
-			kingpin.FatalIfError(err, "Cannot load ESS TLS config.")
+	if canSafeStart {
+		crdGate := new(gate.Gate[schema.GroupVersionKind])
+		clusterOpts.Gate = crdGate
+		namespacedOpts.Gate = crdGate
 
-			o.ESSOptions.TLSConfig = tCfg
-		}
+		kingpin.FatalIfError(customresourcesgate.Setup(mgr, xpcontroller.Options{
+			Logger:                  log,
+			Gate:                    crdGate,
+			MaxConcurrentReconciles: 1,
+		}), "Cannot setup CRD gate")
 
-		// Ensure default store config exists.
-		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(context.Background(), &v1alpha1.StoreConfig{
-			ObjectMeta: metav1.ObjectMeta{
-				Name: "default",
-			},
-			Spec: v1alpha1.StoreConfigSpec{
-				// NOTE(turkenh): We only set required spec and expect optional
-				// ones to properly be initialized with CRD level default values.
-				SecretStoreConfig: xpv1.SecretStoreConfig{
-					DefaultScope: *namespace,
-				},
-			},
-		})), "cannot create default store config")
+		kingpin.FatalIfError(controllerCluster.SetupGated(mgr, clusterOpts), "Cannot setup cluster-scoped Scaleway controllers")
+		kingpin.FatalIfError(controllerNamespaced.SetupGated(mgr, namespacedOpts), "Cannot setup namespaced Scaleway controllers")
+	} else {
+		// Fallback to non-gated setup (SafeStart disabled)
+		log.Info("Provider has missing RBAC permissions for watching CRDs, controller SafeStart capability will be disabled")
+		kingpin.FatalIfError(controllerCluster.Setup(mgr, clusterOpts), "Cannot setup cluster-scoped Scaleway controllers")
+		kingpin.FatalIfError(controllerNamespaced.Setup(mgr, namespacedOpts), "Cannot setup namespaced Scaleway controllers")
 	}
 
-	kingpin.FatalIfError(controller.Setup(mgr, o), "Cannot setup Scaleway controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
+}
+
+// canWatchCRD checks if the provider has RBAC permissions to watch CRDs
+// which is required for the SafeStart capability.
+func canWatchCRD(ctx context.Context, mgr manager.Manager) (bool, error) {
+	if err := authv1.AddToScheme(mgr.GetScheme()); err != nil {
+		return false, err
+	}
+	verbs := []string{"get", "list", "watch"}
+	for _, verb := range verbs {
+		sar := &authv1.SelfSubjectAccessReview{
+			Spec: authv1.SelfSubjectAccessReviewSpec{
+				ResourceAttributes: &authv1.ResourceAttributes{
+					Group:    "apiextensions.k8s.io",
+					Resource: "customresourcedefinitions",
+					Verb:     verb,
+				},
+			},
+		}
+		if err := mgr.GetClient().Create(ctx, sar); err != nil {
+			return false, errors.Wrapf(err, "unable to perform RBAC check for verb %s on CustomResourceDefinitions", verb)
+		}
+		if !sar.Status.Allowed {
+			return false, nil
+		}
+	}
+	return true, nil
 }

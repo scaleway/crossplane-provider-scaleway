@@ -1,0 +1,166 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGatewayPATRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: pat01
+  name: pat01
+  namespace: upbound-system
+spec:
+  forProvider:
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg01
+    privateIp: ${scaleway_vpc_public_gateway_dhcp_reservation.rsv01.ip_address}
+    privatePort: 22
+    protocol: tcp
+    publicPort: 2202
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNIC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: pnic01
+  name: pnic01
+  namespace: upbound-system
+spec:
+  forProvider:
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: srv01
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: sg01
+  name: sg01
+  namespace: upbound-system
+spec:
+  forProvider:
+    inboundDefaultPolicy: drop
+    inboundRule:
+    - action: accept
+      port: 22
+      protocol: TCP
+    outboundDefaultPolicy: accept
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: srv01
+  name: srv01
+  namespace: upbound-system
+spec:
+  forProvider:
+    image: ubuntu_jammy
+    name: my-server
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sg01
+    type: PLAY2-NANO
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: GatewayNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: gn01
+  name: gn01
+  namespace: upbound-system
+spec:
+  forProvider:
+    cleanupDhcp: true
+    dhcpIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dhcp01
+    enableMasquerade: true
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg01
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-pn
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: pg01
+  name: pg01
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ip01
+    name: my-pg
+    type: VPC-GW-S
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGatewayDHCP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: dhcp01
+  name: dhcp01
+  namespace: upbound-system
+spec:
+  forProvider:
+    subnet: 192.168.0.0/24
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGatewayIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgatewaypatrule
+  labels:
+    testing.upbound.io/example-name: ip01
+  name: ip01
+  namespace: upbound-system
+spec:
+  forProvider: {}

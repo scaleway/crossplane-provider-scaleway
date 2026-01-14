@@ -1,0 +1,36 @@
+apiVersion: iam.scaleway.m.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: object_read_only
+  name: object-read-only
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: app
+    description: gives app readonly access to object storage in project
+    name: my policy
+    rule:
+    - permissionSetNames:
+      - ObjectStorageReadOnly
+      projectIds:
+      - ${data.scaleway_account_project.default.id}
+
+---
+
+apiVersion: iam.scaleway.m.upbound.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: app
+  name: app
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my app

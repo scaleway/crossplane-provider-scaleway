@@ -1,0 +1,19 @@
+apiVersion: lb.scaleway.m.upbound.io/v1alpha1
+kind: Frontend
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/frontend
+  labels:
+    testing.upbound.io/example-name: frontend01
+  name: frontend01
+  namespace: upbound-system
+spec:
+  forProvider:
+    backendIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: backend01
+    inboundPort: "80"
+    lbIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lb01
+    name: frontend01

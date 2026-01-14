@@ -48,13 +48,13 @@ GO_SUBDIRS += cmd internal apis
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.23.0
-UP_VERSION = v0.31.0
+KIND_VERSION = v0.30.0
+UP_VERSION = v0.41.0
 UP_CHANNEL = stable
 UPTEST_LOCAL_VERSION ?= v0.13.0
 UPTEST_LOCAL_CHANNEL ?= stable
 -include build/makelib/k8s_tools.mk
-CROSSPLANE_VERSION = 1.18.0
+CROSSPLANE_VERSION = 2.0.2
 
 UPTEST_LOCAL := $(TOOLS_HOST_DIR)/uptest-$(UPTEST_LOCAL_VERSION)
 
@@ -84,11 +84,12 @@ XPKGS = $(PROJECT_NAME)
 
 # NOTE(hasheddan): we force image building to happen prior to xpkg build so that
 # we ensure image is present in daemon.
-xpkg.build.provider-scaleway: do.build.images
+# NOTE: CROSSPLANE_CLI must be built before xpkg build
+xpkg.build.provider-scaleway: do.build.images $(CROSSPLANE_CLI)
 
-# NOTE(hasheddan): we ensure up is installed prior to running platform-specific
-# build steps in parallel to avoid encountering an installation race condition.
-build.init: $(UP)
+# NOTE(hasheddan): we ensure up and crossplane-cli are installed prior to running
+# platform-specific build steps in parallel to avoid encountering an installation race condition.
+build.init: $(UP) $(CROSSPLANE_CLI)
 
 # ====================================================================================
 # Fallthrough

@@ -1,0 +1,71 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: GatewayNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    enableMasquerade: true
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg01
+    ipamConfig:
+    - pushDefaultRoute: true
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my vpc
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipv4Subnet:
+    - subnet: 172.16.64.0/22
+    name: pn_test_network
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/gatewaynetwork
+  labels:
+    testing.upbound.io/example-name: pg01
+  name: pg01
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: foobar
+    type: VPC-GW-S

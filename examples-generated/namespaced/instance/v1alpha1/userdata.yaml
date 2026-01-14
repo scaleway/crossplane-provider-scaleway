@@ -1,0 +1,32 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: UserData
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/userdata
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    key: foo
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    value: bar
+
+---
+
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/userdata
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    image: ubuntu_focal
+    type: DEV1-S

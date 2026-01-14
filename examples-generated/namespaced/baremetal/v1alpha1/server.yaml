@@ -1,0 +1,16 @@
+apiVersion: baremetal.scaleway.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: baremetal/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: my_server
+  name: my-server
+  namespace: upbound-system
+spec:
+  forProvider:
+    offer: ${data.scaleway_baremetal_offer.my_offer.offer_id}
+    os: d17d6872-0412-45d9-a198-af82c34d3c5c
+    sshKeyIdsRefs:
+    - name: scaleway_iam_ssh_key
+    zone: fr-par-2

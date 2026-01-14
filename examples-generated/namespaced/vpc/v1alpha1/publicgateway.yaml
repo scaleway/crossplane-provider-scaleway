@@ -1,0 +1,16 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: PublicGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/publicgateway
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: public_gateway_demo
+    tags:
+    - demo
+    - terraform
+    type: VPC-GW-S

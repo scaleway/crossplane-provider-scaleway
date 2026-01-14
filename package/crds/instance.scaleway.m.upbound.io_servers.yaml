@@ -1,0 +1,1391 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: servers.instance.scaleway.m.upbound.io
+spec:
+  group: instance.scaleway.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - scaleway
+    kind: Server
+    listKind: ServerList
+    plural: servers
+    singular: server
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Server is the Schema for the Servers API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ServerSpec defines the desired state of Server
+            properties:
+              forProvider:
+                properties:
+                  additionalVolumeIds:
+                    description: |-
+                      The additional volumes
+                      attached to the server. Updates to this field will trigger a stop/start of the server.
+                      The additional volumes attached to the server
+                    items:
+                      type: string
+                    type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
+                  bootType:
+                    description: |-
+                      The boot Type of the server. Possible values are: local, bootscript or rescue.
+                      The boot type of the server
+                    type: string
+                  bootscriptId:
+                    description: |-
+                      The ID of the IP address resource.
+                      ID of the target bootscript (set boot_type to bootscript)
+                    type: string
+                  cloudInit:
+                    description: The cloud init script associated with this server
+                    type: string
+                  enableDynamicIp:
+                    description: |-
+                      (Defaults to false) If true a dynamic IP will be attached to the server.
+                      Enable dynamic IP on the server
+                    type: boolean
+                  filesystems:
+                    description: |-
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                      type: object
+                    type: array
+                  image:
+                    description: |-
+                      The UUID or the label of the base image used by the server. You can use this endpoint
+                      to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
+                      The UUID or the label of the base image used by the server
+                    type: string
+                  ipId:
+                    description: |-
+                      The ID of the reserved IP that is attached to the server.
+                      The ID of the reserved IP for the server
+                    type: string
+                  ipIdRef:
+                    description: Reference to a IP in instance to populate ipId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  ipIdSelector:
+                    description: Selector for a IP in instance to populate ipId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  ipIds:
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: |-
+                      The name of the server.
+                      The name of the server
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
+                      The placement group the server is attached to
+                    type: string
+                  placementGroupIdRef:
+                    description: Reference to a PlacementGroup in instance to populate
+                      placementGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  placementGroupIdSelector:
+                    description: Selector for a PlacementGroup in instance to populate
+                      placementGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private network associated with the server.
+                      Use the pn_id key to attach a private_network on your instance.
+                      List of private network to connect with your instance
+                    items:
+                      properties:
+                        pnId:
+                          description: |-
+                            The private network ID where to connect.
+                            The Private Network ID
+                          type: string
+                        zone:
+                          description: |-
+                            (Defaults to provider zone) The zone in which the server should be created.
+                            The zone you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  publicIps:
+                    description: |-
+                      The list of public IPs of the server.
+                      List of private IPv4 and IPv6 addresses attached to your instance
+                    items:
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: |-
+                      (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+                      Delete and re-create server if type change
+                    type: boolean
+                  rootVolume:
+                    description: |-
+                      Root volume attached to the server on creation.
+                      Root volume attached to the server on creation
+                    items:
+                      properties:
+                        boot:
+                          description: Set the volume where the boot the server
+                          type: boolean
+                        deleteOnTermination:
+                          description: |-
+                            (Defaults to true) Forces deletion of the root volume on instance termination.
+                            Force deletion of the root volume on instance termination
+                          type: boolean
+                        name:
+                          description: |-
+                            The name of the server.
+                            Name of the root volume
+                          type: string
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
+                        sizeInGb:
+                          description: |-
+                            Size of the root volume in gigabytes.
+                            To find the right size use this endpoint and
+                            check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+                            Depending on volume_type, updates to this field may recreate a new resource.
+                            Size of the root volume in gigabytes
+                          type: number
+                        volumeId:
+                          description: |-
+                            The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+                            Volume ID of the root volume
+                          type: string
+                        volumeType:
+                          description: |-
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+                            Volume type of the root volume
+                          type: string
+                      type: object
+                    type: array
+                  securityGroupId:
+                    description: |-
+                      The security group the server is attached to.
+                      The security group the server is attached to
+                    type: string
+                  securityGroupIdRef:
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  securityGroupIdSelector:
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  state:
+                    description: |-
+                      (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
+                      The state of the server should be: started, stopped, standby
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      The tags associated with the server
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: |-
+                      The commercial type of the server.
+                      You find all the available types on the pricing page.
+                      Updates to this field will migrate the server, local storage constraint must be respected. More info.
+                      Use replace_on_type_change to trigger replacement instead of migration.
+                      The instance type of the server
+                    type: string
+                  userData:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The user data associated with the server.
+                      Use the cloud-init key to use cloud-init on your instance.
+                      You can define values using:
+                      The user data associated with the server
+                    type: object
+                    x-kubernetes-map-type: granular
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  additionalVolumeIds:
+                    description: |-
+                      The additional volumes
+                      attached to the server. Updates to this field will trigger a stop/start of the server.
+                      The additional volumes attached to the server
+                    items:
+                      type: string
+                    type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
+                  bootType:
+                    description: |-
+                      The boot Type of the server. Possible values are: local, bootscript or rescue.
+                      The boot type of the server
+                    type: string
+                  bootscriptId:
+                    description: |-
+                      The ID of the IP address resource.
+                      ID of the target bootscript (set boot_type to bootscript)
+                    type: string
+                  cloudInit:
+                    description: The cloud init script associated with this server
+                    type: string
+                  enableDynamicIp:
+                    description: |-
+                      (Defaults to false) If true a dynamic IP will be attached to the server.
+                      Enable dynamic IP on the server
+                    type: boolean
+                  filesystems:
+                    description: |-
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                      type: object
+                    type: array
+                  image:
+                    description: |-
+                      The UUID or the label of the base image used by the server. You can use this endpoint
+                      to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
+                      The UUID or the label of the base image used by the server
+                    type: string
+                  ipId:
+                    description: |-
+                      The ID of the reserved IP that is attached to the server.
+                      The ID of the reserved IP for the server
+                    type: string
+                  ipIdRef:
+                    description: Reference to a IP in instance to populate ipId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  ipIdSelector:
+                    description: Selector for a IP in instance to populate ipId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  ipIds:
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: |-
+                      The name of the server.
+                      The name of the server
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
+                      The placement group the server is attached to
+                    type: string
+                  placementGroupIdRef:
+                    description: Reference to a PlacementGroup in instance to populate
+                      placementGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  placementGroupIdSelector:
+                    description: Selector for a PlacementGroup in instance to populate
+                      placementGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private network associated with the server.
+                      Use the pn_id key to attach a private_network on your instance.
+                      List of private network to connect with your instance
+                    items:
+                      properties:
+                        pnId:
+                          description: |-
+                            The private network ID where to connect.
+                            The Private Network ID
+                          type: string
+                        zone:
+                          description: |-
+                            (Defaults to provider zone) The zone in which the server should be created.
+                            The zone you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  publicIps:
+                    description: |-
+                      The list of public IPs of the server.
+                      List of private IPv4 and IPv6 addresses attached to your instance
+                    items:
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: |-
+                      (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+                      Delete and re-create server if type change
+                    type: boolean
+                  rootVolume:
+                    description: |-
+                      Root volume attached to the server on creation.
+                      Root volume attached to the server on creation
+                    items:
+                      properties:
+                        boot:
+                          description: Set the volume where the boot the server
+                          type: boolean
+                        deleteOnTermination:
+                          description: |-
+                            (Defaults to true) Forces deletion of the root volume on instance termination.
+                            Force deletion of the root volume on instance termination
+                          type: boolean
+                        name:
+                          description: |-
+                            The name of the server.
+                            Name of the root volume
+                          type: string
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
+                        sizeInGb:
+                          description: |-
+                            Size of the root volume in gigabytes.
+                            To find the right size use this endpoint and
+                            check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+                            Depending on volume_type, updates to this field may recreate a new resource.
+                            Size of the root volume in gigabytes
+                          type: number
+                        volumeId:
+                          description: |-
+                            The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+                            Volume ID of the root volume
+                          type: string
+                        volumeType:
+                          description: |-
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+                            Volume type of the root volume
+                          type: string
+                      type: object
+                    type: array
+                  securityGroupId:
+                    description: |-
+                      The security group the server is attached to.
+                      The security group the server is attached to
+                    type: string
+                  securityGroupIdRef:
+                    description: Reference to a SecurityGroup in instance to populate
+                      securityGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  securityGroupIdSelector:
+                    description: Selector for a SecurityGroup in instance to populate
+                      securityGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  state:
+                    description: |-
+                      (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
+                      The state of the server should be: started, stopped, standby
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      The tags associated with the server
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: |-
+                      The commercial type of the server.
+                      You find all the available types on the pricing page.
+                      Updates to this field will migrate the server, local storage constraint must be respected. More info.
+                      Use replace_on_type_change to trigger replacement instead of migration.
+                      The instance type of the server
+                    type: string
+                  userData:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The user data associated with the server.
+                      Use the cloud-init key to use cloud-init on your instance.
+                      You can define values using:
+                      The user data associated with the server
+                    type: object
+                    x-kubernetes-map-type: granular
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.type is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || (has(self.initProvider) && has(self.initProvider.type))'
+          status:
+            description: ServerStatus defines the observed state of Server.
+            properties:
+              atProvider:
+                properties:
+                  additionalVolumeIds:
+                    description: |-
+                      The additional volumes
+                      attached to the server. Updates to this field will trigger a stop/start of the server.
+                      The additional volumes attached to the server
+                    items:
+                      type: string
+                    type: array
+                  adminPasswordEncryptionSshKeyId:
+                    description: |-
+                      The ID of the SSH RSA key that will be used to encrypt the initial admin password for OS requiring it.
+                      Mandatory for Windows OS. The public_key value of this key is used to encrypt the admin password.
+                      When set to an empty string, it resets this value and admin_password_encrypted_value to an empty string so a new password may be generated.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server
+                    type: string
+                  bootType:
+                    description: |-
+                      The boot Type of the server. Possible values are: local, bootscript or rescue.
+                      The boot type of the server
+                    type: string
+                  bootscriptId:
+                    description: |-
+                      The ID of the IP address resource.
+                      ID of the target bootscript (set boot_type to bootscript)
+                    type: string
+                  cloudInit:
+                    description: The cloud init script associated with this server
+                    type: string
+                  enableDynamicIp:
+                    description: |-
+                      (Defaults to false) If true a dynamic IP will be attached to the server.
+                      Enable dynamic IP on the server
+                    type: boolean
+                  filesystems:
+                    description: |-
+                      List of filesystems attached to the server.
+                      Filesystems attach to the server
+                    items:
+                      properties:
+                        filesystemId:
+                          description: |-
+                            The unique ID of the filesystem attached to the server.
+                            The filesystem ID attached to the server
+                          type: string
+                        status:
+                          description: |-
+                            The private NIC state.
+                            The state of the filesystem
+                          type: string
+                      type: object
+                    type: array
+                  id:
+                    description: The ID of the IP address resource.
+                    type: string
+                  image:
+                    description: |-
+                      The UUID or the label of the base image used by the server. You can use this endpoint
+                      to find either the right label or the right local image ID for a given type. Optional when creating an instance with an existing root volume.
+                      The UUID or the label of the base image used by the server
+                    type: string
+                  ipId:
+                    description: |-
+                      The ID of the reserved IP that is attached to the server.
+                      The ID of the reserved IP for the server
+                    type: string
+                  ipIds:
+                    description: |-
+                      List of ID of reserved IPs that are attached to the server. Cannot be used with ip_id.
+                      The IDs of the reserved IP for the server
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: |-
+                      The name of the server.
+                      The name of the server
+                    type: string
+                  organizationId:
+                    description: |-
+                      The organization ID the server is associated with.
+                      The organization_id you want to attach the resource to
+                    type: string
+                  placementGroupId:
+                    description: |-
+                      The [placement group](https://www.scaleway.com/en/developers/api/instance/#path-security-groups-update-a-security-group the server is attached to.
+                      The placement group the server is attached to
+                    type: string
+                  placementGroupPolicyRespected:
+                    description: |-
+                      (Deprecated) Always false, use instance_placement_group resource to known when the placement group policy is respected.
+                      True when the placement group policy is respected
+                    type: boolean
+                  privateIps:
+                    description: |-
+                      The list of private IPv4 and IPv6 addresses associated with the resource.
+                      List of private IPv4 and IPv6 addresses associated with the resource
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IP address.
+                            The private IP address
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the IP address resource.
+                            The ID of the IP address resource
+                          type: string
+                      type: object
+                    type: array
+                  privateNetwork:
+                    description: |-
+                      The private network associated with the server.
+                      Use the pn_id key to attach a private_network on your instance.
+                      List of private network to connect with your instance
+                    items:
+                      properties:
+                        macAddress:
+                          description: |-
+                            The private NIC MAC address.
+                            MAC address of the NIC
+                          type: string
+                        pnId:
+                          description: |-
+                            The private network ID where to connect.
+                            The Private Network ID
+                          type: string
+                        pnicId:
+                          description: |-
+                            The ID of the IP address resource.
+                            The ID of the NIC
+                          type: string
+                        status:
+                          description: |-
+                            The private NIC state.
+                            The private NIC state
+                          type: string
+                        zone:
+                          description: |-
+                            (Defaults to provider zone) The zone in which the server should be created.
+                            The zone you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the server is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  protected:
+                    description: |-
+                      Set to true to activate server protection option.
+                      If true, the instance is protected against accidental deletion via the Scaleway API.
+                    type: boolean
+                  publicIps:
+                    description: |-
+                      The list of public IPs of the server.
+                      List of private IPv4 and IPv6 addresses attached to your instance
+                    items:
+                      properties:
+                        address:
+                          description: |-
+                            The private IP address.
+                            IP Address
+                          type: string
+                        dynamic:
+                          description: |-
+                            Whether the IP is dynamic.
+                            Whether the IP is dynamic
+                          type: boolean
+                        family:
+                          description: |-
+                            The IP address' family.
+                            IP address family (inet or inet6)
+                          type: string
+                        gateway:
+                          description: |-
+                            The IP of the Gateway associated with the IP.
+                            Gateway's IP address
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the IP address resource.
+                            ID of the IP
+                          type: string
+                        netmask:
+                          description: |-
+                            The CIDR netmask of the IP.
+                            CIDR netmask
+                          type: string
+                        provisioningMode:
+                          description: |-
+                            The provisioning mode of the IP
+                            Provisioning mode of the IP address
+                          type: string
+                      type: object
+                    type: array
+                  replaceOnTypeChange:
+                    description: |-
+                      (Defaults to false) If true, the server will be replaced if type is changed. Otherwise, the server will migrate.
+                      Delete and re-create server if type change
+                    type: boolean
+                  rootVolume:
+                    description: |-
+                      Root volume attached to the server on creation.
+                      Root volume attached to the server on creation
+                    items:
+                      properties:
+                        boot:
+                          description: Set the volume where the boot the server
+                          type: boolean
+                        deleteOnTermination:
+                          description: |-
+                            (Defaults to true) Forces deletion of the root volume on instance termination.
+                            Force deletion of the root volume on instance termination
+                          type: boolean
+                        name:
+                          description: |-
+                            The name of the server.
+                            Name of the root volume
+                          type: string
+                        sbsIops:
+                          description: |-
+                            Choose IOPS of your sbs volume, has to be used with sbs_volume for root volume type.
+                            SBS Volume IOPS, only with volume_type as sbs_volume
+                          type: number
+                        sizeInGb:
+                          description: |-
+                            Size of the root volume in gigabytes.
+                            To find the right size use this endpoint and
+                            check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
+                            Depending on volume_type, updates to this field may recreate a new resource.
+                            Size of the root volume in gigabytes
+                          type: number
+                        volumeId:
+                          description: |-
+                            The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.
+                            Volume ID of the root volume
+                          type: string
+                        volumeType:
+                          description: |-
+                            Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type
+                            Volume type of the root volume
+                          type: string
+                      type: object
+                    type: array
+                  securityGroupId:
+                    description: |-
+                      The security group the server is attached to.
+                      The security group the server is attached to
+                    type: string
+                  state:
+                    description: |-
+                      (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
+                      The state of the server should be: started, stopped, standby
+                    type: string
+                  tags:
+                    description: |-
+                      The tags associated with the server.
+                      The tags associated with the server
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    description: |-
+                      The commercial type of the server.
+                      You find all the available types on the pricing page.
+                      Updates to this field will migrate the server, local storage constraint must be respected. More info.
+                      Use replace_on_type_change to trigger replacement instead of migration.
+                      The instance type of the server
+                    type: string
+                  userData:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The user data associated with the server.
+                      Use the cloud-init key to use cloud-init on your instance.
+                      You can define values using:
+                      The user data associated with the server
+                    type: object
+                    x-kubernetes-map-type: granular
+                  zone:
+                    description: |-
+                      (Defaults to provider zone) The zone in which the server should be created.
+                      The zone you want to attach the resource to
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

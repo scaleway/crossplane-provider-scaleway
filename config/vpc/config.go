@@ -1,6 +1,6 @@
 package vpc
 
-import "github.com/crossplane/upjet/pkg/config"
+import "github.com/crossplane/upjet/v2/pkg/config"
 
 const shortGroup = "vpc"
 
@@ -46,7 +46,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "GatewayNetwork"
 
-		// https://github.com/crossplane/upjet/issues/197
+		// https://github.com/crossplane/upjet/v2/issues/197
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"static_address"},
 		}

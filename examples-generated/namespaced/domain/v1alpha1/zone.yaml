@@ -1,0 +1,13 @@
+apiVersion: domain.scaleway.m.upbound.io/v1alpha1
+kind: Zone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: domain/v1alpha1/zone
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    domain: scaleway-terraform.com
+    subdomain: test

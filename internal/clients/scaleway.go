@@ -13,14 +13,15 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"
 	"github.com/scaleway/crossplane-provider-scaleway/internal/version"
 	"github.com/scaleway/scaleway-sdk-go/scw"
 
-	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 
-	"github.com/scaleway/crossplane-provider-scaleway/apis/v1beta1"
+	clusterv1beta1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/v1beta1"
+	namespacedv1beta1 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/v1beta1"
 )
 
 const (
@@ -55,29 +56,21 @@ func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) te
 			Configuration: map[string]any{},
 		}
 
-		configRef := mg.GetProviderConfigReference()
-		if configRef == nil {
-			return ps, errors.New(errNoProviderConfig)
-		}
-		pc := &v1beta1.ProviderConfig{}
-		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-			return ps, errors.Wrap(err, errGetProviderConfig)
-		}
-
-		t := resource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
-		if err := t.Track(ctx, mg); err != nil {
-			return ps, errors.Wrap(err, errTrackUsage)
+		// Resolve ProviderConfig based on the managed resource type
+		pcSpec, err := resolveProviderConfig(ctx, client, mg)
+		if err != nil {
+			return ps, errors.Wrap(err, "cannot resolve provider config")
 		}
 
 		// Load Scaleway config file + Env (Env > File)
-		profile, err := resolveScwProfile(pc)
+		profile, err := resolveScwProfile(pcSpec)
 		if err != nil {
 			return ps, err
 		}
 		fillConfigFromProfile(ps.Configuration, profile)
 
 		// Overlay Secret (if any). Secret > Env > File
-		data, err := resource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
+		data, err := resource.CommonCredentialExtractor(ctx, pcSpec.Credentials.Source, client, pcSpec.Credentials.CommonCredentialSelectors)
 		if err == nil && len(data) > 0 {
 			vals := map[string]string{}
 			if err := json.Unmarshal(data, &vals); err != nil {
@@ -97,6 +90,100 @@ func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) te
 	}
 }
 
+// resolveProviderConfig resolves the ProviderConfigSpec based on the managed resource type
+func resolveProviderConfig(ctx context.Context, crClient client.Client, mg resource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	switch managed := mg.(type) {
+	case resource.LegacyManaged:
+		return resolveLegacy(ctx, crClient, managed)
+	case resource.ModernManaged:
+		return resolveModern(ctx, crClient, managed)
+	default:
+		return nil, errors.New("resource is not a managed resource")
+	}
+}
+
+// resolveLegacy handles cluster-scoped MRs with legacy ProviderConfigReferencer
+func resolveLegacy(ctx context.Context, crClient client.Client, mg resource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil {
+		return nil, errors.New(errNoProviderConfig)
+	}
+
+	pc := &clusterv1beta1.ProviderConfig{}
+	if err := crClient.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
+		return nil, errors.Wrap(err, errGetProviderConfig)
+	}
+
+	t := resource.NewLegacyProviderConfigUsageTracker(crClient, &clusterv1beta1.ProviderConfigUsage{})
+	if err := t.Track(ctx, mg); err != nil {
+		return nil, errors.Wrap(err, errTrackUsage)
+	}
+
+	return toNamespacedPCSpec(pc)
+}
+
+func toNamespacedPCSpec(pc *clusterv1beta1.ProviderConfig) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	if pc == nil {
+		return nil, nil
+	}
+
+	data, err := json.Marshal(pc.Spec)
+	if err != nil {
+		return nil, err
+	}
+
+	var mSpec namespacedv1beta1.ProviderConfigSpec
+	err = json.Unmarshal(data, &mSpec)
+
+	return &mSpec, err
+}
+
+// resolveModern handles namespaced MRs with TypedProviderConfigReferencer
+func resolveModern(ctx context.Context, crClient client.Client, mg resource.ModernManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil {
+		return nil, errors.New(errNoProviderConfig)
+	}
+
+	pcRuntimeObj, err := crClient.Scheme().New(namespacedv1beta1.SchemeGroupVersion.WithKind(configRef.Kind))
+	if err != nil {
+		return nil, errors.Wrap(err, "unknown GVK for ProviderConfig")
+	}
+
+	pcObj, ok := pcRuntimeObj.(client.Object)
+	if !ok {
+		return nil, errors.New("resolved type is not a client.Object")
+	}
+
+	// Namespace will be ignored if the PC is a cluster-scoped type
+	if err := crClient.Get(ctx, types.NamespacedName{Name: configRef.Name, Namespace: mg.GetNamespace()}, pcObj); err != nil {
+		return nil, errors.Wrap(err, errGetProviderConfig)
+	}
+
+	var pcSpec namespacedv1beta1.ProviderConfigSpec
+	pcu := &namespacedv1beta1.ProviderConfigUsage{}
+
+	switch pc := pcObj.(type) {
+	case *namespacedv1beta1.ProviderConfig:
+		pcSpec = pc.Spec
+		// For namespaced ProviderConfig, set secret namespace to MR's namespace
+		if pcSpec.Credentials.SecretRef != nil {
+			pcSpec.Credentials.SecretRef.Namespace = mg.GetNamespace()
+		}
+	case *namespacedv1beta1.ClusterProviderConfig:
+		pcSpec = pc.Spec
+	default:
+		return nil, errors.New("unknown provider config type")
+	}
+
+	t := resource.NewProviderConfigUsageTracker(crClient, pcu)
+	if err := t.Track(ctx, mg); err != nil {
+		return nil, errors.Wrap(err, errTrackUsage)
+	}
+
+	return &pcSpec, nil
+}
+
 // overlayCredentials overlays non-empty Secret values over existing config
 func overlayCredentials(cfg map[string]any, vals map[string]string) {
 	for _, k := range []string{
@@ -109,10 +196,10 @@ func overlayCredentials(cfg map[string]any, vals map[string]string) {
 	}
 }
 
-func resolveScwProfile(pc *v1beta1.ProviderConfig) (*scw.Profile, error) {
-	useFile := shouldUseScwConfig(pc)
+func resolveScwProfile(spec *namespacedv1beta1.ProviderConfigSpec) (*scw.Profile, error) {
+	useFile := shouldUseScwConfig(spec)
 
-	fileProf, err := readScwConfigProfile(pc, useFile)
+	fileProf, err := readScwConfigProfile(spec, useFile)
 	if err != nil {
 		return nil, err
 	}
@@ -124,12 +211,12 @@ func resolveScwProfile(pc *v1beta1.ProviderConfig) (*scw.Profile, error) {
 	return scw.MergeProfiles(fileProf, envProf), nil
 }
 
-func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profile, error) {
+func readScwConfigProfile(spec *namespacedv1beta1.ProviderConfigSpec, useFile bool) (*scw.Profile, error) {
 	if !useFile {
 		return nil, nil
 	}
 
-	cfg, err := loadScwConfigFile(pc)
+	cfg, err := loadScwConfigFile(spec)
 	if err != nil {
 		return nil, err
 	}
@@ -137,15 +224,15 @@ func readScwConfigProfile(pc *v1beta1.ProviderConfig, useFile bool) (*scw.Profil
 		return nil, nil
 	}
 
-	return selectScwProfile(pc, cfg)
+	return selectScwProfile(spec, cfg)
 }
 
-func loadScwConfigFile(pc *v1beta1.ProviderConfig) (*scw.Config, error) {
+func loadScwConfigFile(spec *namespacedv1beta1.ProviderConfigSpec) (*scw.Config, error) {
 	var cfg *scw.Config
 	var err error
 
-	if hasScwPath(pc) {
-		cfg, err = scw.LoadConfigFromPath(*pc.Spec.Scw.Path)
+	if hasScwPath(spec) {
+		cfg, err = scw.LoadConfigFromPath(*spec.Scw.Path)
 	} else {
 		cfg, err = scw.LoadConfig()
 	}
@@ -158,13 +245,13 @@ func loadScwConfigFile(pc *v1beta1.ProviderConfig) (*scw.Config, error) {
 	return cfg, nil
 }
 
-func selectScwProfile(pc *v1beta1.ProviderConfig, cfg *scw.Config) (*scw.Profile, error) {
+func selectScwProfile(spec *namespacedv1beta1.ProviderConfigSpec, cfg *scw.Config) (*scw.Profile, error) {
 	if cfg == nil {
 		return nil, nil
 	}
 
-	if hasScwProfile(pc) {
-		prof, err := cfg.GetProfile(*pc.Spec.Scw.Profile)
+	if hasScwProfile(spec) {
+		prof, err := cfg.GetProfile(*spec.Scw.Profile)
 		if err != nil {
 			return nil, errors.Wrap(err, errGetSCWProfile)
 		}
@@ -178,17 +265,17 @@ func selectScwProfile(pc *v1beta1.ProviderConfig, cfg *scw.Config) (*scw.Profile
 	return prof, nil
 }
 
-func hasScwPath(pc *v1beta1.ProviderConfig) bool {
-	return pc.Spec.Scw != nil && pc.Spec.Scw.Path != nil && *pc.Spec.Scw.Path != ""
+func hasScwPath(spec *namespacedv1beta1.ProviderConfigSpec) bool {
+	return spec.Scw != nil && spec.Scw.Path != nil && *spec.Scw.Path != ""
 }
 
-func hasScwProfile(pc *v1beta1.ProviderConfig) bool {
-	return pc.Spec.Scw != nil && pc.Spec.Scw.Profile != nil && *pc.Spec.Scw.Profile != ""
+func hasScwProfile(spec *namespacedv1beta1.ProviderConfigSpec) bool {
+	return spec.Scw != nil && spec.Scw.Profile != nil && *spec.Scw.Profile != ""
 }
 
-func shouldUseScwConfig(pc *v1beta1.ProviderConfig) bool {
-	if pc.Spec.Scw != nil && pc.Spec.Scw.UseScwConfig != nil {
-		return *pc.Spec.Scw.UseScwConfig
+func shouldUseScwConfig(spec *namespacedv1beta1.ProviderConfigSpec) bool {
+	if spec.Scw != nil && spec.Scw.UseScwConfig != nil {
+		return *spec.Scw.UseScwConfig
 	}
 	return true
 }
