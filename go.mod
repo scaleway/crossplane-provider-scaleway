@@ -7,7 +7,7 @@ require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime/v2 v2.0.0
 	github.com/crossplane/crossplane-tools v0.0.0-20251017183449-dd4517244339
-	github.com/crossplane/upjet/v2 v2.1.0
+	github.com/crossplane/upjet/v2 v2.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/scaleway/scaleway-sdk-go v1.0.0-beta.36
 	golang.org/x/text v0.33.0
