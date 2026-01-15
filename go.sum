@@ -36,8 +36,8 @@ github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UF
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
-github.com/crossplane/crossplane-runtime/v2 v2.0.0 h1:PK2pTKfshdDZ5IfoiMRiCi0PBnIjqbS0KGXEJgRdrb4=
-github.com/crossplane/crossplane-runtime/v2 v2.0.0/go.mod h1:pkd5UzmE8esaZAApevMutR832GjJ1Qgc5Ngr78ByxrI=
+github.com/crossplane/crossplane-runtime/v2 v2.1.0 h1:JBMhL9T+/PfyjLAQEdZWlKLvA3jJVtza8zLLwd9Gs4k=
+github.com/crossplane/crossplane-runtime/v2 v2.1.0/go.mod h1:j78pmk0qlI//Ur7zHhqTr8iePHFcwJKrZnzZB+Fg4t0=
 github.com/crossplane/crossplane-tools v0.0.0-20251017183449-dd4517244339 h1:MPbMxSlY+82UsjrLUAGyXlh/iX1tL5WNj8W9SOaq/nk=
 github.com/crossplane/crossplane-tools v0.0.0-20251017183449-dd4517244339/go.mod h1:8etxwmP4cZwJDwen4+PQlnc1tggltAhEfyyigmdHulQ=
 github.com/crossplane/upjet/v2 v2.2.0 h1:ZWRG9weBklrA3hRG8CjxYql7ffEE5sYnIH3UsyxsSTA=
@@ -458,8 +458,8 @@ k8s.io/utils v0.0.0-20251002143259-bc988d571ff4 h1:SjGebBtkBqHFOli+05xYbK8YF1Dzk
 k8s.io/utils v0.0.0-20251002143259-bc988d571ff4/go.mod h1:OLgZIPagt7ERELqWJFomSt595RzquPNLL48iOWgYOg0=
 sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.31.2 h1:jpcvIRr3GLoUoEKRkHKSmGjxb6lWwrBlJsXc+eUYQHM=
 sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.31.2/go.mod h1:Ve9uj1L+deCXFrPOk1LpFXqTg7LCFzFso6PA48q/XZw=
-sigs.k8s.io/controller-runtime v0.21.0 h1:CYfjpEuicjUecRk+KAeyYh+ouUBn4llGyDYytIGcJS8=
-sigs.k8s.io/controller-runtime v0.21.0/go.mod h1:OSg14+F65eWqIu4DceX7k/+QRAbTTvxeQSNSOQpukWM=
+sigs.k8s.io/controller-runtime v0.22.0 h1:mTOfibb8Hxwpx3xEkR56i7xSjB+nH4hZG37SrlCY5e0=
+sigs.k8s.io/controller-runtime v0.22.0/go.mod h1:FwiwRjkRPbiN+zp2QRp7wlTCzbUXxZ/D4OzuQUDwBHY=
 sigs.k8s.io/controller-tools v0.20.0 h1:VWZF71pwSQ2lZZCt7hFGJsOfDc5dVG28/IysjjMWXL8=
 sigs.k8s.io/controller-tools v0.20.0/go.mod h1:b4qPmjGU3iZwqn34alUU5tILhNa9+VXK+J3QV0fT/uU=
 sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 h1:IpInykpT6ceI+QxKBbEflcR5EXP7sU1kvOlxwZh5txg=
