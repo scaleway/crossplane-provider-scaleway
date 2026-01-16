@@ -160,6 +160,11 @@ func (in *DefinitionInitParameters) DeepCopyInto(out *DefinitionInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalStorageCapacity != nil {
+		in, out := &in.LocalStorageCapacity, &out.LocalStorageCapacity
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryLimit != nil {
 		in, out := &in.MemoryLimit, &out.MemoryLimit
 		*out = new(float64)
@@ -287,6 +292,11 @@ func (in *DefinitionObservation) DeepCopyInto(out *DefinitionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalStorageCapacity != nil {
+		in, out := &in.LocalStorageCapacity, &out.LocalStorageCapacity
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryLimit != nil {
 		in, out := &in.MemoryLimit, &out.MemoryLimit
 		*out = new(float64)
@@ -375,6 +385,11 @@ func (in *DefinitionParameters) DeepCopyInto(out *DefinitionParameters) {
 	if in.ImageURI != nil {
 		in, out := &in.ImageURI, &out.ImageURI
 		*out = new(string)
+		**out = **in
+	}
+	if in.LocalStorageCapacity != nil {
+		in, out := &in.LocalStorageCapacity, &out.LocalStorageCapacity
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemoryLimit != nil {

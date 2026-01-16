@@ -104,6 +104,11 @@ spec:
                       The uri of the container image that will be used for the job run.
                       Image URI to use for the job
                     type: string
+                  localStorageCapacity:
+                    description: |-
+                      The local storage capacity of the job in MiB.
+                      Local storage capacity of the job in MiB
+                    type: number
                   memoryLimit:
                     description: |-
                       The memory computing resources in MB to allocate to each container running the job.
@@ -217,6 +222,11 @@ spec:
                       The uri of the container image that will be used for the job run.
                       Image URI to use for the job
                     type: string
+                  localStorageCapacity:
+                    description: |-
+                      The local storage capacity of the job in MiB.
+                      Local storage capacity of the job in MiB
+                    type: number
                   memoryLimit:
                     description: |-
                       The memory computing resources in MB to allocate to each container running the job.
@@ -392,6 +402,11 @@ spec:
                       The uri of the container image that will be used for the job run.
                       Image URI to use for the job
                     type: string
+                  localStorageCapacity:
+                    description: |-
+                      The local storage capacity of the job in MiB.
+                      Local storage capacity of the job in MiB
+                    type: number
                   memoryLimit:
                     description: |-
                       The memory computing resources in MB to allocate to each container running the job.

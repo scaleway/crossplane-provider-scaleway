@@ -19,9 +19,14 @@ type AlertManagerInitParameters struct {
 	// A list of contact points
 	ContactPoints []ContactPointsInitParameters `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Specifies whether the alert manager should be enabled. Defaults to true.
-	// Enable or disable the alert manager
+	// Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+	// Enable or disable the alert manager (deprecated)
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
+
+	// A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// +listType=set
+	PreconfiguredAlertIds []*string `json:"preconfiguredAlertIds,omitempty" tf:"preconfigured_alert_ids,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
@@ -51,11 +56,16 @@ type AlertManagerObservation struct {
 	// A list of contact points
 	ContactPoints []ContactPointsObservation `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Specifies whether the alert manager should be enabled. Defaults to true.
-	// Enable or disable the alert manager
+	// Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+	// Enable or disable the alert manager (deprecated)
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// +listType=set
+	PreconfiguredAlertIds []*string `json:"preconfiguredAlertIds,omitempty" tf:"preconfigured_alert_ids,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
@@ -73,10 +83,16 @@ type AlertManagerParameters struct {
 	// +kubebuilder:validation:Optional
 	ContactPoints []ContactPointsParameters `json:"contactPoints,omitempty" tf:"contact_points,omitempty"`
 
-	// Specifies whether the alert manager should be enabled. Defaults to true.
-	// Enable or disable the alert manager
+	// Deprecated  Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.
+	// Enable or disable the alert manager (deprecated)
 	// +kubebuilder:validation:Optional
 	EnableManagedAlerts *bool `json:"enableManagedAlerts,omitempty" tf:"enable_managed_alerts,omitempty"`
+
+	// A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	PreconfiguredAlertIds []*string `json:"preconfiguredAlertIds,omitempty" tf:"preconfigured_alert_ids,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
