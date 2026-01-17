@@ -71,6 +71,11 @@ spec:
                       The name of the server.
                       Name of the server
                     type: string
+                  osId:
+                    description: |-
+                      The ID of the OS to use for the server.
+                      The OS ID of the server
+                    type: string
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the server.
@@ -109,6 +114,13 @@ spec:
                       Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
                       The public bandwidth of the server in bits per second
                     type: number
+                  runnerIds:
+                    description: |-
+                      List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+                      List of runner ids attach to the server
+                    items:
+                      type: string
+                    type: array
                   type:
                     description: |-
                       The commercial type of the server. You find all the available types on
@@ -149,6 +161,11 @@ spec:
                       The name of the server.
                       Name of the server
                     type: string
+                  osId:
+                    description: |-
+                      The ID of the OS to use for the server.
+                      The OS ID of the server
+                    type: string
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the server.
@@ -187,6 +204,13 @@ spec:
                       Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
                       The public bandwidth of the server in bits per second
                     type: number
+                  runnerIds:
+                    description: |-
+                      List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+                      List of runner ids attach to the server
+                    items:
+                      type: string
+                    type: array
                   type:
                     description: |-
                       The commercial type of the server. You find all the available types on
@@ -304,6 +328,11 @@ spec:
                       The organization ID the server is associated with.
                       The organization_id you want to attach the resource to
                     type: string
+                  osId:
+                    description: |-
+                      The ID of the OS to use for the server.
+                      The OS ID of the server
+                    type: string
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the server.
@@ -373,6 +402,13 @@ spec:
                       Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
                       The public bandwidth of the server in bits per second
                     type: number
+                  runnerIds:
+                    description: |-
+                      List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+                      List of runner ids attach to the server
+                    items:
+                      type: string
+                    type: array
                   state:
                     description: |-
                       The state of the server.

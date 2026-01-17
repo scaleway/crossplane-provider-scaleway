@@ -167,6 +167,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   region:
                     description: |-
                       The Scaleway region this resource resides in.
@@ -295,13 +305,21 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   region:
                     description: |-
                       The Scaleway region this resource resides in.
                       The region you want to attach the resource to
                     type: string
-                required:
-                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:
@@ -366,9 +384,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.passwordSecretRef is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -393,6 +408,16 @@ spec:
                       database user name.
                       Database user name
                     type: string
+                  passwordWo:
+                    description: |-
+                      Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   region:
                     description: |-
                       The Scaleway region this resource resides in.

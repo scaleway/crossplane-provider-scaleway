@@ -75,6 +75,10 @@ type DefinitionInitParameters struct {
 	// Image URI to use for the job
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
+	// The local storage capacity of the job in MiB.
+	// Local storage capacity of the job in MiB
+	LocalStorageCapacity *float64 `json:"localStorageCapacity,omitempty" tf:"local_storage_capacity,omitempty"`
+
 	// The memory computing resources in MB to allocate to each container running the job.
 	// Memory limit of the job
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
@@ -129,6 +133,10 @@ type DefinitionObservation struct {
 	// The uri of the container image that will be used for the job run.
 	// Image URI to use for the job
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
+
+	// The local storage capacity of the job in MiB.
+	// Local storage capacity of the job in MiB
+	LocalStorageCapacity *float64 `json:"localStorageCapacity,omitempty" tf:"local_storage_capacity,omitempty"`
 
 	// The memory computing resources in MB to allocate to each container running the job.
 	// Memory limit of the job
@@ -187,6 +195,11 @@ type DefinitionParameters struct {
 	// Image URI to use for the job
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
+
+	// The local storage capacity of the job in MiB.
+	// Local storage capacity of the job in MiB
+	// +kubebuilder:validation:Optional
+	LocalStorageCapacity *float64 `json:"localStorageCapacity,omitempty" tf:"local_storage_capacity,omitempty"`
 
 	// The memory computing resources in MB to allocate to each container running the job.
 	// Memory limit of the job

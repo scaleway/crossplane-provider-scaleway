@@ -1189,6 +1189,11 @@ func (in *LBConfigInitParameters) DeepCopyInto(out *LBConfigInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.HasWebsocket != nil {
+		in, out := &in.HasWebsocket, &out.HasWebsocket
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1237,6 +1242,11 @@ func (in *LBConfigObservation) DeepCopyInto(out *LBConfigObservation) {
 	if in.FrontendID != nil {
 		in, out := &in.FrontendID, &out.FrontendID
 		*out = new(string)
+		**out = **in
+	}
+	if in.HasWebsocket != nil {
+		in, out := &in.HasWebsocket, &out.HasWebsocket
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -1288,6 +1298,11 @@ func (in *LBConfigParameters) DeepCopyInto(out *LBConfigParameters) {
 		in, out := &in.FrontendIDSelector, &out.FrontendIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.HasWebsocket != nil {
+		in, out := &in.HasWebsocket, &out.HasWebsocket
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
