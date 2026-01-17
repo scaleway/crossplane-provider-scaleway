@@ -13,7 +13,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     privacy: private
-    runtime: go118
+    runtime: go124
 
 ---
 

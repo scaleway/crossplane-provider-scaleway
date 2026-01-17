@@ -55,6 +55,17 @@ func (in *AlertManagerInitParameters) DeepCopyInto(out *AlertManagerInitParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PreconfiguredAlertIds != nil {
+		in, out := &in.PreconfiguredAlertIds, &out.PreconfiguredAlertIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -144,6 +155,17 @@ func (in *AlertManagerObservation) DeepCopyInto(out *AlertManagerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PreconfiguredAlertIds != nil {
+		in, out := &in.PreconfiguredAlertIds, &out.PreconfiguredAlertIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -180,6 +202,17 @@ func (in *AlertManagerParameters) DeepCopyInto(out *AlertManagerParameters) {
 		in, out := &in.EnableManagedAlerts, &out.EnableManagedAlerts
 		*out = new(bool)
 		**out = **in
+	}
+	if in.PreconfiguredAlertIds != nil {
+		in, out := &in.PreconfiguredAlertIds, &out.PreconfiguredAlertIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
