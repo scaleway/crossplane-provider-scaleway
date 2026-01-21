@@ -95,6 +95,10 @@ type ServerInitParameters struct {
 	// Name of the server
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the OS to use for the server.
+	// The OS ID of the server
+	OsID *string `json:"osId,omitempty" tf:"os_id,omitempty"`
+
 	// The list of private IPv4 and IPv6 addresses associated with the server.
 	// List of private IPv4 and IPv6 addresses associated with the server
 	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
@@ -111,6 +115,10 @@ type ServerInitParameters struct {
 	// Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
 	// The public bandwidth of the server in bits per second
 	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
+
+	// List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+	// List of runner ids attach to the server
+	RunnerIds []*string `json:"runnerIds,omitempty" tf:"runner_ids,omitempty"`
 
 	// The commercial type of the server. You find all the available types on
 	// the pricing page. Updates to this field will recreate a new
@@ -155,6 +163,10 @@ type ServerObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The ID of the OS to use for the server.
+	// The OS ID of the server
+	OsID *string `json:"osId,omitempty" tf:"os_id,omitempty"`
+
 	// The list of private IPv4 and IPv6 addresses associated with the server.
 	// List of private IPv4 and IPv6 addresses associated with the server
 	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
@@ -171,6 +183,10 @@ type ServerObservation struct {
 	// Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
 	// The public bandwidth of the server in bits per second
 	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
+
+	// List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+	// List of runner ids attach to the server
+	RunnerIds []*string `json:"runnerIds,omitempty" tf:"runner_ids,omitempty"`
 
 	// The state of the server.
 	// The state of the server
@@ -220,6 +236,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the OS to use for the server.
+	// The OS ID of the server
+	// +kubebuilder:validation:Optional
+	OsID *string `json:"osId,omitempty" tf:"os_id,omitempty"`
+
 	// The list of private IPv4 and IPv6 addresses associated with the server.
 	// List of private IPv4 and IPv6 addresses associated with the server
 	// +kubebuilder:validation:Optional
@@ -240,6 +261,11 @@ type ServerParameters struct {
 	// The public bandwidth of the server in bits per second
 	// +kubebuilder:validation:Optional
 	PublicBandwidth *float64 `json:"publicBandwidth,omitempty" tf:"public_bandwidth,omitempty"`
+
+	// List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type
+	// List of runner ids attach to the server
+	// +kubebuilder:validation:Optional
+	RunnerIds []*string `json:"runnerIds,omitempty" tf:"runner_ids,omitempty"`
 
 	// The commercial type of the server. You find all the available types on
 	// the pricing page. Updates to this field will recreate a new

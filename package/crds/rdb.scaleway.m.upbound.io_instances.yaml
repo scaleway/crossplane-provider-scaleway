@@ -141,8 +141,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the Database Instance.
-                      Password for the first user of the database instance
+                      Password for the first user of the Database Instance. Only one of password or password_wo should be specified.
+                      Password for the first user of the database instance. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -153,6 +153,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the Database Instance in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password for the first user of the database instance in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the resource.
@@ -417,8 +427,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the Database Instance.
-                      Password for the first user of the database instance
+                      Password for the first user of the Database Instance. Only one of password or password_wo should be specified.
+                      Password for the first user of the database instance. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -429,6 +439,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the Database Instance in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password for the first user of the database instance in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the resource.
@@ -789,6 +809,16 @@ spec:
                       The organization ID the Database Instance is associated with.
                       The organization_id you want to attach the resource to
                     type: string
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the Database Instance in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password for the first user of the database instance in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the resource.

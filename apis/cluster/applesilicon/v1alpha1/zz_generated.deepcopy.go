@@ -225,6 +225,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OsID != nil {
+		in, out := &in.OsID, &out.OsID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsInitParameters, len(*in))
@@ -246,6 +251,17 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		in, out := &in.PublicBandwidth, &out.PublicBandwidth
 		*out = new(float64)
 		**out = **in
+	}
+	if in.RunnerIds != nil {
+		in, out := &in.RunnerIds, &out.RunnerIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -344,6 +360,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OsID != nil {
+		in, out := &in.OsID, &out.OsID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsObservation, len(*in))
@@ -367,6 +388,17 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		in, out := &in.PublicBandwidth, &out.PublicBandwidth
 		*out = new(float64)
 		**out = **in
+	}
+	if in.RunnerIds != nil {
+		in, out := &in.RunnerIds, &out.RunnerIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
@@ -433,6 +465,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OsID != nil {
+		in, out := &in.OsID, &out.OsID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsParameters, len(*in))
@@ -454,6 +491,17 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		in, out := &in.PublicBandwidth, &out.PublicBandwidth
 		*out = new(float64)
 		**out = **in
+	}
+	if in.RunnerIds != nil {
+		in, out := &in.RunnerIds, &out.RunnerIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

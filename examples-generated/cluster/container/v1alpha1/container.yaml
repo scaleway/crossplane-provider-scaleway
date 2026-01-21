@@ -15,14 +15,14 @@ spec:
     - bash
     - -c
     - script.sh
-    cpuLimit: 140
+    cpuLimit: 1024
     deploy: true
     description: environment variables test
     environmentVariables:
       foo: var
     maxConcurrency: 80
     maxScale: 5
-    memoryLimit: 256
+    memoryLimit: 2048
     minScale: 3
     name: my-container-02
     namespaceIdSelector:

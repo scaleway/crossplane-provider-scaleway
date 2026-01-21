@@ -4,19 +4,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: k8s/v1alpha1/pool
   labels:
-    testing.upbound.io/example-name: bill
-  name: bill
+    testing.upbound.io/example-name: main
+  name: main
 spec:
   forProvider:
     autohealing: true
     autoscaling: true
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: jack
+        testing.upbound.io/example-name: main
     containerRuntime: containerd
     maxSize: 10
     minSize: 0
-    name: bill
     nodeType: DEV1-M
     placementGroupId: 1267e3fd-a51c-49ed-ad12-857092ee3a3d
     size: 3
@@ -29,10 +28,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: k8s/v1alpha1/pool
   labels:
-    testing.upbound.io/example-name: jack
-  name: jack
+    testing.upbound.io/example-name: main
+  name: main
 spec:
   forProvider:
     cni: cilium
-    name: jack
     version: 1.32.3
