@@ -11,6 +11,7 @@ import (
 
 	project "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/account/project"
 	sshkey "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/account/sshkey"
+	runner "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/runner"
 	server "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/server"
 	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/group"
 	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/policy"
@@ -115,6 +116,9 @@ import (
 	userrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/rdb/user"
 	clusterredis "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/redis/cluster"
 	registrynamespace "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/registry/registrynamespace"
+	connection "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/connection"
+	gateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/gateway"
+	policys2svpn "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/policy"
 	sqldatabase "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/sdb/sqldatabase"
 	secret "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/secrets/secret"
 	version "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/secrets/version"
@@ -138,6 +142,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		project.Setup,
 		sshkey.Setup,
+		runner.Setup,
 		server.Setup,
 		group.Setup,
 		policy.Setup,
@@ -242,6 +247,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userrdb.Setup,
 		clusterredis.Setup,
 		registrynamespace.Setup,
+		connection.Setup,
+		gateway.Setup,
+		gateway.Setup,
+		policys2svpn.Setup,
 		sqldatabase.Setup,
 		secret.Setup,
 		version.Setup,
@@ -271,6 +280,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		project.SetupGated,
 		sshkey.SetupGated,
+		runner.SetupGated,
 		server.SetupGated,
 		group.SetupGated,
 		policy.SetupGated,
@@ -375,6 +385,10 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		userrdb.SetupGated,
 		clusterredis.SetupGated,
 		registrynamespace.SetupGated,
+		connection.SetupGated,
+		gateway.SetupGated,
+		gateway.SetupGated,
+		policys2svpn.SetupGated,
 		sqldatabase.SetupGated,
 		secret.SetupGated,
 		version.SetupGated,

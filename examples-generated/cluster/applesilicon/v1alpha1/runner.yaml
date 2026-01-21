@@ -1,0 +1,17 @@
+apiVersion: applesilicon.scaleway.upbound.io/v1alpha1
+kind: Runner
+metadata:
+  annotations:
+    meta.upbound.io/example-id: applesilicon/v1alpha1/runner
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    ciProvider: github
+    name: my-github-runner
+    tokenSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    url: https://github.com/my-org/my-repo

@@ -7,7 +7,10 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
-func (tr *Runner) Hub() {}
+func (tr *Connection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Server) Hub() {}
+func (tr *Gateway) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Policy) Hub() {}

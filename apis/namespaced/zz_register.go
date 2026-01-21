@@ -38,6 +38,7 @@ import (
 	v1alpha1rdb "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/rdb/v1alpha1"
 	v1alpha1redis "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/redis/v1alpha1"
 	v1alpha1registry "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/registry/v1alpha1"
+	v1alpha1s2svpn "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/s2svpn/v1alpha1"
 	v1alpha1sdb "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/sdb/v1alpha1"
 	v1alpha1secrets "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/secrets/v1alpha1"
 	v1alpha1tem "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/tem/v1alpha1"
@@ -77,6 +78,7 @@ func init() {
 		v1alpha1rdb.SchemeBuilder.AddToScheme,
 		v1alpha1redis.SchemeBuilder.AddToScheme,
 		v1alpha1registry.SchemeBuilder.AddToScheme,
+		v1alpha1s2svpn.SchemeBuilder.AddToScheme,
 		v1alpha1sdb.SchemeBuilder.AddToScheme,
 		v1alpha1secrets.SchemeBuilder.AddToScheme,
 		v1alpha1tem.SchemeBuilder.AddToScheme,
