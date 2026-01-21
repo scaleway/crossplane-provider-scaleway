@@ -16,8 +16,16 @@ import (
 type VersionInitParameters struct {
 
 	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of your secret version.
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
+	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+
+	// The data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	DataWoSecretRef *v1.SecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
+
+	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
 
 	// Description of the secret version (e.g. my-new-description).
 	// Description of the secret version
@@ -47,6 +55,10 @@ type VersionObservation struct {
 	// Date and time of secret version's creation (RFC 3339 format)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
+
 	// Description of the secret version (e.g. my-new-description).
 	// Description of the secret version
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -58,7 +70,7 @@ type VersionObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The revision number of the secret version.
-	// The revision of secret version
+	// The revision of secret version.
 	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
 
 	// The ID of the secret associated with the version.
@@ -77,9 +89,19 @@ type VersionObservation struct {
 type VersionParameters struct {
 
 	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of your secret version.
+	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
 	// +kubebuilder:validation:Optional
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+
+	// The data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	// +kubebuilder:validation:Optional
+	DataWoSecretRef *v1.SecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
+
+	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	// +kubebuilder:validation:Optional
+	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
 
 	// Description of the secret version (e.g. my-new-description).
 	// Description of the secret version
@@ -142,9 +164,8 @@ type VersionStatus struct {
 type Version struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSecretRef)",message="spec.forProvider.dataSecretRef is a required parameter"
-	Spec   VersionSpec   `json:"spec"`
-	Status VersionStatus `json:"status,omitempty"`
+	Spec              VersionSpec   `json:"spec"`
+	Status            VersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

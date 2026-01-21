@@ -189,6 +189,10 @@ type PrivateNetworkParameters struct {
 
 type ServerInitParameters struct {
 
+	// Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+	// Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+	CloudInit *string `json:"cloudInit,omitempty" tf:"cloud_init,omitempty"`
+
 	// A description for the server.
 	// Some description to associate to the server, max 255 characters
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -288,6 +292,10 @@ type ServerInitParameters struct {
 }
 
 type ServerObservation struct {
+
+	// Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+	// Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+	CloudInit *string `json:"cloudInit,omitempty" tf:"cloud_init,omitempty"`
 
 	// A description for the server.
 	// Some description to associate to the server, max 255 characters
@@ -406,6 +414,11 @@ type ServerObservation struct {
 }
 
 type ServerParameters struct {
+
+	// Configuration data to pass to cloud-init such as a YAML cloud config or a user-data script. Accepts either a string containing the content or a path to a file (for example file("cloud-init.yml")). Max length: 127998 characters. Updates to cloud_init will update the server user-data via the API and do not trigger a reinstall; however, a reboot of the server is required for the OS to re-run cloud-init and apply the changes. Only supported for Offers that have cloud-init enabled. You can check available offers with scw baremetal list offers command.
+	// Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+	// +kubebuilder:validation:Optional
+	CloudInit *string `json:"cloudInit,omitempty" tf:"cloud_init,omitempty"`
 
 	// A description for the server.
 	// Some description to associate to the server, max 255 characters

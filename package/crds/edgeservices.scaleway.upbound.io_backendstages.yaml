@@ -170,6 +170,11 @@ spec:
                                         type: string
                                     type: object
                                 type: object
+                              hasWebsocket:
+                                description: |-
+                                  Defines whether to forward websocket requests to the load balancer.
+                                  Defines whether to forward websocket requests to the load balancer
+                                type: boolean
                               id:
                                 description: |-
                                   The ID of the Load Balancer.
@@ -484,6 +489,11 @@ spec:
                                         type: string
                                     type: object
                                 type: object
+                              hasWebsocket:
+                                description: |-
+                                  Defines whether to forward websocket requests to the load balancer.
+                                  Defines whether to forward websocket requests to the load balancer
+                                type: boolean
                               id:
                                 description: |-
                                   The ID of the Load Balancer.
@@ -808,6 +818,11 @@ spec:
                                   The ID of the frontend.
                                   ID of the frontend linked to the Load Balancer
                                 type: string
+                              hasWebsocket:
+                                description: |-
+                                  Defines whether to forward websocket requests to the load balancer.
+                                  Defines whether to forward websocket requests to the load balancer
+                                type: boolean
                               id:
                                 description: |-
                                   The ID of the Load Balancer.

@@ -11,4 +11,11 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Server"
 	})
+
+	p.AddResourceConfigurator("scaleway_apple_silicon_runner", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Runner"
+
+	})
 }

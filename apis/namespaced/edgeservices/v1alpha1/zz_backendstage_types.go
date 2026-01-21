@@ -145,6 +145,10 @@ type LBConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.NamespacedSelector `json:"frontendIdSelector,omitempty" tf:"-"`
 
+	// Defines whether to forward websocket requests to the load balancer.
+	// Defines whether to forward websocket requests to the load balancer
+	HasWebsocket *bool `json:"hasWebsocket,omitempty" tf:"has_websocket,omitempty"`
+
 	// The ID of the Load Balancer.
 	// ID of the Load Balancer
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/lb/v1alpha1.LB
@@ -176,6 +180,10 @@ type LBConfigObservation struct {
 	// The ID of the frontend.
 	// ID of the frontend linked to the Load Balancer
 	FrontendID *string `json:"frontendId,omitempty" tf:"frontend_id,omitempty"`
+
+	// Defines whether to forward websocket requests to the load balancer.
+	// Defines whether to forward websocket requests to the load balancer
+	HasWebsocket *bool `json:"hasWebsocket,omitempty" tf:"has_websocket,omitempty"`
 
 	// The ID of the Load Balancer.
 	// ID of the Load Balancer
@@ -210,6 +218,11 @@ type LBConfigParameters struct {
 	// Selector for a Frontend in lb to populate frontendId.
 	// +kubebuilder:validation:Optional
 	FrontendIDSelector *v1.NamespacedSelector `json:"frontendIdSelector,omitempty" tf:"-"`
+
+	// Defines whether to forward websocket requests to the load balancer.
+	// Defines whether to forward websocket requests to the load balancer
+	// +kubebuilder:validation:Optional
+	HasWebsocket *bool `json:"hasWebsocket,omitempty" tf:"has_websocket,omitempty"`
 
 	// The ID of the Load Balancer.
 	// ID of the Load Balancer

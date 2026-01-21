@@ -1,0 +1,120 @@
+apiVersion: s2svpn.scaleway.upbound.io/v1alpha1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    bgpConfigIpv4:
+    - peerPrivateIp: 169.254.0.2/30
+      privateIp: 169.254.0.1/30
+      routingPolicyIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: policy
+    customerGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: customer_gw
+    enableRoutePropagation: true
+    espCiphers:
+    - dhGroup: modp2048
+      encryption: aes256
+      integrity: sha256
+    ikev2Ciphers:
+    - dhGroup: modp2048
+      encryption: aes256
+      integrity: sha256
+    initiationPolicy: customer_gateway
+    name: my-vpn-connection
+    vpnGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway
+
+---
+
+apiVersion: s2svpn.scaleway.upbound.io/v1alpha1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: customer_gw
+  name: customer-gw
+spec:
+  forProvider:
+    asn: 65000
+    ipv4PublicSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: my-customer-gateway
+
+---
+
+apiVersion: s2svpn.scaleway.upbound.io/v1alpha1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: gateway
+  name: gateway
+spec:
+  forProvider:
+    gatewayType: VGW-S
+    name: my-vpn-gateway
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn
+
+---
+
+apiVersion: s2svpn.scaleway.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    name: my-routing-policy
+    prefixFilterIn:
+    - 10.0.2.0/24
+    prefixFilterOut:
+    - 10.0.1.0/24
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+spec:
+  forProvider:
+    name: my-vpc
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: pn
+  name: pn
+spec:
+  forProvider:
+    ipv4Subnet:
+    - subnet: 10.0.1.0/24
+    name: my-private-network
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
