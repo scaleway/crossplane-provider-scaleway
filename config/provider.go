@@ -5,6 +5,7 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/scaleway/crossplane-provider-scaleway/config/s2svpn"
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -89,6 +90,7 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		secrets.Configure,
 		tem.Configure,
 		vpc.Configure,
+		s2svpn.Configure,
 	}
 }
 

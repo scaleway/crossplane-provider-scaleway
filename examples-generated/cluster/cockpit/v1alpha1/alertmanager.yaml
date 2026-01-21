@@ -4,17 +4,21 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cockpit/v1alpha1/alertmanager
   labels:
-    testing.upbound.io/example-name: alert_manager
-  name: alert-manager
+    testing.upbound.io/example-name: main
+  name: main
 spec:
   forProvider:
     contactPoints:
-    - email: alert1@example.com
-    - email: alert2@example.com
-    enableManagedAlerts: true
+    - email: alerts@example.com
+    preconfiguredAlertIds: |-
+      ${[
+          for alert in data.scaleway_cockpit_preconfigured_alert.all.alerts :
+          alert.preconfigured_rule_id
+          if alert.product_name == "instance"
+        ]}
     projectIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: project
+        testing.upbound.io/example-name: main
 
 ---
 
@@ -28,4 +32,20 @@ metadata:
   name: project
 spec:
   forProvider:
-    name: tf_test_project
+    name: my-observability-project
+
+---
+
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: Cockpit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/alertmanager
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: project
