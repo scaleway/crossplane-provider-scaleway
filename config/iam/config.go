@@ -16,6 +16,19 @@ func Configure(p *config.Provider) {
 		r.References["application_id"] = config.Reference{
 			TerraformName: "scaleway_iam_application",
 		}
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			details := make(map[string][]byte)
+
+			if accessKey, ok := attr["access_key"].(string); ok {
+				details["access_key"] = []byte(accessKey)
+			}
+			if defaultProjectID, ok := attr["default_project_id"].(string); ok {
+				details["default_project_id"] = []byte(defaultProjectID)
+			}
+
+			return details, nil
+		}
 	})
 
 	p.AddResourceConfigurator("scaleway_iam_application", func(r *config.Resource) {
