@@ -36,7 +36,7 @@ spec:
 ---
 
 apiVersion: s2svpn.scaleway.m.upbound.io/v1alpha1
-kind: Gateway
+kind: CustomerGateway
 metadata:
   annotations:
     meta.upbound.io/example-id: s2svpn/v1alpha1/connection
