@@ -4,45 +4,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s2svpn/v1alpha1/gateway
   labels:
-    testing.upbound.io/example-name: gateway
-  name: gateway
+    testing.upbound.io/example-name: customer_gw
+  name: customer-gw
 spec:
   forProvider:
-    gatewayType: VGW-S
-    name: my-vpn-gateway
-    privateNetworkIdSelector:
+    asn: 65000
+    ipv4PublicSelector:
       matchLabels:
-        testing.upbound.io/example-name: pn
-
----
-
-apiVersion: vpc.scaleway.upbound.io/v1alpha1
-kind: VPC
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s2svpn/v1alpha1/gateway
-  labels:
-    testing.upbound.io/example-name: vpc
-  name: vpc
-spec:
-  forProvider:
-    name: my-vpc
-
----
-
-apiVersion: vpc.scaleway.upbound.io/v1alpha1
-kind: PrivateNetwork
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s2svpn/v1alpha1/gateway
-  labels:
-    testing.upbound.io/example-name: pn
-  name: pn
-spec:
-  forProvider:
-    ipv4Subnet:
-    - subnet: 10.0.1.0/24
-    name: my-private-network
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: vpc
+        testing.upbound.io/example-name: example
+    name: my-customer-gateway
