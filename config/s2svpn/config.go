@@ -42,7 +42,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("scaleway_s2s_vpn_customer_gateway", func(r *config.Resource) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
-		r.Kind = "Gateway"
+		r.Kind = "CustomerGateway"
 
 		r.References["ipv4_public"] = config.Reference{
 			TerraformName: "scaleway_instance_ip",

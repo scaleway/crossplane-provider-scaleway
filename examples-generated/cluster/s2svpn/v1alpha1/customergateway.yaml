@@ -1,0 +1,15 @@
+apiVersion: s2svpn.scaleway.upbound.io/v1alpha1
+kind: CustomerGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/customergateway
+  labels:
+    testing.upbound.io/example-name: customer_gw
+  name: customer-gw
+spec:
+  forProvider:
+    asn: 65000
+    ipv4PublicSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: my-customer-gateway

@@ -117,6 +117,7 @@ import (
 	clusterredis "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/redis/cluster"
 	registrynamespace "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/registry/registrynamespace"
 	connection "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/connection"
+	customergateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/customergateway"
 	gateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/gateway"
 	policys2svpn "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/s2svpn/policy"
 	sqldatabase "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/sdb/sqldatabase"
@@ -248,7 +249,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterredis.Setup,
 		registrynamespace.Setup,
 		connection.Setup,
-		gateway.Setup,
+		customergateway.Setup,
 		gateway.Setup,
 		policys2svpn.Setup,
 		sqldatabase.Setup,
@@ -386,7 +387,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		clusterredis.SetupGated,
 		registrynamespace.SetupGated,
 		connection.SetupGated,
-		gateway.SetupGated,
+		customergateway.SetupGated,
 		gateway.SetupGated,
 		policys2svpn.SetupGated,
 		sqldatabase.SetupGated,
