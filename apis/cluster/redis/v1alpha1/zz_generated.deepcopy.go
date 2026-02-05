@@ -9,6 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -144,7 +145,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsInitParameters, len(*in))
@@ -300,6 +315,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsObservation, len(*in))
@@ -415,7 +440,21 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsParameters, len(*in))

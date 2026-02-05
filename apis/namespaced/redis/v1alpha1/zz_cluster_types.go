@@ -74,9 +74,17 @@ type ClusterInitParameters struct {
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the Redis™ cluster.
-	// Password of the user
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	// Password for the first user of the Redis™ cluster. Only one of password or password_wo should be specified.
+	// Password of the user. Only one of `password` or `password_wo` should be specified.
+	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password for the first user of the Redis™ cluster in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// Password of the user in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 addresses associated with the resource.
 	// List of private IPv4 addresses associated with the resource
@@ -154,6 +162,14 @@ type ClusterObservation struct {
 	// Type of node to use for the cluster
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Password for the first user of the Redis™ cluster in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// Password of the user in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
 	// The list of private IPv4 addresses associated with the resource.
 	// List of private IPv4 addresses associated with the resource
 	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
@@ -227,10 +243,20 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// Password for the first user of the Redis™ cluster.
-	// Password of the user
+	// Password for the first user of the Redis™ cluster. Only one of password or password_wo should be specified.
+	// Password of the user. Only one of `password` or `password_wo` should be specified.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password for the first user of the Redis™ cluster in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// Password of the user in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 addresses associated with the resource.
 	// List of private IPv4 addresses associated with the resource
@@ -455,7 +481,6 @@ type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userName) || (has(self.initProvider) && has(self.initProvider.userName))",message="spec.forProvider.userName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || (has(self.initProvider) && has(self.initProvider.version))",message="spec.forProvider.version is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
