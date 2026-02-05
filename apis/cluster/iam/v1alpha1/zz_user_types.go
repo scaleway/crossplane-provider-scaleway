@@ -35,9 +35,17 @@ type UserInitParameters struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The password for first access.
-	// The member's password for first access
+	// The password for first access. Only one of password or password_wo should be specified.
+	// The member's password for first access. Only one of `password` or `password_wo` should be specified.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The user's phone number.
 	// The member's phone number
@@ -109,6 +117,14 @@ type UserObservation struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
 	// The user's phone number.
 	// The member's phone number
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
@@ -169,10 +185,20 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The password for first access.
-	// The member's password for first access
+	// The password for first access. Only one of password or password_wo should be specified.
+	// The member's password for first access. Only one of `password` or `password_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The user's phone number.
 	// The member's phone number

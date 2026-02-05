@@ -1634,6 +1634,16 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 		*out = new(v1.LocalSecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PhoneNumber != nil {
 		in, out := &in.PhoneNumber, &out.PhoneNumber
 		*out = new(string)
@@ -1772,6 +1782,16 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PhoneNumber != nil {
 		in, out := &in.PhoneNumber, &out.PhoneNumber
 		*out = new(string)
@@ -1861,6 +1881,16 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PhoneNumber != nil {
