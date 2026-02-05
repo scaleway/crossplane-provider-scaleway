@@ -175,14 +175,14 @@ type ConnectionInitParameters struct {
 
 	// The ID of the customer gateway to attach to the connection.
 	// The ID of the customer gateway to attach to the connection
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/s2svpn/v1alpha1.Gateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/s2svpn/v1alpha1.CustomerGateway
 	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
 
-	// Reference to a Gateway in s2svpn to populate customerGatewayId.
+	// Reference to a CustomerGateway in s2svpn to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDRef *v1.Reference `json:"customerGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a Gateway in s2svpn to populate customerGatewayId.
+	// Selector for a CustomerGateway in s2svpn to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDSelector *v1.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 
@@ -356,15 +356,15 @@ type ConnectionParameters struct {
 
 	// The ID of the customer gateway to attach to the connection.
 	// The ID of the customer gateway to attach to the connection
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/s2svpn/v1alpha1.Gateway
+	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/s2svpn/v1alpha1.CustomerGateway
 	// +kubebuilder:validation:Optional
 	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
 
-	// Reference to a Gateway in s2svpn to populate customerGatewayId.
+	// Reference to a CustomerGateway in s2svpn to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDRef *v1.Reference `json:"customerGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a Gateway in s2svpn to populate customerGatewayId.
+	// Selector for a CustomerGateway in s2svpn to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
 	CustomerGatewayIDSelector *v1.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 

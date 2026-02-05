@@ -3235,6 +3235,16 @@ resources:
                   "email": "${local.users[count.index].email}",
                   "username": "${local.users[count.index].username}"
                 }
+            - name: password_wo_user
+              manifest: |-
+                {
+                  "email": "user@example.com",
+                  "password_wo": "${ephemeral.random_password.db_password.result}",
+                  "password_wo_version": 1,
+                  "username": "testuser"
+                }
+              references:
+                password_wo: ephemeral.random_password.db_password.result
         argumentDocs:
             account_root_user_id: '- The ID of the account root user associated with the user.'
             created_at: '- The date and time of the creation of the IAM user.'
@@ -3248,7 +3258,9 @@ resources:
             locked: '- Whether the user is locked.'
             mfa: '- Whether the MFA is enabled.'
             organization_id: '- (Defaults to provider organization_id) The ID of the organization the user is associated with.'
-            password: '- The password for first access.'
+            password: '- The password for first access. Only one of password or password_wo should be specified.'
+            password_wo: '- (Optional) The password for first access in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version.'
+            password_wo_version: '- (Optional) The version of the write-only password. To update the password_wo, you must also update the password_wo_version.'
             phone_number: '- The user''s phone number.'
             send_password_email: '- Whether or not to send an email containing the password for first access.'
             send_welcome_email: '- Whether or not to send a welcome email that includes onboarding information.'
@@ -7745,19 +7757,20 @@ resources:
                   "user_name": "my_initial_user",
                   "version": "6.2.7"
                 }
-            - name: main
+            - name: password_wo_cluster
               manifest: |-
                 {
-                  "name": "test_redis_basic",
+                  "cluster_size": 1,
+                  "name": "test_redis_password_wo",
                   "node_type": "RED1-MICRO",
-                  "password": "thiZ_is_v\u0026ry_s3cret",
-                  "settings": {
-                    "maxclients": "1000",
-                    "tcp-keepalive": "120"
-                  },
+                  "password_wo": "${ephemeral.random_password.db_password.result}",
+                  "password_wo_version": 1,
+                  "tls_enabled": "true",
                   "user_name": "my_initial_user",
                   "version": "6.2.7"
                 }
+              references:
+                password_wo: ephemeral.random_password.db_password.result
             - name: main
               manifest: |-
                 {
@@ -7779,11 +7792,26 @@ resources:
                   "user_name": "my_initial_user",
                   "version": "6.2.7"
                 }
+              references:
+                private_network.id: scaleway_vpc_private_network.pn.id
               dependencies:
                 scaleway_vpc_private_network.pn: |-
                     {
                       "name": "private-network"
                     }
+            - name: main
+              manifest: |-
+                {
+                  "name": "test_redis_basic",
+                  "node_type": "RED1-MICRO",
+                  "password": "thiZ_is_v\u0026ry_s3cret",
+                  "settings": {
+                    "maxclients": "1000",
+                    "tcp-keepalive": "120"
+                  },
+                  "user_name": "my_initial_user",
+                  "version": "6.2.7"
+                }
         argumentDocs:
             acl: '- (Optional) List of acl rules, this is cluster''s authorized IPs. More details on the ACL section.'
             acl.acl: conflict with private_network. Only one should be specified.
@@ -7800,7 +7828,9 @@ resources:
             ips: '- List of IPv4 addresses of the endpoint.'
             name: '- (Optional) The name of the Redis™ cluster.'
             node_type: '- (Required) The type of Redis™ cluster you want to create (e.g. RED1-M).'
-            password: '- (Required) Password for the first user of the Redis™ cluster.'
+            password: '- (Optional) Password for the first user of the Redis™ cluster. Only one of password or password_wo should be specified.'
+            password_wo: '- (Optional) Password for the first user of the Redis™ cluster in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version.'
+            password_wo_version: '- (Optional) The version of the write-only password. To update the password_wo, you must also update the password_wo_version.'
             port: '- TCP port of the endpoint.'
             private_ips: '- The list of private IPv4 addresses associated with the resource.'
             private_network: |-
@@ -8243,8 +8273,8 @@ resources:
                     }
         argumentDocs:
             created_at: '- The date and time of the secret version''s creation (in RFC 3339 format).'
-            data: '- (Optional) The data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.'
-            data_wo: '- (Optional) The data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.'
+            data: '- (Optional) The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.'
+            data_wo: '- (Optional) The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.'
             data_wo_version: '- (Optional) The version of the write-only data. To update the data_wo, you must also update the data_wo_version.'
             description: '- (Optional) Description of the secret version (e.g. my-new-description).'
             my_new_secret: data

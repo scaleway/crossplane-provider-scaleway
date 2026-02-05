@@ -16,12 +16,12 @@ import (
 
 type VersionInitParameters struct {
 
-	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
+	// The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
 	DataSecretRef *v1.LocalSecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
 	DataWoSecretRef *v1.LocalSecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
 
 	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
@@ -89,13 +89,13 @@ type VersionObservation struct {
 
 type VersionParameters struct {
 
-	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
+	// The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.LocalSecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
+	// The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
 	// +kubebuilder:validation:Optional
 	DataWoSecretRef *v1.LocalSecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
 

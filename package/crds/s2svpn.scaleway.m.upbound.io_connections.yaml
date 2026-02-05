@@ -192,7 +192,8 @@ spec:
                       The ID of the customer gateway to attach to the connection
                     type: string
                   customerGatewayIdRef:
-                    description: Reference to a Gateway in s2svpn to populate customerGatewayId.
+                    description: Reference to a CustomerGateway in s2svpn to populate
+                      customerGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -229,7 +230,8 @@ spec:
                     - name
                     type: object
                   customerGatewayIdSelector:
-                    description: Selector for a Gateway in s2svpn to populate customerGatewayId.
+                    description: Selector for a CustomerGateway in s2svpn to populate
+                      customerGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -587,7 +589,8 @@ spec:
                       The ID of the customer gateway to attach to the connection
                     type: string
                   customerGatewayIdRef:
-                    description: Reference to a Gateway in s2svpn to populate customerGatewayId.
+                    description: Reference to a CustomerGateway in s2svpn to populate
+                      customerGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -624,7 +627,8 @@ spec:
                     - name
                     type: object
                   customerGatewayIdSelector:
-                    description: Selector for a Gateway in s2svpn to populate customerGatewayId.
+                    description: Selector for a CustomerGateway in s2svpn to populate
+                      customerGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-

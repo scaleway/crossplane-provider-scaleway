@@ -85,8 +85,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      The password for first access.
-                      The member's password for first access
+                      The password for first access. Only one of password or password_wo should be specified.
+                      The member's password for first access. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -97,6 +97,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   phoneNumber:
                     description: |-
                       The user's phone number.
@@ -165,8 +175,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      The password for first access.
-                      The member's password for first access
+                      The password for first access. Only one of password or password_wo should be specified.
+                      The member's password for first access. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -177,6 +187,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   phoneNumber:
                     description: |-
                       The user's phone number.
@@ -335,6 +355,16 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  passwordWo:
+                    description: |-
+                      The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   phoneNumber:
                     description: |-
                       The user's phone number.

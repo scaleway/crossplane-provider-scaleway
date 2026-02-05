@@ -9,7 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1"
+	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/instance/v1alpha1"
+	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -46,8 +47,8 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.CustomerGatewayIDRef,
 		Selector:     mg.Spec.ForProvider.CustomerGatewayIDSelector,
 		To: reference.To{
-			List:    &GatewayList{},
-			Managed: &Gateway{},
+			List:    &CustomerGatewayList{},
+			Managed: &CustomerGateway{},
 		},
 	})
 	if err != nil {
@@ -99,8 +100,8 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.InitProvider.CustomerGatewayIDRef,
 		Selector:     mg.Spec.InitProvider.CustomerGatewayIDSelector,
 		To: reference.To{
-			List:    &GatewayList{},
-			Managed: &Gateway{},
+			List:    &CustomerGatewayList{},
+			Managed: &CustomerGateway{},
 		},
 	})
 	if err != nil {
@@ -129,6 +130,50 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this CustomerGateway.
+func (mg *CustomerGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPv4Public),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.IPv4PublicRef,
+		Selector:     mg.Spec.ForProvider.IPv4PublicSelector,
+		To: reference.To{
+			List:    &v1alpha1.IPList{},
+			Managed: &v1alpha1.IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPv4Public")
+	}
+	mg.Spec.ForProvider.IPv4Public = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IPv4PublicRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPv4Public),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.IPv4PublicRef,
+		Selector:     mg.Spec.InitProvider.IPv4PublicSelector,
+		To: reference.To{
+			List:    &v1alpha1.IPList{},
+			Managed: &v1alpha1.IP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPv4Public")
+	}
+	mg.Spec.InitProvider.IPv4Public = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPv4PublicRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Gateway.
 func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -143,8 +188,8 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		Reference:    mg.Spec.ForProvider.PrivateNetworkIDRef,
 		Selector:     mg.Spec.ForProvider.PrivateNetworkIDSelector,
 		To: reference.To{
-			List:    &v1alpha1.PrivateNetworkList{},
-			Managed: &v1alpha1.PrivateNetwork{},
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
 		},
 	})
 	if err != nil {
@@ -160,8 +205,8 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		Reference:    mg.Spec.InitProvider.PrivateNetworkIDRef,
 		Selector:     mg.Spec.InitProvider.PrivateNetworkIDSelector,
 		To: reference.To{
-			List:    &v1alpha1.PrivateNetworkList{},
-			Managed: &v1alpha1.PrivateNetwork{},
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
 		},
 	})
 	if err != nil {

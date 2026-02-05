@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
-type GatewayInitParameters_2 struct {
+type GatewayInitParameters struct {
 
 	// The VPN gateway type (commercial offer type).
 	// The VPN gateway type (commercial offer type)
@@ -65,7 +65,7 @@ type GatewayInitParameters_2 struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
-type GatewayObservation_2 struct {
+type GatewayObservation struct {
 
 	// The AS Number of the VPN gateway (typically 12876 for Scaleway).
 	// The AS Number of the vpn gateway
@@ -131,7 +131,7 @@ type GatewayObservation_2 struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
-type GatewayParameters_2 struct {
+type GatewayParameters struct {
 
 	// The VPN gateway type (commercial offer type).
 	// The VPN gateway type (commercial offer type)
@@ -231,7 +231,7 @@ type PublicConfigParameters struct {
 // GatewaySpec defines the desired state of Gateway
 type GatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayParameters_2 `json:"forProvider"`
+	ForProvider     GatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -242,13 +242,13 @@ type GatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GatewayInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider GatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // GatewayStatus defines the observed state of Gateway.
 type GatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        GatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

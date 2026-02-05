@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.0
-  name: versions.secrets.scaleway.upbound.io
+  name: customergateways.s2svpn.scaleway.upbound.io
 spec:
-  group: secrets.scaleway.upbound.io
+  group: s2svpn.scaleway.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - scaleway
-    kind: Version
-    listKind: VersionList
-    plural: versions
-    singular: version
+    kind: CustomerGateway
+    listKind: CustomerGatewayList
+    plural: customergateways
+    singular: customergateway
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Version is the Schema for the Versions API.
+        description: CustomerGateway is the Schema for the CustomerGateways API.
         properties:
           apiVersion:
             description: |-
@@ -54,7 +54,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: VersionSpec defines the desired state of Version
+            description: CustomerGatewaySpec defines the desired state of CustomerGateway
             properties:
               deletionPolicy:
                 default: Delete
@@ -72,66 +72,18 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  dataSecretRef:
+                  asn:
                     description: |-
-                      The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-                      The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  dataWoSecretRef:
-                    description: |-
-                      The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-                      The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  dataWoVersion:
-                    description: |-
-                      The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+                      The AS Number of the customer gateway. Must be different from Scaleway's ASN (12876). For testing, you can use a private ASN (64512-65535).
+                      The AS Number of the customer gateway
                     type: number
-                  description:
+                  ipv4Public:
                     description: |-
-                      Description of the secret version (e.g. my-new-description).
-                      Description of the secret version
+                      The public IPv4 address of the customer gateway (your VPN endpoint).
+                      The public IPv4 address of the customer gateway
                     type: string
-                  region:
-                    description: |-
-                      (Defaults to the region specified in the provider configuration). The region where the resource exists.
-                      The region you want to attach the resource to
-                    type: string
-                  secretId:
-                    description: |-
-                      The ID of the secret associated with the version.
-                      The secret ID associated with this version
-                    type: string
-                  secretIdRef:
-                    description: Reference to a Secret in secrets to populate secretId.
+                  ipv4PublicRef:
+                    description: Reference to a IP in instance to populate ipv4Public.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -164,8 +116,8 @@ spec:
                     required:
                     - name
                     type: object
-                  secretIdSelector:
-                    description: Selector for a Secret in secrets to populate secretId.
+                  ipv4PublicSelector:
+                    description: Selector for a IP in instance to populate ipv4Public.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -204,6 +156,33 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipv6Public:
+                    description: |-
+                      The public IPv6 address of the customer gateway (your VPN endpoint).
+                      The public IPv6 address of the customer gateway
+                    type: string
+                  name:
+                    description: |-
+                      The name of the customer gateway. If not provided, it will be randomly generated.
+                      The name of the customer gateway
+                    type: string
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the customer gateway is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the customer gateway should be created.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: |-
+                      The list of tags to apply to the customer gateway.
+                      The list of tags to apply to the customer gateway
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -218,66 +197,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  dataSecretRef:
+                  asn:
                     description: |-
-                      The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-                      The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  dataWoSecretRef:
-                    description: |-
-                      The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-                      The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  dataWoVersion:
-                    description: |-
-                      The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+                      The AS Number of the customer gateway. Must be different from Scaleway's ASN (12876). For testing, you can use a private ASN (64512-65535).
+                      The AS Number of the customer gateway
                     type: number
-                  description:
+                  ipv4Public:
                     description: |-
-                      Description of the secret version (e.g. my-new-description).
-                      Description of the secret version
+                      The public IPv4 address of the customer gateway (your VPN endpoint).
+                      The public IPv4 address of the customer gateway
                     type: string
-                  region:
-                    description: |-
-                      (Defaults to the region specified in the provider configuration). The region where the resource exists.
-                      The region you want to attach the resource to
-                    type: string
-                  secretId:
-                    description: |-
-                      The ID of the secret associated with the version.
-                      The secret ID associated with this version
-                    type: string
-                  secretIdRef:
-                    description: Reference to a Secret in secrets to populate secretId.
+                  ipv4PublicRef:
+                    description: Reference to a IP in instance to populate ipv4Public.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -310,8 +241,8 @@ spec:
                     required:
                     - name
                     type: object
-                  secretIdSelector:
-                    description: Selector for a Secret in secrets to populate secretId.
+                  ipv4PublicSelector:
+                    description: Selector for a IP in instance to populate ipv4Public.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -350,6 +281,33 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipv6Public:
+                    description: |-
+                      The public IPv6 address of the customer gateway (your VPN endpoint).
+                      The public IPv6 address of the customer gateway
+                    type: string
+                  name:
+                    description: |-
+                      The name of the customer gateway. If not provided, it will be randomly generated.
+                      The name of the customer gateway
+                    type: string
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the customer gateway is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  region:
+                    description: |-
+                      (Defaults to provider region) The region in which the customer gateway should be created.
+                      The region you want to attach the resource to
+                    type: string
+                  tags:
+                    description: |-
+                      The list of tags to apply to the customer gateway.
+                      The list of tags to apply to the customer gateway
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -437,52 +395,70 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.asn is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.asn)
+                || (has(self.initProvider) && has(self.initProvider.asn))'
           status:
-            description: VersionStatus defines the observed state of Version.
+            description: CustomerGatewayStatus defines the observed state of CustomerGateway.
             properties:
               atProvider:
                 properties:
+                  asn:
+                    description: |-
+                      The AS Number of the customer gateway. Must be different from Scaleway's ASN (12876). For testing, you can use a private ASN (64512-65535).
+                      The AS Number of the customer gateway
+                    type: number
                   createdAt:
                     description: |-
-                      The date and time of the secret version's creation (in RFC 3339 format).
-                      Date and time of secret version's creation (RFC 3339 format)
-                    type: string
-                  dataWoVersion:
-                    description: |-
-                      The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
-                    type: number
-                  description:
-                    description: |-
-                      Description of the secret version (e.g. my-new-description).
-                      Description of the secret version
+                      The date and time of the creation of the customer gateway (RFC 3339 format).
+                      The date and time of the creation of the TLS stage
                     type: string
                   id:
+                    description: The ID of the customer gateway.
+                    type: string
+                  ipv4Public:
+                    description: |-
+                      The public IPv4 address of the customer gateway (your VPN endpoint).
+                      The public IPv4 address of the customer gateway
+                    type: string
+                  ipv6Public:
+                    description: |-
+                      The public IPv6 address of the customer gateway (your VPN endpoint).
+                      The public IPv6 address of the customer gateway
+                    type: string
+                  name:
+                    description: |-
+                      The name of the customer gateway. If not provided, it will be randomly generated.
+                      The name of the customer gateway
+                    type: string
+                  organizationId:
+                    description: |-
+                      The Organization ID the customer gateway is associated with.
+                      Organization ID of the Project
+                    type: string
+                  projectId:
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the customer gateway is associated with.
+                      The project_id you want to attach the resource to
                     type: string
                   region:
                     description: |-
-                      (Defaults to the region specified in the provider configuration). The region where the resource exists.
+                      (Defaults to provider region) The region in which the customer gateway should be created.
                       The region you want to attach the resource to
                     type: string
-                  revision:
+                  tags:
                     description: |-
-                      The revision number of the secret version.
-                      The revision of secret version.
-                    type: string
-                  secretId:
-                    description: |-
-                      The ID of the secret associated with the version.
-                      The secret ID associated with this version
-                    type: string
-                  status:
-                    description: |-
-                      The status of the secret version.
-                      Status of the secret version
-                    type: string
+                      The list of tags to apply to the customer gateway.
+                      The list of tags to apply to the customer gateway
+                    items:
+                      type: string
+                    type: array
                   updatedAt:
                     description: |-
-                      The date and time of the secret version's last update (in RFC 3339 format).
-                      Date and time of secret version's creation (RFC 3339 format)
+                      The date and time of the last update of the customer gateway (RFC 3339 format).
+                      The date and time of the last update of the TLS stage
                     type: string
                 type: object
               conditions:

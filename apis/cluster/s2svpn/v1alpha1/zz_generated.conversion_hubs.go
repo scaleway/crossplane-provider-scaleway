@@ -10,6 +10,9 @@ package v1alpha1
 func (tr *Connection) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CustomerGateway) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Gateway) Hub() {}
 
 // Hub marks this type as a conversion hub.
