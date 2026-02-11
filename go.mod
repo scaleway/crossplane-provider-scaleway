@@ -12,9 +12,9 @@ require (
 	github.com/scaleway/scaleway-sdk-go v1.0.0-beta.36
 	golang.org/x/text v0.34.0
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/api v0.35.0
+	k8s.io/api v0.35.1
 	k8s.io/apiextensions-apiserver v0.35.0
-	k8s.io/apimachinery v0.35.0
+	k8s.io/apimachinery v0.35.1
 	k8s.io/client-go v0.35.0
 	sigs.k8s.io/controller-runtime v0.22.0
 	sigs.k8s.io/controller-tools v0.20.0
