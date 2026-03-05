@@ -5,7 +5,10 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
+	"github.com/scaleway/crossplane-provider-scaleway/config/opensearch"
 	"github.com/scaleway/crossplane-provider-scaleway/config/s2svpn"
+
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -91,6 +94,8 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		tem.Configure,
 		vpc.Configure,
 		s2svpn.Configure,
+		kafka.Configure,
+		opensearch.Configure,
 	}
 }
 

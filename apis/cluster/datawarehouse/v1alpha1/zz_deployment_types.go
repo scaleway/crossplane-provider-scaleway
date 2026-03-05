@@ -31,6 +31,10 @@ type DeploymentInitParameters struct {
 	// Password for the first user of the deployment
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+	// Private network to expose your datawarehouse deployment
+	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
@@ -76,6 +80,10 @@ type DeploymentObservation struct {
 	// Name of the Data Warehouse deployment.
 	// Name of the Datawarehouse deployment
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+	// Private network to expose your datawarehouse deployment
+	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
@@ -136,6 +144,11 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+	// Private network to expose your datawarehouse deployment
+	// +kubebuilder:validation:Optional
+	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the deployment is associated with.
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
@@ -167,6 +180,40 @@ type DeploymentParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type PrivateNetworkInitParameters struct {
+
+	// The ID of the private network. Format: {region}/{id} or just {id}.
+	// The private network ID
+	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+}
+
+type PrivateNetworkObservation struct {
+
+	// DNS record for the public endpoint.
+	// DNS record for the private endpoint
+	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
+
+	// The ID of the deployment.
+	// The endpoint ID
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the private network. Format: {region}/{id} or just {id}.
+	// The private network ID
+	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
+
+	// List of services exposed on the public endpoint.
+	// List of services exposed on the private endpoint
+	Services []ServicesObservation `json:"services,omitempty" tf:"services,omitempty"`
+}
+
+type PrivateNetworkParameters struct {
+
+	// The ID of the private network. Format: {region}/{id} or just {id}.
+	// The private network ID
+	// +kubebuilder:validation:Optional
+	PnID *string `json:"pnId" tf:"pn_id,omitempty"`
+}
+
 type PublicNetworkInitParameters struct {
 }
 
@@ -179,10 +226,25 @@ type PublicNetworkObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of services exposed on the public endpoint.
-	Services []ServicesObservation `json:"services,omitempty" tf:"services,omitempty"`
+	Services []PublicNetworkServicesObservation `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type PublicNetworkParameters struct {
+}
+
+type PublicNetworkServicesInitParameters struct {
+}
+
+type PublicNetworkServicesObservation struct {
+
+	// TCP port number.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Service protocol (e.g., "tcp", "https", "mysql").
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
+type PublicNetworkServicesParameters struct {
 }
 
 type ServicesInitParameters struct {

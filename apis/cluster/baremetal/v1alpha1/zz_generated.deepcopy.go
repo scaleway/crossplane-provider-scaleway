@@ -543,6 +543,16 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsInitParameters, len(*in))
@@ -596,6 +606,16 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 	if in.ServicePasswordSecretRef != nil {
 		in, out := &in.ServicePasswordSecretRef, &out.ServicePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ServicePasswordWo != nil {
+		in, out := &in.ServicePasswordWo, &out.ServicePasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePasswordWoVersion != nil {
+		in, out := &in.ServicePasswordWoVersion, &out.ServicePasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceUser != nil {
@@ -769,6 +789,16 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsObservation, len(*in))
@@ -808,6 +838,16 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.ServicePasswordWo != nil {
+		in, out := &in.ServicePasswordWo, &out.ServicePasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePasswordWoVersion != nil {
+		in, out := &in.ServicePasswordWoVersion, &out.ServicePasswordWoVersion
+		*out = new(float64)
+		**out = **in
 	}
 	if in.ServiceUser != nil {
 		in, out := &in.ServiceUser, &out.ServiceUser
@@ -902,6 +942,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateIps != nil {
 		in, out := &in.PrivateIps, &out.PrivateIps
 		*out = make([]PrivateIpsParameters, len(*in))
@@ -955,6 +1005,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.ServicePasswordSecretRef != nil {
 		in, out := &in.ServicePasswordSecretRef, &out.ServicePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ServicePasswordWo != nil {
+		in, out := &in.ServicePasswordWo, &out.ServicePasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePasswordWoVersion != nil {
+		in, out := &in.ServicePasswordWoVersion, &out.ServicePasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceUser != nil {

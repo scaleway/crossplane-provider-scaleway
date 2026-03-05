@@ -55,6 +55,13 @@ type DatabaseBackupObservation struct {
 	// Name of the database of this backup.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// URL you can download the backup from (when exporting).
+	DownloadURL *string `json:"downloadUrl,omitempty" tf:"download_url,omitempty"`
+
+	// Expiration date (Format ISO 8601).
+	// Expiration date of the download link (Format ISO 8601).
+	DownloadURLExpiresAt *string `json:"downloadUrlExpiresAt,omitempty" tf:"download_url_expires_at,omitempty"`
+
 	// Expiration date (Format ISO 8601).
 	// Expiration date (Format ISO 8601). Cannot be removed.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
@@ -78,9 +85,16 @@ type DatabaseBackupObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// (Defaults to provider region) The region in which the resource exists.
+	// Whether the backup is stored in the same region as the source instance.
+	SameRegion *bool `json:"sameRegion,omitempty" tf:"same_region,omitempty"`
+
 	// Size of the backup (in bytes).
 	// Size of the backup (in bytes).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Status of the backup (creating, ready, restoring, deleting, error, exporting, locked).
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Updated date (Format ISO 8601).
 	// Updated date (Format ISO 8601).
