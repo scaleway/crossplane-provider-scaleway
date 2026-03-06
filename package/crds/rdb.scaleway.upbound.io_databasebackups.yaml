@@ -391,6 +391,14 @@ spec:
                       Name of the database (e.g. my-database).
                       Name of the database of this backup.
                     type: string
+                  downloadUrl:
+                    description: URL you can download the backup from (when exporting).
+                    type: string
+                  downloadUrlExpiresAt:
+                    description: |-
+                      Expiration date (Format ISO 8601).
+                      Expiration date of the download link (Format ISO 8601).
+                    type: string
                   expiresAt:
                     description: |-
                       Expiration date (Format ISO 8601).
@@ -420,11 +428,20 @@ spec:
                       (Defaults to provider region) The region in which the resource exists.
                       The region you want to attach the resource to
                     type: string
+                  sameRegion:
+                    description: |-
+                      (Defaults to provider region) The region in which the resource exists.
+                      Whether the backup is stored in the same region as the source instance.
+                    type: boolean
                   size:
                     description: |-
                       Size of the backup (in bytes).
                       Size of the backup (in bytes).
                     type: number
+                  status:
+                    description: Status of the backup (creating, ready, restoring,
+                      deleting, error, exporting, locked).
+                    type: string
                   updatedAt:
                     description: |-
                       Updated date (Format ISO 8601).

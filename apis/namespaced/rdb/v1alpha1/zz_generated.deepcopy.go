@@ -452,6 +452,16 @@ func (in *DatabaseBackupObservation) DeepCopyInto(out *DatabaseBackupObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.DownloadURL != nil {
+		in, out := &in.DownloadURL, &out.DownloadURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DownloadURLExpiresAt != nil {
+		in, out := &in.DownloadURLExpiresAt, &out.DownloadURLExpiresAt
+		*out = new(string)
+		**out = **in
+	}
 	if in.ExpiresAt != nil {
 		in, out := &in.ExpiresAt, &out.ExpiresAt
 		*out = new(string)
@@ -482,9 +492,19 @@ func (in *DatabaseBackupObservation) DeepCopyInto(out *DatabaseBackupObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SameRegion != nil {
+		in, out := &in.SameRegion, &out.SameRegion
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Status != nil {
+		in, out := &in.Status, &out.Status
+		*out = new(string)
 		**out = **in
 	}
 	if in.UpdatedAt != nil {

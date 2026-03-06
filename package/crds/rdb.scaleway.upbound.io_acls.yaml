@@ -85,8 +85,8 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The IP range to whitelist in CIDR notation
-                            Target IP of the rules
+                            The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+                            IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
                           type: string
                       type: object
                     type: array
@@ -201,8 +201,8 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The IP range to whitelist in CIDR notation
-                            Target IP of the rules
+                            The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+                            IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
                           type: string
                       type: object
                     type: array
@@ -400,8 +400,8 @@ spec:
                           type: string
                         ip:
                           description: |-
-                            The IP range to whitelist in CIDR notation
-                            Target IP of the rules
+                            The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+                            IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
                           type: string
                       type: object
                     type: array

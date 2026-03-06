@@ -27,11 +27,19 @@ type ModelInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission).
+	// Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission). Conflicts with secret_wo.
 	// A token or credential used to authenticate when pulling the model from a private or gated source. For example, a Hugging Face access token with read permissions.
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
-	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret
+	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
+
+	// The version of the write-only secret. Required when using secret_wo.
+	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
+
+	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret or secret_wo
 	// The HTTPS URL to the model archive or repository. Typically, this is a Hugging Face repository URL (e.g., `https://huggingface.co/your-org/your-model`). The URL must be publicly accessible or require a valid secret for authentication.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
@@ -77,6 +85,14 @@ type ModelObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
+
+	// The version of the write-only secret. Required when using secret_wo.
+	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
+
 	// Total size, in bytes, of the model archive.
 	// Total size, in bytes, of the model files
 	SizeBytes *float64 `json:"sizeBytes,omitempty" tf:"size_bytes,omitempty"`
@@ -89,7 +105,7 @@ type ModelObservation struct {
 	// The tags associated with the deployment
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret
+	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret or secret_wo
 	// The HTTPS URL to the model archive or repository. Typically, this is a Hugging Face repository URL (e.g., `https://huggingface.co/your-org/your-model`). The URL must be publicly accessible or require a valid secret for authentication.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
@@ -114,12 +130,22 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission).
+	// Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission). Conflicts with secret_wo.
 	// A token or credential used to authenticate when pulling the model from a private or gated source. For example, a Hugging Face access token with read permissions.
 	// +kubebuilder:validation:Optional
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
-	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret
+	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	// +kubebuilder:validation:Optional
+	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
+
+	// The version of the write-only secret. Required when using secret_wo.
+	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	// +kubebuilder:validation:Optional
+	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
+
+	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret or secret_wo
 	// The HTTPS URL to the model archive or repository. Typically, this is a Hugging Face repository URL (e.g., `https://huggingface.co/your-org/your-model`). The URL must be publicly accessible or require a valid secret for authentication.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

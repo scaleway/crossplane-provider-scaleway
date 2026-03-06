@@ -134,6 +134,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_s2s_vpn_connection":                  config.NameAsIdentifier,
 	"scaleway_apple_silicon_runner":                config.NameAsIdentifier,
 	"scaleway_s2s_vpn_customer_gateway":            config.NameAsIdentifier,
+	"scaleway_opensearch_deployment":               config.NameAsIdentifier,
+	"scaleway_kafka_cluster":                       config.NameAsIdentifier,
 	"scaleway_vpc_route":                           config.NameAsIdentifier,
 }
 

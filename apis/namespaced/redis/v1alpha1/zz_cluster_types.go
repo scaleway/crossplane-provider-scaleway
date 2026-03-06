@@ -20,9 +20,8 @@ type ACLInitParameters struct {
 	// Description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The IP range to whitelist
-	// in CIDR notation
-	// IPv4 network address of the rule (IP network in a CIDR format).
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 network address of the rule in CIDR notation (IPv6 is not supported by the Scaleway API).
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
 
@@ -36,9 +35,8 @@ type ACLObservation struct {
 	// ID of the rule (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP range to whitelist
-	// in CIDR notation
-	// IPv4 network address of the rule (IP network in a CIDR format).
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 network address of the rule in CIDR notation (IPv6 is not supported by the Scaleway API).
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
 
@@ -49,9 +47,8 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The IP range to whitelist
-	// in CIDR notation
-	// IPv4 network address of the rule (IP network in a CIDR format).
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 network address of the rule in CIDR notation (IPv6 is not supported by the Scaleway API).
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip" tf:"ip,omitempty"`
 }
@@ -338,12 +335,12 @@ type PrivateNetworkInitParameters struct {
 	// UUID of the private network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Endpoint IPv4 addresses in CIDR notation (IPv6 is not supported by the Scaleway API). You must provide at least one IP per node.
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
-	// List of IPv4 addresses of the private network with a CIDR notation
+	// List of IPv4 addresses of the private network in CIDR notation (IPv6 is not supported by the Scaleway API)
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 }
 
@@ -365,12 +362,12 @@ type PrivateNetworkObservation struct {
 	// TCP port of the endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Endpoint IPv4 addresses in CIDR notation (IPv6 is not supported by the Scaleway API). You must provide at least one IP per node.
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
-	// List of IPv4 addresses of the private network with a CIDR notation
+	// List of IPv4 addresses of the private network in CIDR notation (IPv6 is not supported by the Scaleway API)
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 
 	// (Defaults to provider zone) The zone in which the
@@ -386,12 +383,12 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// Endpoint IPv4 addresses in CIDR notation. You must provide at least one IP per node.
+	// Endpoint IPv4 addresses in CIDR notation (IPv6 is not supported by the Scaleway API). You must provide at least one IP per node.
 	// Keep in mind that in cluster mode you cannot edit your Private Network after its creation so if you want to be able to
 	// scale your cluster horizontally (adding nodes) later, you should provide more IPs than nodes.
 	// If not set, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.
 	// ~> Important: When IPAM is enabled, the IPs specified here will be ignored and should not be provided.
-	// List of IPv4 addresses of the private network with a CIDR notation
+	// List of IPv4 addresses of the private network in CIDR notation (IPv6 is not supported by the Scaleway API)
 	// +kubebuilder:validation:Optional
 	ServiceIps []*string `json:"serviceIps,omitempty" tf:"service_ips,omitempty"`
 }

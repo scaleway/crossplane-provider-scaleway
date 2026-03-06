@@ -479,6 +479,16 @@ func (in *ModelInitParameters) DeepCopyInto(out *ModelInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.SecretWo != nil {
+		in, out := &in.SecretWo, &out.SecretWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretWoVersion != nil {
+		in, out := &in.SecretWoVersion, &out.SecretWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.URL != nil {
 		in, out := &in.URL, &out.URL
 		*out = new(string)
@@ -578,6 +588,16 @@ func (in *ModelObservation) DeepCopyInto(out *ModelObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretWo != nil {
+		in, out := &in.SecretWo, &out.SecretWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretWoVersion != nil {
+		in, out := &in.SecretWoVersion, &out.SecretWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SizeBytes != nil {
 		in, out := &in.SizeBytes, &out.SizeBytes
 		*out = new(float64)
@@ -642,6 +662,16 @@ func (in *ModelParameters) DeepCopyInto(out *ModelParameters) {
 	if in.SecretSecretRef != nil {
 		in, out := &in.SecretSecretRef, &out.SecretSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.SecretWo != nil {
+		in, out := &in.SecretWo, &out.SecretWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretWoVersion != nil {
+		in, out := &in.SecretWoVersion, &out.SecretWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.URL != nil {

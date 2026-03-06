@@ -51,12 +51,16 @@ type CronParameters struct {
 
 type DefinitionInitParameters struct {
 
+	// The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+	// Job arguments in list format. Overrides the default arguments defined in the job image.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container running the job.
 	// CPU limit of the job
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// The command that will be run in the container if specified.
-	// Command to use for the job
+	// (Deprecated) The command that will be run in the container if specified.
+	// Command to use for the job (in string format)
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron configuration
@@ -100,6 +104,10 @@ type DefinitionInitParameters struct {
 	// A reference to a Secret Manager secret.
 	SecretReference []SecretReferenceInitParameters `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
 
+	// The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+	// Command to use for the job (in list format). Overrides the default command defined in the job image.
+	StartupCommand []*string `json:"startupCommand,omitempty" tf:"startup_command,omitempty"`
+
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
 	// Timeout for the job in seconds
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
@@ -107,12 +115,16 @@ type DefinitionInitParameters struct {
 
 type DefinitionObservation struct {
 
+	// The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+	// Job arguments in list format. Overrides the default arguments defined in the job image.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container running the job.
 	// CPU limit of the job
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// The command that will be run in the container if specified.
-	// Command to use for the job
+	// (Deprecated) The command that will be run in the container if specified.
+	// Command to use for the job (in string format)
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The cron configuration
@@ -159,6 +171,10 @@ type DefinitionObservation struct {
 	// A reference to a Secret Manager secret.
 	SecretReference []SecretReferenceObservation `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
 
+	// The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+	// Command to use for the job (in list format). Overrides the default command defined in the job image.
+	StartupCommand []*string `json:"startupCommand,omitempty" tf:"startup_command,omitempty"`
+
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
 	// Timeout for the job in seconds
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
@@ -166,13 +182,18 @@ type DefinitionObservation struct {
 
 type DefinitionParameters struct {
 
+	// The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+	// Job arguments in list format. Overrides the default arguments defined in the job image.
+	// +kubebuilder:validation:Optional
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
 	// The amount of vCPU computing resources to allocate to each container running the job.
 	// CPU limit of the job
 	// +kubebuilder:validation:Optional
 	CPULimit *float64 `json:"cpuLimit,omitempty" tf:"cpu_limit,omitempty"`
 
-	// The command that will be run in the container if specified.
-	// Command to use for the job
+	// (Deprecated) The command that will be run in the container if specified.
+	// Command to use for the job (in string format)
 	// +kubebuilder:validation:Optional
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
 
@@ -226,6 +247,11 @@ type DefinitionParameters struct {
 	// A reference to a Secret Manager secret.
 	// +kubebuilder:validation:Optional
 	SecretReference []SecretReferenceParameters `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
+
+	// The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+	// Command to use for the job (in list format). Overrides the default command defined in the job image.
+	// +kubebuilder:validation:Optional
+	StartupCommand []*string `json:"startupCommand,omitempty" tf:"startup_command,omitempty"`
 
 	// The job run timeout, in Go Time format (ex: 2h30m25s)
 	// Timeout for the job in seconds
@@ -335,6 +361,8 @@ type Definition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cpuLimit) || (has(self.initProvider) && has(self.initProvider.cpuLimit))",message="spec.forProvider.cpuLimit is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.imageUri) || (has(self.initProvider) && has(self.initProvider.imageUri))",message="spec.forProvider.imageUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.localStorageCapacity) || (has(self.initProvider) && has(self.initProvider.localStorageCapacity))",message="spec.forProvider.localStorageCapacity is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.memoryLimit) || (has(self.initProvider) && has(self.initProvider.memoryLimit))",message="spec.forProvider.memoryLimit is a required parameter"
 	Spec   DefinitionSpec   `json:"spec"`
 	Status DefinitionStatus `json:"status,omitempty"`
