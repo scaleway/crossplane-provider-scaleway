@@ -1,0 +1,58 @@
+apiVersion: kafka.scaleway.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-kafka-cluster
+    nodeAmount: 1
+    nodeType: KAFK-PLAY-NANO
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    privateNetwork:
+    - pnIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: pn
+    userName: admin
+    version: 3.9.0
+    volumeSizeInGb: 10
+    volumeType: sbs_5k
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-vpc
+    region: fr-par
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: pn
+  name: pn
+spec:
+  forProvider:
+    name: my-private-network
+    region: fr-par
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main

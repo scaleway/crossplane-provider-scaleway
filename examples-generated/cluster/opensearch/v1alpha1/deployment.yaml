@@ -1,0 +1,21 @@
+apiVersion: opensearch.scaleway.upbound.io/v1alpha1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1alpha1/deployment
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-opensearch-cluster
+    nodeAmount: 1
+    nodeType: SEARCHDB-SHARED-2C-8G
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    version: "2.0"
+    volume:
+    - sizeInGb: 5
+      type: sbs_5k

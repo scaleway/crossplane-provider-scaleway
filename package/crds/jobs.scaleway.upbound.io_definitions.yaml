@@ -72,10 +72,17 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  args:
+                    description: |-
+                      The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+                      Job arguments in list format. Overrides the default arguments defined in the job image.
+                    items:
+                      type: string
+                    type: array
                   command:
                     description: |-
-                      The command that will be run in the container if specified.
-                      Command to use for the job
+                      (Deprecated) The command that will be run in the container if specified.
+                      Command to use for the job (in string format)
                     type: string
                   cpuLimit:
                     description: |-
@@ -170,6 +177,13 @@ spec:
                             The secret version.
                           type: string
                       type: object
+                    type: array
+                  startupCommand:
+                    description: |-
+                      The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+                      Command to use for the job (in list format). Overrides the default command defined in the job image.
+                    items:
+                      type: string
                     type: array
                   timeout:
                     description: |-
@@ -190,10 +204,17 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  args:
+                    description: |-
+                      The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+                      Job arguments in list format. Overrides the default arguments defined in the job image.
+                    items:
+                      type: string
+                    type: array
                   command:
                     description: |-
-                      The command that will be run in the container if specified.
-                      Command to use for the job
+                      (Deprecated) The command that will be run in the container if specified.
+                      Command to use for the job (in string format)
                     type: string
                   cpuLimit:
                     description: |-
@@ -288,6 +309,13 @@ spec:
                             The secret version.
                           type: string
                       type: object
+                    type: array
+                  startupCommand:
+                    description: |-
+                      The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+                      Command to use for the job (in list format). Overrides the default command defined in the job image.
+                    items:
+                      type: string
                     type: array
                   timeout:
                     description: |-
@@ -386,6 +414,14 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cpuLimit)
                 || (has(self.initProvider) && has(self.initProvider.cpuLimit))'
+            - message: spec.forProvider.imageUri is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.imageUri)
+                || (has(self.initProvider) && has(self.initProvider.imageUri))'
+            - message: spec.forProvider.localStorageCapacity is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.localStorageCapacity)
+                || (has(self.initProvider) && has(self.initProvider.localStorageCapacity))'
             - message: spec.forProvider.memoryLimit is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.memoryLimit)
@@ -395,10 +431,17 @@ spec:
             properties:
               atProvider:
                 properties:
+                  args:
+                    description: |-
+                      The arguments that will be passed to the startup command at runtime (in list of string format). Overrides the default arguments defined in the job image. Environment variables and secrets can be included, and will be expanded before the arguments are used.
+                      Job arguments in list format. Overrides the default arguments defined in the job image.
+                    items:
+                      type: string
+                    type: array
                   command:
                     description: |-
-                      The command that will be run in the container if specified.
-                      Command to use for the job
+                      (Deprecated) The command that will be run in the container if specified.
+                      Command to use for the job (in string format)
                     type: string
                   cpuLimit:
                     description: |-
@@ -501,6 +544,13 @@ spec:
                             The secret version.
                           type: string
                       type: object
+                    type: array
+                  startupCommand:
+                    description: |-
+                      The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.
+                      Command to use for the job (in list format). Overrides the default command defined in the job image.
+                    items:
+                      type: string
                     type: array
                   timeout:
                     description: |-

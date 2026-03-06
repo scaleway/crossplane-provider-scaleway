@@ -106,6 +106,19 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateNetwork:
+                    description: |-
+                      Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+                      Private network to expose your datawarehouse deployment
+                    items:
+                      properties:
+                        pnId:
+                          description: |-
+                            The ID of the private network. Format: {region}/{id} or just {id}.
+                            The private network ID
+                          type: string
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
@@ -186,6 +199,19 @@ spec:
                     - name
                     - namespace
                     type: object
+                  privateNetwork:
+                    description: |-
+                      Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+                      Private network to expose your datawarehouse deployment
+                    items:
+                      properties:
+                        pnId:
+                          description: |-
+                            The ID of the private network. Format: {region}/{id} or just {id}.
+                            The private network ID
+                          type: string
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
@@ -358,6 +384,44 @@ spec:
                       Name of the Data Warehouse deployment.
                       Name of the Datawarehouse deployment
                     type: string
+                  privateNetwork:
+                    description: |-
+                      Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
+                      Private network to expose your datawarehouse deployment
+                    items:
+                      properties:
+                        dnsRecord:
+                          description: |-
+                            DNS record for the public endpoint.
+                            DNS record for the private endpoint
+                          type: string
+                        id:
+                          description: |-
+                            The ID of the deployment.
+                            The endpoint ID
+                          type: string
+                        pnId:
+                          description: |-
+                            The ID of the private network. Format: {region}/{id} or just {id}.
+                            The private network ID
+                          type: string
+                        services:
+                          description: |-
+                            List of services exposed on the public endpoint.
+                            List of services exposed on the private endpoint
+                          items:
+                            properties:
+                              port:
+                                description: TCP port number.
+                                type: number
+                              protocol:
+                                description: Service protocol (e.g., "tcp", "https",
+                                  "mysql").
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.

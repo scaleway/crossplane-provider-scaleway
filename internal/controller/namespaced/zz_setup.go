@@ -79,6 +79,7 @@ import (
 	acl "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/k8s/acl"
 	cluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/k8s/cluster"
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/k8s/pool"
+	clusterkafka "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/kafka/cluster"
 	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/keymanager/key"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/backend"
 	certificate "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/certificate"
@@ -105,6 +106,7 @@ import (
 	object "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/object"
 	policyobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/policy"
 	websiteconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/websiteconfiguration"
+	deploymentopensearch "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/opensearch/deployment"
 	providerconfig "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/providerconfig"
 	aclrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/rdb/acl"
 	databaserdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/rdb/database"
@@ -211,6 +213,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		acl.Setup,
 		cluster.Setup,
 		pool.Setup,
+		clusterkafka.Setup,
 		key.Setup,
 		backend.Setup,
 		certificate.Setup,
@@ -237,6 +240,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		object.Setup,
 		policyobject.Setup,
 		websiteconfiguration.Setup,
+		deploymentopensearch.Setup,
 		providerconfig.Setup,
 		aclrdb.Setup,
 		databaserdb.Setup,
@@ -349,6 +353,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		acl.SetupGated,
 		cluster.SetupGated,
 		pool.SetupGated,
+		clusterkafka.SetupGated,
 		key.SetupGated,
 		backend.SetupGated,
 		certificate.SetupGated,
@@ -375,6 +380,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		object.SetupGated,
 		policyobject.SetupGated,
 		websiteconfiguration.SetupGated,
+		deploymentopensearch.SetupGated,
 		providerconfig.SetupGated,
 		aclrdb.SetupGated,
 		databaserdb.SetupGated,

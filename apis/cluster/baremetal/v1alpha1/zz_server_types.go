@@ -229,9 +229,17 @@ type ServerInitParameters struct {
 	// The partitioning schema in json format
 	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
-	// Password used for the installation. May be required depending on used os.
-	// Password used for the installation.
+	// Password used for the installation. May be required depending on used os. Only one of password or password_wo should be specified.
+	// Password used for the installation. Only one of `password` or `password_wo` should be specified.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
 	// List of private IPv4 and IPv6 addresses associated with the resource
@@ -270,9 +278,17 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeyIdsSelector *v1.Selector `json:"sshKeyIdsSelector,omitempty" tf:"-"`
 
-	// Password used for the service to install. May be required depending on used os.
-	// Password used for the service to install.
+	// Password used for the service to install. May be required depending on used os. Only one of service_password or service_password_wo should be specified.
+	// Password used for the service to install. Only one of `service_password` or `service_password_wo` should be specified.
 	ServicePasswordSecretRef *v1.SecretKeySelector `json:"servicePasswordSecretRef,omitempty" tf:"-"`
+
+	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
+
+	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 
 	// User used for the service to install.
 	// User used for the service to install.
@@ -368,6 +384,14 @@ type ServerObservation struct {
 	// The partitioning schema in json format
 	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
+	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
 	// List of private IPv4 and IPv6 addresses associated with the resource
 	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
@@ -395,6 +419,14 @@ type ServerObservation struct {
 	// **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server.
 	// If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
 	SSHKeyIds []*string `json:"sshKeyIds,omitempty" tf:"ssh_key_ids,omitempty"`
+
+	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
+
+	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 
 	// User used for the service to install.
 	// User used for the service to install.
@@ -464,10 +496,20 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
-	// Password used for the installation. May be required depending on used os.
-	// Password used for the installation.
+	// Password used for the installation. May be required depending on used os. Only one of password or password_wo should be specified.
+	// Password used for the installation. Only one of `password` or `password_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
 	// List of private IPv4 and IPv6 addresses associated with the resource
@@ -512,10 +554,20 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeyIdsSelector *v1.Selector `json:"sshKeyIdsSelector,omitempty" tf:"-"`
 
-	// Password used for the service to install. May be required depending on used os.
-	// Password used for the service to install.
+	// Password used for the service to install. May be required depending on used os. Only one of service_password or service_password_wo should be specified.
+	// Password used for the service to install. Only one of `service_password` or `service_password_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	ServicePasswordSecretRef *v1.SecretKeySelector `json:"servicePasswordSecretRef,omitempty" tf:"-"`
+
+	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// +kubebuilder:validation:Optional
+	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
+
+	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// +kubebuilder:validation:Optional
+	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 
 	// User used for the service to install.
 	// User used for the service to install.

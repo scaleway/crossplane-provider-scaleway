@@ -136,8 +136,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password used for the installation. May be required depending on used os.
-                      Password used for the installation.
+                      Password used for the installation. May be required depending on used os. Only one of password or password_wo should be specified.
+                      Password used for the installation. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         description: The key to select.
@@ -153,6 +153,16 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the resource.
@@ -198,8 +208,8 @@ spec:
                     type: boolean
                   servicePasswordSecretRef:
                     description: |-
-                      Password used for the service to install. May be required depending on used os.
-                      Password used for the service to install.
+                      Password used for the service to install. May be required depending on used os. Only one of service_password or service_password_wo should be specified.
+                      Password used for the service to install. Only one of `service_password` or `service_password_wo` should be specified.
                     properties:
                       key:
                         description: The key to select.
@@ -215,6 +225,16 @@ spec:
                     - name
                     - namespace
                     type: object
+                  servicePasswordWo:
+                    description: |-
+                      Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: string
+                  servicePasswordWoVersion:
+                    description: |-
+                      The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: number
                   serviceUser:
                     description: |-
                       User used for the service to install.
@@ -403,8 +423,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password used for the installation. May be required depending on used os.
-                      Password used for the installation.
+                      Password used for the installation. May be required depending on used os. Only one of password or password_wo should be specified.
+                      Password used for the installation. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         description: The key to select.
@@ -420,6 +440,16 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the resource.
@@ -465,8 +495,8 @@ spec:
                     type: boolean
                   servicePasswordSecretRef:
                     description: |-
-                      Password used for the service to install. May be required depending on used os.
-                      Password used for the service to install.
+                      Password used for the service to install. May be required depending on used os. Only one of service_password or service_password_wo should be specified.
+                      Password used for the service to install. Only one of `service_password` or `service_password_wo` should be specified.
                     properties:
                       key:
                         description: The key to select.
@@ -482,6 +512,16 @@ spec:
                     - name
                     - namespace
                     type: object
+                  servicePasswordWo:
+                    description: |-
+                      Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: string
+                  servicePasswordWoVersion:
+                    description: |-
+                      The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: number
                   serviceUser:
                     description: |-
                       User used for the service to install.
@@ -848,6 +888,16 @@ spec:
                       The partitioning schema in JSON format
                       The partitioning schema in json format
                     type: string
+                  passwordWo:
+                    description: |-
+                      Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
+                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIps:
                     description: |-
                       The list of private IPv4 and IPv6 addresses associated with the resource.
@@ -927,6 +977,16 @@ spec:
                       ~> Important: Updates to ssh_key_ids, user, password, service_user or service_password will not take effect on the server, it requires to reinstall it. To do so please set 'reinstall_on_config_changes' argument to true.
                       If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
                     type: boolean
+                  servicePasswordWo:
+                    description: |-
+                      Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
+                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: string
+                  servicePasswordWoVersion:
+                    description: |-
+                      The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
+                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                    type: number
                   serviceUser:
                     description: |-
                       User used for the service to install.

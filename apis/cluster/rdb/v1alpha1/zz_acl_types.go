@@ -87,8 +87,8 @@ type ACLRulesInitParameters struct {
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The IP range to whitelist in CIDR notation
-	// Target IP of the rules
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
 
@@ -98,8 +98,8 @@ type ACLRulesObservation struct {
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The IP range to whitelist in CIDR notation
-	// Target IP of the rules
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 }
 
@@ -110,8 +110,8 @@ type ACLRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The IP range to whitelist in CIDR notation
-	// Target IP of the rules
+	// The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.
+	// IPv4 address or range in CIDR notation (IPv6 is not supported by the Scaleway API)
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip" tf:"ip,omitempty"`
 }

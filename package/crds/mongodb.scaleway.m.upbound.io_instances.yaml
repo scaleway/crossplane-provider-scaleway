@@ -79,7 +79,7 @@ spec:
                   passwordSecretRef:
                     description: |-
                       Password of the user.
-                      Password of the user
+                      Password of the user. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -90,6 +90,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: Password of the user in [write-only](https://developer.hashicorp.
+                      Only one of `password` or `password_wo` should be specified.
+                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      MongoDB® version of the instance.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the instance.
@@ -224,7 +234,7 @@ spec:
                   passwordSecretRef:
                     description: |-
                       Password of the user.
-                      Password of the user
+                      Password of the user. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -235,6 +245,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: Password of the user in [write-only](https://developer.hashicorp.
+                      Only one of `password` or `password_wo` should be specified.
+                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      MongoDB® version of the instance.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the instance.
@@ -433,6 +453,16 @@ spec:
                       The type of MongoDB® instance to create.
                       Type of node to use for the instance
                     type: string
+                  passwordWo:
+                    description: Password of the user in [write-only](https://developer.hashicorp.
+                      Only one of `password` or `password_wo` should be specified.
+                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      MongoDB® version of the instance.
+                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateIp:
                     description: |-
                       The private IPv4 address associated with the instance.
