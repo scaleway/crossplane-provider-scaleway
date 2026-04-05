@@ -51,6 +51,10 @@ type PathFilterParameters struct {
 
 type RouteStageInitParameters struct {
 
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
+
 	// The ID of the pipeline.
 	// The ID of the pipeline
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/edgeservices/v1alpha1.Pipeline
@@ -68,11 +72,11 @@ type RouteStageInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
 	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
 	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/edgeservices/v1alpha1.WAFStage
 	WafStageID *string `json:"wafStageId,omitempty" tf:"waf_stage_id,omitempty"`
@@ -87,6 +91,10 @@ type RouteStageInitParameters struct {
 }
 
 type RouteStageObservation struct {
+
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
 
 	// The date and time of the creation of the route stage.
 	// The date and time of the creation of the route stage
@@ -103,7 +111,7 @@ type RouteStageObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
 	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -111,12 +119,17 @@ type RouteStageObservation struct {
 	// The date and time of the last update of the route stage
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
 	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
 	WafStageID *string `json:"wafStageId,omitempty" tf:"waf_stage_id,omitempty"`
 }
 
 type RouteStageParameters struct {
+
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+	// +kubebuilder:validation:Optional
+	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
 
 	// The ID of the pipeline.
 	// The ID of the pipeline
@@ -137,12 +150,12 @@ type RouteStageParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
 	// List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
 	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/edgeservices/v1alpha1.WAFStage
 	// +kubebuilder:validation:Optional
@@ -194,7 +207,7 @@ type RuleHTTPMatchParameters struct {
 
 type RuleInitParameters struct {
 
-	// The ID of the backend stage that requests matching the rule should be forwarded to.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
 	// ID of the backend stage that requests matching the rule should be forwarded to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/edgeservices/v1alpha1.BackendStage
 	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
@@ -207,25 +220,33 @@ type RuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendStageIDSelector *v1.NamespacedSelector `json:"backendStageIdSelector,omitempty" tf:"-"`
 
-	// The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+	// The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
 	// Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
 	RuleHTTPMatch []RuleHTTPMatchInitParameters `json:"ruleHttpMatch,omitempty" tf:"rule_http_match,omitempty"`
+
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+	// ID of the WAF stage that requests matching the rule should be forwarded to
+	WafStageID *string `json:"wafStageId,omitempty" tf:"waf_stage_id,omitempty"`
 }
 
 type RuleObservation struct {
 
-	// The ID of the backend stage that requests matching the rule should be forwarded to.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
 	// ID of the backend stage that requests matching the rule should be forwarded to
 	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
 
-	// The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+	// The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
 	// Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
 	RuleHTTPMatch []RuleHTTPMatchObservation `json:"ruleHttpMatch,omitempty" tf:"rule_http_match,omitempty"`
+
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+	// ID of the WAF stage that requests matching the rule should be forwarded to
+	WafStageID *string `json:"wafStageId,omitempty" tf:"waf_stage_id,omitempty"`
 }
 
 type RuleParameters struct {
 
-	// The ID of the backend stage that requests matching the rule should be forwarded to.
+	// The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
 	// ID of the backend stage that requests matching the rule should be forwarded to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/edgeservices/v1alpha1.BackendStage
 	// +kubebuilder:validation:Optional
@@ -239,10 +260,15 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendStageIDSelector *v1.NamespacedSelector `json:"backendStageIdSelector,omitempty" tf:"-"`
 
-	// The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+	// The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
 	// Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
 	// +kubebuilder:validation:Optional
 	RuleHTTPMatch []RuleHTTPMatchParameters `json:"ruleHttpMatch,omitempty" tf:"rule_http_match,omitempty"`
+
+	// The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+	// ID of the WAF stage that requests matching the rule should be forwarded to
+	// +kubebuilder:validation:Optional
+	WafStageID *string `json:"wafStageId,omitempty" tf:"waf_stage_id,omitempty"`
 }
 
 // RouteStageSpec defines the desired state of RouteStage

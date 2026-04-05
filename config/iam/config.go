@@ -79,4 +79,21 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "User"
 	})
+
+	p.AddResourceConfigurator("scaleway_iam_saml_certificate", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Certificate"
+
+		r.References["saml_id"] = config.Reference{
+			TerraformName: "scaleway_iam_saml",
+		}
+	})
+
+	p.AddResourceConfigurator("scaleway_iam_saml", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Saml"
+
+	})
 }

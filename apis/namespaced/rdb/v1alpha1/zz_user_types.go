@@ -42,11 +42,11 @@ type UserInitParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-	// Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Database user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The Scaleway region this resource resides in.
@@ -72,11 +72,11 @@ type UserObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-	// Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Database user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The Scaleway region this resource resides in.
@@ -116,12 +116,12 @@ type UserParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Database user password in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-	// Database user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Database user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
