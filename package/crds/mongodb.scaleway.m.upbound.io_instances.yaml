@@ -78,7 +78,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password of the user.
+                      Password of the user. Only one of password or password_wo should be specified.
                       Password of the user. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
@@ -91,14 +91,14 @@ spec:
                     - name
                     type: object
                   passwordWo:
-                    description: Password of the user in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      Password of the user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password of the user in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
-                      MongoDB® version of the instance.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIp:
                     description: |-
@@ -233,7 +233,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password of the user.
+                      Password of the user. Only one of password or password_wo should be specified.
                       Password of the user. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
@@ -246,14 +246,14 @@ spec:
                     - name
                     type: object
                   passwordWo:
-                    description: Password of the user in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      Password of the user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password of the user in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
-                      MongoDB® version of the instance.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIp:
                     description: |-
@@ -454,14 +454,14 @@ spec:
                       Type of node to use for the instance
                     type: string
                   passwordWo:
-                    description: Password of the user in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      Password of the user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      Password of the user in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
-                      MongoDB® version of the instance.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIp:
                     description: |-

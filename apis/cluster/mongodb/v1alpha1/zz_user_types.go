@@ -80,14 +80,16 @@ type UserInitParameters struct {
 	// MongoDB user name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The password of the MongoDB® user.
+	// The password of the MongoDB® user. Only one of password or password_wo should be specified.
 	// MongoDB user password. Only one of `password` or `password_wo` should be specified.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// MongoDB user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// (Defaults to provider region) The region in which the MongoDB® user should be created.
@@ -112,10 +114,12 @@ type UserObservation struct {
 	// MongoDB user name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// MongoDB user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// (Defaults to provider region) The region in which the MongoDB® user should be created.
@@ -148,16 +152,18 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The password of the MongoDB® user.
+	// The password of the MongoDB® user. Only one of password or password_wo should be specified.
 	// MongoDB user password. Only one of `password` or `password_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// MongoDB user password in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+	// MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 

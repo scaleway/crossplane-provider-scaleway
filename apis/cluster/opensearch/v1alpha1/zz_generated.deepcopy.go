@@ -199,6 +199,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicDashboardURL != nil {
+		in, out := &in.PublicDashboardURL, &out.PublicDashboardURL
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

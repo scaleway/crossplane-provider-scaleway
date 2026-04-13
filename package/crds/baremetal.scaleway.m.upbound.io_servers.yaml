@@ -137,12 +137,12 @@ spec:
                   passwordWo:
                     description: |-
                       Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIps:
                     description: |-
@@ -204,12 +204,12 @@ spec:
                   servicePasswordWo:
                     description: |-
                       Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: string
                   servicePasswordWoVersion:
                     description: |-
                       The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: number
                   serviceUser:
                     description: |-
@@ -420,12 +420,12 @@ spec:
                   passwordWo:
                     description: |-
                       Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIps:
                     description: |-
@@ -487,12 +487,12 @@ spec:
                   servicePasswordWo:
                     description: |-
                       Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: string
                   servicePasswordWoVersion:
                     description: |-
                       The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: number
                   serviceUser:
                     description: |-
@@ -841,12 +841,12 @@ spec:
                   passwordWo:
                     description: |-
                       Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-                      Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   privateIps:
                     description: |-
@@ -930,12 +930,12 @@ spec:
                   servicePasswordWo:
                     description: |-
                       Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-                      Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: string
                   servicePasswordWoVersion:
                     description: |-
                       The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
                     type: number
                   serviceUser:
                     description: |-
