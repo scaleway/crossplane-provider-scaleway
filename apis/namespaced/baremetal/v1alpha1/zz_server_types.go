@@ -235,11 +235,11 @@ type ServerInitParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
@@ -284,11 +284,11 @@ type ServerInitParameters struct {
 	ServicePasswordSecretRef *v1.LocalSecretKeySelector `json:"servicePasswordSecretRef,omitempty" tf:"-"`
 
 	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
 
 	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 
 	// User used for the service to install.
@@ -386,11 +386,11 @@ type ServerObservation struct {
 	Partitioning *string `json:"partitioning,omitempty" tf:"partitioning,omitempty"`
 
 	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the resource.
@@ -422,11 +422,11 @@ type ServerObservation struct {
 	SSHKeyIds []*string `json:"sshKeyIds,omitempty" tf:"ssh_key_ids,omitempty"`
 
 	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
 
 	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 
 	// User used for the service to install.
@@ -503,12 +503,12 @@ type ServerParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Password used for the installation in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. May be required depending on used os.
-	// Password used for the installation in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+	// Password used for the installation in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
 
 	// The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
@@ -561,12 +561,12 @@ type ServerParameters struct {
 	ServicePasswordSecretRef *v1.LocalSecretKeySelector `json:"servicePasswordSecretRef,omitempty" tf:"-"`
 
 	// Password used for the service to install in write-only mode. Only one of service_password or service_password_wo should be specified. To update the service_password_wo, you must also update the service_password_wo_version. May be required depending on used os.
-	// Password used for the service to install in [write-only](https://developer.hashicorp. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// Password used for the service to install in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	// +kubebuilder:validation:Optional
 	ServicePasswordWo *string `json:"servicePasswordWo,omitempty" tf:"service_password_wo,omitempty"`
 
 	// The version of the write-only service password. To update the service_password_wo, you must also update the service_password_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
 	// +kubebuilder:validation:Optional
 	ServicePasswordWoVersion *float64 `json:"servicePasswordWoVersion,omitempty" tf:"service_password_wo_version,omitempty"`
 

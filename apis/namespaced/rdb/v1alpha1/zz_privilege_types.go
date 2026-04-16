@@ -33,8 +33,8 @@ type PrivilegeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
-	// Privilege
+	// Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+	// Desired permission (readonly, readwrite, all, custom, none)
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// (Defaults to provider region) The region in which the resource exists.
@@ -52,6 +52,10 @@ type PrivilegeObservation struct {
 	// Database name
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// The actual permission currently set in Scaleway. May differ from permission after database schema changes (new tables, views, or sequences created).
+	// Actual permission currently set in Scaleway. May differ from 'permission' after database schema changes
+	EffectivePermission *string `json:"effectivePermission,omitempty" tf:"effective_permission,omitempty"`
+
 	// The ID of the user privileges, which is of the form {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -59,9 +63,13 @@ type PrivilegeObservation struct {
 	// Instance on which the database is created
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
-	// Privilege
+	// Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+	// Desired permission (readonly, readwrite, all, custom, none)
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+
+	// Permission synchronization status. Possible values:
+	// Permission synchronization status: 'synced' if effective matches desired, 'drifted' if they differ
+	PermissionStatus *string `json:"permissionStatus,omitempty" tf:"permission_status,omitempty"`
 
 	// (Defaults to provider region) The region in which the resource exists.
 	// The region you want to attach the resource to
@@ -93,8 +101,8 @@ type PrivilegeParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// Permission to set. Valid values are readonly, readwrite, all, custom and none.
-	// Privilege
+	// Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+	// Desired permission (readonly, readwrite, all, custom, none)
 	// +kubebuilder:validation:Optional
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 

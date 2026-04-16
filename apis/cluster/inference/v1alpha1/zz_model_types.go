@@ -32,11 +32,11 @@ type ModelInitParameters struct {
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
-	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
 	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
 
 	// The version of the write-only secret. Required when using secret_wo.
-	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) secret. To update the `secret_wo`, you must also update the `secret_wo_version`.
 	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
 
 	// The HTTPS source URL from which the model will be downloaded. This is typically a Hugging Face repository URL (e.g., https://huggingface.co/agentica-org/DeepCoder-14B-Preview). The URL must be publicly accessible or require valid credentials via secret or secret_wo
@@ -86,11 +86,11 @@ type ModelObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
-	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
 	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
 
 	// The version of the write-only secret. Required when using secret_wo.
-	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) secret. To update the `secret_wo`, you must also update the `secret_wo_version`.
 	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
 
 	// Total size, in bytes, of the model archive.
@@ -136,12 +136,12 @@ type ModelParameters struct {
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Authentication token used to pull the model from a private or gated URL in write-only mode. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.
-	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://developer.hashicorp. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
+	// A token or credential used to authenticate when pulling the model from a private or gated source in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. For example, a Hugging Face access token with read permissions. Only one of `secret` or `secret_wo` should be specified.
 	// +kubebuilder:validation:Optional
 	SecretWo *string `json:"secretWo,omitempty" tf:"secret_wo,omitempty"`
 
 	// The version of the write-only secret. Required when using secret_wo.
-	// The version of the [write-only](https://developer.hashicorp. To update the `secret_wo`, you must also update the `secret_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) secret. To update the `secret_wo`, you must also update the `secret_wo_version`.
 	// +kubebuilder:validation:Optional
 	SecretWoVersion *float64 `json:"secretWoVersion,omitempty" tf:"secret_wo_version,omitempty"`
 
