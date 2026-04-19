@@ -60,12 +60,12 @@ spec:
                 properties:
                   cpuMax:
                     description: |-
-                      Maximum CPU count. Must be greater than or equal to cpu_min.
+                      Maximum CPU count (autoscaling upper bound). Must be greater than or equal to cpu_min. Can be updated in place.
                       Maximum CPU count
                     type: number
                   cpuMin:
                     description: |-
-                      Minimum CPU count. Must be less than or equal to cpu_max.
+                      Minimum CPU count (autoscaling lower bound). Must be less than or equal to cpu_max. Can be updated in place.
                       Minimum CPU count
                     type: number
                   name:
@@ -75,8 +75,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the deployment. If not specified, a random password will be generated. Note: password is only used during deployment creation.
-                      Password for the first user of the deployment
+                      Password for the first user of the deployment. If not specified, a random password will be generated. Only one of password or password_wo should be specified. Note: plain password is only used during deployment creation; it is not rotated on update.
+                      Password for the first user of the deployment. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -87,6 +87,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the deployment in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. Updates are applied via the Users API to the initial user (an administrator when present, otherwise the first user by name).
+                      Password for the first user of the deployment in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`. When updating, the password is rotated via the Data Warehouse Users API (the initial user is selected as an admin user when present, otherwise the first user by name).
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateNetwork:
                     description: |-
                       Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
@@ -117,9 +127,14 @@ spec:
                     type: string
                   replicaCount:
                     description: |-
-                      Number of replicas.
+                      Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
                     type: number
+                  started:
+                    description: |-
+                      Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
+                      Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
+                    type: boolean
                   tags:
                     description: |-
                       List of tags to apply to the deployment.
@@ -148,12 +163,12 @@ spec:
                 properties:
                   cpuMax:
                     description: |-
-                      Maximum CPU count. Must be greater than or equal to cpu_min.
+                      Maximum CPU count (autoscaling upper bound). Must be greater than or equal to cpu_min. Can be updated in place.
                       Maximum CPU count
                     type: number
                   cpuMin:
                     description: |-
-                      Minimum CPU count. Must be less than or equal to cpu_max.
+                      Minimum CPU count (autoscaling lower bound). Must be less than or equal to cpu_max. Can be updated in place.
                       Minimum CPU count
                     type: number
                   name:
@@ -163,8 +178,8 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      Password for the first user of the deployment. If not specified, a random password will be generated. Note: password is only used during deployment creation.
-                      Password for the first user of the deployment
+                      Password for the first user of the deployment. If not specified, a random password will be generated. Only one of password or password_wo should be specified. Note: plain password is only used during deployment creation; it is not rotated on update.
+                      Password for the first user of the deployment. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
                         type: string
@@ -175,6 +190,16 @@ spec:
                     - key
                     - name
                     type: object
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the deployment in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. Updates are applied via the Users API to the initial user (an administrator when present, otherwise the first user by name).
+                      Password for the first user of the deployment in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`. When updating, the password is rotated via the Data Warehouse Users API (the initial user is selected as an admin user when present, otherwise the first user by name).
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateNetwork:
                     description: |-
                       Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
@@ -205,9 +230,14 @@ spec:
                     type: string
                   replicaCount:
                     description: |-
-                      Number of replicas.
+                      Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
                     type: number
+                  started:
+                    description: |-
+                      Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
+                      Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
+                    type: boolean
                   tags:
                     description: |-
                       List of tags to apply to the deployment.
@@ -311,12 +341,12 @@ spec:
                 properties:
                   cpuMax:
                     description: |-
-                      Maximum CPU count. Must be greater than or equal to cpu_min.
+                      Maximum CPU count (autoscaling upper bound). Must be greater than or equal to cpu_min. Can be updated in place.
                       Maximum CPU count
                     type: number
                   cpuMin:
                     description: |-
-                      Minimum CPU count. Must be less than or equal to cpu_max.
+                      Minimum CPU count (autoscaling lower bound). Must be less than or equal to cpu_max. Can be updated in place.
                       Minimum CPU count
                     type: number
                   createdAt:
@@ -332,6 +362,16 @@ spec:
                       Name of the Data Warehouse deployment.
                       Name of the Datawarehouse deployment
                     type: string
+                  passwordWo:
+                    description: |-
+                      Password for the first user of the deployment in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version. Updates are applied via the Users API to the initial user (an administrator when present, otherwise the first user by name).
+                      Password for the first user of the deployment in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`. When updating, the password is rotated via the Data Warehouse Users API (the initial user is selected as an admin user when present, otherwise the first user by name).
+                    type: string
+                  passwordWoVersion:
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
+                    type: number
                   privateNetwork:
                     description: |-
                       Private network configuration to expose your deployment. Changing this forces recreation of the deployment.
@@ -414,9 +454,14 @@ spec:
                     type: string
                   replicaCount:
                     description: |-
-                      Number of replicas.
+                      Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
                     type: number
+                  started:
+                    description: |-
+                      Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
+                      Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
+                    type: boolean
                   status:
                     description: |-
                       The status of the deployment (e.g., "ready", "provisioning").

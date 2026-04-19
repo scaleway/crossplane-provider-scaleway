@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  backendStageId:
+                    description: |-
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+                    type: string
                   pipelineId:
                     description: |-
                       The ID of the pipeline.
@@ -160,13 +165,13 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+                      List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
                       List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
                     items:
                       properties:
                         backendStageId:
                           description: |-
-                            The ID of the backend stage that requests matching the rule should be forwarded to.
+                            The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
                             ID of the backend stage that requests matching the rule should be forwarded to
                           type: string
                         backendStageIdRef:
@@ -247,10 +252,28 @@ spec:
                           type: object
                         ruleHttpMatch:
                           description: |-
-                            The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+                            The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
                             Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
                           items:
                             properties:
+                              hostFilter:
+                                description: |-
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided.
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided
+                                items:
+                                  properties:
+                                    hostFilterType:
+                                      description: |-
+                                        The type of filter to match for the host. Use the regex type.
+                                        The type of filter to match for the host path
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value to be matched for the HTTP URL path.
+                                        The value to be matched for the host path
+                                      type: string
+                                  type: object
+                                type: array
                               methodFilters:
                                 description: |-
                                   HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are get, post, put, patch, delete, head, options. All methods will match if none is provided.
@@ -278,11 +301,16 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        wafStageId:
+                          description: |-
+                            The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+                            ID of the WAF stage that requests matching the rule should be forwarded to
+                          type: string
                       type: object
                     type: array
                   wafStageId:
                     description: |-
-                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
                       The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
                     type: string
                   wafStageIdRef:
@@ -375,6 +403,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  backendStageId:
+                    description: |-
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+                    type: string
                   pipelineId:
                     description: |-
                       The ID of the pipeline.
@@ -463,13 +496,13 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+                      List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
                       List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
                     items:
                       properties:
                         backendStageId:
                           description: |-
-                            The ID of the backend stage that requests matching the rule should be forwarded to.
+                            The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
                             ID of the backend stage that requests matching the rule should be forwarded to
                           type: string
                         backendStageIdRef:
@@ -550,10 +583,28 @@ spec:
                           type: object
                         ruleHttpMatch:
                           description: |-
-                            The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+                            The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
                             Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
                           items:
                             properties:
+                              hostFilter:
+                                description: |-
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided.
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided
+                                items:
+                                  properties:
+                                    hostFilterType:
+                                      description: |-
+                                        The type of filter to match for the host. Use the regex type.
+                                        The type of filter to match for the host path
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value to be matched for the HTTP URL path.
+                                        The value to be matched for the host path
+                                      type: string
+                                  type: object
+                                type: array
                               methodFilters:
                                 description: |-
                                   HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are get, post, put, patch, delete, head, options. All methods will match if none is provided.
@@ -581,11 +632,16 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        wafStageId:
+                          description: |-
+                            The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+                            ID of the WAF stage that requests matching the rule should be forwarded to
+                          type: string
                       type: object
                     type: array
                   wafStageId:
                     description: |-
-                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
                       The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
                     type: string
                   wafStageIdRef:
@@ -756,6 +812,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  backendStageId:
+                    description: |-
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
+                      The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+                    type: string
                   createdAt:
                     description: |-
                       The date and time of the creation of the route stage.
@@ -776,21 +837,39 @@ spec:
                     type: string
                   rule:
                     description: |-
-                      The list of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by waf_stage_id.
+                      List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified target stage. If no rules are matched, the request is forwarded to the default stage defined by waf_stage_id or backend_stage_id.
                       List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`
                     items:
                       properties:
                         backendStageId:
                           description: |-
-                            The ID of the backend stage that requests matching the rule should be forwarded to.
+                            The ID of the backend stage HTTP requests should be forwarded to when no rules are matched. Conflicts with waf_stage_id.
                             ID of the backend stage that requests matching the rule should be forwarded to
                           type: string
                         ruleHttpMatch:
                           description: |-
-                            The rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the backend_stage_id field. Requests that do not match will be checked by the next rule's condition.
+                            The rule condition to be matched. Requests matching the condition defined here will be forwarded to the stage specified by backend_stage_id or waf_stage_id. Requests that do not match will be checked by the next rule's condition.
                             Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition
                           items:
                             properties:
+                              hostFilter:
+                                description: |-
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided.
+                                  Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided
+                                items:
+                                  properties:
+                                    hostFilterType:
+                                      description: |-
+                                        The type of filter to match for the host. Use the regex type.
+                                        The type of filter to match for the host path
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value to be matched for the HTTP URL path.
+                                        The value to be matched for the host path
+                                      type: string
+                                  type: object
+                                type: array
                               methodFilters:
                                 description: |-
                                   HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are get, post, put, patch, delete, head, options. All methods will match if none is provided.
@@ -818,6 +897,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        wafStageId:
+                          description: |-
+                            The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
+                            ID of the WAF stage that requests matching the rule should be forwarded to
+                          type: string
                       type: object
                     type: array
                   updatedAt:
@@ -827,7 +911,7 @@ spec:
                     type: string
                   wafStageId:
                     description: |-
-                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
+                      The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched. Conflicts with backend_stage_id.
                       The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
                     type: string
                 type: object

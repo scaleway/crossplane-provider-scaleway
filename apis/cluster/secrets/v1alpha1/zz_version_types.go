@@ -20,11 +20,11 @@ type VersionInitParameters struct {
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The raw data payload of your secret version in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
 	DataWoSecretRef *v1.SecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
 
 	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) data. To update the `data_wo`, you must also update the `data_wo_version`.
 	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
 
 	// Description of the secret version (e.g. my-new-description).
@@ -56,7 +56,7 @@ type VersionObservation struct {
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) data. To update the `data_wo`, you must also update the `data_wo_version`.
 	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
 
 	// Description of the secret version (e.g. my-new-description).
@@ -94,12 +94,12 @@ type VersionParameters struct {
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The raw data payload of your secret version in write-only mode. Must not exceed 64KiB in size (e.g. my-secret-version-payload). Find out more on the data section.
-	// The raw data payload of your secret version in [write-only](https://developer.hashicorp. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The raw data payload of your secret version in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. To update the `data_wo`, you must also update the `data_wo_version`.
 	// +kubebuilder:validation:Optional
 	DataWoSecretRef *v1.SecretKeySelector `json:"dataWoSecretRef,omitempty" tf:"-"`
 
 	// The version of the write-only data. To update the data_wo, you must also update the data_wo_version.
-	// The version of the [write-only](https://developer.hashicorp. To update the `data_wo`, you must also update the `data_wo_version`.
+	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) data. To update the `data_wo`, you must also update the `data_wo_version`.
 	// +kubebuilder:validation:Optional
 	DataWoVersion *float64 `json:"dataWoVersion,omitempty" tf:"data_wo_version,omitempty"`
 

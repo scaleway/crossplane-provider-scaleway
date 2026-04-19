@@ -2706,6 +2706,11 @@ func (in *RouteInitParameters) DeepCopyInto(out *RouteInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NexthopVPCConnectorID != nil {
+		in, out := &in.NexthopVPCConnectorID, &out.NexthopVPCConnectorID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -2814,6 +2819,11 @@ func (in *RouteObservation) DeepCopyInto(out *RouteObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NexthopVPCConnectorID != nil {
+		in, out := &in.NexthopVPCConnectorID, &out.NexthopVPCConnectorID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -2872,6 +2882,11 @@ func (in *RouteParameters) DeepCopyInto(out *RouteParameters) {
 	}
 	if in.NexthopResourceID != nil {
 		in, out := &in.NexthopResourceID, &out.NexthopResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NexthopVPCConnectorID != nil {
+		in, out := &in.NexthopVPCConnectorID, &out.NexthopVPCConnectorID
 		*out = new(string)
 		**out = **in
 	}
