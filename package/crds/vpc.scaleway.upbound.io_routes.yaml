@@ -92,6 +92,11 @@ spec:
                       The ID of the nexthop resource.
                       The ID of the nexthop resource
                     type: string
+                  nexthopVpcConnectorId:
+                    description: |-
+                      The ID of the nexthop VPC Connector.
+                      The ID of the nexthop VPC Connector
+                    type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region of the route.
@@ -216,6 +221,11 @@ spec:
                     description: |-
                       The ID of the nexthop resource.
                       The ID of the nexthop resource
+                    type: string
+                  nexthopVpcConnectorId:
+                    description: |-
+                      The ID of the nexthop VPC Connector.
+                      The ID of the nexthop VPC Connector
                     type: string
                   region:
                     description: |-
@@ -427,6 +437,11 @@ spec:
                     description: |-
                       The ID of the nexthop resource.
                       The ID of the nexthop resource
+                    type: string
+                  nexthopVpcConnectorId:
+                    description: |-
+                      The ID of the nexthop VPC Connector.
+                      The ID of the nexthop VPC Connector
                     type: string
                   region:
                     description: |-

@@ -32,6 +32,10 @@ type RouteInitParameters struct {
 	// The ID of the nexthop resource
 	NexthopResourceID *string `json:"nexthopResourceId,omitempty" tf:"nexthop_resource_id,omitempty"`
 
+	// The ID of the nexthop VPC Connector.
+	// The ID of the nexthop VPC Connector
+	NexthopVPCConnectorID *string `json:"nexthopVpcConnectorId,omitempty" tf:"nexthop_vpc_connector_id,omitempty"`
+
 	// (Defaults to provider region) The region of the route.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -79,6 +83,10 @@ type RouteObservation struct {
 	// The ID of the nexthop resource
 	NexthopResourceID *string `json:"nexthopResourceId,omitempty" tf:"nexthop_resource_id,omitempty"`
 
+	// The ID of the nexthop VPC Connector.
+	// The ID of the nexthop VPC Connector
+	NexthopVPCConnectorID *string `json:"nexthopVpcConnectorId,omitempty" tf:"nexthop_vpc_connector_id,omitempty"`
+
 	// (Defaults to provider region) The region of the route.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -117,6 +125,11 @@ type RouteParameters struct {
 	// The ID of the nexthop resource
 	// +kubebuilder:validation:Optional
 	NexthopResourceID *string `json:"nexthopResourceId,omitempty" tf:"nexthop_resource_id,omitempty"`
+
+	// The ID of the nexthop VPC Connector.
+	// The ID of the nexthop VPC Connector
+	// +kubebuilder:validation:Optional
+	NexthopVPCConnectorID *string `json:"nexthopVpcConnectorId,omitempty" tf:"nexthop_vpc_connector_id,omitempty"`
 
 	// (Defaults to provider region) The region of the route.
 	// The region you want to attach the resource to

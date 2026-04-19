@@ -158,8 +158,8 @@ spec:
                     type: object
                   permission:
                     description: |-
-                      Permission to set. Valid values are readonly, readwrite, all, custom and none.
-                      Privilege
+                      Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+                      Desired permission (readonly, readwrite, all, custom, none)
                     type: string
                   region:
                     description: |-
@@ -271,8 +271,8 @@ spec:
                     type: object
                   permission:
                     description: |-
-                      Permission to set. Valid values are readonly, readwrite, all, custom and none.
-                      Privilege
+                      Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+                      Desired permission (readonly, readwrite, all, custom, none)
                     type: string
                   region:
                     description: |-
@@ -394,6 +394,11 @@ spec:
                       Name of the database (e.g. my-db-name).
                       Database name
                     type: string
+                  effectivePermission:
+                    description: |-
+                      The actual permission currently set in Scaleway. May differ from permission after database schema changes (new tables, views, or sequences created).
+                      Actual permission currently set in Scaleway. May differ from 'permission' after database schema changes
+                    type: string
                   id:
                     description: The ID of the user privileges, which is of the form
                       {region}/{instance_id}/{database_name}/{user_name}, e.g. fr-par/11111111-1111-1111-1111-111111111111/database_name/foo
@@ -405,8 +410,13 @@ spec:
                     type: string
                   permission:
                     description: |-
-                      Permission to set. Valid values are readonly, readwrite, all, custom and none.
-                      Privilege
+                      Desired permission level. Valid values are readonly, readwrite, all, custom and none.
+                      Desired permission (readonly, readwrite, all, custom, none)
+                    type: string
+                  permissionStatus:
+                    description: |-
+                      Permission synchronization status. Possible values:
+                      Permission synchronization status: 'synced' if effective matches desired, 'drifted' if they differ
                     type: string
                   region:
                     description: |-
