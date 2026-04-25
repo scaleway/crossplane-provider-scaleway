@@ -173,13 +173,13 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+                      (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
                       Minimum size of the pool
                     type: number
                   name:
                     description: |-
                       The name for the pool.
-                      The name of the cluster
+                      The name of the pool
                     type: string
                   nodeType:
                     description: |-
@@ -385,13 +385,13 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+                      (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
                       Minimum size of the pool
                     type: number
                   name:
                     description: |-
                       The name for the pool.
-                      The name of the cluster
+                      The name of the pool
                     type: string
                   nodeType:
                     description: |-
@@ -591,13 +591,13 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+                      (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
                       Minimum size of the pool
                     type: number
                   name:
                     description: |-
                       The name for the pool.
-                      The name of the cluster
+                      The name of the pool
                     type: string
                   nodeType:
                     description: |-

@@ -119,12 +119,12 @@ spec:
                   passwordWo:
                     description: |-
                       The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The member's password for first access in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   phoneNumber:
                     description: |-
@@ -214,12 +214,12 @@ spec:
                   passwordWo:
                     description: |-
                       The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The member's password for first access in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   phoneNumber:
                     description: |-
@@ -410,12 +410,12 @@ spec:
                   passwordWo:
                     description: |-
                       The password for first access in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
-                      The member's password for first access in [write-only](https://developer.hashicorp. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The member's password for first access in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
                     description: |-
                       The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
-                      The version of the [write-only](https://developer.hashicorp. To update the `password_wo`, you must also update the `password_wo_version`.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   phoneNumber:
                     description: |-

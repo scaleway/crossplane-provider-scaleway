@@ -77,12 +77,12 @@ type PoolInitParameters struct {
 	// Maximum size of the pool
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
-	// (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+	// (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// The name of the cluster
+	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.
@@ -171,12 +171,12 @@ type PoolObservation struct {
 	// Maximum size of the pool
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
-	// (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+	// (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// The name of the cluster
+	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.
@@ -286,13 +286,13 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
-	// (Defaults to 1) The minimum size of the pool, used by the autoscaling feature.
+	// (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.
 	// Minimum size of the pool
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The name for the pool.
-	// The name of the cluster
+	// The name of the pool
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

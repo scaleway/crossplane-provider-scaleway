@@ -91,6 +91,10 @@ type DeploymentObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// URL of OpenSearch Dashboards when served on a public endpoint. With a private network for the API, the API endpoint is private but the dashboard may still be reachable at this public URL.
+	// URL of the OpenSearch Dashboards service when it is exposed on a public endpoint (including when the API uses a private network)
+	PublicDashboardURL *string `json:"publicDashboardUrl,omitempty" tf:"public_dashboard_url,omitempty"`
+
 	// (Defaults to provider region) The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
