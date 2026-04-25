@@ -158,7 +158,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      The password of the MongoDB® user.
+                      The password of the MongoDB® user. Only one of password or password_wo should be specified.
                       MongoDB user password. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
@@ -176,13 +176,14 @@ spec:
                     - namespace
                     type: object
                   passwordWo:
-                    description: MongoDB user password in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
-                    description: The version of the [write-only](https://developer.hashicorp.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   region:
                     description: |-
@@ -312,7 +313,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: |-
-                      The password of the MongoDB® user.
+                      The password of the MongoDB® user. Only one of password or password_wo should be specified.
                       MongoDB user password. Only one of `password` or `password_wo` should be specified.
                     properties:
                       key:
@@ -330,13 +331,14 @@ spec:
                     - namespace
                     type: object
                   passwordWo:
-                    description: MongoDB user password in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
-                    description: The version of the [write-only](https://developer.hashicorp.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   region:
                     description: |-
@@ -477,13 +479,14 @@ spec:
                       MongoDB user name
                     type: string
                   passwordWo:
-                    description: MongoDB user password in [write-only](https://developer.hashicorp.
-                      Only one of `password` or `password_wo` should be specified.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. To update the password_wo, you must also update the password_wo_version.
+                      MongoDB user password in [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: string
                   passwordWoVersion:
-                    description: The version of the [write-only](https://developer.hashicorp.
-                      To update the `password_wo`, you must also update the `password_wo_version`.
+                    description: |-
+                      The version of the write-only password. To update the password_wo, you must also update the password_wo_version.
+                      The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
                     type: number
                   region:
                     description: |-
