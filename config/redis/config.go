@@ -12,5 +12,11 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
 		r.Kind = "Cluster"
+
+		// Late-initializing it collapses to empty entries and
+		// causes a reconcile loop that re-creates the PN endpoint.
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"private_ips"},
+		}
 	})
 }
