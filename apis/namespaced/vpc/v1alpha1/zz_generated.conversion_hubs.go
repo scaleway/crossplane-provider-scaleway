@@ -10,6 +10,9 @@ package v1alpha1
 func (tr *Acl) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Connector) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *GatewayNetwork) Hub() {}
 
 // Hub marks this type as a conversion hub.

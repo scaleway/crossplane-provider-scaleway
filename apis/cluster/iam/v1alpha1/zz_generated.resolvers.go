@@ -56,6 +56,50 @@ func (mg *ApiKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this Certificate.
+func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SAMLID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.SAMLIDRef,
+		Selector:     mg.Spec.ForProvider.SAMLIDSelector,
+		To: reference.To{
+			List:    &SamlList{},
+			Managed: &Saml{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SAMLID")
+	}
+	mg.Spec.ForProvider.SAMLID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SAMLIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SAMLID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.SAMLIDRef,
+		Selector:     mg.Spec.InitProvider.SAMLIDSelector,
+		To: reference.To{
+			List:    &SamlList{},
+			Managed: &Saml{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SAMLID")
+	}
+	mg.Spec.InitProvider.SAMLID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SAMLIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Group.
 func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

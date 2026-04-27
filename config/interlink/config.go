@@ -17,12 +17,5 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
 		r.Kind = "Link"
-
-		r.References["partner_id"] = config.Reference{
-			TerraformName: "data",
-		}
-		r.References["pop_id"] = config.Reference{
-			TerraformName: "data",
-		}
 	})
 }

@@ -13,10 +13,16 @@ func (tr *ApiKey) Hub() {}
 func (tr *Application) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Certificate) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Group) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Policy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Saml) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SSHKey) Hub() {}

@@ -67,17 +67,8 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Exporter"
 
-		r.References["datadog_destination.api_key"] = config.Reference{
-			TerraformName: "var",
-		}
-		r.References["datasource_id"] = config.Reference{
-			TerraformName: "data",
-		}
 		r.References["otlp_destination.endpoint"] = config.Reference{
 			TerraformName: "scaleway_cockpit_source",
-		}
-		r.References["project_id"] = config.Reference{
-			TerraformName: "data",
 		}
 	})
 }

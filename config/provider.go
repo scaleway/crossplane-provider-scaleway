@@ -7,7 +7,6 @@ package config
 import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/interlink"
 	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
-	"github.com/scaleway/crossplane-provider-scaleway/config/objectstorage"
 	"github.com/scaleway/crossplane-provider-scaleway/config/opensearch"
 	"github.com/scaleway/crossplane-provider-scaleway/config/s2svpn"
 
@@ -99,7 +98,6 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		opensearch.Configure,
 		kafka.Configure,
 		interlink.Configure,
-		objectstorage.Configure,
 	}
 }
 

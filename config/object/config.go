@@ -55,4 +55,14 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "WebsiteConfiguration"
 	})
+
+	p.AddResourceConfigurator("scaleway_object_bucket_server_side_encryption_configuration", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Configuration"
+
+		r.References["bucket"] = config.Reference{
+			TerraformName: "scaleway_object_bucket",
+		}
+	})
 }

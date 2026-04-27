@@ -21,6 +21,7 @@ import (
 	volume "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/block/volume"
 	alertmanager "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/alertmanager"
 	cockpit "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/cockpit"
+	exporter "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/exporter"
 	grafanauser "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/grafanauser"
 	source "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/source"
 	token "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/token"
@@ -53,8 +54,10 @@ import (
 	tokenfunction "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/function/token"
 	apikey "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/apikey"
 	application "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/application"
+	certificate "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/certificate"
 	groupiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/group"
 	policyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/policy"
+	saml "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/saml"
 	sshkeyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/sshkey"
 	useriam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/user"
 	deploymentinference "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/inference/deployment"
@@ -69,6 +72,8 @@ import (
 	snapshotinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/instance/snapshot"
 	userdata "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/instance/userdata"
 	volumeinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/instance/volume"
+	link "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/interlink/link"
+	policyinterlink "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/interlink/policy"
 	device "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iot/device"
 	hub "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iot/hub"
 	network "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iot/network"
@@ -82,7 +87,7 @@ import (
 	clusterkafka "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/kafka/cluster"
 	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/keymanager/key"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/backend"
-	certificate "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/certificate"
+	certificatelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/certificate"
 	frontend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/frontend"
 	iplb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/ip"
 	lb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/lb"
@@ -102,6 +107,7 @@ import (
 	usermongodb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mongodb/user"
 	aclobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/acl"
 	bucket "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/bucket"
+	configuration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/configuration"
 	lockconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/lockconfiguration"
 	object "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/object"
 	policyobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/policy"
@@ -129,6 +135,7 @@ import (
 	list "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/tem/list"
 	webhook "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/tem/webhook"
 	aclvpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/acl"
+	connector "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/connector"
 	gatewaynetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/gatewaynetwork"
 	privatenetworkvpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/privatenetwork"
 	publicgateway "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/publicgateway"
@@ -155,6 +162,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		volume.Setup,
 		alertmanager.Setup,
 		cockpit.Setup,
+		exporter.Setup,
 		grafanauser.Setup,
 		source.Setup,
 		token.Setup,
@@ -187,8 +195,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		tokenfunction.Setup,
 		apikey.Setup,
 		application.Setup,
+		certificate.Setup,
 		groupiam.Setup,
 		policyiam.Setup,
+		saml.Setup,
 		sshkeyiam.Setup,
 		useriam.Setup,
 		deploymentinference.Setup,
@@ -203,6 +213,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		snapshotinstance.Setup,
 		userdata.Setup,
 		volumeinstance.Setup,
+		link.Setup,
+		policyinterlink.Setup,
 		device.Setup,
 		hub.Setup,
 		network.Setup,
@@ -216,7 +228,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterkafka.Setup,
 		key.Setup,
 		backend.Setup,
-		certificate.Setup,
+		certificatelb.Setup,
 		frontend.Setup,
 		iplb.Setup,
 		lb.Setup,
@@ -236,6 +248,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		usermongodb.Setup,
 		aclobject.Setup,
 		bucket.Setup,
+		configuration.Setup,
 		lockconfiguration.Setup,
 		object.Setup,
 		policyobject.Setup,
@@ -263,6 +276,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		list.Setup,
 		webhook.Setup,
 		aclvpc.Setup,
+		connector.Setup,
 		gatewaynetwork.Setup,
 		privatenetworkvpc.Setup,
 		publicgateway.Setup,
@@ -295,6 +309,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		volume.SetupGated,
 		alertmanager.SetupGated,
 		cockpit.SetupGated,
+		exporter.SetupGated,
 		grafanauser.SetupGated,
 		source.SetupGated,
 		token.SetupGated,
@@ -327,8 +342,10 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		tokenfunction.SetupGated,
 		apikey.SetupGated,
 		application.SetupGated,
+		certificate.SetupGated,
 		groupiam.SetupGated,
 		policyiam.SetupGated,
+		saml.SetupGated,
 		sshkeyiam.SetupGated,
 		useriam.SetupGated,
 		deploymentinference.SetupGated,
@@ -343,6 +360,8 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		snapshotinstance.SetupGated,
 		userdata.SetupGated,
 		volumeinstance.SetupGated,
+		link.SetupGated,
+		policyinterlink.SetupGated,
 		device.SetupGated,
 		hub.SetupGated,
 		network.SetupGated,
@@ -356,7 +375,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		clusterkafka.SetupGated,
 		key.SetupGated,
 		backend.SetupGated,
-		certificate.SetupGated,
+		certificatelb.SetupGated,
 		frontend.SetupGated,
 		iplb.SetupGated,
 		lb.SetupGated,
@@ -376,6 +395,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		usermongodb.SetupGated,
 		aclobject.SetupGated,
 		bucket.SetupGated,
+		configuration.SetupGated,
 		lockconfiguration.SetupGated,
 		object.SetupGated,
 		policyobject.SetupGated,
@@ -403,6 +423,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		list.SetupGated,
 		webhook.SetupGated,
 		aclvpc.SetupGated,
+		connector.SetupGated,
 		gatewaynetwork.SetupGated,
 		privatenetworkvpc.SetupGated,
 		publicgateway.SetupGated,
