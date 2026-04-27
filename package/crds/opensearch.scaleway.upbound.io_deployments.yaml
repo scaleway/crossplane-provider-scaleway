@@ -445,6 +445,11 @@ spec:
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  publicDashboardUrl:
+                    description: |-
+                      URL of OpenSearch Dashboards when served on a public endpoint. With a private network for the API, the API endpoint is private but the dashboard may still be reachable at this public URL.
+                      URL of the OpenSearch Dashboards service when it is exposed on a public endpoint (including when the API uses a private network)
+                    type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region in which the deployment should be created.

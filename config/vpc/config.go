@@ -112,4 +112,17 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_vpc",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_vpc_connector", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Connector"
+
+		r.References["target_vpc_id"] = config.Reference{
+			TerraformName: "scaleway_vpc",
+		}
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "scaleway_vpc",
+		}
+	})
 }

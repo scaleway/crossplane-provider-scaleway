@@ -2065,6 +2065,11 @@ func (in *PrivilegeObservation) DeepCopyInto(out *PrivilegeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EffectivePermission != nil {
+		in, out := &in.EffectivePermission, &out.EffectivePermission
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -2077,6 +2082,11 @@ func (in *PrivilegeObservation) DeepCopyInto(out *PrivilegeObservation) {
 	}
 	if in.Permission != nil {
 		in, out := &in.Permission, &out.Permission
+		*out = new(string)
+		**out = **in
+	}
+	if in.PermissionStatus != nil {
+		in, out := &in.PermissionStatus, &out.PermissionStatus
 		*out = new(string)
 		**out = **in
 	}
