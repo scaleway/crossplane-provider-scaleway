@@ -13,6 +13,9 @@ func (tr *ACL) Hub() {}
 func (tr *Bucket) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Configuration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *LockConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.

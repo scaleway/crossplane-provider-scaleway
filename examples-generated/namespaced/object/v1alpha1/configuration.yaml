@@ -1,0 +1,34 @@
+apiVersion: object.scaleway.m.upbound.io/v1alpha1
+kind: Configuration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/configuration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: fr-par
+    rule:
+    - applyServerSideEncryptionByDefault:
+      - sseAlgorithm: AES256
+
+---
+
+apiVersion: object.scaleway.m.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/configuration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-unique-bucket-name
+    region: fr-par

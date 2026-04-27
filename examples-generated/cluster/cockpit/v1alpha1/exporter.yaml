@@ -1,0 +1,21 @@
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: Exporter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/exporter
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    datadogDestination:
+    - apiKeySecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      endpoint: https://api.datadoghq.com
+    datasourceId: ${data.scaleway_cockpit_sources.scaleway_metrics.sources[0].id}
+    exportedProducts:
+    - all
+    name: my-datadog-exporter
+    projectId: ${data.scaleway_account_project.project.id}

@@ -61,4 +61,14 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_account_project",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_cockpit_exporter", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Exporter"
+
+		r.References["otlp_destination.endpoint"] = config.Reference{
+			TerraformName: "scaleway_cockpit_source",
+		}
+	})
 }

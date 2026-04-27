@@ -26,6 +26,7 @@ import (
 	v1alpha1iam "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/iam/v1alpha1"
 	v1alpha1inference "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/inference/v1alpha1"
 	v1alpha1instance "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/instance/v1alpha1"
+	v1alpha1interlink "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/interlink/v1alpha1"
 	v1alpha1iot "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/iot/v1alpha1"
 	v1alpha1ipam "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/ipam/v1alpha1"
 	v1alpha1jobs "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/jobs/v1alpha1"
@@ -68,6 +69,7 @@ func init() {
 		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1inference.SchemeBuilder.AddToScheme,
 		v1alpha1instance.SchemeBuilder.AddToScheme,
+		v1alpha1interlink.SchemeBuilder.AddToScheme,
 		v1alpha1iot.SchemeBuilder.AddToScheme,
 		v1alpha1ipam.SchemeBuilder.AddToScheme,
 		v1alpha1jobs.SchemeBuilder.AddToScheme,

@@ -1,0 +1,14 @@
+apiVersion: interlink.scaleway.upbound.io/v1alpha1
+kind: Link
+metadata:
+  annotations:
+    meta.upbound.io/example-id: interlink/v1alpha1/link
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    bandwidthMbps: 50
+    name: my-hosted-link
+    partnerId: ${data.scaleway_interlink_partner.partner.id}
+    popId: ${data.scaleway_interlink_pop.pop.id}

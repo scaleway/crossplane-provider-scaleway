@@ -277,6 +277,16 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkInitParameters, len(*in))
@@ -302,6 +312,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 	if in.ReplicaCount != nil {
 		in, out := &in.ReplicaCount, &out.ReplicaCount
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Started != nil {
+		in, out := &in.Started, &out.Started
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -392,6 +407,16 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkObservation, len(*in))
@@ -424,6 +449,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 	if in.ReplicaCount != nil {
 		in, out := &in.ReplicaCount, &out.ReplicaCount
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Started != nil {
+		in, out := &in.Started, &out.Started
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Status != nil {
@@ -487,6 +517,16 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWo != nil {
+		in, out := &in.PasswordWo, &out.PasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.PrivateNetwork != nil {
 		in, out := &in.PrivateNetwork, &out.PrivateNetwork
 		*out = make([]PrivateNetworkParameters, len(*in))
@@ -512,6 +552,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	if in.ReplicaCount != nil {
 		in, out := &in.ReplicaCount, &out.ReplicaCount
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Started != nil {
+		in, out := &in.Started, &out.Started
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {

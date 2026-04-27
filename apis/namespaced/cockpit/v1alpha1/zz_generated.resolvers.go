@@ -101,6 +101,55 @@ func (mg *Cockpit) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this Exporter.
+func (mg *Exporter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OtlpDestination); i3++ {
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OtlpDestination[i3].Endpoint),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.OtlpDestination[i3].EndpointRef,
+			Selector:     mg.Spec.ForProvider.OtlpDestination[i3].EndpointSelector,
+			To: reference.To{
+				List:    &SourceList{},
+				Managed: &Source{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OtlpDestination[i3].Endpoint")
+		}
+		mg.Spec.ForProvider.OtlpDestination[i3].Endpoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OtlpDestination[i3].EndpointRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OtlpDestination); i3++ {
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OtlpDestination[i3].Endpoint),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.OtlpDestination[i3].EndpointRef,
+			Selector:     mg.Spec.InitProvider.OtlpDestination[i3].EndpointSelector,
+			To: reference.To{
+				List:    &SourceList{},
+				Managed: &Source{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OtlpDestination[i3].Endpoint")
+		}
+		mg.Spec.InitProvider.OtlpDestination[i3].Endpoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OtlpDestination[i3].EndpointRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this GrafanaUser.
 func (mg *GrafanaUser) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)

@@ -1,0 +1,48 @@
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/connector
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-vpc-connector
+    targetVpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc02
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/connector
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-vpc-source
+
+---
+
+apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/connector
+  labels:
+    testing.upbound.io/example-name: vpc02
+  name: vpc02
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-vpc-target

@@ -5,6 +5,7 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/scaleway/crossplane-provider-scaleway/config/interlink"
 	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
 	"github.com/scaleway/crossplane-provider-scaleway/config/opensearch"
 	"github.com/scaleway/crossplane-provider-scaleway/config/s2svpn"
@@ -96,6 +97,7 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		s2svpn.Configure,
 		opensearch.Configure,
 		kafka.Configure,
+		interlink.Configure,
 	}
 }
 
