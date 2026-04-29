@@ -23,6 +23,10 @@ type LinkInitParameters struct {
 	// If set, creates a self-hosted link using this dedicated physical connection
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
+	// Defines whether route propagation is enabled or not. Defaults to false.
+	// Defines whether route propagation is enabled or not. Defaults to false
+	EnableRoutePropagation *bool `json:"enableRoutePropagation,omitempty" tf:"enable_route_propagation,omitempty"`
+
 	// Name of the link. If not provided, a name will be randomly generated.
 	// Name of the link
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -59,6 +63,10 @@ type LinkInitParameters struct {
 	// List of tags associated with the link
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// ID of the Scaleway VPC to attach to the link.
+	// ID of the Scaleway VPC to attach to the link
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
 	// For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.
 	// For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned
 	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
@@ -86,8 +94,8 @@ type LinkObservation struct {
 	// Creation date of the link
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Defines whether route propagation is enabled or not.
-	// Defines whether route propagation is enabled or not
+	// Defines whether route propagation is enabled or not. Defaults to false.
+	// Defines whether route propagation is enabled or not. Defaults to false
 	EnableRoutePropagation *bool `json:"enableRoutePropagation,omitempty" tf:"enable_route_propagation,omitempty"`
 
 	// Unique identifier of the link.
@@ -149,8 +157,8 @@ type LinkObservation struct {
 	// Last modification date of the link
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// ID of the Scaleway VPC attached to the link.
-	// ID of the Scaleway VPC attached to the link
+	// ID of the Scaleway VPC to attach to the link.
+	// ID of the Scaleway VPC to attach to the link
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.
@@ -169,6 +177,11 @@ type LinkParameters struct {
 	// If set, creates a self-hosted link using this dedicated physical connection
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// Defines whether route propagation is enabled or not. Defaults to false.
+	// Defines whether route propagation is enabled or not. Defaults to false
+	// +kubebuilder:validation:Optional
+	EnableRoutePropagation *bool `json:"enableRoutePropagation,omitempty" tf:"enable_route_propagation,omitempty"`
 
 	// Name of the link. If not provided, a name will be randomly generated.
 	// Name of the link
@@ -214,6 +227,11 @@ type LinkParameters struct {
 	// List of tags associated with the link
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// ID of the Scaleway VPC to attach to the link.
+	// ID of the Scaleway VPC to attach to the link
+	// +kubebuilder:validation:Optional
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.
 	// For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned
