@@ -4556,13 +4556,31 @@ resources:
               references:
                 partner_id: data.scaleway_interlink_partner.partner.id
                 pop_id: data.scaleway_interlink_pop.pop.id
+            - name: main
+              manifest: |-
+                {
+                  "bandwidth_mbps": 50,
+                  "name": "my-hosted-link",
+                  "partner_id": "${data.scaleway_interlink_partner.partner.id}",
+                  "pop_id": "${data.scaleway_interlink_pop.pop.id}",
+                  "vpc_id": "${scaleway_vpc.vpc.id}"
+                }
+              references:
+                partner_id: data.scaleway_interlink_partner.partner.id
+                pop_id: data.scaleway_interlink_pop.pop.id
+                vpc_id: scaleway_vpc.vpc.id
+              dependencies:
+                scaleway_vpc.vpc: |-
+                    {
+                      "name": "my-vpc"
+                    }
         argumentDocs:
             bandwidth_mbps: '- (Required) Desired bandwidth for the link. Must be compatible with available link bandwidths and remaining bandwidth capacity of the connection.'
             bgp_v4_status: '- Status of the link''s BGP IPv4 session.'
             bgp_v6_status: '- Status of the link''s BGP IPv6 session.'
             connection_id: '- (Optional) If set, creates a self-hosted link using this dedicated physical connection. Conflicts with partner_id.'
             created_at: '- Creation date of the link (RFC 3339 format).'
-            enable_route_propagation: '- Defines whether route propagation is enabled or not.'
+            enable_route_propagation: '- (Optional) Defines whether route propagation is enabled or not. Defaults to false.'
             id: '- Unique identifier of the link.'
             name: '- (Optional) Name of the link. If not provided, a name will be randomly generated.'
             organization_id: '- Organization ID.'
@@ -4580,7 +4598,7 @@ resources:
             tags: '- (Optional) List of tags to apply to the link.'
             updated_at: '- Last modification date of the link (RFC 3339 format).'
             vlan: '- (Optional) For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.'
-            vpc_id: '- ID of the Scaleway VPC attached to the link.'
+            vpc_id: '- (Optional) ID of the Scaleway VPC to attach to the link.'
         importStatements: []
     scaleway_interlink_routing_policy:
         subCategory: Interlink
