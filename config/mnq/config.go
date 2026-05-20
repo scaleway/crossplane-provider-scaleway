@@ -2,7 +2,10 @@ package mnq
 
 import "github.com/crossplane/upjet/v2/pkg/config"
 
-const shortGroup = "mnq"
+const (
+	shortGroup                  = "mnq"
+	terraformNameAccountProject = "scaleway_account_project"
+)
 
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("scaleway_mnq_sns_topic_subscription", func(r *config.Resource) {
@@ -15,7 +18,7 @@ func Configure(p *config.Provider) {
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("access_key",false)`,
 		}
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 		r.References["secret_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sns_credentials",
@@ -32,7 +35,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "SNS"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -42,7 +45,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "SQSCredentials"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -90,7 +93,7 @@ func Configure(p *config.Provider) {
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("access_key",false)`,
 		}
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 		r.References["secret_key"] = config.Reference{
 			TerraformName: "scaleway_mnq_sqs_credentials",
@@ -108,7 +111,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "SQS"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -118,7 +121,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "SNSCredentials"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 }

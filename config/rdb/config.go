@@ -2,7 +2,10 @@ package rdb
 
 import "github.com/crossplane/upjet/v2/pkg/config"
 
-const shortGroup = "rdb"
+const (
+	shortGroup               = "rdb"
+	terraformNameRDBInstance = "scaleway_rdb_instance"
+)
 
 // Configure adds configurations for rdb resources.
 func Configure(p *config.Provider) {
@@ -14,7 +17,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ACL"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -26,7 +29,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Database"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -38,7 +41,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "DatabaseBackup"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -62,7 +65,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Privilege"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -74,7 +77,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "ReadReplica"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -86,7 +89,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "User"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 
@@ -96,7 +99,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Snapshot"
 
 		r.References["instance_id"] = config.Reference{
-			TerraformName: "scaleway_rdb_instance",
+			TerraformName: terraformNameRDBInstance,
 		}
 	})
 }
