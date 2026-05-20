@@ -2,7 +2,10 @@ package edgeservices
 
 import "github.com/crossplane/upjet/v2/pkg/config"
 
-const shortGroup = "edgeservices"
+const (
+	shortGroup                        = "edgeservices"
+	terraformNameEdgeServicesPipeline = "scaleway_edge_services_pipeline"
+)
 
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("scaleway_edge_services_head_stage", func(r *config.Resource) {
@@ -14,7 +17,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_edge_services_dns_stage",
 		}
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -37,7 +40,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_lb",
 		}
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -50,10 +53,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_edge_services_backend_stage",
 		}
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 		r.References["purge.pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -63,7 +66,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "TLSStage"
 
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -73,7 +76,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "WAFStage"
 
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -90,7 +93,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "DNSStage"
 
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 	})
 
@@ -100,7 +103,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "RouteStage"
 
 		r.References["pipeline_id"] = config.Reference{
-			TerraformName: "scaleway_edge_services_pipeline",
+			TerraformName: terraformNameEdgeServicesPipeline,
 		}
 		r.References["rule.backend_stage_id"] = config.Reference{
 			TerraformName: "scaleway_edge_services_backend_stage",
