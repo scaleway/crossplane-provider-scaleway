@@ -2,7 +2,10 @@ package vpc
 
 import "github.com/crossplane/upjet/v2/pkg/config"
 
-const shortGroup = "vpc"
+const (
+	shortGroup       = "vpc"
+	terraformNameVPC = "scaleway_vpc"
+)
 
 // Configure configures individual resources by adding custom ResourceConfigurators.
 func Configure(p *config.Provider) {
@@ -23,7 +26,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "PrivateNetwork"
 
 		r.References["vpc_id"] = config.Reference{
-			TerraformName: "scaleway_vpc",
+			TerraformName: terraformNameVPC,
 		}
 	})
 
@@ -99,7 +102,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Route"
 
 		r.References["vpc_id"] = config.Reference{
-			TerraformName: "scaleway_vpc",
+			TerraformName: terraformNameVPC,
 		}
 	})
 
@@ -109,7 +112,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Acl"
 
 		r.References["vpc_id"] = config.Reference{
-			TerraformName: "scaleway_vpc",
+			TerraformName: terraformNameVPC,
 		}
 	})
 
@@ -119,10 +122,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "Connector"
 
 		r.References["target_vpc_id"] = config.Reference{
-			TerraformName: "scaleway_vpc",
+			TerraformName: terraformNameVPC,
 		}
 		r.References["vpc_id"] = config.Reference{
-			TerraformName: "scaleway_vpc",
+			TerraformName: terraformNameVPC,
 		}
 	})
 }

@@ -2,7 +2,10 @@ package cockpit
 
 import "github.com/crossplane/upjet/v2/pkg/config"
 
-const shortGroup = "cockpit"
+const (
+	shortGroup                  = "cockpit"
+	terraformNameAccountProject = "scaleway_account_project"
+)
 
 // Configure configures individual resources by adding custom ResourceConfigurators.
 func Configure(p *config.Provider) {
@@ -14,7 +17,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Cockpit"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -26,7 +29,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Token"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -38,7 +41,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "GrafanaUser"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -48,7 +51,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "Source"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
@@ -58,7 +61,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "AlertManager"
 
 		r.References["project_id"] = config.Reference{
-			TerraformName: "scaleway_account_project",
+			TerraformName: terraformNameAccountProject,
 		}
 	})
 
