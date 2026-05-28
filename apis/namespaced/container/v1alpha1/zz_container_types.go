@@ -28,7 +28,7 @@ type ContainerInitParameters struct {
 	// Command executed when the container starts. Overrides the command from the container image.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Boolean indicating whether the container is in a production environment.
+	// (Deprecated) Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
@@ -41,32 +41,48 @@ type ContainerInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// Health check configuration block of the container.
+	// Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+	// If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+	HTTPSConnectionsOnly *bool `json:"httpsConnectionsOnly,omitempty" tf:"https_connections_only,omitempty"`
+
+	// (Deprecated) Health check configuration block of the container.
 	// Health check configuration of the container.
 	HealthCheck []HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Local storage limit of the container (in MB)
+	// The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Defines how to check if the container is running.
+	// Defines how to check if the container is running.
+	LivenessProbe []LivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
+
+	// (Deprecated) Local storage limit of the container (in MB)
 	// Local storage limit of the container (in MB)
 	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
 
-	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-	// The maximum the number of simultaneous requests your container can handle at the same time.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	// Local storage limit of the container (in bytes).
+	// Local storage limit of the container (in bytes)
+	LocalStorageLimitBytes *float64 `json:"localStorageLimitBytes,omitempty" tf:"local_storage_limit_bytes,omitempty"`
 
 	// The maximum number of instances this container can scale to.
 	// The maximum of number of instances this container can scale to.
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory resources in MB to allocate to each container.
+	// (Deprecated) The memory resources in MB to allocate to each container.
 	// The memory computing resources in MB to allocate to each container.
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
+	// The memory resources in bytes to allocate to each container.
+	// The memory computing resources in bytes to allocate to each container.
+	MemoryLimitBytes *float64 `json:"memoryLimitBytes,omitempty" tf:"memory_limit_bytes,omitempty"`
+
 	// The minimum number of container instances running continuously.
-	// The minimum of running container instances continuously.
+	// The minimum of number of instances this container can scale to.
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
 	// The unique name of the container name.
@@ -91,7 +107,7 @@ type ContainerInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-	// The privacy type define the way to authenticate to your container
+	// The privacy type defines the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
 	// The ID of the Private Network the container is connected to.
@@ -106,7 +122,7 @@ type ContainerInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
@@ -124,9 +140,8 @@ type ContainerInitParameters struct {
 
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
-	// The container status.
-	// The container status
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	// Defines how to check if the container has started successfully.
+	StartupProbe []StartupProbeInitParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
 
 	// The list of tags associated with the container.
 	// List of tags ["tag1", "tag2", ...] attached to the container.
@@ -155,7 +170,7 @@ type ContainerObservation struct {
 	// The cron status
 	CronStatus *string `json:"cronStatus,omitempty" tf:"cron_status,omitempty"`
 
-	// Boolean indicating whether the container is in a production environment.
+	// (Deprecated) Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
 
@@ -176,35 +191,51 @@ type ContainerObservation struct {
 	// The error description
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 
-	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// Health check configuration block of the container.
+	// Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+	// If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+	HTTPSConnectionsOnly *bool `json:"httpsConnectionsOnly,omitempty" tf:"https_connections_only,omitempty"`
+
+	// (Deprecated) Health check configuration block of the container.
 	// Health check configuration of the container.
 	HealthCheck []HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
 	// The unique identifier of the container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Local storage limit of the container (in MB)
+	// The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Defines how to check if the container is running.
+	// Defines how to check if the container is running.
+	LivenessProbe []LivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
+
+	// (Deprecated) Local storage limit of the container (in MB)
 	// Local storage limit of the container (in MB)
 	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
 
-	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-	// The maximum the number of simultaneous requests your container can handle at the same time.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	// Local storage limit of the container (in bytes).
+	// Local storage limit of the container (in bytes)
+	LocalStorageLimitBytes *float64 `json:"localStorageLimitBytes,omitempty" tf:"local_storage_limit_bytes,omitempty"`
 
 	// The maximum number of instances this container can scale to.
 	// The maximum of number of instances this container can scale to.
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory resources in MB to allocate to each container.
+	// (Deprecated) The memory resources in MB to allocate to each container.
 	// The memory computing resources in MB to allocate to each container.
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
+	// The memory resources in bytes to allocate to each container.
+	// The memory computing resources in bytes to allocate to each container.
+	MemoryLimitBytes *float64 `json:"memoryLimitBytes,omitempty" tf:"memory_limit_bytes,omitempty"`
+
 	// The minimum number of container instances running continuously.
-	// The minimum of running container instances continuously.
+	// The minimum of number of instances this container can scale to.
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
 	// The unique name of the container name.
@@ -220,7 +251,7 @@ type ContainerObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-	// The privacy type define the way to authenticate to your container
+	// The privacy type defines the way to authenticate to your container
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
 	// The ID of the Private Network the container is connected to.
@@ -231,11 +262,15 @@ type ContainerObservation struct {
 	// The communication protocol http1 or h2c. Defaults to http1.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The native domain name of the container
+	// Public URL of the container. This is the default endpoint generated by Scaleway to access the container from the Internet.
+	PublicEndpoint *string `json:"publicEndpoint,omitempty" tf:"public_endpoint,omitempty"`
+
 	// (Defaults to provider region) The region in which the container was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
 
@@ -250,6 +285,9 @@ type ContainerObservation struct {
 	// Configuration block used to decide when to scale up or down. Possible values:
 	// Configuration used to decide when to scale up or down.
 	ScalingOption []ScalingOptionObservation `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
+
+	// Defines how to check if the container has started successfully.
+	StartupProbe []StartupProbeObservation `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
 
 	// The container status.
 	// The container status
@@ -281,7 +319,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Boolean indicating whether the container is in a production environment.
+	// (Deprecated) Boolean indicating whether the container is in a production environment.
 	// This allows you to control your production environment
 	// +kubebuilder:validation:Optional
 	Deploy *bool `json:"deploy,omitempty" tf:"deploy,omitempty"`
@@ -297,38 +335,58 @@ type ContainerParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+	// (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
 	// HTTP traffic configuration
 	// +kubebuilder:validation:Optional
 	HTTPOption *string `json:"httpOption,omitempty" tf:"http_option,omitempty"`
 
-	// Health check configuration block of the container.
+	// Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+	// If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+	// +kubebuilder:validation:Optional
+	HTTPSConnectionsOnly *bool `json:"httpsConnectionsOnly,omitempty" tf:"https_connections_only,omitempty"`
+
+	// (Deprecated) Health check configuration block of the container.
 	// Health check configuration of the container.
 	// +kubebuilder:validation:Optional
 	HealthCheck []HealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Local storage limit of the container (in MB)
+	// The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+	// +kubebuilder:validation:Optional
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Defines how to check if the container is running.
+	// Defines how to check if the container is running.
+	// +kubebuilder:validation:Optional
+	LivenessProbe []LivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
+
+	// (Deprecated) Local storage limit of the container (in MB)
 	// Local storage limit of the container (in MB)
 	// +kubebuilder:validation:Optional
 	LocalStorageLimit *float64 `json:"localStorageLimit,omitempty" tf:"local_storage_limit,omitempty"`
 
-	// (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-	// The maximum the number of simultaneous requests your container can handle at the same time.
+	// Local storage limit of the container (in bytes).
+	// Local storage limit of the container (in bytes)
 	// +kubebuilder:validation:Optional
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	LocalStorageLimitBytes *float64 `json:"localStorageLimitBytes,omitempty" tf:"local_storage_limit_bytes,omitempty"`
 
 	// The maximum number of instances this container can scale to.
 	// The maximum of number of instances this container can scale to.
 	// +kubebuilder:validation:Optional
 	MaxScale *float64 `json:"maxScale,omitempty" tf:"max_scale,omitempty"`
 
-	// The memory resources in MB to allocate to each container.
+	// (Deprecated) The memory resources in MB to allocate to each container.
 	// The memory computing resources in MB to allocate to each container.
 	// +kubebuilder:validation:Optional
 	MemoryLimit *float64 `json:"memoryLimit,omitempty" tf:"memory_limit,omitempty"`
 
+	// The memory resources in bytes to allocate to each container.
+	// The memory computing resources in bytes to allocate to each container.
+	// +kubebuilder:validation:Optional
+	MemoryLimitBytes *float64 `json:"memoryLimitBytes,omitempty" tf:"memory_limit_bytes,omitempty"`
+
 	// The minimum number of container instances running continuously.
-	// The minimum of running container instances continuously.
+	// The minimum of number of instances this container can scale to.
 	// +kubebuilder:validation:Optional
 	MinScale *float64 `json:"minScale,omitempty" tf:"min_scale,omitempty"`
 
@@ -357,7 +415,7 @@ type ContainerParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-	// The privacy type define the way to authenticate to your container
+	// The privacy type defines the way to authenticate to your container
 	// +kubebuilder:validation:Optional
 	Privacy *string `json:"privacy,omitempty" tf:"privacy,omitempty"`
 
@@ -376,7 +434,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+	// (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
 	// The scaleway registry image address
 	// +kubebuilder:validation:Optional
 	RegistryImage *string `json:"registryImage,omitempty" tf:"registry_image,omitempty"`
@@ -401,10 +459,9 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.LocalSecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
-	// The container status.
-	// The container status
+	// Defines how to check if the container has started successfully.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	StartupProbe []StartupProbeParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
 
 	// The list of tags associated with the container.
 	// List of tags ["tag1", "tag2", ...] attached to the container.
@@ -436,7 +493,7 @@ type HTTPParameters struct {
 	// Path to use for the HTTP health check.
 	// Path to use for the HTTP health check.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path" tf:"path,omitempty"`
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type HealthCheckInitParameters struct {
@@ -452,6 +509,10 @@ type HealthCheckInitParameters struct {
 	// Period between health checks (in seconds).
 	// Period between health checks.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type HealthCheckObservation struct {
@@ -467,6 +528,10 @@ type HealthCheckObservation struct {
 	// Period between health checks (in seconds).
 	// Period between health checks.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type HealthCheckParameters struct {
@@ -474,17 +539,118 @@ type HealthCheckParameters struct {
 	// Number of consecutive health check failures before considering the container unhealthy.
 	// Number of consecutive health check failures before considering the container unhealthy.
 	// +kubebuilder:validation:Optional
-	FailureThreshold *float64 `json:"failureThreshold" tf:"failure_threshold,omitempty"`
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
 	// HTTP health check configuration.
 	// HTTP health check configuration.
 	// +kubebuilder:validation:Optional
-	HTTP []HTTPParameters `json:"http" tf:"http,omitempty"`
+	HTTP []HTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
 
 	// Period between health checks (in seconds).
 	// Period between health checks.
 	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	// +kubebuilder:validation:Optional
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+}
+
+type LivenessProbeHTTPInitParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type LivenessProbeHTTPObservation struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type LivenessProbeHTTPParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+}
+
+type LivenessProbeInitParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	HTTP []LivenessProbeHTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type LivenessProbeObservation struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	HTTP []LivenessProbeHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type LivenessProbeParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	// +kubebuilder:validation:Optional
+	FailureThreshold *float64 `json:"failureThreshold" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	// +kubebuilder:validation:Optional
+	HTTP []LivenessProbeHTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	// +kubebuilder:validation:Optional
 	Interval *string `json:"interval" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	// +kubebuilder:validation:Optional
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	// +kubebuilder:validation:Optional
+	Timeout *string `json:"timeout" tf:"timeout,omitempty"`
 }
 
 type ScalingOptionInitParameters struct {
@@ -533,6 +699,102 @@ type ScalingOptionParameters struct {
 	// Scale depending on the memory usage of a container instance.
 	// +kubebuilder:validation:Optional
 	MemoryUsageThreshold *float64 `json:"memoryUsageThreshold,omitempty" tf:"memory_usage_threshold,omitempty"`
+}
+
+type StartupProbeHTTPInitParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type StartupProbeHTTPObservation struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type StartupProbeHTTPParameters struct {
+
+	// Path to use for the HTTP health check.
+	// Path to use for the HTTP health check.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+}
+
+type StartupProbeInitParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	HTTP []StartupProbeHTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type StartupProbeObservation struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	HTTP []StartupProbeHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type StartupProbeParameters struct {
+
+	// Number of consecutive health check failures before considering the container unhealthy.
+	// Number of consecutive failures before considering the container has to be restarted.
+	// +kubebuilder:validation:Optional
+	FailureThreshold *float64 `json:"failureThreshold" tf:"failure_threshold,omitempty"`
+
+	// Perform HTTP check on the container with the specified path.
+	// Perform HTTP check on the container with the specified path.
+	// +kubebuilder:validation:Optional
+	HTTP []StartupProbeHTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Time interval between checks (in duration notation, e.g. "30s").
+	// Time interval between checks (in duration notation).
+	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval" tf:"interval,omitempty"`
+
+	// When set to true, performs TCP checks on the container.
+	// Perform TCP check on the container
+	// +kubebuilder:validation:Optional
+	TCP *bool `json:"tcp,omitempty" tf:"tcp,omitempty"`
+
+	// The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+	// Duration before the check times out (in duration notation).
+	// +kubebuilder:validation:Optional
+	Timeout *string `json:"timeout" tf:"timeout,omitempty"`
 }
 
 // ContainerSpec defines the desired state of Container

@@ -73,11 +73,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  activateVpcIntegration:
-                    description: |-
-                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-                      Activate VPC integration for the namespace
-                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -145,11 +140,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  activateVpcIntegration:
-                    description: |-
-                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-                      Activate VPC integration for the namespace
-                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -284,11 +274,6 @@ spec:
             properties:
               atProvider:
                 properties:
-                  activateVpcIntegration:
-                    description: |-
-                      (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-                      Activate VPC integration for the namespace
-                    type: boolean
                   description:
                     description: |-
                       The description of the namespace.
@@ -330,12 +315,12 @@ spec:
                     type: string
                   registryEndpoint:
                     description: |-
-                      The registry endpoint of the namespace.
+                      (Deprecated) The registry endpoint of the namespace.
                       The endpoint reachable by docker
                     type: string
                   registryNamespaceId:
                     description: |-
-                      The registry namespace ID of the namespace.
+                      (Deprecated) The registry namespace ID of the namespace.
                       The ID of the registry namespace
                     type: string
                   tags:

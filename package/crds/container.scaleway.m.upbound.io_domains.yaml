@@ -355,7 +355,7 @@ spec:
                     type: string
                   url:
                     description: |-
-                      The URL used to query the container.
+                      (Deprecated) The URL used to query the container.
                       URL used to query the container
                     type: string
                 type: object

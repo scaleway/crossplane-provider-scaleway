@@ -79,7 +79,7 @@ spec:
                     type: number
                   deploy:
                     description: |-
-                      Boolean indicating whether the container is in a production environment.
+                      (Deprecated) Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -97,7 +97,7 @@ spec:
                     x-kubernetes-map-type: granular
                   healthCheck:
                     description: |-
-                      Health check configuration block of the container.
+                      (Deprecated) Health check configuration block of the container.
                       Health check configuration of the container.
                     items:
                       properties:
@@ -124,22 +124,78 @@ spec:
                             Period between health checks (in seconds).
                             Period between health checks.
                           type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
                       type: object
                     type: array
                   httpOption:
                     description: |-
-                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
+                  httpsConnectionsOnly:
+                    description: |-
+                      Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+                      If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+                    type: boolean
+                  image:
+                    description: |-
+                      The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+                    type: string
+                  livenessProbe:
+                    description: |-
+                      Defines how to check if the container is running.
+                      Defines how to check if the container is running.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
+                      type: object
+                    type: array
                   localStorageLimit:
                     description: |-
-                      Local storage limit of the container (in MB)
+                      (Deprecated) Local storage limit of the container (in MB)
                       Local storage limit of the container (in MB)
                     type: number
-                  maxConcurrency:
+                  localStorageLimitBytes:
                     description: |-
-                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-                      The maximum the number of simultaneous requests your container can handle at the same time.
+                      Local storage limit of the container (in bytes).
+                      Local storage limit of the container (in bytes)
                     type: number
                   maxScale:
                     description: |-
@@ -148,13 +204,18 @@ spec:
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory resources in MB to allocate to each container.
+                      (Deprecated) The memory resources in MB to allocate to each container.
                       The memory computing resources in MB to allocate to each container.
+                    type: number
+                  memoryLimitBytes:
+                    description: |-
+                      The memory resources in bytes to allocate to each container.
+                      The memory computing resources in bytes to allocate to each container.
                     type: number
                   minScale:
                     description: |-
                       The minimum number of container instances running continuously.
-                      The minimum of running container instances continuously.
+                      The minimum of number of instances this container can scale to.
                     type: number
                   name:
                     description: |-
@@ -256,7 +317,7 @@ spec:
                   privacy:
                     description: |-
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-                      The privacy type define the way to authenticate to your container
+                      The privacy type defines the way to authenticate to your container
                     type: string
                   privateNetworkId:
                     description: |-
@@ -275,7 +336,7 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
@@ -322,11 +383,46 @@ spec:
                     required:
                     - name
                     type: object
-                  status:
-                    description: |-
-                      The container status.
-                      The container status
-                    type: string
+                  startupProbe:
+                    description: Defines how to check if the container has started
+                      successfully.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     description: |-
                       The list of tags associated with the container.
@@ -374,7 +470,7 @@ spec:
                     type: number
                   deploy:
                     description: |-
-                      Boolean indicating whether the container is in a production environment.
+                      (Deprecated) Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -392,7 +488,7 @@ spec:
                     x-kubernetes-map-type: granular
                   healthCheck:
                     description: |-
-                      Health check configuration block of the container.
+                      (Deprecated) Health check configuration block of the container.
                       Health check configuration of the container.
                     items:
                       properties:
@@ -419,22 +515,78 @@ spec:
                             Period between health checks (in seconds).
                             Period between health checks.
                           type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
                       type: object
                     type: array
                   httpOption:
                     description: |-
-                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
+                  httpsConnectionsOnly:
+                    description: |-
+                      Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+                      If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+                    type: boolean
+                  image:
+                    description: |-
+                      The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+                    type: string
+                  livenessProbe:
+                    description: |-
+                      Defines how to check if the container is running.
+                      Defines how to check if the container is running.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
+                      type: object
+                    type: array
                   localStorageLimit:
                     description: |-
-                      Local storage limit of the container (in MB)
+                      (Deprecated) Local storage limit of the container (in MB)
                       Local storage limit of the container (in MB)
                     type: number
-                  maxConcurrency:
+                  localStorageLimitBytes:
                     description: |-
-                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-                      The maximum the number of simultaneous requests your container can handle at the same time.
+                      Local storage limit of the container (in bytes).
+                      Local storage limit of the container (in bytes)
                     type: number
                   maxScale:
                     description: |-
@@ -443,13 +595,18 @@ spec:
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory resources in MB to allocate to each container.
+                      (Deprecated) The memory resources in MB to allocate to each container.
                       The memory computing resources in MB to allocate to each container.
+                    type: number
+                  memoryLimitBytes:
+                    description: |-
+                      The memory resources in bytes to allocate to each container.
+                      The memory computing resources in bytes to allocate to each container.
                     type: number
                   minScale:
                     description: |-
                       The minimum number of container instances running continuously.
-                      The minimum of running container instances continuously.
+                      The minimum of number of instances this container can scale to.
                     type: number
                   name:
                     description: |-
@@ -551,7 +708,7 @@ spec:
                   privacy:
                     description: |-
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-                      The privacy type define the way to authenticate to your container
+                      The privacy type defines the way to authenticate to your container
                     type: string
                   privateNetworkId:
                     description: |-
@@ -570,7 +727,7 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
@@ -610,11 +767,46 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                  status:
-                    description: |-
-                      The container status.
-                      The container status
-                    type: string
+                  startupProbe:
+                    description: Defines how to check if the container has started
+                      successfully.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     description: |-
                       The list of tags associated with the container.
@@ -717,7 +909,7 @@ spec:
                     type: string
                   deploy:
                     description: |-
-                      Boolean indicating whether the container is in a production environment.
+                      (Deprecated) Boolean indicating whether the container is in a production environment.
                       This allows you to control your production environment
                     type: boolean
                   description:
@@ -745,7 +937,7 @@ spec:
                     type: string
                   healthCheck:
                     description: |-
-                      Health check configuration block of the container.
+                      (Deprecated) Health check configuration block of the container.
                       Health check configuration of the container.
                     items:
                       properties:
@@ -772,25 +964,81 @@ spec:
                             Period between health checks (in seconds).
                             Period between health checks.
                           type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
                       type: object
                     type: array
                   httpOption:
                     description: |-
-                      Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
+                      (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.
                       HTTP traffic configuration
                     type: string
+                  httpsConnectionsOnly:
+                    description: |-
+                      Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.
+                      If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
+                    type: boolean
                   id:
                     description: The unique identifier of the container.
                     type: string
+                  image:
+                    description: |-
+                      The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
+                    type: string
+                  livenessProbe:
+                    description: |-
+                      Defines how to check if the container is running.
+                      Defines how to check if the container is running.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
+                      type: object
+                    type: array
                   localStorageLimit:
                     description: |-
-                      Local storage limit of the container (in MB)
+                      (Deprecated) Local storage limit of the container (in MB)
                       Local storage limit of the container (in MB)
                     type: number
-                  maxConcurrency:
+                  localStorageLimitBytes:
                     description: |-
-                      (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.
-                      The maximum the number of simultaneous requests your container can handle at the same time.
+                      Local storage limit of the container (in bytes).
+                      Local storage limit of the container (in bytes)
                     type: number
                   maxScale:
                     description: |-
@@ -799,13 +1047,18 @@ spec:
                     type: number
                   memoryLimit:
                     description: |-
-                      The memory resources in MB to allocate to each container.
+                      (Deprecated) The memory resources in MB to allocate to each container.
                       The memory computing resources in MB to allocate to each container.
+                    type: number
+                  memoryLimitBytes:
+                    description: |-
+                      The memory resources in bytes to allocate to each container.
+                      The memory computing resources in bytes to allocate to each container.
                     type: number
                   minScale:
                     description: |-
                       The minimum number of container instances running continuously.
-                      The minimum of running container instances continuously.
+                      The minimum of number of instances this container can scale to.
                     type: number
                   name:
                     description: |-
@@ -825,7 +1078,7 @@ spec:
                   privacy:
                     description: |-
                       The privacy type defines the way to authenticate to your container. Please check our dedicated section.
-                      The privacy type define the way to authenticate to your container
+                      The privacy type defines the way to authenticate to your container
                     type: string
                   privateNetworkId:
                     description: |-
@@ -837,6 +1090,11 @@ spec:
                       The communication protocol http1 or h2c. Defaults to http1.
                       The communication protocol http1 or h2c. Defaults to http1.
                     type: string
+                  publicEndpoint:
+                    description: |-
+                      The native domain name of the container
+                      Public URL of the container. This is the default endpoint generated by Scaleway to access the container from the Internet.
+                    type: string
                   region:
                     description: |-
                       (Defaults to provider region) The region in which the container was created.
@@ -844,7 +1102,7 @@ spec:
                     type: string
                   registryImage:
                     description: |-
-                      The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
+                      (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)
                       The scaleway registry image address
                     type: string
                   registrySha256:
@@ -878,6 +1136,46 @@ spec:
                             Scale depending on the memory usage of a container instance.
                             Scale depending on the memory usage of a container instance.
                           type: number
+                      type: object
+                    type: array
+                  startupProbe:
+                    description: Defines how to check if the container has started
+                      successfully.
+                    items:
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            Number of consecutive health check failures before considering the container unhealthy.
+                            Number of consecutive failures before considering the container has to be restarted.
+                          type: number
+                        http:
+                          description: |-
+                            Perform HTTP check on the container with the specified path.
+                            Perform HTTP check on the container with the specified path.
+                          items:
+                            properties:
+                              path:
+                                description: |-
+                                  Path to use for the HTTP health check.
+                                  Path to use for the HTTP health check.
+                                type: string
+                            type: object
+                          type: array
+                        interval:
+                          description: |-
+                            Time interval between checks (in duration notation, e.g. "30s").
+                            Time interval between checks (in duration notation).
+                          type: string
+                        tcp:
+                          description: |-
+                            When set to true, performs TCP checks on the container.
+                            Perform TCP check on the container
+                          type: boolean
+                        timeout:
+                          description: |-
+                            The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.
+                            Duration before the check times out (in duration notation).
+                          type: string
                       type: object
                     type: array
                   status:

@@ -314,6 +314,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ShardCount != nil {
+		in, out := &in.ShardCount, &out.ShardCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Started != nil {
 		in, out := &in.Started, &out.Started
 		*out = new(bool)
@@ -451,6 +456,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ShardCount != nil {
+		in, out := &in.ShardCount, &out.ShardCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Started != nil {
 		in, out := &in.Started, &out.Started
 		*out = new(bool)
@@ -551,6 +561,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	}
 	if in.ReplicaCount != nil {
 		in, out := &in.ReplicaCount, &out.ReplicaCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.ShardCount != nil {
+		in, out := &in.ShardCount, &out.ShardCount
 		*out = new(float64)
 		**out = **in
 	}

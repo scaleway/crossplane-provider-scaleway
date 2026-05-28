@@ -15,10 +15,6 @@ import (
 
 type ContainerNamespaceInitParameters struct {
 
-	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
-
 	// The description of the namespace.
 	// The description of the container namespace
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -52,10 +48,6 @@ type ContainerNamespaceInitParameters struct {
 
 type ContainerNamespaceObservation struct {
 
-	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
-
 	// The description of the namespace.
 	// The description of the container namespace
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -87,11 +79,11 @@ type ContainerNamespaceObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The registry endpoint of the namespace.
+	// (Deprecated) The registry endpoint of the namespace.
 	// The endpoint reachable by docker
 	RegistryEndpoint *string `json:"registryEndpoint,omitempty" tf:"registry_endpoint,omitempty"`
 
-	// The registry namespace ID of the namespace.
+	// (Deprecated) The registry namespace ID of the namespace.
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
 
@@ -101,11 +93,6 @@ type ContainerNamespaceObservation struct {
 }
 
 type ContainerNamespaceParameters struct {
-
-	// (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	// +kubebuilder:validation:Optional
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the container namespace

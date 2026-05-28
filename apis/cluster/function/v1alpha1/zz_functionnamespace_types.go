@@ -15,10 +15,6 @@ import (
 
 type FunctionNamespaceInitParameters struct {
 
-	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
-
 	// The description of the namespace.
 	// The description of the function namespace
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -48,10 +44,6 @@ type FunctionNamespaceInitParameters struct {
 }
 
 type FunctionNamespaceObservation struct {
-
-	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the function namespace
@@ -95,11 +87,6 @@ type FunctionNamespaceObservation struct {
 }
 
 type FunctionNamespaceParameters struct {
-
-	// (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.
-	// Activate VPC integration for the namespace
-	// +kubebuilder:validation:Optional
-	ActivateVPCIntegration *bool `json:"activateVpcIntegration,omitempty" tf:"activate_vpc_integration,omitempty"`
 
 	// The description of the namespace.
 	// The description of the function namespace
