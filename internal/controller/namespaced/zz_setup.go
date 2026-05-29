@@ -58,6 +58,7 @@ import (
 	groupiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/group"
 	policyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/policy"
 	saml "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/saml"
+	scim "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/scim"
 	sshkeyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/sshkey"
 	useriam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/user"
 	deploymentinference "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/inference/deployment"
@@ -199,6 +200,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		groupiam.Setup,
 		policyiam.Setup,
 		saml.Setup,
+		scim.Setup,
 		sshkeyiam.Setup,
 		useriam.Setup,
 		deploymentinference.Setup,
@@ -346,6 +348,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		groupiam.SetupGated,
 		policyiam.SetupGated,
 		saml.SetupGated,
+		scim.SetupGated,
 		sshkeyiam.SetupGated,
 		useriam.SetupGated,
 		deploymentinference.SetupGated,
