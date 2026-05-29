@@ -52,6 +52,11 @@ func (in *LinkInitParameters) DeepCopyInto(out *LinkInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableRoutePropagation != nil {
+		in, out := &in.EnableRoutePropagation, &out.EnableRoutePropagation
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -102,6 +107,11 @@ func (in *LinkInitParameters) DeepCopyInto(out *LinkInitParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.VPCID != nil {
+		in, out := &in.VPCID, &out.VPCID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
@@ -305,6 +315,11 @@ func (in *LinkParameters) DeepCopyInto(out *LinkParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableRoutePropagation != nil {
+		in, out := &in.EnableRoutePropagation, &out.EnableRoutePropagation
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -355,6 +370,11 @@ func (in *LinkParameters) DeepCopyInto(out *LinkParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.VPCID != nil {
+		in, out := &in.VPCID, &out.VPCID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan

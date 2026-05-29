@@ -82,6 +82,11 @@ spec:
                       If set, creates a self-hosted link using this dedicated physical connection. Conflicts with partner_id.
                       If set, creates a self-hosted link using this dedicated physical connection
                     type: string
+                  enableRoutePropagation:
+                    description: |-
+                      Defines whether route propagation is enabled or not. Defaults to false.
+                      Defines whether route propagation is enabled or not. Defaults to false
+                    type: boolean
                   name:
                     description: |-
                       Name of the link. If not provided, a name will be randomly generated.
@@ -134,6 +139,11 @@ spec:
                       For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.
                       For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned
                     type: number
+                  vpcId:
+                    description: |-
+                      ID of the Scaleway VPC to attach to the link.
+                      ID of the Scaleway VPC to attach to the link
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -158,6 +168,11 @@ spec:
                       If set, creates a self-hosted link using this dedicated physical connection. Conflicts with partner_id.
                       If set, creates a self-hosted link using this dedicated physical connection
                     type: string
+                  enableRoutePropagation:
+                    description: |-
+                      Defines whether route propagation is enabled or not. Defaults to false.
+                      Defines whether route propagation is enabled or not. Defaults to false
+                    type: boolean
                   name:
                     description: |-
                       Name of the link. If not provided, a name will be randomly generated.
@@ -210,6 +225,11 @@ spec:
                       For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.
                       For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned
                     type: number
+                  vpcId:
+                    description: |-
+                      ID of the Scaleway VPC to attach to the link.
+                      ID of the Scaleway VPC to attach to the link
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -338,8 +358,8 @@ spec:
                     type: string
                   enableRoutePropagation:
                     description: |-
-                      Defines whether route propagation is enabled or not.
-                      Defines whether route propagation is enabled or not
+                      Defines whether route propagation is enabled or not. Defaults to false.
+                      Defines whether route propagation is enabled or not. Defaults to false
                     type: boolean
                   id:
                     description: Unique identifier of the link.
@@ -441,8 +461,8 @@ spec:
                     type: number
                   vpcId:
                     description: |-
-                      ID of the Scaleway VPC attached to the link.
-                      ID of the Scaleway VPC attached to the link
+                      ID of the Scaleway VPC to attach to the link.
+                      ID of the Scaleway VPC to attach to the link
                     type: string
                 type: object
               conditions:

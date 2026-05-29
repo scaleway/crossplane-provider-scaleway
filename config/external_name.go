@@ -143,6 +143,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_interlink_link":                                     config.NameAsIdentifier,
 	"scaleway_vpc_connector":                                      config.NameAsIdentifier,
 	"scaleway_iam_saml_certificate":                               config.NameAsIdentifier,
+	"scaleway_iam_scim":                                           config.NameAsIdentifier,
 	"scaleway_vpc_route":                                          config.NameAsIdentifier,
 }
 

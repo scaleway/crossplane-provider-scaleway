@@ -54,7 +54,7 @@ type DomainObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The URL used to query the container.
+	// (Deprecated) The URL used to query the container.
 	// URL used to query the container
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }

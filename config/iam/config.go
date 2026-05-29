@@ -96,4 +96,11 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_iam_saml",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_iam_scim", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Scim"
+
+	})
 }

@@ -59,6 +59,9 @@ type DeploymentInitParameters struct {
 	// Number of replicas
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
+	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
+
 	// Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
 	// Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
 	Started *bool `json:"started,omitempty" tf:"started,omitempty"`
@@ -124,6 +127,9 @@ type DeploymentObservation struct {
 	// Number of replicas. Can be updated in place via the deployment configuration API.
 	// Number of replicas
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
 	// Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
@@ -202,6 +208,10 @@ type DeploymentParameters struct {
 	// Number of replicas
 	// +kubebuilder:validation:Optional
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+	// +kubebuilder:validation:Optional
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
 	// Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.

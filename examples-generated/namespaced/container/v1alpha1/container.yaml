@@ -17,22 +17,19 @@ spec:
     - -c
     - script.sh
     cpuLimit: 1024
-    deploy: true
-    description: environment variables test
+    description: This container has a description.
     environmentVariables:
       foo: var
-    maxConcurrency: 80
+    image: nginx:latest
     maxScale: 5
-    memoryLimit: 2048
+    memoryLimitBytes: 2048000000
     minScale: 3
-    name: my-container-02
+    name: my-container
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
-    port: 9997
-    privacy: private
+    port: 80
     protocol: http1
-    registryImage: ${scaleway_container_namespace.main.registry_endpoint}/alpine:test
     secretEnvironmentVariablesSecretRef:
       key: example-key
       name: example-secret
@@ -53,6 +50,4 @@ metadata:
   name: main
   namespace: upbound-system
 spec:
-  forProvider:
-    description: test container
-    name: my-ns-test
+  forProvider: {}

@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.1
-  name: functionnamespaces.function.scaleway.m.upbound.io
+  name: scims.iam.scaleway.m.upbound.io
 spec:
-  group: function.scaleway.m.upbound.io
+  group: iam.scaleway.m.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - scaleway
-    kind: FunctionNamespace
-    listKind: FunctionNamespaceList
-    plural: functionnamespaces
-    singular: functionnamespace
+    kind: Scim
+    listKind: ScimList
+    plural: scims
+    singular: scim
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: FunctionNamespace is the Schema for the FunctionNamespaces API.
+        description: Scim is the Schema for the Scims API.
         properties:
           apiVersion:
             description: |-
@@ -54,56 +54,15 @@ spec:
           metadata:
             type: object
           spec:
-            description: FunctionNamespaceSpec defines the desired state of FunctionNamespace
+            description: ScimSpec defines the desired state of Scim
             properties:
               forProvider:
                 properties:
-                  description:
+                  organizationId:
                     description: |-
-                      The description of the namespace.
-                      The description of the function namespace
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
-                  environmentVariables:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The environment variables of the namespace.
-                      The environment variables of the function namespace
-                    type: object
-                    x-kubernetes-map-type: granular
-                  name:
-                    description: |-
-                      The unique name of the Functions namespace.
-                      The name of the function namespace
-                    type: string
-                  projectId:
-                    description: |-
-                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
-                      The project_id you want to attach the resource to
-                    type: string
-                  region:
-                    description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
-                      The region you want to attach the resource to
-                    type: string
-                  secretEnvironmentVariablesSecretRef:
-                    description: |-
-                      The secret environment variables of the namespace.
-                      The environment variables of the function namespace
-                    properties:
-                      name:
-                        description: Name of the secret.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  tags:
-                    description: |-
-                      The list of tags associated with the namespace.
-                      List of tags ["tag1", "tag2", ...] attached to the function namespace
-                    items:
-                      type: string
-                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -118,45 +77,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  description:
+                  organizationId:
                     description: |-
-                      The description of the namespace.
-                      The description of the function namespace
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
-                  environmentVariables:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The environment variables of the namespace.
-                      The environment variables of the function namespace
-                    type: object
-                    x-kubernetes-map-type: granular
-                  name:
-                    description: |-
-                      The unique name of the Functions namespace.
-                      The name of the function namespace
-                    type: string
-                  projectId:
-                    description: |-
-                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
-                      The project_id you want to attach the resource to
-                    type: string
-                  region:
-                    description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
-                      The region you want to attach the resource to
-                    type: string
-                  secretEnvironmentVariablesSecretRef:
-                    additionalProperties:
-                      type: string
-                    type: object
-                  tags:
-                    description: |-
-                      The list of tags associated with the namespace.
-                      List of tags ["tag1", "tag2", ...] attached to the function namespace
-                    items:
-                      type: string
-                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -217,63 +142,23 @@ spec:
             - forProvider
             type: object
           status:
-            description: FunctionNamespaceStatus defines the observed state of FunctionNamespace.
+            description: ScimStatus defines the observed state of Scim.
             properties:
               atProvider:
                 properties:
-                  description:
+                  createdAt:
                     description: |-
-                      The description of the namespace.
-                      The description of the function namespace
+                      The date and time of SCIM configuration creation.
+                      The date and time of SCIM configuration creation
                     type: string
-                  environmentVariables:
-                    additionalProperties:
-                      type: string
-                    description: |-
-                      The environment variables of the namespace.
-                      The environment variables of the function namespace
-                    type: object
-                    x-kubernetes-map-type: granular
                   id:
-                    description: The unique identifier of the namespace.
-                    type: string
-                  name:
-                    description: |-
-                      The unique name of the Functions namespace.
-                      The name of the function namespace
+                    description: The ID of the SCIM configuration.
                     type: string
                   organizationId:
                     description: |-
-                      The Organization ID with which the namespace is associated.
-                      The organization_id you want to attach the resource to
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
-                  projectId:
-                    description: |-
-                      (Defaults to provider project_id) The unique identifier of the project that contains the namespace.
-                      The project_id you want to attach the resource to
-                    type: string
-                  region:
-                    description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
-                      The region you want to attach the resource to
-                    type: string
-                  registryEndpoint:
-                    description: |-
-                      The registry endpoint of the namespace.
-                      The endpoint reachable by docker
-                    type: string
-                  registryNamespaceId:
-                    description: |-
-                      The registry namespace ID of the namespace.
-                      The ID of the registry namespace
-                    type: string
-                  tags:
-                    description: |-
-                      The list of tags associated with the namespace.
-                      List of tags ["tag1", "tag2", ...] attached to the function namespace
-                    items:
-                      type: string
-                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

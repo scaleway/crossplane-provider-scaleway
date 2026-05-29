@@ -1157,21 +1157,18 @@ resources:
                     "script.sh"
                   ],
                   "cpu_limit": 1024,
-                  "deploy": true,
-                  "description": "environment variables test",
+                  "description": "This container has a description.",
                   "environment_variables": {
                     "foo": "var"
                   },
-                  "max_concurrency": 80,
+                  "image": "nginx:latest",
                   "max_scale": 5,
-                  "memory_limit": 2048,
+                  "memory_limit_bytes": 2048000000,
                   "min_scale": 3,
-                  "name": "my-container-02",
+                  "name": "my-container",
                   "namespace_id": "${scaleway_container_namespace.main.id}",
-                  "port": 9997,
-                  "privacy": "private",
+                  "port": 80,
                   "protocol": "http1",
-                  "registry_image": "${scaleway_container_namespace.main.registry_endpoint}/alpine:test",
                   "secret_environment_variables": {
                     "key": "secret"
                   },
@@ -1184,18 +1181,47 @@ resources:
               references:
                 namespace_id: scaleway_container_namespace.main.id
               dependencies:
+                scaleway_container_namespace.main: '{}'
+            - name: main
+              manifest: |-
+                {
+                  "image": "${data.scaleway_registry_namespace.main.endpoint}/${data.scaleway_registry_image.main.name}:${data.scaleway_registry_image.main.tags[0]}",
+                  "name": "my-container",
+                  "namespace_id": "${scaleway_container_namespace.main.id}",
+                  "port": 80,
+                  "registry_sha256": "${timestamp()}"
+                }
+              references:
+                namespace_id: scaleway_container_namespace.main.id
+              dependencies:
+                scaleway_container_namespace.main: '{}'
+            - name: main
+              manifest: |-
+                {
+                  "image": "${data.scaleway_registry_namespace.main.endpoint}/${data.scaleway_registry_image.nginx.name}:${data.scaleway_registry_image_tag.nginx_latest.name}",
+                  "name": "nginx-latest",
+                  "namespace_id": "${scaleway_container_namespace.main.id}",
+                  "port": 80,
+                  "registry_sha256": "${data.scaleway_registry_image_tag.nginx_latest.digest}"
+                }
+              references:
+                namespace_id: scaleway_container_namespace.main.id
+                registry_sha256: data.scaleway_registry_image_tag.nginx_latest.digest
+              dependencies:
                 scaleway_container_namespace.main: |-
                     {
-                      "description": "test container",
-                      "name": "my-ns-test"
+                      "name": "my-container-namespace"
+                    }
+                scaleway_registry_namespace.main: |-
+                    {
+                      "name": "some-unique-name"
                     }
             - name: private
               manifest: |-
                 {
-                  "deploy": true,
+                  "image": "rg.fr-par.scw.cloud/my-registry-ns/my-image:latest",
                   "namespace_id": "${scaleway_container_namespace.private.id}",
-                  "privacy": "private",
-                  "registry_image": "rg.fr-par.scw.cloud/my-registry-ns/my-image:latest"
+                  "privacy": "private"
                 }
               references:
                 namespace_id: scaleway_container_namespace.private.id
@@ -1229,29 +1255,7 @@ resources:
             - name: main
               manifest: |-
                 {
-                  "deploy": true,
-                  "name": "nginx-latest",
-                  "namespace_id": "${scaleway_container_namespace.main.id}",
-                  "port": 80,
-                  "registry_image": "${scaleway_registry_namespace.main.endpoint}/nginx:latest",
-                  "registry_sha256": "${data.scaleway_registry_image_tag.nginx_latest.digest}"
-                }
-              references:
-                namespace_id: scaleway_container_namespace.main.id
-                registry_sha256: data.scaleway_registry_image_tag.nginx_latest.digest
-              dependencies:
-                scaleway_container_namespace.main: |-
-                    {
-                      "name": "my-container-namespace"
-                    }
-                scaleway_registry_namespace.main: |-
-                    {
-                      "name": "some-unique-name"
-                    }
-            - name: main
-              manifest: |-
-                {
-                  "health_check": [
+                  "liveness_probe": [
                     {
                       "failure_threshold": 40,
                       "http": [
@@ -1259,10 +1263,11 @@ resources:
                           "path": "/ping"
                         }
                       ],
-                      "interval": "5s"
+                      "interval": "5s",
+                      "timeout": "1m"
                     }
                   ],
-                  "name": "my-container-02",
+                  "name": "my-container",
                   "namespace_id": "${scaleway_container_namespace.main.id}"
                 }
               references:
@@ -1281,27 +1286,37 @@ resources:
               references:
                 namespace_id: scaleway_container_namespace.main.id
         argumentDocs:
+            ' startup_probe': '- (Optional) Defines how to check if the container has started successfully.'
             args: '- (Optional) Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.'
             command: '- (Optional) Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.'
             cpu_limit: '- (Optional) The amount of vCPU computing resources to allocate to each container.'
             cron_status: '- The cron status of the container.'
-            deploy: '- (Optional) Boolean indicating whether the container is in a production environment.'
+            deploy: '- (Deprecated) Boolean indicating whether the container is in a production environment.'
             description: (Optional) The description of the container.
             domain_name: '- The native domain name of the container'
+            duration: '- Duration before the check times out (in duration notation, e.g. "30s").'
             environment_variables: '- (Optional) The environment variables of the container.'
             error_message: '- The error message of the container.'
+            failure_threshold: '- Number of consecutive failures before considering the container has to be restarted.'
             h2c: ': HTTP/2 over TCP.'
-            health_check: '- (Optional) Health check configuration block of the container.'
+            health_check: '- (Deprecated) Health check configuration block of the container.'
             health_check.failure_threshold: '- Number of consecutive health check failures before considering the container unhealthy.'
             health_check.http: '- HTTP health check configuration.'
             health_check.interval: '- Period between health checks (in seconds).'
-            http_option: '- (Optional) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.'
+            health_check.tcp: '- When set to true, performs TCP checks on the container.'
+            http: '- Perform HTTP check on the container with the specified path.'
+            http_option: '- (Deprecated) Allows both HTTP and HTTPS (enabled) or redirect HTTP to HTTPS (redirected). Defaults to enabled.'
             http1: ': Hypertext Transfer Protocol.'
+            https_connections_only: '- (Optional) Allows both HTTP and HTTPS (false) or redirect HTTP to HTTPS (true). Defaults to false.'
             id: '- The unique identifier of the container.'
-            local_storage_limit: '- (Optional) Local storage limit of the container (in MB)'
-            max_concurrency: '- (Deprecated) The maximum number of simultaneous requests your container can handle at the same time. Use scaling_option.concurrent_requests_threshold instead.'
+            image: '- (Optional) The image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
+            interval: '- Time interval between checks (in duration notation, e.g. "30s").'
+            liveness_probe: '- (Optional) Defines how to check if the container is running.'
+            local_storage_limit: '- (Deprecated) Local storage limit of the container (in MB)'
+            local_storage_limit_bytes: '- (Optional) Local storage limit of the container (in bytes).'
             max_scale: '- (Optional) The maximum number of instances this container can scale to.'
-            memory_limit: '- (Optional) The memory resources in MB to allocate to each container.'
+            memory_limit: '- (Deprecated) The memory resources in MB to allocate to each container.'
+            memory_limit_bytes: '- (Optional) The memory resources in bytes to allocate to each container.'
             min_scale: '- (Optional) The minimum number of container instances running continuously.'
             name: '- (Required) The unique name of the container name.'
             namespace_id: '- (Required) The Containers namespace ID of the container.'
@@ -1310,8 +1325,9 @@ resources:
             privacy: '- (Optional) The privacy type defines the way to authenticate to your container. Please check our dedicated section.'
             private_network_id: (Optional) The ID of the Private Network the container is connected to.
             protocol: '- (Optional) The communication protocol http1 or h2c. Defaults to http1.'
+            public_endpoint: '- The native domain name of the container'
             region: '- (Defaults to provider region) The region in which the container was created.'
-            registry_image: '- (Optional) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
+            registry_image: '- (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
             registry_sha256: '- (Optional) The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.'
             sandbox: '- (Optional) Execution environment of the container.'
             scaling_option: '- (Optional) Configuration block used to decide when to scale up or down. Possible values:'
@@ -1321,6 +1337,7 @@ resources:
             secret_environment_variables: '- (Optional) The secret environment variables of the container.'
             status: '- The container status.'
             tags: '- (Optional) The list of tags associated with the container.'
+            tcp: '- When set to true, performs TCP checks on the container.'
             timeout: '- (Optional) The maximum amount of time in seconds your container can spend processing a request before being stopped. Default to 300 seconds.'
         importStatements: []
     scaleway_container_cron:
@@ -1382,29 +1399,18 @@ resources:
               dependencies:
                 scaleway_container.app: |-
                     {
-                      "cpu_limit": 140,
-                      "deploy": true,
-                      "max_concurrency": 80,
-                      "max_scale": 1,
-                      "memory_limit": 256,
-                      "min_scale": 1,
+                      "image": "nginx:latest",
                       "name": "app",
                       "namespace_id": "${scaleway_container_namespace.main.id}",
                       "port": 80,
                       "privacy": "public",
-                      "protocol": "http1",
-                      "registry_image": "${scaleway_container_namespace.main.registry_endpoint}/nginx:alpine",
-                      "timeout": 600
+                      "protocol": "http1"
                     }
-                scaleway_container_namespace.main: |-
-                    {
-                      "description": "test container",
-                      "name": "my-ns-test"
-                    }
+                scaleway_container_namespace.main: '{}'
                 scaleway_domain_record.app: |-
                     {
-                      "data": "${scaleway_container.app.domain_name}.",
-                      "dns_zone": "domain.tld",
+                      "data": "${format(\"%s.\", trimprefix(\"${scaleway_container.app.public_endpoint}\", \"https://\"))}",
+                      "dns_zone": "scaleway-terraform.com",
                       "name": "subdomain",
                       "ttl": 3600,
                       "type": "CNAME"
@@ -1414,7 +1420,7 @@ resources:
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the container domain.'
             region: '- (Defaults to provider region) The region in which the container exists.'
-            url: '- The URL used to query the container.'
+            url: '- (Deprecated) The URL used to query the container.'
         importStatements: []
     scaleway_container_namespace:
         subCategory: Containers
@@ -1432,7 +1438,6 @@ resources:
                   ]
                 }
         argumentDocs:
-            activate_vpc_integration: '- (Deprecated) Activates VPC integration for the namespace. Containers of a namespace with VPC integration activated will be able to connect to a Private Network.'
             description: '- (Optional) The description of the namespace.'
             environment_variables: '- (Optional) The environment variables of the namespace.'
             id: '- The unique identifier of the namespace.'
@@ -1440,8 +1445,8 @@ resources:
             organization_id: '- The Organization ID with which the namespace is associated.'
             project_id: '- (Defaults to provider project_id) The unique identifier of the project that contains the namespace.'
             region: '- (Defaults to provider region). The region in which the namespace is created.'
-            registry_endpoint: '- The registry endpoint of the namespace.'
-            registry_namespace_id: '- The registry namespace ID of the namespace.'
+            registry_endpoint: '- (Deprecated) The registry endpoint of the namespace.'
+            registry_namespace_id: '- (Deprecated) The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
             tags: '- (Optional) The list of tags associated with the namespace.'
         importStatements: []
@@ -1501,49 +1506,109 @@ resources:
               manifest: |-
                 {
                   "container_id": "${scaleway_container.main.id}",
-                  "name": "my-trigger",
+                  "destination_config": [
+                    {
+                      "http_method": "get",
+                      "http_path": "/"
+                    }
+                  ],
+                  "name": "my-sqs-trigger",
                   "sqs": [
                     {
-                      "project_id": "${scaleway_mnq_sqs.main.project_id}",
-                      "queue": "MyQueue",
-                      "region": "${scaleway_mnq_sqs.main.region}"
+                      "access_key": "${scaleway_mnq_sqs_credentials.main.access_key}",
+                      "endpoint": "${scaleway_mnq_sqs_queue.main.sqs_endpoint}",
+                      "queue_url": "${scaleway_mnq_sqs_queue.main.url}",
+                      "region": "${scaleway_mnq_sqs.main.region}",
+                      "secret_key": "${scaleway_mnq_sqs_credentials.main.secret_key}"
                     }
                   ]
                 }
               references:
                 container_id: scaleway_container.main.id
-                sqs.project_id: scaleway_mnq_sqs.main.project_id
+                sqs.access_key: scaleway_mnq_sqs_credentials.main.access_key
+                sqs.endpoint: scaleway_mnq_sqs_queue.main.sqs_endpoint
+                sqs.queue_url: scaleway_mnq_sqs_queue.main.url
                 sqs.region: scaleway_mnq_sqs.main.region
+                sqs.secret_key: scaleway_mnq_sqs_credentials.main.secret_key
             - name: main
               manifest: |-
                 {
                   "container_id": "${scaleway_container.main.id}",
-                  "name": "my-trigger",
+                  "destination_config": [
+                    {
+                      "http_method": "get",
+                      "http_path": "/ping"
+                    }
+                  ],
+                  "name": "my-nats-trigger",
                   "nats": [
                     {
-                      "account_id": "${scaleway_mnq_nats_account.main.id}",
+                      "credentials_file_content": "${scaleway_mnq_nats_credentials.main.file}",
                       "region": "${scaleway_mnq_nats_account.main.region}",
-                      "subject": "MySubject"
+                      "server_urls": [
+                        "${scaleway_mnq_nats_account.main.endpoint}"
+                      ],
+                      "subject": "TestSubject"
                     }
                   ]
                 }
               references:
                 container_id: scaleway_container.main.id
-                nats.account_id: scaleway_mnq_nats_account.main.id
+                nats.credentials_file_content: scaleway_mnq_nats_credentials.main.file
                 nats.region: scaleway_mnq_nats_account.main.region
+                nats.server_urls: scaleway_mnq_nats_account.main.endpoint
+            - name: main
+              manifest: |-
+                {
+                  "container_id": "${scaleway_container.main.id}",
+                  "cron": [
+                    {
+                      "body": "{\"message\": \"This is the content to send to the container.\"}",
+                      "headers": {
+                        "Content-Length": 45,
+                        "Content-Type": "application/json"
+                      },
+                      "schedule": "5 4 1 * *",
+                      "timezone": "Europe/Paris"
+                    }
+                  ],
+                  "destination_config": [
+                    {
+                      "http_method": "patch",
+                      "http_path": "/patch/here"
+                    }
+                  ],
+                  "name": "my-cron-trigger"
+                }
+              references:
+                container_id: scaleway_container.main.id
         argumentDocs:
-            account_id: (Required) unique identifier of the Messaging and Queuing NATS account.
-            container_id: (Required) The unique identifier of the container to create a trigger for.
-            description: (Optional) The description of the trigger.
+            access_key: '- (Required, Sensitive) The access key for accessing the SQS queue.'
+            account_id: '- (Deprecated) unique identifier of the Messaging and Queuing NATS account  .'
+            body: '- (Optional) Body to send to the container when the trigger is invoked.'
+            container_id: '- (Required) The unique identifier of the container to create a trigger for.'
+            credentials_file_content: '- (Required, Sensitive) The content of the NATS credentials file that will be used to authenticate with the NATS server and subscribe to the specified subject.'
+            cron: '- The configuration for the cron source of the trigger'
+            description: '- (Optional) The description of the trigger.'
+            destination_config: '- (Required) The configuration of the destination to trigger.'
+            endpoint: '- (Required) Endpoint URL to use to access SQS (e.g., "https://sqs.mnq.fr-par.scaleway.com").'
+            headers: '- (Optional) Additional headers to send to the container when the trigger is invoked.'
+            http_method: '- (Required) The HTTP method to use when sending the request (e.g., get, post, put, patch, delete).'
+            http_path: '- (Required) The HTTP path to send the request to (e.g., "/my-webhook-endpoint").'
             id: '- The unique identifier of the Container trigger'
             name: '- (Optional) The unique name of the trigger. If not provided, a random name is generated.'
-            namespace_id: (Deprecated) ID of the Messaging and Queuing namespace. This argument is deprecated.
-            nats: The configuration for the Scaleway NATS account used by the trigger
-            project_id: (Optional) The ID of the project in which SQS is enabled, (defaults to provider project_id)
-            queue: (Required) The name of the SQS queue.
-            region: (Optional) Region where SQS is enabled (defaults to provider region)
-            sqs: The configuration of the Scaleway SQS queue used by the trigger
-            subject: (Required) The subject to listen to.
+            nats: '- The configuration for the Scaleway NATS account used by the trigger'
+            project_id: '- (Optional) The ID of the project in which SQS is enabled, (defaults to provider project_id)'
+            queue: '- (Deprecated) The name of the SQS queue.  This argument is no longer supported.'
+            queue_url: '- (Required) The URL of the SQS queue to monitor for messages.'
+            region: '- (Optional) Region where SQS is enabled (defaults to provider region)'
+            schedule: '- (Required) UNIX cron schedule to run job (e.g., "* * * * *").'
+            secret_key: '- (Required, Sensitive) The secret key for accessing the SQS queue.'
+            server_urls: '- (Required) The list of URLs of the NATS server (e.g., "nats://nats.mnq.fr-par.scaleway.com:4222").'
+            sqs: '- The configuration of the Scaleway SQS queue used by the trigger'
+            subject: '- (Required) NATS subject to subscribe to (e.g., "my-subject")."'
+            tags: '- (Optional) The list of tags associated with the trigger.'
+            timezone: '- (Required) Timezone for the cron schedule, in tz database format (e.g., "Europe/Paris").'
         importStatements: []
     scaleway_datawarehouse_database:
         subCategory: Data Warehouse
@@ -3021,7 +3086,6 @@ resources:
                   ]
                 }
         argumentDocs:
-            activate_vpc_integration: '- (Deprecated) Activates VPC integration for the namespace. Functions of a namespace with VPC integration activated will be able to connect to a Private Network.'
             description: (Optional) The description of the namespace.
             environment_variables: '- (Optional) The environment variables of the namespace.'
             id: '- The unique identifier of the namespace.'
@@ -3467,6 +3531,21 @@ resources:
             origin: '(String) The origin of the SAML certificate. Possible values are: scaleway, identity_provider.'
             saml_id: (Optional, String) The ID of the SAML configuration. If not provided, the organization's SAML configuration is used.
             type: '(Required, String) The type of the SAML certificate. Possible values are: signing, encryption.'
+        importStatements: []
+    scaleway_iam_scim:
+        subCategory: IAM
+        name: scaleway_iam_scim
+        title: scaleway_iam_scim
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "organization_id": "11111111-1111-1111-1111-111111111111"
+                }
+        argumentDocs:
+            created_at: '- The date and time of SCIM configuration creation.'
+            id: '- The ID of the SCIM configuration.'
+            organization_id: '- (Optional) The organization ID. If not provided, the default organization configured in the provider is used.'
         importStatements: []
     scaleway_iam_ssh_key:
         subCategory: IAM
@@ -4556,13 +4635,31 @@ resources:
               references:
                 partner_id: data.scaleway_interlink_partner.partner.id
                 pop_id: data.scaleway_interlink_pop.pop.id
+            - name: main
+              manifest: |-
+                {
+                  "bandwidth_mbps": 50,
+                  "name": "my-hosted-link",
+                  "partner_id": "${data.scaleway_interlink_partner.partner.id}",
+                  "pop_id": "${data.scaleway_interlink_pop.pop.id}",
+                  "vpc_id": "${scaleway_vpc.vpc.id}"
+                }
+              references:
+                partner_id: data.scaleway_interlink_partner.partner.id
+                pop_id: data.scaleway_interlink_pop.pop.id
+                vpc_id: scaleway_vpc.vpc.id
+              dependencies:
+                scaleway_vpc.vpc: |-
+                    {
+                      "name": "my-vpc"
+                    }
         argumentDocs:
             bandwidth_mbps: '- (Required) Desired bandwidth for the link. Must be compatible with available link bandwidths and remaining bandwidth capacity of the connection.'
             bgp_v4_status: '- Status of the link''s BGP IPv4 session.'
             bgp_v6_status: '- Status of the link''s BGP IPv6 session.'
             connection_id: '- (Optional) If set, creates a self-hosted link using this dedicated physical connection. Conflicts with partner_id.'
             created_at: '- Creation date of the link (RFC 3339 format).'
-            enable_route_propagation: '- Defines whether route propagation is enabled or not.'
+            enable_route_propagation: '- (Optional) Defines whether route propagation is enabled or not. Defaults to false.'
             id: '- Unique identifier of the link.'
             name: '- (Optional) Name of the link. If not provided, a name will be randomly generated.'
             organization_id: '- Organization ID.'
@@ -4580,7 +4677,7 @@ resources:
             tags: '- (Optional) List of tags to apply to the link.'
             updated_at: '- Last modification date of the link (RFC 3339 format).'
             vlan: '- (Optional) For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned.'
-            vpc_id: '- ID of the Scaleway VPC attached to the link.'
+            vpc_id: '- (Optional) ID of the Scaleway VPC to attach to the link.'
         importStatements: []
     scaleway_interlink_routing_policy:
         subCategory: Interlink

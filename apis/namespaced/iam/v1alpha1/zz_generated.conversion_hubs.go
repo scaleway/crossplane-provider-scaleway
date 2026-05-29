@@ -25,6 +25,9 @@ func (tr *Policy) Hub() {}
 func (tr *Saml) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Scim) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SSHKey) Hub() {}
 
 // Hub marks this type as a conversion hub.

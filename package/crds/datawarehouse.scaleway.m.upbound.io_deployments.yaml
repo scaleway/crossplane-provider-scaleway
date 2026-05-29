@@ -130,6 +130,10 @@ spec:
                       Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
                     type: number
+                  shardCount:
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
+                    type: number
                   started:
                     description: |-
                       Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
@@ -232,6 +236,10 @@ spec:
                     description: |-
                       Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
+                    type: number
+                  shardCount:
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
@@ -456,6 +464,10 @@ spec:
                     description: |-
                       Number of replicas. Can be updated in place via the deployment configuration API.
                       Number of replicas
+                    type: number
+                  shardCount:
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
