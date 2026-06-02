@@ -143,6 +143,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      The region in which the bucket is located.
+                      The region you want to attach the resource to
+                    type: string
                   rule:
                     description: |-
                       Set of server-side encryption configuration rules. The rule object supports the following:
@@ -155,13 +160,22 @@ spec:
                             Single object for setting server-side encryption by default.
                           items:
                             properties:
+                              kmsMasterKeyId:
+                                description: |-
+                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+                                type: string
                               sseAlgorithm:
                                 description: |-
                                   Server-side encryption algorithm to use. Valid values are AES256.
-                                  Server-side encryption algorithm to use. Valid values are AES256
+                                  Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
+                        bucketKeyEnabled:
+                          description: Whether or not to use Scaleway Object Bucket
+                            Keys for SSE-KMS.
+                          type: boolean
                       type: object
                     type: array
                 type: object
@@ -263,6 +277,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  region:
+                    description: |-
+                      The region in which the bucket is located.
+                      The region you want to attach the resource to
+                    type: string
                   rule:
                     description: |-
                       Set of server-side encryption configuration rules. The rule object supports the following:
@@ -275,13 +294,22 @@ spec:
                             Single object for setting server-side encryption by default.
                           items:
                             properties:
+                              kmsMasterKeyId:
+                                description: |-
+                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+                                type: string
                               sseAlgorithm:
                                 description: |-
                                   Server-side encryption algorithm to use. Valid values are AES256.
-                                  Server-side encryption algorithm to use. Valid values are AES256
+                                  Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
+                        bucketKeyEnabled:
+                          description: Whether or not to use Scaleway Object Bucket
+                            Keys for SSE-KMS.
+                          type: boolean
                       type: object
                     type: array
                 type: object
@@ -362,6 +390,11 @@ spec:
                     description: The unique identifier of the server-side encryption
                       configuration.
                     type: string
+                  region:
+                    description: |-
+                      The region in which the bucket is located.
+                      The region you want to attach the resource to
+                    type: string
                   rule:
                     description: |-
                       Set of server-side encryption configuration rules. The rule object supports the following:
@@ -374,13 +407,22 @@ spec:
                             Single object for setting server-side encryption by default.
                           items:
                             properties:
+                              kmsMasterKeyId:
+                                description: |-
+                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+                                type: string
                               sseAlgorithm:
                                 description: |-
                                   Server-side encryption algorithm to use. Valid values are AES256.
-                                  Server-side encryption algorithm to use. Valid values are AES256
+                                  Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
+                        bucketKeyEnabled:
+                          description: Whether or not to use Scaleway Object Bucket
+                            Keys for SSE-KMS.
+                          type: boolean
                       type: object
                     type: array
                 type: object

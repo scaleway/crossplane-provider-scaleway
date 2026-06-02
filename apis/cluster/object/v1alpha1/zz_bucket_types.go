@@ -242,24 +242,44 @@ type CorsRuleParameters struct {
 
 type ExpirationInitParameters struct {
 
+	// Specifies the date the object is to be moved or deleted. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
+
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
 type ExpirationObservation struct {
 
+	// Specifies the date the object is to be moved or deleted. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
+
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
 type ExpirationParameters struct {
 
+	// Specifies the date the object is to be moved or deleted. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	// +kubebuilder:validation:Optional
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
+
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days" tf:"days,omitempty"`
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	// +kubebuilder:validation:Optional
+	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
 type LifecycleRuleInitParameters struct {
@@ -279,6 +299,20 @@ type LifecycleRuleInitParameters struct {
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	// Unique identifier for the rule
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies a period of expiration for the object. The expiration object supports the following:
+	// Configuration block that specifies when noncurrent object versions expire
+	NoncurrentVersionExpiration []NoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+
+	// Specifies a period in the object's transitions.
+	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class
+	NoncurrentVersionTransition []NoncurrentVersionTransitionInitParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
+
+	// Minimum object size (in bytes) to which the rule applies
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	// Maximum object size (in bytes) to which the rule applies
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
 	// Object key prefix identifying one or more objects to which the rule applies.
 	// The prefix identifying one or more objects to which the rule applies
@@ -311,6 +345,20 @@ type LifecycleRuleObservation struct {
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	// Unique identifier for the rule
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies a period of expiration for the object. The expiration object supports the following:
+	// Configuration block that specifies when noncurrent object versions expire
+	NoncurrentVersionExpiration []NoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+
+	// Specifies a period in the object's transitions.
+	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class
+	NoncurrentVersionTransition []NoncurrentVersionTransitionObservation `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
+
+	// Minimum object size (in bytes) to which the rule applies
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	// Maximum object size (in bytes) to which the rule applies
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
 	// Object key prefix identifying one or more objects to which the rule applies.
 	// The prefix identifying one or more objects to which the rule applies
@@ -348,6 +396,24 @@ type LifecycleRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies a period of expiration for the object. The expiration object supports the following:
+	// Configuration block that specifies when noncurrent object versions expire
+	// +kubebuilder:validation:Optional
+	NoncurrentVersionExpiration []NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
+
+	// Specifies a period in the object's transitions.
+	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class
+	// +kubebuilder:validation:Optional
+	NoncurrentVersionTransition []NoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
+
+	// Minimum object size (in bytes) to which the rule applies
+	// +kubebuilder:validation:Optional
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	// Maximum object size (in bytes) to which the rule applies
+	// +kubebuilder:validation:Optional
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
 	// Object key prefix identifying one or more objects to which the rule applies.
 	// The prefix identifying one or more objects to which the rule applies
 	// +kubebuilder:validation:Optional
@@ -365,7 +431,87 @@ type LifecycleRuleParameters struct {
 	Transition []TransitionParameters `json:"transition,omitempty" tf:"transition,omitempty"`
 }
 
+type NoncurrentVersionExpirationInitParameters struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action. Must be a positive integer
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+}
+
+type NoncurrentVersionExpirationObservation struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action. Must be a positive integer
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+}
+
+type NoncurrentVersionExpirationParameters struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	// +kubebuilder:validation:Optional
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action. Must be a positive integer
+	// +kubebuilder:validation:Optional
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+}
+
+type NoncurrentVersionTransitionInitParameters struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+}
+
+type NoncurrentVersionTransitionObservation struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+}
+
+type NoncurrentVersionTransitionParameters struct {
+
+	// Number of noncurrent versions Scaleway Object Storage will retain. Must be a non-zero positive integer
+	// +kubebuilder:validation:Optional
+	NewerNoncurrentVersions *float64 `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
+
+	// Specifies the number of days after object creation when the specific rule action takes effect.
+	// Number of days an object is noncurrent before Scaleway Object Storage can perform the associated action
+	// +kubebuilder:validation:Optional
+	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
+
+	// Specifies the Scaleway storage class STANDARD, GLACIER, ONEZONE_IA  to which you want the object to transition.
+	// Specifies the Scaleway Object Storage class to which you want the object to transition
+	// +kubebuilder:validation:Optional
+	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
+}
+
 type TransitionInitParameters struct {
+
+	// Specifies the date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
@@ -378,6 +524,9 @@ type TransitionInitParameters struct {
 
 type TransitionObservation struct {
 
+	// Specifies the date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
+
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
@@ -388,6 +537,10 @@ type TransitionObservation struct {
 }
 
 type TransitionParameters struct {
+
+	// Specifies the date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. `2023-08-22`
+	// +kubebuilder:validation:Optional
+	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Specifies the number of days after object creation when the specific rule action takes effect.
 	// Specifies the number of days after object creation when the specific rule action takes effect

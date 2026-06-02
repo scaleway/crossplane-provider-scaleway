@@ -85,8 +85,8 @@ spec:
                     type: string
                   peerAsn:
                     description: |-
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
                     type: number
                   popId:
                     description: |-
@@ -171,8 +171,8 @@ spec:
                     type: string
                   peerAsn:
                     description: |-
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
                     type: number
                   popId:
                     description: |-
@@ -339,8 +339,8 @@ spec:
                     type: string
                   peerAsn:
                     description: |-
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-                      For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+                      For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
                     type: number
                   peerBgpConfig:
                     description: |-

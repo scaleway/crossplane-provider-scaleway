@@ -166,6 +166,14 @@ spec:
                       The Kubelet arguments to be used by this pool
                     type: object
                     x-kubernetes-map-type: granular
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
+                    type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -221,12 +229,46 @@ spec:
                       The size of the pool.
                       Size of the pool
                     type: number
+                  startupTaints:
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     description: |-
                       The tags associated with the pool.
                       The tags associated with the pool
                     items:
                       type: string
+                    type: array
+                  taints:
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
                     type: array
                   upgradePolicy:
                     description: |-
@@ -378,6 +420,14 @@ spec:
                       The Kubelet arguments to be used by this pool
                     type: object
                     x-kubernetes-map-type: granular
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
+                    type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -433,12 +483,46 @@ spec:
                       The size of the pool.
                       Size of the pool
                     type: number
+                  startupTaints:
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     description: |-
                       The tags associated with the pool.
                       The tags associated with the pool
                     items:
                       type: string
+                    type: array
+                  taints:
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
                     type: array
                   upgradePolicy:
                     description: |-
@@ -584,6 +668,14 @@ spec:
                       The Kubelet arguments to be used by this pool
                     type: object
                     x-kubernetes-map-type: granular
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
+                    type: object
+                    x-kubernetes-map-type: granular
                   maxSize:
                     description: |-
                       (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
@@ -679,6 +771,23 @@ spec:
                       The size of the pool.
                       Size of the pool
                     type: number
+                  startupTaints:
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: |-
                       The status of the pool.
@@ -690,6 +799,23 @@ spec:
                       The tags associated with the pool
                     items:
                       type: string
+                    type: array
+                  taints:
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
+                    items:
+                      properties:
+                        effect:
+                          description: Effect of the taint
+                          type: string
+                        key:
+                          description: Key of the taint
+                          type: string
+                        value:
+                          description: Value of the taint
+                          type: string
+                      type: object
                     type: array
                   updatedAt:
                     description: |-

@@ -72,6 +72,42 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  containerBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Container backend linked to the backend stage.
+                      The Scaleway Serverless Container backend linked to the backend stage
+                    items:
+                      properties:
+                        containerId:
+                          description: |-
+                            The ID of the Serverless Container.
+                            ID of the Serverless Container
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  functionBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Function backend linked to the backend stage.
+                      The Scaleway Serverless Function backend linked to the backend stage
+                    items:
+                      properties:
+                        functionId:
+                          description: |-
+                            The ID of the Serverless Function.
+                            ID of the Serverless Function
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
                   lbBackendConfig:
                     description: |-
                       The Scaleway Load Balancer linked to the backend stage.
@@ -391,6 +427,42 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  containerBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Container backend linked to the backend stage.
+                      The Scaleway Serverless Container backend linked to the backend stage
+                    items:
+                      properties:
+                        containerId:
+                          description: |-
+                            The ID of the Serverless Container.
+                            ID of the Serverless Container
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
+                  functionBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Function backend linked to the backend stage.
+                      The Scaleway Serverless Function backend linked to the backend stage
+                    items:
+                      properties:
+                        functionId:
+                          description: |-
+                            The ID of the Serverless Function.
+                            ID of the Serverless Function
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
                   lbBackendConfig:
                     description: |-
                       The Scaleway Load Balancer linked to the backend stage.
@@ -788,11 +860,47 @@ spec:
             properties:
               atProvider:
                 properties:
+                  containerBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Container backend linked to the backend stage.
+                      The Scaleway Serverless Container backend linked to the backend stage
+                    items:
+                      properties:
+                        containerId:
+                          description: |-
+                            The ID of the Serverless Container.
+                            ID of the Serverless Container
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
                   createdAt:
                     description: |-
                       The date and time of the creation of the backend stage.
                       The date and time of the creation of the backend stage
                     type: string
+                  functionBackendConfig:
+                    description: |-
+                      The Scaleway Serverless Function backend linked to the backend stage.
+                      The Scaleway Serverless Function backend linked to the backend stage
+                    items:
+                      properties:
+                        functionId:
+                          description: |-
+                            The ID of the Serverless Function.
+                            ID of the Serverless Function
+                          type: string
+                        region:
+                          description: |-
+                            (Defaults to provider region) The region of the Serverless Container.
+                            The region you want to attach the resource to
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Load Balancer.
                     type: string

@@ -72,6 +72,11 @@ type PoolInitParameters struct {
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
+	// The list of Kubernetes labels applied and reconciled on the nodes.
+	// Kubernetes labels applied and reconciled on the nodes.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
 	// Maximum size of the pool
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
@@ -116,9 +121,17 @@ type PoolInitParameters struct {
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
+	// Kubernetes taints applied at node creation but not reconciled afterwards.
+	StartupTaints []StartupTaintsInitParameters `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
+
 	// The tags associated with the pool.
 	// The tags associated with the pool
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The list of Kubernetes taints applied and reconciled on the nodes.
+	// Kubernetes taints applied and reconciled on the nodes.
+	Taints []TaintsInitParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 
 	// The Pool upgrade policy
 	// The Pool upgrade policy
@@ -165,6 +178,11 @@ type PoolObservation struct {
 	// The Kubelet arguments to be used by this pool
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
+
+	// The list of Kubernetes labels applied and reconciled on the nodes.
+	// Kubernetes labels applied and reconciled on the nodes.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
 	// Maximum size of the pool
@@ -214,6 +232,10 @@ type PoolObservation struct {
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
+	// Kubernetes taints applied at node creation but not reconciled afterwards.
+	StartupTaints []StartupTaintsObservation `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
+
 	// The status of the pool.
 	// The status of the pool
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -221,6 +243,10 @@ type PoolObservation struct {
 	// The tags associated with the pool.
 	// The tags associated with the pool
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The list of Kubernetes taints applied and reconciled on the nodes.
+	// Kubernetes taints applied and reconciled on the nodes.
+	Taints []TaintsObservation `json:"taints,omitempty" tf:"taints,omitempty"`
 
 	// The last update date of the pool.
 	// The date and time of the last update of the pool
@@ -280,6 +306,12 @@ type PoolParameters struct {
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
+	// The list of Kubernetes labels applied and reconciled on the nodes.
+	// Kubernetes labels applied and reconciled on the nodes.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
 	// (Defaults to size) The maximum size of the pool, used by the autoscaling feature.
 	// Maximum size of the pool
 	// +kubebuilder:validation:Optional
@@ -335,10 +367,20 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
+	// Kubernetes taints applied at node creation but not reconciled afterwards.
+	// +kubebuilder:validation:Optional
+	StartupTaints []StartupTaintsParameters `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
+
 	// The tags associated with the pool.
 	// The tags associated with the pool
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The list of Kubernetes taints applied and reconciled on the nodes.
+	// Kubernetes taints applied and reconciled on the nodes.
+	// +kubebuilder:validation:Optional
+	Taints []TaintsParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 
 	// The Pool upgrade policy
 	// The Pool upgrade policy
@@ -369,6 +411,84 @@ type PrivateIpsObservation struct {
 }
 
 type PrivateIpsParameters struct {
+}
+
+type StartupTaintsInitParameters struct {
+
+	// Effect of the taint
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// Key of the taint
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the taint
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StartupTaintsObservation struct {
+
+	// Effect of the taint
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// Key of the taint
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the taint
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StartupTaintsParameters struct {
+
+	// Effect of the taint
+	// +kubebuilder:validation:Optional
+	Effect *string `json:"effect" tf:"effect,omitempty"`
+
+	// Key of the taint
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Value of the taint
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type TaintsInitParameters struct {
+
+	// Effect of the taint
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// Key of the taint
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the taint
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TaintsObservation struct {
+
+	// Effect of the taint
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// Key of the taint
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the taint
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TaintsParameters struct {
+
+	// Effect of the taint
+	// +kubebuilder:validation:Optional
+	Effect *string `json:"effect" tf:"effect,omitempty"`
+
+	// Key of the taint
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Value of the taint
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type UpgradePolicyInitParameters struct {

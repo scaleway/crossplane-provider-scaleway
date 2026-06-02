@@ -37,8 +37,8 @@ type SourceInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-	// The number of days to retain data, must be between 1 and 365.
+	// The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+	// The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// The type of data source. Possible values are: metrics, logs, or traces.
@@ -75,8 +75,8 @@ type SourceObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-	// The number of days to retain data, must be between 1 and 365.
+	// The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+	// The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Indicates whether the data source is synchronized with Grafana.
@@ -122,8 +122,8 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-	// The number of days to retain data, must be between 1 and 365.
+	// The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+	// The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 

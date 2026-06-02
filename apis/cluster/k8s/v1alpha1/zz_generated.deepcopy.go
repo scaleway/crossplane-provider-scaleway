@@ -461,6 +461,11 @@ func (in *AutoscalerConfigInitParameters) DeepCopyInto(out *AutoscalerConfigInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LogLevel != nil {
+		in, out := &in.LogLevel, &out.LogLevel
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxGracefulTerminationSec != nil {
 		in, out := &in.MaxGracefulTerminationSec, &out.MaxGracefulTerminationSec
 		*out = new(float64)
@@ -479,6 +484,11 @@ func (in *AutoscalerConfigInitParameters) DeepCopyInto(out *AutoscalerConfigInit
 	if in.ScaleDownUtilizationThreshold != nil {
 		in, out := &in.ScaleDownUtilizationThreshold, &out.ScaleDownUtilizationThreshold
 		*out = new(float64)
+		**out = **in
+	}
+	if in.SkipNodesWithLocalStorage != nil {
+		in, out := &in.SkipNodesWithLocalStorage, &out.SkipNodesWithLocalStorage
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -526,6 +536,11 @@ func (in *AutoscalerConfigObservation) DeepCopyInto(out *AutoscalerConfigObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LogLevel != nil {
+		in, out := &in.LogLevel, &out.LogLevel
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxGracefulTerminationSec != nil {
 		in, out := &in.MaxGracefulTerminationSec, &out.MaxGracefulTerminationSec
 		*out = new(float64)
@@ -544,6 +559,11 @@ func (in *AutoscalerConfigObservation) DeepCopyInto(out *AutoscalerConfigObserva
 	if in.ScaleDownUtilizationThreshold != nil {
 		in, out := &in.ScaleDownUtilizationThreshold, &out.ScaleDownUtilizationThreshold
 		*out = new(float64)
+		**out = **in
+	}
+	if in.SkipNodesWithLocalStorage != nil {
+		in, out := &in.SkipNodesWithLocalStorage, &out.SkipNodesWithLocalStorage
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -591,6 +611,11 @@ func (in *AutoscalerConfigParameters) DeepCopyInto(out *AutoscalerConfigParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LogLevel != nil {
+		in, out := &in.LogLevel, &out.LogLevel
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxGracefulTerminationSec != nil {
 		in, out := &in.MaxGracefulTerminationSec, &out.MaxGracefulTerminationSec
 		*out = new(float64)
@@ -609,6 +634,11 @@ func (in *AutoscalerConfigParameters) DeepCopyInto(out *AutoscalerConfigParamete
 	if in.ScaleDownUtilizationThreshold != nil {
 		in, out := &in.ScaleDownUtilizationThreshold, &out.ScaleDownUtilizationThreshold
 		*out = new(float64)
+		**out = **in
+	}
+	if in.SkipNodesWithLocalStorage != nil {
+		in, out := &in.SkipNodesWithLocalStorage, &out.SkipNodesWithLocalStorage
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -1601,6 +1631,22 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Labels != nil {
+		in, out := &in.Labels, &out.Labels
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
 		*out = new(float64)
@@ -1656,6 +1702,13 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StartupTaints != nil {
+		in, out := &in.StartupTaints, &out.StartupTaints
+		*out = make([]StartupTaintsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -1665,6 +1718,13 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Taints != nil {
+		in, out := &in.Taints, &out.Taints
+		*out = make([]TaintsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.UpgradePolicy != nil {
@@ -1782,6 +1842,22 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Labels != nil {
+		in, out := &in.Labels, &out.Labels
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
 		*out = new(float64)
@@ -1844,6 +1920,13 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StartupTaints != nil {
+		in, out := &in.StartupTaints, &out.StartupTaints
+		*out = make([]StartupTaintsObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -1858,6 +1941,13 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Taints != nil {
+		in, out := &in.Taints, &out.Taints
+		*out = make([]TaintsObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.UpdatedAt != nil {
@@ -1948,6 +2038,22 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Labels != nil {
+		in, out := &in.Labels, &out.Labels
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
 		*out = new(float64)
@@ -2003,6 +2109,13 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StartupTaints != nil {
+		in, out := &in.StartupTaints, &out.StartupTaints
+		*out = make([]StartupTaintsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -2012,6 +2125,13 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Taints != nil {
+		in, out := &in.Taints, &out.Taints
+		*out = make([]TaintsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.UpgradePolicy != nil {
@@ -2129,6 +2249,186 @@ func (in *PrivateIpsParameters) DeepCopy() *PrivateIpsParameters {
 		return nil
 	}
 	out := new(PrivateIpsParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *StartupTaintsInitParameters) DeepCopyInto(out *StartupTaintsInitParameters) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new StartupTaintsInitParameters.
+func (in *StartupTaintsInitParameters) DeepCopy() *StartupTaintsInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(StartupTaintsInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *StartupTaintsObservation) DeepCopyInto(out *StartupTaintsObservation) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new StartupTaintsObservation.
+func (in *StartupTaintsObservation) DeepCopy() *StartupTaintsObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(StartupTaintsObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *StartupTaintsParameters) DeepCopyInto(out *StartupTaintsParameters) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new StartupTaintsParameters.
+func (in *StartupTaintsParameters) DeepCopy() *StartupTaintsParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(StartupTaintsParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TaintsInitParameters) DeepCopyInto(out *TaintsInitParameters) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TaintsInitParameters.
+func (in *TaintsInitParameters) DeepCopy() *TaintsInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(TaintsInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TaintsObservation) DeepCopyInto(out *TaintsObservation) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TaintsObservation.
+func (in *TaintsObservation) DeepCopy() *TaintsObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(TaintsObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *TaintsParameters) DeepCopyInto(out *TaintsParameters) {
+	*out = *in
+	if in.Effect != nil {
+		in, out := &in.Effect, &out.Effect
+		*out = new(string)
+		**out = **in
+	}
+	if in.Key != nil {
+		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TaintsParameters.
+func (in *TaintsParameters) DeepCopy() *TaintsParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(TaintsParameters)
 	in.DeepCopyInto(out)
 	return out
 }

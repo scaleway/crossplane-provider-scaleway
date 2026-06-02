@@ -16,22 +16,35 @@ import (
 
 type ApplyServerSideEncryptionByDefaultInitParameters struct {
 
+	// The unique identifier of the server-side encryption configuration.
+	// Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
 	// Server-side encryption algorithm to use. Valid values are AES256.
-	// Server-side encryption algorithm to use. Valid values are AES256
+	// Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
 type ApplyServerSideEncryptionByDefaultObservation struct {
 
+	// The unique identifier of the server-side encryption configuration.
+	// Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
 	// Server-side encryption algorithm to use. Valid values are AES256.
-	// Server-side encryption algorithm to use. Valid values are AES256
+	// Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
 type ApplyServerSideEncryptionByDefaultParameters struct {
 
+	// The unique identifier of the server-side encryption configuration.
+	// Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error if not this element is absent while the sse_algorithm is aws:kms.
+	// +kubebuilder:validation:Optional
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
 	// Server-side encryption algorithm to use. Valid values are AES256.
-	// Server-side encryption algorithm to use. Valid values are AES256
+	// Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
 	// +kubebuilder:validation:Optional
 	SseAlgorithm *string `json:"sseAlgorithm" tf:"sse_algorithm,omitempty"`
 }
@@ -51,6 +64,10 @@ type ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The region in which the bucket is located.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Set of server-side encryption configuration rules. The rule object supports the following:
 	// Set of server-side encryption configuration rules
 	Rule []ConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
@@ -64,6 +81,10 @@ type ConfigurationObservation struct {
 
 	// The unique identifier of the server-side encryption configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The region in which the bucket is located.
+	// The region you want to attach the resource to
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Set of server-side encryption configuration rules. The rule object supports the following:
 	// Set of server-side encryption configuration rules
@@ -86,6 +107,11 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
+	// The region in which the bucket is located.
+	// The region you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Set of server-side encryption configuration rules. The rule object supports the following:
 	// Set of server-side encryption configuration rules
 	// +kubebuilder:validation:Optional
@@ -97,6 +123,9 @@ type ConfigurationRuleInitParameters struct {
 	// Single object for setting server-side encryption by default. The apply_server_side_encryption_by_default object supports the following:
 	// Single object for setting server-side encryption by default.
 	ApplyServerSideEncryptionByDefault []ApplyServerSideEncryptionByDefaultInitParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
 
 type ConfigurationRuleObservation struct {
@@ -104,6 +133,9 @@ type ConfigurationRuleObservation struct {
 	// Single object for setting server-side encryption by default. The apply_server_side_encryption_by_default object supports the following:
 	// Single object for setting server-side encryption by default.
 	ApplyServerSideEncryptionByDefault []ApplyServerSideEncryptionByDefaultObservation `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
 
 type ConfigurationRuleParameters struct {
@@ -112,6 +144,10 @@ type ConfigurationRuleParameters struct {
 	// Single object for setting server-side encryption by default.
 	// +kubebuilder:validation:Optional
 	ApplyServerSideEncryptionByDefault []ApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+	// +kubebuilder:validation:Optional
+	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
 
 // ConfigurationSpec defines the desired state of Configuration

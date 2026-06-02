@@ -90,6 +90,11 @@ type AutoscalerConfigInitParameters struct {
 	// Ignore DaemonSet pods when calculating resource utilization for scaling down
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
+	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
+
 	// (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	MaxGracefulTerminationSec *float64 `json:"maxGracefulTerminationSec,omitempty" tf:"max_graceful_termination_sec,omitempty"`
@@ -105,6 +110,10 @@ type AutoscalerConfigInitParameters struct {
 	// (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
+
+	// (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
 
 type AutoscalerConfigObservation struct {
@@ -133,6 +142,11 @@ type AutoscalerConfigObservation struct {
 	// Ignore DaemonSet pods when calculating resource utilization for scaling down
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
+	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
+
 	// (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	MaxGracefulTerminationSec *float64 `json:"maxGracefulTerminationSec,omitempty" tf:"max_graceful_termination_sec,omitempty"`
@@ -148,6 +162,10 @@ type AutoscalerConfigObservation struct {
 	// (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
+
+	// (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
 
 type AutoscalerConfigParameters struct {
@@ -182,6 +200,12 @@ type AutoscalerConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
+	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+	// +kubebuilder:validation:Optional
+	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
+
 	// (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
 	// +kubebuilder:validation:Optional
@@ -201,6 +225,11 @@ type AutoscalerConfigParameters struct {
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	// +kubebuilder:validation:Optional
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
+
+	// (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+	// +kubebuilder:validation:Optional
+	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
 
 type ClusterInitParameters struct {

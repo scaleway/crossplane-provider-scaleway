@@ -132,6 +132,12 @@ spec:
                             (Defaults to false) Ignore DaemonSet pods when calculating resource utilization for scaling down.
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
+                        logLevel:
+                          description: |-
+                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Check out the autoscaler's FAQ for details.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                          type: number
                         maxGracefulTerminationSec:
                           description: |-
                             (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
@@ -152,6 +158,11 @@ spec:
                             (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
+                        skipNodesWithLocalStorage:
+                          description: |-
+                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                          type: boolean
                       type: object
                     type: array
                   cni:
@@ -448,6 +459,12 @@ spec:
                             (Defaults to false) Ignore DaemonSet pods when calculating resource utilization for scaling down.
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
+                        logLevel:
+                          description: |-
+                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Check out the autoscaler's FAQ for details.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                          type: number
                         maxGracefulTerminationSec:
                           description: |-
                             (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
@@ -468,6 +485,11 @@ spec:
                             (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
+                        skipNodesWithLocalStorage:
+                          description: |-
+                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                          type: boolean
                       type: object
                     type: array
                   cni:
@@ -836,6 +858,12 @@ spec:
                             (Defaults to false) Ignore DaemonSet pods when calculating resource utilization for scaling down.
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
+                        logLevel:
+                          description: |-
+                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Check out the autoscaler's FAQ for details.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                          type: number
                         maxGracefulTerminationSec:
                           description: |-
                             (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
@@ -856,6 +884,11 @@ spec:
                             (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
+                        skipNodesWithLocalStorage:
+                          description: |-
+                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                          type: boolean
                       type: object
                     type: array
                   cni:

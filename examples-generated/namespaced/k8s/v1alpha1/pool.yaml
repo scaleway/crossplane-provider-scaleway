@@ -15,11 +15,18 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     containerRuntime: containerd
+    labels:
+      foo: bar
+      key: value
     maxSize: 10
     minSize: 0
     nodeType: DEV1-M
     placementGroupId: 1267e3fd-a51c-49ed-ad12-857092ee3a3d
     size: 3
+    taints:
+    - effect: NoSchedule
+      key: taint-key
+      value: taint-value
 
 ---
 
