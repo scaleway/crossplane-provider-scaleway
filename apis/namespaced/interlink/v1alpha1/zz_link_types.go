@@ -36,8 +36,8 @@ type LinkInitParameters struct {
 	// If set, creates a hosted link on a partner's connection. Specify the ID of the chosen partner, who already has a shared connection with available bandwidth
 	PartnerID *string `json:"partnerId,omitempty" tf:"partner_id,omitempty"`
 
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
 	// PoP (location) where the link will be created.
@@ -114,8 +114,8 @@ type LinkObservation struct {
 	// If set, creates a hosted link on a partner's connection. Specify the ID of the chosen partner, who already has a shared connection with available bandwidth
 	PartnerID *string `json:"partnerId,omitempty" tf:"partner_id,omitempty"`
 
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
 	// BGP configuration on peer's side (on-premises or other hosting provider). Contains asn, ipv4, ipv6.
@@ -194,8 +194,8 @@ type LinkParameters struct {
 	// +kubebuilder:validation:Optional
 	PartnerID *string `json:"partnerId,omitempty" tf:"partner_id,omitempty"`
 
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.
-	// For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.
+	// For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
 	// +kubebuilder:validation:Optional
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 

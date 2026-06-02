@@ -1074,7 +1074,7 @@ resources:
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.'
             push_url: '- The URL endpoint used for pushing data to the Cockpit data source.'
             region: '- (Defaults to the region specified in the provider configuration) The region where the data source is located.'
-            retention_days: '- (Required) The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.'
+            retention_days: '- (Required) The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.'
             synchronized_with_grafana: '- Indicates whether the data source is synchronized with Grafana.'
             type: '- (Required) The type of data source. Possible values are: metrics, logs, or traces.'
             updated_at: '- The date and time the data source was last updated (in RFC 3339 format).'
@@ -1182,6 +1182,24 @@ resources:
                 namespace_id: scaleway_container_namespace.main.id
               dependencies:
                 scaleway_container_namespace.main: '{}'
+            - name: with_pn
+              manifest: |-
+                {
+                  "image": "my-image:latest",
+                  "name": "container-with-private-network",
+                  "namespace_id": "${scaleway_container_namespace.with_pn.id}",
+                  "private_network_id": "${scaleway_vpc_private_network.pn.id}"
+                }
+              references:
+                namespace_id: scaleway_container_namespace.with_pn.id
+                private_network_id: scaleway_vpc_private_network.pn.id
+              dependencies:
+                scaleway_container_namespace.with_pn: '{}'
+                scaleway_vpc.vpc: '{}'
+                scaleway_vpc_private_network.pn: |-
+                    {
+                      "vpc_id": "${scaleway_vpc.vpc.id}"
+                    }
             - name: main
               manifest: |-
                 {
@@ -1255,6 +1273,7 @@ resources:
             - name: main
               manifest: |-
                 {
+                  "image": "nginx:latest",
                   "liveness_probe": [
                     {
                       "failure_threshold": 40,
@@ -2248,12 +2267,77 @@ resources:
                       "lb_id": "${scaleway_lb.main.id}",
                       "name": "frontend01"
                     }
+            - name: main
+              manifest: |-
+                {
+                  "container_backend_config": [
+                    {
+                      "container_id": "${scaleway_container.main.id}",
+                      "region": "fr-par"
+                    }
+                  ],
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                container_backend_config.container_id: scaleway_container.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+              dependencies:
+                scaleway_container.main: |-
+                    {
+                      "image": "nginx:1.29.4-alpine",
+                      "name": "my-container",
+                      "namespace_id": "${scaleway_container_namespace.main.id}",
+                      "port": 80
+                    }
+                scaleway_container_namespace.main: |-
+                    {
+                      "name": "my-namespace"
+                    }
+                scaleway_edge_services_pipeline.main: |-
+                    {
+                      "name": "my-pipeline"
+                    }
+            - name: main
+              manifest: |-
+                {
+                  "function_backend_config": [
+                    {
+                      "function_id": "${scaleway_function.main.id}",
+                      "region": "fr-par"
+                    }
+                  ],
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                function_backend_config.function_id: scaleway_function.main.id
+                pipeline_id: scaleway_edge_services_pipeline.main.id
+              dependencies:
+                scaleway_edge_services_pipeline.main: |-
+                    {
+                      "name": "my-pipeline"
+                    }
+                scaleway_function.main: |-
+                    {
+                      "handler": "handler.handle",
+                      "name": "my-function",
+                      "namespace_id": "${scaleway_function_namespace.main.id}",
+                      "privacy": "private",
+                      "runtime": "node20"
+                    }
+                scaleway_function_namespace.main: |-
+                    {
+                      "name": "my-namespace"
+                    }
         argumentDocs:
             bucket_name: '- The name of the Bucket.'
             bucket_region: '- The region of the Bucket.'
+            container_backend_config: '- (Optional) The Scaleway Serverless Container backend linked to the backend stage.'
+            container_id: '- (Required) The ID of the Serverless Container.'
             created_at: '- The date and time of the creation of the backend stage.'
             domain_name: '- The Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer.'
             frontend_id: '- The ID of the frontend.'
+            function_backend_config: '- (Optional) The Scaleway Serverless Function backend linked to the backend stage.'
+            function_id: '- (Required) The ID of the Serverless Function.'
             has_websocket: '- Defines whether to forward websocket requests to the load balancer.'
             id: '- The ID of the Load Balancer.'
             is_ssl: '- Defines whether the Load Balancer''s frontend handles SSL connections.'
@@ -2262,6 +2346,7 @@ resources:
             lb_config: '- The Load Balancer config.'
             pipeline_id: '- (Required) The ID of the pipeline.'
             project_id: '- (Defaults to provider project_id) The ID of the project the backend stage is associated with.'
+            region: '- (Defaults to provider region) The region of the Serverless Container.'
             s3_backend_config: '- (Optional) The Scaleway Object Storage origin bucket (S3) linked to the backend stage.'
             updated_at: '- The date and time of the last update of the backend stage.'
             zone: '- (Defaults to provider zone) The zone of the Load Balancer.'
@@ -4665,7 +4750,7 @@ resources:
             organization_id: '- Organization ID.'
             pairing_key: '- Used to identify a link from a user or partner''s point of view.'
             partner_id: '- (Optional) If set, creates a hosted link on a partner''s connection. Specify the ID of the chosen partner, who already has a shared connection with available bandwidth. Conflicts with connection_id.'
-            peer_asn: '- (Optional) For self-hosted links, the peer AS Number to establish BGP session. If not given, a default one will be assigned.'
+            peer_asn: '- (Optional) For self-hosted links, the peer AS Number to establish BGP session. Required when connection_id is set.'
             peer_bgp_config: '- BGP configuration on peer''s side (on-premises or other hosting provider). Contains asn, ipv4, ipv6.'
             pop_id: '- (Required) PoP (location) where the link will be created.'
             project_id: '- (Defaults to provider project_id) The ID of the project the link is associated with.'
@@ -5536,6 +5621,9 @@ resources:
             kapsule: or multicloud
             kapsule-dedicated-4: ', kapsule-dedicated-8 or kapsule-dedicated-16.'
             kubeconfig: ""
+            log_level: |-
+                - (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                Check out the autoscaler's FAQ for details.
             maintenance_window_day: '- (Optional) The day of the auto upgrade maintenance window (monday to sunday, or any).'
             maintenance_window_start_hour: '- (Optional) The start hour (UTC) of the 2-hour auto upgrade maintenance window (0 to 23).'
             max_graceful_termination_sec: '- (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node'
@@ -5553,6 +5641,7 @@ resources:
             scale_down_utilization_threshold: '- (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down'
             service_cidr: '- (Optional) The subnet used for the Service CIDR.'
             service_dns_ip: '- (Optional) The IP used for the DNS Service. If unset, defaults to Service CIDR''s network + 10.'
+            skip_nodes_with_local_storage: '- (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.'
             status: '- The status of the Kubernetes cluster.'
             tags: '- (Optional) The tags associated with the Kubernetes cluster.'
             token: '- The token to connect to the Kubernetes API server.'
@@ -5576,6 +5665,10 @@ resources:
                   "autoscaling": true,
                   "cluster_id": "${scaleway_k8s_cluster.main.id}",
                   "container_runtime": "containerd",
+                  "labels": {
+                    "foo": "bar",
+                    "key": "value"
+                  },
                   "lifecycle": [
                     {
                       "create_before_destroy": true
@@ -5585,7 +5678,14 @@ resources:
                   "min_size": 0,
                   "node_type": "DEV1-M",
                   "placement_group_id": "1267e3fd-a51c-49ed-ad12-857092ee3a3d",
-                  "size": 3
+                  "size": 3,
+                  "taints": [
+                    {
+                      "effect": "NoSchedule",
+                      "key": "taint-key",
+                      "value": "taint-value"
+                    }
+                  ]
                 }
               references:
                 cluster_id: scaleway_k8s_cluster.main.id
@@ -5657,6 +5757,7 @@ resources:
             current_size: '- The size of the pool at the time the terraform state was updated.'
             id: '- The ID of the pool.'
             kubelet_args: '- (Optional) The Kubelet arguments to be used by this pool'
+            labels: '- The list of Kubernetes labels applied and reconciled on the nodes.'
             max_size: '- (Defaults to size) The maximum size of the pool, used by the autoscaling feature.'
             max_surge: '- (Defaults to 0) The maximum number of nodes to be created during the upgrade'
             max_unavailable: '- (Defaults to 1) The maximum number of nodes that can be not ready at the same time'
@@ -5674,8 +5775,10 @@ resources:
             root_volume_type: '- (Optional) System volume type of the nodes composing the pool'
             security_group_id: '- The ID of the security group'
             size: '- (Required) The size of the pool.'
+            startup_taints: '- The list of Kubernetes taints applied at node creation but not reconciled afterward.'
             status: '- The status of the pool.'
             tags: '- (Optional) The tags associated with the pool.'
+            taints: '- The list of Kubernetes taints applied and reconciled on the nodes.'
             updated_at: '- The last update date of the pool.'
             upgrade_policy: '- (Optional) The Pool upgrade policy'
             version: '- The version of the pool.'
@@ -7444,6 +7547,99 @@ resources:
                     "key": "value"
                   }
                 }
+            - name: main
+              manifest: |-
+                {
+                  "lifecycle_rule": [
+                    {
+                      "enabled": true,
+                      "expiration": [
+                        {
+                          "days": 365
+                        }
+                      ],
+                      "id": "id1",
+                      "prefix": "path1/",
+                      "transition": [
+                        {
+                          "days": 120,
+                          "storage_class": "GLACIER"
+                        }
+                      ]
+                    },
+                    {
+                      "enabled": true,
+                      "expiration": [
+                        {
+                          "days": "50"
+                        }
+                      ],
+                      "id": "id2",
+                      "prefix": "path2/"
+                    },
+                    {
+                      "enabled": false,
+                      "expiration": [
+                        {
+                          "days": "1"
+                        }
+                      ],
+                      "id": "id3",
+                      "prefix": "path3/",
+                      "tags": {
+                        "tagKey": "tagValue",
+                        "terraform": "hashicorp"
+                      }
+                    },
+                    {
+                      "enabled": true,
+                      "id": "id4",
+                      "tags": {
+                        "tag1": "value1"
+                      },
+                      "transition": [
+                        {
+                          "days": 1,
+                          "storage_class": "GLACIER"
+                        }
+                      ]
+                    },
+                    {
+                      "abort_incomplete_multipart_upload_days": 30,
+                      "enabled": true
+                    }
+                  ],
+                  "name": "mybuckectid",
+                  "region": "fr-par"
+                }
+            - name: main
+              manifest: |-
+                {
+                  "lifecycle_rule": [
+                    {
+                      "enabled": true,
+                      "id": "id1",
+                      "noncurrent_version_expiration": [
+                        {
+                          "noncurrent_days": 90
+                        }
+                      ],
+                      "noncurrent_version_transition": [
+                        {
+                          "noncurrent_days": 30,
+                          "storage_class": "ONEZONE_IA"
+                        },
+                        {
+                          "noncurrent_days": 60,
+                          "storage_class": "GLACIER"
+                        }
+                      ],
+                      "prefix": "path1/"
+                    }
+                  ],
+                  "name": "mybuckectid",
+                  "region": "fr-par"
+                }
             - name: some_bucket
               manifest: |-
                 {
@@ -7764,6 +7960,65 @@ resources:
         name: scaleway_object_bucket_server_side_encryption_configuration
         title: scaleway_object_bucket_server_side_encryption_configuration
         examples:
+            - name: test
+              manifest: |-
+                {
+                  "bucket": "${scaleway_object_bucket.test.name}",
+                  "region": "fr-par",
+                  "rule": [
+                    {
+                      "apply_server_side_encryption_by_default": [
+                        {
+                          "kms_master_key_id": "${scaleway_key_manager_key.mykey.name}",
+                          "sse_algorithm": "aws:kms"
+                        }
+                      ],
+                      "bucket_key_enabled": true
+                    }
+                  ]
+                }
+              references:
+                bucket: scaleway_object_bucket.test.name
+                rule.apply_server_side_encryption_by_default.kms_master_key_id: scaleway_key_manager_key.mykey.name
+              dependencies:
+                scaleway_key_manager_key.mykey: |-
+                    {
+                      "algorithm": "rsa_oaep_4096_sha256",
+                      "description": "This key is used to encrypt bucket objects",
+                      "name": "my-kms-key",
+                      "unprotected": "true",
+                      "usage": "asymmetric_encryption"
+                    }
+                scaleway_object_bucket.test: |-
+                    {
+                      "name": "my-bucket",
+                      "region": "fr-par"
+                    }
+            - name: test
+              manifest: |-
+                {
+                  "bucket": "${scaleway_object_bucket.test.name}",
+                  "region": "fr-par",
+                  "rule": [
+                    {
+                      "apply_server_side_encryption_by_default": [
+                        {
+                          "kms_master_key_id": "my-key-id",
+                          "sse_algorithm": "aws:kms"
+                        }
+                      ],
+                      "bucket_key_enabled": true
+                    }
+                  ]
+                }
+              references:
+                bucket: scaleway_object_bucket.test.name
+              dependencies:
+                scaleway_object_bucket.test: |-
+                    {
+                      "name": "my-bucket",
+                      "region": "fr-par"
+                    }
             - name: test
               manifest: |-
                 {

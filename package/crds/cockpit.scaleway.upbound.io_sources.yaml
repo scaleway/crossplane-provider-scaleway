@@ -163,8 +163,8 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-                      The number of days to retain data, must be between 1 and 365.
+                      The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+                      The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
                     type: number
                   type:
                     description: |-
@@ -276,8 +276,8 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-                      The number of days to retain data, must be between 1 and 365.
+                      The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+                      The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
                     type: number
                   type:
                     description: |-
@@ -416,8 +416,8 @@ spec:
                     type: string
                   retentionDays:
                     description: |-
-                      The number of days to retain data in the data source. Must be a value between 1 and 365. For more details on retention policies, please refer to the Scaleway Retention Documentation. Note: Changes to this field will force the creation of a new resource.
-                      The number of days to retain data, must be between 1 and 365.
+                      The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.
+                      The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
                     type: number
                   synchronizedWithGrafana:
                     description: |-
