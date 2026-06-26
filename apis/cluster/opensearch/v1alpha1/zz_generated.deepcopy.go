@@ -53,6 +53,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
+	if in.NodeCount != nil {
+		in, out := &in.NodeCount, &out.NodeCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -182,6 +187,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.NodeCount != nil {
+		in, out := &in.NodeCount, &out.NodeCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -269,6 +279,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	}
 	if in.NodeAmount != nil {
 		in, out := &in.NodeAmount, &out.NodeAmount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NodeCount != nil {
+		in, out := &in.NodeCount, &out.NodeCount
 		*out = new(float64)
 		**out = **in
 	}

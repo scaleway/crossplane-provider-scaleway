@@ -319,6 +319,12 @@ type ClusterInitParameters struct {
 	// The type of cluster
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`
+
 	// The version of the Kubernetes cluster.
 	// The version of the cluster
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -427,6 +433,12 @@ type ClusterObservation struct {
 	// Set to true if a newer Kubernetes version is available.
 	// True if an upgrade is available
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty" tf:"upgrade_available,omitempty"`
+
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`
 
 	// The version of the Kubernetes cluster.
 	// The version of the cluster
@@ -540,6 +552,13 @@ type ClusterParameters struct {
 	// The type of cluster
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// +kubebuilder:validation:Optional
+	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`
 
 	// The version of the Kubernetes cluster.
 	// The version of the cluster

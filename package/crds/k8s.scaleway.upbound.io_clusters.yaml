@@ -374,6 +374,13 @@ spec:
                       The type of Kubernetes cluster. Possible values are:
                       The type of cluster
                     type: string
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    type: boolean
                   version:
                     description: |-
                       The version of the Kubernetes cluster.
@@ -695,6 +702,13 @@ spec:
                       The type of Kubernetes cluster. Possible values are:
                       The type of cluster
                     type: string
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    type: boolean
                   version:
                     description: |-
                       The version of the Kubernetes cluster.
@@ -1067,6 +1081,13 @@ spec:
                     description: |-
                       Set to true if a newer Kubernetes version is available.
                       True if an upgrade is available
+                    type: boolean
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
                     type: boolean
                   version:
                     description: |-
