@@ -23,6 +23,10 @@ type VPCInitParameters struct {
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
+	// Enable packets from peered VPCs to transit through this VPC.
+	// Enable packets from peered VPCs to transit through this VPC
+	EnableTransitivity *bool `json:"enableTransitivity,omitempty" tf:"enable_transitivity,omitempty"`
+
 	// The name for the VPC. If not provided it will be randomly generated.
 	// The name of the VPC
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -53,6 +57,10 @@ type VPCObservation struct {
 	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
+
+	// Enable packets from peered VPCs to transit through this VPC.
+	// Enable packets from peered VPCs to transit through this VPC
+	EnableTransitivity *bool `json:"enableTransitivity,omitempty" tf:"enable_transitivity,omitempty"`
 
 	// The ID of the VPC.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -97,6 +105,11 @@ type VPCParameters struct {
 	// Enable routing between Private Networks in the VPC
 	// +kubebuilder:validation:Optional
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
+
+	// Enable packets from peered VPCs to transit through this VPC.
+	// Enable packets from peered VPCs to transit through this VPC
+	// +kubebuilder:validation:Optional
+	EnableTransitivity *bool `json:"enableTransitivity,omitempty" tf:"enable_transitivity,omitempty"`
 
 	// The name for the VPC. If not provided it will be randomly generated.
 	// The name of the VPC

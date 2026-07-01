@@ -103,4 +103,14 @@ func Configure(p *config.Provider) {
 		r.Kind = "Scim"
 
 	})
+
+	p.AddResourceConfigurator("scaleway_iam_scim_token", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Token"
+
+		r.References["scim_id"] = config.Reference{
+			TerraformName: "scaleway_iam_scim",
+		}
+	})
 }

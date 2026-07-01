@@ -68,6 +68,11 @@ spec:
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
                       Enable routing between Private Networks in the VPC
                     type: boolean
+                  enableTransitivity:
+                    description: |-
+                      Enable packets from peered VPCs to transit through this VPC.
+                      Enable packets from peered VPCs to transit through this VPC
+                    type: boolean
                   name:
                     description: |-
                       The name for the VPC. If not provided it will be randomly generated.
@@ -113,6 +118,11 @@ spec:
                     description: |-
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
                       Enable routing between Private Networks in the VPC
+                    type: boolean
+                  enableTransitivity:
+                    description: |-
+                      Enable packets from peered VPCs to transit through this VPC.
+                      Enable packets from peered VPCs to transit through this VPC
                     type: boolean
                   name:
                     description: |-
@@ -214,6 +224,11 @@ spec:
                     description: |-
                       Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
                       Enable routing between Private Networks in the VPC
+                    type: boolean
+                  enableTransitivity:
+                    description: |-
+                      Enable packets from peered VPCs to transit through this VPC.
+                      Enable packets from peered VPCs to transit through this VPC
                     type: boolean
                   id:
                     description: The ID of the VPC.

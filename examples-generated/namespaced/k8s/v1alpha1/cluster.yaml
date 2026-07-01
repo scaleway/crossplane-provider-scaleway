@@ -15,7 +15,7 @@ spec:
     privateNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pn
-    version: 1.32.3
+    version: 1.35.3
 
 ---
 
@@ -36,6 +36,7 @@ spec:
     name: tf-pool
     nodeType: DEV1-M
     size: 1
+    version: 1.35.3
 
 ---
 

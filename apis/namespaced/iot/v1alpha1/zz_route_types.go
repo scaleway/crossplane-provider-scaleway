@@ -150,7 +150,7 @@ type RestParameters struct {
 
 type RouteInitParameters struct {
 
-	// Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+	// Configuration block for the database routes. See product documentation for a better understanding of the parameters.
 	// Database Route parameters
 	Database []DatabaseInitParameters `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -194,7 +194,7 @@ type RouteObservation struct {
 	// The date and time of the creation of the IoT Route
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+	// Configuration block for the database routes. See product documentation for a better understanding of the parameters.
 	// Database Route parameters
 	Database []DatabaseObservation `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -228,7 +228,7 @@ type RouteObservation struct {
 
 type RouteParameters struct {
 
-	// Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+	// Configuration block for the database routes. See product documentation for a better understanding of the parameters.
 	// Database Route parameters
 	// +kubebuilder:validation:Optional
 	Database []DatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
