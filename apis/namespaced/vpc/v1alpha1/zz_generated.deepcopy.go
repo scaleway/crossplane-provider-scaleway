@@ -3490,6 +3490,11 @@ func (in *VPCInitParameters) DeepCopyInto(out *VPCInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableTransitivity != nil {
+		in, out := &in.EnableTransitivity, &out.EnableTransitivity
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -3578,6 +3583,11 @@ func (in *VPCObservation) DeepCopyInto(out *VPCObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableTransitivity != nil {
+		in, out := &in.EnableTransitivity, &out.EnableTransitivity
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -3646,6 +3656,11 @@ func (in *VPCParameters) DeepCopyInto(out *VPCParameters) {
 	}
 	if in.EnableRouting != nil {
 		in, out := &in.EnableRouting, &out.EnableRouting
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableTransitivity != nil {
+		in, out := &in.EnableTransitivity, &out.EnableTransitivity
 		*out = new(bool)
 		**out = **in
 	}

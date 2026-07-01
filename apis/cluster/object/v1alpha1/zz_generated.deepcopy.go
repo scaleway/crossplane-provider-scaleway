@@ -815,6 +815,11 @@ func (in *ConfigurationInitParameters) DeepCopyInto(out *ConfigurationInitParame
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -884,6 +889,11 @@ func (in *ConfigurationObservation) DeepCopyInto(out *ConfigurationObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -925,6 +935,11 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 		in, out := &in.BucketSelector, &out.BucketSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

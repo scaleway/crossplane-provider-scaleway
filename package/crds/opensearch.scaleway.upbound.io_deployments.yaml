@@ -79,6 +79,11 @@ spec:
                     type: string
                   nodeAmount:
                     description: |-
+                      Use node_count instead. Changing this forces recreation of the deployment.
+                      Number of nodes
+                    type: number
+                  nodeCount:
+                    description: |-
                       Number of nodes in the cluster. Changing this forces recreation of the deployment.
                       Number of nodes
                     type: number
@@ -107,12 +112,14 @@ spec:
                     - namespace
                     type: object
                   privateNetwork:
-                    description: Private network configuration
+                    description: |-
+                      Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
+                      Private network configuration
                     items:
                       properties:
                         privateNetworkId:
                           description: |-
-                            Private network ID if the endpoint is private.
+                            The ID of the private network. Format: {region}/{id} or just {id}.
                             UUID of the Private Network
                           type: string
                       type: object
@@ -183,6 +190,11 @@ spec:
                     type: string
                   nodeAmount:
                     description: |-
+                      Use node_count instead. Changing this forces recreation of the deployment.
+                      Number of nodes
+                    type: number
+                  nodeCount:
+                    description: |-
                       Number of nodes in the cluster. Changing this forces recreation of the deployment.
                       Number of nodes
                     type: number
@@ -211,12 +223,14 @@ spec:
                     - namespace
                     type: object
                   privateNetwork:
-                    description: Private network configuration
+                    description: |-
+                      Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
+                      Private network configuration
                     items:
                       properties:
                         privateNetworkId:
                           description: |-
-                            Private network ID if the endpoint is private.
+                            The ID of the private network. Format: {region}/{id} or just {id}.
                             UUID of the Private Network
                           type: string
                       type: object
@@ -354,10 +368,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.nodeAmount is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeAmount)
-                || (has(self.initProvider) && has(self.initProvider.nodeAmount))'
             - message: spec.forProvider.nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
@@ -386,7 +396,8 @@ spec:
                           description: The ID of the deployment in the format {region}/{id}.
                           type: string
                         privateNetworkId:
-                          description: Private network ID if the endpoint is private.
+                          description: 'The ID of the private network. Format: {region}/{id}
+                            or just {id}.'
                           type: string
                         public:
                           description: Whether the endpoint is public (true) or private
@@ -405,7 +416,7 @@ spec:
                                 type: number
                               url:
                                 description: Full URL to access the service (e.g.,
-                                  "https://abc-123.searchdb.fr-par.scw.cloud:9200").
+                                  https://abc-123.searchdb.fr-par.scw.cloud:9200).
                                 type: string
                             type: object
                           type: array
@@ -421,6 +432,11 @@ spec:
                     type: string
                   nodeAmount:
                     description: |-
+                      Use node_count instead. Changing this forces recreation of the deployment.
+                      Number of nodes
+                    type: number
+                  nodeCount:
+                    description: |-
                       Number of nodes in the cluster. Changing this forces recreation of the deployment.
                       Number of nodes
                     type: number
@@ -430,12 +446,14 @@ spec:
                       Type of node
                     type: string
                   privateNetwork:
-                    description: Private network configuration
+                    description: |-
+                      Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
+                      Private network configuration
                     items:
                       properties:
                         privateNetworkId:
                           description: |-
-                            Private network ID if the endpoint is private.
+                            The ID of the private network. Format: {region}/{id} or just {id}.
                             UUID of the Private Network
                           type: string
                       type: object

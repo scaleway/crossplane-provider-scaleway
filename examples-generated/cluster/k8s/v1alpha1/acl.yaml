@@ -35,7 +35,7 @@ spec:
     privateNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: acl_basic
-    version: 1.32.2
+    version: 1.35.3
 
 ---
 

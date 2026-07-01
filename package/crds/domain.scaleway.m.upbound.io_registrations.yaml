@@ -574,7 +574,7 @@ spec:
                   administrativeContact:
                     description: |-
                       (Computed, List): Administrative contact information.
-                      Details of the administrative contact.
+                      Details of the administrative contact (read-only, set by the API).
                     items:
                       properties:
                         addressLine1:
@@ -950,7 +950,7 @@ spec:
                   technicalContact:
                     description: |-
                       (Computed, List): Technical contact information.
-                      Details of the technical contact.
+                      Details of the technical contact (read-only, set by the API).
                     items:
                       properties:
                         addressLine1:

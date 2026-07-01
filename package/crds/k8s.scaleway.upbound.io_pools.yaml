@@ -296,6 +296,12 @@ spec:
                           type: number
                       type: object
                     type: array
+                  version:
+                    description: |-
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+                      The Kubernetes version of the pool
+                    type: string
                   waitForPoolReady:
                     description: |-
                       (Defaults to true) Whether to wait for the pool to be ready.
@@ -544,6 +550,12 @@ spec:
                           type: number
                       type: object
                     type: array
+                  version:
+                    description: |-
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+                      The Kubernetes version of the pool
+                    type: string
                   waitForPoolReady:
                     description: |-
                       (Defaults to true) Whether to wait for the pool to be ready.
@@ -872,7 +884,8 @@ spec:
                     type: array
                   version:
                     description: |-
-                      The version of the pool.
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
                       The Kubernetes version of the pool
                     type: string
                   waitForPoolReady:

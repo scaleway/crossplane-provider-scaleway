@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     name: my-opensearch-cluster
-    nodeAmount: 1
+    nodeCount: 1
     nodeType: SEARCHDB-SHARED-2C-8G
     passwordSecretRef:
       key: example-key
