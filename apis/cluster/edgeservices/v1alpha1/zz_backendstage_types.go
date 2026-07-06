@@ -15,9 +15,11 @@ import (
 
 type BackendStageInitParameters struct {
 
+	// The Scaleway Serverless Container backend linked to the backend stage.
 	// The Scaleway Serverless Container backend linked to the backend stage
 	ContainerBackendConfig []ContainerBackendConfigInitParameters `json:"containerBackendConfig,omitempty" tf:"container_backend_config,omitempty"`
 
+	// The Scaleway Serverless Function backend linked to the backend stage.
 	// The Scaleway Serverless Function backend linked to the backend stage
 	FunctionBackendConfig []FunctionBackendConfigInitParameters `json:"functionBackendConfig,omitempty" tf:"function_backend_config,omitempty"`
 
@@ -49,6 +51,7 @@ type BackendStageInitParameters struct {
 
 type BackendStageObservation struct {
 
+	// The Scaleway Serverless Container backend linked to the backend stage.
 	// The Scaleway Serverless Container backend linked to the backend stage
 	ContainerBackendConfig []ContainerBackendConfigObservation `json:"containerBackendConfig,omitempty" tf:"container_backend_config,omitempty"`
 
@@ -56,6 +59,7 @@ type BackendStageObservation struct {
 	// The date and time of the creation of the backend stage
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The Scaleway Serverless Function backend linked to the backend stage.
 	// The Scaleway Serverless Function backend linked to the backend stage
 	FunctionBackendConfig []FunctionBackendConfigObservation `json:"functionBackendConfig,omitempty" tf:"function_backend_config,omitempty"`
 
@@ -85,10 +89,12 @@ type BackendStageObservation struct {
 
 type BackendStageParameters struct {
 
+	// The Scaleway Serverless Container backend linked to the backend stage.
 	// The Scaleway Serverless Container backend linked to the backend stage
 	// +kubebuilder:validation:Optional
 	ContainerBackendConfig []ContainerBackendConfigParameters `json:"containerBackendConfig,omitempty" tf:"container_backend_config,omitempty"`
 
+	// The Scaleway Serverless Function backend linked to the backend stage.
 	// The Scaleway Serverless Function backend linked to the backend stage
 	// +kubebuilder:validation:Optional
 	FunctionBackendConfig []FunctionBackendConfigParameters `json:"functionBackendConfig,omitempty" tf:"function_backend_config,omitempty"`
@@ -125,31 +131,34 @@ type BackendStageParameters struct {
 
 type ContainerBackendConfigInitParameters struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Container.
 	// ID of the Serverless Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ContainerBackendConfigObservation struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Container.
 	// ID of the Serverless Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ContainerBackendConfigParameters struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Container.
 	// ID of the Serverless Container
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId" tf:"container_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -157,31 +166,34 @@ type ContainerBackendConfigParameters struct {
 
 type FunctionBackendConfigInitParameters struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Function.
 	// ID of the Serverless Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type FunctionBackendConfigObservation struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Function.
 	// ID of the Serverless Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type FunctionBackendConfigParameters struct {
 
-	// The ID of the Load Balancer.
+	// The ID of the Serverless Function.
 	// ID of the Serverless Function
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId" tf:"function_id,omitempty"`
 
+	// (Defaults to provider region) The region of the Serverless Container.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

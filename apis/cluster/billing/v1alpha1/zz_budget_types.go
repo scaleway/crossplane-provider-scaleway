@@ -16,11 +16,14 @@ import (
 type BudgetInitParameters struct {
 
 	// Cost limit for the budget in cents.
+	// Cost limit for the budget in cents.
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
+	// Whether the budget is enabled or not. Defaults to true.
 	// Whether the budget is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	// The organization ID. If not provided, the default organization configured in the provider is used.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
@@ -28,19 +31,25 @@ type BudgetInitParameters struct {
 type BudgetObservation struct {
 
 	// Cost limit for the budget in cents.
+	// Cost limit for the budget in cents.
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
 	// The date and time of budget creation
+	// The date and time of budget creation
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Whether the budget is enabled or not. Defaults to true.
 	// Whether the budget is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The ID of the budget
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID. If not provided, the default organization configured in the provider is used.
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The date and time when the budget was last updated
 	// The date and time when the budget was last updated
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
@@ -48,13 +57,16 @@ type BudgetObservation struct {
 type BudgetParameters struct {
 
 	// Cost limit for the budget in cents.
+	// Cost limit for the budget in cents.
 	// +kubebuilder:validation:Optional
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
+	// Whether the budget is enabled or not. Defaults to true.
 	// Whether the budget is enabled or not.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	// The organization ID. If not provided, the default organization configured in the provider is used.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -87,7 +99,7 @@ type BudgetStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Budget is the Schema for the Budgets API. <no value>
+// Budget is the Schema for the Budgets API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -15,9 +15,11 @@ import (
 
 type RuleInitParameters struct {
 
+	// The description of the ingress rule.
 	// The ingress rule description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the private network used as nexthop for traffic matched by this rule.
 	// The ID of the nexthop private network
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.PrivateNetwork
 	NexthopPrivateNetworkID *string `json:"nexthopPrivateNetworkId,omitempty" tf:"nexthop_private_network_id,omitempty"`
@@ -30,18 +32,23 @@ type RuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NexthopPrivateNetworkIDSelector *v1.Selector `json:"nexthopPrivateNetworkIdSelector,omitempty" tf:"-"`
 
+	// IP of the nexthop resource that should handle traffic matched by this rule.
 	// IP of the nexthop resource for the ingress rule
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
+	// (Defaults to provider region) The region of the ingress rule.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Source IP range (in CIDR notation) to which the ingress rule applies.
 	// Source IP range to which this rule applies (CIDR notation with subnet mask)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
+	// The tags to associate with the ingress rule.
 	// The tags associated with the ingress rule
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the VPC in which to create the ingress rule.
 	// The ID of the VPC the ingress rule belongs to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -57,45 +64,58 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
+	// The date and time of the creation of the ingress rule (RFC 3339 format).
 	// The date and time of the creation of the ingress rule
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The description of the ingress rule.
 	// The ingress rule description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the VPC ingress rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether the ingress rule is for IPv6 traffic (derived from source).
 	// Whether the ingress rule is for IPv6 traffic
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
+	// The ID of the private network used as nexthop for traffic matched by this rule.
 	// The ID of the nexthop private network
 	NexthopPrivateNetworkID *string `json:"nexthopPrivateNetworkId,omitempty" tf:"nexthop_private_network_id,omitempty"`
 
+	// IP of the nexthop resource that should handle traffic matched by this rule.
 	// IP of the nexthop resource for the ingress rule
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
+	// (Defaults to provider region) The region of the ingress rule.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Source IP range (in CIDR notation) to which the ingress rule applies.
 	// Source IP range to which this rule applies (CIDR notation with subnet mask)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
+	// The tags to associate with the ingress rule.
 	// The tags associated with the ingress rule
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The date and time of the last update of the ingress rule (RFC 3339 format).
 	// The date and time of the last update of the ingress rule
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
+	// The ID of the VPC in which to create the ingress rule.
 	// The ID of the VPC the ingress rule belongs to
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type RuleParameters struct {
 
+	// The description of the ingress rule.
 	// The ingress rule description
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the private network used as nexthop for traffic matched by this rule.
 	// The ID of the nexthop private network
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
@@ -109,22 +129,27 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NexthopPrivateNetworkIDSelector *v1.Selector `json:"nexthopPrivateNetworkIdSelector,omitempty" tf:"-"`
 
+	// IP of the nexthop resource that should handle traffic matched by this rule.
 	// IP of the nexthop resource for the ingress rule
 	// +kubebuilder:validation:Optional
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
+	// (Defaults to provider region) The region of the ingress rule.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Source IP range (in CIDR notation) to which the ingress rule applies.
 	// Source IP range to which this rule applies (CIDR notation with subnet mask)
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
+	// The tags to associate with the ingress rule.
 	// The tags associated with the ingress rule
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the VPC in which to create the ingress rule.
 	// The ID of the VPC the ingress rule belongs to
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.VPC
 	// +kubebuilder:validation:Optional
@@ -166,7 +191,7 @@ type RuleStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Rule is the Schema for the Rules API. <no value>
+// Rule is the Schema for the Rules API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

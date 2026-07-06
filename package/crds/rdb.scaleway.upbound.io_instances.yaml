@@ -834,6 +834,27 @@ spec:
                           type: number
                       type: object
                     type: array
+                  maintenances:
+                    description: List of scheduled maintenance events on the database
+                      instance
+                    items:
+                      properties:
+                        closedAt:
+                          type: string
+                        forcedAt:
+                          type: string
+                        isApplicable:
+                          type: boolean
+                        reason:
+                          type: string
+                        startsAt:
+                          type: string
+                        status:
+                          type: string
+                        stopsAt:
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the Database Instance.

@@ -19,10 +19,11 @@ type DeploymentInitParameters struct {
 	// Name of the OpenSearch deployment
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
+	// Use node_count instead. Changing this forces recreation of the deployment.
 	// Number of nodes
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
+	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
 	// Number of nodes
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
@@ -34,6 +35,7 @@ type DeploymentInitParameters struct {
 	// Password for the deployment user
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
 	// Private network configuration
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -79,10 +81,11 @@ type DeploymentObservation struct {
 	// Name of the OpenSearch deployment
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
+	// Use node_count instead. Changing this forces recreation of the deployment.
 	// Number of nodes
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
+	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
 	// Number of nodes
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
@@ -90,6 +93,7 @@ type DeploymentObservation struct {
 	// Type of node
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
 	// Private network configuration
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
@@ -137,11 +141,12 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
+	// Use node_count instead. Changing this forces recreation of the deployment.
 	// Number of nodes
 	// +kubebuilder:validation:Optional
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
+	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
 	// Number of nodes
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
@@ -156,6 +161,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Private network configuration for the OpenSearch API endpoint. Can be added, updated, or removed on an existing deployment.
 	// Private network configuration
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
@@ -199,7 +205,7 @@ type EndpointsObservation struct {
 	// The ID of the deployment in the format {region}/{id}.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Private network ID if the endpoint is private.
+	// The ID of the private network. Format: {region}/{id} or just {id}.
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// Whether the endpoint is public (true) or private (false).
@@ -214,21 +220,21 @@ type EndpointsParameters struct {
 
 type PrivateNetworkInitParameters struct {
 
-	// Private network ID if the endpoint is private.
+	// The ID of the private network. Format: {region}/{id} or just {id}.
 	// UUID of the Private Network
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 }
 
 type PrivateNetworkObservation struct {
 
-	// Private network ID if the endpoint is private.
+	// The ID of the private network. Format: {region}/{id} or just {id}.
 	// UUID of the Private Network
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 }
 
 type PrivateNetworkParameters struct {
 
-	// Private network ID if the endpoint is private.
+	// The ID of the private network. Format: {region}/{id} or just {id}.
 	// UUID of the Private Network
 	// +kubebuilder:validation:Optional
 	PrivateNetworkID *string `json:"privateNetworkId" tf:"private_network_id,omitempty"`
@@ -245,7 +251,7 @@ type ServicesObservation struct {
 	// Service port number.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Full URL to access the service (e.g., "https://abc-123.searchdb.fr-par.scw.cloud:9200").
+	// Full URL to access the service (e.g., https://abc-123.searchdb.fr-par.scw.cloud:9200).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 

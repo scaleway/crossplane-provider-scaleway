@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Rule is the Schema for the Rules API. <no value>
+        description: Rule is the Schema for the Rules API.
         properties:
           apiVersion:
             description: |-
@@ -59,10 +59,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The ingress rule description
+                    description: |-
+                      The description of the ingress rule.
+                      The ingress rule description
                     type: string
                   nexthopPrivateNetworkId:
-                    description: The ID of the nexthop private network
+                    description: |-
+                      The ID of the private network used as nexthop for traffic matched by this rule.
+                      The ID of the nexthop private network
                     type: string
                   nexthopPrivateNetworkIdRef:
                     description: Reference to a PrivateNetwork in vpc to populate
@@ -147,22 +151,31 @@ spec:
                         type: object
                     type: object
                   nexthopResourceIp:
-                    description: IP of the nexthop resource for the ingress rule
+                    description: |-
+                      IP of the nexthop resource that should handle traffic matched by this rule.
+                      IP of the nexthop resource for the ingress rule
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region of the ingress rule.
+                      The region you want to attach the resource to
                     type: string
                   source:
-                    description: Source IP range to which this rule applies (CIDR
-                      notation with subnet mask)
+                    description: |-
+                      Source IP range (in CIDR notation) to which the ingress rule applies.
+                      Source IP range to which this rule applies (CIDR notation with subnet mask)
                     type: string
                   tags:
-                    description: The tags associated with the ingress rule
+                    description: |-
+                      The tags to associate with the ingress rule.
+                      The tags associated with the ingress rule
                     items:
                       type: string
                     type: array
                   vpcId:
-                    description: The ID of the VPC the ingress rule belongs to
+                    description: |-
+                      The ID of the VPC in which to create the ingress rule.
+                      The ID of the VPC the ingress rule belongs to
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in vpc to populate vpcId.
@@ -259,10 +272,14 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The ingress rule description
+                    description: |-
+                      The description of the ingress rule.
+                      The ingress rule description
                     type: string
                   nexthopPrivateNetworkId:
-                    description: The ID of the nexthop private network
+                    description: |-
+                      The ID of the private network used as nexthop for traffic matched by this rule.
+                      The ID of the nexthop private network
                     type: string
                   nexthopPrivateNetworkIdRef:
                     description: Reference to a PrivateNetwork in vpc to populate
@@ -347,22 +364,31 @@ spec:
                         type: object
                     type: object
                   nexthopResourceIp:
-                    description: IP of the nexthop resource for the ingress rule
+                    description: |-
+                      IP of the nexthop resource that should handle traffic matched by this rule.
+                      IP of the nexthop resource for the ingress rule
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region of the ingress rule.
+                      The region you want to attach the resource to
                     type: string
                   source:
-                    description: Source IP range to which this rule applies (CIDR
-                      notation with subnet mask)
+                    description: |-
+                      Source IP range (in CIDR notation) to which the ingress rule applies.
+                      Source IP range to which this rule applies (CIDR notation with subnet mask)
                     type: string
                   tags:
-                    description: The tags associated with the ingress rule
+                    description: |-
+                      The tags to associate with the ingress rule.
+                      The tags associated with the ingress rule
                     items:
                       type: string
                     type: array
                   vpcId:
-                    description: The ID of the VPC the ingress rule belongs to
+                    description: |-
+                      The ID of the VPC in which to create the ingress rule.
+                      The ID of the VPC the ingress rule belongs to
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in vpc to populate vpcId.
@@ -518,41 +544,59 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of the creation of the ingress
-                      rule
+                    description: |-
+                      The date and time of the creation of the ingress rule (RFC 3339 format).
+                      The date and time of the creation of the ingress rule
                     type: string
                   description:
-                    description: The ingress rule description
+                    description: |-
+                      The description of the ingress rule.
+                      The ingress rule description
                     type: string
                   id:
+                    description: The ID of the VPC ingress rule.
                     type: string
                   isIpv6:
-                    description: Whether the ingress rule is for IPv6 traffic
+                    description: |-
+                      Whether the ingress rule is for IPv6 traffic (derived from source).
+                      Whether the ingress rule is for IPv6 traffic
                     type: boolean
                   nexthopPrivateNetworkId:
-                    description: The ID of the nexthop private network
+                    description: |-
+                      The ID of the private network used as nexthop for traffic matched by this rule.
+                      The ID of the nexthop private network
                     type: string
                   nexthopResourceIp:
-                    description: IP of the nexthop resource for the ingress rule
+                    description: |-
+                      IP of the nexthop resource that should handle traffic matched by this rule.
+                      IP of the nexthop resource for the ingress rule
                     type: string
                   region:
-                    description: The region you want to attach the resource to
+                    description: |-
+                      (Defaults to provider region) The region of the ingress rule.
+                      The region you want to attach the resource to
                     type: string
                   source:
-                    description: Source IP range to which this rule applies (CIDR
-                      notation with subnet mask)
+                    description: |-
+                      Source IP range (in CIDR notation) to which the ingress rule applies.
+                      Source IP range to which this rule applies (CIDR notation with subnet mask)
                     type: string
                   tags:
-                    description: The tags associated with the ingress rule
+                    description: |-
+                      The tags to associate with the ingress rule.
+                      The tags associated with the ingress rule
                     items:
                       type: string
                     type: array
                   updatedAt:
-                    description: The date and time of the last update of the ingress
-                      rule
+                    description: |-
+                      The date and time of the last update of the ingress rule (RFC 3339 format).
+                      The date and time of the last update of the ingress rule
                     type: string
                   vpcId:
-                    description: The ID of the VPC the ingress rule belongs to
+                    description: |-
+                      The ID of the VPC in which to create the ingress rule.
+                      The ID of the VPC the ingress rule belongs to
                     type: string
                 type: object
               conditions:

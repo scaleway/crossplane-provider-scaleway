@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Budget is the Schema for the Budgets API. <no value>
+        description: Budget is the Schema for the Budgets API.
         properties:
           apiVersion:
             description: |-
@@ -73,14 +73,19 @@ spec:
               forProvider:
                 properties:
                   consumptionLimit:
-                    description: Cost limit for the budget in cents.
+                    description: |-
+                      Cost limit for the budget in cents.
+                      Cost limit for the budget in cents.
                     type: number
                   enabled:
-                    description: Whether the budget is enabled or not.
+                    description: |-
+                      Whether the budget is enabled or not. Defaults to true.
+                      Whether the budget is enabled or not.
                     type: boolean
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                 type: object
               initProvider:
@@ -97,14 +102,19 @@ spec:
                   autoscaler.
                 properties:
                   consumptionLimit:
-                    description: Cost limit for the budget in cents.
+                    description: |-
+                      Cost limit for the budget in cents.
+                      Cost limit for the budget in cents.
                     type: number
                   enabled:
-                    description: Whether the budget is enabled or not.
+                    description: |-
+                      Whether the budget is enabled or not. Defaults to true.
+                      Whether the budget is enabled or not.
                     type: boolean
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                 type: object
               managementPolicies:
@@ -204,22 +214,32 @@ spec:
               atProvider:
                 properties:
                   consumptionLimit:
-                    description: Cost limit for the budget in cents.
+                    description: |-
+                      Cost limit for the budget in cents.
+                      Cost limit for the budget in cents.
                     type: number
                   createdAt:
-                    description: The date and time of budget creation
+                    description: |-
+                      The date and time of budget creation
+                      The date and time of budget creation
                     type: string
                   enabled:
-                    description: Whether the budget is enabled or not.
+                    description: |-
+                      Whether the budget is enabled or not. Defaults to true.
+                      Whether the budget is enabled or not.
                     type: boolean
                   id:
+                    description: The ID of the budget
                     type: string
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                   updatedAt:
-                    description: The date and time when the budget was last updated
+                    description: |-
+                      The date and time when the budget was last updated
+                      The date and time when the budget was last updated
                     type: string
                 type: object
               conditions:

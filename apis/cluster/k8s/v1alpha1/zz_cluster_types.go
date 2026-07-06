@@ -90,6 +90,8 @@ type AutoscalerConfigInitParameters struct {
 	// Ignore DaemonSet pods when calculating resource utilization for scaling down
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
@@ -109,6 +111,7 @@ type AutoscalerConfigInitParameters struct {
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
+	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
@@ -139,6 +142,8 @@ type AutoscalerConfigObservation struct {
 	// Ignore DaemonSet pods when calculating resource utilization for scaling down
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
@@ -158,6 +163,7 @@ type AutoscalerConfigObservation struct {
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
+	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
@@ -194,6 +200,8 @@ type AutoscalerConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IgnoreDaemonsetsUtilization *bool `json:"ignoreDaemonsetsUtilization,omitempty" tf:"ignore_daemonsets_utilization,omitempty"`
 
+	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+	// Check out the autoscaler's FAQ for details.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	// +kubebuilder:validation:Optional
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
@@ -218,6 +226,7 @@ type AutoscalerConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
+	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	// +kubebuilder:validation:Optional
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
@@ -309,6 +318,9 @@ type ClusterInitParameters struct {
 	// The type of cluster
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
 	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
 	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`
 
@@ -421,6 +433,9 @@ type ClusterObservation struct {
 	// True if an upgrade is available
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty" tf:"upgrade_available,omitempty"`
 
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
 	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
 	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`
 
@@ -537,6 +552,9 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+	// If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+	// In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
 	// Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
 	// +kubebuilder:validation:Optional
 	UpgradePools *bool `json:"upgradePools,omitempty" tf:"upgrade_pools,omitempty"`

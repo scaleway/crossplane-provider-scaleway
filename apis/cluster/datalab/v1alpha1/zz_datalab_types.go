@@ -16,16 +16,21 @@ import (
 type DatalabInitParameters struct {
 
 	// A description for the Datalab instance.
+	// A description for the Datalab instance.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether a JupyterLab notebook is associated with the Datalab.
+	// Whether a JupyterLab notebook is associated with the Datalab.
 	HasNotebook *bool `json:"hasNotebook,omitempty" tf:"has_notebook,omitempty"`
 
+	// The Spark main node configuration.
 	Main *MainInitParameters `json:"main,omitempty" tf:"main,omitempty"`
 
 	// The name of the Datalab instance. If not provided, a random name is generated.
+	// The name of the Datalab instance. If not provided, a random name is generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the private network to attach the Datalab to.
 	// The ID of the private network to attach the Datalab to.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.PrivateNetwork
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
@@ -38,90 +43,118 @@ type DatalabInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to provider project_id) The project ID the Datalab belongs to.
 	// The project ID the Datalab belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
 	// The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// Tags associated with the Datalab instance.
+	// Tags associated with the Datalab instance.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Persistent volume storage configuration.
 	TotalStorage *TotalStorageInitParameters `json:"totalStorage,omitempty" tf:"total_storage,omitempty"`
 
+	// The Spark worker nodes configuration.
 	Worker *WorkerInitParameters `json:"worker,omitempty" tf:"worker,omitempty"`
 }
 
 type DatalabObservation struct {
 
 	// The creation timestamp of the Datalab instance.
+	// The creation timestamp of the Datalab instance.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// A description for the Datalab instance.
 	// A description for the Datalab instance.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether a JupyterLab notebook is associated with the Datalab.
+	// Whether a JupyterLab notebook is associated with the Datalab.
 	HasNotebook *bool `json:"hasNotebook,omitempty" tf:"has_notebook,omitempty"`
 
+	// The ID of the Datalab instance, in the {region}/{id} format.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Spark main node configuration.
 	Main *MainObservation `json:"main,omitempty" tf:"main,omitempty"`
 
+	// The name of the Datalab instance. If not provided, a random name is generated.
 	// The name of the Datalab instance. If not provided, a random name is generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The URL used to reach the cluster from the notebook.
+	// The URL used to reach the cluster from the notebook.
 	NotebookMasterURL *string `json:"notebookMasterUrl,omitempty" tf:"notebook_master_url,omitempty"`
 
+	// The URL of the JupyterLab notebook, if available.
 	// The URL of the JupyterLab notebook, if available.
 	NotebookURL *string `json:"notebookUrl,omitempty" tf:"notebook_url,omitempty"`
 
 	// The ID of the private network to attach the Datalab to.
+	// The ID of the private network to attach the Datalab to.
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
+	// (Defaults to provider project_id) The project ID the Datalab belongs to.
 	// The project ID the Datalab belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
 	// The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// The current status of the Datalab instance.
+	// The current status of the Datalab instance.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Tags associated with the Datalab instance.
+	// Tags associated with the Datalab instance.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Persistent volume storage configuration.
 	TotalStorage *TotalStorageObservation `json:"totalStorage,omitempty" tf:"total_storage,omitempty"`
 
 	// The last update timestamp of the Datalab instance.
+	// The last update timestamp of the Datalab instance.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
+	// The Spark worker nodes configuration.
 	Worker *WorkerObservation `json:"worker,omitempty" tf:"worker,omitempty"`
 }
 
 type DatalabParameters struct {
 
 	// A description for the Datalab instance.
+	// A description for the Datalab instance.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether a JupyterLab notebook is associated with the Datalab.
+	// Whether a JupyterLab notebook is associated with the Datalab.
 	// +kubebuilder:validation:Optional
 	HasNotebook *bool `json:"hasNotebook,omitempty" tf:"has_notebook,omitempty"`
 
+	// The Spark main node configuration.
 	// +kubebuilder:validation:Optional
 	Main *MainParameters `json:"main,omitempty" tf:"main,omitempty"`
 
 	// The name of the Datalab instance. If not provided, a random name is generated.
+	// The name of the Datalab instance. If not provided, a random name is generated.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the private network to attach the Datalab to.
 	// The ID of the private network to attach the Datalab to.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
@@ -135,25 +168,31 @@ type DatalabParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
+	// (Defaults to provider project_id) The project ID the Datalab belongs to.
 	// The project ID the Datalab belongs to. Defaults to the provider's project ID.
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
 	// The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
 	// +kubebuilder:validation:Optional
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// Tags associated with the Datalab instance.
+	// Tags associated with the Datalab instance.
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Persistent volume storage configuration.
 	// +kubebuilder:validation:Optional
 	TotalStorage *TotalStorageParameters `json:"totalStorage,omitempty" tf:"total_storage,omitempty"`
 
+	// The Spark worker nodes configuration.
 	// +kubebuilder:validation:Optional
 	Worker *WorkerParameters `json:"worker,omitempty" tf:"worker,omitempty"`
 }
@@ -161,25 +200,31 @@ type DatalabParameters struct {
 type MainInitParameters struct {
 
 	// The node type for the main node.
+	// The node type for the main node.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 }
 
 type MainObservation struct {
 
 	// The node type for the main node.
+	// The node type for the main node.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Volume details for the main node.
 	RootVolume *RootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 
 	// The Spark master URL within the VPC.
+	// The Spark master URL within the VPC.
 	SparkMasterURL *string `json:"sparkMasterUrl,omitempty" tf:"spark_master_url,omitempty"`
 
+	// The Spark UI URL.
 	// The Spark UI URL.
 	SparkUIURL *string `json:"sparkUiUrl,omitempty" tf:"spark_ui_url,omitempty"`
 }
 
 type MainParameters struct {
 
+	// The node type for the main node.
 	// The node type for the main node.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
@@ -191,8 +236,10 @@ type RootVolumeInitParameters struct {
 type RootVolumeObservation struct {
 
 	// The volume size in bytes.
+	// The volume size in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The volume type. Defaults to sbs_5k.
 	// The volume type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -203,8 +250,10 @@ type RootVolumeParameters struct {
 type TotalStorageInitParameters struct {
 
 	// The volume size in bytes.
+	// The volume size in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The volume type. Defaults to sbs_5k.
 	// The volume type. Defaults to `sbs_5k`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -212,8 +261,10 @@ type TotalStorageInitParameters struct {
 type TotalStorageObservation struct {
 
 	// The volume size in bytes.
+	// The volume size in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The volume type. Defaults to sbs_5k.
 	// The volume type. Defaults to `sbs_5k`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -221,9 +272,11 @@ type TotalStorageObservation struct {
 type TotalStorageParameters struct {
 
 	// The volume size in bytes.
+	// The volume size in bytes.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The volume type. Defaults to sbs_5k.
 	// The volume type. Defaults to `sbs_5k`.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -232,8 +285,10 @@ type TotalStorageParameters struct {
 type WorkerInitParameters struct {
 
 	// The number of worker nodes.
+	// The number of worker nodes.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
+	// The node type for the main node.
 	// The node type for worker nodes.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 }
@@ -241,20 +296,25 @@ type WorkerInitParameters struct {
 type WorkerObservation struct {
 
 	// The number of worker nodes.
+	// The number of worker nodes.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
+	// The node type for the main node.
 	// The node type for worker nodes.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Volume details for the main node.
 	RootVolume *WorkerRootVolumeObservation `json:"rootVolume,omitempty" tf:"root_volume,omitempty"`
 }
 
 type WorkerParameters struct {
 
 	// The number of worker nodes.
+	// The number of worker nodes.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount" tf:"node_count,omitempty"`
 
+	// The node type for the main node.
 	// The node type for worker nodes.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
@@ -266,8 +326,10 @@ type WorkerRootVolumeInitParameters struct {
 type WorkerRootVolumeObservation struct {
 
 	// The volume size in bytes.
+	// The volume size in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// The volume type. Defaults to sbs_5k.
 	// The volume type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -302,7 +364,7 @@ type DatalabStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Datalab is the Schema for the Datalabs API. <no value>
+// Datalab is the Schema for the Datalabs API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

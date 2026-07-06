@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Token is the Schema for the Tokens API. <no value>
+        description: Token is the Schema for the Tokens API.
         properties:
           apiVersion:
             description: |-
@@ -73,12 +73,14 @@ spec:
               forProvider:
                 properties:
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                   scimId:
-                    description: The SCIM configuration ID for which to create the
-                      token.
+                    description: |-
+                      The SCIM configuration ID for which to create the token.
+                      The SCIM configuration ID for which to create the token.
                     type: string
                   scimIdRef:
                     description: Reference to a Scim in iam to populate scimId.
@@ -169,12 +171,14 @@ spec:
                   autoscaler.
                 properties:
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                   scimId:
-                    description: The SCIM configuration ID for which to create the
-                      token.
+                    description: |-
+                      The SCIM configuration ID for which to create the token.
+                      The SCIM configuration ID for which to create the token.
                     type: string
                   scimIdRef:
                     description: Reference to a Scim in iam to populate scimId.
@@ -343,20 +347,27 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The date and time of SCIM token creation
+                    description: |-
+                      The date and time of SCIM token creation
+                      The date and time of SCIM token creation
                     type: string
                   expiresAt:
-                    description: The date and time when the SCIM token expires
+                    description: |-
+                      The date and time when the SCIM token expires
+                      The date and time when the SCIM token expires
                     type: string
                   id:
+                    description: The ID of the SCIM token
                     type: string
                   organizationId:
-                    description: The organization ID. If not provided, the default
-                      organization configured in the provider is used.
+                    description: |-
+                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The organization ID. If not provided, the default organization configured in the provider is used.
                     type: string
                   scimId:
-                    description: The SCIM configuration ID for which to create the
-                      token.
+                    description: |-
+                      The SCIM configuration ID for which to create the token.
+                      The SCIM configuration ID for which to create the token.
                     type: string
                 type: object
               conditions:

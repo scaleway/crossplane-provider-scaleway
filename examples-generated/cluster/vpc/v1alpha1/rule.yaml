@@ -1,0 +1,50 @@
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: Rule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    description: Allow ingress traffic from 10.0.0.0/24
+    nexthopPrivateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pn01
+    nexthopResourceIp: 10.0.0.10
+    source: 10.0.0.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: vpc01
+  name: vpc01
+spec:
+  forProvider:
+    name: my-vpc
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: pn01
+  name: pn01
+spec:
+  forProvider:
+    name: my-private-network
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc01

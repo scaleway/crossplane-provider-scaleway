@@ -177,7 +177,9 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Kubernetes labels applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
                     type: object
                     x-kubernetes-map-type: granular
                   maxSize:
@@ -236,8 +238,9 @@ spec:
                       Size of the pool
                     type: number
                   startupTaints:
-                    description: Kubernetes taints applied at node creation but not
-                      reconciled afterwards.
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
                     items:
                       properties:
                         effect:
@@ -259,7 +262,9 @@ spec:
                       type: string
                     type: array
                   taints:
-                    description: Kubernetes taints applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
                     items:
                       properties:
                         effect:
@@ -293,7 +298,8 @@ spec:
                     type: array
                   version:
                     description: |-
-                      The version of the pool.
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
                       The Kubernetes version of the pool
                     type: string
                   waitForPoolReady:
@@ -425,7 +431,9 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Kubernetes labels applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
                     type: object
                     x-kubernetes-map-type: granular
                   maxSize:
@@ -484,8 +492,9 @@ spec:
                       Size of the pool
                     type: number
                   startupTaints:
-                    description: Kubernetes taints applied at node creation but not
-                      reconciled afterwards.
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
                     items:
                       properties:
                         effect:
@@ -507,7 +516,9 @@ spec:
                       type: string
                     type: array
                   taints:
-                    description: Kubernetes taints applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
                     items:
                       properties:
                         effect:
@@ -541,7 +552,8 @@ spec:
                     type: array
                   version:
                     description: |-
-                      The version of the pool.
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
                       The Kubernetes version of the pool
                     type: string
                   waitForPoolReady:
@@ -701,7 +713,9 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Kubernetes labels applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes labels applied and reconciled on the nodes.
+                      Kubernetes labels applied and reconciled on the nodes.
                     type: object
                     x-kubernetes-map-type: granular
                   maxSize:
@@ -800,8 +814,9 @@ spec:
                       Size of the pool
                     type: number
                   startupTaints:
-                    description: Kubernetes taints applied at node creation but not
-                      reconciled afterwards.
+                    description: |-
+                      The list of Kubernetes taints applied at node creation but not reconciled afterward.
+                      Kubernetes taints applied at node creation but not reconciled afterwards.
                     items:
                       properties:
                         effect:
@@ -828,7 +843,9 @@ spec:
                       type: string
                     type: array
                   taints:
-                    description: Kubernetes taints applied and reconciled on the nodes.
+                    description: |-
+                      The list of Kubernetes taints applied and reconciled on the nodes.
+                      Kubernetes taints applied and reconciled on the nodes.
                     items:
                       properties:
                         effect:
@@ -867,7 +884,8 @@ spec:
                     type: array
                   version:
                     description: |-
-                      The version of the pool.
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
                       The Kubernetes version of the pool
                     type: string
                   waitForPoolReady:

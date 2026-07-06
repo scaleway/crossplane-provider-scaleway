@@ -14,7 +14,27 @@ spec:
     region: fr-par
     rule:
     - applyServerSideEncryptionByDefault:
-      - sseAlgorithm: AES256
+      - kmsMasterKeyId: my-kms-key
+        sseAlgorithm: aws:kms
+      bucketKeyEnabled: true
+
+---
+
+apiVersion: keymanager.scaleway.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/configuration
+  labels:
+    testing.upbound.io/example-name: mykey
+  name: mykey
+spec:
+  forProvider:
+    algorithm: rsa_oaep_4096_sha256
+    description: This key is used to encrypt bucket objects
+    name: my-kms-key
+    unprotected: "true"
+    usage: asymmetric_encryption
 
 ---
 
@@ -28,5 +48,5 @@ metadata:
   name: test
 spec:
   forProvider:
-    name: my-unique-bucket-name
+    name: my-bucket
     region: fr-par

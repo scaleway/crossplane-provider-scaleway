@@ -17,8 +17,10 @@ import (
 type TokenInitParameters struct {
 
 	// The organization ID. If not provided, the default organization configured in the provider is used.
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The SCIM configuration ID for which to create the token.
 	// The SCIM configuration ID for which to create the token.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/iam/v1alpha1.Scim
 	ScimID *string `json:"scimId,omitempty" tf:"scim_id,omitempty"`
@@ -35,16 +37,21 @@ type TokenInitParameters struct {
 type TokenObservation struct {
 
 	// The date and time of SCIM token creation
+	// The date and time of SCIM token creation
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// The date and time when the SCIM token expires
+	// The date and time when the SCIM token expires
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
+	// The ID of the SCIM token
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The organization ID. If not provided, the default organization configured in the provider is used.
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The SCIM configuration ID for which to create the token.
 	// The SCIM configuration ID for which to create the token.
 	ScimID *string `json:"scimId,omitempty" tf:"scim_id,omitempty"`
 }
@@ -52,9 +59,11 @@ type TokenObservation struct {
 type TokenParameters struct {
 
 	// The organization ID. If not provided, the default organization configured in the provider is used.
+	// The organization ID. If not provided, the default organization configured in the provider is used.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The SCIM configuration ID for which to create the token.
 	// The SCIM configuration ID for which to create the token.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/iam/v1alpha1.Scim
 	// +kubebuilder:validation:Optional
@@ -96,7 +105,7 @@ type TokenStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Token is the Schema for the Tokens API. <no value>
+// Token is the Schema for the Tokens API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

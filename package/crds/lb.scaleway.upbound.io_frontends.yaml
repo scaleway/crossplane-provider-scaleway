@@ -74,7 +74,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend. Defined below.
                       ACL rules
                     items:
                       properties:
@@ -386,7 +386,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend. Defined below.
                       ACL rules
                     items:
                       properties:
@@ -781,7 +781,7 @@ spec:
                 properties:
                   acl:
                     description: |-
-                      A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+                      A list of ACL rules to apply to the Load Balancer frontend. Defined below.
                       ACL rules
                     items:
                       properties:

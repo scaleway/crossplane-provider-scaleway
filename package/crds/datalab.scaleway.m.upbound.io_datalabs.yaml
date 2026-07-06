@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Datalab is the Schema for the Datalabs API. <no value>
+        description: Datalab is the Schema for the Datalabs API.
         properties:
           apiVersion:
             description: |-
@@ -59,25 +59,33 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description for the Datalab instance.
+                    description: |-
+                      A description for the Datalab instance.
+                      A description for the Datalab instance.
                     type: string
                   hasNotebook:
-                    description: Whether a JupyterLab notebook is associated with
-                      the Datalab.
+                    description: |-
+                      Whether a JupyterLab notebook is associated with the Datalab.
+                      Whether a JupyterLab notebook is associated with the Datalab.
                     type: boolean
                   main:
+                    description: The Spark main node configuration.
                     properties:
                       nodeType:
-                        description: The node type for the main node.
+                        description: |-
+                          The node type for the main node.
+                          The node type for the main node.
                         type: string
                     type: object
                   name:
-                    description: The name of the Datalab instance. If not provided,
-                      a random name is generated.
+                    description: |-
+                      The name of the Datalab instance. If not provided, a random name is generated.
+                      The name of the Datalab instance. If not provided, a random name is generated.
                     type: string
                   privateNetworkId:
-                    description: The ID of the private network to attach the Datalab
-                      to.
+                    description: |-
+                      The ID of the private network to attach the Datalab to.
+                      The ID of the private network to attach the Datalab to.
                     type: string
                   privateNetworkIdRef:
                     description: Reference to a PrivateNetwork in vpc to populate
@@ -162,38 +170,53 @@ spec:
                         type: object
                     type: object
                   projectId:
-                    description: The project ID the Datalab belongs to. Defaults to
-                      the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The project ID the Datalab belongs to.
+                      The project ID the Datalab belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
-                    description: The region the Datalab is in. Only `fr-par` is currently
-                      supported.
+                    description: |-
+                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:
-                    description: The Spark version to use for the Datalab instance.
-                      Available versions can be retrieved from `ListClusterVersions`.
+                    description: |-
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
                     type: string
                   tags:
-                    description: Tags associated with the Datalab instance.
+                    description: |-
+                      Tags associated with the Datalab instance.
+                      Tags associated with the Datalab instance.
                     items:
                       type: string
                     type: array
                   totalStorage:
+                    description: Persistent volume storage configuration.
                     properties:
                       size:
-                        description: The volume size in bytes.
+                        description: |-
+                          The volume size in bytes.
+                          The volume size in bytes.
                         type: number
                       type:
-                        description: The volume type. Defaults to `sbs_5k`.
+                        description: |-
+                          The volume type. Defaults to sbs_5k.
+                          The volume type. Defaults to `sbs_5k`.
                         type: string
                     type: object
                   worker:
+                    description: The Spark worker nodes configuration.
                     properties:
                       nodeCount:
-                        description: The number of worker nodes.
+                        description: |-
+                          The number of worker nodes.
+                          The number of worker nodes.
                         type: number
                       nodeType:
-                        description: The node type for worker nodes.
+                        description: |-
+                          The node type for the main node.
+                          The node type for worker nodes.
                         type: string
                     type: object
                 type: object
@@ -211,25 +234,33 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A description for the Datalab instance.
+                    description: |-
+                      A description for the Datalab instance.
+                      A description for the Datalab instance.
                     type: string
                   hasNotebook:
-                    description: Whether a JupyterLab notebook is associated with
-                      the Datalab.
+                    description: |-
+                      Whether a JupyterLab notebook is associated with the Datalab.
+                      Whether a JupyterLab notebook is associated with the Datalab.
                     type: boolean
                   main:
+                    description: The Spark main node configuration.
                     properties:
                       nodeType:
-                        description: The node type for the main node.
+                        description: |-
+                          The node type for the main node.
+                          The node type for the main node.
                         type: string
                     type: object
                   name:
-                    description: The name of the Datalab instance. If not provided,
-                      a random name is generated.
+                    description: |-
+                      The name of the Datalab instance. If not provided, a random name is generated.
+                      The name of the Datalab instance. If not provided, a random name is generated.
                     type: string
                   privateNetworkId:
-                    description: The ID of the private network to attach the Datalab
-                      to.
+                    description: |-
+                      The ID of the private network to attach the Datalab to.
+                      The ID of the private network to attach the Datalab to.
                     type: string
                   privateNetworkIdRef:
                     description: Reference to a PrivateNetwork in vpc to populate
@@ -314,38 +345,53 @@ spec:
                         type: object
                     type: object
                   projectId:
-                    description: The project ID the Datalab belongs to. Defaults to
-                      the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The project ID the Datalab belongs to.
+                      The project ID the Datalab belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
-                    description: The region the Datalab is in. Only `fr-par` is currently
-                      supported.
+                    description: |-
+                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:
-                    description: The Spark version to use for the Datalab instance.
-                      Available versions can be retrieved from `ListClusterVersions`.
+                    description: |-
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
                     type: string
                   tags:
-                    description: Tags associated with the Datalab instance.
+                    description: |-
+                      Tags associated with the Datalab instance.
+                      Tags associated with the Datalab instance.
                     items:
                       type: string
                     type: array
                   totalStorage:
+                    description: Persistent volume storage configuration.
                     properties:
                       size:
-                        description: The volume size in bytes.
+                        description: |-
+                          The volume size in bytes.
+                          The volume size in bytes.
                         type: number
                       type:
-                        description: The volume type. Defaults to `sbs_5k`.
+                        description: |-
+                          The volume type. Defaults to sbs_5k.
+                          The volume type. Defaults to `sbs_5k`.
                         type: string
                     type: object
                   worker:
+                    description: The Spark worker nodes configuration.
                     properties:
                       nodeCount:
-                        description: The number of worker nodes.
+                        description: |-
+                          The number of worker nodes.
+                          The number of worker nodes.
                         type: number
                       nodeType:
-                        description: The node type for worker nodes.
+                        description: |-
+                          The node type for the main node.
+                          The node type for worker nodes.
                         type: string
                     type: object
                 type: object
@@ -418,99 +464,148 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The creation timestamp of the Datalab instance.
+                    description: |-
+                      The creation timestamp of the Datalab instance.
+                      The creation timestamp of the Datalab instance.
                     type: string
                   description:
-                    description: A description for the Datalab instance.
+                    description: |-
+                      A description for the Datalab instance.
+                      A description for the Datalab instance.
                     type: string
                   hasNotebook:
-                    description: Whether a JupyterLab notebook is associated with
-                      the Datalab.
+                    description: |-
+                      Whether a JupyterLab notebook is associated with the Datalab.
+                      Whether a JupyterLab notebook is associated with the Datalab.
                     type: boolean
                   id:
+                    description: The ID of the Datalab instance, in the {region}/{id}
+                      format.
                     type: string
                   main:
+                    description: The Spark main node configuration.
                     properties:
                       nodeType:
-                        description: The node type for the main node.
+                        description: |-
+                          The node type for the main node.
+                          The node type for the main node.
                         type: string
                       rootVolume:
+                        description: Volume details for the main node.
                         properties:
                           size:
-                            description: The volume size in bytes.
+                            description: |-
+                              The volume size in bytes.
+                              The volume size in bytes.
                             type: number
                           type:
-                            description: The volume type.
+                            description: |-
+                              The volume type. Defaults to sbs_5k.
+                              The volume type.
                             type: string
                         type: object
                       sparkMasterUrl:
-                        description: The Spark master URL within the VPC.
+                        description: |-
+                          The Spark master URL within the VPC.
+                          The Spark master URL within the VPC.
                         type: string
                       sparkUiUrl:
-                        description: The Spark UI URL.
+                        description: |-
+                          The Spark UI URL.
+                          The Spark UI URL.
                         type: string
                     type: object
                   name:
-                    description: The name of the Datalab instance. If not provided,
-                      a random name is generated.
+                    description: |-
+                      The name of the Datalab instance. If not provided, a random name is generated.
+                      The name of the Datalab instance. If not provided, a random name is generated.
                     type: string
                   notebookMasterUrl:
-                    description: The URL used to reach the cluster from the notebook.
+                    description: |-
+                      The URL used to reach the cluster from the notebook.
+                      The URL used to reach the cluster from the notebook.
                     type: string
                   notebookUrl:
-                    description: The URL of the JupyterLab notebook, if available.
+                    description: |-
+                      The URL of the JupyterLab notebook, if available.
+                      The URL of the JupyterLab notebook, if available.
                     type: string
                   privateNetworkId:
-                    description: The ID of the private network to attach the Datalab
-                      to.
+                    description: |-
+                      The ID of the private network to attach the Datalab to.
+                      The ID of the private network to attach the Datalab to.
                     type: string
                   projectId:
-                    description: The project ID the Datalab belongs to. Defaults to
-                      the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The project ID the Datalab belongs to.
+                      The project ID the Datalab belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
-                    description: The region the Datalab is in. Only `fr-par` is currently
-                      supported.
+                    description: |-
+                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:
-                    description: The Spark version to use for the Datalab instance.
-                      Available versions can be retrieved from `ListClusterVersions`.
+                    description: |-
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from ListClusterVersions.
+                      The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
                     type: string
                   status:
-                    description: The current status of the Datalab instance.
+                    description: |-
+                      The current status of the Datalab instance.
+                      The current status of the Datalab instance.
                     type: string
                   tags:
-                    description: Tags associated with the Datalab instance.
+                    description: |-
+                      Tags associated with the Datalab instance.
+                      Tags associated with the Datalab instance.
                     items:
                       type: string
                     type: array
                   totalStorage:
+                    description: Persistent volume storage configuration.
                     properties:
                       size:
-                        description: The volume size in bytes.
+                        description: |-
+                          The volume size in bytes.
+                          The volume size in bytes.
                         type: number
                       type:
-                        description: The volume type. Defaults to `sbs_5k`.
+                        description: |-
+                          The volume type. Defaults to sbs_5k.
+                          The volume type. Defaults to `sbs_5k`.
                         type: string
                     type: object
                   updatedAt:
-                    description: The last update timestamp of the Datalab instance.
+                    description: |-
+                      The last update timestamp of the Datalab instance.
+                      The last update timestamp of the Datalab instance.
                     type: string
                   worker:
+                    description: The Spark worker nodes configuration.
                     properties:
                       nodeCount:
-                        description: The number of worker nodes.
+                        description: |-
+                          The number of worker nodes.
+                          The number of worker nodes.
                         type: number
                       nodeType:
-                        description: The node type for worker nodes.
+                        description: |-
+                          The node type for the main node.
+                          The node type for worker nodes.
                         type: string
                       rootVolume:
+                        description: Volume details for the main node.
                         properties:
                           size:
-                            description: The volume size in bytes.
+                            description: |-
+                              The volume size in bytes.
+                              The volume size in bytes.
                             type: number
                           type:
-                            description: The volume type.
+                            description: |-
+                              The volume type. Defaults to sbs_5k.
+                              The volume type.
                             type: string
                         type: object
                     type: object

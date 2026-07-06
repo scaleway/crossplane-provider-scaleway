@@ -153,7 +153,8 @@ spec:
                     type: object
                   projectId:
                     description: |-
-                      The unique identifier of the server-side encryption configuration.
+                      (Defaults to provider's ) The ID of the
+                      project the bucket is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -175,19 +176,22 @@ spec:
                             properties:
                               kmsMasterKeyId:
                                 description: |-
-                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption.
+                                  This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error
+                                  if this element is absent while the sse_algorithm is aws:kms.
                                   Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as 'aws:kms'. Will return an error if this element is absent while the sse_algorithm is 'aws:kms'.
                                 type: string
                               sseAlgorithm:
                                 description: |-
-                                  Server-side encryption algorithm to use. Valid values are AES256.
+                                  Server-side encryption algorithm to use. Valid values are AES256, aws:kms.
                                   Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
                         bucketKeyEnabled:
-                          description: Whether or not to use Scaleway Object Bucket
-                            Keys for SSE-KMS.
+                          description: |-
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
                           type: boolean
                       type: object
                     type: array
@@ -286,7 +290,8 @@ spec:
                     type: object
                   projectId:
                     description: |-
-                      The unique identifier of the server-side encryption configuration.
+                      (Defaults to provider's ) The ID of the
+                      project the bucket is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -308,19 +313,22 @@ spec:
                             properties:
                               kmsMasterKeyId:
                                 description: |-
-                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption.
+                                  This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error
+                                  if this element is absent while the sse_algorithm is aws:kms.
                                   Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as 'aws:kms'. Will return an error if this element is absent while the sse_algorithm is 'aws:kms'.
                                 type: string
                               sseAlgorithm:
                                 description: |-
-                                  Server-side encryption algorithm to use. Valid values are AES256.
+                                  Server-side encryption algorithm to use. Valid values are AES256, aws:kms.
                                   Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
                         bucketKeyEnabled:
-                          description: Whether or not to use Scaleway Object Bucket
-                            Keys for SSE-KMS.
+                          description: |-
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
                           type: boolean
                       type: object
                     type: array
@@ -432,7 +440,8 @@ spec:
                     type: string
                   projectId:
                     description: |-
-                      The unique identifier of the server-side encryption configuration.
+                      (Defaults to provider's ) The ID of the
+                      project the bucket is associated with.
                       The project_id you want to attach the resource to
                     type: string
                   region:
@@ -454,19 +463,22 @@ spec:
                             properties:
                               kmsMasterKeyId:
                                 description: |-
-                                  The unique identifier of the server-side encryption configuration.
+                                  Scaleway KMS master key ID used for the SSE-KMS encryption.
+                                  This can only be used when you set the value of sse_algorithm as aws:kms. Will return an error
+                                  if this element is absent while the sse_algorithm is aws:kms.
                                   Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as 'aws:kms'. Will return an error if this element is absent while the sse_algorithm is 'aws:kms'.
                                 type: string
                               sseAlgorithm:
                                 description: |-
-                                  Server-side encryption algorithm to use. Valid values are AES256.
+                                  Server-side encryption algorithm to use. Valid values are AES256, aws:kms.
                                   Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
                                 type: string
                             type: object
                           type: array
                         bucketKeyEnabled:
-                          description: Whether or not to use Scaleway Object Bucket
-                            Keys for SSE-KMS.
+                          description: |-
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
+                            Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
                           type: boolean
                       type: object
                     type: array

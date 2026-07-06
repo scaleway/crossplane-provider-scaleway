@@ -1,0 +1,52 @@
+apiVersion: datalab.scaleway.upbound.io/v1alpha1
+kind: Datalab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datalab/v1alpha1/datalab
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    main:
+      nodeType: DATALAB-SHARED-4C-8G
+    name: my-datalab
+    privateNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    region: fr-par
+    sparkVersion: 4.0.0
+    worker:
+      nodeCount: 1
+      nodeType: DATALAB-DEDICATED2-2C-8G
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datalab/v1alpha1/datalab
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-vpc
+
+---
+
+apiVersion: vpc.scaleway.upbound.io/v1alpha1
+kind: PrivateNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datalab/v1alpha1/datalab
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    region: fr-par
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
