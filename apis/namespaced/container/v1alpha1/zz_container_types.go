@@ -16,7 +16,7 @@ import (
 
 type ContainerInitParameters struct {
 
-	// Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
 	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
@@ -141,7 +141,6 @@ type ContainerInitParameters struct {
 	SecretEnvironmentVariables map[string]*string `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
 	// Defines how to check if the container has started successfully.
-	// Defines how to check if the container has started successfully.
 	StartupProbe []StartupProbeInitParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
 
 	// The list of tags associated with the container.
@@ -155,7 +154,7 @@ type ContainerInitParameters struct {
 
 type ContainerObservation struct {
 
-	// Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
 	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
@@ -167,7 +166,7 @@ type ContainerObservation struct {
 	// Command executed when the container starts. Overrides the command from the container image.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The container status.
+	// The cron status of the container.
 	// The cron status
 	CronStatus *string `json:"cronStatus,omitempty" tf:"cron_status,omitempty"`
 
@@ -288,7 +287,6 @@ type ContainerObservation struct {
 	ScalingOption []ScalingOptionObservation `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
 
 	// Defines how to check if the container has started successfully.
-	// Defines how to check if the container has started successfully.
 	StartupProbe []StartupProbeObservation `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
 
 	// The container status.
@@ -306,7 +304,7 @@ type ContainerObservation struct {
 
 type ContainerParameters struct {
 
-	// Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+	// Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
 	// Arguments passed to the command from the command "field". Overrides the arguments from the container image.
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
@@ -461,7 +459,6 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretEnvironmentVariablesSecretRef *v1.LocalSecretReference `json:"secretEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
-	// Defines how to check if the container has started successfully.
 	// Defines how to check if the container has started successfully.
 	// +kubebuilder:validation:Optional
 	StartupProbe []StartupProbeParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`

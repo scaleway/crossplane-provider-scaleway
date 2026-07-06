@@ -133,10 +133,8 @@ spec:
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
                         logLevel:
-                          description: |-
-                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
-                            Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
+                          description: Autoscaler logging level expressed from 0 to
+                            4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -159,9 +157,8 @@ spec:
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
                         skipNodesWithLocalStorage:
-                          description: |-
-                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                          description: If true, the autoscaler will never delete nodes
+                            with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -367,11 +364,8 @@ spec:
                       The type of cluster
                     type: string
                   upgradePools:
-                    description: |-
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
-                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
-                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    description: Whether the pools should be automatically upgraded
+                      alongside the cluster, or have to be upgraded separately.
                     type: boolean
                   version:
                     description: |-
@@ -467,10 +461,8 @@ spec:
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
                         logLevel:
-                          description: |-
-                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
-                            Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
+                          description: Autoscaler logging level expressed from 0 to
+                            4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -493,9 +485,8 @@ spec:
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
                         skipNodesWithLocalStorage:
-                          description: |-
-                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                          description: If true, the autoscaler will never delete nodes
+                            with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -701,11 +692,8 @@ spec:
                       The type of cluster
                     type: string
                   upgradePools:
-                    description: |-
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
-                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
-                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    description: Whether the pools should be automatically upgraded
+                      alongside the cluster, or have to be upgraded separately.
                     type: boolean
                   version:
                     description: |-
@@ -873,10 +861,8 @@ spec:
                             Ignore DaemonSet pods when calculating resource utilization for scaling down
                           type: boolean
                         logLevel:
-                          description: |-
-                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
-                            Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
+                          description: Autoscaler logging level expressed from 0 to
+                            4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -899,9 +885,8 @@ spec:
                             Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
                           type: number
                         skipNodesWithLocalStorage:
-                          description: |-
-                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                          description: If true, the autoscaler will never delete nodes
+                            with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -1053,11 +1038,8 @@ spec:
                       True if an upgrade is available
                     type: boolean
                   upgradePools:
-                    description: |-
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
-                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
-                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
-                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    description: Whether the pools should be automatically upgraded
+                      alongside the cluster, or have to be upgraded separately.
                     type: boolean
                   version:
                     description: |-

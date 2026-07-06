@@ -60,7 +60,7 @@ spec:
                 properties:
                   args:
                     description: |-
-                      Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
                       Arguments passed to the command from the command "field". Overrides the arguments from the container image.
                     items:
                       type: string
@@ -384,9 +384,8 @@ spec:
                     - name
                     type: object
                   startupProbe:
-                    description: |-
-                      Defines how to check if the container has started successfully.
-                      Defines how to check if the container has started successfully.
+                    description: Defines how to check if the container has started
+                      successfully.
                     items:
                       properties:
                         failureThreshold:
@@ -452,7 +451,7 @@ spec:
                 properties:
                   args:
                     description: |-
-                      Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
                       Arguments passed to the command from the command "field". Overrides the arguments from the container image.
                     items:
                       type: string
@@ -769,9 +768,8 @@ spec:
                       type: string
                     type: object
                   startupProbe:
-                    description: |-
-                      Defines how to check if the container has started successfully.
-                      Defines how to check if the container has started successfully.
+                    description: Defines how to check if the container has started
+                      successfully.
                     items:
                       properties:
                         failureThreshold:
@@ -887,7 +885,7 @@ spec:
                 properties:
                   args:
                     description: |-
-                      Arguments passed to the command specified in the command field. These override the default arguments from the container image, and behave like command-line parameters.
+                      Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
                       Arguments passed to the command from the command "field". Overrides the arguments from the container image.
                     items:
                       type: string
@@ -906,7 +904,7 @@ spec:
                     type: number
                   cronStatus:
                     description: |-
-                      The container status.
+                      The cron status of the container.
                       The cron status
                     type: string
                   deploy:
@@ -1141,9 +1139,8 @@ spec:
                       type: object
                     type: array
                   startupProbe:
-                    description: |-
-                      Defines how to check if the container has started successfully.
-                      Defines how to check if the container has started successfully.
+                    description: Defines how to check if the container has started
+                      successfully.
                     items:
                       properties:
                         failureThreshold:

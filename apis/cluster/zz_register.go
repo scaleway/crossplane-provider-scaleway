@@ -14,9 +14,11 @@ import (
 	v1alpha1applesilicon "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/applesilicon/v1alpha1"
 	v1alpha1autoscaling "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/autoscaling/v1alpha1"
 	v1alpha1baremetal "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/baremetal/v1alpha1"
+	v1alpha1billing "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/billing/v1alpha1"
 	v1alpha1block "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/block/v1alpha1"
 	v1alpha1cockpit "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/cockpit/v1alpha1"
 	v1alpha1container "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/container/v1alpha1"
+	v1alpha1datalab "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/datalab/v1alpha1"
 	v1alpha1datawarehouse "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/datawarehouse/v1alpha1"
 	v1alpha1domain "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/domain/v1alpha1"
 	v1alpha1edgeservices "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/edgeservices/v1alpha1"
@@ -57,9 +59,11 @@ func init() {
 		v1alpha1applesilicon.SchemeBuilder.AddToScheme,
 		v1alpha1autoscaling.SchemeBuilder.AddToScheme,
 		v1alpha1baremetal.SchemeBuilder.AddToScheme,
+		v1alpha1billing.SchemeBuilder.AddToScheme,
 		v1alpha1block.SchemeBuilder.AddToScheme,
 		v1alpha1cockpit.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
+		v1alpha1datalab.SchemeBuilder.AddToScheme,
 		v1alpha1datawarehouse.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1edgeservices.SchemeBuilder.AddToScheme,

@@ -72,7 +72,6 @@ type PoolInitParameters struct {
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
-	// The list of Kubernetes labels applied and reconciled on the nodes.
 	// Kubernetes labels applied and reconciled on the nodes.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
@@ -121,7 +120,6 @@ type PoolInitParameters struct {
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
 	// Kubernetes taints applied at node creation but not reconciled afterwards.
 	StartupTaints []StartupTaintsInitParameters `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
 
@@ -129,7 +127,6 @@ type PoolInitParameters struct {
 	// The tags associated with the pool
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of Kubernetes taints applied and reconciled on the nodes.
 	// Kubernetes taints applied and reconciled on the nodes.
 	Taints []TaintsInitParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 
@@ -137,8 +134,7 @@ type PoolInitParameters struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
-	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+	// The version of the pool.
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -184,7 +180,6 @@ type PoolObservation struct {
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
-	// The list of Kubernetes labels applied and reconciled on the nodes.
 	// Kubernetes labels applied and reconciled on the nodes.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
@@ -237,7 +232,6 @@ type PoolObservation struct {
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
 	// Kubernetes taints applied at node creation but not reconciled afterwards.
 	StartupTaints []StartupTaintsObservation `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
 
@@ -249,7 +243,6 @@ type PoolObservation struct {
 	// The tags associated with the pool
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of Kubernetes taints applied and reconciled on the nodes.
 	// Kubernetes taints applied and reconciled on the nodes.
 	Taints []TaintsObservation `json:"taints,omitempty" tf:"taints,omitempty"`
 
@@ -261,8 +254,7 @@ type PoolObservation struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
-	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+	// The version of the pool.
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -312,7 +304,6 @@ type PoolParameters struct {
 	// +mapType=granular
 	KubeletArgs map[string]*string `json:"kubeletArgs,omitempty" tf:"kubelet_args,omitempty"`
 
-	// The list of Kubernetes labels applied and reconciled on the nodes.
 	// Kubernetes labels applied and reconciled on the nodes.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -373,7 +364,6 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
 	// Kubernetes taints applied at node creation but not reconciled afterwards.
 	// +kubebuilder:validation:Optional
 	StartupTaints []StartupTaintsParameters `json:"startupTaints,omitempty" tf:"startup_taints,omitempty"`
@@ -383,7 +373,6 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of Kubernetes taints applied and reconciled on the nodes.
 	// Kubernetes taints applied and reconciled on the nodes.
 	// +kubebuilder:validation:Optional
 	Taints []TaintsParameters `json:"taints,omitempty" tf:"taints,omitempty"`
@@ -393,8 +382,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
-	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+	// The version of the pool.
 	// The Kubernetes version of the pool
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
