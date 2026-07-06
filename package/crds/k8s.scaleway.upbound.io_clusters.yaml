@@ -148,9 +148,9 @@ spec:
                           type: boolean
                         logLevel:
                           description: |-
-                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -174,8 +174,8 @@ spec:
                           type: number
                         skipNodesWithLocalStorage:
                           description: |-
-                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -374,6 +374,13 @@ spec:
                       The type of Kubernetes cluster. Possible values are:
                       The type of cluster
                     type: string
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    type: boolean
                   version:
                     description: |-
                       The version of the Kubernetes cluster.
@@ -469,9 +476,9 @@ spec:
                           type: boolean
                         logLevel:
                           description: |-
-                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -495,8 +502,8 @@ spec:
                           type: number
                         skipNodesWithLocalStorage:
                           description: |-
-                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -695,6 +702,13 @@ spec:
                       The type of Kubernetes cluster. Possible values are:
                       The type of cluster
                     type: string
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                    type: boolean
                   version:
                     description: |-
                       The version of the Kubernetes cluster.
@@ -890,9 +904,9 @@ spec:
                           type: boolean
                         logLevel:
                           description: |-
-                            (Defaults to 2) Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
+                            Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2.
+                            Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
                           description: |-
@@ -916,8 +930,8 @@ spec:
                           type: number
                         skipNodesWithLocalStorage:
                           description: |-
-                            (Defaults to true) If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+                            If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
+                            If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
                     type: array
@@ -1067,6 +1081,13 @@ spec:
                     description: |-
                       Set to true if a newer Kubernetes version is available.
                       True if an upgrade is available
+                    type: boolean
+                  upgradePools:
+                    description: |-
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
+                      If false (cluster and pool version are independent of each other), pool upgrades can be conducted by setting the version field in the pool resource.
+                      In that case, refreshing the state will be required for the pool to be read again and the version changes to be shown in the state.
+                      Whether the pools should be automatically upgraded alongside the cluster, or have to be upgraded separately.
                     type: boolean
                   version:
                     description: |-

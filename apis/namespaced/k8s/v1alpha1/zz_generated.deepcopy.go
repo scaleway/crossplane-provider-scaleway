@@ -813,6 +813,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradePools != nil {
+		in, out := &in.UpgradePools, &out.UpgradePools
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -1020,6 +1025,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.UpgradePools != nil {
+		in, out := &in.UpgradePools, &out.UpgradePools
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -1173,6 +1183,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
+		**out = **in
+	}
+	if in.UpgradePools != nil {
+		in, out := &in.UpgradePools, &out.UpgradePools
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Version != nil {
@@ -1734,6 +1749,11 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Version != nil {
+		in, out := &in.Version, &out.Version
+		*out = new(string)
+		**out = **in
+	}
 	if in.WaitForPoolReady != nil {
 		in, out := &in.WaitForPoolReady, &out.WaitForPoolReady
 		*out = new(bool)
@@ -2140,6 +2160,11 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Version != nil {
+		in, out := &in.Version, &out.Version
+		*out = new(string)
+		**out = **in
 	}
 	if in.WaitForPoolReady != nil {
 		in, out := &in.WaitForPoolReady, &out.WaitForPoolReady
