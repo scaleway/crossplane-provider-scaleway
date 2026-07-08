@@ -17,6 +17,9 @@ import (
 	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/policy"
 	template "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/template"
 	serverbaremetal "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/baremetal/server"
+	alert "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/billing/alert"
+	budget "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/billing/budget"
+	notification "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/billing/notification"
 	snapshot "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/block/snapshot"
 	volume "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/block/volume"
 	alertmanager "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/alertmanager"
@@ -30,6 +33,7 @@ import (
 	cron "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/container/cron"
 	domain "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/container/domain"
 	tokencontainer "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/container/token"
+	datalab "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/datalab/datalab"
 	database "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/datawarehouse/database"
 	deployment "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/datawarehouse/deployment"
 	user "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/datawarehouse/user"
@@ -60,6 +64,7 @@ import (
 	saml "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/saml"
 	scim "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/scim"
 	sshkeyiam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/sshkey"
+	tokeniam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/token"
 	useriam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/iam/user"
 	deploymentinference "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/inference/deployment"
 	model "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/inference/model"
@@ -144,6 +149,7 @@ import (
 	publicgatewayip "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/publicgatewayip"
 	publicgatewaypatrule "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/publicgatewaypatrule"
 	routevpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/route"
+	rule "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/rule"
 	vpc "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/vpc/vpc"
 )
 
@@ -159,6 +165,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		template.Setup,
 		serverbaremetal.Setup,
+		alert.Setup,
+		budget.Setup,
+		notification.Setup,
 		snapshot.Setup,
 		volume.Setup,
 		alertmanager.Setup,
@@ -172,6 +181,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cron.Setup,
 		domain.Setup,
 		tokencontainer.Setup,
+		datalab.Setup,
 		database.Setup,
 		deployment.Setup,
 		user.Setup,
@@ -202,6 +212,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		saml.Setup,
 		scim.Setup,
 		sshkeyiam.Setup,
+		tokeniam.Setup,
 		useriam.Setup,
 		deploymentinference.Setup,
 		model.Setup,
@@ -286,6 +297,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		publicgatewayip.Setup,
 		publicgatewaypatrule.Setup,
 		routevpc.Setup,
+		rule.Setup,
 		vpc.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -307,6 +319,9 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		policy.SetupGated,
 		template.SetupGated,
 		serverbaremetal.SetupGated,
+		alert.SetupGated,
+		budget.SetupGated,
+		notification.SetupGated,
 		snapshot.SetupGated,
 		volume.SetupGated,
 		alertmanager.SetupGated,
@@ -320,6 +335,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		cron.SetupGated,
 		domain.SetupGated,
 		tokencontainer.SetupGated,
+		datalab.SetupGated,
 		database.SetupGated,
 		deployment.SetupGated,
 		user.SetupGated,
@@ -350,6 +366,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		saml.SetupGated,
 		scim.SetupGated,
 		sshkeyiam.SetupGated,
+		tokeniam.SetupGated,
 		useriam.SetupGated,
 		deploymentinference.SetupGated,
 		model.SetupGated,
@@ -434,6 +451,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		publicgatewayip.SetupGated,
 		publicgatewaypatrule.SetupGated,
 		routevpc.SetupGated,
+		rule.SetupGated,
 		vpc.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

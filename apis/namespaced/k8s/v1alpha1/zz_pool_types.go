@@ -22,7 +22,7 @@ type NodesObservation struct {
 	// The ID of the pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name for the pool.
+	// The name for the pool. If not provided it will be generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the node.
@@ -86,7 +86,7 @@ type PoolInitParameters struct {
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool.
+	// The name for the pool. If not provided it will be generated.
 	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -137,6 +137,11 @@ type PoolInitParameters struct {
 	// The Pool upgrade policy
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+	// The Kubernetes version of the pool
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// (Defaults to true) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
@@ -193,7 +198,7 @@ type PoolObservation struct {
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool.
+	// The name for the pool. If not provided it will be generated.
 	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -257,7 +262,8 @@ type PoolObservation struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
-	// The version of the pool.
+	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
 	// The Kubernetes version of the pool
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -323,7 +329,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool.
+	// The name for the pool. If not provided it will be generated.
 	// The name of the pool
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -387,6 +393,12 @@ type PoolParameters struct {
 	// The Pool upgrade policy
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+	// The Kubernetes version of the pool
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// (Defaults to true) Whether to wait for the pool to be ready.
 	// Whether to wait for the pool to be ready
@@ -563,7 +575,6 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"
 	Spec   PoolSpec   `json:"spec"`

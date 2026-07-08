@@ -155,8 +155,7 @@ spec:
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network details. Only one of private_network and public_network may be set.
-                      ~> The public_network block exports:
+                      Public network details. Only one of private_network and public_network may be set. The public_network block exports:
                       Public network specs details
                     items:
                       properties:
@@ -167,7 +166,7 @@ spec:
                           type: string
                         ips:
                           description: |-
-                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint (IP addresses).
                             List of IPv4 addresses of the endpoint
                           items:
                             type: string
@@ -327,8 +326,7 @@ spec:
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network details. Only one of private_network and public_network may be set.
-                      ~> The public_network block exports:
+                      Public network details. Only one of private_network and public_network may be set. The public_network block exports:
                       Public network specs details
                     items:
                       properties:
@@ -339,7 +337,7 @@ spec:
                           type: string
                         ips:
                           description: |-
-                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint (IP addresses).
                             List of IPv4 addresses of the endpoint
                           items:
                             type: string
@@ -563,7 +561,7 @@ spec:
                           type: string
                         ips:
                           description: |-
-                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint (IP addresses).
                             List of IPv4 addresses of the endpoint
                           items:
                             type: string
@@ -600,8 +598,7 @@ spec:
                     type: string
                   publicNetwork:
                     description: |-
-                      Public network details. Only one of private_network and public_network may be set.
-                      ~> The public_network block exports:
+                      Public network details. Only one of private_network and public_network may be set. The public_network block exports:
                       Public network specs details
                     items:
                       properties:
@@ -612,7 +609,7 @@ spec:
                           type: string
                         ips:
                           description: |-
-                            Lis of IPv4 address of the endpoint (IP address).
+                            List of IPv4 addresses of the endpoint (IP addresses).
                             List of IPv4 addresses of the endpoint
                           items:
                             type: string

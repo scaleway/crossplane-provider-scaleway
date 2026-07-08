@@ -128,4 +128,17 @@ func Configure(p *config.Provider) {
 			TerraformName: terraformNameVPC,
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_vpc_ingress_rule", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Rule"
+
+		r.References["nexthop_private_network_id"] = config.Reference{
+			TerraformName: "scaleway_vpc_private_network",
+		}
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "scaleway_vpc",
+		}
+	})
 }

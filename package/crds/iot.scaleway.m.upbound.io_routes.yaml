@@ -60,7 +60,7 @@ spec:
                 properties:
                   database:
                     description: |-
-                      Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+                      Configuration block for the database routes. See product documentation for a better understanding of the parameters.
                       Database Route parameters
                     items:
                       properties:
@@ -275,7 +275,7 @@ spec:
                 properties:
                   database:
                     description: |-
-                      Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+                      Configuration block for the database routes. See product documentation for a better understanding of the parameters.
                       Database Route parameters
                     items:
                       properties:
@@ -556,7 +556,7 @@ spec:
                     type: string
                   database:
                     description: |-
-                      Configuration block for the database routes. See  product documentation for a better understanding of the parameters.
+                      Configuration block for the database routes. See product documentation for a better understanding of the parameters.
                       Database Route parameters
                     items:
                       properties:

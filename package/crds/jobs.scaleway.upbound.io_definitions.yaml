@@ -150,6 +150,15 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  retryPolicy:
+                    description: Defines a retry policy for the job.
+                    items:
+                      properties:
+                        maxRetries:
+                          description: The maximum number of retries upon job failure.
+                          type: number
+                      type: object
+                    type: array
                   secretReference:
                     description: |-
                       A reference to a secret stored in Secret Manager.
@@ -282,6 +291,15 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  retryPolicy:
+                    description: Defines a retry policy for the job.
+                    items:
+                      properties:
+                        maxRetries:
+                          description: The maximum number of retries upon job failure.
+                          type: number
+                      type: object
+                    type: array
                   secretReference:
                     description: |-
                       A reference to a secret stored in Secret Manager.
@@ -512,6 +530,15 @@ spec:
                       (Defaults to provider region) The region of the Job.
                       The region you want to attach the resource to
                     type: string
+                  retryPolicy:
+                    description: Defines a retry policy for the job.
+                    items:
+                      properties:
+                        maxRetries:
+                          description: The maximum number of retries upon job failure.
+                          type: number
+                      type: object
+                    type: array
                   secretReference:
                     description: |-
                       A reference to a secret stored in Secret Manager.

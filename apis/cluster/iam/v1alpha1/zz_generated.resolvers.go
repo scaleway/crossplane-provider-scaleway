@@ -221,3 +221,47 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	return nil
 }
+
+// ResolveReferences of this Token.
+func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScimID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ScimIDRef,
+		Selector:     mg.Spec.ForProvider.ScimIDSelector,
+		To: reference.To{
+			List:    &ScimList{},
+			Managed: &Scim{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ScimID")
+	}
+	mg.Spec.ForProvider.ScimID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScimIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScimID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ScimIDRef,
+		Selector:     mg.Spec.InitProvider.ScimIDSelector,
+		To: reference.To{
+			List:    &ScimList{},
+			Managed: &Scim{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ScimID")
+	}
+	mg.Spec.InitProvider.ScimID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScimIDRef = rsp.ResolvedReference
+
+	return nil
+}

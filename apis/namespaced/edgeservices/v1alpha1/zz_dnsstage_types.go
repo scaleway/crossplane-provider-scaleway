@@ -48,6 +48,10 @@ type DNSStageInitParameters struct {
 	// The TLS stage ID the DNS stage will be linked to. Only one of backend_stage_id, cache_stage_id and tls_stage_id should be specified.
 	// The TLS stage ID the DNS stage will be linked to
 	TLSStageID *string `json:"tlsStageId,omitempty" tf:"tls_stage_id,omitempty"`
+
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+	WildcardDomain *bool `json:"wildcardDomain,omitempty" tf:"wildcard_domain,omitempty"`
 }
 
 type DNSStageObservation struct {
@@ -94,6 +98,10 @@ type DNSStageObservation struct {
 	// The date and time of the last update of the DNS stage.
 	// The date and time of the last update of the DNS stage
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
+
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+	WildcardDomain *bool `json:"wildcardDomain,omitempty" tf:"wildcard_domain,omitempty"`
 }
 
 type DNSStageParameters struct {
@@ -136,6 +144,11 @@ type DNSStageParameters struct {
 	// The TLS stage ID the DNS stage will be linked to
 	// +kubebuilder:validation:Optional
 	TLSStageID *string `json:"tlsStageId,omitempty" tf:"tls_stage_id,omitempty"`
+
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
+	// Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+	// +kubebuilder:validation:Optional
+	WildcardDomain *bool `json:"wildcardDomain,omitempty" tf:"wildcard_domain,omitempty"`
 }
 
 // DNSStageSpec defines the desired state of DNSStage
