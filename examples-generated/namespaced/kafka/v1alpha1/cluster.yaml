@@ -20,7 +20,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: pn
     userName: admin
-    version: 3.9.0
+    version: 4.1.1
     volumeSizeInGb: 10
     volumeType: sbs_5k
 

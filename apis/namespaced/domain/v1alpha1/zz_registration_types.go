@@ -587,7 +587,7 @@ type OwnerContactParameters struct {
 	// : Company identification code.
 	// Company identification code (e.g., SIREN/SIRET in France) for the contact.
 	// +kubebuilder:validation:Optional
-	CompanyIdentificationCode *string `json:"companyIdentificationCode" tf:"company_identification_code,omitempty"`
+	CompanyIdentificationCode *string `json:"companyIdentificationCode,omitempty" tf:"company_identification_code,omitempty"`
 
 	// : Company name.
 	// Name of the company associated with the contact (if applicable).
@@ -659,7 +659,7 @@ type OwnerContactParameters struct {
 	// : VAT identification code.
 	// VAT identification code of the contact, if applicable.
 	// +kubebuilder:validation:Optional
-	VatIdentificationCode *string `json:"vatIdentificationCode" tf:"vat_identification_code,omitempty"`
+	VatIdentificationCode *string `json:"vatIdentificationCode,omitempty" tf:"vat_identification_code,omitempty"`
 
 	// Indicates whether the contact has opted into WHOIS publishing.
 	// +kubebuilder:validation:Optional
@@ -715,7 +715,7 @@ type RegistrationInitParameters struct {
 type RegistrationObservation struct {
 
 	// (Computed, List): Administrative contact information.
-	// Details of the administrative contact.
+	// Details of the administrative contact (read-only, set by the API).
 	AdministrativeContact []AdministrativeContactObservation `json:"administrativeContact,omitempty" tf:"administrative_contact,omitempty"`
 
 	// renewal.
@@ -758,7 +758,7 @@ type RegistrationObservation struct {
 	TaskID *string `json:"taskId,omitempty" tf:"task_id,omitempty"`
 
 	// (Computed, List): Technical contact information.
-	// Details of the technical contact.
+	// Details of the technical contact (read-only, set by the API).
 	TechnicalContact []TechnicalContactObservation `json:"technicalContact,omitempty" tf:"technical_contact,omitempty"`
 }
 
