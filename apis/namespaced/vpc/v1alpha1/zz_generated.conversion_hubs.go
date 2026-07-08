@@ -34,4 +34,7 @@ func (tr *PublicGatewayPATRule) Hub() {}
 func (tr *Route) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Rule) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VPC) Hub() {}
