@@ -12,4 +12,14 @@ func Configure(p *config.Provider) {
 		r.Kind = "Key"
 
 	})
+
+	p.AddResourceConfigurator("scaleway_key_manager_key_material", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Material"
+
+		r.References["key_id"] = config.Reference{
+			TerraformName: "scaleway_key_manager_key",
+		}
+	})
 }

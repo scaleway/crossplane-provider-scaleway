@@ -33,6 +33,9 @@ type NodesObservation struct {
 	// The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)
 	PublicIPV6 *string `json:"publicIpV6,omitempty" tf:"public_ip_v6,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the pool.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The status of the pool.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -236,6 +239,10 @@ type PoolObservation struct {
 	// The size of the pool.
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the pool.
+	// The Scaleway Resource Name (SRN) of the pool
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The list of Kubernetes taints applied at node creation but not reconciled afterward.
 	// Kubernetes taints applied at node creation but not reconciled afterwards.

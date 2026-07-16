@@ -38,6 +38,10 @@ type IPv4SubnetObservation struct {
 	// The length of the network prefix, e.g., 24 for a 255.255.255.0 mask
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the Private Network.
+	// The Scaleway Resource Name (SRN) of the subnet
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The subnet CIDR.
 	// The subnet CIDR
 	Subnet *string `json:"subnet,omitempty" tf:"subnet,omitempty"`
@@ -83,6 +87,10 @@ type IPv6SubnetsObservation struct {
 	// The length of the network prefix, e.g., 24 for a 255.255.255.0 mask.
 	// The length of the network prefix, e.g., 24 for a 255.255.255.0 mask
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the Private Network.
+	// The Scaleway Resource Name (SRN) of the subnet
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The subnet CIDR.
 	// The subnet CIDR
@@ -197,6 +205,10 @@ type PrivateNetworkObservation struct {
 	// (Defaults to provider region) The region of the Private Network.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the Private Network.
+	// The Scaleway Resource Name (SRN) of the private network
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The tags associated with the Private Network.
 	// The tags associated with private network

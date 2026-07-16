@@ -24,6 +24,7 @@ type SQLDatabaseInitParameters struct {
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
 	// The name of the database (e.g. my-new-database).
+	// ~> Important: Updates to the name argument will recreate the database.
 	// The database name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -54,6 +55,7 @@ type SQLDatabaseObservation struct {
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
 	// The name of the database (e.g. my-new-database).
+	// ~> Important: Updates to the name argument will recreate the database.
 	// The database name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -79,6 +81,7 @@ type SQLDatabaseParameters struct {
 	MinCPU *float64 `json:"minCpu,omitempty" tf:"min_cpu,omitempty"`
 
 	// The name of the database (e.g. my-new-database).
+	// ~> Important: Updates to the name argument will recreate the database.
 	// The database name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

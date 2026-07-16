@@ -51,6 +51,7 @@ type CustomResourceParameters struct {
 type IPInitParameters struct {
 
 	// Request a specific IP in the specified source pool.
+	// ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
@@ -82,6 +83,7 @@ type IPInitParameters struct {
 type IPObservation struct {
 
 	// Request a specific IP in the specified source pool.
+	// ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
 	// Request a specific IP in the requested source pool
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
@@ -140,6 +142,7 @@ type IPObservation struct {
 type IPParameters struct {
 
 	// Request a specific IP in the specified source pool.
+	// ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
 	// Request a specific IP in the requested source pool
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
@@ -202,6 +205,7 @@ type ReversesInitParameters struct {
 type ReversesObservation struct {
 
 	// Request a specific IP in the specified source pool.
+	// ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The reverse domain name.

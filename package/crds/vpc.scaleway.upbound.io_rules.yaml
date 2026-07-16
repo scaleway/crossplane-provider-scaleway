@@ -599,6 +599,11 @@ spec:
                       Source IP range (in CIDR notation) to which the ingress rule applies.
                       Source IP range to which this rule applies (CIDR notation with subnet mask)
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the ingress rule.
+                      The Scaleway Resource Name (SRN) of the ingress rule
+                    type: string
                   tags:
                     description: |-
                       The tags to associate with the ingress rule.

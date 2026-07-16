@@ -92,6 +92,7 @@ import (
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/k8s/pool"
 	clusterkafka "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/kafka/cluster"
 	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/keymanager/key"
+	material "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/keymanager/material"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/backend"
 	certificatelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/certificate"
 	frontend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/frontend"
@@ -240,6 +241,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		pool.Setup,
 		clusterkafka.Setup,
 		key.Setup,
+		material.Setup,
 		backend.Setup,
 		certificatelb.Setup,
 		frontend.Setup,
@@ -394,6 +396,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		pool.SetupGated,
 		clusterkafka.SetupGated,
 		key.SetupGated,
+		material.SetupGated,
 		backend.SetupGated,
 		certificatelb.SetupGated,
 		frontend.SetupGated,

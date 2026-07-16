@@ -393,6 +393,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  srn:
+                    description: |-
+                      – The Scaleway Resource Name (SRN) of the key.
+                      The Scaleway Resource Name (SRN) of the key
+                    type: string
                   state:
                     description: |-
                       – The state of the key (e.g., enabled).
