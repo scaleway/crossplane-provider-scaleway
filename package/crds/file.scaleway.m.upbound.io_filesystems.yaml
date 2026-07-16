@@ -79,7 +79,7 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+                      The filesystem size in GB. Minimum 25GB, maximum 10TB
                     type: number
                   tags:
                     description: |-
@@ -123,7 +123,7 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+                      The filesystem size in GB. Minimum 25GB, maximum 10TB
                     type: number
                   tags:
                     description: |-
@@ -240,8 +240,13 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+                      The filesystem size in GB. Minimum 25GB, maximum 10TB
                     type: number
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the filesystem.
+                      The Scaleway Resource Name (SRN) of the filesystem
+                    type: string
                   status:
                     description: |-
                       The current status of the filesystem. Possible values include creating, available, etc.

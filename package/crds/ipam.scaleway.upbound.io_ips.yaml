@@ -75,6 +75,7 @@ spec:
                   address:
                     description: |-
                       Request a specific IP in the specified source pool.
+                      ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
                       Request a specific IP in the requested source pool
                     type: string
                   customResource:
@@ -233,6 +234,7 @@ spec:
                   address:
                     description: |-
                       Request a specific IP in the specified source pool.
+                      ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
                       Request a specific IP in the requested source pool
                     type: string
                   customResource:
@@ -474,6 +476,7 @@ spec:
                   address:
                     description: |-
                       Request a specific IP in the specified source pool.
+                      ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
                       Request a specific IP in the requested source pool
                     type: string
                   addressCidr:
@@ -550,8 +553,9 @@ spec:
                     items:
                       properties:
                         address:
-                          description: Request a specific IP in the specified source
-                            pool.
+                          description: |-
+                            Request a specific IP in the specified source pool.
+                            ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
                           type: string
                         hostname:
                           description: The reverse domain name.

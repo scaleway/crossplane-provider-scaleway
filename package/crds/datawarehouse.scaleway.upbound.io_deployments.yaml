@@ -150,8 +150,9 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: Number of shards for the deployment. This value is
-                      immutable and cannot be changed after creation.
+                    description: |-
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
@@ -262,8 +263,9 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: Number of shards for the deployment. This value is
-                      immutable and cannot be changed after creation.
+                    description: |-
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
@@ -518,8 +520,9 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: Number of shards for the deployment. This value is
-                      immutable and cannot be changed after creation.
+                    description: |-
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-

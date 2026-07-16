@@ -110,6 +110,10 @@ type KeyObservation struct {
 	// Key rotation policy.
 	RotationPolicy []RotationPolicyObservation `json:"rotationPolicy,omitempty" tf:"rotation_policy,omitempty"`
 
+	// – The Scaleway Resource Name (SRN) of the key.
+	// The Scaleway Resource Name (SRN) of the key
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// – The state of the key (e.g., enabled).
 	// State of the key. See the Key.State enum for possible values.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`

@@ -431,6 +431,11 @@ spec:
                             Only one rule with this field set to true can be added.
                             Allow access to cluster from all Scaleway ranges
                           type: boolean
+                        srn:
+                          description: |-
+                            The Scaleway Resource Name (SRN) of each individual ACL rule.
+                            The Scaleway Resource Name (SRN) of the ACL rule
+                          type: string
                       type: object
                     type: array
                   clusterId:

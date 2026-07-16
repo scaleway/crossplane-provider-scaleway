@@ -770,6 +770,9 @@ spec:
                             official Kubernetes provider and the kubernetes_nodes
                             data source)
                           type: string
+                        srn:
+                          description: The Scaleway Resource Name (SRN) of the pool.
+                          type: string
                         status:
                           description: The status of the pool.
                           type: string
@@ -810,6 +813,11 @@ spec:
                       The size of the pool.
                       Size of the pool
                     type: number
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the pool.
+                      The Scaleway Resource Name (SRN) of the pool
+                    type: string
                   startupTaints:
                     description: |-
                       The list of Kubernetes taints applied at node creation but not reconciled afterward.

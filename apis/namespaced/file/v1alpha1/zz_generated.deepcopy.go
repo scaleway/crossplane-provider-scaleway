@@ -160,6 +160,11 @@ func (in *FilesystemObservation) DeepCopyInto(out *FilesystemObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)

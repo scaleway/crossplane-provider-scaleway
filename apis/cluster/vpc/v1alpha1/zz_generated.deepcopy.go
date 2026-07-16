@@ -416,6 +416,11 @@ func (in *ConnectorObservation) DeepCopyInto(out *ConnectorObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -985,6 +990,11 @@ func (in *IPv4SubnetObservation) DeepCopyInto(out *IPv4SubnetObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Subnet != nil {
 		in, out := &in.Subnet, &out.Subnet
 		*out = new(string)
@@ -1073,6 +1083,11 @@ func (in *IPv6SubnetsObservation) DeepCopyInto(out *IPv6SubnetsObservation) {
 	if in.PrefixLength != nil {
 		in, out := &in.PrefixLength, &out.PrefixLength
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
 		**out = **in
 	}
 	if in.Subnet != nil {
@@ -1450,6 +1465,11 @@ func (in *PrivateNetworkObservation) DeepCopyInto(out *PrivateNetworkObservation
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -3131,6 +3151,11 @@ func (in *RouteObservation) DeepCopyInto(out *RouteObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -3445,6 +3470,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 	}
 	if in.Source != nil {
 		in, out := &in.Source, &out.Source
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -3937,6 +3967,11 @@ func (in *VPCObservation) DeepCopyInto(out *VPCObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}

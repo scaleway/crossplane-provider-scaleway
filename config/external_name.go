@@ -150,6 +150,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_billing_budget":                                     config.NameAsIdentifier,
 	"scaleway_vpc_ingress_rule":                                   config.NameAsIdentifier,
 	"scaleway_billing_budget_alert_notification":                  config.NameAsIdentifier,
+	"scaleway_key_manager_key_material":                           config.NameAsIdentifier,
 	"scaleway_vpc_route":                                          config.NameAsIdentifier,
 }
 
