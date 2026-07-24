@@ -111,7 +111,7 @@ spec:
                         nextRotationAt:
                           description: |-
                             – The date and time of the next scheduled rotation.
-                            Timestamp indicating the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
                           type: string
                         rotationPeriod:
                           description: |-
@@ -190,7 +190,7 @@ spec:
                         nextRotationAt:
                           description: |-
                             – The date and time of the next scheduled rotation.
-                            Timestamp indicating the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
                           type: string
                         rotationPeriod:
                           description: |-
@@ -384,7 +384,7 @@ spec:
                         nextRotationAt:
                           description: |-
                             – The date and time of the next scheduled rotation.
-                            Timestamp indicating the next scheduled rotation.
+                            Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
                           type: string
                         rotationPeriod:
                           description: |-

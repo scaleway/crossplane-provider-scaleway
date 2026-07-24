@@ -1244,11 +1244,6 @@ func (in *PlacementGroupObservation) DeepCopyInto(out *PlacementGroupObservation
 		*out = new(string)
 		**out = **in
 	}
-	if in.OrganizationID != nil {
-		in, out := &in.OrganizationID, &out.OrganizationID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyMode != nil {
 		in, out := &in.PolicyMode, &out.PolicyMode
 		*out = new(string)
