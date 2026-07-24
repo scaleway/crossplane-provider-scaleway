@@ -73,6 +73,11 @@ linters:
           - gosec
           - gas
 
+      # LegacyManaged is deprecated but we need to support existing cluster-scoped resources
+      - text: "SA1019: resource.LegacyManaged is deprecated"
+        linters:
+          - staticcheck
+
   default: none
   enable:
     - staticcheck
