@@ -93,7 +93,7 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The filesystem size in GB. Minimum 25GB, maximum 10TB
+                      The filesystem size in GB. Minimum 25GB, maximum 50TB
                     type: number
                   tags:
                     description: |-
@@ -137,7 +137,7 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The filesystem size in GB. Minimum 25GB, maximum 10TB
+                      The filesystem size in GB. Minimum 25GB, maximum 50TB
                     type: number
                   tags:
                     description: |-
@@ -282,7 +282,7 @@ spec:
                       The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                       - Minimum: 100 GB (100000000000 bytes)
                       - Maximum: 10 TB (10000000000000 bytes)
-                      The filesystem size in GB. Minimum 25GB, maximum 10TB
+                      The filesystem size in GB. Minimum 25GB, maximum 50TB
                     type: number
                   srn:
                     description: |-

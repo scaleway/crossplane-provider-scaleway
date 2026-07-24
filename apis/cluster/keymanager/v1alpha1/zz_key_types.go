@@ -190,7 +190,7 @@ type KeyParameters struct {
 type RotationPolicyInitParameters struct {
 
 	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 
 	// (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
@@ -201,7 +201,7 @@ type RotationPolicyInitParameters struct {
 type RotationPolicyObservation struct {
 
 	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 
 	// (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
@@ -212,7 +212,7 @@ type RotationPolicyObservation struct {
 type RotationPolicyParameters struct {
 
 	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	// +kubebuilder:validation:Optional
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 

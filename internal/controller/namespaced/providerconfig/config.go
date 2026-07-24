@@ -75,3 +75,8 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	}, v1beta1.ClusterProviderConfigGroupVersionKind, v1beta1.ProviderConfigGroupVersionKind, v1beta1.ProviderConfigUsageGroupVersionKind)
 	return nil
 }
+
+// SetupWebhookWithManager registers the webhook for ProviderConfig.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	return nil
+}
