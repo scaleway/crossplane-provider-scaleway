@@ -97,8 +97,7 @@ type ClusterInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network details. Only one of private_network and public_network may be set.
-	// ~> The public_network block exports:
+	// Public network details. Only one of private_network and public_network may be set. The public_network block exports:
 	// Public network specs details
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
@@ -181,8 +180,7 @@ type ClusterObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network details. Only one of private_network and public_network may be set.
-	// ~> The public_network block exports:
+	// Public network details. Only one of private_network and public_network may be set. The public_network block exports:
 	// Public network specs details
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
@@ -272,8 +270,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public network details. Only one of private_network and public_network may be set.
-	// ~> The public_network block exports:
+	// Public network details. Only one of private_network and public_network may be set. The public_network block exports:
 	// Public network specs details
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
@@ -354,7 +351,7 @@ type PrivateNetworkObservation struct {
 	// UUID of the private network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint (IP addresses).
 	// List of IPv4 addresses of the endpoint
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
@@ -399,7 +396,7 @@ type PublicNetworkInitParameters struct {
 	// UUID of the public network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint (IP addresses).
 	// List of IPv4 addresses of the endpoint
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
@@ -414,7 +411,7 @@ type PublicNetworkObservation struct {
 	// UUID of the public network to be connected to the cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint (IP addresses).
 	// List of IPv4 addresses of the endpoint
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
@@ -430,7 +427,7 @@ type PublicNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Lis of IPv4 address of the endpoint (IP address).
+	// List of IPv4 addresses of the endpoint (IP addresses).
 	// List of IPv4 addresses of the endpoint
 	// +kubebuilder:validation:Optional
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`

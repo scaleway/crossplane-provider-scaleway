@@ -117,7 +117,7 @@ type ActionParameters struct {
 
 type FrontendInitParameters struct {
 
-	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend. Defined below.
 	// ACL rules
 	ACL []ACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -183,7 +183,7 @@ type FrontendInitParameters struct {
 
 type FrontendObservation struct {
 
-	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend. Defined below.
 	// ACL rules
 	ACL []ACLObservation `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -246,7 +246,7 @@ type FrontendObservation struct {
 
 type FrontendParameters struct {
 
-	// A list of ACL rules to apply to the Load Balancer frontend.  Defined below.
+	// A list of ACL rules to apply to the Load Balancer frontend. Defined below.
 	// ACL rules
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`

@@ -31,7 +31,7 @@ type FilesystemInitParameters struct {
 	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
 	// - Minimum: 100 GB (100000000000 bytes)
 	// - Maximum: 10 TB (10000000000000 bytes)
-	// The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+	// The filesystem size in GB. Minimum 25GB, maximum 10TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// A list of tags associated with the filesystem.
@@ -72,8 +72,12 @@ type FilesystemObservation struct {
 	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
 	// - Minimum: 100 GB (100000000000 bytes)
 	// - Maximum: 10 TB (10000000000000 bytes)
-	// The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+	// The filesystem size in GB. Minimum 25GB, maximum 10TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the filesystem.
+	// The Scaleway Resource Name (SRN) of the filesystem
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The current status of the filesystem. Possible values include creating, available, etc.
 	// The Current status of the filesystem (e.g. creating, available, ...)
@@ -109,7 +113,7 @@ type FilesystemParameters struct {
 	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
 	// - Minimum: 100 GB (100000000000 bytes)
 	// - Maximum: 10 TB (10000000000000 bytes)
-	// The Filesystem size_in_gb in bytes, with a granularity of 100 GB (10^11 bytes). Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size_in_gb.
+	// The filesystem size in GB. Minimum 25GB, maximum 10TB
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 

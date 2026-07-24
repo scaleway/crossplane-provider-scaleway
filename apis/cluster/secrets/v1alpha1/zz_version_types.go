@@ -77,6 +77,10 @@ type VersionObservation struct {
 	// The secret ID associated with this version
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the secret version.
+	// The Scaleway Resource Name (SRN) of the secret version
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The status of the secret version.
 	// Status of the secret version
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

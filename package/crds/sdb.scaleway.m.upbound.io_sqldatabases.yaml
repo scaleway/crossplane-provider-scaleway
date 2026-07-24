@@ -71,6 +71,7 @@ spec:
                   name:
                     description: |-
                       The name of the database (e.g. my-new-database).
+                      ~> Important: Updates to the name argument will recreate the database.
                       The database name
                     type: string
                   projectId:
@@ -110,6 +111,7 @@ spec:
                   name:
                     description: |-
                       The name of the database (e.g. my-new-database).
+                      ~> Important: Updates to the name argument will recreate the database.
                       The database name
                     type: string
                   projectId:
@@ -213,6 +215,7 @@ spec:
                   name:
                     description: |-
                       The name of the database (e.g. my-new-database).
+                      ~> Important: Updates to the name argument will recreate the database.
                       The database name
                     type: string
                   projectId:

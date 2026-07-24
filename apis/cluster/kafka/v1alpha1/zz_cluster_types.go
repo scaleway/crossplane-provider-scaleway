@@ -51,7 +51,7 @@ type ClusterInitParameters struct {
 	// Username for the Kafka user
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
+	// Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
 	// Kafka version to use
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -117,7 +117,7 @@ type ClusterObservation struct {
 	// Username for the Kafka user
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
+	// Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
 	// Kafka version to use
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -177,7 +177,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
+	// Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
 	// Kafka version to use
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`

@@ -418,6 +418,11 @@ spec:
                       If set, the new volume will be created from this snapshot.
                       The snapshot to create the volume from
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the volume.
+                      The Scaleway Resource Name (SRN) of the volume
+                    type: string
                   tags:
                     description: |-
                       A list of tags to apply to the volume.

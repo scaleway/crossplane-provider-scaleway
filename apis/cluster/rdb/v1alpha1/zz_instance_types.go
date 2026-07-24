@@ -178,6 +178,10 @@ type InstanceObservation struct {
 	// Logs policy configuration
 	LogsPolicy []LogsPolicyObservation `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
+	// List of scheduled maintenance events on the Database Instance.
+	// List of scheduled maintenance events on the database instance
+	Maintenances []MaintenancesObservation `json:"maintenances,omitempty" tf:"maintenances,omitempty"`
+
 	// The name of the Database Instance.
 	// Name of the database instance
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -447,6 +451,36 @@ type LogsPolicyParameters struct {
 	// The max disk size of remote logs to keep on the Database Instance.
 	// +kubebuilder:validation:Optional
 	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
+}
+
+type MaintenancesInitParameters struct {
+}
+
+type MaintenancesObservation struct {
+
+	// Closed maintenance date.
+	ClosedAt *string `json:"closedAt,omitempty" tf:"closed_at,omitempty"`
+
+	// Time when Scaleway-side maintenance will be applied.
+	ForcedAt *string `json:"forcedAt,omitempty" tf:"forced_at,omitempty"`
+
+	// Whether the maintenance can be applied by the user.
+	IsApplicable *bool `json:"isApplicable,omitempty" tf:"is_applicable,omitempty"`
+
+	// Maintenance information message.
+	Reason *string `json:"reason,omitempty" tf:"reason,omitempty"`
+
+	// Start date of the maintenance window.
+	StartsAt *string `json:"startsAt,omitempty" tf:"starts_at,omitempty"`
+
+	// Status of the maintenance (pending, ongoing, done, canceled, unknown).
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// End date of the maintenance window.
+	StopsAt *string `json:"stopsAt,omitempty" tf:"stops_at,omitempty"`
+}
+
+type MaintenancesParameters struct {
 }
 
 type PrivateIPInitParameters struct {

@@ -794,6 +794,38 @@ spec:
                           type: number
                       type: object
                     type: array
+                  maintenances:
+                    description: |-
+                      List of scheduled maintenance events on the Database Instance.
+                      List of scheduled maintenance events on the database instance
+                    items:
+                      properties:
+                        closedAt:
+                          description: Closed maintenance date.
+                          type: string
+                        forcedAt:
+                          description: Time when Scaleway-side maintenance will be
+                            applied.
+                          type: string
+                        isApplicable:
+                          description: Whether the maintenance can be applied by the
+                            user.
+                          type: boolean
+                        reason:
+                          description: Maintenance information message.
+                          type: string
+                        startsAt:
+                          description: Start date of the maintenance window.
+                          type: string
+                        status:
+                          description: Status of the maintenance (pending, ongoing,
+                            done, canceled, unknown).
+                          type: string
+                        stopsAt:
+                          description: End date of the maintenance window.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       The name of the Database Instance.

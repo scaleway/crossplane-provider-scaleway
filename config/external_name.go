@@ -144,6 +144,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_vpc_connector":                                      config.NameAsIdentifier,
 	"scaleway_iam_saml_certificate":                               config.NameAsIdentifier,
 	"scaleway_iam_scim":                                           config.NameAsIdentifier,
+	"scaleway_billing_budget_alert":                               config.NameAsIdentifier,
+	"scaleway_datalab":                                            config.NameAsIdentifier,
+	"scaleway_iam_scim_token":                                     config.NameAsIdentifier,
+	"scaleway_billing_budget":                                     config.NameAsIdentifier,
+	"scaleway_vpc_ingress_rule":                                   config.NameAsIdentifier,
+	"scaleway_billing_budget_alert_notification":                  config.NameAsIdentifier,
+	"scaleway_key_manager_key_material":                           config.NameAsIdentifier,
 	"scaleway_vpc_route":                                          config.NameAsIdentifier,
 }
 

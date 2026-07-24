@@ -194,7 +194,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool.
+                      The name for the pool. If not provided it will be generated.
                       The name of the pool
                     type: string
                   nodeType:
@@ -296,6 +296,12 @@ spec:
                           type: number
                       type: object
                     type: array
+                  version:
+                    description: |-
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+                      The Kubernetes version of the pool
+                    type: string
                   waitForPoolReady:
                     description: |-
                       (Defaults to true) Whether to wait for the pool to be ready.
@@ -442,7 +448,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool.
+                      The name for the pool. If not provided it will be generated.
                       The name of the pool
                     type: string
                   nodeType:
@@ -544,6 +550,12 @@ spec:
                           type: number
                       type: object
                     type: array
+                  version:
+                    description: |-
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
+                      The Kubernetes version of the pool
+                    type: string
                   waitForPoolReady:
                     description: |-
                       (Defaults to true) Whether to wait for the pool to be ready.
@@ -642,10 +654,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
@@ -718,7 +726,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool.
+                      The name for the pool. If not provided it will be generated.
                       The name of the pool
                     type: string
                   nodeType:
@@ -736,7 +744,8 @@ spec:
                           description: The ID of the pool.
                           type: string
                         name:
-                          description: The name for the pool.
+                          description: The name for the pool. If not provided it will
+                            be generated.
                           type: string
                         privateIps:
                           description: The list of private IPv4 and IPv6 addresses
@@ -760,6 +769,9 @@ spec:
                           description: The public IPv6. (Deprecated, Please use the
                             official Kubernetes provider and the kubernetes_nodes
                             data source)
+                          type: string
+                        srn:
+                          description: The Scaleway Resource Name (SRN) of the pool.
                           type: string
                         status:
                           description: The status of the pool.
@@ -801,6 +813,11 @@ spec:
                       The size of the pool.
                       Size of the pool
                     type: number
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the pool.
+                      The Scaleway Resource Name (SRN) of the pool
+                    type: string
                   startupTaints:
                     description: |-
                       The list of Kubernetes taints applied at node creation but not reconciled afterward.
@@ -872,7 +889,8 @@ spec:
                     type: array
                   version:
                     description: |-
-                      The version of the pool.
+                      The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
+                      For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
                       The Kubernetes version of the pool
                     type: string
                   waitForPoolReady:

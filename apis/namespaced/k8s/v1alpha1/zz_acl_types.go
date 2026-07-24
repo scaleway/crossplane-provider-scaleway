@@ -48,6 +48,10 @@ type ACLRulesObservation struct {
 	// Only one rule with this field set to true can be added.
 	// Allow access to cluster from all Scaleway ranges
 	ScalewayRanges *bool `json:"scalewayRanges,omitempty" tf:"scaleway_ranges,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of each individual ACL rule.
+	// The Scaleway Resource Name (SRN) of the ACL rule
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 }
 
 type ACLRulesParameters struct {

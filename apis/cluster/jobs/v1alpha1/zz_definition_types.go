@@ -99,6 +99,9 @@ type DefinitionInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Defines a retry policy for the job.
+	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
 	// A reference to a secret stored in Secret Manager.
 	// A reference to a Secret Manager secret.
 	SecretReference []SecretReferenceInitParameters `json:"secretReference,omitempty" tf:"secret_reference,omitempty"`
@@ -165,6 +168,9 @@ type DefinitionObservation struct {
 	// (Defaults to provider region) The region of the Job.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Defines a retry policy for the job.
+	RetryPolicy []RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// A reference to a secret stored in Secret Manager.
 	// A reference to a Secret Manager secret.
@@ -242,6 +248,10 @@ type DefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Defines a retry policy for the job.
+	// +kubebuilder:validation:Optional
+	RetryPolicy []RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
 	// A reference to a secret stored in Secret Manager.
 	// A reference to a Secret Manager secret.
 	// +kubebuilder:validation:Optional
@@ -256,6 +266,25 @@ type DefinitionParameters struct {
 	// Timeout for the job in seconds
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type RetryPolicyInitParameters struct {
+
+	// The maximum number of retries upon job failure.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+}
+
+type RetryPolicyObservation struct {
+
+	// The maximum number of retries upon job failure.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+}
+
+type RetryPolicyParameters struct {
+
+	// The maximum number of retries upon job failure.
+	// +kubebuilder:validation:Optional
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 }
 
 type SecretReferenceInitParameters struct {

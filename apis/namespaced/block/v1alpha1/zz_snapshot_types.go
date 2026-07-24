@@ -141,6 +141,10 @@ type SnapshotObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the snapshot.
+	// The Scaleway Resource Name (SRN) of the snapshot
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// A list of tags to apply to the snapshot.
 	// The tags associated with the snapshot
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

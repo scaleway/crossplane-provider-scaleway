@@ -139,6 +139,10 @@ type SecretObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the secret.
+	// The Scaleway Resource Name (SRN) of the secret
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The status of the secret.
 	// Status of the secret
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
