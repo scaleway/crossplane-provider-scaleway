@@ -95,7 +95,6 @@ type RuleObservation struct {
 	// Source IP range to which this rule applies (CIDR notation with subnet mask)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the ingress rule.
 	// The Scaleway Resource Name (SRN) of the ingress rule
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

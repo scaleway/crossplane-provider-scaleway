@@ -21,7 +21,7 @@ type NodesObservation struct {
 	// The ID of the pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name for the pool. If not provided it will be generated.
+	// The name for the pool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The list of private IPv4 and IPv6 addresses associated with the node.
@@ -33,7 +33,6 @@ type NodesObservation struct {
 	// The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)
 	PublicIPV6 *string `json:"publicIpV6,omitempty" tf:"public_ip_v6,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the pool.
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The status of the pool.
@@ -88,7 +87,7 @@ type PoolInitParameters struct {
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool. If not provided it will be generated.
+	// The name for the pool.
 	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -200,7 +199,7 @@ type PoolObservation struct {
 	// Minimum size of the pool
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool. If not provided it will be generated.
+	// The name for the pool.
 	// The name of the pool
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -240,7 +239,6 @@ type PoolObservation struct {
 	// Size of the pool
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the pool.
 	// The Scaleway Resource Name (SRN) of the pool
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
@@ -335,7 +333,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// The name for the pool. If not provided it will be generated.
+	// The name for the pool.
 	// The name of the pool
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

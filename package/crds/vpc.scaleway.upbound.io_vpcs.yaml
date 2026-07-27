@@ -301,9 +301,7 @@ spec:
                       The region you want to attach the resource to
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the VPC.
-                      The Scaleway Resource Name (SRN) of the private network
+                    description: The Scaleway Resource Name (SRN) of the private network
                     type: string
                   tags:
                     description: |-

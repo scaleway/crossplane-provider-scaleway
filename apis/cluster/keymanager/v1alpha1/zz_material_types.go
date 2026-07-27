@@ -15,7 +15,6 @@ import (
 
 type MaterialInitParameters struct {
 
-	// The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	// ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1.Key
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
@@ -29,75 +28,57 @@ type MaterialInitParameters struct {
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
-	// The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	KeyMaterialSecretRef *v1.SecretKeySelector `json:"keyMaterialSecretRef,omitempty" tf:"-"`
 
-	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
 	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	KeyMaterialWo *string `json:"keyMaterialWo,omitempty" tf:"key_material_wo,omitempty"`
 
-	// Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
 	// Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
 	KeyMaterialWoVersion *float64 `json:"keyMaterialWoVersion,omitempty" tf:"key_material_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.
 	// Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	SaltSecretRef *v1.SecretKeySelector `json:"saltSecretRef,omitempty" tf:"-"`
 
-	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
 	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	SaltWo *string `json:"saltWo,omitempty" tf:"salt_wo,omitempty"`
 
-	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
 	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
 	SaltWoVersion *float64 `json:"saltWoVersion,omitempty" tf:"salt_wo_version,omitempty"`
 }
 
 type MaterialObservation struct {
-
-	// The ID of the key material resource (same as key_id).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	// ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
 	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	KeyMaterialWo *string `json:"keyMaterialWo,omitempty" tf:"key_material_wo,omitempty"`
 
-	// Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
 	// Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
 	KeyMaterialWoVersion *float64 `json:"keyMaterialWoVersion,omitempty" tf:"key_material_wo_version,omitempty"`
 
 	// The current state of the key (enabled, disabled, pending_key_material).
-	// The current state of the key (enabled, disabled, pending_key_material).
 	KeyState *string `json:"keyState,omitempty" tf:"key_state,omitempty"`
 
 	// The origin of the key (should be 'external').
-	// The origin of the key (should be 'external').
 	Origin *string `json:"origin,omitempty" tf:"origin,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
 	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	SaltWo *string `json:"saltWo,omitempty" tf:"salt_wo,omitempty"`
 
-	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
 	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
 	SaltWoVersion *float64 `json:"saltWoVersion,omitempty" tf:"salt_wo_version,omitempty"`
 }
 
 type MaterialParameters struct {
 
-	// The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	// ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1.Key
 	// +kubebuilder:validation:Optional
@@ -112,36 +93,29 @@ type MaterialParameters struct {
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
-	// The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	// +kubebuilder:validation:Optional
 	KeyMaterialSecretRef *v1.SecretKeySelector `json:"keyMaterialSecretRef,omitempty" tf:"-"`
 
-	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
 	// The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	// +kubebuilder:validation:Optional
 	KeyMaterialWo *string `json:"keyMaterialWo,omitempty" tf:"key_material_wo,omitempty"`
 
-	// Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
 	// Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
 	// +kubebuilder:validation:Optional
 	KeyMaterialWoVersion *float64 `json:"keyMaterialWoVersion,omitempty" tf:"key_material_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.
 	// Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	// +kubebuilder:validation:Optional
 	SaltSecretRef *v1.SecretKeySelector `json:"saltSecretRef,omitempty" tf:"-"`
 
-	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
 	// Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
 	// +kubebuilder:validation:Optional
 	SaltWo *string `json:"saltWo,omitempty" tf:"salt_wo,omitempty"`
 
-	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
 	// Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
 	// +kubebuilder:validation:Optional
 	SaltWoVersion *float64 `json:"saltWoVersion,omitempty" tf:"salt_wo_version,omitempty"`
@@ -174,7 +148,7 @@ type MaterialStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Material is the Schema for the Materials API.
+// Material is the Schema for the Materials API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

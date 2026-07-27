@@ -150,7 +150,6 @@ spec:
                           description: |-
                             Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
                             Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
@@ -176,7 +175,6 @@ spec:
                         skipNodesWithLocalStorage:
                           description: |-
                             If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
                             If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
@@ -480,7 +478,6 @@ spec:
                           description: |-
                             Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
                             Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
@@ -506,7 +503,6 @@ spec:
                         skipNodesWithLocalStorage:
                           description: |-
                             If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
                             If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
@@ -910,7 +906,6 @@ spec:
                           description: |-
                             Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                             Check out the autoscaler's FAQ for details.
-                            ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
                             Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
                           type: number
                         maxGracefulTerminationSec:
@@ -936,7 +931,6 @@ spec:
                         skipNodesWithLocalStorage:
                           description: |-
                             If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                            ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
                             If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
                           type: boolean
                       type: object
@@ -1062,9 +1056,7 @@ spec:
                       The IP used for the DNS Service.
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the cluster.
-                      The Scaleway Resource Name (SRN) of the cluster
+                    description: The Scaleway Resource Name (SRN) of the cluster
                     type: string
                   status:
                     description: |-

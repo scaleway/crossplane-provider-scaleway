@@ -76,7 +76,6 @@ type FilesystemObservation struct {
 	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the filesystem.
 	// The Scaleway Resource Name (SRN) of the filesystem
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

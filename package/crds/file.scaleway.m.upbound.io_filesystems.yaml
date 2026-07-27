@@ -243,9 +243,7 @@ spec:
                       The filesystem size in GB. Minimum 25GB, maximum 50TB
                     type: number
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the filesystem.
-                      The Scaleway Resource Name (SRN) of the filesystem
+                    description: The Scaleway Resource Name (SRN) of the filesystem
                     type: string
                   status:
                     description: |-

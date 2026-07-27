@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Notification is the Schema for the Notifications API.
+        description: Notification is the Schema for the Notifications API. <no value>
         properties:
           apiVersion:
             description: |-
@@ -73,9 +73,8 @@ spec:
               forProvider:
                 properties:
                   budgetAlertId:
-                    description: |-
-                      The ID of the budget alert to create notification for.
-                      The ID of the budget alert to create notification for.
+                    description: The ID of the budget alert to create notification
+                      for.
                     type: string
                   budgetAlertIdRef:
                     description: Reference to a Alert in billing to populate budgetAlertId.
@@ -152,25 +151,25 @@ spec:
                         type: object
                     type: object
                   emailAddresses:
-                    description: |-
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of email addresses to receive email notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   smsPhoneNumbers:
-                    description: |-
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of phone numbers to receive SMS notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   webhookUrls:
-                    description: |-
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of webhook URLs to receive webhook notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
@@ -190,9 +189,8 @@ spec:
                   autoscaler.
                 properties:
                   budgetAlertId:
-                    description: |-
-                      The ID of the budget alert to create notification for.
-                      The ID of the budget alert to create notification for.
+                    description: The ID of the budget alert to create notification
+                      for.
                     type: string
                   budgetAlertIdRef:
                     description: Reference to a Alert in billing to populate budgetAlertId.
@@ -269,25 +267,25 @@ spec:
                         type: object
                     type: object
                   emailAddresses:
-                    description: |-
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of email addresses to receive email notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   smsPhoneNumbers:
-                    description: |-
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of phone numbers to receive SMS notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   webhookUrls:
-                    description: |-
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of webhook URLs to receive webhook notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
@@ -385,48 +383,41 @@ spec:
               atProvider:
                 properties:
                   budgetAlertId:
-                    description: |-
-                      The ID of the budget alert to create notification for.
-                      The ID of the budget alert to create notification for.
+                    description: The ID of the budget alert to create notification
+                      for.
                     type: string
                   createdAt:
-                    description: |-
-                      The date and time of budget alert notification creation
-                      The date and time of budget alert notification creation
+                    description: The date and time of budget alert notification creation
                     type: string
                   emailAddresses:
-                    description: |-
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of email addresses to receive email notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   id:
-                    description: The ID of the budget alert notification
                     type: string
                   smsPhoneNumbers:
-                    description: |-
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of phone numbers to receive SMS notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   type:
-                    description: |-
-                      The type of notification (sms, email, or webhook)
-                      The type of notification (sms, email, or webhook)
+                    description: The type of notification (sms, email, or webhook)
                     type: string
                   updatedAt:
-                    description: |-
-                      The date and time when the budget alert notification was last updated
-                      The date and time when the budget alert notification was last updated
+                    description: The date and time when the budget alert notification
+                      was last updated
                     type: string
                   webhookUrls:
-                    description: |-
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-                      List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
+                    description: List of webhook URLs to receive webhook notifications.
+                      Precisely one of sms_phone_numbers, email_addresses, or webhook_urls
+                      must be set.
                     items:
                       type: string
                     type: array

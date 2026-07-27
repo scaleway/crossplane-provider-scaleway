@@ -47,6 +47,10 @@ type DeploymentInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Public endpoint information (always created automatically).
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
+	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
 	// RAM per CPU in GB.
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
@@ -59,7 +63,6 @@ type DeploymentInitParameters struct {
 	// Number of replicas
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
-	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
@@ -114,7 +117,7 @@ type DeploymentObservation struct {
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Public endpoint information (always created automatically).
-	// Public endpoint configuration. A public endpoint is created by default.
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// RAM per CPU in GB.
@@ -129,7 +132,6 @@ type DeploymentObservation struct {
 	// Number of replicas
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
-	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
@@ -196,6 +198,11 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Public endpoint information (always created automatically).
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
+	// +kubebuilder:validation:Optional
+	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
 	// RAM per CPU in GB.
 	// RAM per CPU (GB)
 	// +kubebuilder:validation:Optional
@@ -211,7 +218,6 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
-	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	// +kubebuilder:validation:Optional
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
@@ -272,12 +278,15 @@ type PublicNetworkInitParameters struct {
 type PublicNetworkObservation struct {
 
 	// DNS record for the public endpoint.
+	// DNS record for the public endpoint
 	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
 	// The ID of the deployment.
+	// ID of the public endpoint
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of services exposed on the public endpoint.
+	// List of services exposed on the public endpoint
 	Services []PublicNetworkServicesObservation `json:"services,omitempty" tf:"services,omitempty"`
 }
 

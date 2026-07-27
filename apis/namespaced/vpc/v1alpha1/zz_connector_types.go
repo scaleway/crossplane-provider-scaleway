@@ -80,7 +80,6 @@ type ConnectorObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the VPC connector.
 	// The Scaleway Resource Name (SRN) of the vpc connector
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

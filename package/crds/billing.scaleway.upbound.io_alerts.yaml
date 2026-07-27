@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Alert is the Schema for the Alerts API.
+        description: Alert is the Schema for the Alerts API. <no value>
         properties:
           apiVersion:
             description: |-
@@ -73,9 +73,7 @@ spec:
               forProvider:
                 properties:
                   budgetId:
-                    description: |-
-                      The ID of the budget to create alert for.
-                      The ID of the budget to create alert for.
+                    description: The ID of the budget to create alert for.
                     type: string
                   budgetIdRef:
                     description: Reference to a Budget in billing to populate budgetId.
@@ -152,9 +150,8 @@ spec:
                         type: object
                     type: object
                   threshold:
-                    description: |-
-                      Threshold percentage above which the alert is sent (0-100).
-                      Threshold percentage above which the alert is sent (0-100).
+                    description: Threshold percentage above which the alert is sent
+                      (0-100).
                     type: number
                 type: object
               initProvider:
@@ -171,9 +168,7 @@ spec:
                   autoscaler.
                 properties:
                   budgetId:
-                    description: |-
-                      The ID of the budget to create alert for.
-                      The ID of the budget to create alert for.
+                    description: The ID of the budget to create alert for.
                     type: string
                   budgetIdRef:
                     description: Reference to a Budget in billing to populate budgetId.
@@ -250,9 +245,8 @@ spec:
                         type: object
                     type: object
                   threshold:
-                    description: |-
-                      Threshold percentage above which the alert is sent (0-100).
-                      Threshold percentage above which the alert is sent (0-100).
+                    description: Threshold percentage above which the alert is sent
+                      (0-100).
                     type: number
                 type: object
               managementPolicies:
@@ -352,27 +346,20 @@ spec:
               atProvider:
                 properties:
                   budgetId:
-                    description: |-
-                      The ID of the budget to create alert for.
-                      The ID of the budget to create alert for.
+                    description: The ID of the budget to create alert for.
                     type: string
                   createdAt:
-                    description: |-
-                      The date and time of budget alert creation
-                      The date and time of budget alert creation
+                    description: The date and time of budget alert creation
                     type: string
                   id:
-                    description: The ID of the budget alert
                     type: string
                   threshold:
-                    description: |-
-                      Threshold percentage above which the alert is sent (0-100).
-                      Threshold percentage above which the alert is sent (0-100).
+                    description: Threshold percentage above which the alert is sent
+                      (0-100).
                     type: number
                   updatedAt:
-                    description: |-
-                      The date and time when the budget alert was last updated
-                      The date and time when the budget alert was last updated
+                    description: The date and time when the budget alert was last
+                      updated
                     type: string
                 type: object
               conditions:

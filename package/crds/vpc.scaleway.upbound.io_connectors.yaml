@@ -557,9 +557,7 @@ spec:
                       The region you want to attach the resource to
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the VPC connector.
-                      The Scaleway Resource Name (SRN) of the vpc connector
+                    description: The Scaleway Resource Name (SRN) of the vpc connector
                     type: string
                   status:
                     description: |-

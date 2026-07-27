@@ -299,6 +299,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetwork != nil {
+		in, out := &in.PublicNetwork, &out.PublicNetwork
+		*out = make([]PublicNetworkInitParameters, len(*in))
+		copy(*out, *in)
+	}
 	if in.RAMPerCPU != nil {
 		in, out := &in.RAMPerCPU, &out.RAMPerCPU
 		*out = new(float64)
@@ -548,6 +553,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PublicNetwork != nil {
+		in, out := &in.PublicNetwork, &out.PublicNetwork
+		*out = make([]PublicNetworkParameters, len(*in))
+		copy(*out, *in)
 	}
 	if in.RAMPerCPU != nil {
 		in, out := &in.RAMPerCPU, &out.RAMPerCPU

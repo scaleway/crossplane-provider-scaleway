@@ -432,9 +432,8 @@ spec:
                             Allow access to cluster from all Scaleway ranges
                           type: boolean
                         srn:
-                          description: |-
-                            The Scaleway Resource Name (SRN) of each individual ACL rule.
-                            The Scaleway Resource Name (SRN) of the ACL rule
+                          description: The Scaleway Resource Name (SRN) of the ACL
+                            rule
                           type: string
                       type: object
                     type: array
