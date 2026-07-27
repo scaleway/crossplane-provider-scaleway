@@ -93,7 +93,6 @@ type AutoscalerConfigInitParameters struct {
 
 	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
 	// Check out the autoscaler's FAQ for details.
-	// ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
@@ -114,7 +113,6 @@ type AutoscalerConfigInitParameters struct {
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
 	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-	// ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
@@ -147,7 +145,6 @@ type AutoscalerConfigObservation struct {
 
 	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
 	// Check out the autoscaler's FAQ for details.
-	// ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
@@ -168,7 +165,6 @@ type AutoscalerConfigObservation struct {
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
 	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-	// ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 }
@@ -207,7 +203,6 @@ type AutoscalerConfigParameters struct {
 
 	// Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
 	// Check out the autoscaler's FAQ for details.
-	// ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
 	// Autoscaler logging level expressed from 0 to 4 (4 being the more verbose).
 	// +kubebuilder:validation:Optional
 	LogLevel *float64 `json:"logLevel,omitempty" tf:"log_level,omitempty"`
@@ -233,7 +228,6 @@ type AutoscalerConfigParameters struct {
 	ScaleDownUtilizationThreshold *float64 `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
 	// If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-	// ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
 	// If true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
 	// +kubebuilder:validation:Optional
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
@@ -420,7 +414,6 @@ type ClusterObservation struct {
 	// The IP used for the DNS Service.
 	ServiceDNSIP *string `json:"serviceDnsIp,omitempty" tf:"service_dns_ip,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the cluster.
 	// The Scaleway Resource Name (SRN) of the cluster
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

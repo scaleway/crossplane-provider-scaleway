@@ -90,7 +90,6 @@ type RouteObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the route.
 	// The Scaleway Resource Name (SRN) of the route
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

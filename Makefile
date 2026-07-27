@@ -4,7 +4,7 @@
 PROJECT_NAME := provider-scaleway
 PROJECT_REPO := github.com/scaleway/crossplane-provider-scaleway
 
-export TERRAFORM_VERSION := 1.10.5
+export TERRAFORM_VERSION := 1.15.8
 
 export TERRAFORM_PROVIDER_SOURCE := scaleway/scaleway
 export TERRAFORM_PROVIDER_REPO := https://github.com/scaleway/terraform-provider-scaleway

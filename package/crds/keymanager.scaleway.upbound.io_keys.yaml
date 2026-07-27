@@ -394,9 +394,7 @@ spec:
                       type: object
                     type: array
                   srn:
-                    description: |-
-                      – The Scaleway Resource Name (SRN) of the key.
-                      The Scaleway Resource Name (SRN) of the key
+                    description: The Scaleway Resource Name (SRN) of the key
                     type: string
                   state:
                     description: |-

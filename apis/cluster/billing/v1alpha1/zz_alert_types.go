@@ -16,7 +16,6 @@ import (
 type AlertInitParameters struct {
 
 	// The ID of the budget to create alert for.
-	// The ID of the budget to create alert for.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/billing/v1alpha1.Budget
 	BudgetID *string `json:"budgetId,omitempty" tf:"budget_id,omitempty"`
 
@@ -28,7 +27,6 @@ type AlertInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BudgetIDSelector *v1.Selector `json:"budgetIdSelector,omitempty" tf:"-"`
 
-	// Threshold percentage above which the alert is sent (0-100).
 	// Threshold percentage above which the alert is sent (0-100).
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
@@ -36,28 +34,22 @@ type AlertInitParameters struct {
 type AlertObservation struct {
 
 	// The ID of the budget to create alert for.
-	// The ID of the budget to create alert for.
 	BudgetID *string `json:"budgetId,omitempty" tf:"budget_id,omitempty"`
 
 	// The date and time of budget alert creation
-	// The date and time of budget alert creation
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The ID of the budget alert
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Threshold percentage above which the alert is sent (0-100).
-	// Threshold percentage above which the alert is sent (0-100).
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
-	// The date and time when the budget alert was last updated
 	// The date and time when the budget alert was last updated
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type AlertParameters struct {
 
-	// The ID of the budget to create alert for.
 	// The ID of the budget to create alert for.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/billing/v1alpha1.Budget
 	// +kubebuilder:validation:Optional
@@ -71,7 +63,6 @@ type AlertParameters struct {
 	// +kubebuilder:validation:Optional
 	BudgetIDSelector *v1.Selector `json:"budgetIdSelector,omitempty" tf:"-"`
 
-	// Threshold percentage above which the alert is sent (0-100).
 	// Threshold percentage above which the alert is sent (0-100).
 	// +kubebuilder:validation:Optional
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
@@ -104,7 +95,7 @@ type AlertStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Alert is the Schema for the Alerts API.
+// Alert is the Schema for the Alerts API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

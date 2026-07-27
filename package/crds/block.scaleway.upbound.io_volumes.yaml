@@ -449,9 +449,7 @@ spec:
                       The snapshot to create the volume from
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the volume.
-                      The Scaleway Resource Name (SRN) of the volume
+                    description: The Scaleway Resource Name (SRN) of the volume
                     type: string
                   tags:
                     description: |-

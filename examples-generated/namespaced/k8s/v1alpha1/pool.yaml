@@ -19,8 +19,9 @@ spec:
       foo: bar
       key: value
     maxSize: 10
-    minSize: 1
+    minSize: 0
     nodeType: DEV1-M
+    placementGroupId: 1267e3fd-a51c-49ed-ad12-857092ee3a3d
     size: 3
     taints:
     - effect: NoSchedule
@@ -42,40 +43,4 @@ metadata:
 spec:
   forProvider:
     cni: cilium
-    deleteAdditionalResources: true
-    name: example-cluster
-    privateNetworkIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: main
     version: 1.35.3
-
----
-
-apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
-kind: VPC
-metadata:
-  annotations:
-    meta.upbound.io/example-id: k8s/v1alpha1/pool
-  labels:
-    testing.upbound.io/example-name: main
-  name: main
-  namespace: upbound-system
-spec:
-  forProvider: {}
-
----
-
-apiVersion: vpc.scaleway.m.upbound.io/v1alpha1
-kind: PrivateNetwork
-metadata:
-  annotations:
-    meta.upbound.io/example-id: k8s/v1alpha1/pool
-  labels:
-    testing.upbound.io/example-name: main
-  name: main
-  namespace: upbound-system
-spec:
-  forProvider:
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: main

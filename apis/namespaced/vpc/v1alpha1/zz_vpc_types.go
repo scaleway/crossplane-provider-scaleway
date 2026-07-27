@@ -86,7 +86,6 @@ type VPCObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the VPC.
 	// The Scaleway Resource Name (SRN) of the private network
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

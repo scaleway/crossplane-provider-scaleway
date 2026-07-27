@@ -17,7 +17,6 @@ import (
 type NotificationInitParameters struct {
 
 	// The ID of the budget alert to create notification for.
-	// The ID of the budget alert to create notification for.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/billing/v1alpha1.Alert
 	BudgetAlertID *string `json:"budgetAlertId,omitempty" tf:"budget_alert_id,omitempty"`
 
@@ -30,16 +29,13 @@ type NotificationInitParameters struct {
 	BudgetAlertIDSelector *v1.NamespacedSelector `json:"budgetAlertIdSelector,omitempty" tf:"-"`
 
 	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	SMSPhoneNumbers []*string `json:"smsPhoneNumbers,omitempty" tf:"sms_phone_numbers,omitempty"`
 
-	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	WebhookUrls []*string `json:"webhookUrls,omitempty" tf:"webhook_urls,omitempty"`
@@ -48,35 +44,27 @@ type NotificationInitParameters struct {
 type NotificationObservation struct {
 
 	// The ID of the budget alert to create notification for.
-	// The ID of the budget alert to create notification for.
 	BudgetAlertID *string `json:"budgetAlertId,omitempty" tf:"budget_alert_id,omitempty"`
 
-	// The date and time of budget alert notification creation
 	// The date and time of budget alert notification creation
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
-	// The ID of the budget alert notification
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	SMSPhoneNumbers []*string `json:"smsPhoneNumbers,omitempty" tf:"sms_phone_numbers,omitempty"`
 
 	// The type of notification (sms, email, or webhook)
-	// The type of notification (sms, email, or webhook)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The date and time when the budget alert notification was last updated
-	// The date and time when the budget alert notification was last updated
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +listType=set
 	WebhookUrls []*string `json:"webhookUrls,omitempty" tf:"webhook_urls,omitempty"`
@@ -84,7 +72,6 @@ type NotificationObservation struct {
 
 type NotificationParameters struct {
 
-	// The ID of the budget alert to create notification for.
 	// The ID of the budget alert to create notification for.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/billing/v1alpha1.Alert
 	// +kubebuilder:validation:Optional
@@ -99,18 +86,15 @@ type NotificationParameters struct {
 	BudgetAlertIDSelector *v1.NamespacedSelector `json:"budgetAlertIdSelector,omitempty" tf:"-"`
 
 	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-	// List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
-	// List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SMSPhoneNumbers []*string `json:"smsPhoneNumbers,omitempty" tf:"sms_phone_numbers,omitempty"`
 
-	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -144,7 +128,7 @@ type NotificationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Notification is the Schema for the Notifications API.
+// Notification is the Schema for the Notifications API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

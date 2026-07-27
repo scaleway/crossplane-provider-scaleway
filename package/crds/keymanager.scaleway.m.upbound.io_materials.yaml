@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Material is the Schema for the Materials API.
+        description: Material is the Schema for the Materials API. <no value>
         properties:
           apiVersion:
             description: |-
@@ -59,9 +59,9 @@ spec:
               forProvider:
                 properties:
                   keyId:
-                    description: |-
-                      The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
-                      ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
+                    description: ID of the key to import key material into. The key's
+                      origin must be external (UUID format). Can be a plain UUID or
+                      a regional ID.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in keymanager to populate keyId.
@@ -144,9 +144,10 @@ spec:
                         type: object
                     type: object
                   keyMaterialSecretRef:
-                    description: |-
-                      The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
-                      The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: The key material to import. The key material is a
+                      random sequence of bytes used to derive a cryptographic key.
+                      Can be provided as raw bytes or a base64-encoded string (the
+                      provider will automatically normalize the input).
                     properties:
                       key:
                         type: string
@@ -158,24 +159,27 @@ spec:
                     - name
                     type: object
                   keyMaterialWo:
-                    description: |-
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: The key material to import in write-only mode. The
+                      key material is a random sequence of bytes used to derive a
+                      cryptographic key. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   keyMaterialWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
-                      Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
+                    description: Version number to track changes to the write-only
+                      key material. Increment this value to trigger resource recreation.
+                      Required when using 'key_material_wo'.
                     type: number
                   region:
-                    description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
-                      Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                    description: Region of the key. If not set, the region is derived
+                      from the key_id when possible or from the provider configuration.
                     type: string
                   saltSecretRef:
-                    description: |-
-                      Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.
-                      Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: Optional salt for key derivation. A salt is random
+                      data added to key material to ensure unique derived keys, even
+                      if the input is similar. It helps strengthen security when the
+                      key material has low randomness (low entropy). Can be provided
+                      as raw bytes or a base64-encoded string (the provider will automatically
+                      normalize the input).
                     properties:
                       key:
                         type: string
@@ -187,14 +191,15 @@ spec:
                     - name
                     type: object
                   saltWo:
-                    description: |-
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: Optional salt for key derivation in write-only mode.
+                      A salt is random data added to key material to ensure unique
+                      derived keys. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   saltWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
+                    description: Version number to track changes to the write-only
+                      salt. Increment this value to recreate the resource with new
+                      salt. Required when using 'salt_wo'.
                     type: number
                 type: object
               initProvider:
@@ -211,9 +216,9 @@ spec:
                   autoscaler.
                 properties:
                   keyId:
-                    description: |-
-                      The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
-                      ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
+                    description: ID of the key to import key material into. The key's
+                      origin must be external (UUID format). Can be a plain UUID or
+                      a regional ID.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in keymanager to populate keyId.
@@ -296,9 +301,10 @@ spec:
                         type: object
                     type: object
                   keyMaterialSecretRef:
-                    description: |-
-                      The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
-                      The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: The key material to import. The key material is a
+                      random sequence of bytes used to derive a cryptographic key.
+                      Can be provided as raw bytes or a base64-encoded string (the
+                      provider will automatically normalize the input).
                     properties:
                       key:
                         type: string
@@ -310,24 +316,27 @@ spec:
                     - name
                     type: object
                   keyMaterialWo:
-                    description: |-
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: The key material to import in write-only mode. The
+                      key material is a random sequence of bytes used to derive a
+                      cryptographic key. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   keyMaterialWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
-                      Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
+                    description: Version number to track changes to the write-only
+                      key material. Increment this value to trigger resource recreation.
+                      Required when using 'key_material_wo'.
                     type: number
                   region:
-                    description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
-                      Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                    description: Region of the key. If not set, the region is derived
+                      from the key_id when possible or from the provider configuration.
                     type: string
                   saltSecretRef:
-                    description: |-
-                      Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.
-                      Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: Optional salt for key derivation. A salt is random
+                      data added to key material to ensure unique derived keys, even
+                      if the input is similar. It helps strengthen security when the
+                      key material has low randomness (low entropy). Can be provided
+                      as raw bytes or a base64-encoded string (the provider will automatically
+                      normalize the input).
                     properties:
                       key:
                         type: string
@@ -339,14 +348,15 @@ spec:
                     - name
                     type: object
                   saltWo:
-                    description: |-
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: Optional salt for key derivation in write-only mode.
+                      A salt is random data added to key material to ensure unique
+                      derived keys. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   saltWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
+                    description: Version number to track changes to the write-only
+                      salt. Increment this value to recreate the resource with new
+                      salt. Required when using 'salt_wo'.
                     type: number
                 type: object
               managementPolicies:
@@ -413,47 +423,44 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the key material resource (same as key_id).
                     type: string
                   keyId:
-                    description: |-
-                      The ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
-                      ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
+                    description: ID of the key to import key material into. The key's
+                      origin must be external (UUID format). Can be a plain UUID or
+                      a regional ID.
                     type: string
                   keyMaterialWo:
-                    description: |-
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. Either key_material or key_material_wo must be specified.
-                      The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: The key material to import in write-only mode. The
+                      key material is a random sequence of bytes used to derive a
+                      cryptographic key. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   keyMaterialWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.
-                      Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
+                    description: Version number to track changes to the write-only
+                      key material. Increment this value to trigger resource recreation.
+                      Required when using 'key_material_wo'.
                     type: number
                   keyState:
-                    description: |-
-                      The current state of the key (enabled, disabled, pending_key_material).
-                      The current state of the key (enabled, disabled, pending_key_material).
+                    description: The current state of the key (enabled, disabled,
+                      pending_key_material).
                     type: string
                   origin:
-                    description: |-
-                      The origin of the key (should be 'external').
-                      The origin of the key (should be 'external').
+                    description: The origin of the key (should be 'external').
                     type: string
                   region:
-                    description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
-                      Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                    description: Region of the key. If not set, the region is derived
+                      from the key_id when possible or from the provider configuration.
                     type: string
                   saltWo:
-                    description: |-
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. Only one of salt or salt_wo can be specified.
-                      Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
+                    description: Optional salt for key derivation in write-only mode.
+                      A salt is random data added to key material to ensure unique
+                      derived keys. Can be provided as raw bytes or a base64-encoded
+                      string (the provider will automatically normalize the input).
                     type: string
                   saltWoVersion:
-                    description: |-
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.
-                      Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
+                    description: Version number to track changes to the write-only
+                      salt. Increment this value to recreate the resource with new
+                      salt. Required when using 'salt_wo'.
                     type: number
                 type: object
               conditions:

@@ -181,9 +181,9 @@ spec:
                       The TLS stage ID the DNS stage will be linked to
                     type: string
                   wildcardDomain:
-                    description: |-
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+                    description: Defines whether wildcard (subdomains) is supported
+                      for the given domain. A wildcard certificate is required to
+                      make it work
                     type: boolean
                 type: object
               initProvider:
@@ -308,9 +308,9 @@ spec:
                       The TLS stage ID the DNS stage will be linked to
                     type: string
                   wildcardDomain:
-                    description: |-
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+                    description: Defines whether wildcard (subdomains) is supported
+                      for the given domain. A wildcard certificate is required to
+                      make it work
                     type: boolean
                 type: object
               managementPolicies:
@@ -460,9 +460,9 @@ spec:
                       The date and time of the last update of the DNS stage
                     type: string
                   wildcardDomain:
-                    description: |-
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.
-                      Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
+                    description: Defines whether wildcard (subdomains) is supported
+                      for the given domain. A wildcard certificate is required to
+                      make it work
                     type: boolean
                 type: object
               conditions:

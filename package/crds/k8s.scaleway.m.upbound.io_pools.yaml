@@ -186,7 +186,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool. If not provided it will be generated.
+                      The name for the pool.
                       The name of the pool
                     type: string
                   nodeType:
@@ -446,7 +446,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool. If not provided it will be generated.
+                      The name for the pool.
                       The name of the pool
                     type: string
                   nodeType:
@@ -696,7 +696,7 @@ spec:
                     type: number
                   name:
                     description: |-
-                      The name for the pool. If not provided it will be generated.
+                      The name for the pool.
                       The name of the pool
                     type: string
                   nodeType:
@@ -714,8 +714,7 @@ spec:
                           description: The ID of the pool.
                           type: string
                         name:
-                          description: The name for the pool. If not provided it will
-                            be generated.
+                          description: The name for the pool.
                           type: string
                         privateIps:
                           description: The list of private IPv4 and IPv6 addresses
@@ -741,7 +740,6 @@ spec:
                             data source)
                           type: string
                         srn:
-                          description: The Scaleway Resource Name (SRN) of the pool.
                           type: string
                         status:
                           description: The status of the pool.
@@ -784,9 +782,7 @@ spec:
                       Size of the pool
                     type: number
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the pool.
-                      The Scaleway Resource Name (SRN) of the pool
+                    description: The Scaleway Resource Name (SRN) of the pool
                     type: string
                   startupTaints:
                     description: |-

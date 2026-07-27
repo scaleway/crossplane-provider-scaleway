@@ -206,7 +206,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
+                      Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
                       Kafka version to use
                     type: string
                   volumeSizeInGb:
@@ -381,7 +381,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
+                      Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
                       Kafka version to use
                     type: string
                   volumeSizeInGb:
@@ -589,7 +589,7 @@ spec:
                     type: string
                   version:
                     description: |-
-                      Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.
+                      Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.
                       Kafka version to use
                     type: string
                   volumeSizeInGb:

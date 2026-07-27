@@ -87,7 +87,6 @@ type VolumeObservation struct {
 	// The snapshot to create the volume from
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the volume.
 	// The Scaleway Resource Name (SRN) of the volume
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

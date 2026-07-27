@@ -199,7 +199,7 @@ type ConnectionInitParameters struct {
 	// The list of IKE v2 ciphers proposed for the IPsec tunnel
 	Ikev2Ciphers []Ikev2CiphersInitParameters `json:"ikev2Ciphers,omitempty" tf:"ikev2_ciphers,omitempty"`
 
-	// Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+	// Defines who initiates the IPSec tunnel.
 	// Defines who initiates the IPsec tunnel
 	InitiationPolicy *string `json:"initiationPolicy,omitempty" tf:"initiation_policy,omitempty"`
 
@@ -286,7 +286,7 @@ type ConnectionObservation struct {
 	// The list of IKE v2 ciphers proposed for the IPsec tunnel
 	Ikev2Ciphers []Ikev2CiphersObservation `json:"ikev2Ciphers,omitempty" tf:"ikev2_ciphers,omitempty"`
 
-	// Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+	// Defines who initiates the IPSec tunnel.
 	// Defines who initiates the IPsec tunnel
 	InitiationPolicy *string `json:"initiationPolicy,omitempty" tf:"initiation_policy,omitempty"`
 
@@ -384,7 +384,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Ikev2Ciphers []Ikev2CiphersParameters `json:"ikev2Ciphers,omitempty" tf:"ikev2_ciphers,omitempty"`
 
-	// Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+	// Defines who initiates the IPSec tunnel.
 	// Defines who initiates the IPsec tunnel
 	// +kubebuilder:validation:Optional
 	InitiationPolicy *string `json:"initiationPolicy,omitempty" tf:"initiation_policy,omitempty"`

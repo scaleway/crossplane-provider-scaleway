@@ -134,6 +134,13 @@ spec:
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  publicNetwork:
+                    description: |-
+                      Public endpoint information (always created automatically).
+                      Public endpoint configuration. A public endpoint is created only when this block is defined.
+                    items:
+                      type: object
+                    type: array
                   ramPerCpu:
                     description: |-
                       RAM per CPU in GB.
@@ -150,9 +157,8 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: |-
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
@@ -247,6 +253,13 @@ spec:
                       (Defaults to provider project_id) The ID of the project the deployment is associated with.
                       The project_id you want to attach the resource to
                     type: string
+                  publicNetwork:
+                    description: |-
+                      Public endpoint information (always created automatically).
+                      Public endpoint configuration. A public endpoint is created only when this block is defined.
+                    items:
+                      type: object
+                    type: array
                   ramPerCpu:
                     description: |-
                       RAM per CPU in GB.
@@ -263,9 +276,8 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: |-
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-
@@ -480,17 +492,23 @@ spec:
                   publicNetwork:
                     description: |-
                       Public endpoint information (always created automatically).
-                      Public endpoint configuration. A public endpoint is created by default.
+                      Public endpoint configuration. A public endpoint is created only when this block is defined.
                     items:
                       properties:
                         dnsRecord:
-                          description: DNS record for the public endpoint.
+                          description: |-
+                            DNS record for the public endpoint.
+                            DNS record for the public endpoint
                           type: string
                         id:
-                          description: The ID of the deployment.
+                          description: |-
+                            The ID of the deployment.
+                            ID of the public endpoint
                           type: string
                         services:
-                          description: List of services exposed on the public endpoint.
+                          description: |-
+                            List of services exposed on the public endpoint.
+                            List of services exposed on the public endpoint
                           items:
                             properties:
                               port:
@@ -520,9 +538,8 @@ spec:
                       Number of replicas
                     type: number
                   shardCount:
-                    description: |-
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
-                      Number of shards for the deployment. This value is immutable and cannot be changed after creation.
+                    description: Number of shards for the deployment. This value is
+                      immutable and cannot be changed after creation.
                     type: number
                   started:
                     description: |-

@@ -328,7 +328,7 @@ spec:
                     type: array
                   initiationPolicy:
                     description: |-
-                      Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+                      Defines who initiates the IPSec tunnel.
                       Defines who initiates the IPsec tunnel
                     type: string
                   isIpv6:
@@ -707,7 +707,7 @@ spec:
                     type: array
                   initiationPolicy:
                     description: |-
-                      Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+                      Defines who initiates the IPSec tunnel.
                       Defines who initiates the IPsec tunnel
                     type: string
                   isIpv6:
@@ -1068,7 +1068,7 @@ spec:
                     type: array
                   initiationPolicy:
                     description: |-
-                      Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.
+                      Defines who initiates the IPSec tunnel.
                       Defines who initiates the IPsec tunnel
                     type: string
                   isIpv6:

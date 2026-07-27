@@ -774,115 +774,6 @@ resources:
             organization_id: '- (Optional) The organization ID. If not provided, the default organization configured in the provider is used.'
             updated_at: '- The date and time when the budget was last updated'
         importStatements: []
-    scaleway_billing_budget_alert:
-        subCategory: Billing
-        name: scaleway_billing_budget_alert
-        title: scaleway_billing_budget_alert
-        examples:
-            - name: main
-              manifest: |-
-                {
-                  "budget_id": "${scaleway_billing_budget.main.id}",
-                  "threshold": 80
-                }
-              references:
-                budget_id: scaleway_billing_budget.main.id
-              dependencies:
-                scaleway_billing_budget.main: |-
-                    {
-                      "consumption_limit": 10000,
-                      "enabled": true,
-                      "organization_id": "11111111-1111-1111-1111-111111111111"
-                    }
-        argumentDocs:
-            budget_id: '- (Required) The ID of the budget to create alert for.'
-            created_at: '- The date and time of budget alert creation'
-            id: '- The ID of the budget alert'
-            threshold: '- (Required) Threshold percentage above which the alert is sent (0-100).'
-            updated_at: '- The date and time when the budget alert was last updated'
-        importStatements: []
-    scaleway_billing_budget_alert_notification:
-        subCategory: Billing
-        name: scaleway_billing_budget_alert_notification
-        title: scaleway_billing_budget_alert_notification
-        examples:
-            - name: email
-              manifest: |-
-                {
-                  "budget_alert_id": "${scaleway_billing_budget_alert.main.id}",
-                  "email_addresses": [
-                    "alerts@example.com",
-                    "billing@example.com"
-                  ]
-                }
-              references:
-                budget_alert_id: scaleway_billing_budget_alert.main.id
-              dependencies:
-                scaleway_billing_budget.main: |-
-                    {
-                      "consumption_limit": 10000,
-                      "enabled": true,
-                      "organization_id": "11111111-1111-1111-1111-111111111111"
-                    }
-                scaleway_billing_budget_alert.main: |-
-                    {
-                      "budget_id": "${scaleway_billing_budget.main.id}",
-                      "threshold": 80
-                    }
-            - name: sms
-              manifest: |-
-                {
-                  "budget_alert_id": "${scaleway_billing_budget_alert.main.id}",
-                  "sms_phone_numbers": [
-                    "+33612345678"
-                  ]
-                }
-              references:
-                budget_alert_id: scaleway_billing_budget_alert.main.id
-              dependencies:
-                scaleway_billing_budget.main: |-
-                    {
-                      "consumption_limit": 10000,
-                      "enabled": true,
-                      "organization_id": "11111111-1111-1111-1111-111111111111"
-                    }
-                scaleway_billing_budget_alert.main: |-
-                    {
-                      "budget_id": "${scaleway_billing_budget.main.id}",
-                      "threshold": 80
-                    }
-            - name: webhook
-              manifest: |-
-                {
-                  "budget_alert_id": "${scaleway_billing_budget_alert.main.id}",
-                  "webhook_urls": [
-                    "https://example.com/webhook"
-                  ]
-                }
-              references:
-                budget_alert_id: scaleway_billing_budget_alert.main.id
-              dependencies:
-                scaleway_billing_budget.main: |-
-                    {
-                      "consumption_limit": 10000,
-                      "enabled": true,
-                      "organization_id": "11111111-1111-1111-1111-111111111111"
-                    }
-                scaleway_billing_budget_alert.main: |-
-                    {
-                      "budget_id": "${scaleway_billing_budget.main.id}",
-                      "threshold": 80
-                    }
-        argumentDocs:
-            budget_alert_id: '- (Required) The ID of the budget alert to create notification for.'
-            created_at: '- The date and time of budget alert notification creation'
-            email_addresses: '- (Optional) List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.'
-            id: '- The ID of the budget alert notification'
-            sms_phone_numbers: '- (Optional) List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.'
-            type: '- The type of notification (sms, email, or webhook)'
-            updated_at: '- The date and time when the budget alert notification was last updated'
-            webhook_urls: '- (Optional) List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.'
-        importStatements: []
     scaleway_block_snapshot:
         subCategory: Block
         name: scaleway_block_snapshot
@@ -904,7 +795,6 @@ resources:
                       "size_in_gb": 20
                     }
         argumentDocs:
-            '{zone}/{id}.srn': '- The Scaleway Resource Name (SRN) of the snapshot.'
             export: |-
                 - (Optional) Use this block to export the volume as a QCOW file to Object Storage.
                 - bucket – (Required) The name of the bucket where the QCOW file will be saved.
@@ -962,7 +852,6 @@ resources:
                     }
         argumentDocs:
             '{zone}/{id}.organization_id': '- The Organization ID the volume is associated with.'
-            '{zone}/{id}.srn': '- The Scaleway Resource Name (SRN) of the volume.'
             id: '- The ID of the volume.'
             iops: '- (Required) The maximum IOPs expected, must match available options.'
             name: '- (Optional) The name of the volume. If not provided, a name will be randomly generated.'
@@ -1441,7 +1330,8 @@ resources:
             cpu_limit: '- (Optional) The amount of vCPU computing resources to allocate to each container.'
             deploy: '- (Deprecated) Boolean indicating whether the container is in a production environment.'
             description: (Optional) The description of the container.
-            domain_name: '- The native domain name of the container.'
+            domain_name: '- The native domain name of the container'
+            duration: '- Duration before the check times out (in duration notation, e.g. "30s").'
             environment_variables: '- (Optional) The environment variables of the container.'
             error_message: '- The error message of the container.'
             failure_threshold: '- Number of consecutive failures before considering the container has to be restarted.'
@@ -1472,7 +1362,7 @@ resources:
             privacy: '- (Optional) The privacy type defines the way to authenticate to your container. Please check our dedicated section.'
             private_network_id: (Optional) The ID of the Private Network the container is connected to.
             protocol: '- (Optional) The communication protocol http1 or h2c. Defaults to http1.'
-            public_endpoint: '- The scheme and domain of the container (e.g., https://example.com).'
+            public_endpoint: '- The native domain name of the container'
             region: '- (Defaults to provider region) The region in which the container was created.'
             registry_image: '- (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
             registry_sha256: '- (Optional) The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.'
@@ -1926,7 +1816,6 @@ resources:
             region: '- (Defaults to provider region) The region in which the deployment should be created.'
             replica_count: '- (Required) Number of replicas. Can be updated in place via the deployment configuration API.'
             services: '- List of services exposed on the public endpoint.'
-            shard_count: '- (Optional, Computed, Forces new resource) Number of shards for the deployment. This value is immutable and cannot be changed after creation.'
             started: '- (Optional, defaults to true) Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.'
             status: '- The status of the deployment (e.g., "ready", "provisioning").'
             tags: '- (Optional) List of tags to apply to the deployment.'
@@ -2612,7 +2501,6 @@ resources:
             tls_stage_id: '- (Optional) The TLS stage ID the DNS stage will be linked to. Only one of backend_stage_id, cache_stage_id and tls_stage_id should be specified.'
             type: '- The type of the stage.'
             updated_at: '- The date and time of the last update of the DNS stage.'
-            wildcard_domain: '- (Optional) Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work.'
         importStatements: []
     scaleway_edge_services_head_stage:
         subCategory: Edge Services
@@ -3012,7 +2900,6 @@ resources:
                 - (Required) The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
                 - Minimum: 100 GB (100000000000 bytes)
                 - Maximum: 10 TB (10000000000000 bytes)
-            srn: '- The Scaleway Resource Name (SRN) of the filesystem.'
             status: '- The current status of the filesystem. Possible values include creating, available, etc.'
             tags: '- (Optional) A list of tags associated with the filesystem.'
             updated_at: '- The date and time of the last update to the File Storage filesystem.'
@@ -4116,8 +4003,6 @@ resources:
             additional_volumes.id: '- The ID of the volume.'
             additional_volumes.name: '- The name of the volume.'
             additional_volumes.server: '- Description of the server containing the volume (in case the image is a backup from a server).'
-            additional_volumes.server.id: '- ID of the server containing the volume.'
-            additional_volumes.server.name: '- Name of the server containing the volume.'
             additional_volumes.size: '- The size of the volume.'
             additional_volumes.tags: '- List of tags associated with the volume.'
             additional_volumes.volume_type: '- The type of volume, possible values are l_ssd and sbs_snapshot.'
@@ -4136,7 +4021,8 @@ resources:
             root_volume.size: '- The size of the volume.'
             root_volume.volume_type: '- The type of volume, possible values are l_ssd and sbs_snapshot.'
             root_volume_id: '- (Required) The ID of the snapshot of the volume to be used as root in the image.'
-            server: 'block contains :'
+            server.id: '- ID of the server containing the volume.'
+            server.name: '- Name of the server containing the volume.'
             state: '- State of the image. Possible values are: available, creating or error.'
             tags: '- (Optional) A list of tags to apply to the image.'
             zone: '- (Defaults to provider zone) The zone in which the image should be created.'
@@ -5387,12 +5273,11 @@ resources:
                       "vpc_id": "${scaleway_vpc.vpc01.id}"
                     }
         argumentDocs:
-            address: |-
-                - (Optional) Request a specific IP in the specified source pool.
-                ~> Important: when requesting specific IP addresses, it is best ensure these are created before any other resource in the Private Network. This can be achieved by using depends_on relations, or moving the declarations to another Terraform module. Otherwise, other resources may take the requested address first, blocking the whole Terraform setup. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
+            address: '- (Optional) Request a specific IP in the specified source pool.'
             address_cidr: '- the IP address in CIDR notation.'
             created_at: '- Date and time of IP''s creation (RFC 3339 format).'
             custom_resource: '- (Optional) The custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server.'
+            depends_on: relations, or moving the declarations to another Terraform module. Otherwise, other resources may take the requested address first, blocking the whole Terraform setup. Static IPs should be avoided unless necessary, as we cannot guarantee full automation. We recommend to use DNS, or to not request a specific IP.
             hostname: The reverse domain name.
             id: '- The ID of the IP in IPAM.'
             is_ipv6: '- (Optional) Defines whether to request an IPv6 address instead of IPv4.'
@@ -5586,7 +5471,6 @@ resources:
                 scaleway_vpc_private_network.acl_basic: '{}'
         argumentDocs:
             acl_rules.#.id: '- The ID of each individual ACL rule.'
-            acl_rules.#.srn: '- The Scaleway Resource Name (SRN) of each individual ACL rule.'
             acl_rules.acl_rules: '- (Optional) A list of ACLs (structure is described below)'
             acl_rules.description: '- (Optional) A text describing this rule.'
             acl_rules.ip: '- (Optional) The IP range to whitelist in CIDR notation'
@@ -5848,7 +5732,6 @@ resources:
             log_level: |-
                 - Autoscaler logging level expressed from 0 (least verbose) to 4 (most verbose).
                 Check out the autoscaler's FAQ for details.
-                ~> Important: For now, it is not possible to change the value of log_level after creation. Changes to this field will recreate a new cluster resource.
             maintenance_window_day: '- (Optional) The day of the auto upgrade maintenance window (monday to sunday, or any).'
             maintenance_window_start_hour: '- (Optional) The start hour (UTC) of the 2-hour auto upgrade maintenance window (0 to 23).'
             max_graceful_termination_sec: '- (Defaults to 600) Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node'
@@ -5866,10 +5749,7 @@ resources:
             scale_down_utilization_threshold: '- (Defaults to 0.5) Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down'
             service_cidr: '- (Optional) The subnet used for the Service CIDR.'
             service_dns_ip: '- (Optional) The IP used for the DNS Service. If unset, defaults to Service CIDR''s network + 10.'
-            skip_nodes_with_local_storage: |-
-                - If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.
-                ~> Important: For now, it is not possible to change the value of skip_nodes_with_local_storage after creation. Changes to this field will recreate a new cluster resource.
-            srn: '- The Scaleway Resource Name (SRN) of the cluster.'
+            skip_nodes_with_local_storage: '- If set to true, the autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath.'
             status: '- The status of the Kubernetes cluster.'
             tags: '- (Optional) The tags associated with the Kubernetes cluster.'
             token: '- The token to connect to the Kubernetes API server.'
@@ -5908,8 +5788,9 @@ resources:
                     }
                   ],
                   "max_size": 10,
-                  "min_size": 1,
+                  "min_size": 0,
                   "node_type": "DEV1-M",
+                  "placement_group_id": "1267e3fd-a51c-49ed-ad12-857092ee3a3d",
                   "size": 3,
                   "taints": [
                     {
@@ -5927,48 +5808,7 @@ resources:
                 scaleway_k8s_cluster.main: |-
                     {
                       "cni": "cilium",
-                      "delete_additional_resources": true,
-                      "name": "example-cluster",
-                      "private_network_id": "${scaleway_vpc_private_network.main.id}",
                       "version": "1.35.3"
-                    }
-                scaleway_vpc.main: '{}'
-                scaleway_vpc_private_network.main: |-
-                    {
-                      "vpc_id": "${scaleway_vpc.main.id}"
-                    }
-            - name: main
-              manifest: |-
-                {
-                  "cluster_id": "${scaleway_k8s_cluster.main.id}",
-                  "lifecycle": [
-                    {
-                      "create_before_destroy": true
-                    }
-                  ],
-                  "node_type": "DEV1-M",
-                  "placement_group_id": "${scaleway_instance_placement_group.main.id}",
-                  "size": 3,
-                  "version": "${scaleway_k8s_cluster.main.version}"
-                }
-              references:
-                cluster_id: scaleway_k8s_cluster.main.id
-                placement_group_id: scaleway_instance_placement_group.main.id
-                version: scaleway_k8s_cluster.main.version
-              dependencies:
-                scaleway_instance_placement_group.main: '{}'
-                scaleway_k8s_cluster.main: |-
-                    {
-                      "cni": "cilium",
-                      "delete_additional_resources": true,
-                      "name": "example-cluster",
-                      "private_network_id": "${scaleway_vpc_private_network.main.id}",
-                      "version": "1.35.3"
-                    }
-                scaleway_vpc.main: '{}'
-                scaleway_vpc_private_network.main: |-
-                    {
-                      "vpc_id": "${scaleway_vpc.main.id}"
                     }
             - name: pool
               manifest: |-
@@ -6039,7 +5879,7 @@ resources:
             max_surge: '- (Defaults to 0) The maximum number of nodes to be created during the upgrade'
             max_unavailable: '- (Defaults to 1) The maximum number of nodes that can be not ready at the same time'
             min_size: '- (Defaults to 1 if size > 0, or 0 otherwise) The minimum size of the pool, used by the autoscaling feature.'
-            name: '- (Optional) The name for the pool. If not provided it will be generated.'
+            name: '- (Required) The name for the pool.'
             node_type: '- (Required) The commercial type of the pool instances. Instances with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). external is a special node type used to provision from other Cloud providers.'
             nodes: '- (List of) The nodes in the default pool.'
             placement_group_id: '- (Optional) The placement group the nodes of the pool will be attached to.'
@@ -6052,7 +5892,6 @@ resources:
             root_volume_type: '- (Optional) System volume type of the nodes composing the pool'
             security_group_id: '- The ID of the security group'
             size: '- (Required) The size of the pool.'
-            srn: '- The Scaleway Resource Name (SRN) of the pool.'
             startup_taints: '- The list of Kubernetes taints applied at node creation but not reconciled afterward.'
             status: '- The status of the pool.'
             tags: '- (Optional) The tags associated with the pool.'
@@ -6083,7 +5922,7 @@ resources:
                     }
                   ],
                   "user_name": "admin",
-                  "version": "4.1.1",
+                  "version": "3.9.0",
                   "volume_size_in_gb": 10,
                   "volume_type": "sbs_5k"
                 }
@@ -6118,7 +5957,7 @@ resources:
                     "messaging"
                   ],
                   "user_name": "admin",
-                  "version": "4.1.1",
+                  "version": "3.9.0",
                   "volume_size_in_gb": 10,
                   "volume_type": "sbs_5k"
                 }
@@ -6154,7 +5993,7 @@ resources:
             tags: '- (Optional) List of tags to apply to the cluster.'
             updated_at: '- Date and time of cluster last update (RFC 3339 format).'
             user_name: '- (Optional, Forces new resource) Username for the Kafka user. If not specified, no user will be created. Changing this forces recreation of the cluster.'
-            version: '- (Required, Forces new resource) Kafka version to use (e.g., "4.1.1"). Changing this forces recreation of the cluster.'
+            version: '- (Required, Forces new resource) Kafka version to use (e.g., "3.9.0"). Changing this forces recreation of the cluster.'
             volume_size_in_gb: '- (Required, Forces new resource) Volume size in GB. Changing this forces recreation of the cluster.'
             volume_type: '- (Required, Forces new resource) Type of volume where data is stored (e.g., "sbs_5k", "sbs_15k"). Changing this forces recreation of the cluster.'
         importStatements: []
@@ -6222,7 +6061,6 @@ resources:
             rotation_period: (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
             rotation_policy: '(Block, Optional) – Rotation policy for the key:'
             scaleway_kms: (default)
-            srn: – The Scaleway Resource Name (SRN) of the key.
             state: – The state of the key (e.g., enabled).
             symmetric_encryption: – For symmetric encryption operations
             tags: (List of String, Optional) – A list of tags to assign to the key.
@@ -6232,76 +6070,6 @@ resources:
             usage: '(String, Required) – The usage type of the key. Valid values:'
         importStatements:
             - terraform import scaleway_key_manager_key.main fr-par/11111111-2222-3333-4444-555555555555
-    scaleway_key_manager_key_material:
-        subCategory: Key Manager
-        name: scaleway_key_manager_key_material
-        title: scaleway_key_manager_key_material
-        examples:
-            - name: main
-              manifest: |-
-                {
-                  "key_id": "${scaleway_key_manager_key.main.id}",
-                  "key_material_wo": "${base64encode(random_bytes.key_material.base64)}",
-                  "key_material_wo_version": 1
-                }
-              references:
-                key_id: scaleway_key_manager_key.main.id
-              dependencies:
-                random_bytes.key_material: |-
-                    {
-                      "length": 32
-                    }
-                scaleway_key_manager_key.main: |-
-                    {
-                      "algorithm": "aes_256_gcm",
-                      "description": "Key with externally imported material",
-                      "name": "my-external-key",
-                      "origin": "external",
-                      "region": "fr-par",
-                      "usage": "symmetric_encryption"
-                    }
-            - name: main
-              manifest: |-
-                {
-                  "key_id": "${scaleway_key_manager_key.main.id}",
-                  "key_material_wo": "${base64encode(random_bytes.key_material.base64)}",
-                  "key_material_wo_version": 1,
-                  "salt_wo": "${base64encode(random_bytes.salt.base64)}",
-                  "salt_wo_version": 1
-                }
-              references:
-                key_id: scaleway_key_manager_key.main.id
-              dependencies:
-                random_bytes.key_material: |-
-                    {
-                      "length": 32
-                    }
-                random_bytes.salt: |-
-                    {
-                      "length": 16
-                    }
-                scaleway_key_manager_key.main: |-
-                    {
-                      "algorithm": "aes_256_gcm",
-                      "description": "Key with externally imported material and salt",
-                      "name": "my-external-key",
-                      "origin": "external",
-                      "region": "fr-par",
-                      "usage": "symmetric_encryption"
-                    }
-        argumentDocs:
-            id: '- The ID of the key material resource (same as key_id).'
-            key_id: '- (Required, ForceNew) The ID of the key to import key material into. The key''s origin must be external (UUID format). Can be a plain UUID or a regional ID.'
-            key_material: '- (Optional, Sensitive, ForceNew) The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).'
-            key_material_wo: '- (Optional, Write-only) The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Must be provided as a base64-encoded string. The key material will not be stored in the Terraform state. Either key_material or key_material_wo must be specified.'
-            key_material_wo_version: '- (Optional, ForceNew) Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.'
-            key_state: '- The current state of the key (enabled, disabled, pending_key_material).'
-            origin: '- The origin of the key (should be ''external'').'
-            region: '- (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.'
-            salt: '- (Optional, Sensitive, ForceNew) Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.'
-            salt_wo: '- (Optional, Write-only) Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. The salt will not be stored in the Terraform state. Only one of salt or salt_wo can be specified.'
-            salt_wo_version: '- (Optional, ForceNew) Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.'
-        importStatements: []
     scaleway_lb:
         subCategory: Load Balancers
         name: scaleway_lb
@@ -6793,6 +6561,9 @@ resources:
         argumentDocs:
             acl: '- (Optional) A list of ACL rules to apply to the Load Balancer frontend. Defined below.'
             acl.action: '- (Required) Action to undertake when an ACL filter matches.'
+            acl.external_acls: |-
+                - (Defaults to false) A boolean to specify whether to use lb_acl.
+                If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
             acl.match: '- (Required) The ACL match rule. At least ip_subnet or ips_edge_services or http_filter and http_filter_value are required.'
             acl.name: '- (Optional) The ACL name. If not provided it will be randomly generated.'
             backend_id: '- (Required) The ID of the Load Balancer backend this frontend is attached to.'
@@ -6803,9 +6574,6 @@ resources:
             created_at: '- The date and time the frontend was created.'
             enable_access_logs: '- (Default: false) Defines whether to enable access logs on the frontend.'
             enable_http3: '- (Default: false) Activates HTTP/3 protocol.'
-            external_acls: |-
-                - (Defaults to false) A boolean to specify whether to use lb_acl.
-                If external_acls is set to true, acl can not be set directly in the Load Balancer frontend.
             http_filter: |-
                 - (Optional) The HTTP filter to match. This filter is supported only if your backend protocol has an HTTP forward protocol.
                 It extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part).
@@ -8985,7 +8753,6 @@ resources:
             backup_schedule_frequency: '- (Optional) Backup schedule frequency in hours.'
             backup_schedule_retention: '- (Optional) Backup schedule retention in days.'
             certificate: '- Certificate of the Database Instance.'
-            closed_at: '- Closed maintenance date.'
             disable_backup: '- (Optional) Disable automated backup for the Database Instance.'
             enable_ipam: '- (Optional) If true, the IP network address within the private subnet is determined by the IP Address Management (IPAM) service.'
             encryption_at_rest: '- (Optional) Enable or disable encryption at rest for the Database Instance.'
@@ -8993,18 +8760,15 @@ resources:
             endpoint_ip: '- (Deprecated) The IP of the Database Instance. Please use the private_network or the load_balancer attribute.'
             endpoint_port: '- (Deprecated) The port of the Database Instance. Please use the private_network or the load_balancer attribute.'
             engine: '- (Required) Database Instance''s engine version name (e.g. PostgreSQL-16, MySQL-8).'
-            forced_at: '- Time when Scaleway-side maintenance will be applied.'
             hostname: '- Name of the endpoint.'
             id: '- The ID of the Database Instance.'
             init_settings: '- (Optional) Map of engine settings to be set at database initialisation.'
             ip: '- IP of the replica.'
             ip_net: '- (Optional) The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.'
-            is_applicable: '- Whether the maintenance can be applied by the user.'
             is_ha_cluster: '- (Optional) Enable or disable high availability for the Database Instance.'
             load_balancer: |-
                 - (Optional) List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
                 This block must be defined if you want a public endpoint in addition to your private endpoint.
-            maintenances: '- List of scheduled maintenance events on the Database Instance.'
             minor_version: '- Minor version string (e.g., 15.5.0).'
             name: '- (Optional) The name of the Database Instance.'
             node_type: '- (Required) The type of Database Instance you want to create (e.g. db-dev-s).'
@@ -9020,15 +8784,11 @@ resources:
                 - (Defaults to provider project_id) The ID of the project the Database
                 Instance is associated with.
             read_replicas: '- List of read replicas of the Database Instance.'
-            reason: '- Maintenance information message.'
             region: |-
                 - (Defaults to provider region) The region
                 in which the Database Instance should be created.
             settings: '- (Optional) Map of engine settings to be set. Using this option will override default config.'
             snapshot_id: '- (Optional) The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.'
-            starts_at: '- Start date of the maintenance window.'
-            status: '- Status of the maintenance (pending, ongoing, done, canceled, unknown).'
-            stops_at: '- End date of the maintenance window.'
             tags: '- (Optional) The tags associated with the Database Instance.'
             upgradable_versions: '- List of available engine versions for upgrade. Each version contains:'
             user_name: '- (Optional) Identifier for the first user of the Database Instance.'
@@ -9607,7 +9367,7 @@ resources:
             ikev2_ciphers.dh_group: '- (Optional) The Diffie-Hellman group.'
             ikev2_ciphers.encryption: '- (Required) The encryption algorithm.'
             ikev2_ciphers.integrity: '- (Optional) The integrity/hash algorithm.'
-            initiation_policy: '- (Optional) Defines who initiates the IPSec tunnel. Possible values are vpn_gateway, customer_gateway or unknown_initiation_policy. Defaults to unknown_initiation_policy.'
+            initiation_policy: '- (Optional) Defines who initiates the IPSec tunnel.'
             is_ipv6: '- (Optional) Defines IP version of the IPSec Tunnel. Defaults to false (IPv4).'
             name: '- (Optional) The name of the connection.'
             organization_id: '- The Organization ID the connection is associated with.'
@@ -9815,9 +9575,7 @@ resources:
             id: '- The unique identifier of the database, which is of the form {region}/{id} e.g. fr-par/11111111-1111-1111-1111-111111111111.'
             max_cpu: '- (Optional) The maximum number of CPU units for your database. Defaults to 15.'
             min_cpu: '- (Optional) The minimum number of CPU units for your database. Defaults to 0.'
-            name: |-
-                - (Required) The name of the database (e.g. my-new-database).
-                ~> Important: Updates to the name argument will recreate the database.
+            name: '- (Required) The name of the database (e.g. my-new-database).'
             region: '- (Defaults to provider region) The region in which the resource exists.'
         importStatements: []
     scaleway_secret:
@@ -9860,7 +9618,6 @@ resources:
             region: |-
                 - (Defaults to provider region) The region
                 in which the resource exists.
-            srn: '- The Scaleway Resource Name (SRN) of the secret.'
             status: '- The status of the secret.'
             tags: '- (Optional) Tags of the secret (e.g. ["tag", "secret"]).'
             ttl: '- (Optional) Time frame, from one second and up to one year, during which the secret''s versions are valid. Has to be specified in Go Duration format (ex: "30m", "24h").'
@@ -9902,7 +9659,6 @@ resources:
             region: '- (Defaults to the region specified in the provider configuration). The region where the resource exists.'
             revision: '- The revision number of the secret version.'
             secret_id: '- (Required) The ID of the secret associated with the version.'
-            srn: '- The Scaleway Resource Name (SRN) of the secret version.'
             status: '- The status of the secret version.'
             updated_at: '- The date and time of the secret version''s last update (in RFC 3339 format).'
         importStatements: []
@@ -10090,7 +9846,6 @@ resources:
             organization_id: '- The Organization ID the VPC is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the VPC is associated with.'
             region: '- (Defaults to provider region) The region of the VPC.'
-            srn: '- The Scaleway Resource Name (SRN) of the VPC.'
             tags: '- (Optional) The tags to associate with the VPC.'
             updated_at: '- Date and time of VPC''s last update (RFC 3339 format).'
         importStatements: []
@@ -10219,7 +9974,6 @@ resources:
             organization_id: '- The Organization ID the VPC connector is associated with.'
             project_id: '- The Scaleway Project the VPC connector belongs to.'
             region: '- (Defaults to provider region) The region of the VPC connector.'
-            srn: '- The Scaleway Resource Name (SRN) of the VPC connector.'
             status: '- The status of the VPC connector.'
             tags: '- (Optional) The tags to associate with the VPC connector.'
             target_vpc_id: '- (Required) The ID of the target VPC to connect to.'
@@ -10418,7 +10172,6 @@ resources:
             nexthop_resource_ip: '- (Required) IP of the nexthop resource that should handle traffic matched by this rule.'
             region: '- (Defaults to provider region) The region of the ingress rule.'
             source: '- (Required) Source IP range (in CIDR notation) to which the ingress rule applies.'
-            srn: '- The Scaleway Resource Name (SRN) of the ingress rule.'
             tags: '- (Optional) The tags to associate with the ingress rule.'
             updated_at: '- The date and time of the last update of the ingress rule (RFC 3339 format).'
             vpc_id: '- (Required) The ID of the VPC in which to create the ingress rule.'
@@ -10472,7 +10225,6 @@ resources:
             prefix_length: '- The length of the network prefix, e.g., 24 for a 255.255.255.0 mask.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the private network is associated with.'
             region: '- (Defaults to provider region) The region of the Private Network.'
-            srn: '- The Scaleway Resource Name (SRN) of the Private Network.'
             subnet: '- (Optional) The subnet CIDR.'
             subnet_mask: '- The subnet mask expressed in dotted decimal notation, e.g., ''255.255.255.0'' for a /24 subnet'
             tags: '- (Optional) The tags associated with the Private Network.'
@@ -10915,7 +10667,6 @@ resources:
             nexthop_vpc_connector_id: '- (Optional) The ID of the nexthop VPC Connector.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the route is associated with.'
             region: '- (Defaults to provider region) The region of the route.'
-            srn: '- The Scaleway Resource Name (SRN) of the route.'
             tags: '- (Optional) The tags to associate with the route.'
             updated_at: '- The date and time of the creation of the route (RFC 3339 format).'
             vpc_id: '- (Required) The VPC ID the route belongs to.'

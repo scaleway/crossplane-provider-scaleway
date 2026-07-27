@@ -502,9 +502,7 @@ spec:
                             The length of the network prefix, e.g., 24 for a 255.255.255.0 mask
                           type: number
                         srn:
-                          description: |-
-                            The Scaleway Resource Name (SRN) of the Private Network.
-                            The Scaleway Resource Name (SRN) of the subnet
+                          description: The Scaleway Resource Name (SRN) of the subnet
                           type: string
                         subnet:
                           description: |-
@@ -550,9 +548,7 @@ spec:
                             The length of the network prefix, e.g., 24 for a 255.255.255.0 mask
                           type: number
                         srn:
-                          description: |-
-                            The Scaleway Resource Name (SRN) of the Private Network.
-                            The Scaleway Resource Name (SRN) of the subnet
+                          description: The Scaleway Resource Name (SRN) of the subnet
                           type: string
                         subnet:
                           description: |-
@@ -597,9 +593,7 @@ spec:
                       The region you want to attach the resource to
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the Private Network.
-                      The Scaleway Resource Name (SRN) of the private network
+                    description: The Scaleway Resource Name (SRN) of the private network
                     type: string
                   tags:
                     description: |-
