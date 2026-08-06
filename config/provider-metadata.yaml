@@ -50,6 +50,91 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the SSH key is associated with.'
             public_key: '- (Required) The public SSH key to be added.'
         importStatements: []
+    scaleway_annotations_binding:
+        subCategory: Annotations
+        name: scaleway_annotations_binding
+        title: scaleway_annotations_binding
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "srn": "${scaleway_key_manager_key.main.srn}",
+                  "value_id": "${scaleway_annotations_value.production.id}"
+                }
+              references:
+                srn: scaleway_key_manager_key.main.srn
+                value_id: scaleway_annotations_value.production.id
+              dependencies:
+                scaleway_annotations_key.environment: |-
+                    {
+                      "description": "Deployment environment (production, staging, development)",
+                      "name": "environment"
+                    }
+                scaleway_annotations_value.production: |-
+                    {
+                      "description": "Production environment",
+                      "key_id": "${scaleway_annotations_key.environment.id}",
+                      "name": "production"
+                    }
+                scaleway_key_manager_key.main: |-
+                    {
+                      "algorithm": "aes_256_gcm",
+                      "description": "Example key for binding",
+                      "name": "example-key",
+                      "region": "fr-par",
+                      "unprotected": true,
+                      "usage": "symmetric_encryption"
+                    }
+        argumentDocs:
+            id: '- The ID of the annotation binding.'
+            key_id: '- ID of the key associated to the binding.'
+            srn: '- (Required) Scaleway Resource Number to associate. Changing this forces a new resource to be created.'
+            value_id: '- (Required) ID of the value to associate. Changing this forces a new resource to be created.'
+        importStatements: []
+    scaleway_annotations_key:
+        subCategory: Annotations
+        name: scaleway_annotations_key
+        title: scaleway_annotations_key
+        examples:
+            - name: environment
+              manifest: |-
+                {
+                  "description": "Deployment environment (production, staging, development)",
+                  "name": "environment"
+                }
+        argumentDocs:
+            description: '- (Optional) Description of the annotation key.'
+            id: '- The ID of the annotation key.'
+            name: '- (Required) Name of the annotation key.'
+            organization_id: '- (Defaults to provider organization_id) The organization ID to create the key in.'
+        importStatements: []
+    scaleway_annotations_value:
+        subCategory: Annotations
+        name: scaleway_annotations_value
+        title: scaleway_annotations_value
+        examples:
+            - name: production
+              manifest: |-
+                {
+                  "description": "Production environment",
+                  "key_id": "${scaleway_annotations_key.environment.id}",
+                  "name": "production"
+                }
+              references:
+                key_id: scaleway_annotations_key.environment.id
+              dependencies:
+                scaleway_annotations_key.environment: |-
+                    {
+                      "description": "Deployment environment (production, staging, development)",
+                      "name": "environment"
+                    }
+        argumentDocs:
+            description: '- (Optional) Description of the annotation value.'
+            id: '- The ID of the annotation value.'
+            key_id: '- (Required) ID of the key the value is associated to.'
+            name: '- (Required) Name of the annotation value.'
+            value_id: '- The ID of the annotation value.'
+        importStatements: []
     scaleway_apple_silicon_runner:
         subCategory: Apple Silicon
         name: scaleway_apple_silicon_runner
@@ -2995,7 +3080,7 @@ resources:
             - name: file
               manifest: |-
                 {
-                  "name": "my-nfs-filesystem",
+                  "name": "my-filesystem",
                   "size_in_gb": 100
                 }
         argumentDocs:
@@ -3009,9 +3094,9 @@ resources:
                 associated with.
             region: '- (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).'
             size_in_gb: |-
-                - (Required) The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
-                - Minimum: 100 GB (100000000000 bytes)
-                - Maximum: 10 TB (10000000000000 bytes)
+                - (Required) The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
+                - Minimum: 25 GB
+                - Maximum: 50 TB (50000 GB)
             srn: '- The Scaleway Resource Name (SRN) of the filesystem.'
             status: '- The current status of the filesystem. Possible values include creating, available, etc.'
             tags: '- (Optional) A list of tags associated with the filesystem.'
@@ -6212,14 +6297,14 @@ resources:
             id: – The ID of the key.
             locked: – Whether the key is locked.
             name: (String) – The name of the key.
-            next_rotation_at: – The date and time of the next scheduled rotation.
+            next_rotation_at: (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
             origin: '(String, Optional) – The origin of the key. Valid values are:'
             project_id: (String, Optional) – The ID of the project the key belongs to.
             protected: – Whether the key is protected from deletion.
             region: (String) – The region in which to create the key (e.g., fr-par).
             rotated_at: – The date and time when the key was last rotated.
             rotation_count: – The number of times the key has been rotated.
-            rotation_period: (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+            rotation_period: (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
             rotation_policy: '(Block, Optional) – Rotation policy for the key:'
             scaleway_kms: (default)
             srn: – The Scaleway Resource Name (SRN) of the key.

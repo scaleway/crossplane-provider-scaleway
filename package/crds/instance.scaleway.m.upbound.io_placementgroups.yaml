@@ -208,11 +208,6 @@ spec:
                       The name of the placement group.
                       The name of the placement group
                     type: string
-                  organizationId:
-                    description: |-
-                      The organization ID the placement group is associated with.
-                      The organization_id you want to attach the resource to
-                    type: string
                   policyMode:
                     description: |-
                       (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
