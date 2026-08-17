@@ -49,10 +49,6 @@ type PlacementGroupObservation struct {
 	// The name of the placement group
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization ID the placement group is associated with.
-	// The organization_id you want to attach the resource to
-	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
-
 	// (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
 	// One of the two policy_mode may be selected: enforced or optional.
 	PolicyMode *string `json:"policyMode,omitempty" tf:"policy_mode,omitempty"`

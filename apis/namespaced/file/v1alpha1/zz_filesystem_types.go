@@ -29,10 +29,10 @@ type FilesystemInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
-	// - Minimum: 100 GB (100000000000 bytes)
-	// - Maximum: 10 TB (10000000000000 bytes)
-	// The filesystem size in GB. Minimum 25GB, maximum 10TB
+	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
+	// - Minimum: 25 GB
+	// - Maximum: 50 TB (50000 GB)
+	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// A list of tags associated with the filesystem.
@@ -70,10 +70,10 @@ type FilesystemObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
-	// - Minimum: 100 GB (100000000000 bytes)
-	// - Maximum: 10 TB (10000000000000 bytes)
-	// The filesystem size in GB. Minimum 25GB, maximum 10TB
+	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
+	// - Minimum: 25 GB
+	// - Maximum: 50 TB (50000 GB)
+	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// The Scaleway Resource Name (SRN) of the filesystem.
@@ -111,10 +111,10 @@ type FilesystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
-	// - Minimum: 100 GB (100000000000 bytes)
-	// - Maximum: 10 TB (10000000000000 bytes)
-	// The filesystem size in GB. Minimum 25GB, maximum 10TB
+	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
+	// - Minimum: 25 GB
+	// - Maximum: 50 TB (50000 GB)
+	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
