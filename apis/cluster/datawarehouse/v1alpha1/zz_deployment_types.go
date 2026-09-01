@@ -51,7 +51,7 @@ type DeploymentInitParameters struct {
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -121,7 +121,7 @@ type DeploymentObservation struct {
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -201,7 +201,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

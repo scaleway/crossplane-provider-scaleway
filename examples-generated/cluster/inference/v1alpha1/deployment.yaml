@@ -9,6 +9,9 @@ metadata:
 spec:
   forProvider:
     acceptEula: true
+    modelIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scaleway_inference_model
     name: tf-inference-deployment
     nodeType: L4
     publicEndpoint:

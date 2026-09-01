@@ -50,6 +50,91 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the SSH key is associated with.'
             public_key: '- (Required) The public SSH key to be added.'
         importStatements: []
+    scaleway_annotations_binding:
+        subCategory: Annotations
+        name: scaleway_annotations_binding
+        title: scaleway_annotations_binding
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "srn": "${scaleway_key_manager_key.main.srn}",
+                  "value_id": "${scaleway_annotations_value.production.id}"
+                }
+              references:
+                srn: scaleway_key_manager_key.main.srn
+                value_id: scaleway_annotations_value.production.id
+              dependencies:
+                scaleway_annotations_key.environment: |-
+                    {
+                      "description": "Deployment environment (production, staging, development)",
+                      "name": "environment"
+                    }
+                scaleway_annotations_value.production: |-
+                    {
+                      "description": "Production environment",
+                      "key_id": "${scaleway_annotations_key.environment.id}",
+                      "name": "production"
+                    }
+                scaleway_key_manager_key.main: |-
+                    {
+                      "algorithm": "aes_256_gcm",
+                      "description": "Example key for binding",
+                      "name": "example-key",
+                      "region": "fr-par",
+                      "unprotected": true,
+                      "usage": "symmetric_encryption"
+                    }
+        argumentDocs:
+            id: '- The ID of the annotation binding.'
+            key_id: '- ID of the key associated to the binding.'
+            srn: '- (Required) Scaleway Resource Number to associate. Changing this forces a new resource to be created.'
+            value_id: '- (Required) ID of the value to associate. Changing this forces a new resource to be created.'
+        importStatements: []
+    scaleway_annotations_key:
+        subCategory: Annotations
+        name: scaleway_annotations_key
+        title: scaleway_annotations_key
+        examples:
+            - name: environment
+              manifest: |-
+                {
+                  "description": "Deployment environment (production, staging, development)",
+                  "name": "environment"
+                }
+        argumentDocs:
+            description: '- (Optional) Description of the annotation key.'
+            id: '- The ID of the annotation key.'
+            name: '- (Required) Name of the annotation key.'
+            organization_id: '- (Defaults to provider organization_id) The organization ID to create the key in.'
+        importStatements: []
+    scaleway_annotations_value:
+        subCategory: Annotations
+        name: scaleway_annotations_value
+        title: scaleway_annotations_value
+        examples:
+            - name: production
+              manifest: |-
+                {
+                  "description": "Production environment",
+                  "key_id": "${scaleway_annotations_key.environment.id}",
+                  "name": "production"
+                }
+              references:
+                key_id: scaleway_annotations_key.environment.id
+              dependencies:
+                scaleway_annotations_key.environment: |-
+                    {
+                      "description": "Deployment environment (production, staging, development)",
+                      "name": "environment"
+                    }
+        argumentDocs:
+            description: '- (Optional) Description of the annotation value.'
+            id: '- The ID of the annotation value.'
+            key_id: '- (Required) ID of the key the value is associated to.'
+            name: '- (Required) Name of the annotation value.'
+            value_id: '- The ID of the annotation value.'
+        importStatements: []
     scaleway_apple_silicon_runner:
         subCategory: Apple Silicon
         name: scaleway_apple_silicon_runner
@@ -162,7 +247,7 @@ resources:
             vnc_url: '- URL of the VNC.'
             vpc_status: '- The current status of the VPC option.'
             zone: |-
-                - (Defaults to provider zone) The zone in which
+                - (Optional, Computed, Defaults to provider zone) The zone in which
                 the server should be created.
         importStatements: []
     scaleway_autoscaling_instance_group:
@@ -352,7 +437,7 @@ resources:
             tags: '- (Optional) The tags associated with the Instance group.'
             template_id: '- (Required) The ID of the Instance template to attach to the Instance group.'
             updated_at: '- Date and time of Instance group''s last update (RFC 3339 format).'
-            zone: '- (Defaults to provider zone) The zone in which the Instance group exists.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Instance group exists.'
         importStatements: []
     scaleway_autoscaling_instance_policy:
         subCategory: Autoscaling
@@ -419,7 +504,7 @@ resources:
             threshold: '- The threshold value to measure the aggregated sampled metric value against. Combined with the operator field, determines whether a scaling action should be triggered.'
             type: '- (Required) How to use the number defined in value when determining by how many Instances to scale up/down.'
             value: '- (Required) The value representing the magnitude of the scaling action to take for the Instance group. Depending on the type parameter, this number could represent a total number of Instances in the group, a number of Instances to add, or a percentage to scale the group by.'
-            zone: '- (Defaults to provider zone) The zone in which the Instance policy exists.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Instance policy exists.'
         importStatements: []
     scaleway_autoscaling_instance_template:
         subCategory: Autoscaling
@@ -475,7 +560,7 @@ resources:
             updated_at: '- Date and time of Instance group''s last update (RFC 3339 format).'
             volume_type: '- The type of the volume.'
             volumes: '- (Required) The template of Instance volume.'
-            zone: '- (Defaults to provider zone) The zone in which the Instance template exists.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Instance template exists.'
         importStatements: []
     scaleway_baremetal_server:
         subCategory: Elastic Metal
@@ -752,7 +837,7 @@ resources:
             user: '- (Optional) User used for the installation.'
             version: '- The type of the IP.'
             vlan: '- The VLAN ID associated to the private network.'
-            zone: '- (Defaults to provider zone) The zone in which the server should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the server should be created.'
         importStatements: []
     scaleway_billing_budget:
         subCategory: Billing
@@ -1077,7 +1162,7 @@ resources:
             enable_managed_alerts: '- Deprecated (Optional, Boolean) Use preconfigured_alert_ids instead. This field will be removed in a future version. When set to true, it enables all preconfigured alerts for the project. You cannot filter or disable individual alerts with this legacy flag.'
             preconfigured_alert_ids: '- (Optional, Set of String) A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.'
-            region: '- (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.'
+            region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.'
         importStatements: []
     scaleway_cockpit_exporter:
         subCategory: Cockpit
@@ -1147,7 +1232,7 @@ resources:
             otlp_destination.endpoint: '- (Required) OTLP endpoint URL.'
             otlp_destination.headers: '- (Optional) Headers to include in requests.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project.'
-            region: '- (Defaults to the region specified in the provider configuration) The region where the exporter is located.'
+            region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the exporter is located.'
             status: '- Status of the data export (creating, ready, error).'
             updated_at: '- Date and time of last update (RFC 3339 format).'
         importStatements: []
@@ -1204,7 +1289,7 @@ resources:
             origin: '- The origin of the Cockpit data source.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.'
             push_url: '- The URL endpoint used for pushing data to the Cockpit data source.'
-            region: '- (Defaults to the region specified in the provider configuration) The region where the data source is located.'
+            region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the data source is located.'
             retention_days: '- (Required) The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.'
             synchronized_with_grafana: '- Indicates whether the data source is synchronized with Grafana.'
             type: '- (Required) The type of data source. Possible values are: metrics, logs, or traces.'
@@ -1259,7 +1344,7 @@ resources:
             query_metrics: '- (Defaults to false) Permission to query metrics.'
             query_traces: '- (Defaults to false) Permission to query traces.'
             read: permissions to the token for metrics and logs
-            region: '- (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.'
+            region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.'
             scopes: '- (Optional) Scopes allowed, each with default values:'
             secret_key: '- The secret key of the token.'
             setup_alerts: '- (Defaults to false) Permission to set up alerts.'
@@ -1473,7 +1558,7 @@ resources:
             private_network_id: (Optional) The ID of the Private Network the container is connected to.
             protocol: '- (Optional) The communication protocol http1 or h2c. Defaults to http1.'
             public_endpoint: '- The scheme and domain of the container (e.g., https://example.com).'
-            region: '- (Defaults to provider region) The region in which the container was created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the container was created.'
             registry_image: '- (Deprecated) The registry image address (e.g., rg.fr-par.scw.cloud/$NAMESPACE/$IMAGE)'
             registry_sha256: '- (Optional) The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string.'
             sandbox: '- (Optional) Execution environment of the container.'
@@ -1516,7 +1601,7 @@ resources:
             id: '- The unique identifier of the container''s CRON trigger.'
             name: '- (Optional) The name of the container CRON trigger. If not provided, a random name is generated.'
             region: |-
-                - (Defaults to provider region) The region
+                - (Optional, Computed, Defaults to provider region) The region
                 in which the CRON trigger is created.
             schedule: '- (Required) CRON format string (refer to the CRON schedule reference for more information).'
             status: '- The CRON status.'
@@ -1567,7 +1652,7 @@ resources:
             container_id: '- (Required) The unique identifier of the container.'
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the container domain.'
-            region: '- (Defaults to provider region) The region in which the container exists.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the container exists.'
             url: '- (Deprecated) The URL used to query the container.'
         importStatements: []
     scaleway_container_namespace:
@@ -1592,7 +1677,7 @@ resources:
             name: '- (Required) The unique name of the Containers namespace.'
             organization_id: '- The Organization ID with which the namespace is associated.'
             project_id: '- (Defaults to provider project_id) The unique identifier of the project that contains the namespace.'
-            region: '- (Defaults to provider region). The region in which the namespace is created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace is created.'
             registry_endpoint: '- (Deprecated) The registry endpoint of the namespace.'
             registry_namespace_id: '- (Deprecated) The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
@@ -1642,7 +1727,7 @@ resources:
             expires_at: (Optional) The expiration date of the token.
             id: '- The unique identifier of the token.'
             namespace_id: '- (Required) The unique identifier of the Containers namespace.'
-            region: '- (Defaults to provider region). The region in which the namespace is created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace is created.'
             token: '- The token.'
         importStatements: []
     scaleway_container_trigger:
@@ -1749,7 +1834,7 @@ resources:
             project_id: '- (Optional) The ID of the project in which SQS is enabled, (defaults to provider project_id)'
             queue: '- (Deprecated) The name of the SQS queue. This argument is no longer supported.'
             queue_url: '- (Required) The URL of the SQS queue to monitor for messages.'
-            region: '- (Optional) Region where SQS is enabled (defaults to provider region)'
+            region: '- (Optional, Computed) Region where SQS is enabled (defaults to provider region)'
             schedule: '- (Required) UNIX cron schedule to run job (e.g., "* * * * *").'
             secret_key: '- (Required, Sensitive) The secret key for accessing the SQS queue.'
             server_urls: '- (Required) The list of URLs of the NATS server (e.g., "nats://nats.mnq.fr-par.scaleway.com:4222").'
@@ -1803,7 +1888,7 @@ resources:
             notebook_url: '- The URL of the JupyterLab notebook, if available.'
             private_network_id: '- (Required, Forces new resource) The ID of the private network to attach the Datalab to.'
             project_id: '- (Defaults to provider project_id) The project ID the Datalab belongs to.'
-            region: '- (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.'
+            region: '- (Optional, Computed, Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.'
             root_volume: '- Volume details for the main node.'
             size: '- (Optional, Forces new resource) The volume size in bytes.'
             spark_master_url: '- The Spark master URL within the VPC.'
@@ -1844,7 +1929,7 @@ resources:
             deployment_id: '- (Required) ID of the Data Warehouse deployment to which this database belongs.'
             id: '- The ID of the database (format: {region}/{deployment_id}/{name}).'
             name: '- (Required) Name of the database.'
-            region: '- (Defaults to provider region) The region in which the database should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the database should be created.'
             size: '- Size of the database in GB.'
         importStatements: []
     scaleway_datawarehouse_deployment:
@@ -1923,7 +2008,7 @@ resources:
             protocol: '- Service protocol (e.g., "tcp", "https", "mysql").'
             public_network: '- Public endpoint information (always created automatically).'
             ram_per_cpu: '- (Required) RAM per CPU in GB.'
-            region: '- (Defaults to provider region) The region in which the deployment should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the deployment should be created.'
             replica_count: '- (Required) Number of replicas. Can be updated in place via the deployment configuration API.'
             services: '- List of services exposed on the public endpoint.'
             shard_count: '- (Optional, Computed, Forces new resource) Number of shards for the deployment. This value is immutable and cannot be changed after creation.'
@@ -1985,7 +2070,7 @@ resources:
             is_admin: '- (Optional) Whether the user has administrator privileges. Defaults to false.'
             name: '- (Required) Name of the ClickHouse user.'
             password: '- (Required) Password for the ClickHouse user.'
-            region: '- (Defaults to provider region) The region in which the user should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the user should be created.'
         importStatements: []
     scaleway_domain_record:
         subCategory: Domains and DNS
@@ -2534,10 +2619,10 @@ resources:
             lb_config: '- The Load Balancer config.'
             pipeline_id: '- (Required) The ID of the pipeline.'
             project_id: '- (Defaults to provider project_id) The ID of the project the backend stage is associated with.'
-            region: '- (Defaults to provider region) The region of the Serverless Container.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the Serverless Container.'
             s3_backend_config: '- (Optional) The Scaleway Object Storage origin bucket (S3) linked to the backend stage.'
             updated_at: '- The date and time of the last update of the backend stage.'
-            zone: '- (Defaults to provider zone) The zone of the Load Balancer.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone of the Load Balancer.'
         importStatements: []
     scaleway_edge_services_cache_stage:
         subCategory: Edge Services
@@ -2957,7 +3042,7 @@ resources:
             managed_certificate: '- (Optional) Set to true when Scaleway generates and manages a Let''s Encrypt certificate for the TLS stage/custom endpoint.'
             pipeline_id: '- (Required) The ID of the pipeline.'
             project_id: '- (Defaults to provider project_id) The ID of the project the TLS stage is associated with.'
-            region: '- The region of the secret.'
+            region: '- (Optional, Computed) The region of the secret.'
             route_stage_id: '- (Optional) The route stage ID the TLS stage will be linked to. Only one of backend_stage_id, cache_stage_id, route_stage_id and waf_stage_id should be specified.'
             secrets: '- (Optional) The TLS secrets.'
             updated_at: '- The date and time of the last update of the TLS stage.'
@@ -2995,7 +3080,7 @@ resources:
             - name: file
               manifest: |-
                 {
-                  "name": "my-nfs-filesystem",
+                  "name": "my-filesystem",
                   "size_in_gb": 100
                 }
         argumentDocs:
@@ -3007,11 +3092,11 @@ resources:
             project_id: |-
                 - (Defaults to provider project_id) The ID of the project the server is
                 associated with.
-            region: '- (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).'
+            region: '- (Optional, Computed, Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).'
             size_in_gb: |-
-                - (Required) The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
-                - Minimum: 100 GB (100000000000 bytes)
-                - Maximum: 10 TB (10000000000000 bytes)
+                - (Required) The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
+                - Minimum: 25 GB
+                - Maximum: 50 TB (50000 GB)
             srn: '- The Scaleway Resource Name (SRN) of the filesystem.'
             status: '- The current status of the filesystem. Possible values include creating, available, etc.'
             tags: '- (Optional) A list of tags associated with the filesystem.'
@@ -3237,7 +3322,7 @@ resources:
             privacy: '- (Optional) The privacy type defines the way to authenticate to your function. Please check our dedicated section.'
             private_network_id: (Optional) The ID of the Private Network the function is connected to.
             project_id: '- (Defaults to provider project_id) The ID of the project the functions namespace is associated with.'
-            region: '- (Defaults to provider region). The region in which the namespace should be created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace should be created.'
             runtime: '- (Required) Runtime of the function. Runtimes can be fetched using specific route'
             sandbox: '- (Optional) Execution environment of the function.'
             secret_environment_variables: '- (Optional) The secret environment variables of the function.'
@@ -3305,7 +3390,7 @@ resources:
             id: '- The unique identifier of the function''s CRON trigger.'
             name: '- (Optional) The name of the function CRON trigger. If not provided, a random name is generated.'
             region: |-
-                - (Defaults to provider region) The region
+                - (Optional, Computed, Defaults to provider region) The region
                 in which the function was created.
             schedule: '- (Required) CRON format string (refer to the CRON schedule reference for more information).'
             status: '- The CRON status.'
@@ -3342,7 +3427,7 @@ resources:
             function_id: '- (Required) The unique identifier of the function.'
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the function domain.'
-            region: '- (Defaults to provider region) The region in which the domain was created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the domain was created.'
             url: '- The URL used to query the function.'
         importStatements: []
     scaleway_function_namespace:
@@ -3367,7 +3452,7 @@ resources:
             name: '- (Required) The unique name of the Functions namespace.'
             organization_id: '- The Organization ID with which the namespace is associated.'
             project_id: '- (Defaults to provider project_id) The unique identifier of the project that contains the namespace.'
-            region: '- (Defaults to provider region). The region in which the namespace is created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace is created.'
             registry_endpoint: '- The registry endpoint of the namespace.'
             registry_namespace_id: '- The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
@@ -3423,7 +3508,7 @@ resources:
             function_id: '- (Required) The unique identifier of the function.'
             id: '- The unique identifier of the token.'
             namespace_id: '- (Required) The unique identifier of the Functions namespace.'
-            region: '- (Defaults to provider region). The region in which the namespace is created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace is created.'
             token: '- The token.'
         importStatements: []
     scaleway_function_trigger:
@@ -3475,7 +3560,7 @@ resources:
             nats: The configuration for the Scaleway NATS account used by the trigger
             project_id: (Optional) The ID of the project in which SQS is enabled, (defaults to provider project_id)
             queue: (Required) The name of the SQS queue.
-            region: (Optional) Region where SQS is enabled (defaults to provider region)
+            region: (Optional, Computed) Region where SQS is enabled (defaults to provider region)
             sqs: The configuration of the Scaleway SQS queue used by the trigger
             subject: (Required) The subject to listen to.
         importStatements: []
@@ -3939,7 +4024,7 @@ resources:
               manifest: |-
                 {
                   "accept_eula": true,
-                  "model_name": "${data.scaleway_inference_model.my_model.id}",
+                  "model_id": "${data.scaleway_inference_model.my_model.id}",
                   "name": "tf-inference-deployment",
                   "node_type": "L4",
                   "public_endpoint": [
@@ -3949,7 +4034,7 @@ resources:
                   ]
                 }
               references:
-                model_name: data.scaleway_inference_model.my_model.id
+                model_id: data.scaleway_inference_model.my_model.id
         argumentDocs:
             accept_eula: '- (Optional) Some models (e.g Meta Llama) require end-user license agreements. Set true to accept.'
             address: '- The private IPv4 address.'
@@ -3968,7 +4053,7 @@ resources:
             private_network_id: '- (Optional) The ID of the private network to use.'
             project_id: '- (Defaults to provider project_id) The ID of the project the deployment is associated with.'
             public_endpoint: '- (Optional) Configuration of the deployment''s public endpoint.'
-            region: '- (Defaults to provider region) The region in which the deployment is created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the deployment is created.'
             size: '- The size of the pool.'
             status: '- The status of the deployment.'
             tags: '- (Optional) The tags associated with the deployment.'
@@ -4029,7 +4114,7 @@ resources:
                 - max_context_size - Maximum context length supported by this quantization.
             parameter_size_bits: '- Size, in bits, of the model parameters.'
             project_id: '- (Defaults to provider project_id) The ID of the project the deployment is associated with.'
-            region: '- (Defaults to provider region) The region in which the deployment is created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the deployment is created.'
             secret: '- (Optional, Sensitive) Authentication token used to pull the model from a private or gated URL (e.g., a Hugging Face access token with read permission). Conflicts with secret_wo.'
             secret_wo: '- (Optional) Authentication token used to pull the model from a private or gated URL in write-only mode. secret_wo will not be stored in the Terraform state. Only one of secret or secret_wo should be specified. Requires secret_wo_version to be set.'
             secret_wo_version: '- (Optional) The version of the write-only secret. Required when using secret_wo.'
@@ -4157,7 +4242,7 @@ resources:
             reverse: '- The reverse dns attached to this IP'
             tags: '- The tags associated with the IP.'
             type: '- The type of the IP (routed_ipv4, routed_ipv6), more information in the documentation'
-            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_instance_ip_reverse_dns:
         subCategory: Instances
@@ -4187,7 +4272,7 @@ resources:
             id: '- The ID of the IP for which the reverse DNS is configured.'
             ip_id: '- (Required) The IP ID'
             reverse: '- (Required) The reverse DNS for this IP.'
-            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_instance_placement_group:
         subCategory: Instances
@@ -4205,7 +4290,7 @@ resources:
             policy_type: '- (Defaults to max_availability) The policy type of the placement group. Possible values are: low_latency or max_availability.'
             project_id: '- (Defaults to provider project_id) The ID of the project the placement group is associated with.'
             tags: '- (Optional) A list of tags to apply to the placement group.'
-            zone: '- (Defaults to provider zone) The zone in which the placement group should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the placement group should be created.'
         importStatements: []
     scaleway_instance_private_nic:
         subCategory: Instances
@@ -4292,7 +4377,7 @@ resources:
             private_network_id: '- (Required) The ID of the private network attached to.'
             server_id: '- (Required) The ID of the server associated with.'
             tags: '- (Optional) The tags associated with the private NIC.'
-            zone: '- (Defaults to provider zone) The zone in which the server must be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the server must be created.'
         importStatements: []
     scaleway_instance_security_group:
         subCategory: Instances
@@ -4397,7 +4482,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the security group is associated with.'
             stateful: '- (Defaults to true) A boolean to specify whether the security group should be stateful or not.'
             tags: '- (Optional) The tags of the security group.'
-            zone: '- (Defaults to provider zone) The zone in which the security group should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the security group should be created.'
         importStatements: []
     scaleway_instance_security_group_rules:
         subCategory: Instances
@@ -4763,7 +4848,7 @@ resources:
                 You can define values using:
             volume_id: '- (Optional) The volume ID of the root volume of the server, allows you to create server with an existing volume. If empty, will be computed to a created volume ID.'
             volume_type: '- (Optional) Volume type of root volume, can be l_ssd or sbs_volume, default value depends on server type'
-            zone: '- (Defaults to provider zone) The zone in which the server should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the server should be created.'
         importStatements: []
     scaleway_instance_snapshot:
         subCategory: Instances
@@ -4848,7 +4933,7 @@ resources:
                 Updates to this field will recreate a new resource.
             volume_id: '- (Optional) The ID of the volume to take a snapshot from.'
             zone: |-
-                - (Defaults to provider zone) The zone in which
+                - (Optional, Computed, Defaults to provider zone) The zone in which
                 the snapshot should be created.
         importStatements: []
     scaleway_instance_user_data:
@@ -4895,7 +4980,7 @@ resources:
             key: '- (Required) Key of the user data.'
             server_id: '- (Required) The ID of the server associated with.'
             value: '- (Required) Value associated with your key'
-            zone: '- (Defaults to provider zone) The zone in which the server should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the server should be created.'
         importStatements: []
     scaleway_instance_volume:
         subCategory: Instances
@@ -4919,7 +5004,7 @@ resources:
             size_in_gb: '- (Optional) The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.'
             tags: '- (Optional) A list of tags to apply to the volume.'
             type: '- (Required) The type of the volume. The possible values are: l_ssd (Local SSD), scratch (Local Scratch SSD).'
-            zone: '- (Defaults to provider zone) The zone in which the volume should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the volume should be created.'
         importStatements: []
     scaleway_interlink_link:
         subCategory: Interlink
@@ -4971,7 +5056,7 @@ resources:
             peer_bgp_config: '- BGP configuration on peer''s side (on-premises or other hosting provider). Contains asn, ipv4, ipv6.'
             pop_id: '- (Required) PoP (location) where the link will be created.'
             project_id: '- (Defaults to provider project_id) The ID of the project the link is associated with.'
-            region: '- (Defaults to provider region) The region in which the link should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the link should be created.'
             routing_policy_v4_id: '- (Optional) If set, attaches this routing policy containing IPv4 prefixes to the link. A BGP IPv4 session will be created.'
             routing_policy_v6_id: '- (Optional) If set, attaches this routing policy containing IPv6 prefixes to the link. A BGP IPv6 session will be created.'
             scw_bgp_config: '- BGP configuration on Scaleway''s side. Contains asn, ipv4, ipv6.'
@@ -5031,7 +5116,7 @@ resources:
             prefix_filter_in: '- (Optional) List of IP prefixes (in CIDR notation) to accept from the peer. These are the ranges of route announcements to accept.'
             prefix_filter_out: '- (Optional) List of IP prefixes (in CIDR notation) to advertise to the peer. These are the ranges of routes to advertise.'
             project_id: '- (Defaults to provider project_id) The ID of the project the routing policy is associated with.'
-            region: '- (Defaults to provider region) The region in which the routing policy should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the routing policy should be created.'
             tags: '- (Optional) The list of tags to apply to the routing policy.'
             updated_at: '- The date and time of the last update of the routing policy (RFC 3339 format).'
         importStatements: []
@@ -5118,7 +5203,7 @@ resources:
             name: '- (Required) The name of the IoT Hub instance you want to create (e.g. my-hub).'
             product_plan: '- (Required) Product plan to create the hub, see documentation for available product plans (e.g. plan_shared)'
             project_id: '- (Defaults to provider project_id) The ID of the project the IoT Hub Instance is associated with.'
-            region: '- (Defaults to provider region) The region in which the Database Instance should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the Database Instance should be created.'
             status: '- The current status of the Hub.'
             updated_at: '- The date and time the Hub resource was updated.'
         importStatements: []
@@ -5148,7 +5233,7 @@ resources:
             hub_id: '- (Required) The hub ID to which the Network will be attached to.'
             id: '- The ID of the Network.'
             name: '- (Required) The name of the IoT Network you want to create (e.g. my-net).'
-            region: '- (Defaults to provider region) The region in which the Network is attached to.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the Network is attached to.'
             secret: '- The endpoint key to keep secret.'
             topic_prefix: '- (Optional) The prefix that will be prepended to all topics for this Network.'
             type: '- (Required) The network type to create (e.g. sigfox).'
@@ -5261,7 +5346,7 @@ resources:
             hub_id: '- (Required) The hub ID to which the Route will be attached to.'
             id: '- The ID of the Route.'
             name: '- (Required) The name of the IoT Route you want to create (e.g. my-route).'
-            region: '- (Defaults to provider region) The region in which the Route is attached to.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the Route is attached to.'
             rest: (Optional) - Configuration block for the rest routes. See product documentation for a better understanding of the parameters.
             rest.headers: '- (Required) a map of the extra headers to send with the HTTP call (e.g. X-Header = Value).'
             rest.uri: '- (Required) The URI of the Rest endpoint (e.g. https://internal.mycompany.com/ingest/mqttdata).'
@@ -5400,7 +5485,7 @@ resources:
             name: '- When the resource is in a Private Network, a DNS record is available to resolve the resource name.'
             private_network_id: '- The Private Network of the IP (if the IP is a private IP).'
             project_id: '- (Defaults to provider project_id) The ID of the Project the IP is associated with.'
-            region: '- (Defaults to provider region) The region of the IP.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the IP.'
             resource: '- The IP resource.'
             reverses: '- The reverse DNS for this IP.'
             source: '- (Required) The source in which to book the IP.'
@@ -5454,7 +5539,7 @@ resources:
             hostname: '- (Required) The reverse domain name.'
             id: '- The ID of the IPAM IP for which reverse DNS is configured.'
             ipam_ip_id: '- (Required) The IPAM IP ID.'
-            region: '- (Defaults to provider region) The region of the IP reverse DNS.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the IP reverse DNS.'
         importStatements: []
     scaleway_job_definition:
         subCategory: Jobs
@@ -5524,7 +5609,7 @@ resources:
             memory_limit: '- (Required) The memory computing resources in MB to allocate to each container running the job.'
             name: '- (Optional) The name of the job.'
             project_id: '- (Defaults to provider project_id) The ID of the project the Job is associated with.'
-            region: '- (Defaults to provider region) The region of the Job.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the Job.'
             schedule: '- Cron format string.'
             secret_id: '- (Required) The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition. You could reference the same secret multiple times in the same job definition.'
             secret_reference: '- (Optional) A reference to a secret stored in Secret Manager.'
@@ -5596,7 +5681,7 @@ resources:
             cluster_id: '- (Required) UUID of the cluster. The ID of the cluster is also the ID of the ACL resource, as there can only be one per cluster.'
             id: '- The ID of the ACL resource. It is the same as the ID of the cluster.'
             no_ip_allowed: '- (Optional) If set to true, no IP will be allowed and the cluster will be in full-isolation.'
-            no_ip_allowed.region: '- (Defaults to provider region) The region in which the ACL rule should be created.'
+            no_ip_allowed.region: '- (Optional, Computed, Defaults to provider region) The region in which the ACL rule should be created.'
         importStatements: []
     scaleway_k8s_cluster:
         subCategory: Kubernetes
@@ -5859,7 +5944,7 @@ resources:
             pod_cidr: '- (Optional) The subnet used for the Pod CIDR.'
             private_network_id: '- (Required) The ID of the private network of the cluster.'
             project_id: '- (Defaults to provider project_id) The ID of the project the cluster is associated with.'
-            region: '- (Defaults to provider region) The region in which the cluster should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the cluster should be created.'
             required_claim: '- (Optional) Multiple key=value pairs that describes a required claim in the ID Token'
             scale_down_delay_after_add: '- (Defaults to 10m) How long after scale up that scale down evaluation resumes.'
             scale_down_unneeded_time: '- (Default to 10m) How long a node should be unneeded before it is eligible for scale down.'
@@ -6024,6 +6109,7 @@ resources:
                 }
               references:
                 cluster_id: scaleway_k8s_cluster.kubernetes_cluster.id
+                node_type: var.node_type
         argumentDocs:
             address: '- The private IP address.'
             autohealing: '- (Defaults to false) Enables the autohealing feature for this pool.'
@@ -6047,7 +6133,7 @@ resources:
             public_ip: '- The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
             public_ip_disabled: '- (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.'
             public_ip_v6: '- The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
-            region: '- (Defaults to provider region) The region in which the pool should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the pool should be created.'
             root_volume_size_in_gb: '- (Optional) The size of the system volume of the nodes in gigabyte'
             root_volume_type: '- (Optional) System volume type of the nodes composing the pool'
             security_group_id: '- The ID of the security group'
@@ -6063,7 +6149,7 @@ resources:
                 - (Optional) The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
                 For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
             wait_for_pool_ready: '- (Defaults to true) Whether to wait for the pool to be ready.'
-            zone: '- (Defaults to provider zone) The zone in which the pool should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the pool should be created.'
         importStatements: []
     scaleway_kafka_cluster:
         subCategory: Kafka
@@ -6149,7 +6235,7 @@ resources:
             private_network: '- (Optional, Forces new resource) Private network to expose your Kafka cluster. Changing this forces recreation of the cluster.'
             project_id: '- (Defaults to provider project_id) The ID of the project the cluster is associated with.'
             public_network: '- Public endpoint information.'
-            region: '- (Defaults to provider region) The region in which the cluster should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the cluster should be created.'
             status: '- The status of the cluster (e.g., "ready", "creating", "configuring").'
             tags: '- (Optional) List of tags to apply to the cluster.'
             updated_at: '- Date and time of cluster last update (RFC 3339 format).'
@@ -6212,14 +6298,14 @@ resources:
             id: – The ID of the key.
             locked: – Whether the key is locked.
             name: (String) – The name of the key.
-            next_rotation_at: – The date and time of the next scheduled rotation.
+            next_rotation_at: (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
             origin: '(String, Optional) – The origin of the key. Valid values are:'
             project_id: (String, Optional) – The ID of the project the key belongs to.
             protected: – Whether the key is protected from deletion.
-            region: (String) – The region in which to create the key (e.g., fr-par).
+            region: (String, Optional, Computed) – The region in which to create the key (e.g., fr-par). If not specified, defaults to the provider configuration.
             rotated_at: – The date and time when the key was last rotated.
             rotation_count: – The number of times the key has been rotated.
-            rotation_period: (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+            rotation_period: (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
             rotation_policy: '(Block, Optional) – Rotation policy for the key:'
             scaleway_kms: (default)
             srn: – The Scaleway Resource Name (SRN) of the key.
@@ -6297,7 +6383,7 @@ resources:
             key_material_wo_version: '- (Optional, ForceNew) Version number to track changes to the write-only key material. Increment this value to recreate the resource with new key material. Required when using key_material_wo.'
             key_state: '- The current state of the key (enabled, disabled, pending_key_material).'
             origin: '- The origin of the key (should be ''external'').'
-            region: '- (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.'
             salt: '- (Optional, Sensitive, ForceNew) Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). Only one of salt or salt_wo can be specified.'
             salt_wo: '- (Optional, Write-only) Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Must be provided as a base64-encoded string. The salt will not be stored in the Terraform state. Only one of salt or salt_wo can be specified.'
             salt_wo_version: '- (Optional, ForceNew) Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using salt_wo.'
@@ -6419,7 +6505,7 @@ resources:
             status: '- The status of the private network connection.'
             tags: '- (Optional) The tags associated with the Load Balancer.'
             type: '- (Required) The type of the Load Balancer. Please check the migration section to upgrade the type.'
-            zone: '- (Defaults to provider zone) The zone of the Load Balancer.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone of the Load Balancer.'
         importStatements: []
     scaleway_lb_acl:
         subCategory: Load Balancers
@@ -6546,7 +6632,7 @@ resources:
             timeout_server: '- (Optional) Maximum server connection inactivity time. (e.g. 1s)'
             timeout_tunnel: '- (Optional) Maximum tunnel inactivity time. (e.g. 1s)'
             uri: '- (Required) The path for health check requests.'
-            zone: '- (Defaults to provider zone) The zone in which the Load Balancer was created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Load Balancer was created.'
         importStatements: []
     scaleway_lb_certificate:
         subCategory: Load Balancers
@@ -6608,7 +6694,7 @@ resources:
             not_valid_before: '- The not valid before validity bound timestamp'
             status: '- Certificate status'
             subject_alternative_name: '- The alternative domain names of the certificate'
-            zone: '- (Defaults to provider zone) The zone of the certificate.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone of the certificate.'
         importStatements: []
     scaleway_lb_frontend:
         subCategory: Load Balancers
@@ -6826,7 +6912,7 @@ resources:
             timeout_client: '- (Optional) Maximum inactivity time on the client side. (e.g. 1s)'
             type: '- (Required) The action type. Possible values are: allow or deny or redirect.'
             updated_at: '- The date and time the frontend resource was updated.'
-            zone: '- (Defaults to provider zone) The zone in which the Load Balancer was created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Load Balancer was created.'
         importStatements: []
     scaleway_lb_ip:
         subCategory: Load Balancers
@@ -6851,7 +6937,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the Project the IP is associated with.'
             reverse: '- (Optional) The reverse domain associated with this IP.'
             tags: '- (Optional) The tags associated with this IP.'
-            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_lb_private_network:
         subCategory: Load Balancers
@@ -6908,7 +6994,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the Project the Private Network attachment is associated with.'
             status: '- The status of the Private Network attachment.'
             updated_at: '- The date and time of the last update of the Private Network attachment (RFC 3339 format).'
-            zone: '- (Defaults to provider zone) The zone in which the Private Network should be attached.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Private Network should be attached.'
         importStatements: []
     scaleway_lb_route:
         subCategory: Load Balancers
@@ -7069,7 +7155,7 @@ resources:
                 Only one of match_sni, match_host_header and match_path_begin should be specified.
             match_subdomains: '- (Default: false) If true, all subdomains will match.'
             updated_at: '- The date on which the route was last updated.'
-            zone: '- (Defaults to provider zone) The zone in which the Load Balancer was created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Load Balancer was created.'
         importStatements: []
     scaleway_mnq_nats_account:
         subCategory: Messaging and Queuing
@@ -7089,7 +7175,7 @@ resources:
                 - (Defaults to provider project_id) The ID of the Project the
                 account is associated with.
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which the account should be created.
         importStatements: []
     scaleway_mnq_nats_credentials:
@@ -7115,7 +7201,7 @@ resources:
             id: '- The ID of the credentials'
             name: '- (Optional) The unique name of the NATS credentials.'
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which the account exists.
         importStatements: []
     scaleway_mnq_sns:
@@ -7137,7 +7223,7 @@ resources:
             id: '- The ID of the Project'
             project_id: '- (Defaults to provider project_id) The ID of the project in which SNS will be enabled.'
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which SNS will be enabled.
         importStatements: []
     scaleway_mnq_sns_credentials:
@@ -7171,7 +7257,7 @@ resources:
             name: '- (Optional) The unique name of the SNS credentials.'
             permissions: '- (Optional). List of permissions associated with these credentials.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SNS is enabled.'
-            region: '- (Defaults to provider region). The region in which SNS is enabled.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which SNS is enabled.'
             secret_key: '- The secret value of the key.'
         importStatements: []
     scaleway_mnq_sns_topic:
@@ -7212,7 +7298,7 @@ resources:
             name_prefix: '- (Optional) Creates a unique name beginning with the specified prefix. Conflicts with name.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SNS is enabled.'
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which SNS is enabled.
             secret_key: '- (Optional) The secret key of the SNS credentials.'
             sns_endpoint: '- (Optional) The endpoint of the SNS service. Can contain a {region} placeholder. Defaults to https://sns.mnq.{region}.scaleway.com.'
@@ -7265,7 +7351,7 @@ resources:
             protocol: '- (Required) Protocol of the SNS topic subscription.'
             redrive_policy: '- (Optional) Activate JSON redrive policy.'
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which SNS is enabled.
             secret_key: '- (Optional) The secret key of the SNS credentials.'
             sns_endpoint: '- (Optional) The endpoint of the SNS service. Can contain a {region} placeholder. Defaults to https://sns.mnq.{region}.scaleway.com.'
@@ -7291,7 +7377,7 @@ resources:
             id: '- The ID of the Project'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SQS will be enabled.'
             region: |-
-                - (Defaults to provider region). The region
+                - (Optional, Computed, Defaults to provider region). The region
                 in which SQS will be enabled.
         importStatements: []
     scaleway_mnq_sqs_credentials:
@@ -7325,7 +7411,7 @@ resources:
             name: '- (Optional) The unique name of the SQS credentials.'
             permissions: '- (Optional). List of permissions associated with these credentials.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SQS is enabled.'
-            region: '- (Defaults to provider region). The region in which SQS is enabled.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which SQS is enabled.'
             secret_key: '- The secret value of the key.'
         importStatements: []
     scaleway_mnq_sqs_queue:
@@ -7438,7 +7524,7 @@ resources:
             name_prefix: '- (Optional) Creates a unique name beginning with the specified prefix. Conflicts with name.'
             project_id: '- (Defaults to provider project_id) The ID of the Project in which SQS is enabled.'
             receive_wait_time_seconds: '- (Optional) The number of seconds to wait for a message to arrive in the queue before returning. Must be between 0 and 20. Defaults to 0.'
-            region: '- (Defaults to provider region). The region in which SQS is enabled.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which SQS is enabled.'
             secret_key: '- (Required) The secret key of the SQS queue.'
             sqs_endpoint: '- (Optional) The endpoint of the SQS queue. Can contain a {region} placeholder. Defaults to https://sqs.mnq.{region}.scaleway.com.'
             url: '- The URL of the queue.'
@@ -7621,7 +7707,7 @@ resources:
             private_network: '- (Optional) Private Network endpoints of the Database Instance.'
             project_id: '- (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.'
             public_network: '- (Optional) Public network endpoint configuration (no arguments).'
-            region: '- (Defaults to provider region) The region in which the MongoDB® instance should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the MongoDB® instance should be created.'
             snapshot_id: '- (Optional) Snapshot ID to restore the MongoDB® instance from.'
             snapshot_schedule_frequency_hours: '- (Optional) Snapshot schedule frequency in hours.'
             snapshot_schedule_retention_days: '- (Optional) Snapshot schedule retention in days.'
@@ -7645,6 +7731,8 @@ resources:
                   "instance_id": "${scaleway_mongodb_instance.main.id}",
                   "name": "name-snapshot"
                 }
+              references:
+                instance_id: scaleway_mongodb_instance.main.id
         argumentDocs:
             created_at: '- The date and time when the MongoDB® snapshot was created.'
             expires_at: '- (Required) The expiration date of the MongoDB® snapshot in ISO 8601 format (e.g. 2024-12-31T23:59:59Z).'
@@ -7653,7 +7741,7 @@ resources:
             instance_name: '- The name of the MongoDB® instance from which the snapshot was created.'
             name: '- (Optional) The name of the MongoDB® snapshot.'
             node_type: '- The type of node associated with the MongoDB® snapshot.'
-            region: '- (Defaults to provider region) The region in which the MongoDB® snapshot should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the MongoDB® snapshot should be created.'
             size: '- The size of the MongoDB® snapshot in bytes.'
             updated_at: '- The date and time of the last update of the MongoDB® snapshot.'
             volume_type: '- The type of volume used for the MongoDB® snapshot.'
@@ -7842,7 +7930,7 @@ resources:
             password: '- (Optional) The password of the MongoDB® user. Only one of password or password_wo should be specified.'
             password_wo: '- (Optional) The password of the MongoDB® user in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version.'
             password_wo_version: '- (Optional) The version of the write-only password. To update the password_wo, you must also update the password_wo_version.'
-            region: '- (Defaults to provider region) The region in which the MongoDB® user should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the MongoDB® user should be created.'
             roles: '- (Optional) List of roles assigned to the user. Each role block supports:'
             roles.any_database: '- (Optional) Apply the role to all databases. Cannot be used with database_name.'
             roles.database_name: '- (Optional) The database name for the role. Cannot be used with any_database.'
@@ -8139,7 +8227,7 @@ resources:
                 - (Optional) Object key prefix identifying one or more objects
                 to which the rule applies.
             project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
-            region: '- (Optional) The region in which the bucket will be created.'
+            region: '- (Optional, Computed) The region in which the bucket will be created.'
             storage_class: |-
                 - (Required) Specifies the Scaleway storage class
                 STANDARD, GLACIER, ONEZONE_IA to which you want the object to
@@ -8225,7 +8313,7 @@ resources:
             owner.display_name: '- (Optional) The display name of the owner.'
             owner.id: '- (Required) The ID of the project owner.'
             project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
-            region: '- (Optional) The region in which the bucket should be created.'
+            region: '- (Optional, Computed) The region in which the bucket should be created.'
         importStatements: []
     scaleway_object_bucket_lock_configuration:
         subCategory: Object Storage
@@ -8364,7 +8452,7 @@ resources:
             id: '- The unique identifier of the policy, which is the ID of the bucket.'
             policy: '- (Required) The policy document. This is a JSON formatted string. For more information about building AWS IAM policy documents with Terraform, refer to the official documentation.'
             project_id: '- (Defaults to provider project_id) The ID of the project the bucket is associated with.'
-            region: '- The Scaleway region this bucket resides in.'
+            region: '- (Computed) The Scaleway region this bucket resides in.'
         importStatements: []
     scaleway_object_bucket_server_side_encryption_configuration:
         subCategory: Object Storage
@@ -8486,7 +8574,7 @@ resources:
             project_id: |-
                 - (Defaults to provider's ) The ID of the
                 project the bucket is associated with.
-            region: '- (Optional) The region in which the bucket is located.'
+            region: '- (Optional, Computed) The region in which the bucket is located.'
             rule: '- (Required) Set of server-side encryption configuration rules. The rule object supports the following:'
             sse_algorithm: '- (Required) Server-side encryption algorithm to use. Valid values are AES256, aws:kms.'
         importStatements: []
@@ -8670,7 +8758,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the deployment is associated with.'
             public: '- Whether the endpoint is public (true) or private (false).'
             public_dashboard_url: '- URL of OpenSearch Dashboards when served on a public endpoint. With a private network for the API, the API endpoint is private but the dashboard may still be reachable at this public URL.'
-            region: '- (Defaults to provider region) The region in which the deployment should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the deployment should be created.'
             services: '- List of services exposed on the endpoint.'
             size_in_gb: '- (Required, Forces new resource) Volume size in GB. Changing this forces recreation of the deployment.'
             status: '- The status of the deployment (e.g., "ready", "creating", "upgrading").'
@@ -8760,7 +8848,7 @@ resources:
             acl_rules.description: '- (Optional) A text describing this rule. Default description: IP allowed'
             acl_rules.ip: '- (Required) The IPv4 address or range to whitelist in CIDR notation. IPv6 is not supported by the Scaleway API.'
             instance_id: '- (Required) UUID of the Database Instance.'
-            scaleway_rdb_acl.region: '- (Defaults to provider region) The region in which the Database Instance should be created.'
+            scaleway_rdb_acl.region: '- (Optional, Computed, Defaults to provider region) The region in which the Database Instance should be created.'
         importStatements: []
     scaleway_rdb_database:
         subCategory: Databases
@@ -8792,7 +8880,7 @@ resources:
             managed: '- Whether the database is managed or not.'
             name: '- (Required) Name of the database (e.g. my-new-database).'
             owner: '- The name of the owner of the database.'
-            region: '- (Defaults to provider region) The region in which the resource exists.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the resource exists.'
             size: '- Size of the database (in bytes).'
         importStatements: []
     scaleway_rdb_database_backup:
@@ -8842,7 +8930,7 @@ resources:
             instance_id: '- (Required) UUID of the Database Instance.'
             instance_name: '- Name of the instance of the backup.'
             name: '- (Required) Name of the database (e.g. my-database).'
-            region: '- (Defaults to provider region) The region in which the resource exists.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the resource exists.'
             size: '- Size of the backup (in bytes).'
             updated_at: '- Updated date (Format ISO 8601).'
         importStatements: []
@@ -9022,7 +9110,7 @@ resources:
             read_replicas: '- List of read replicas of the Database Instance.'
             reason: '- Maintenance information message.'
             region: |-
-                - (Defaults to provider region) The region
+                - (Optional, Computed, Defaults to provider region) The region
                 in which the Database Instance should be created.
             settings: '- (Optional) Map of engine settings to be set. Using this option will override default config.'
             snapshot_id: '- (Optional) The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.'
@@ -9094,7 +9182,7 @@ resources:
             instance_id: '- (Required) UUID of the Database Instance.'
             permission: '- (Required) Desired permission level. Valid values are readonly, readwrite, all, custom and none.'
             permission_status: '- Permission synchronization status. Possible values:'
-            region: '- (Defaults to provider region) The region in which the resource exists.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the resource exists.'
             synced: ': The effective permission matches the desired permission'
             user_name: '- (Required) Name of the user (e.g. my-db-user).'
         importStatements: []
@@ -9194,7 +9282,7 @@ resources:
             private_network: '- (Optional) Create an endpoint in a Private Netork.'
             private_network_id: '- (Required) UUID of the Private Netork to be connected to the Read Replica.'
             region: |-
-                - (Defaults to provider region) The region
+                - (Optional, Computed, Defaults to provider region) The region
                 in which the Read Replica should be created.
             same_zone: '- (Defaults to true) Defines whether to create the replica in the same availability zone as the main instance nodes or not.'
             service_ip: '- (Optional) The IP network address within the private subnet. This must be an IPv4 address with a CIDR notation. If not set, The IP network address within the private subnet is determined by the IP Address Management (IPAM) service.'
@@ -9273,7 +9361,7 @@ resources:
             instance_id: '- (Required) The UUID of the database instance for which the snapshot is created.'
             name: '- (Required) The name of the snapshot.'
             node_type: '- The type of the database instance for which the snapshot was created.'
-            region: '- The region where the snapshot is stored. Defaults to the region set in the provider configuration.'
+            region: '- (Optional, Computed) The region where the snapshot is stored. Defaults to the region set in the provider configuration.'
             size: '- The size of the snapshot in bytes.'
             status: '- The current status of the snapshot (e.g., ready, creating, error).'
             updated_at: '- The timestamp when the snapshot was last updated, in ISO 8601 format.'
@@ -9351,7 +9439,7 @@ resources:
             password_wo: '- (Optional) Database user password in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version.'
             password_wo_version: '- (Optional) The version of the write-only password. To update the password_wo, you must also update the password_wo_version.'
             random_password: resource with appropriate parameters.
-            region: '- The Scaleway region this resource resides in.'
+            region: '- (Optional, Computed) The Scaleway region this resource resides in.'
         importStatements: []
     scaleway_redis_cluster:
         subCategory: Redis
@@ -9507,7 +9595,7 @@ resources:
             name: '- (Required) The unique name of the namespace.'
             organization_id: '- The Organization ID the namespace is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the namespace is associated with.'
-            region: '- (Defaults to provider region). The region in which the namespace should be created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the namespace should be created.'
         importStatements: []
     scaleway_s2s_vpn_connection:
         subCategory: S2S VPN
@@ -9612,7 +9700,7 @@ resources:
             name: '- (Optional) The name of the connection.'
             organization_id: '- The Organization ID the connection is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the connection is associated with.'
-            region: '- (Defaults to provider region) The region in which the connection should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the connection should be created.'
             route_propagation_enabled: '- Whether route propagation is enabled.'
             secret_id: '- The ID of the secret containing the pre-shared key (PSK) for the connection.'
             secret_version: '- The version of the secret containing the PSK.'
@@ -9671,7 +9759,7 @@ resources:
             name: '- (Optional) The name of the customer gateway. If not provided, it will be randomly generated.'
             organization_id: '- The Organization ID the customer gateway is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the project the customer gateway is associated with.'
-            region: '- (Defaults to provider region) The region in which the customer gateway should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the customer gateway should be created.'
             tags: '- (Optional) The list of tags to apply to the customer gateway.'
             updated_at: '- The date and time of the last update of the customer gateway (RFC 3339 format).'
         importStatements: []
@@ -9718,11 +9806,11 @@ resources:
             public_config: '- (Optional) The public endpoint configuration of the VPN gateway. See Public Config below.'
             public_config.ipam_ipv4_id: '- (Optional) The ID of the IPAM IPv4 address to use as the public IP for the VPN gateway.'
             public_config.ipam_ipv6_id: '- (Optional) The ID of the IPAM IPv6 address to use as the public IP for the VPN gateway.'
-            region: '- (Defaults to provider region) The region in which the VPN gateway should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the VPN gateway should be created.'
             status: '- The status of the VPN gateway.'
             tags: '- (Optional) The list of tags to apply to the VPN gateway.'
             updated_at: '- The date and time of the last update of the VPN gateway (RFC 3339 format).'
-            zone: '- (Defaults to provider zone) The zone in which the VPN gateway should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the VPN gateway should be created.'
         importStatements: []
     scaleway_s2s_vpn_routing_policy:
         subCategory: S2S VPN
@@ -9762,7 +9850,7 @@ resources:
             prefix_filter_in: '- (Optional) List of IP prefixes (in CIDR notation) to accept from the peer gateway. These are the routes that the customer gateway can announce to Scaleway.'
             prefix_filter_out: '- (Optional) List of IP prefixes (in CIDR notation) to advertise to the peer gateway. These are the routes that Scaleway will announce to the customer gateway.'
             project_id: '- (Defaults to provider project_id) The ID of the project the routing policy is associated with.'
-            region: '- (Defaults to provider region) The region in which the routing policy should be created.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the routing policy should be created.'
             tags: '- (Optional) The list of tags to apply to the routing policy.'
             updated_at: '- The date and time of the last update of the routing policy (RFC 3339 format).'
         importStatements: []
@@ -9818,7 +9906,7 @@ resources:
             name: |-
                 - (Required) The name of the database (e.g. my-new-database).
                 ~> Important: Updates to the name argument will recreate the database.
-            region: '- (Defaults to provider region) The region in which the resource exists.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the resource exists.'
         importStatements: []
     scaleway_secret:
         subCategory: Secrets
@@ -9858,7 +9946,7 @@ resources:
             project_id: '- (Optional) The project ID containing is the secret.'
             protected: '- (Optional) True if secret protection is enabled on the secret. A protected secret cannot be deleted, terraform will fail to destroy unless this is set to false.'
             region: |-
-                - (Defaults to provider region) The region
+                - (Optional, Computed, Defaults to provider region) The region
                 in which the resource exists.
             srn: '- The Scaleway Resource Name (SRN) of the secret.'
             status: '- The status of the secret.'
@@ -9899,7 +9987,7 @@ resources:
             data_wo_version: '- (Optional) The version of the write-only data. To update the data_wo, you must also update the data_wo_version.'
             description: '- (Optional) Description of the secret version (e.g. my-new-description).'
             my_new_secret: data
-            region: '- (Defaults to the region specified in the provider configuration). The region where the resource exists.'
+            region: '- (Optional, Computed, Defaults to the region specified in the provider configuration). The region where the resource exists.'
             revision: '- The revision number of the secret version.'
             secret_id: '- (Required) The ID of the secret associated with the version.'
             srn: '- The Scaleway Resource Name (SRN) of the secret version.'
@@ -9928,7 +10016,7 @@ resources:
             mailbox_not_found: — The recipient's mailbox does not exist.
             project_id: '- (Optional) The ID of the project this blocklist belongs to. Defaults to the provider''s project ID.'
             reason: '- (Optional, Default: manual_block) Reason for blocking the email address.'
-            region: '- (Optional) The region in which the blocklist is created. Defaults to the provider''s region.'
+            region: '- (Optional, Computed) The region in which the blocklist is created. Defaults to the provider''s region.'
             type: '- (Required) Type of the blocklist. Possible values are:'
         importStatements: []
     scaleway_tem_domain:
@@ -9951,7 +10039,7 @@ resources:
                     }
         argumentDocs:
             domain_id: '- (Required) The ID of the domain name used when sending emails. This ID must correspond to a domain already registered with Scaleway''s Transactional Email service.'
-            region: '- (Defaults to provider region). Specifies the region where the domain is registered. If not specified, it defaults to the provider''s region.'
+            region: '- (Optional, Computed, Defaults to provider region). Specifies the region where the domain is registered. If not specified, it defaults to the provider''s region.'
             timeout: '- (Optional) The maximum wait time in seconds before returning an error if the domain validation does not complete. The default is 300 seconds.'
             validated: '- Indicates if the domain has been verified for email sending. This is computed after the creation or update of the domain validation resource.'
         importStatements: []
@@ -10050,7 +10138,7 @@ resources:
             name: '- (Optional) The name of the webhook. Defaults to an autogenerated name if not provided.'
             organization_id: '- The ID of the organization the webhook belongs to.'
             project_id: '- (Defaults to provider project_id) The ID of the project the webhook is associated with.'
-            region: '- (Defaults to provider region). The region in which the webhook should be created.'
+            region: '- (Optional, Computed, Defaults to provider region). The region in which the webhook should be created.'
             sns_arn: '- (Required) The Amazon Resource Name (ARN) of the SNS topic.'
             updated_at: '- The date and time of the webhook''s last update (RFC 3339 format).'
         importStatements: []
@@ -10089,7 +10177,7 @@ resources:
             name: '- (Optional) The name for the VPC. If not provided it will be randomly generated.'
             organization_id: '- The Organization ID the VPC is associated with.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the VPC is associated with.'
-            region: '- (Defaults to provider region) The region of the VPC.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the VPC.'
             srn: '- The Scaleway Resource Name (SRN) of the VPC.'
             tags: '- (Optional) The tags to associate with the VPC.'
             updated_at: '- Date and time of VPC''s last update (RFC 3339 format).'
@@ -10136,7 +10224,7 @@ resources:
             id: '- The ID of the ACL.'
             is_ipv6: '- (Optional) Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type.'
             protocol: '- (Optional) The protocol to which this rule applies. Default value: ANY.'
-            region: '- (Defaults to provider region) The region of the ACL.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the ACL.'
             rules: '- (Optional) The list of Network ACL rules.'
             source: '- (Optional) The Source IP range to which this rule applies (CIDR notation with subnet mask).'
             src_port_high: '- (Optional) The ending port of the source port range to which this rule applies (inclusive).'
@@ -10218,7 +10306,7 @@ resources:
             name: '- (Optional) The name of the VPC connector. If not provided it will be randomly generated.'
             organization_id: '- The Organization ID the VPC connector is associated with.'
             project_id: '- The Scaleway Project the VPC connector belongs to.'
-            region: '- (Defaults to provider region) The region of the VPC connector.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the VPC connector.'
             srn: '- The Scaleway Resource Name (SRN) of the VPC connector.'
             status: '- The status of the VPC connector.'
             tags: '- (Optional) The tags to associate with the VPC connector.'
@@ -10330,7 +10418,7 @@ resources:
             static_address: '- (Deprecated) Please use ipam_config. Enable DHCP configuration on this GatewayNetwork. Only one of dhcp_id, static_address and ipam_config should be specified.'
             status: '- The status of the Public Gateway''s connection to the Private Network.'
             updated_at: '- The date and time of the last update of the GatewayNetwork.'
-            zone: '- (Defaults to provider zone) The zone in which the gateway network should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the gateway network should be created.'
         importStatements: []
     scaleway_vpc_ingress_rule:
         subCategory: VPC
@@ -10416,7 +10504,7 @@ resources:
             is_ipv6: '- Whether the ingress rule is for IPv6 traffic (derived from source).'
             nexthop_private_network_id: '- (Required) The ID of the private network used as nexthop for traffic matched by this rule.'
             nexthop_resource_ip: '- (Required) IP of the nexthop resource that should handle traffic matched by this rule.'
-            region: '- (Defaults to provider region) The region of the ingress rule.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the ingress rule.'
             source: '- (Required) Source IP range (in CIDR notation) to which the ingress rule applies.'
             srn: '- The Scaleway Resource Name (SRN) of the ingress rule.'
             tags: '- (Optional) The tags to associate with the ingress rule.'
@@ -10471,7 +10559,7 @@ resources:
             organization_id: '- The Organization ID the Private Network is associated with.'
             prefix_length: '- The length of the network prefix, e.g., 24 for a 255.255.255.0 mask.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the private network is associated with.'
-            region: '- (Defaults to provider region) The region of the Private Network.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the Private Network.'
             srn: '- The Scaleway Resource Name (SRN) of the Private Network.'
             subnet: '- (Optional) The subnet CIDR.'
             subnet_mask: '- The subnet mask expressed in dotted decimal notation, e.g., ''255.255.255.0'' for a /24 subnet'
@@ -10538,7 +10626,7 @@ resources:
             type: '- (Required) The gateway type.'
             updated_at: '- The date and time of the last update of the Public Gateway.'
             upstream_dns_servers: '- (Deprecated) Override the gateway''s default recursive DNS servers, if DNS features are enabled.'
-            zone: '- (Defaults to provider zone) The zone in which the Public Gateway should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Public Gateway should be created.'
         importStatements: []
     scaleway_vpc_public_gateway_dhcp:
         subCategory: VPC
@@ -10569,7 +10657,7 @@ resources:
             subnet: '- (Required) The subnet to associate with the Public Gateway DHCP configuration.'
             updated_at: '- The date and time of the last update of the Public Gateway DHCP configuration.'
             valid_lifetime: '- (Optional) How long, in seconds, DHCP entries will be valid. Defaults to 1h (3600s).'
-            zone: '- (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.'
         importStatements: []
     scaleway_vpc_public_gateway_dhcp_reservation:
         subCategory: VPC
@@ -10634,7 +10722,7 @@ resources:
             mac_address: '- (Required) The MAC address for the static entry.'
             type: '- The reservation type, either static (DHCP reservation) or dynamic (DHCP lease). Possible values are reservation and lease.'
             updated_at: '- The date and time of the last update of the Public Gateway DHCP configuration.'
-            zone: '- (Defaults to provider zone) The zone in which the public gateway DHCP config should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the public gateway DHCP config should be created.'
         importStatements: []
     scaleway_vpc_public_gateway_ip:
         subCategory: VPC
@@ -10665,7 +10753,7 @@ resources:
             reverse: '- (Optional) The reverse domain name for the IP address'
             tags: '- (Optional) The tags associated with the Public Gateway IP.'
             updated_at: '- The date and time of the last update of the Public Gateway IP.'
-            zone: '- (Defaults to provider zone) The zone in which the Public Gateway IP should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Public Gateway IP should be created.'
         importStatements: []
     scaleway_vpc_public_gateway_ip_reverse_dns:
         subCategory: VPC
@@ -10695,7 +10783,7 @@ resources:
             gateway_ip_id: '- (Required) The Public Gateway IP ID'
             id: '- The ID of the Public Gateway IP for which the reverse DNS is configured.'
             reverse: '- (Required) The reverse domain name for this IP address'
-            zone: '- (Defaults to provider zone) The zone in which the IP should be reserved.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the IP should be reserved.'
         importStatements: []
     scaleway_vpc_public_gateway_pat_rule:
         subCategory: VPC
@@ -10778,7 +10866,7 @@ resources:
             protocol: '- (Defaults to both) The protocol the rule should apply to. Possible values are both, tcp and udp.'
             public_port: '- (Required) The public port to listen on.'
             updated_at: '- The date and time of the last update of the PAT rule configuration.'
-            zone: '- (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.'
+            zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.'
         importStatements: []
     scaleway_vpc_route:
         subCategory: VPC
@@ -10914,7 +11002,7 @@ resources:
             nexthop_resource_id: '- (Optional) The ID of the nexthop resource.'
             nexthop_vpc_connector_id: '- (Optional) The ID of the nexthop VPC Connector.'
             project_id: '- (Defaults to provider project_id) The ID of the Project the route is associated with.'
-            region: '- (Defaults to provider region) The region of the route.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the route.'
             srn: '- The Scaleway Resource Name (SRN) of the route.'
             tags: '- (Optional) The tags to associate with the route.'
             updated_at: '- The date and time of the creation of the route (RFC 3339 format).'
@@ -10956,7 +11044,7 @@ resources:
             platform_hostname: '- The hostname of the host platform.'
             platform_number: '- The number of the host platform.'
             project_id: '- (Defaults to provider project_id) The ID of the project the VPC is associated with.'
-            region: '- (Defaults to provider region) The region of the Hosting.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the Hosting.'
             status: '- The hosting status.'
             tags: '- (Optional) The tags associated with the hosting.'
             updated_at: '- Date and time of hosting''s last update (RFC 3339 format).'

@@ -37,7 +37,7 @@ type RuleInitParameters struct {
 	// IP of the nexthop resource for the ingress rule
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
-	// (Defaults to provider region) The region of the ingress rule.
+	// The region of the ingress rule.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -88,7 +88,7 @@ type RuleObservation struct {
 	// IP of the nexthop resource for the ingress rule
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
-	// (Defaults to provider region) The region of the ingress rule.
+	// The region of the ingress rule.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -139,7 +139,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NexthopResourceIP *string `json:"nexthopResourceIp,omitempty" tf:"nexthop_resource_ip,omitempty"`
 
-	// (Defaults to provider region) The region of the ingress rule.
+	// The region of the ingress rule.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

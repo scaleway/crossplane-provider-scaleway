@@ -78,7 +78,7 @@ type GatewayNetworkInitParameters struct {
 	// The static IP address in CIDR on this network
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the gateway network should be created.
+	// The zone in which the gateway network should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -140,7 +140,7 @@ type GatewayNetworkObservation struct {
 	// The date and time of the last update of the gateway network
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the gateway network should be created.
+	// The zone in which the gateway network should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -219,7 +219,7 @@ type GatewayNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	StaticAddress *string `json:"staticAddress,omitempty" tf:"static_address,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the gateway network should be created.
+	// The zone in which the gateway network should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

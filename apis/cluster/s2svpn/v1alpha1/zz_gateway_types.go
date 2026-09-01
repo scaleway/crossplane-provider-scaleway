@@ -52,7 +52,7 @@ type GatewayInitParameters struct {
 	// The public endpoint configuration of the VPN gateway
 	PublicConfig []PublicConfigInitParameters `json:"publicConfig,omitempty" tf:"public_config,omitempty"`
 
-	// (Defaults to provider region) The region in which the VPN gateway should be created.
+	// The region in which the VPN gateway should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -60,7 +60,7 @@ type GatewayInitParameters struct {
 	// The list of tags to apply to the VPN gateway
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the VPN gateway should be created.
+	// The zone in which the VPN gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -110,7 +110,7 @@ type GatewayObservation struct {
 	// The public endpoint configuration of the VPN gateway
 	PublicConfig []PublicConfigObservation `json:"publicConfig,omitempty" tf:"public_config,omitempty"`
 
-	// (Defaults to provider region) The region in which the VPN gateway should be created.
+	// The region in which the VPN gateway should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -126,7 +126,7 @@ type GatewayObservation struct {
 	// The date and time of the last update of the VPN gateway
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the VPN gateway should be created.
+	// The zone in which the VPN gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -177,7 +177,7 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicConfig []PublicConfigParameters `json:"publicConfig,omitempty" tf:"public_config,omitempty"`
 
-	// (Defaults to provider region) The region in which the VPN gateway should be created.
+	// The region in which the VPN gateway should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -187,7 +187,7 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the VPN gateway should be created.
+	// The zone in which the VPN gateway should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

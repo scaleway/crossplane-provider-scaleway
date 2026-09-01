@@ -159,7 +159,7 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.NamespacedSelector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
+	// The region where the Cockpit token is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -184,7 +184,7 @@ type TokenObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
+	// The region where the Cockpit token is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -217,7 +217,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.NamespacedSelector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the Cockpit token is located.
+	// The region where the Cockpit token is located.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

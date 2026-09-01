@@ -88,7 +88,7 @@ type SecretInitParameters struct {
 	// True if secret protection is enabled on a given secret. A protected secret cannot be deleted.
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -134,7 +134,7 @@ type SecretObservation struct {
 	// True if secret protection is enabled on a given secret. A protected secret cannot be deleted.
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -199,7 +199,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
