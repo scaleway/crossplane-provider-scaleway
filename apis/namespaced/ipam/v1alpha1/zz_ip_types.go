@@ -68,7 +68,7 @@ type IPInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the IP.
+	// The region of the IP.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -111,7 +111,7 @@ type IPObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the IP.
+	// The region of the IP.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -126,6 +126,10 @@ type IPObservation struct {
 	// The source in which to book the IP.
 	// The source in which to book the IP
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the IP.
+	// The Scaleway Resource Name (SRN) of the IP
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The tags associated with the IP.
 	// The tags associated with the IP
@@ -163,7 +167,7 @@ type IPParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the IP.
+	// The region of the IP.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

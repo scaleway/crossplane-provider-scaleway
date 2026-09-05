@@ -40,7 +40,7 @@ type MaterialInitParameters struct {
 	// Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
 	KeyMaterialWoVersion *float64 `json:"keyMaterialWoVersion,omitempty" tf:"key_material_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+	// The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -82,7 +82,7 @@ type MaterialObservation struct {
 	// The origin of the key (should be 'external').
 	Origin *string `json:"origin,omitempty" tf:"origin,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+	// The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -126,7 +126,7 @@ type MaterialParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyMaterialWoVersion *float64 `json:"keyMaterialWoVersion,omitempty" tf:"key_material_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+	// The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

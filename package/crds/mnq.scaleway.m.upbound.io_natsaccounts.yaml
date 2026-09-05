@@ -71,7 +71,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which the account should be created.
                       The region you want to attach the resource to
                     type: string
@@ -102,7 +102,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which the account should be created.
                       The region you want to attach the resource to
                     type: string
@@ -191,7 +191,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which the account should be created.
                       The region you want to attach the resource to
                     type: string

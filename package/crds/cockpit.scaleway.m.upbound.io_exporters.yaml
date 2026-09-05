@@ -217,7 +217,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to the region specified in the provider configuration) The region where the exporter is located.
+                      The region where the exporter is located.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -395,7 +395,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to the region specified in the provider configuration) The region where the exporter is located.
+                      The region where the exporter is located.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -542,7 +542,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to the region specified in the provider configuration) The region where the exporter is located.
+                      The region where the exporter is located.
                       The region you want to attach the resource to
                     type: string
                   status:

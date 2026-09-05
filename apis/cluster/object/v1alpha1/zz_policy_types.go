@@ -26,7 +26,7 @@ type PolicyInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// (Computed) The Scaleway region this bucket resides in.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -47,7 +47,7 @@ type PolicyObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// (Computed) The Scaleway region this bucket resides in.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -68,7 +68,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The Scaleway region this bucket resides in.
+	// (Computed) The Scaleway region this bucket resides in.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

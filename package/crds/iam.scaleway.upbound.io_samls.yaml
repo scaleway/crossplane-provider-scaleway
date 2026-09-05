@@ -220,6 +220,11 @@ spec:
                       (Computed) The single sign-on URL of the SAML Identity Provider.
                       The single sign-on URL of the SAML Identity Provider
                     type: string
+                  srn:
+                    description: |-
+                      (Computed) The Scaleway Resource Name (SRN) of the SAML configuration.
+                      The Scaleway Resource Name (SRN) of the SAML configuration
+                    type: string
                   status:
                     description: |-
                       (Computed) The status of the SAML configuration.

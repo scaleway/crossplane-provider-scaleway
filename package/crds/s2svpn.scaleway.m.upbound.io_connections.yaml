@@ -346,7 +346,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the connection should be created.
+                      The region in which the connection should be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -743,7 +743,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the connection should be created.
+                      The region in which the connection should be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -1087,7 +1087,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the connection should be created.
+                      The region in which the connection should be created.
                       The region you want to attach the resource to
                     type: string
                   routePropagationEnabled:
@@ -1105,6 +1105,11 @@ spec:
                       The version of the secret containing the PSK.
                       The BGP peer IP on customer side
                     type: number
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the connection.
+                      The Scaleway Resource Name (SRN) of the connection
+                    type: string
                   status:
                     description: |-
                       The status of the connection.

@@ -94,7 +94,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the IP.
+                      The region of the IP.
                       The region you want to attach the resource to
                     type: string
                   source:
@@ -259,7 +259,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the IP.
+                      The region of the IP.
                       The region you want to attach the resource to
                     type: string
                   source:
@@ -492,7 +492,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the IP.
+                      The region of the IP.
                       The region you want to attach the resource to
                     type: string
                   resource:
@@ -555,6 +555,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the IP.
+                      The Scaleway Resource Name (SRN) of the IP
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the IP.

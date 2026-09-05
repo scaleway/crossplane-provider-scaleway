@@ -136,7 +136,7 @@ type ContainerBackendConfigInitParameters struct {
 	// ID of the Serverless Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -147,7 +147,7 @@ type ContainerBackendConfigObservation struct {
 	// ID of the Serverless Container
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -159,7 +159,7 @@ type ContainerBackendConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId" tf:"container_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -171,7 +171,7 @@ type FunctionBackendConfigInitParameters struct {
 	// ID of the Serverless Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -182,7 +182,7 @@ type FunctionBackendConfigObservation struct {
 	// ID of the Serverless Function
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -194,7 +194,7 @@ type FunctionBackendConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId" tf:"function_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Serverless Container.
+	// The region of the Serverless Container.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -262,7 +262,7 @@ type LBConfigInitParameters struct {
 	// Defines whether the Load Balancer's frontend handles SSL connections
 	IsSSL *bool `json:"isSsl,omitempty" tf:"is_ssl,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -289,7 +289,7 @@ type LBConfigObservation struct {
 	// Defines whether the Load Balancer's frontend handles SSL connections
 	IsSSL *bool `json:"isSsl,omitempty" tf:"is_ssl,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -339,7 +339,7 @@ type LBConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IsSSL *bool `json:"isSsl,omitempty" tf:"is_ssl,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

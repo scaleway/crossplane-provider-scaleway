@@ -69,7 +69,7 @@ type PublicGatewayInitParameters struct {
 	// gateway type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
+	// The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -126,6 +126,10 @@ type PublicGatewayObservation struct {
 	// Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
 	RefreshSSHKeys *string `json:"refreshSshKeys,omitempty" tf:"refresh_ssh_keys,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the public gateway.
+	// The Scaleway Resource Name (SRN) of the public gateway
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The status of the public gateway.
 	// The status of the public gateway
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -146,7 +150,7 @@ type PublicGatewayObservation struct {
 	// override the gateway's default recursive DNS servers, if DNS features are enabled
 	UpstreamDNSServers []*string `json:"upstreamDnsServers,omitempty" tf:"upstream_dns_servers,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
+	// The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -217,7 +221,7 @@ type PublicGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway should be created.
+	// The zone in which the Public Gateway should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
