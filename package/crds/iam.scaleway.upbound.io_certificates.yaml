@@ -403,6 +403,11 @@ spec:
                       The ID of the SAML configuration. If not provided, the organization's SAML configuration is used.
                       The ID of the SAML configuration
                     type: string
+                  srn:
+                    description: |-
+                      (String) The Scaleway Resource Name (SRN) of the SAML certificate.
+                      The Scaleway Resource Name (SRN) of the SAML certificate
+                    type: string
                   type:
                     description: |-
                       The type of the SAML certificate. Possible values are: signing, encryption.

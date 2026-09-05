@@ -42,7 +42,7 @@ type VolumeInitParameters struct {
 	// The volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -87,7 +87,7 @@ type VolumeObservation struct {
 	// The volume type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -128,7 +128,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the volume should be created.
+	// The zone in which the volume should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

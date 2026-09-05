@@ -36,7 +36,7 @@ type PolicyInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the routing policy should be created.
+	// The region in which the routing policy should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -78,9 +78,13 @@ type PolicyObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the routing policy should be created.
+	// The region in which the routing policy should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the routing policy.
+	// The Scaleway Resource Name (SRN) of the routing policy
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// The list of tags to apply to the routing policy.
 	// The list of tags to apply to the routing policy
@@ -118,7 +122,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the routing policy should be created.
+	// The region in which the routing policy should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

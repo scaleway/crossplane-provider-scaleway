@@ -68,7 +68,7 @@ type DeploymentInitParameters struct {
 	// The number of bits each model parameter should be quantized to
 	Quantization *float64 `json:"quantization,omitempty" tf:"quantization,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment is created.
+	// The region in which the deployment is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -133,7 +133,7 @@ type DeploymentObservation struct {
 	// The number of bits each model parameter should be quantized to
 	Quantization *float64 `json:"quantization,omitempty" tf:"quantization,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment is created.
+	// The region in which the deployment is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -219,7 +219,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	Quantization *float64 `json:"quantization,omitempty" tf:"quantization,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment is created.
+	// The region in which the deployment is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

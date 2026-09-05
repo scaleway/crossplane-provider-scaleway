@@ -125,7 +125,7 @@ type ServerInitParameters struct {
 	// Type of the server
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -213,7 +213,7 @@ type ServerObservation struct {
 	// VNC url use to connect remotely to the desktop GUI
 	VncURL *string `json:"vncUrl,omitempty" tf:"vnc_url,omitempty"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -273,7 +273,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional

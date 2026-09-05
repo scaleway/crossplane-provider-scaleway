@@ -114,7 +114,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the link should be created.
+                      The region in which the link should be created.
                       The region you want to attach the resource to
                     type: string
                   routingPolicyV4Id:
@@ -200,7 +200,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the link should be created.
+                      The region in which the link should be created.
                       The region you want to attach the resource to
                     type: string
                   routingPolicyV4Id:
@@ -410,7 +410,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the link should be created.
+                      The region in which the link should be created.
                       The region you want to attach the resource to
                     type: string
                   routingPolicyV4Id:
@@ -437,6 +437,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the link.
+                      The Scaleway Resource Name (SRN) of the link
+                    type: string
                   status:
                     description: |-
                       Status of the link.

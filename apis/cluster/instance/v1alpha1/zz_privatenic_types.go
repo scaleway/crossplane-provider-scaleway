@@ -65,6 +65,10 @@ type PrivateNICInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
+	// The ID of the private NIC.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The ID of the server associated with.
 	// The server ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/instance/v1alpha1.Server
@@ -82,7 +86,7 @@ type PrivateNICInitParameters struct {
 	// The tags associated with the private-nic
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server must be created.
+	// The zone in which the server must be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -111,6 +115,10 @@ type PrivateNICObservation struct {
 	// The private network ID
 	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
+	// The ID of the private NIC.
+	// The project_id you want to attach the resource to
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The ID of the server associated with.
 	// The server ID
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -119,7 +127,7 @@ type PrivateNICObservation struct {
 	// The tags associated with the private-nic
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server must be created.
+	// The zone in which the server must be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -163,6 +171,11 @@ type PrivateNICParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworkIDSelector *v1.Selector `json:"privateNetworkIdSelector,omitempty" tf:"-"`
 
+	// The ID of the private NIC.
+	// The project_id you want to attach the resource to
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
 	// The ID of the server associated with.
 	// The server ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/instance/v1alpha1.Server
@@ -182,7 +195,7 @@ type PrivateNICParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server must be created.
+	// The zone in which the server must be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

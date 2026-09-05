@@ -73,7 +73,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The Scaleway region this bucket resides in.
+                      (Computed) The Scaleway region this bucket resides in.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -105,7 +105,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The Scaleway region this bucket resides in.
+                      (Computed) The Scaleway region this bucket resides in.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -200,7 +200,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      The Scaleway region this bucket resides in.
+                      (Computed) The Scaleway region this bucket resides in.
                       The region you want to attach the resource to
                     type: string
                 type: object

@@ -111,7 +111,7 @@ type ReadReplicaInitParameters struct {
 	// Private network endpoints
 	PrivateNetwork []ReadReplicaPrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -138,7 +138,7 @@ type ReadReplicaObservation struct {
 	// Private network endpoints
 	PrivateNetwork []ReadReplicaPrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -174,7 +174,7 @@ type ReadReplicaParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []ReadReplicaPrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the Read Replica should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

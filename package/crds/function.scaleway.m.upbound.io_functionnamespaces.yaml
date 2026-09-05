@@ -83,7 +83,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
+                      . The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -143,7 +143,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
+                      . The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   secretEnvironmentVariablesSecretRef:
@@ -254,7 +254,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which the namespace is created.
+                      . The region in which the namespace is created.
                       The region you want to attach the resource to
                     type: string
                   registryEndpoint:

@@ -33,7 +33,7 @@ type DatabaseInitParameters struct {
 	// Database name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -59,7 +59,7 @@ type DatabaseObservation struct {
 	// User that own the database
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -89,7 +89,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

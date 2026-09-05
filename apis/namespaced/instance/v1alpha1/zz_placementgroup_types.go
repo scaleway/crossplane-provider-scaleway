@@ -36,7 +36,7 @@ type PlacementGroupInitParameters struct {
 	// The tags associated with the placement group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the placement group should be created.
+	// The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -49,10 +49,6 @@ type PlacementGroupObservation struct {
 	// The name of the placement group.
 	// The name of the placement group
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The organization ID the placement group is associated with.
-	// The organization_id you want to attach the resource to
-	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// (Defaults to optional) The policy mode of the placement group. Possible values are: optional or enforced.
 	// One of the two policy_mode may be selected: enforced or optional.
@@ -74,7 +70,7 @@ type PlacementGroupObservation struct {
 	// The tags associated with the placement group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the placement group should be created.
+	// The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -106,7 +102,7 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the placement group should be created.
+	// The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

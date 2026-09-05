@@ -170,6 +170,11 @@ func (in *ApiKeyObservation) DeepCopyInto(out *ApiKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.UpdatedAt != nil {
 		in, out := &in.UpdatedAt, &out.UpdatedAt
 		*out = new(string)
@@ -407,6 +412,11 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -648,6 +658,11 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 	}
 	if in.SAMLID != nil {
 		in, out := &in.SAMLID, &out.SAMLID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -928,6 +943,11 @@ func (in *GroupObservation) DeepCopyInto(out *GroupObservation) {
 	}
 	if in.OrganizationID != nil {
 		in, out := &in.OrganizationID, &out.OrganizationID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -1286,6 +1306,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1721,6 +1746,11 @@ func (in *SSHKeyObservation) DeepCopyInto(out *SSHKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.UpdatedAt != nil {
 		in, out := &in.UpdatedAt, &out.UpdatedAt
 		*out = new(string)
@@ -1912,6 +1942,11 @@ func (in *SamlObservation) DeepCopyInto(out *SamlObservation) {
 	}
 	if in.SingleSignOnURL != nil {
 		in, out := &in.SingleSignOnURL, &out.SingleSignOnURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -2641,6 +2676,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 	if in.SendWelcomeEmail != nil {
 		in, out := &in.SendWelcomeEmail, &out.SendWelcomeEmail
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
 		**out = **in
 	}
 	if in.Status != nil {

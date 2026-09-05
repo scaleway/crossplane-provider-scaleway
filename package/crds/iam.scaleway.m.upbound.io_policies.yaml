@@ -687,6 +687,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the policy.
+                      The Scaleway Resource Name (SRN) of the policy
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the IAM policy.

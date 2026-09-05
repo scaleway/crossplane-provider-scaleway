@@ -104,7 +104,7 @@ type PoolInitParameters struct {
 	// Defines if the public IP should be removed from the nodes.
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
 
-	// (Defaults to provider region) The region in which the pool should be created.
+	// The region in which the pool should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -149,7 +149,7 @@ type PoolInitParameters struct {
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the pool should be created.
+	// The zone in which the pool should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -220,7 +220,7 @@ type PoolObservation struct {
 	// Defines if the public IP should be removed from the nodes.
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
 
-	// (Defaults to provider region) The region in which the pool should be created.
+	// The region in which the pool should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -277,7 +277,7 @@ type PoolObservation struct {
 	// Whether to wait for the pool to be ready
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the pool should be created.
+	// The zone in which the pool should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -355,7 +355,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
 
-	// (Defaults to provider region) The region in which the pool should be created.
+	// The region in which the pool should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -411,7 +411,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	WaitForPoolReady *bool `json:"waitForPoolReady,omitempty" tf:"wait_for_pool_ready,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the pool should be created.
+	// The zone in which the pool should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
