@@ -36,7 +36,7 @@ type CronInitParameters struct {
 	// Cron job name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -63,7 +63,7 @@ type CronObservation struct {
 	// Cron job name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -103,7 +103,7 @@ type CronParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the CRON trigger is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

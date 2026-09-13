@@ -47,7 +47,7 @@ type LinkInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the link should be created.
+	// The region in which the link should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -129,7 +129,7 @@ type LinkObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the link should be created.
+	// The region in which the link should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -144,6 +144,10 @@ type LinkObservation struct {
 	// BGP configuration on Scaleway's side. Contains asn, ipv4, ipv6.
 	// BGP configuration on Scaleway's side
 	ScwBGPConfig []ScwBGPConfigObservation `json:"scwBgpConfig,omitempty" tf:"scw_bgp_config,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the link.
+	// The Scaleway Resource Name (SRN) of the link
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// Status of the link.
 	// Status of the link
@@ -208,7 +212,7 @@ type LinkParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the link should be created.
+	// The region in which the link should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

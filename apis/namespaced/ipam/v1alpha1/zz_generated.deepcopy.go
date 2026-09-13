@@ -273,6 +273,11 @@ func (in *IPObservation) DeepCopyInto(out *IPObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))

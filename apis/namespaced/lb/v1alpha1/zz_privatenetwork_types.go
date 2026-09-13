@@ -59,7 +59,7 @@ type PrivateNetworkInitParameters_2 struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Private Network should be attached.
+	// The zone in which the Private Network should be attached.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -97,7 +97,7 @@ type PrivateNetworkObservation_2 struct {
 	// The date and time of the last update of the private network connection
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Private Network should be attached.
+	// The zone in which the Private Network should be attached.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -151,7 +151,7 @@ type PrivateNetworkParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Private Network should be attached.
+	// The zone in which the Private Network should be attached.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

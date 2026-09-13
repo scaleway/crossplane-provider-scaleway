@@ -84,7 +84,7 @@ type SNSCredentialsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which SNS is enabled.
+	// . The region in which SNS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -106,7 +106,7 @@ type SNSCredentialsObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region). The region in which SNS is enabled.
+	// . The region in which SNS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -137,7 +137,7 @@ type SNSCredentialsParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which SNS is enabled.
+	// . The region in which SNS is enabled.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

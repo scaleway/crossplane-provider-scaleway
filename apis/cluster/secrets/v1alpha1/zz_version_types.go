@@ -31,7 +31,7 @@ type VersionInitParameters struct {
 	// Description of the secret version
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration). The region where the resource exists.
+	// . The region where the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -65,7 +65,7 @@ type VersionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration). The region where the resource exists.
+	// . The region where the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -112,7 +112,7 @@ type VersionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration). The region where the resource exists.
+	// . The region where the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

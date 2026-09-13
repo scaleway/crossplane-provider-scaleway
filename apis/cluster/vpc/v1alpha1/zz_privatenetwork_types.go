@@ -139,7 +139,7 @@ type PrivateNetworkInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Private Network.
+	// The region of the Private Network.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -202,7 +202,7 @@ type PrivateNetworkObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Private Network.
+	// The region of the Private Network.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -259,7 +259,7 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the Private Network.
+	// The region of the Private Network.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

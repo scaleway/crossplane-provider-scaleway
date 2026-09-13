@@ -182,7 +182,7 @@ spec:
                     type: number
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                      The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                       Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                     type: string
                   saltSecretRef:
@@ -338,7 +338,7 @@ spec:
                     type: number
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                      The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                       Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                     type: string
                   saltSecretRef:
@@ -492,7 +492,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
+                      The region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                       Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
                     type: string
                   saltWo:

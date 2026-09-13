@@ -173,7 +173,7 @@ spec:
                   tags:
                     description: |-
                       The tags associated with the group.
-                      The tags associated with the application
+                      The tags associated with the group
                     items:
                       type: string
                     type: array
@@ -314,7 +314,7 @@ spec:
                   tags:
                     description: |-
                       The tags associated with the group.
-                      The tags associated with the application
+                      The tags associated with the group
                     items:
                       type: string
                     type: array
@@ -399,7 +399,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   createdAt:
-                    description: The date and time of the creation of the group
+                    description: |-
+                      The date and time of the creation of the group.
+                      The date and time of the creation of the group
                     type: string
                   description:
                     description: |-
@@ -412,6 +414,7 @@ spec:
                       Handle user and application memberships externally
                     type: boolean
                   id:
+                    description: The ID of the group.
                     type: string
                   name:
                     description: |-
@@ -423,15 +426,22 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the group is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the group.
+                      The Scaleway Resource Name (SRN) of the group
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the group.
-                      The tags associated with the application
+                      The tags associated with the group
                     items:
                       type: string
                     type: array
                   updatedAt:
-                    description: The date and time of the last update of the group
+                    description: |-
+                      The date and time of the last update of the group.
+                      The date and time of the last update of the group
                     type: string
                   userIds:
                     description: |-

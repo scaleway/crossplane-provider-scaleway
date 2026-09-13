@@ -36,7 +36,7 @@ type SnapshotInitParameters struct {
 	// Name of the snapshot
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® snapshot should be created.
+	// The region in which the MongoDB® snapshot should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -70,7 +70,7 @@ type SnapshotObservation struct {
 	// Type of node associated with the snapshot
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® snapshot should be created.
+	// The region in which the MongoDB® snapshot should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -113,7 +113,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® snapshot should be created.
+	// The region in which the MongoDB® snapshot should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
