@@ -111,6 +111,10 @@ type PolicyObservation struct {
 	// Rules of the policy to create
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the policy.
+	// The Scaleway Resource Name (SRN) of the policy
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The tags associated with the IAM policy.
 	// The tags associated with the policy
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

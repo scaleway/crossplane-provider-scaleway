@@ -157,7 +157,7 @@ type PolicyInitParameters struct {
 	// Value representing the magnitude of the scaling action to take for the Instance group. Depending on the `type` parameter, this number could represent a total number of Instances in the group, a number of Instances to add, or a percentage to scale the group by
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance policy exists.
+	// The zone in which the Instance policy exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -199,7 +199,7 @@ type PolicyObservation struct {
 	// Value representing the magnitude of the scaling action to take for the Instance group. Depending on the `type` parameter, this number could represent a total number of Instances in the group, a number of Instances to add, or a percentage to scale the group by
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance policy exists.
+	// The zone in which the Instance policy exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -255,7 +255,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance policy exists.
+	// The zone in which the Instance policy exists.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

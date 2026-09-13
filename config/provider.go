@@ -5,8 +5,10 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/scaleway/crossplane-provider-scaleway/config/annotations"
 	"github.com/scaleway/crossplane-provider-scaleway/config/billing"
 	"github.com/scaleway/crossplane-provider-scaleway/config/datalab"
+	"github.com/scaleway/crossplane-provider-scaleway/config/instances"
 	"github.com/scaleway/crossplane-provider-scaleway/config/interlink"
 	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
 	"github.com/scaleway/crossplane-provider-scaleway/config/opensearch"
@@ -102,6 +104,8 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		interlink.Configure,
 		billing.Configure,
 		datalab.Configure,
+		annotations.Configure,
+		instances.Configure,
 	}
 }
 

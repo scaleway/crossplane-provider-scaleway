@@ -48,7 +48,7 @@ type DatalabInitParameters struct {
 	// The project ID the Datalab belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+	// The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -107,7 +107,7 @@ type DatalabObservation struct {
 	// The project ID the Datalab belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+	// The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -174,7 +174,7 @@ type DatalabParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+	// The region the Datalab is in. Only fr-par is currently supported.
 	// The region the Datalab is in. Only `fr-par` is currently supported.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

@@ -32,7 +32,7 @@ type SourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
+	// The region where the data source is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -70,7 +70,7 @@ type SourceObservation struct {
 	// The URL endpoint used for pushing data to the cockpit data source.
 	PushURL *string `json:"pushUrl,omitempty" tf:"push_url,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
+	// The region where the data source is located.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -116,7 +116,7 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the data source is located.
+	// The region where the data source is located.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

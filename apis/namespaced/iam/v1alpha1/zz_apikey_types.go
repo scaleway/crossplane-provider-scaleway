@@ -86,6 +86,10 @@ type ApiKeyObservation struct {
 	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the API key.
+	// The Scaleway Resource Name (SRN) of the API key
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The date and time of the last update of the IAM API key.
 	// The date and time of the last update of the iam api key
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`

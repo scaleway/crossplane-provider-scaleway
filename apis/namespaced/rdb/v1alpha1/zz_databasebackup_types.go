@@ -41,7 +41,7 @@ type DatabaseBackupInitParameters struct {
 	// Name of the backup.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -82,11 +82,11 @@ type DatabaseBackupObservation struct {
 	// Name of the backup.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// Whether the backup is stored in the same region as the source instance.
 	SameRegion *bool `json:"sameRegion,omitempty" tf:"same_region,omitempty"`
 
@@ -133,7 +133,7 @@ type DatabaseBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

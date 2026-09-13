@@ -175,6 +175,11 @@ func (in *IpObservation) DeepCopyInto(out *IpObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)

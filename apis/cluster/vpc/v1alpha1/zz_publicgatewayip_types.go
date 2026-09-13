@@ -27,7 +27,7 @@ type PublicGatewayIPInitParameters struct {
 	// The tags associated with public gateway IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
+	// The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -57,6 +57,10 @@ type PublicGatewayIPObservation struct {
 	// reverse domain name for the IP address
 	Reverse *string `json:"reverse,omitempty" tf:"reverse,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the IP.
+	// The Scaleway Resource Name (SRN) of the IP
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The tags associated with the Public Gateway IP.
 	// The tags associated with public gateway IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -65,7 +69,7 @@ type PublicGatewayIPObservation struct {
 	// The date and time of the last update of the public gateway IP
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
+	// The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -87,7 +91,7 @@ type PublicGatewayIPParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway IP should be created.
+	// The zone in which the Public Gateway IP should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

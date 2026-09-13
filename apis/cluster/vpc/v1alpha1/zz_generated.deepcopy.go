@@ -783,6 +783,11 @@ func (in *GatewayNetworkObservation) DeepCopyInto(out *GatewayNetworkObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.StaticAddress != nil {
 		in, out := &in.StaticAddress, &out.StaticAddress
 		*out = new(string)
@@ -2211,6 +2216,11 @@ func (in *PublicGatewayIPObservation) DeepCopyInto(out *PublicGatewayIPObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -2523,6 +2533,11 @@ func (in *PublicGatewayObservation) DeepCopyInto(out *PublicGatewayObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -2732,6 +2747,11 @@ func (in *PublicGatewayPATRuleObservation) DeepCopyInto(out *PublicGatewayPATRul
 	if in.PublicPort != nil {
 		in, out := &in.PublicPort, &out.PublicPort
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
 		**out = **in
 	}
 	if in.UpdatedAt != nil {

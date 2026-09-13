@@ -202,7 +202,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the cluster should be created.
+                      The region in which the cluster should be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -376,7 +376,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the cluster should be created.
+                      The region in which the cluster should be created.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -602,7 +602,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the cluster should be created.
+                      The region in which the cluster should be created.
                       The region you want to attach the resource to
                     type: string
                   status:
