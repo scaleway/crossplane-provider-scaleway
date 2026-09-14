@@ -626,6 +626,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -988,6 +993,11 @@ func (in *CustomerGatewayObservation) DeepCopyInto(out *CustomerGatewayObservati
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -1414,6 +1424,11 @@ func (in *GatewayObservation) DeepCopyInto(out *GatewayObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -1847,6 +1862,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}

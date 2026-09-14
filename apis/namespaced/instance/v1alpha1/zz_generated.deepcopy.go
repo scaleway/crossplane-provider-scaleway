@@ -1244,11 +1244,6 @@ func (in *PlacementGroupObservation) DeepCopyInto(out *PlacementGroupObservation
 		*out = new(string)
 		**out = **in
 	}
-	if in.OrganizationID != nil {
-		in, out := &in.OrganizationID, &out.OrganizationID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyMode != nil {
 		in, out := &in.PolicyMode, &out.PolicyMode
 		*out = new(string)
@@ -1522,6 +1517,11 @@ func (in *PrivateNICInitParameters) DeepCopyInto(out *PrivateNICInitParameters) 
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)
@@ -1644,6 +1644,11 @@ func (in *PrivateNICObservation) DeepCopyInto(out *PrivateNICObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)
@@ -1733,6 +1738,11 @@ func (in *PrivateNICParameters) DeepCopyInto(out *PrivateNICParameters) {
 		in, out := &in.PrivateNetworkIDSelector, &out.PrivateNetworkIDSelector
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ProjectID != nil {
+		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
 	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID

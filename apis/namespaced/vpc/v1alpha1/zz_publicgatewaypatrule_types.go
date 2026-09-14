@@ -45,7 +45,7 @@ type PublicGatewayPATRuleInitParameters struct {
 	// The public port used in the PAT rule
 	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -83,11 +83,15 @@ type PublicGatewayPATRuleObservation struct {
 	// The public port used in the PAT rule
 	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the PAT rule.
+	// The Scaleway Resource Name (SRN) of the PAT rule
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The date and time of the last update of the PAT rule configuration.
 	// The date and time of the last update of the PAT rule
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -128,7 +132,7 @@ type PublicGatewayPATRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

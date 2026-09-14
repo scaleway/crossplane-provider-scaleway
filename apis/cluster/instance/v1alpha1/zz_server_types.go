@@ -45,7 +45,7 @@ type PrivateNetworkInitParameters struct {
 	// The Private Network ID
 	PnID *string `json:"pnId,omitempty" tf:"pn_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -68,7 +68,7 @@ type PrivateNetworkObservation struct {
 	// The private NIC state
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -80,7 +80,7 @@ type PrivateNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	PnID *string `json:"pnId" tf:"pn_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -258,7 +258,7 @@ type ServerInitParameters struct {
 	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -382,7 +382,7 @@ type ServerObservation struct {
 	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -546,7 +546,7 @@ type ServerParameters struct {
 	// +mapType=granular
 	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
