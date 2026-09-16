@@ -67,6 +67,10 @@ type CertificateObservation struct {
 	// The ID of the SAML configuration
 	SAMLID *string `json:"samlId,omitempty" tf:"saml_id,omitempty"`
 
+	// (String) The Scaleway Resource Name (SRN) of the SAML certificate.
+	// The Scaleway Resource Name (SRN) of the SAML certificate
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The type of the SAML certificate. Possible values are: signing, encryption.
 	// The type of the SAML certificate
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
