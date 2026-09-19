@@ -32,7 +32,7 @@ type NATSCredentialsInitParameters struct {
 	// The nats credentials name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which the account exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -51,7 +51,7 @@ type NATSCredentialsObservation struct {
 	// The nats credentials name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which the account exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -78,7 +78,7 @@ type NATSCredentialsParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which the account exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

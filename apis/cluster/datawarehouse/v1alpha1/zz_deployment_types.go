@@ -47,11 +47,15 @@ type DeploymentInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
+	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
 	// RAM per CPU in GB.
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -113,15 +117,15 @@ type DeploymentObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public endpoint information (always created automatically).
-	// Public endpoint configuration. A public endpoint is created by default.
+	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// RAM per CPU in GB.
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -132,6 +136,10 @@ type DeploymentObservation struct {
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the deployment.
+	// The Scaleway Resource Name (SRN) of the deployment
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
 	// Whether the deployment should be running. When set to false, the provider calls the Stop deployment API after create or update; when set to true, it calls Start deployment if the deployment is stopped. Scaling fields (replica_count, cpu_min, cpu_max) require the deployment to be running; if it is stopped, the provider starts it to apply the change, then stops it again when started is false.
 	// Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
@@ -196,12 +204,17 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint configuration. A public endpoint is created only when this block is defined.
+	// +kubebuilder:validation:Optional
+	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
 	// RAM per CPU in GB.
 	// RAM per CPU (GB)
 	// +kubebuilder:validation:Optional
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// (Defaults to provider region) The region in which the deployment should be created.
+	// The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -267,21 +280,33 @@ type PrivateNetworkParameters struct {
 }
 
 type PublicNetworkInitParameters struct {
+
+	// The ID of the deployment.
+	// ID of the public endpoint
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PublicNetworkObservation struct {
 
 	// DNS record for the public endpoint.
+	// DNS record for the public endpoint
 	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
 	// The ID of the deployment.
+	// ID of the public endpoint
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of services exposed on the public endpoint.
+	// List of services exposed on the public endpoint
 	Services []PublicNetworkServicesObservation `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type PublicNetworkParameters struct {
+
+	// The ID of the deployment.
+	// ID of the public endpoint
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PublicNetworkServicesInitParameters struct {

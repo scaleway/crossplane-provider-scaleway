@@ -250,6 +250,11 @@ spec:
                       (Defaults to provider organization_id) The ID of the organization the application is associated with.
                       ID of organization the resource is associated to.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the application.
+                      The Scaleway Resource Name (SRN) of the application
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the application.
