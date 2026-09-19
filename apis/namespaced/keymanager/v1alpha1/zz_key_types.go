@@ -36,7 +36,7 @@ type KeyInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// par).
+	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -94,7 +94,7 @@ type KeyObservation struct {
 	// Returns true if key protection is applied to the key.
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
 
-	// par).
+	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -162,7 +162,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// par).
+	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -190,34 +190,34 @@ type KeyParameters struct {
 
 type RotationPolicyInitParameters struct {
 
-	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 
-	// (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+	// (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
 	// Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
 	RotationPeriod *string `json:"rotationPeriod,omitempty" tf:"rotation_period,omitempty"`
 }
 
 type RotationPolicyObservation struct {
 
-	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 
-	// (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+	// (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
 	// Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
 	RotationPeriod *string `json:"rotationPeriod,omitempty" tf:"rotation_period,omitempty"`
 }
 
 type RotationPolicyParameters struct {
 
-	// – The date and time of the next scheduled rotation.
-	// Timestamp indicating the next scheduled rotation.
+	// (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
+	// Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
 	// +kubebuilder:validation:Optional
 	NextRotationAt *string `json:"nextRotationAt,omitempty" tf:"next_rotation_at,omitempty"`
 
-	// (String, Optional) – The period between key rotations (e.g., "720h" for 30 days).
+	// (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
 	// Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
 	// +kubebuilder:validation:Optional
 	RotationPeriod *string `json:"rotationPeriod" tf:"rotation_period,omitempty"`

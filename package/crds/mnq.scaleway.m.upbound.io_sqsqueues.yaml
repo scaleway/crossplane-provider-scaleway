@@ -212,7 +212,7 @@ spec:
                     type: number
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which SQS is enabled.
+                      . The region in which SQS is enabled.
                       The region you want to attach the resource to
                     type: string
                   secretKeySecretRef:
@@ -487,7 +487,7 @@ spec:
                     type: number
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which SQS is enabled.
+                      . The region in which SQS is enabled.
                       The region you want to attach the resource to
                     type: string
                   secretKeySecretRef:
@@ -734,7 +734,7 @@ spec:
                     type: number
                   region:
                     description: |-
-                      (Defaults to provider region). The region in which SQS is enabled.
+                      . The region in which SQS is enabled.
                       The region you want to attach the resource to
                     type: string
                   sqsEndpoint:

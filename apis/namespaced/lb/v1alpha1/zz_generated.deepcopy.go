@@ -320,6 +320,11 @@ func (in *BackendInitParameters) DeepCopyInto(out *BackendInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Host != nil {
+		in, out := &in.Host, &out.Host
+		*out = new(string)
+		**out = **in
+	}
 	if in.IgnoreSSLServerVerify != nil {
 		in, out := &in.IgnoreSSLServerVerify, &out.IgnoreSSLServerVerify
 		*out = new(bool)
@@ -537,6 +542,11 @@ func (in *BackendObservation) DeepCopyInto(out *BackendObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Host != nil {
+		in, out := &in.Host, &out.Host
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -714,6 +724,11 @@ func (in *BackendParameters) DeepCopyInto(out *BackendParameters) {
 	}
 	if in.HealthCheckTransientDelay != nil {
 		in, out := &in.HealthCheckTransientDelay, &out.HealthCheckTransientDelay
+		*out = new(string)
+		**out = **in
+	}
+	if in.Host != nil {
+		in, out := &in.Host, &out.Host
 		*out = new(string)
 		**out = **in
 	}

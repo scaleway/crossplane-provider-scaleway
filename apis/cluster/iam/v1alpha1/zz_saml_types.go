@@ -41,6 +41,10 @@ type SamlObservation struct {
 	// The single sign-on URL of the SAML Identity Provider
 	SingleSignOnURL *string `json:"singleSignOnUrl,omitempty" tf:"single_sign_on_url,omitempty"`
 
+	// (Computed) The Scaleway Resource Name (SRN) of the SAML configuration.
+	// The Scaleway Resource Name (SRN) of the SAML configuration
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// (Computed) The status of the SAML configuration.
 	// The status of the SAML configuration
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
