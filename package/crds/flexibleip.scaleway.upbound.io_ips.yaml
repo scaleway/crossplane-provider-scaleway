@@ -295,6 +295,11 @@ spec:
                       The ID of the associated server.
                       The baremetal server associated with this flexible IP
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the flexible IP.
+                      The Scaleway Resource Name (SRN) of the flexible IP
+                    type: string
                   status:
                     description: |-
                       The status of the flexible IP.

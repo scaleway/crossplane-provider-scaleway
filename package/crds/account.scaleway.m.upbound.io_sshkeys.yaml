@@ -210,6 +210,9 @@ spec:
                       The public SSH key to be added.
                       The public SSH key
                     type: string
+                  srn:
+                    description: The Scaleway Resource Name (SRN) of the SSH key
+                    type: string
                   updatedAt:
                     description: The date and time of the last update of the iam SSH
                       Key

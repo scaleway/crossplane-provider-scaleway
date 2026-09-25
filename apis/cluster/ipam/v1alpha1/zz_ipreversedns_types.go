@@ -36,7 +36,7 @@ type IPReverseDNSInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamIPIDSelector *v1.Selector `json:"ipamIpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region of the IP reverse DNS.
+	// The region of the IP reverse DNS.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -58,7 +58,7 @@ type IPReverseDNSObservation struct {
 	// The IPAM IP ID
 	IpamIPID *string `json:"ipamIpId,omitempty" tf:"ipam_ip_id,omitempty"`
 
-	// (Defaults to provider region) The region of the IP reverse DNS.
+	// The region of the IP reverse DNS.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -89,7 +89,7 @@ type IPReverseDNSParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamIPIDSelector *v1.Selector `json:"ipamIpIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region of the IP reverse DNS.
+	// The region of the IP reverse DNS.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

@@ -84,7 +84,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the deployment is created.
+                      The region in which the deployment is created.
                       The region you want to attach the resource to
                     type: string
                   secretSecretRef:
@@ -147,7 +147,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the deployment is created.
+                      The region in which the deployment is created.
                       The region you want to attach the resource to
                     type: string
                   secretSecretRef:
@@ -346,7 +346,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the deployment is created.
+                      The region in which the deployment is created.
                       The region you want to attach the resource to
                     type: string
                   secretWo:
