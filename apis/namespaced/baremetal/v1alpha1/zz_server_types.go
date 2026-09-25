@@ -303,7 +303,7 @@ type ServerInitParameters struct {
 	// User used for the installation.
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -441,7 +441,7 @@ type ServerObservation struct {
 	// User used for the installation.
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -585,7 +585,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

@@ -380,6 +380,11 @@ spec:
                       Whether or not to send a welcome email that includes onboarding information.
                       Whether or not to send a welcome email that includes onboarding information
                     type: boolean
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the user.
+                      The Scaleway Resource Name (SRN) of the user
+                    type: string
                   status:
                     description: |-
                       The status of user invitation. Check the possible values in the API doc.

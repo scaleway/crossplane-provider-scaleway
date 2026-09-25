@@ -59,7 +59,7 @@ type InstanceInitParameters struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -88,7 +88,7 @@ type InstanceInitParameters struct {
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// MongoDB® version of the instance.
-	// MongoDB version of the instance
+	// MongoDB version of the instance (e.g. '7.0')
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Volume size in GB.
@@ -148,7 +148,7 @@ type InstanceObservation struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -185,7 +185,7 @@ type InstanceObservation struct {
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// MongoDB® version of the instance.
-	// MongoDB version of the instance
+	// MongoDB version of the instance (e.g. '7.0')
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Volume size in GB.
@@ -253,7 +253,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -289,7 +289,7 @@ type InstanceParameters struct {
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// MongoDB® version of the instance.
-	// MongoDB version of the instance
+	// MongoDB version of the instance (e.g. '7.0')
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

@@ -11,6 +11,9 @@ import (
 
 	project "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/account/project"
 	sshkey "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/account/sshkey"
+	binding "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/annotations/binding"
+	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/annotations/key"
+	value "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/annotations/value"
 	runner "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/runner"
 	server "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/server"
 	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/group"
@@ -76,6 +79,7 @@ import (
 	securitygrouprule "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/securitygrouprule"
 	serverinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/server"
 	snapshotinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/snapshot"
+	templateinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/template"
 	userdata "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/userdata"
 	volumeinstance "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/instance/volume"
 	link "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/interlink/link"
@@ -91,7 +95,7 @@ import (
 	cluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/k8s/cluster"
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/k8s/pool"
 	clusterkafka "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/kafka/cluster"
-	key "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/keymanager/key"
+	keykeymanager "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/keymanager/key"
 	material "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/keymanager/material"
 	backend "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/backend"
 	certificatelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/certificate"
@@ -160,8 +164,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		project.Setup,
 		sshkey.Setup,
+		binding.Setup,
+		key.Setup,
+		value.Setup,
 		runner.Setup,
 		server.Setup,
+		group.Setup,
 		group.Setup,
 		policy.Setup,
 		template.Setup,
@@ -225,6 +233,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygrouprule.Setup,
 		serverinstance.Setup,
 		snapshotinstance.Setup,
+		templateinstance.Setup,
 		userdata.Setup,
 		volumeinstance.Setup,
 		link.Setup,
@@ -240,7 +249,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cluster.Setup,
 		pool.Setup,
 		clusterkafka.Setup,
-		key.Setup,
+		keykeymanager.Setup,
 		material.Setup,
 		backend.Setup,
 		certificatelb.Setup,
@@ -315,8 +324,12 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		project.SetupGated,
 		sshkey.SetupGated,
+		binding.SetupGated,
+		key.SetupGated,
+		value.SetupGated,
 		runner.SetupGated,
 		server.SetupGated,
+		group.SetupGated,
 		group.SetupGated,
 		policy.SetupGated,
 		template.SetupGated,
@@ -380,6 +393,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		securitygrouprule.SetupGated,
 		serverinstance.SetupGated,
 		snapshotinstance.SetupGated,
+		templateinstance.SetupGated,
 		userdata.SetupGated,
 		volumeinstance.SetupGated,
 		link.SetupGated,
@@ -395,7 +409,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		cluster.SetupGated,
 		pool.SetupGated,
 		clusterkafka.SetupGated,
-		key.SetupGated,
+		keykeymanager.SetupGated,
 		material.SetupGated,
 		backend.SetupGated,
 		certificatelb.SetupGated,

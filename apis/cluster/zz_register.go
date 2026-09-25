@@ -11,6 +11,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 
 	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/account/v1alpha1"
+	v1alpha1annotations "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/annotations/v1alpha1"
 	v1alpha1applesilicon "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/applesilicon/v1alpha1"
 	v1alpha1autoscaling "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/autoscaling/v1alpha1"
 	v1alpha1baremetal "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/baremetal/v1alpha1"
@@ -56,6 +57,7 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1annotations.SchemeBuilder.AddToScheme,
 		v1alpha1applesilicon.SchemeBuilder.AddToScheme,
 		v1alpha1autoscaling.SchemeBuilder.AddToScheme,
 		v1alpha1baremetal.SchemeBuilder.AddToScheme,

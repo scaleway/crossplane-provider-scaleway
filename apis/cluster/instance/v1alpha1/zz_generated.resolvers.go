@@ -9,6 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha12 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/file/v1alpha1"
+	v1alpha13 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/iam/v1alpha1"
 	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/ipam/v1alpha1"
 	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -367,6 +369,187 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VolumeIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Template.
+func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.FilesystemIds),
+		Extract:       reference.ExternalName(),
+		Namespace:     mg.GetNamespace(),
+		References:    mg.Spec.ForProvider.FilesystemIdsRefs,
+		Selector:      mg.Spec.ForProvider.FilesystemIdsSelector,
+		To: reference.To{
+			List:    &v1alpha12.FilesystemList{},
+			Managed: &v1alpha12.Filesystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FilesystemIds")
+	}
+	mg.Spec.ForProvider.FilesystemIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.FilesystemIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PlacementGroupID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.PlacementGroupIDRef,
+		Selector:     mg.Spec.ForProvider.PlacementGroupIDSelector,
+		To: reference.To{
+			List:    &PlacementGroupList{},
+			Managed: &PlacementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PlacementGroupID")
+	}
+	mg.Spec.ForProvider.PlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PlacementGroupIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrivateNetworks),
+		Extract:       reference.ExternalName(),
+		Namespace:     mg.GetNamespace(),
+		References:    mg.Spec.ForProvider.PrivateNetworksRefs,
+		Selector:      mg.Spec.ForProvider.PrivateNetworksSelector,
+		To: reference.To{
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateNetworks")
+	}
+	mg.Spec.ForProvider.PrivateNetworks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.PrivateNetworksRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityGroupID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.SecurityGroupIDRef,
+		Selector:     mg.Spec.ForProvider.SecurityGroupIDSelector,
+		To: reference.To{
+			List:    &SecurityGroupList{},
+			Managed: &SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupID")
+	}
+	mg.Spec.ForProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecurityGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WindowsRdpSSHKeyID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.WindowsRdpSSHKeyIDRef,
+		Selector:     mg.Spec.ForProvider.WindowsRdpSSHKeyIDSelector,
+		To: reference.To{
+			List:    &v1alpha13.SSHKeyList{},
+			Managed: &v1alpha13.SSHKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WindowsRdpSSHKeyID")
+	}
+	mg.Spec.ForProvider.WindowsRdpSSHKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WindowsRdpSSHKeyIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.FilesystemIds),
+		Extract:       reference.ExternalName(),
+		Namespace:     mg.GetNamespace(),
+		References:    mg.Spec.InitProvider.FilesystemIdsRefs,
+		Selector:      mg.Spec.InitProvider.FilesystemIdsSelector,
+		To: reference.To{
+			List:    &v1alpha12.FilesystemList{},
+			Managed: &v1alpha12.Filesystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FilesystemIds")
+	}
+	mg.Spec.InitProvider.FilesystemIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.FilesystemIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PlacementGroupID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.PlacementGroupIDRef,
+		Selector:     mg.Spec.InitProvider.PlacementGroupIDSelector,
+		To: reference.To{
+			List:    &PlacementGroupList{},
+			Managed: &PlacementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PlacementGroupID")
+	}
+	mg.Spec.InitProvider.PlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PlacementGroupIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PrivateNetworks),
+		Extract:       reference.ExternalName(),
+		Namespace:     mg.GetNamespace(),
+		References:    mg.Spec.InitProvider.PrivateNetworksRefs,
+		Selector:      mg.Spec.InitProvider.PrivateNetworksSelector,
+		To: reference.To{
+			List:    &v1alpha11.PrivateNetworkList{},
+			Managed: &v1alpha11.PrivateNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateNetworks")
+	}
+	mg.Spec.InitProvider.PrivateNetworks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.PrivateNetworksRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityGroupID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.SecurityGroupIDRef,
+		Selector:     mg.Spec.InitProvider.SecurityGroupIDSelector,
+		To: reference.To{
+			List:    &SecurityGroupList{},
+			Managed: &SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupID")
+	}
+	mg.Spec.InitProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecurityGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WindowsRdpSSHKeyID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.WindowsRdpSSHKeyIDRef,
+		Selector:     mg.Spec.InitProvider.WindowsRdpSSHKeyIDSelector,
+		To: reference.To{
+			List:    &v1alpha13.SSHKeyList{},
+			Managed: &v1alpha13.SSHKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WindowsRdpSSHKeyID")
+	}
+	mg.Spec.InitProvider.WindowsRdpSSHKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WindowsRdpSSHKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }

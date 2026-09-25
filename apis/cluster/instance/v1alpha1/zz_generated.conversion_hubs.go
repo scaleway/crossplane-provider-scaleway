@@ -31,6 +31,9 @@ func (tr *Server) Hub() {}
 func (tr *Snapshot) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Template) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *UserData) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -184,7 +184,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only fr-par is currently supported.
                       The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:
@@ -353,7 +353,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only fr-par is currently supported.
                       The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:
@@ -572,7 +572,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region the Datalab is in. Only fr-par is currently supported.
+                      The region the Datalab is in. Only fr-par is currently supported.
                       The region the Datalab is in. Only `fr-par` is currently supported.
                     type: string
                   sparkVersion:

@@ -50,7 +50,7 @@ type TokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace is created.
+	// . The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -76,7 +76,7 @@ type TokenObservation struct {
 	// Namespace ID
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// (Defaults to provider region). The region in which the namespace is created.
+	// . The region in which the namespace is created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -121,7 +121,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region). The region in which the namespace is created.
+	// . The region in which the namespace is created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
