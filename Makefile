@@ -43,6 +43,7 @@ GOLANGCILINT_VERSION ?= 1.63.4
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
+GOCOVER_COBERTURA := $(TOOLS_HOST_DIR)/gocover-cobertura
 -include build/makelib/golang.mk
 
 # ====================================================================================
@@ -150,9 +151,14 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 go.cachedir:
 	@go env GOCACHE
 
+$(GOCOVER_COBERTURA):
+	@$(INFO) installing gocover-cobertura
+	@GOBIN=$(TOOLS_HOST_DIR) go install github.com/boumenot/gocover-cobertura@latest || $(FAIL)
+	@$(OK) installing gocover-cobertura
+
 # Generate a coverage report for cobertura applying exclusions on
 # - generated file
-cobertura:
+cobertura: $(GOCOVER_COBERTURA)
 	@cat $(GO_TEST_OUTPUT)/coverage.txt | \
 		grep -v zz_ | \
 		$(GOCOVER_COBERTURA) > $(GO_TEST_OUTPUT)/cobertura-coverage.xml
