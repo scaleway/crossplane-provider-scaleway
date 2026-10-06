@@ -53,7 +53,7 @@ type InstanceInitParameters struct {
 	// Load balancer of the database instance
 	LoadBalancer []LoadBalancerInitParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
-	// Logs policy configuration for remote logs retention on the Database Instance
+	// Logs policy configuration
 	LogsPolicy []LogsPolicyInitParameters `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
 	// The name of the Database Instance.
@@ -175,7 +175,7 @@ type InstanceObservation struct {
 	// Load balancer of the database instance
 	LoadBalancer []LoadBalancerObservation `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
-	// Logs policy configuration for remote logs retention on the Database Instance
+	// Logs policy configuration
 	LogsPolicy []LogsPolicyObservation `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
 	// List of scheduled maintenance events on the Database Instance.
@@ -303,7 +303,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancer []LoadBalancerParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
-	// Logs policy configuration for remote logs retention on the Database Instance
+	// Logs policy configuration
 	// +kubebuilder:validation:Optional
 	LogsPolicy []LogsPolicyParameters `json:"logsPolicy,omitempty" tf:"logs_policy,omitempty"`
 
@@ -429,7 +429,7 @@ type LogsPolicyInitParameters struct {
 	// The max age (in days) of remote logs to keep on the Database Instance
 	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
 
-	// The max disk size (in bytes) of remote logs to keep on the Database Instance
+	// The max disk size of remote logs to keep on the Database Instance.
 	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
 }
 
@@ -438,7 +438,7 @@ type LogsPolicyObservation struct {
 	// The max age (in days) of remote logs to keep on the Database Instance
 	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
 
-	// The max disk size (in bytes) of remote logs to keep on the Database Instance
+	// The max disk size of remote logs to keep on the Database Instance.
 	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
 }
 
@@ -448,7 +448,7 @@ type LogsPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxAgeRetention *float64 `json:"maxAgeRetention,omitempty" tf:"max_age_retention,omitempty"`
 
-	// The max disk size (in bytes) of remote logs to keep on the Database Instance
+	// The max disk size of remote logs to keep on the Database Instance.
 	// +kubebuilder:validation:Optional
 	TotalDiskRetention *float64 `json:"totalDiskRetention,omitempty" tf:"total_disk_retention,omitempty"`
 }

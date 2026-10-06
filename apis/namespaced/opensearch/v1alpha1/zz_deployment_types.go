@@ -72,7 +72,7 @@ type DeploymentObservation struct {
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// List of endpoints for accessing the deployment.
-	// List of all endpoints returned by the API
+	// List of endpoints
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// The ID of the deployment in the format {region}/{id}.

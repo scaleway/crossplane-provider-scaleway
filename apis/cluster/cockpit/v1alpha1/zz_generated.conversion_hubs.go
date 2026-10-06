@@ -16,6 +16,9 @@ func (tr *Cockpit) Hub() {}
 func (tr *Exporter) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *GrafanaUser) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Source) Hub() {}
 
 // Hub marks this type as a conversion hub.

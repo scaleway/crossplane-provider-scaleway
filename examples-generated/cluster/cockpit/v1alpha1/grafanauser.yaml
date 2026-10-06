@@ -1,0 +1,27 @@
+apiVersion: cockpit.scaleway.upbound.io/v1alpha1
+kind: GrafanaUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/grafanauser
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    login: my-awesome-user
+    projectId: ${scaleway_account_project.project.id}
+    role: editor
+
+---
+
+apiVersion: account.scaleway.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cockpit/v1alpha1/grafanauser
+  labels:
+    testing.upbound.io/example-name: project
+  name: project
+spec:
+  forProvider:
+    name: test project grafana user

@@ -436,16 +436,6 @@ func (in *ConnectionInitParameters) DeepCopyInto(out *ConnectionInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.SecretID != nil {
-		in, out := &in.SecretID, &out.SecretID
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecretVersion != nil {
-		in, out := &in.SecretVersion, &out.SecretVersion
-		*out = new(float64)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -758,16 +748,6 @@ func (in *ConnectionParameters) DeepCopyInto(out *ConnectionParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
-		**out = **in
-	}
-	if in.SecretID != nil {
-		in, out := &in.SecretID, &out.SecretID
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecretVersion != nil {
-		in, out := &in.SecretVersion, &out.SecretVersion
-		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {

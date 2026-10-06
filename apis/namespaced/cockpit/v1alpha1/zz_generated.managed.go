@@ -127,6 +127,46 @@ func (mg *Exporter) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this GrafanaUser.
+func (mg *GrafanaUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this GrafanaUser.
+func (mg *GrafanaUser) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this GrafanaUser.
+func (mg *GrafanaUser) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this GrafanaUser.
+func (mg *GrafanaUser) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this GrafanaUser.
+func (mg *GrafanaUser) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this GrafanaUser.
+func (mg *GrafanaUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this GrafanaUser.
+func (mg *GrafanaUser) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this GrafanaUser.
+func (mg *GrafanaUser) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Source.
 func (mg *Source) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
