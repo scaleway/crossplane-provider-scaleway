@@ -93,7 +93,7 @@ func TerraformSetupBuilder(tfversion, providerSource, providerVersion string) te
 // resolveProviderConfig resolves the ProviderConfigSpec based on the managed resource type
 func resolveProviderConfig(ctx context.Context, crClient client.Client, mg resource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
 	switch managed := mg.(type) {
-	case resource.LegacyManaged:
+	case resource.LegacyManaged: //nolint:staticcheck // Legacy cluster-scoped MRs still need to be supported
 		return resolveLegacy(ctx, crClient, managed)
 	case resource.ModernManaged:
 		return resolveModern(ctx, crClient, managed)
@@ -103,6 +103,8 @@ func resolveProviderConfig(ctx context.Context, crClient client.Client, mg resou
 }
 
 // resolveLegacy handles cluster-scoped MRs with legacy ProviderConfigReferencer
+//
+//nolint:staticcheck // Legacy cluster-scoped MRs still need to be supported
 func resolveLegacy(ctx context.Context, crClient client.Client, mg resource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
