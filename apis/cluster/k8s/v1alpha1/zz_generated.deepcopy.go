@@ -1764,6 +1764,22 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.UserData != nil {
+		in, out := &in.UserData, &out.UserData
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -2002,6 +2018,22 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.UserData != nil {
+		in, out := &in.UserData, &out.UserData
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -2179,6 +2211,22 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 		*out = make([]UpgradePolicyParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.UserData != nil {
+		in, out := &in.UserData, &out.UserData
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.Version != nil {

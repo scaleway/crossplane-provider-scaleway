@@ -337,7 +337,7 @@ spec:
                   endpoints:
                     description: |-
                       List of endpoints for accessing the deployment.
-                      List of endpoints
+                      List of all endpoints returned by the API
                     items:
                       properties:
                         id:

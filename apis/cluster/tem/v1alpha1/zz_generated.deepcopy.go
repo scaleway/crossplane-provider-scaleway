@@ -175,6 +175,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MxPriority != nil {
+		in, out := &in.MxPriority, &out.MxPriority
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)

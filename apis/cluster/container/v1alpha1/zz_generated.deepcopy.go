@@ -80,6 +80,16 @@ func (in *ContainerInitParameters) DeepCopyInto(out *ContainerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableDefaultPublicEndpoint != nil {
+		in, out := &in.EnableDefaultPublicEndpoint, &out.EnableDefaultPublicEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrivateEndpoint != nil {
+		in, out := &in.EnablePrivateEndpoint, &out.EnablePrivateEndpoint
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnvironmentVariables != nil {
 		in, out := &in.EnvironmentVariables, &out.EnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -691,6 +701,16 @@ func (in *ContainerObservation) DeepCopyInto(out *ContainerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableDefaultPublicEndpoint != nil {
+		in, out := &in.EnableDefaultPublicEndpoint, &out.EnableDefaultPublicEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrivateEndpoint != nil {
+		in, out := &in.EnablePrivateEndpoint, &out.EnablePrivateEndpoint
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnvironmentVariables != nil {
 		in, out := &in.EnvironmentVariables, &out.EnvironmentVariables
 		*out = make(map[string]*string, len(*in))
@@ -793,6 +813,11 @@ func (in *ContainerObservation) DeepCopyInto(out *ContainerObservation) {
 	}
 	if in.Privacy != nil {
 		in, out := &in.Privacy, &out.Privacy
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateEndpoint != nil {
+		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
 		*out = new(string)
 		**out = **in
 	}
@@ -916,6 +941,16 @@ func (in *ContainerParameters) DeepCopyInto(out *ContainerParameters) {
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
+		**out = **in
+	}
+	if in.EnableDefaultPublicEndpoint != nil {
+		in, out := &in.EnableDefaultPublicEndpoint, &out.EnableDefaultPublicEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrivateEndpoint != nil {
+		in, out := &in.EnablePrivateEndpoint, &out.EnablePrivateEndpoint
+		*out = new(bool)
 		**out = **in
 	}
 	if in.EnvironmentVariables != nil {

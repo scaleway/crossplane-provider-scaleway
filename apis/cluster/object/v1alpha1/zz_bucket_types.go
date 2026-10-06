@@ -264,7 +264,7 @@ type ExpirationInitParameters struct {
 	// Object will remove a delete marker with no noncurrent versions. If set
 	// to true, the delete marker will be expired; if set to false the
 	// policy takes no action.
-	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions.
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
@@ -285,7 +285,7 @@ type ExpirationObservation struct {
 	// Object will remove a delete marker with no noncurrent versions. If set
 	// to true, the delete marker will be expired; if set to false the
 	// policy takes no action.
-	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions.
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
@@ -308,7 +308,7 @@ type ExpirationParameters struct {
 	// Object will remove a delete marker with no noncurrent versions. If set
 	// to true, the delete marker will be expired; if set to false the
 	// policy takes no action.
-	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions. If set to `true`, the delete marker will be expired; if set to `false` the policy takes no action
+	// Specifies whether Scaleway Object will remove a delete marker with no noncurrent versions.
 	// +kubebuilder:validation:Optional
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
