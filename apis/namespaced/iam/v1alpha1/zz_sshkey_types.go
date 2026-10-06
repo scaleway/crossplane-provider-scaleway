@@ -68,7 +68,6 @@ type SSHKeyObservation struct {
 	// The public SSH key
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the SSH key.
 	// The Scaleway Resource Name (SRN) of the SSH key
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

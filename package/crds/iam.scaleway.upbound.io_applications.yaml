@@ -251,9 +251,7 @@ spec:
                       ID of organization the resource is associated to.
                     type: string
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the application.
-                      The Scaleway Resource Name (SRN) of the application
+                    description: The Scaleway Resource Name (SRN) of the application
                     type: string
                   tags:
                     description: |-

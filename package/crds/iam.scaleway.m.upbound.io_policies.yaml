@@ -688,9 +688,7 @@ spec:
                       type: object
                     type: array
                   srn:
-                    description: |-
-                      The Scaleway Resource Name (SRN) of the policy.
-                      The Scaleway Resource Name (SRN) of the policy
+                    description: The Scaleway Resource Name (SRN) of the policy
                     type: string
                   tags:
                     description: |-

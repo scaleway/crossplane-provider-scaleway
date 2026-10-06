@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Key is the Schema for the Keys API.
+        description: Key is the Schema for the Keys API. <no value>
         properties:
           apiVersion:
             description: |-
@@ -73,19 +73,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: |-
-                      Description of the annotation key.
-                      Description of the annotation key.
+                    description: Description of the annotation key.
                     type: string
                   name:
-                    description: |-
-                      Name of the annotation key.
-                      Name of the annotation key.
+                    description: Name of the annotation key.
                     type: string
                   organizationId:
-                    description: |-
-                      (Defaults to provider organization_id) The organization ID to create the key in.
-                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
+                    description: ID of the organization. If not set, the organization
+                      ID is derived from the provider configuration.
                     type: string
                 type: object
               initProvider:
@@ -102,19 +97,14 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: |-
-                      Description of the annotation key.
-                      Description of the annotation key.
+                    description: Description of the annotation key.
                     type: string
                   name:
-                    description: |-
-                      Name of the annotation key.
-                      Name of the annotation key.
+                    description: Name of the annotation key.
                     type: string
                   organizationId:
-                    description: |-
-                      (Defaults to provider organization_id) The organization ID to create the key in.
-                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
+                    description: ID of the organization. If not set, the organization
+                      ID is derived from the provider configuration.
                     type: string
                 type: object
               managementPolicies:
@@ -214,22 +204,16 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: |-
-                      Description of the annotation key.
-                      Description of the annotation key.
+                    description: Description of the annotation key.
                     type: string
                   id:
-                    description: The ID of the annotation key.
                     type: string
                   name:
-                    description: |-
-                      Name of the annotation key.
-                      Name of the annotation key.
+                    description: Name of the annotation key.
                     type: string
                   organizationId:
-                    description: |-
-                      (Defaults to provider organization_id) The organization ID to create the key in.
-                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
+                    description: ID of the organization. If not set, the organization
+                      ID is derived from the provider configuration.
                     type: string
                 type: object
               conditions:

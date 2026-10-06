@@ -72,7 +72,6 @@ type BackendInitParameters struct {
 	// Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
 	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
 
-	// Value used as the HTTP Host header (or the TLS SNI when ssl_bridging is enabled) when the Load Balancer connects to backend servers. This allows routing to a specific service on a backend server that is configured to respond to a particular hostname.
 	// When connecting to backend servers, use this value as the HTTP `Host` header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
@@ -214,7 +213,6 @@ type BackendObservation struct {
 	// Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
 	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
 
-	// Value used as the HTTP Host header (or the TLS SNI when ssl_bridging is enabled) when the Load Balancer connects to backend servers. This allows routing to a specific service on a backend server that is configured to respond to a particular hostname.
 	// When connecting to backend servers, use this value as the HTTP `Host` header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
@@ -363,7 +361,6 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckTransientDelay *string `json:"healthCheckTransientDelay,omitempty" tf:"health_check_transient_delay,omitempty"`
 
-	// Value used as the HTTP Host header (or the TLS SNI when ssl_bridging is enabled) when the Load Balancer connects to backend servers. This allows routing to a specific service on a backend server that is configured to respond to a particular hostname.
 	// When connecting to backend servers, use this value as the HTTP `Host` header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`

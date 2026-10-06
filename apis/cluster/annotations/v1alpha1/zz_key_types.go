@@ -16,14 +16,11 @@ import (
 type KeyInitParameters struct {
 
 	// Description of the annotation key.
-	// Description of the annotation key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the annotation key.
-	// Name of the annotation key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider organization_id) The organization ID to create the key in.
 	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
@@ -31,17 +28,13 @@ type KeyInitParameters struct {
 type KeyObservation struct {
 
 	// Description of the annotation key.
-	// Description of the annotation key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the annotation key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the annotation key.
-	// Name of the annotation key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider organization_id) The organization ID to create the key in.
 	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
@@ -49,16 +42,13 @@ type KeyObservation struct {
 type KeyParameters struct {
 
 	// Description of the annotation key.
-	// Description of the annotation key.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the annotation key.
-	// Name of the annotation key.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider organization_id) The organization ID to create the key in.
 	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -91,7 +81,7 @@ type KeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Key is the Schema for the Keys API.
+// Key is the Schema for the Keys API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

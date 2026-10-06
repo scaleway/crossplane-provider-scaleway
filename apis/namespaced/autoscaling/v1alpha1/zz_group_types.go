@@ -101,7 +101,7 @@ type GroupInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	TemplateIDSelector *v1.NamespacedSelector `json:"templateIdSelector,omitempty" tf:"-"`
 
-	// The zone in which the Instance group exists.
+	// (Defaults to provider zone) The zone in which the Instance group exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -147,7 +147,7 @@ type GroupObservation_2 struct {
 	// The date and time of the last update of the Instance group
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// The zone in which the Instance group exists.
+	// (Defaults to provider zone) The zone in which the Instance group exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -198,7 +198,7 @@ type GroupParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	TemplateIDSelector *v1.NamespacedSelector `json:"templateIdSelector,omitempty" tf:"-"`
 
-	// The zone in which the Instance group exists.
+	// (Defaults to provider zone) The zone in which the Instance group exists.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

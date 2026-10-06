@@ -36,7 +36,7 @@ type PlacementGroupInitParameters struct {
 	// The tags associated with the placement group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The zone in which the placement group should be created.
+	// (Defaults to provider zone) The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -70,7 +70,7 @@ type PlacementGroupObservation struct {
 	// The tags associated with the placement group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The zone in which the placement group should be created.
+	// (Defaults to provider zone) The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -102,7 +102,7 @@ type PlacementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The zone in which the placement group should be created.
+	// (Defaults to provider zone) The zone in which the placement group should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

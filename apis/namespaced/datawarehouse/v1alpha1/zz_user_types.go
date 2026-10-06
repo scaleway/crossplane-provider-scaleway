@@ -41,7 +41,7 @@ type UserInitParameters struct {
 	// Password for the ClickHouse user.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// The region in which the user should be created.
+	// (Defaults to provider region) The region in which the user should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -63,11 +63,10 @@ type UserObservation struct {
 	// Name of the ClickHouse user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The region in which the user should be created.
+	// (Defaults to provider region) The region in which the user should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the user.
 	// The Scaleway Resource Name (SRN) of the user
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 }
@@ -103,7 +102,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// The region in which the user should be created.
+	// (Defaults to provider region) The region in which the user should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
