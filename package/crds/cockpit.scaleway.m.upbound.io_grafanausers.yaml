@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.1
-  name: budgets.billing.scaleway.m.upbound.io
+  name: grafanausers.cockpit.scaleway.m.upbound.io
 spec:
-  group: billing.scaleway.m.upbound.io
+  group: cockpit.scaleway.m.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - scaleway
-    kind: Budget
-    listKind: BudgetList
-    plural: budgets
-    singular: budget
+    kind: GrafanaUser
+    listKind: GrafanaUserList
+    plural: grafanausers
+    singular: grafanauser
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Budget is the Schema for the Budgets API.
+        description: GrafanaUser is the Schema for the GrafanaUsers API.
         properties:
           apiVersion:
             description: |-
@@ -54,24 +54,24 @@ spec:
           metadata:
             type: object
           spec:
-            description: BudgetSpec defines the desired state of Budget
+            description: GrafanaUserSpec defines the desired state of GrafanaUser
             properties:
               forProvider:
                 properties:
-                  consumptionLimit:
+                  login:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
-                    type: number
-                  enabled:
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
+                      The login of the Grafana user
+                    type: string
+                  projectId:
                     description: |-
-                      Whether the budget is enabled or not. Defaults to true.
-                      Whether the budget is enabled or not.
-                    type: boolean
-                  organizationId:
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  role:
                     description: |-
-                      The organization ID. If not provided, the default organization configured in the provider is used.
-                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The role assigned to the Grafana user. Must be editor or viewer.
+                      The role of the Grafana user
                     type: string
                 type: object
               initProvider:
@@ -87,20 +87,20 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  consumptionLimit:
+                  login:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
-                    type: number
-                  enabled:
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
+                      The login of the Grafana user
+                    type: string
+                  projectId:
                     description: |-
-                      Whether the budget is enabled or not. Defaults to true.
-                      Whether the budget is enabled or not.
-                    type: boolean
-                  organizationId:
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  role:
                     description: |-
-                      The organization ID. If not provided, the default organization configured in the provider is used.
-                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The role assigned to the Grafana user. Must be editor or viewer.
+                      The role of the Grafana user
                     type: string
                 type: object
               managementPolicies:
@@ -162,42 +162,40 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.consumptionLimit is a required parameter
+            - message: spec.forProvider.login is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.consumptionLimit)
-                || (has(self.initProvider) && has(self.initProvider.consumptionLimit))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.login)
+                || (has(self.initProvider) && has(self.initProvider.login))'
+            - message: spec.forProvider.role is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.role)
+                || (has(self.initProvider) && has(self.initProvider.role))'
           status:
-            description: BudgetStatus defines the observed state of Budget.
+            description: GrafanaUserStatus defines the observed state of GrafanaUser.
             properties:
               atProvider:
                 properties:
-                  consumptionLimit:
+                  grafanaUrl:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
-                    type: number
-                  createdAt:
-                    description: |-
-                      The date and time of budget creation
-                      The date and time of budget creation
+                      URL for Grafana.
+                      The grafana URL
                     type: string
-                  enabled:
-                    description: |-
-                      Whether the budget is enabled or not. Defaults to true.
-                      Whether the budget is enabled or not.
-                    type: boolean
                   id:
-                    description: The ID of the budget
                     type: string
-                  organizationId:
+                  login:
                     description: |-
-                      The organization ID. If not provided, the default organization configured in the provider is used.
-                      The organization ID. If not provided, the default organization configured in the provider is used.
+                      The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.
+                      The login of the Grafana user
                     type: string
-                  updatedAt:
+                  projectId:
                     description: |-
-                      The date and time when the budget was last updated
-                      The date and time when the budget was last updated
+                      (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
+                      The project_id you want to attach the resource to
+                    type: string
+                  role:
+                    description: |-
+                      The role assigned to the Grafana user. Must be editor or viewer.
+                      The role of the Grafana user
                     type: string
                 type: object
               conditions:

@@ -288,13 +288,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  userData:
-                    additionalProperties:
-                      type: string
-                    description: User data applied and reconciled with the pool, as
-                      a map of key to content
-                    type: object
-                    x-kubernetes-map-type: granular
                   version:
                     description: |-
                       The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
@@ -555,13 +548,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  userData:
-                    additionalProperties:
-                      type: string
-                    description: User data applied and reconciled with the pool, as
-                      a map of key to content
-                    type: object
-                    x-kubernetes-map-type: granular
                   version:
                     description: |-
                       The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
@@ -871,13 +857,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  userData:
-                    additionalProperties:
-                      type: string
-                    description: User data applied and reconciled with the pool, as
-                      a map of key to content
-                    type: object
-                    x-kubernetes-map-type: granular
                   version:
                     description: |-
                       The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.

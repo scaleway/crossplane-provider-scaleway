@@ -47,11 +47,6 @@ func (in *FilesystemInitParameters) DeepCopyInto(out *FilesystemInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.OrganizationID != nil {
-		in, out := &in.OrganizationID, &out.OrganizationID
-		*out = new(string)
-		**out = **in
-	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
@@ -208,11 +203,6 @@ func (in *FilesystemParameters) DeepCopyInto(out *FilesystemParameters) {
 	*out = *in
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.OrganizationID != nil {
-		in, out := &in.OrganizationID, &out.OrganizationID
 		*out = new(string)
 		**out = **in
 	}

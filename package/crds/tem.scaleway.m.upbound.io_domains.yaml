@@ -217,13 +217,8 @@ spec:
                     description: The Scaleway's blackhole MX server to use
                     type: string
                   mxConfig:
-                    description: MX exchange hostname for the domain blackhole (without
-                      priority), suitable for scaleway_domain_record.data
+                    description: MX record configuration for the domain blackhole
                     type: string
-                  mxPriority:
-                    description: MX priority for the domain blackhole, suitable for
-                      scaleway_domain_record.priority
-                    type: number
                   name:
                     description: The domain name used when sending emails
                     type: string
