@@ -20,9 +20,13 @@ type FilesystemInitParameters struct {
 	// The name of the filesystem
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
+	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the filesystem belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).
@@ -58,12 +62,12 @@ type FilesystemObservation struct {
 	NumberOfAttachments *float64 `json:"numberOfAttachments,omitempty" tf:"number_of_attachments,omitempty"`
 
 	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
-	// The organization_id you want to attach the resource to
+	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the filesystem belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).
@@ -100,9 +104,14 @@ type FilesystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Defaults to provider organization_id) The ID of the organization the user is associated with.
+	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
+	// +kubebuilder:validation:Optional
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
 	// (Defaults to provider project_id) The ID of the project the server is
 	// associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the filesystem belongs to. Defaults to the provider's project ID.
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

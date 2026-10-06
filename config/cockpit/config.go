@@ -33,18 +33,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("scaleway_cockpit_grafana_user", func(r *config.Resource) {
-		// Identifier for this resource is assigned by the provider. In other
-		// words it is not simply the name of the resource.
-		r.ExternalName = config.IdentifierFromProvider
-		r.ShortGroup = shortGroup
-		r.Kind = "GrafanaUser"
-
-		r.References["project_id"] = config.Reference{
-			TerraformName: terraformNameAccountProject,
-		}
-	})
-
 	p.AddResourceConfigurator("scaleway_cockpit_source", func(r *config.Resource) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup

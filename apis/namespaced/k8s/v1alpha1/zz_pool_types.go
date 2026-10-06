@@ -141,6 +141,10 @@ type PoolInitParameters struct {
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
+	// User data applied and reconciled with the pool, as a map of key to content
+	// +mapType=granular
+	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
 	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
 	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
 	// The Kubernetes version of the pool
@@ -268,6 +272,10 @@ type PoolObservation struct {
 	// The Pool upgrade policy
 	// The Pool upgrade policy
 	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// User data applied and reconciled with the pool, as a map of key to content
+	// +mapType=granular
+	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
 	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
@@ -400,6 +408,11 @@ type PoolParameters struct {
 	// The Pool upgrade policy
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// User data applied and reconciled with the pool, as a map of key to content
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	UserData map[string]*string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
 	// For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.

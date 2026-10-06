@@ -28,7 +28,6 @@ import (
 	alertmanager "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/alertmanager"
 	cockpit "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/cockpit"
 	exporter "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/exporter"
-	grafanauser "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/grafanauser"
 	source "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/source"
 	token "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/token"
 	container "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/container/container"
@@ -182,7 +181,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		alertmanager.Setup,
 		cockpit.Setup,
 		exporter.Setup,
-		grafanauser.Setup,
 		source.Setup,
 		token.Setup,
 		container.Setup,
@@ -342,7 +340,6 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		alertmanager.SetupGated,
 		cockpit.SetupGated,
 		exporter.SetupGated,
-		grafanauser.SetupGated,
 		source.SetupGated,
 		token.SetupGated,
 		container.SetupGated,
@@ -501,7 +498,6 @@ func SetupWebhookWithManager(mgr ctrl.Manager) error {
 		alertmanager.SetupWebhookWithManager,
 		cockpit.SetupWebhookWithManager,
 		exporter.SetupWebhookWithManager,
-		grafanauser.SetupWebhookWithManager,
 		source.SetupWebhookWithManager,
 		token.SetupWebhookWithManager,
 		container.SetupWebhookWithManager,

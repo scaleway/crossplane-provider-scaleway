@@ -66,8 +66,11 @@ type DomainObservation struct {
 	// The Scaleway's blackhole MX server to use
 	MxBlackhole *string `json:"mxBlackhole,omitempty" tf:"mx_blackhole,omitempty"`
 
-	// MX record configuration for the domain blackhole
+	// MX exchange hostname for the domain blackhole (without priority), suitable for scaleway_domain_record.data
 	MxConfig *string `json:"mxConfig,omitempty" tf:"mx_config,omitempty"`
+
+	// MX priority for the domain blackhole, suitable for scaleway_domain_record.priority
+	MxPriority *float64 `json:"mxPriority,omitempty" tf:"mx_priority,omitempty"`
 
 	// The domain name used when sending emails
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

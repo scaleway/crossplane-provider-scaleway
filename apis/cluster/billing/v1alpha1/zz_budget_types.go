@@ -16,7 +16,7 @@ import (
 type BudgetInitParameters struct {
 
 	// Cost limit for the budget in cents.
-	// Cost limit for the budget in cents.
+	// Cost limit for the budget in euros.
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
 	// Whether the budget is enabled or not. Defaults to true.
@@ -31,7 +31,7 @@ type BudgetInitParameters struct {
 type BudgetObservation struct {
 
 	// Cost limit for the budget in cents.
-	// Cost limit for the budget in cents.
+	// Cost limit for the budget in euros.
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
 	// The date and time of budget creation
@@ -57,7 +57,7 @@ type BudgetObservation struct {
 type BudgetParameters struct {
 
 	// Cost limit for the budget in cents.
-	// Cost limit for the budget in cents.
+	// Cost limit for the budget in euros.
 	// +kubebuilder:validation:Optional
 	ConsumptionLimit *float64 `json:"consumptionLimit,omitempty" tf:"consumption_limit,omitempty"`
 
