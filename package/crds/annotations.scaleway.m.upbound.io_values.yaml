@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Value is the Schema for the Values API. <no value>
+        description: Value is the Schema for the Values API.
         properties:
           apiVersion:
             description: |-
@@ -59,10 +59,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the annotation value.
+                    description: |-
+                      Description of the annotation value.
+                      Description of the annotation value.
                     type: string
                   keyId:
-                    description: ID of the key the value is associated to.
+                    description: |-
+                      ID of the key the value is associated to.
+                      ID of the key the value is associated to.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in annotations to populate keyId.
@@ -145,7 +149,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Name of the annotation value.
+                    description: |-
+                      Name of the annotation value.
+                      Name of the annotation value.
                     type: string
                 type: object
               initProvider:
@@ -162,10 +168,14 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the annotation value.
+                    description: |-
+                      Description of the annotation value.
+                      Description of the annotation value.
                     type: string
                   keyId:
-                    description: ID of the key the value is associated to.
+                    description: |-
+                      ID of the key the value is associated to.
+                      ID of the key the value is associated to.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in annotations to populate keyId.
@@ -248,7 +258,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: Name of the annotation value.
+                    description: |-
+                      Name of the annotation value.
+                      Name of the annotation value.
                     type: string
                 type: object
               managementPolicies:
@@ -320,18 +332,27 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: Description of the annotation value.
+                    description: |-
+                      Description of the annotation value.
+                      Description of the annotation value.
                     type: string
                   id:
+                    description: The ID of the annotation value.
                     type: string
                   keyId:
-                    description: ID of the key the value is associated to.
+                    description: |-
+                      ID of the key the value is associated to.
+                      ID of the key the value is associated to.
                     type: string
                   name:
-                    description: Name of the annotation value.
+                    description: |-
+                      Name of the annotation value.
+                      Name of the annotation value.
                     type: string
                   valueId:
-                    description: The ID of the annotation value.
+                    description: |-
+                      The ID of the annotation value.
+                      The ID of the annotation value.
                     type: string
                 type: object
               conditions:

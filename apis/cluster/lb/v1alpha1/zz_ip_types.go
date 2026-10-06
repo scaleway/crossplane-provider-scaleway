@@ -31,7 +31,7 @@ type IPInitParameters struct {
 	// The tags associated with the flexible IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the IP should be reserved.
+	// The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -72,7 +72,7 @@ type IPObservation struct {
 	// The tags associated with the flexible IP
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the IP should be reserved.
+	// The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -99,7 +99,7 @@ type IPParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the IP should be reserved.
+	// The zone in which the IP should be reserved.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

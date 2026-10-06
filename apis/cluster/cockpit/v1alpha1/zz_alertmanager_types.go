@@ -41,7 +41,7 @@ type AlertManagerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
+	// The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -71,7 +71,7 @@ type AlertManagerObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
+	// The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -108,7 +108,7 @@ type AlertManagerParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.
+	// The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

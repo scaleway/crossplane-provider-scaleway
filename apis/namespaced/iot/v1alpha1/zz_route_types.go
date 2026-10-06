@@ -171,7 +171,7 @@ type RouteInitParameters struct {
 	// The name of the route
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Route is attached to.
+	// The region in which the Route is attached to.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -209,7 +209,7 @@ type RouteObservation struct {
 	// The name of the route
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Route is attached to.
+	// The region in which the Route is attached to.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -252,7 +252,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Route is attached to.
+	// The region in which the Route is attached to.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

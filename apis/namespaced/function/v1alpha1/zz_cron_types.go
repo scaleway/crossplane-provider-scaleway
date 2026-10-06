@@ -37,7 +37,7 @@ type CronInitParameters struct {
 	// The name of the cron job.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the function was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -64,7 +64,7 @@ type CronObservation struct {
 	// The name of the cron job.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the function was created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -104,7 +104,7 @@ type CronParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region
+	// The region
 	// in which the function was created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

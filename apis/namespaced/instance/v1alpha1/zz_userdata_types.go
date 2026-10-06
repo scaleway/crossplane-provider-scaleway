@@ -37,7 +37,7 @@ type UserDataInitParameters struct {
 	// The value of the user data to set.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -59,7 +59,7 @@ type UserDataObservation struct {
 	// The value of the user data to set.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -90,7 +90,7 @@ type UserDataParameters struct {
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the server should be created.
+	// The zone in which the server should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

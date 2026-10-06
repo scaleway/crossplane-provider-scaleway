@@ -1,0 +1,13 @@
+apiVersion: annotations.scaleway.m.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: environment
+  name: environment
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Deployment environment (production, staging, development)
+    name: environment

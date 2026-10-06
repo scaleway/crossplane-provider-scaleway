@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Template is the Schema for the Templates API. <no value>
+        description: Template is the Schema for the Templates API.
         properties:
           apiVersion:
             description: |-
@@ -59,8 +59,9 @@ spec:
               forProvider:
                 properties:
                   filesystemIds:
-                    description: The IDs of the filesystems to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      - The IDs of the filesystems to attach to the servers created using the template.
+                      The IDs of the filesystems to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
@@ -150,12 +151,14 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the Instance Template. If not provided,
-                      a random name will be generated.
+                    description: |-
+                      The name of the template. If not provided it will be randomly generated.
+                      The name of the Instance Template. If not provided, a random name will be generated.
                     type: string
                   placementGroupId:
-                    description: The ID of the placement group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the placement group to attach to the servers created using the template.
+                      The ID of the placement group to attach to the servers created using the Instance Template.
                     type: string
                   placementGroupIdRef:
                     description: Reference to a PlacementGroup in instance to populate
@@ -240,8 +243,9 @@ spec:
                         type: object
                     type: object
                   privateNetworks:
-                    description: The IDs of the private networks to attach to the
-                      servers created using the Instance Template.
+                    description: |-
+                      - The IDs of the private networks to attach to the servers created using the template.
+                      The IDs of the private networks to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
@@ -331,20 +335,24 @@ spec:
                         type: object
                     type: object
                   projectId:
-                    description: The project ID the Instance Template belongs to.
-                      Defaults to the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the template is associated with.
+                      The project ID the Instance Template belongs to. Defaults to the provider's project ID.
                     type: string
                   publicIpv4Count:
-                    description: The number of public IPv4 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
+                      The number of public IPv4 to attach to the servers created using the Instance Template.
                     type: number
                   publicIpv6Count:
-                    description: The number of public IPv6 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
+                      The number of public IPv6 to attach to the servers created using the Instance Template.
                     type: number
                   securityGroupId:
-                    description: The ID of the security group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the security group to attach to the servers created using the template.
+                      The ID of the security group to attach to the servers created using the Instance Template.
                     type: string
                   securityGroupIdRef:
                     description: Reference to a SecurityGroup in instance to populate
@@ -429,54 +437,70 @@ spec:
                         type: object
                     type: object
                   serverTags:
-                    description: The tags that will be assigned to the servers created
-                      using the Instance Template.
+                    description: |-
+                      A list of tags to apply to the servers created from the template.
+                      The tags that will be assigned to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
                   serverType:
-                    description: The commercial type of the server defined by the
-                      Instance Template.
+                    description: |-
+                      The commercial type of the server defined in the template.
+                      The commercial type of the server defined by the Instance Template.
                     type: string
                   tags:
-                    description: The tags associated with the Instance Template.
+                    description: |-
+                      A list of tags to apply to the template.
+                      The tags associated with the Instance Template.
                     items:
                       type: string
                     type: array
                   volumes:
+                    description: The list of specs describing the volumes to attach
+                      to the servers created using the template.
                     items:
                       properties:
                         baseSnapshotId:
-                          description: The ID of the base snapshot for the volume.
+                          description: |-
+                            The ID of the base snapshot for the volume.
+                            The ID of the base snapshot for the volume.
                           type: string
                         imageLabel:
-                          description: The label of the image used as base for the
-                            volume.
+                          description: |-
+                            The label of the image used as base for the volume.
+                            The label of the image used as base for the volume.
                           type: string
                         name:
-                          description: The name of volume. If not provided, a random
-                            name will be generated.
+                          description: |-
+                            The name of volume.
+                            The name of volume. If not provided, a random name will be generated.
                           type: string
                         perfIops:
-                          description: The performance IOPS of the volume.
+                          description: |-
+                            The performance IOPS of the volume, required for sbs type volumes.
+                            The performance IOPS of the volume.
                           type: number
                         sizeInGb:
                           description: The size of the volume in gigabytes.
                           type: number
                         tags:
-                          description: The tags associated with the volume.
+                          description: |-
+                            The tags associated with the volume.
+                            The tags associated with the volume.
                           items:
                             type: string
                           type: array
                         volumeType:
-                          description: The type of volume.
+                          description: |-
+                            The type of the volume.
+                            The type of volume.
                           type: string
                       type: object
                     type: array
                   windowsRdpSshKeyId:
-                    description: The ID of the IAM SSH key used to encrypt the initial
-                      admin password on a Windows server. This will be repeated on
-                      all servers created using the Instance Template.
+                    description: |-
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
                     type: string
                   windowsRdpSshKeyIdRef:
                     description: Reference to a SSHKey in iam to populate windowsRdpSshKeyId.
@@ -559,7 +583,9 @@ spec:
                         type: object
                     type: object
                   zone:
-                    description: The zone the Instance Template is in.
+                    description: |-
+                      (Defaults to provider zone) The zone in which the template should be created.
+                      The zone the Instance Template is in.
                     type: string
                 type: object
               initProvider:
@@ -576,8 +602,9 @@ spec:
                   autoscaler.
                 properties:
                   filesystemIds:
-                    description: The IDs of the filesystems to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      - The IDs of the filesystems to attach to the servers created using the template.
+                      The IDs of the filesystems to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
@@ -667,12 +694,14 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the Instance Template. If not provided,
-                      a random name will be generated.
+                    description: |-
+                      The name of the template. If not provided it will be randomly generated.
+                      The name of the Instance Template. If not provided, a random name will be generated.
                     type: string
                   placementGroupId:
-                    description: The ID of the placement group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the placement group to attach to the servers created using the template.
+                      The ID of the placement group to attach to the servers created using the Instance Template.
                     type: string
                   placementGroupIdRef:
                     description: Reference to a PlacementGroup in instance to populate
@@ -757,8 +786,9 @@ spec:
                         type: object
                     type: object
                   privateNetworks:
-                    description: The IDs of the private networks to attach to the
-                      servers created using the Instance Template.
+                    description: |-
+                      - The IDs of the private networks to attach to the servers created using the template.
+                      The IDs of the private networks to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
@@ -848,20 +878,24 @@ spec:
                         type: object
                     type: object
                   projectId:
-                    description: The project ID the Instance Template belongs to.
-                      Defaults to the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the template is associated with.
+                      The project ID the Instance Template belongs to. Defaults to the provider's project ID.
                     type: string
                   publicIpv4Count:
-                    description: The number of public IPv4 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
+                      The number of public IPv4 to attach to the servers created using the Instance Template.
                     type: number
                   publicIpv6Count:
-                    description: The number of public IPv6 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
+                      The number of public IPv6 to attach to the servers created using the Instance Template.
                     type: number
                   securityGroupId:
-                    description: The ID of the security group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the security group to attach to the servers created using the template.
+                      The ID of the security group to attach to the servers created using the Instance Template.
                     type: string
                   securityGroupIdRef:
                     description: Reference to a SecurityGroup in instance to populate
@@ -946,54 +980,70 @@ spec:
                         type: object
                     type: object
                   serverTags:
-                    description: The tags that will be assigned to the servers created
-                      using the Instance Template.
+                    description: |-
+                      A list of tags to apply to the servers created from the template.
+                      The tags that will be assigned to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
                   serverType:
-                    description: The commercial type of the server defined by the
-                      Instance Template.
+                    description: |-
+                      The commercial type of the server defined in the template.
+                      The commercial type of the server defined by the Instance Template.
                     type: string
                   tags:
-                    description: The tags associated with the Instance Template.
+                    description: |-
+                      A list of tags to apply to the template.
+                      The tags associated with the Instance Template.
                     items:
                       type: string
                     type: array
                   volumes:
+                    description: The list of specs describing the volumes to attach
+                      to the servers created using the template.
                     items:
                       properties:
                         baseSnapshotId:
-                          description: The ID of the base snapshot for the volume.
+                          description: |-
+                            The ID of the base snapshot for the volume.
+                            The ID of the base snapshot for the volume.
                           type: string
                         imageLabel:
-                          description: The label of the image used as base for the
-                            volume.
+                          description: |-
+                            The label of the image used as base for the volume.
+                            The label of the image used as base for the volume.
                           type: string
                         name:
-                          description: The name of volume. If not provided, a random
-                            name will be generated.
+                          description: |-
+                            The name of volume.
+                            The name of volume. If not provided, a random name will be generated.
                           type: string
                         perfIops:
-                          description: The performance IOPS of the volume.
+                          description: |-
+                            The performance IOPS of the volume, required for sbs type volumes.
+                            The performance IOPS of the volume.
                           type: number
                         sizeInGb:
                           description: The size of the volume in gigabytes.
                           type: number
                         tags:
-                          description: The tags associated with the volume.
+                          description: |-
+                            The tags associated with the volume.
+                            The tags associated with the volume.
                           items:
                             type: string
                           type: array
                         volumeType:
-                          description: The type of volume.
+                          description: |-
+                            The type of the volume.
+                            The type of volume.
                           type: string
                       type: object
                     type: array
                   windowsRdpSshKeyId:
-                    description: The ID of the IAM SSH key used to encrypt the initial
-                      admin password on a Windows server. This will be repeated on
-                      all servers created using the Instance Template.
+                    description: |-
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
                     type: string
                   windowsRdpSshKeyIdRef:
                     description: Reference to a SSHKey in iam to populate windowsRdpSshKeyId.
@@ -1076,7 +1126,9 @@ spec:
                         type: object
                     type: object
                   zone:
-                    description: The zone the Instance Template is in.
+                    description: |-
+                      (Defaults to provider zone) The zone in which the template should be created.
+                      The zone the Instance Template is in.
                     type: string
                 type: object
               managementPolicies:
@@ -1148,103 +1200,134 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: The creation timestamp of the Instance Template.
+                    description: |-
+                      The creation timestamp of the Instance template.
+                      The creation timestamp of the Instance Template.
                     type: string
                   filesystemIds:
-                    description: The IDs of the filesystems to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      - The IDs of the filesystems to attach to the servers created using the template.
+                      The IDs of the filesystems to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   id:
+                    description: The ID of the template.
                     type: string
                   name:
-                    description: The name of the Instance Template. If not provided,
-                      a random name will be generated.
+                    description: |-
+                      The name of the template. If not provided it will be randomly generated.
+                      The name of the Instance Template. If not provided, a random name will be generated.
                     type: string
                   placementGroupId:
-                    description: The ID of the placement group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the placement group to attach to the servers created using the template.
+                      The ID of the placement group to attach to the servers created using the Instance Template.
                     type: string
                   privateNetworks:
-                    description: The IDs of the private networks to attach to the
-                      servers created using the Instance Template.
+                    description: |-
+                      - The IDs of the private networks to attach to the servers created using the template.
+                      The IDs of the private networks to attach to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   projectId:
-                    description: The project ID the Instance Template belongs to.
-                      Defaults to the provider's project ID.
+                    description: |-
+                      (Defaults to provider project_id) The ID of the project the template is associated with.
+                      The project ID the Instance Template belongs to. Defaults to the provider's project ID.
                     type: string
                   publicIpv4Count:
-                    description: The number of public IPv4 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
+                      The number of public IPv4 to attach to the servers created using the Instance Template.
                     type: number
                   publicIpv6Count:
-                    description: The number of public IPv6 to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
+                      The number of public IPv6 to attach to the servers created using the Instance Template.
                     type: number
                   securityGroupId:
-                    description: The ID of the security group to attach to the servers
-                      created using the Instance Template.
+                    description: |-
+                      The ID of the security group to attach to the servers created using the template.
+                      The ID of the security group to attach to the servers created using the Instance Template.
                     type: string
                   serverTags:
-                    description: The tags that will be assigned to the servers created
-                      using the Instance Template.
+                    description: |-
+                      A list of tags to apply to the servers created from the template.
+                      The tags that will be assigned to the servers created using the Instance Template.
                     items:
                       type: string
                     type: array
                   serverType:
-                    description: The commercial type of the server defined by the
-                      Instance Template.
+                    description: |-
+                      The commercial type of the server defined in the template.
+                      The commercial type of the server defined by the Instance Template.
                     type: string
                   tags:
-                    description: The tags associated with the Instance Template.
+                    description: |-
+                      A list of tags to apply to the template.
+                      The tags associated with the Instance Template.
                     items:
                       type: string
                     type: array
                   updatedAt:
-                    description: The last update timestamp of the Instance Template.
+                    description: |-
+                      The last update timestamp of the Instance template.
+                      The last update timestamp of the Instance Template.
                     type: string
                   volumes:
+                    description: The list of specs describing the volumes to attach
+                      to the servers created using the template.
                     items:
                       properties:
                         baseSnapshotId:
-                          description: The ID of the base snapshot for the volume.
+                          description: |-
+                            The ID of the base snapshot for the volume.
+                            The ID of the base snapshot for the volume.
                           type: string
                         imageLabel:
-                          description: The label of the image used as base for the
-                            volume.
+                          description: |-
+                            The label of the image used as base for the volume.
+                            The label of the image used as base for the volume.
                           type: string
                         name:
-                          description: The name of volume. If not provided, a random
-                            name will be generated.
+                          description: |-
+                            The name of volume.
+                            The name of volume. If not provided, a random name will be generated.
                           type: string
                         perfIops:
-                          description: The performance IOPS of the volume.
+                          description: |-
+                            The performance IOPS of the volume, required for sbs type volumes.
+                            The performance IOPS of the volume.
                           type: number
                         sizeInGb:
                           description: The size of the volume in gigabytes.
                           type: number
                         tags:
-                          description: The tags associated with the volume.
+                          description: |-
+                            The tags associated with the volume.
+                            The tags associated with the volume.
                           items:
                             type: string
                           type: array
                         volumeType:
-                          description: The type of volume.
+                          description: |-
+                            The type of the volume.
+                            The type of volume.
                           type: string
                       type: object
                     type: array
                   windowsRdpSshKeyId:
-                    description: The ID of the IAM SSH key used to encrypt the initial
-                      admin password on a Windows server. This will be repeated on
-                      all servers created using the Instance Template.
+                    description: |-
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
+                      The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
                     type: string
                   zone:
-                    description: The zone the Instance Template is in.
+                    description: |-
+                      (Defaults to provider zone) The zone in which the template should be created.
+                      The zone the Instance Template is in.
                     type: string
                 type: object
               conditions:

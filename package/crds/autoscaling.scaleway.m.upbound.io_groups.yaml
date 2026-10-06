@@ -463,7 +463,7 @@ spec:
                     type: object
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the Instance group exists.
+                      The zone in which the Instance group exists.
                       The zone you want to attach the resource to
                     type: string
                 type: object
@@ -885,7 +885,7 @@ spec:
                     type: object
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the Instance group exists.
+                      The zone in which the Instance group exists.
                       The zone you want to attach the resource to
                     type: string
                 type: object
@@ -1042,7 +1042,7 @@ spec:
                     type: string
                   zone:
                     description: |-
-                      (Defaults to provider zone) The zone in which the Instance group exists.
+                      The zone in which the Instance group exists.
                       The zone you want to attach the resource to
                     type: string
                 type: object

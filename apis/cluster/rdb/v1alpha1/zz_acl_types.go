@@ -32,7 +32,7 @@ type ACLInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// The region in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -49,7 +49,7 @@ type ACLObservation struct {
 	// Instance on which the ACL is applied
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// The region in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -75,7 +75,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider region) The region in which the Database Instance should be created.
+	// The region in which the Database Instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

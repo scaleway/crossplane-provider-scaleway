@@ -197,7 +197,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the Route is attached to.
+                      The region in which the Route is attached to.
                       The region you want to attach the resource to
                     type: string
                   rest:
@@ -414,7 +414,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the Route is attached to.
+                      The region in which the Route is attached to.
                       The region you want to attach the resource to
                     type: string
                   rest:
@@ -602,7 +602,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the Route is attached to.
+                      The region in which the Route is attached to.
                       The region you want to attach the resource to
                     type: string
                   rest:

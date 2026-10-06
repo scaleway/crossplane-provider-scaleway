@@ -86,6 +86,7 @@ type ApiKeyObservation struct {
 	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the API key.
 	// The Scaleway Resource Name (SRN) of the API key
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

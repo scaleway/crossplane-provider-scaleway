@@ -99,7 +99,7 @@ type SQSQueueInitParameters struct {
 	// The number of seconds to wait for a message to arrive in the queue before returning.
 	ReceiveWaitTimeSeconds *float64 `json:"receiveWaitTimeSeconds,omitempty" tf:"receive_wait_time_seconds,omitempty"`
 
-	// (Defaults to provider region). The region in which SQS is enabled.
+	// . The region in which SQS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -170,7 +170,7 @@ type SQSQueueObservation struct {
 	// The number of seconds to wait for a message to arrive in the queue before returning.
 	ReceiveWaitTimeSeconds *float64 `json:"receiveWaitTimeSeconds,omitempty" tf:"receive_wait_time_seconds,omitempty"`
 
-	// (Defaults to provider region). The region in which SQS is enabled.
+	// . The region in which SQS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -248,7 +248,7 @@ type SQSQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	ReceiveWaitTimeSeconds *float64 `json:"receiveWaitTimeSeconds,omitempty" tf:"receive_wait_time_seconds,omitempty"`
 
-	// (Defaults to provider region). The region in which SQS is enabled.
+	// . The region in which SQS is enabled.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

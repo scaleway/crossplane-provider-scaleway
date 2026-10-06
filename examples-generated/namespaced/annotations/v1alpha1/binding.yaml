@@ -1,0 +1,72 @@
+apiVersion: annotations.scaleway.m.upbound.io/v1alpha1
+kind: Binding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    srnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    valueIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: production
+
+---
+
+apiVersion: annotations.scaleway.m.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: environment
+  name: environment
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Deployment environment (production, staging, development)
+    name: environment
+
+---
+
+apiVersion: annotations.scaleway.m.upbound.io/v1alpha1
+kind: Value
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: production
+  name: production
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Production environment
+    keyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: environment
+    name: production
+
+---
+
+apiVersion: keymanager.scaleway.m.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/binding
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    algorithm: aes_256_gcm
+    description: Example key for binding
+    name: example-key
+    region: fr-par
+    unprotected: true
+    usage: symmetric_encryption

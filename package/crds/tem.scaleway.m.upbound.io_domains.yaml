@@ -72,7 +72,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
+                      . Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -103,7 +103,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
+                      . Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
                       The region you want to attach the resource to
                     type: string
                 type: object
@@ -231,7 +231,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
+                      . Specifies the region where the domain is registered. If not specified, it defaults to the provider's region.
                       The region you want to attach the resource to
                     type: string
                   reputation:

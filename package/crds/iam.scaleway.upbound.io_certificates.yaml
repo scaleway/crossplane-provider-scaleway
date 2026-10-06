@@ -404,7 +404,9 @@ spec:
                       The ID of the SAML configuration
                     type: string
                   srn:
-                    description: The Scaleway Resource Name (SRN) of the SAML certificate
+                    description: |-
+                      (String) The Scaleway Resource Name (SRN) of the SAML certificate.
+                      The Scaleway Resource Name (SRN) of the SAML certificate
                     type: string
                   type:
                     description: |-

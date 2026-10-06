@@ -57,6 +57,7 @@ type ApplicationObservation struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the application.
 	// The Scaleway Resource Name (SRN) of the application
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

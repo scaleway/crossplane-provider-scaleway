@@ -32,7 +32,7 @@ type DomainInitParameters struct {
 	// Domain's hostname
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists.
+	// The region in which the container exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -50,7 +50,7 @@ type DomainObservation struct {
 	// The unique identifier of the container domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists.
+	// The region in which the container exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -80,7 +80,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// (Defaults to provider region) The region in which the container exists.
+	// The region in which the container exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

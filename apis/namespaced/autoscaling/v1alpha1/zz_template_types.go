@@ -142,7 +142,7 @@ type TemplateInitParameters struct {
 	// The IPv4 subnet associated with the private network
 	Volumes []VolumesInitParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance template exists.
+	// The zone in which the Instance template exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -211,7 +211,7 @@ type TemplateObservation struct {
 	// The IPv4 subnet associated with the private network
 	Volumes []VolumesObservation `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance template exists.
+	// The zone in which the Instance template exists.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -287,7 +287,7 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Volumes []VolumesParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Instance template exists.
+	// The zone in which the Instance template exists.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

@@ -221,7 +221,9 @@ spec:
                       The single sign-on URL of the SAML Identity Provider
                     type: string
                   srn:
-                    description: The Scaleway Resource Name (SRN) of the SAML configuration
+                    description: |-
+                      (Computed) The Scaleway Resource Name (SRN) of the SAML configuration.
+                      The Scaleway Resource Name (SRN) of the SAML configuration
                     type: string
                   status:
                     description: |-

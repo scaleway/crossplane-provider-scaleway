@@ -1,0 +1,30 @@
+apiVersion: annotations.scaleway.upbound.io/v1alpha1
+kind: Value
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/value
+  labels:
+    testing.upbound.io/example-name: production
+  name: production
+spec:
+  forProvider:
+    description: Production environment
+    keyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: environment
+    name: production
+
+---
+
+apiVersion: annotations.scaleway.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: annotations/v1alpha1/value
+  labels:
+    testing.upbound.io/example-name: environment
+  name: environment
+spec:
+  forProvider:
+    description: Deployment environment (production, staging, development)
+    name: environment

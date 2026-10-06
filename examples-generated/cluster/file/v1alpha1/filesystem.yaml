@@ -8,5 +8,5 @@ metadata:
   name: file
 spec:
   forProvider:
-    name: my-nfs-filesystem
+    name: my-filesystem
     sizeInGb: 100

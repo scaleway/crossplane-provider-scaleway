@@ -192,7 +192,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which SNS is enabled.
                       The region you want to attach the resource to
                     type: string
@@ -354,7 +354,7 @@ spec:
                     type: object
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which SNS is enabled.
                       The region you want to attach the resource to
                     type: string
@@ -522,7 +522,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region). The region
+                      . The region
                       in which SNS is enabled.
                       The region you want to attach the resource to
                     type: string
