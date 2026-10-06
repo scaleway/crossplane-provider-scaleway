@@ -47,7 +47,7 @@ type DeploymentInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint information (always created automatically).
 	// Public endpoint configuration. A public endpoint is created only when this block is defined.
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
@@ -55,7 +55,7 @@ type DeploymentInitParameters struct {
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// The region in which the deployment should be created.
+	// (Defaults to provider region) The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -117,7 +117,7 @@ type DeploymentObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint information (always created automatically).
 	// Public endpoint configuration. A public endpoint is created only when this block is defined.
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
@@ -125,7 +125,7 @@ type DeploymentObservation struct {
 	// RAM per CPU (GB)
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// The region in which the deployment should be created.
+	// (Defaults to provider region) The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -137,7 +137,6 @@ type DeploymentObservation struct {
 	// Number of shards for the deployment. This value is immutable and cannot be changed after creation.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the deployment.
 	// The Scaleway Resource Name (SRN) of the deployment
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
@@ -204,7 +203,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// Public endpoint configuration. When defined, a public endpoint is created. Omitting this block creates a deployment without a public endpoint.
+	// Public endpoint information (always created automatically).
 	// Public endpoint configuration. A public endpoint is created only when this block is defined.
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
@@ -214,7 +213,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	RAMPerCPU *float64 `json:"ramPerCpu,omitempty" tf:"ram_per_cpu,omitempty"`
 
-	// The region in which the deployment should be created.
+	// (Defaults to provider region) The region in which the deployment should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

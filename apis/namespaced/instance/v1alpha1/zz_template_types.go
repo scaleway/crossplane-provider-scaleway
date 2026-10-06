@@ -16,7 +16,6 @@ import (
 
 type TemplateInitParameters struct {
 
-	// - The IDs of the filesystems to attach to the servers created using the template.
 	// The IDs of the filesystems to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/file/v1alpha1.Filesystem
 	// +listType=set
@@ -30,11 +29,9 @@ type TemplateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FilesystemIdsSelector *v1.NamespacedSelector `json:"filesystemIdsSelector,omitempty" tf:"-"`
 
-	// The name of the template. If not provided it will be randomly generated.
 	// The name of the Instance Template. If not provided, a random name will be generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the placement group to attach to the servers created using the template.
 	// The ID of the placement group to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.PlacementGroup
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
@@ -47,7 +44,6 @@ type TemplateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.NamespacedSelector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
-	// - The IDs of the private networks to attach to the servers created using the template.
 	// The IDs of the private networks to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/vpc/v1alpha1.PrivateNetwork
 	// +listType=set
@@ -61,19 +57,15 @@ type TemplateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworksSelector *v1.NamespacedSelector `json:"privateNetworksSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider project_id) The ID of the project the template is associated with.
 	// The project ID the Instance Template belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
 	// The number of public IPv4 to attach to the servers created using the Instance Template.
 	PublicIPv4Count *float64 `json:"publicIpv4Count,omitempty" tf:"public_ipv4_count,omitempty"`
 
-	// (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
 	// The number of public IPv6 to attach to the servers created using the Instance Template.
 	PublicIPv6Count *float64 `json:"publicIpv6Count,omitempty" tf:"public_ipv6_count,omitempty"`
 
-	// The ID of the security group to attach to the servers created using the template.
 	// The ID of the security group to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
@@ -86,22 +78,17 @@ type TemplateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of tags to apply to the servers created from the template.
 	// The tags that will be assigned to the servers created using the Instance Template.
 	ServerTags []*string `json:"serverTags,omitempty" tf:"server_tags,omitempty"`
 
-	// The commercial type of the server defined in the template.
 	// The commercial type of the server defined by the Instance Template.
 	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
 
-	// A list of tags to apply to the template.
 	// The tags associated with the Instance Template.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of specs describing the volumes to attach to the servers created using the template.
 	Volumes []VolumesInitParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
 	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/iam/v1alpha1.SSHKey
 	WindowsRdpSSHKeyID *string `json:"windowsRdpSshKeyId,omitempty" tf:"windows_rdp_ssh_key_id,omitempty"`
@@ -114,85 +101,66 @@ type TemplateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	WindowsRdpSSHKeyIDSelector *v1.NamespacedSelector `json:"windowsRdpSshKeyIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which the template should be created.
 	// The zone the Instance Template is in.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type TemplateObservation struct {
 
-	// The creation timestamp of the Instance template.
 	// The creation timestamp of the Instance Template.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// - The IDs of the filesystems to attach to the servers created using the template.
 	// The IDs of the filesystems to attach to the servers created using the Instance Template.
 	// +listType=set
 	FilesystemIds []*string `json:"filesystemIds,omitempty" tf:"filesystem_ids,omitempty"`
 
-	// The ID of the template.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the template. If not provided it will be randomly generated.
 	// The name of the Instance Template. If not provided, a random name will be generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the placement group to attach to the servers created using the template.
 	// The ID of the placement group to attach to the servers created using the Instance Template.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// - The IDs of the private networks to attach to the servers created using the template.
 	// The IDs of the private networks to attach to the servers created using the Instance Template.
 	// +listType=set
 	PrivateNetworks []*string `json:"privateNetworks,omitempty" tf:"private_networks,omitempty"`
 
-	// (Defaults to provider project_id) The ID of the project the template is associated with.
 	// The project ID the Instance Template belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
 	// The number of public IPv4 to attach to the servers created using the Instance Template.
 	PublicIPv4Count *float64 `json:"publicIpv4Count,omitempty" tf:"public_ipv4_count,omitempty"`
 
-	// (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
 	// The number of public IPv6 to attach to the servers created using the Instance Template.
 	PublicIPv6Count *float64 `json:"publicIpv6Count,omitempty" tf:"public_ipv6_count,omitempty"`
 
-	// The ID of the security group to attach to the servers created using the template.
 	// The ID of the security group to attach to the servers created using the Instance Template.
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// A list of tags to apply to the servers created from the template.
 	// The tags that will be assigned to the servers created using the Instance Template.
 	ServerTags []*string `json:"serverTags,omitempty" tf:"server_tags,omitempty"`
 
-	// The commercial type of the server defined in the template.
 	// The commercial type of the server defined by the Instance Template.
 	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
 
-	// A list of tags to apply to the template.
 	// The tags associated with the Instance Template.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The last update timestamp of the Instance template.
 	// The last update timestamp of the Instance Template.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// The list of specs describing the volumes to attach to the servers created using the template.
 	Volumes []VolumesObservation `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
 	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
 	WindowsRdpSSHKeyID *string `json:"windowsRdpSshKeyId,omitempty" tf:"windows_rdp_ssh_key_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the template should be created.
 	// The zone the Instance Template is in.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type TemplateParameters struct {
 
-	// - The IDs of the filesystems to attach to the servers created using the template.
 	// The IDs of the filesystems to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/file/v1alpha1.Filesystem
 	// +kubebuilder:validation:Optional
@@ -207,12 +175,10 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	FilesystemIdsSelector *v1.NamespacedSelector `json:"filesystemIdsSelector,omitempty" tf:"-"`
 
-	// The name of the template. If not provided it will be randomly generated.
 	// The name of the Instance Template. If not provided, a random name will be generated.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the placement group to attach to the servers created using the template.
 	// The ID of the placement group to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.PlacementGroup
 	// +kubebuilder:validation:Optional
@@ -226,7 +192,6 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupIDSelector *v1.NamespacedSelector `json:"placementGroupIdSelector,omitempty" tf:"-"`
 
-	// - The IDs of the private networks to attach to the servers created using the template.
 	// The IDs of the private networks to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/vpc/v1alpha1.PrivateNetwork
 	// +kubebuilder:validation:Optional
@@ -241,22 +206,18 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateNetworksSelector *v1.NamespacedSelector `json:"privateNetworksSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider project_id) The ID of the project the template is associated with.
 	// The project ID the Instance Template belongs to. Defaults to the provider's project ID.
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to 0) The number of public IPv4 to attach to the servers created using the template.
 	// The number of public IPv4 to attach to the servers created using the Instance Template.
 	// +kubebuilder:validation:Optional
 	PublicIPv4Count *float64 `json:"publicIpv4Count,omitempty" tf:"public_ipv4_count,omitempty"`
 
-	// (Defaults to 0) The number of public IPv6 to attach to the servers created using the template.
 	// The number of public IPv6 to attach to the servers created using the Instance Template.
 	// +kubebuilder:validation:Optional
 	PublicIPv6Count *float64 `json:"publicIpv6Count,omitempty" tf:"public_ipv6_count,omitempty"`
 
-	// The ID of the security group to attach to the servers created using the template.
 	// The ID of the security group to attach to the servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
@@ -270,26 +231,21 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of tags to apply to the servers created from the template.
 	// The tags that will be assigned to the servers created using the Instance Template.
 	// +kubebuilder:validation:Optional
 	ServerTags []*string `json:"serverTags,omitempty" tf:"server_tags,omitempty"`
 
-	// The commercial type of the server defined in the template.
 	// The commercial type of the server defined by the Instance Template.
 	// +kubebuilder:validation:Optional
 	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
 
-	// A list of tags to apply to the template.
 	// The tags associated with the Instance Template.
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The list of specs describing the volumes to attach to the servers created using the template.
 	// +kubebuilder:validation:Optional
 	Volumes []VolumesParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 
-	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the template.
 	// The ID of the IAM SSH key used to encrypt the initial admin password on a Windows server. This will be repeated on all servers created using the Instance Template.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/iam/v1alpha1.SSHKey
 	// +kubebuilder:validation:Optional
@@ -303,7 +259,6 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	WindowsRdpSSHKeyIDSelector *v1.NamespacedSelector `json:"windowsRdpSshKeyIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which the template should be created.
 	// The zone the Instance Template is in.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -312,18 +267,14 @@ type TemplateParameters struct {
 type VolumesInitParameters struct {
 
 	// The ID of the base snapshot for the volume.
-	// The ID of the base snapshot for the volume.
 	BaseSnapshotID *string `json:"baseSnapshotId,omitempty" tf:"base_snapshot_id,omitempty"`
 
 	// The label of the image used as base for the volume.
-	// The label of the image used as base for the volume.
 	ImageLabel *string `json:"imageLabel,omitempty" tf:"image_label,omitempty"`
 
-	// The name of volume.
 	// The name of volume. If not provided, a random name will be generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The performance IOPS of the volume, required for sbs type volumes.
 	// The performance IOPS of the volume.
 	PerfIops *float64 `json:"perfIops,omitempty" tf:"perf_iops,omitempty"`
 
@@ -331,10 +282,8 @@ type VolumesInitParameters struct {
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// The tags associated with the volume.
-	// The tags associated with the volume.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume.
 	// The type of volume.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -342,18 +291,14 @@ type VolumesInitParameters struct {
 type VolumesObservation struct {
 
 	// The ID of the base snapshot for the volume.
-	// The ID of the base snapshot for the volume.
 	BaseSnapshotID *string `json:"baseSnapshotId,omitempty" tf:"base_snapshot_id,omitempty"`
 
 	// The label of the image used as base for the volume.
-	// The label of the image used as base for the volume.
 	ImageLabel *string `json:"imageLabel,omitempty" tf:"image_label,omitempty"`
 
-	// The name of volume.
 	// The name of volume. If not provided, a random name will be generated.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The performance IOPS of the volume, required for sbs type volumes.
 	// The performance IOPS of the volume.
 	PerfIops *float64 `json:"perfIops,omitempty" tf:"perf_iops,omitempty"`
 
@@ -361,10 +306,8 @@ type VolumesObservation struct {
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// The tags associated with the volume.
-	// The tags associated with the volume.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume.
 	// The type of volume.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -372,21 +315,17 @@ type VolumesObservation struct {
 type VolumesParameters struct {
 
 	// The ID of the base snapshot for the volume.
-	// The ID of the base snapshot for the volume.
 	// +kubebuilder:validation:Optional
 	BaseSnapshotID *string `json:"baseSnapshotId,omitempty" tf:"base_snapshot_id,omitempty"`
 
 	// The label of the image used as base for the volume.
-	// The label of the image used as base for the volume.
 	// +kubebuilder:validation:Optional
 	ImageLabel *string `json:"imageLabel,omitempty" tf:"image_label,omitempty"`
 
-	// The name of volume.
 	// The name of volume. If not provided, a random name will be generated.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The performance IOPS of the volume, required for sbs type volumes.
 	// The performance IOPS of the volume.
 	// +kubebuilder:validation:Optional
 	PerfIops *float64 `json:"perfIops,omitempty" tf:"perf_iops,omitempty"`
@@ -396,11 +335,9 @@ type VolumesParameters struct {
 	SizeInGb *float64 `json:"sizeInGb" tf:"size_in_gb,omitempty"`
 
 	// The tags associated with the volume.
-	// The tags associated with the volume.
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the volume.
 	// The type of volume.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType" tf:"volume_type,omitempty"`
@@ -433,7 +370,7 @@ type TemplateStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Template is the Schema for the Templates API.
+// Template is the Schema for the Templates API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

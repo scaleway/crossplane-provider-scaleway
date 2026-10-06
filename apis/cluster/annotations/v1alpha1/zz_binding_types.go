@@ -15,7 +15,6 @@ import (
 
 type BindingInitParameters struct {
 
-	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1.Key
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
@@ -28,7 +27,6 @@ type BindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SrnSelector *v1.Selector `json:"srnSelector,omitempty" tf:"-"`
 
-	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/annotations/v1alpha1.Value
 	ValueID *string `json:"valueId,omitempty" tf:"value_id,omitempty"`
@@ -43,26 +41,20 @@ type BindingInitParameters struct {
 }
 
 type BindingObservation struct {
-
-	// The ID of the annotation binding.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ID of the key associated to the binding.
-	// ID of the key associated to the binding.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
-	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
 	ValueID *string `json:"valueId,omitempty" tf:"value_id,omitempty"`
 }
 
 type BindingParameters struct {
 
-	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1.Key
 	// +kubebuilder:validation:Optional
@@ -76,7 +68,6 @@ type BindingParameters struct {
 	// +kubebuilder:validation:Optional
 	SrnSelector *v1.Selector `json:"srnSelector,omitempty" tf:"-"`
 
-	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/annotations/v1alpha1.Value
 	// +kubebuilder:validation:Optional
@@ -118,7 +109,7 @@ type BindingStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Binding is the Schema for the Bindings API.
+// Binding is the Schema for the Bindings API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

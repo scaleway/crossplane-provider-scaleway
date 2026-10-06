@@ -137,7 +137,6 @@ type UserObservation struct {
 	// Whether or not to send a welcome email that includes onboarding information
 	SendWelcomeEmail *bool `json:"sendWelcomeEmail,omitempty" tf:"send_welcome_email,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the user.
 	// The Scaleway Resource Name (SRN) of the user
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

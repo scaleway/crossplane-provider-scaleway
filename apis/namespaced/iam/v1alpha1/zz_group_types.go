@@ -63,7 +63,6 @@ type GroupObservation struct {
 	// +listType=set
 	ApplicationIds []*string `json:"applicationIds,omitempty" tf:"application_ids,omitempty"`
 
-	// The date and time of the creation of the group.
 	// The date and time of the creation of the group
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -75,7 +74,6 @@ type GroupObservation struct {
 	// Handle user and application memberships externally
 	ExternalMembership *bool `json:"externalMembership,omitempty" tf:"external_membership,omitempty"`
 
-	// The ID of the group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the IAM group.
@@ -86,7 +84,6 @@ type GroupObservation struct {
 	// ID of organization the resource is associated to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the group.
 	// The Scaleway Resource Name (SRN) of the group
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
@@ -94,7 +91,6 @@ type GroupObservation struct {
 	// The tags associated with the group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The date and time of the last update of the group.
 	// The date and time of the last update of the group
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 

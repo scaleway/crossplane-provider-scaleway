@@ -24,13 +24,13 @@ type FilesystemInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region where the filesystem will be created (e.g., fr-par, nl-ams).
+	// (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
-	// - Minimum: 25 GB
-	// - Maximum: 50 TB (50000 GB)
+	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
+	// - Minimum: 100 GB (100000000000 bytes)
+	// - Maximum: 10 TB (10000000000000 bytes)
 	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -65,13 +65,13 @@ type FilesystemObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region where the filesystem will be created (e.g., fr-par, nl-ams).
+	// (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
-	// - Minimum: 25 GB
-	// - Maximum: 50 TB (50000 GB)
+	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
+	// - Minimum: 100 GB (100000000000 bytes)
+	// - Maximum: 10 TB (10000000000000 bytes)
 	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
@@ -105,14 +105,14 @@ type FilesystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region where the filesystem will be created (e.g., fr-par, nl-ams).
+	// (Defaults to provider region) The region where the filesystem will be created (e.g., fr-par, nl-ams).
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The size of the filesystem in gigabytes (10⁹ bytes), with a granularity of 1 GB.
-	// - Minimum: 25 GB
-	// - Maximum: 50 TB (50000 GB)
+	// The size of the filesystem in bytes, with a granularity of 100 GB (10¹¹ bytes).
+	// - Minimum: 100 GB (100000000000 bytes)
+	// - Maximum: 10 TB (10000000000000 bytes)
 	// The filesystem size in GB. Minimum 25GB, maximum 50TB
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`

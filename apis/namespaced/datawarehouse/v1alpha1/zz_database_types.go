@@ -33,7 +33,7 @@ type DatabaseInitParameters struct {
 	// Name of the database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The region in which the database should be created.
+	// (Defaults to provider region) The region in which the database should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -51,7 +51,7 @@ type DatabaseObservation struct {
 	// Name of the database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The region in which the database should be created.
+	// (Defaults to provider region) The region in which the database should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -59,7 +59,6 @@ type DatabaseObservation struct {
 	// Size of the database (in GB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the database.
 	// The Scaleway Resource Name (SRN) of the database
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 }
@@ -85,7 +84,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The region in which the database should be created.
+	// (Defaults to provider region) The region in which the database should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

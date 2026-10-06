@@ -215,7 +215,7 @@ type ConnectionInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the connection should be created.
+	// (Defaults to provider region) The region in which the connection should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -306,7 +306,7 @@ type ConnectionObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the connection should be created.
+	// (Defaults to provider region) The region in which the connection should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -322,7 +322,6 @@ type ConnectionObservation struct {
 	// The BGP peer IP on customer side
 	SecretVersion *float64 `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
 
-	// The Scaleway Resource Name (SRN) of the connection.
 	// The Scaleway Resource Name (SRN) of the connection
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 
@@ -408,7 +407,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The region in which the connection should be created.
+	// (Defaults to provider region) The region in which the connection should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
