@@ -8,23 +8,33 @@ metadata:
   name: main
 spec:
   forProvider:
-    capacity:
-    - cooldownDelay: "300"
-      maxReplicas: 5
-      minReplicas: 1
-    loadBalancer:
-    - backendIdsRefs:
-      - name: main
-      idSelector:
-        matchLabels:
-          testing.upbound.io/example-name: main
-      privateNetworkIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: main
-    name: asg-group
+    name: asg-cpu-target
+    scalingPolicy:
+      cpuTarget: 92
+      maximumSize: 25
+      minimumSize: 0
+      scaleInCooldown: 2m
+      scaleInStep: 5
+      scaleOutCooldown: 1m
+      scaleOutStep: 5
     tags:
-    - terraform-test
-    - instance-group
+    - tf-examples
+    - scaleway_autoscaling_group
+    - cpu-target
     templateIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
+
+---
+
+apiVersion: instance.scaleway.upbound.io/v1alpha1
+kind: Template
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    serverType: GP1-L
