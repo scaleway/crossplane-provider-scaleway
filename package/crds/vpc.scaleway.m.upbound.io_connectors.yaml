@@ -65,7 +65,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the VPC connector.
+                      The region of the VPC connector.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -266,7 +266,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the VPC connector.
+                      The region of the VPC connector.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -535,7 +535,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the VPC connector.
+                      The region of the VPC connector.
                       The region you want to attach the resource to
                     type: string
                   srn:

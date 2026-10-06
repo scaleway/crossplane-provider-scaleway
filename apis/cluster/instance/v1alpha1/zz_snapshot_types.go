@@ -85,7 +85,7 @@ type SnapshotInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the snapshot should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -134,7 +134,7 @@ type SnapshotObservation struct {
 	// ID of the volume to take a snapshot from
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the snapshot should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -183,7 +183,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 
-	// (Defaults to provider zone) The zone in which
+	// The zone in which
 	// the snapshot should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional

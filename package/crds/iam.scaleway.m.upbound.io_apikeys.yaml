@@ -395,7 +395,9 @@ spec:
                     description: The ID of the API key, which is the access key.
                     type: string
                   srn:
-                    description: The Scaleway Resource Name (SRN) of the API key
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the API key.
+                      The Scaleway Resource Name (SRN) of the API key
                     type: string
                   updatedAt:
                     description: |-

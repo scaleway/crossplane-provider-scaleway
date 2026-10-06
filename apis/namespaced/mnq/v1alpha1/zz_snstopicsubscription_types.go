@@ -44,7 +44,7 @@ type SNSTopicSubscriptionInitParameters struct {
 	// JSON Redrive policy
 	RedrivePolicy *bool `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which SNS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -99,7 +99,7 @@ type SNSTopicSubscriptionObservation struct {
 	// JSON Redrive policy
 	RedrivePolicy *bool `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which SNS is enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -152,7 +152,7 @@ type SNSTopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	RedrivePolicy *bool `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
-	// (Defaults to provider region). The region
+	// . The region
 	// in which SNS is enabled.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional

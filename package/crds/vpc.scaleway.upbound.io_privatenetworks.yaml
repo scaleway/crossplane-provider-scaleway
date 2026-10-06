@@ -120,7 +120,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the Private Network.
+                      The region of the Private Network.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -276,7 +276,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the Private Network.
+                      The region of the Private Network.
                       The region you want to attach the resource to
                     type: string
                   tags:
@@ -593,7 +593,7 @@ spec:
                     type: string
                   region:
                     description: |-
-                      (Defaults to provider region) The region of the Private Network.
+                      The region of the Private Network.
                       The region you want to attach the resource to
                     type: string
                   srn:

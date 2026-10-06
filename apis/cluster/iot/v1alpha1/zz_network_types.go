@@ -32,7 +32,7 @@ type NetworkInitParameters struct {
 	// The name of the network
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Network is attached to.
+	// The region in which the Network is attached to.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -66,7 +66,7 @@ type NetworkObservation struct {
 	// The name of the network
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Network is attached to.
+	// The region in which the Network is attached to.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -100,7 +100,7 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region in which the Network is attached to.
+	// The region in which the Network is attached to.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

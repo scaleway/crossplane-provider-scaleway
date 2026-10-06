@@ -19,7 +19,7 @@ type ConnectorInitParameters struct {
 	// The name of the VPC connector
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region of the VPC connector.
+	// The region of the VPC connector.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -75,7 +75,7 @@ type ConnectorObservation struct {
 	// The Scaleway Project the VPC connector belongs to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// (Defaults to provider region) The region of the VPC connector.
+	// The region of the VPC connector.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -111,7 +111,7 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Defaults to provider region) The region of the VPC connector.
+	// The region of the VPC connector.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

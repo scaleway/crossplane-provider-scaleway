@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Binding is the Schema for the Bindings API. <no value>
+        description: Binding is the Schema for the Bindings API.
         properties:
           apiVersion:
             description: |-
@@ -59,7 +59,9 @@ spec:
               forProvider:
                 properties:
                   srn:
-                    description: Scaleway Resource Number to associate.
+                    description: |-
+                      Scaleway Resource Number to associate. Changing this forces a new resource to be created.
+                      Scaleway Resource Number to associate.
                     type: string
                   srnRef:
                     description: Reference to a Key in keymanager to populate srn.
@@ -142,7 +144,9 @@ spec:
                         type: object
                     type: object
                   valueId:
-                    description: ID of the value to associate.
+                    description: |-
+                      ID of the value to associate. Changing this forces a new resource to be created.
+                      ID of the value to associate.
                     type: string
                   valueIdRef:
                     description: Reference to a Value in annotations to populate valueId.
@@ -239,7 +243,9 @@ spec:
                   autoscaler.
                 properties:
                   srn:
-                    description: Scaleway Resource Number to associate.
+                    description: |-
+                      Scaleway Resource Number to associate. Changing this forces a new resource to be created.
+                      Scaleway Resource Number to associate.
                     type: string
                   srnRef:
                     description: Reference to a Key in keymanager to populate srn.
@@ -322,7 +328,9 @@ spec:
                         type: object
                     type: object
                   valueId:
-                    description: ID of the value to associate.
+                    description: |-
+                      ID of the value to associate. Changing this forces a new resource to be created.
+                      ID of the value to associate.
                     type: string
                   valueIdRef:
                     description: Reference to a Value in annotations to populate valueId.
@@ -469,15 +477,22 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the annotation binding.
                     type: string
                   keyId:
-                    description: ID of the key associated to the binding.
+                    description: |-
+                      ID of the key associated to the binding.
+                      ID of the key associated to the binding.
                     type: string
                   srn:
-                    description: Scaleway Resource Number to associate.
+                    description: |-
+                      Scaleway Resource Number to associate. Changing this forces a new resource to be created.
+                      Scaleway Resource Number to associate.
                     type: string
                   valueId:
-                    description: ID of the value to associate.
+                    description: |-
+                      ID of the value to associate. Changing this forces a new resource to be created.
+                      ID of the value to associate.
                     type: string
                 type: object
               conditions:

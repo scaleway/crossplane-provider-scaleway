@@ -93,7 +93,7 @@ type UserInitParameters struct {
 	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® user should be created.
+	// The region in which the MongoDB® user should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -123,7 +123,7 @@ type UserObservation struct {
 	// The version of the [write-only](https://registry.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® user should be created.
+	// The region in which the MongoDB® user should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -168,7 +168,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® user should be created.
+	// The region in which the MongoDB® user should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

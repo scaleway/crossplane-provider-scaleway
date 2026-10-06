@@ -148,7 +148,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region in which the MongoDB® instance should be created.
                       The region you want to attach the resource to
                     type: string
                   settings:
@@ -303,7 +303,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region in which the MongoDB® instance should be created.
                       The region you want to attach the resource to
                     type: string
                   settings:
@@ -546,7 +546,7 @@ spec:
                     type: array
                   region:
                     description: |-
-                      (Defaults to provider region) The region in which the MongoDB® instance should be created.
+                      The region in which the MongoDB® instance should be created.
                       The region you want to attach the resource to
                     type: string
                   settings:

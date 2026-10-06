@@ -24,7 +24,7 @@ type AclInitParameters struct {
 	// Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider region) The region of the ACL.
+	// The region of the ACL.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -59,7 +59,7 @@ type AclObservation struct {
 	// Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider region) The region of the ACL.
+	// The region of the ACL.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -84,7 +84,7 @@ type AclParameters struct {
 	// +kubebuilder:validation:Optional
 	IsIPv6 *bool `json:"isIpv6,omitempty" tf:"is_ipv6,omitempty"`
 
-	// (Defaults to provider region) The region of the ACL.
+	// The region of the ACL.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

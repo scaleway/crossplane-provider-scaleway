@@ -81,6 +81,7 @@ type IpObservation struct {
 	// The baremetal server associated with this flexible IP
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the flexible IP.
 	// The Scaleway Resource Name (SRN) of the flexible IP
 	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 

@@ -223,7 +223,9 @@ spec:
                       The public SSH key
                     type: string
                   srn:
-                    description: The Scaleway Resource Name (SRN) of the SSH key
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the SSH key.
+                      The Scaleway Resource Name (SRN) of the SSH key
                     type: string
                   updatedAt:
                     description: |-

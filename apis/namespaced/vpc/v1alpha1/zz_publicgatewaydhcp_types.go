@@ -72,7 +72,7 @@ type PublicGatewayDHCPInitParameters struct {
 	// For how long, in seconds, will DHCP entries will be valid. Defaults to 1h (3600s).
 	ValidLifetime *float64 `json:"validLifetime,omitempty" tf:"valid_lifetime,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -150,7 +150,7 @@ type PublicGatewayDHCPObservation struct {
 	// For how long, in seconds, will DHCP entries will be valid. Defaults to 1h (3600s).
 	ValidLifetime *float64 `json:"validLifetime,omitempty" tf:"valid_lifetime,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -227,7 +227,7 @@ type PublicGatewayDHCPParameters struct {
 	// +kubebuilder:validation:Optional
 	ValidLifetime *float64 `json:"validLifetime,omitempty" tf:"valid_lifetime,omitempty"`
 
-	// (Defaults to provider zone) The zone in which the Public Gateway DHCP configuration should be created.
+	// The zone in which the Public Gateway DHCP configuration should be created.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`

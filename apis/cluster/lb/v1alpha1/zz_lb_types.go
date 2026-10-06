@@ -77,7 +77,7 @@ type LBInitParameters struct {
 	// The type of load-balancer you want to create
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -159,7 +159,7 @@ type LBObservation struct {
 	// The type of load-balancer you want to create
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -241,7 +241,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// The zone you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -293,7 +293,7 @@ type PrivateNetworkObservation struct {
 	// The status of private network connection
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// (Defaults to provider zone) The zone of the Load Balancer.
+	// The zone of the Load Balancer.
 	// Zone
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }

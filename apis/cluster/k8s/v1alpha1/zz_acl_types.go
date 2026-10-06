@@ -95,7 +95,7 @@ type AclInitParameters struct {
 	// If true, no IP will be allowed and the cluster will be fully isolated
 	NoIPAllowed *bool `json:"noIpAllowed,omitempty" tf:"no_ip_allowed,omitempty"`
 
-	// (Defaults to provider region) The region in which the ACL rule should be created.
+	// The region in which the ACL rule should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -117,7 +117,7 @@ type AclObservation struct {
 	// If true, no IP will be allowed and the cluster will be fully isolated
 	NoIPAllowed *bool `json:"noIpAllowed,omitempty" tf:"no_ip_allowed,omitempty"`
 
-	// (Defaults to provider region) The region in which the ACL rule should be created.
+	// The region in which the ACL rule should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -148,7 +148,7 @@ type AclParameters struct {
 	// +kubebuilder:validation:Optional
 	NoIPAllowed *bool `json:"noIpAllowed,omitempty" tf:"no_ip_allowed,omitempty"`
 
-	// (Defaults to provider region) The region in which the ACL rule should be created.
+	// The region in which the ACL rule should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

@@ -37,7 +37,7 @@ type PrivilegeInitParameters struct {
 	// Desired permission (readonly, readwrite, all, custom, none)
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -71,7 +71,7 @@ type PrivilegeObservation struct {
 	// Permission synchronization status: 'synced' if effective matches desired, 'drifted' if they differ
 	PermissionStatus *string `json:"permissionStatus,omitempty" tf:"permission_status,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -106,7 +106,7 @@ type PrivilegeParameters struct {
 	// +kubebuilder:validation:Optional
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 
-	// (Defaults to provider region) The region in which the resource exists.
+	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

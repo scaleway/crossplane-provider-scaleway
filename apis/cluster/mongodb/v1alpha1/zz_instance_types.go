@@ -58,7 +58,7 @@ type InstanceInitParameters struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -147,7 +147,7 @@ type InstanceObservation struct {
 	// Public network specs details
 	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -252,7 +252,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
-	// (Defaults to provider region) The region in which the MongoDB® instance should be created.
+	// The region in which the MongoDB® instance should be created.
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

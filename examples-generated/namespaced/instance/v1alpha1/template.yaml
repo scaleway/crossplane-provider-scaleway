@@ -1,0 +1,21 @@
+apiVersion: instance.scaleway.m.upbound.io/v1alpha1
+kind: Template
+metadata:
+  annotations:
+    meta.upbound.io/example-id: instance/v1alpha1/template
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: instance-template-basic
+    publicIpv4Count: 1
+    publicIpv6Count: 3
+    serverTags:
+    - created-from-template
+    serverType: PRO2-M
+    tags:
+    - terraform-examples
+    - scaleway_instance_template
+    - basic

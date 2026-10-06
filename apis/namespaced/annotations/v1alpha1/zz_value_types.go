@@ -17,8 +17,10 @@ import (
 type ValueInitParameters struct {
 
 	// Description of the annotation value.
+	// Description of the annotation value.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the key the value is associated to.
 	// ID of the key the value is associated to.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/annotations/v1alpha1.Key
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
@@ -31,6 +33,7 @@ type ValueInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// Name of the annotation value.
 	// Name of the annotation value.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -38,16 +41,21 @@ type ValueInitParameters struct {
 type ValueObservation struct {
 
 	// Description of the annotation value.
+	// Description of the annotation value.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the annotation value.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of the key the value is associated to.
 	// ID of the key the value is associated to.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Name of the annotation value.
+	// Name of the annotation value.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the annotation value.
 	// The ID of the annotation value.
 	ValueID *string `json:"valueId,omitempty" tf:"value_id,omitempty"`
 }
@@ -55,9 +63,11 @@ type ValueObservation struct {
 type ValueParameters struct {
 
 	// Description of the annotation value.
+	// Description of the annotation value.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the key the value is associated to.
 	// ID of the key the value is associated to.
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/annotations/v1alpha1.Key
 	// +kubebuilder:validation:Optional
@@ -71,6 +81,7 @@ type ValueParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// Name of the annotation value.
 	// Name of the annotation value.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -103,7 +114,7 @@ type ValueStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Value is the Schema for the Values API. <no value>
+// Value is the Schema for the Values API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
