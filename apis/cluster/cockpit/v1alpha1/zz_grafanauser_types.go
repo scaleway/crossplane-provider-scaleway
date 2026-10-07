@@ -21,16 +21,7 @@ type GrafanaUserInitParameters struct {
 
 	// (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/account/v1alpha1.Project
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
-
-	// Reference to a Project in account to populate projectId.
-	// +kubebuilder:validation:Optional
-	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
-
-	// Selector for a Project in account to populate projectId.
-	// +kubebuilder:validation:Optional
-	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// The role assigned to the Grafana user. Must be editor or viewer.
 	// The role of the Grafana user
@@ -67,17 +58,8 @@ type GrafanaUserParameters struct {
 
 	// (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.
 	// The project_id you want to attach the resource to
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/cluster/account/v1alpha1.Project
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
-
-	// Reference to a Project in account to populate projectId.
-	// +kubebuilder:validation:Optional
-	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
-
-	// Selector for a Project in account to populate projectId.
-	// +kubebuilder:validation:Optional
-	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// The role assigned to the Grafana user. Must be editor or viewer.
 	// The role of the Grafana user
