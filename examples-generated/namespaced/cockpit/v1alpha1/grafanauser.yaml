@@ -10,9 +10,7 @@ metadata:
 spec:
   forProvider:
     login: my-awesome-user
-    projectIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: project
+    projectId: ${scaleway_account_project.project.id}
     role: editor
 
 ---

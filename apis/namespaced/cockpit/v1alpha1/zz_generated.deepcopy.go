@@ -1035,16 +1035,6 @@ func (in *GrafanaUserInitParameters) DeepCopyInto(out *GrafanaUserInitParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.ProjectIDRef != nil {
-		in, out := &in.ProjectIDRef, &out.ProjectIDRef
-		*out = new(v1.NamespacedReference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ProjectIDSelector != nil {
-		in, out := &in.ProjectIDSelector, &out.ProjectIDSelector
-		*out = new(v1.NamespacedSelector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Role != nil {
 		in, out := &in.Role, &out.Role
 		*out = new(string)
@@ -1146,16 +1136,6 @@ func (in *GrafanaUserParameters) DeepCopyInto(out *GrafanaUserParameters) {
 		in, out := &in.ProjectID, &out.ProjectID
 		*out = new(string)
 		**out = **in
-	}
-	if in.ProjectIDRef != nil {
-		in, out := &in.ProjectIDRef, &out.ProjectIDRef
-		*out = new(v1.NamespacedReference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ProjectIDSelector != nil {
-		in, out := &in.ProjectIDSelector, &out.ProjectIDSelector
-		*out = new(v1.NamespacedSelector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.Role != nil {
 		in, out := &in.Role, &out.Role

@@ -33,7 +33,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		Watches(&v1beta1.ProviderConfigUsage{}, &resource.EnqueueRequestForProviderConfig{}).
 		Complete(providerconfig.NewReconciler(mgr, of,
 			providerconfig.WithLogger(o.Logger.WithValues("controller", name)),
-			providerconfig.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name)))))
+			providerconfig.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))))) //nolint:staticcheck // GetEventRecorder returns incompatible type
 }
 
 // SetupGated adds a controller that reconciles ProviderConfigs by accounting for
@@ -44,5 +44,11 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta1.ProviderConfigGroupVersionKind.String())
 		}
 	}, v1beta1.ProviderConfigGroupVersionKind, v1beta1.ProviderConfigUsageGroupVersionKind)
+	return nil
+}
+
+// SetupWebhookWithManager is a no-op as ProviderConfig types do not require
+// conversion webhooks.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
 	return nil
 }
