@@ -9,11 +9,56 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha12 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/block/v1alpha1"
-	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/lb/v1alpha1"
-	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1"
+	v1alpha13 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/block/v1alpha1"
+	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/instance/v1alpha1"
+	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/lb/v1alpha1"
+	v1alpha12 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this AutoscalingGroup.
+func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TemplateID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.TemplateIDRef,
+		Selector:     mg.Spec.ForProvider.TemplateIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.TemplateList{},
+			Managed: &v1alpha1.Template{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TemplateID")
+	}
+	mg.Spec.ForProvider.TemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TemplateIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TemplateID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.TemplateIDRef,
+		Selector:     mg.Spec.InitProvider.TemplateIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.TemplateList{},
+			Managed: &v1alpha1.Template{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TemplateID")
+	}
+	mg.Spec.InitProvider.TemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TemplateIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Group.
 func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -31,8 +76,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			References:    mg.Spec.ForProvider.LoadBalancer[i3].BackendIdsRefs,
 			Selector:      mg.Spec.ForProvider.LoadBalancer[i3].BackendIdsSelector,
 			To: reference.To{
-				List:    &v1alpha1.BackendList{},
-				Managed: &v1alpha1.Backend{},
+				List:    &v1alpha11.BackendList{},
+				Managed: &v1alpha11.Backend{},
 			},
 		})
 		if err != nil {
@@ -50,8 +95,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.ForProvider.LoadBalancer[i3].IDRef,
 			Selector:     mg.Spec.ForProvider.LoadBalancer[i3].IDSelector,
 			To: reference.To{
-				List:    &v1alpha1.LBList{},
-				Managed: &v1alpha1.LB{},
+				List:    &v1alpha11.LBList{},
+				Managed: &v1alpha11.LB{},
 			},
 		})
 		if err != nil {
@@ -69,8 +114,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.ForProvider.LoadBalancer[i3].PrivateNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.LoadBalancer[i3].PrivateNetworkIDSelector,
 			To: reference.To{
-				List:    &v1alpha11.PrivateNetworkList{},
-				Managed: &v1alpha11.PrivateNetwork{},
+				List:    &v1alpha12.PrivateNetworkList{},
+				Managed: &v1alpha12.PrivateNetwork{},
 			},
 		})
 		if err != nil {
@@ -105,8 +150,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			References:    mg.Spec.InitProvider.LoadBalancer[i3].BackendIdsRefs,
 			Selector:      mg.Spec.InitProvider.LoadBalancer[i3].BackendIdsSelector,
 			To: reference.To{
-				List:    &v1alpha1.BackendList{},
-				Managed: &v1alpha1.Backend{},
+				List:    &v1alpha11.BackendList{},
+				Managed: &v1alpha11.Backend{},
 			},
 		})
 		if err != nil {
@@ -124,8 +169,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.InitProvider.LoadBalancer[i3].IDRef,
 			Selector:     mg.Spec.InitProvider.LoadBalancer[i3].IDSelector,
 			To: reference.To{
-				List:    &v1alpha1.LBList{},
-				Managed: &v1alpha1.LB{},
+				List:    &v1alpha11.LBList{},
+				Managed: &v1alpha11.LB{},
 			},
 		})
 		if err != nil {
@@ -143,8 +188,8 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 			Reference:    mg.Spec.InitProvider.LoadBalancer[i3].PrivateNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.LoadBalancer[i3].PrivateNetworkIDSelector,
 			To: reference.To{
-				List:    &v1alpha11.PrivateNetworkList{},
-				Managed: &v1alpha11.PrivateNetwork{},
+				List:    &v1alpha12.PrivateNetworkList{},
+				Managed: &v1alpha12.PrivateNetwork{},
 			},
 		})
 		if err != nil {
@@ -233,8 +278,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.ForProvider.PrivateNetworkIdsRefs,
 		Selector:      mg.Spec.ForProvider.PrivateNetworkIdsSelector,
 		To: reference.To{
-			List:    &v1alpha11.PrivateNetworkList{},
-			Managed: &v1alpha11.PrivateNetwork{},
+			List:    &v1alpha12.PrivateNetworkList{},
+			Managed: &v1alpha12.PrivateNetwork{},
 		},
 	})
 	if err != nil {
@@ -252,8 +297,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.ForProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDRef,
 				Selector:     mg.Spec.ForProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDSelector,
 				To: reference.To{
-					List:    &v1alpha12.SnapshotList{},
-					Managed: &v1alpha12.Snapshot{},
+					List:    &v1alpha13.SnapshotList{},
+					Managed: &v1alpha13.Snapshot{},
 				},
 			})
 			if err != nil {
@@ -271,8 +316,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.InitProvider.PrivateNetworkIdsRefs,
 		Selector:      mg.Spec.InitProvider.PrivateNetworkIdsSelector,
 		To: reference.To{
-			List:    &v1alpha11.PrivateNetworkList{},
-			Managed: &v1alpha11.PrivateNetwork{},
+			List:    &v1alpha12.PrivateNetworkList{},
+			Managed: &v1alpha12.PrivateNetwork{},
 		},
 	})
 	if err != nil {
@@ -290,8 +335,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.InitProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDRef,
 				Selector:     mg.Spec.InitProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDSelector,
 				To: reference.To{
-					List:    &v1alpha12.SnapshotList{},
-					Managed: &v1alpha12.Snapshot{},
+					List:    &v1alpha13.SnapshotList{},
+					Managed: &v1alpha13.Snapshot{},
 				},
 			})
 			if err != nil {

@@ -61,7 +61,7 @@ type CapacityParameters struct {
 	MinReplicas *float64 `json:"minReplicas,omitempty" tf:"min_replicas,omitempty"`
 }
 
-type GroupInitParameters_2 struct {
+type GroupInitParameters struct {
 
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events.
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events
@@ -105,7 +105,7 @@ type GroupInitParameters_2 struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
-type GroupObservation_2 struct {
+type GroupObservation struct {
 
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events.
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events
@@ -151,7 +151,7 @@ type GroupObservation_2 struct {
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
-type GroupParameters_2 struct {
+type GroupParameters struct {
 
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events.
 	// The specification of the minimum and maximum replicas for the Instance group, and the cooldown interval between two scaling events
@@ -308,7 +308,7 @@ type LoadBalancerParameters struct {
 // GroupSpec defines the desired state of Group
 type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GroupParameters_2 `json:"forProvider"`
+	ForProvider     GroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -319,13 +319,13 @@ type GroupSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GroupInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider GroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupStatus defines the observed state of Group.
 type GroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        GroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

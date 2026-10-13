@@ -16,6 +16,7 @@ import (
 	value "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/annotations/value"
 	runner "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/runner"
 	server "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/applesilicon/server"
+	autoscalinggroup "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/autoscalinggroup"
 	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/group"
 	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/policy"
 	template "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/autoscaling/template"
@@ -169,7 +170,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		value.Setup,
 		runner.Setup,
 		server.Setup,
-		group.Setup,
+		autoscalinggroup.Setup,
 		group.Setup,
 		policy.Setup,
 		template.Setup,
@@ -329,7 +330,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		value.SetupGated,
 		runner.SetupGated,
 		server.SetupGated,
-		group.SetupGated,
+		autoscalinggroup.SetupGated,
 		group.SetupGated,
 		policy.SetupGated,
 		template.SetupGated,
