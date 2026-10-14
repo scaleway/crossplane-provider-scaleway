@@ -18,6 +18,7 @@ import (
 	server "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/applesilicon/server"
 	group "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/group"
 	policy "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/policy"
+	scalinggroup "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/scalinggroup"
 	template "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/autoscaling/template"
 	serverbaremetal "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/baremetal/server"
 	alert "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/billing/alert"
@@ -170,8 +171,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		runner.Setup,
 		server.Setup,
 		group.Setup,
-		group.Setup,
 		policy.Setup,
+		scalinggroup.Setup,
 		template.Setup,
 		serverbaremetal.Setup,
 		alert.Setup,
@@ -330,8 +331,8 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		runner.SetupGated,
 		server.SetupGated,
 		group.SetupGated,
-		group.SetupGated,
 		policy.SetupGated,
+		scalinggroup.SetupGated,
 		template.SetupGated,
 		serverbaremetal.SetupGated,
 		alert.SetupGated,
