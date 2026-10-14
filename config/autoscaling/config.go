@@ -53,7 +53,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("scaleway_autoscaling_group", func(r *config.Resource) {
 		r.ExternalName = config.IdentifierFromProvider
 		r.ShortGroup = shortGroup
-		r.Kind = "Group"
+		r.Kind = "ScalingGroup"
 
 		r.References["template_id"] = config.Reference{
 			TerraformName: "scaleway_instance_template",
