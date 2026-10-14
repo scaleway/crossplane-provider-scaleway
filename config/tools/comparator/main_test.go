@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go/token"
 	"testing"
 )
 
@@ -41,11 +42,13 @@ func TestGeneratePackageName(t *testing.T) {
 		{"Virtual Machines", "virtualmachines"},
 		{" ", ""},
 		{"", ""},
-		{"Special Chars *&^%$#", "specialchars*&^%$#"},
+		{"Special Chars *&^%$#", "specialchars"},
+		{"*&^%$#", ""},
+		{"Database V2", "databasev2"},
 		{"MixedCASE Category", "mixedcasecategory"},
 		{"  Leading and Trailing  ", "leadingandtrailing"},
-		{"Dotted.Category", "dotted.category"},
-		{"Hyphenated-Category", "hyphenated-category"},
+		{"Dotted.Category", "dottedcategory"},
+		{"Hyphenated-Category", "hyphenatedcategory"},
 	}
 
 	for _, tt := range tests {
@@ -53,6 +56,9 @@ func TestGeneratePackageName(t *testing.T) {
 			actual := generatePackageName(tt.subCategory)
 			if actual != tt.expected {
 				t.Errorf("generatePackageName(%s) = %s; expected %s", tt.subCategory, actual, tt.expected)
+			}
+			if actual != "" && !token.IsIdentifier(actual) {
+				t.Errorf("generatePackageName(%s) returned an invalid Go package identifier %q", tt.subCategory, actual)
 			}
 		})
 	}

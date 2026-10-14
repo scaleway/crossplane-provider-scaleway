@@ -139,6 +139,8 @@ func parseKindFromResourceName(resourceName string) string {
 	return titleCaser.String(lastWord)
 }
 
+// generatePackageName normalizes a category for a Go package and short API group.
+// It keeps only lowercase ASCII letters and digits; an invalid-only category is empty.
 func generatePackageName(subCategory string) string {
 	re := regexp.MustCompile(`[^A-Za-z0-9]+`)
 	cleaned := re.ReplaceAllString(subCategory, "")
