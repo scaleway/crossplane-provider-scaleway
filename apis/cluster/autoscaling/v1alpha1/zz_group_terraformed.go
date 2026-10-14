@@ -113,7 +113,7 @@ func (tr *Group) GetMergedParameters(shouldMergeInitProvider bool) (map[string]a
 // LateInitialize this Group using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Group) LateInitialize(attrs []byte) (bool, error) {
-	params := &GroupParameters_2{}
+	params := &GroupParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
