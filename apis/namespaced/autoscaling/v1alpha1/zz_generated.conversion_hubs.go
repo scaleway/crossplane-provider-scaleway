@@ -13,4 +13,7 @@ func (tr *Group) Hub() {}
 func (tr *Policy) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ScalingGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Template) Hub() {}

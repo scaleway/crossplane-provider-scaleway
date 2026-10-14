@@ -9,7 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha12 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/block/v1alpha1"
+	v1alpha13 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/block/v1alpha1"
+	v1alpha12 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1"
 	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/lb/v1alpha1"
 	v1alpha11 "github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/vpc/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -218,6 +219,50 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this ScalingGroup.
+func (mg *ScalingGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TemplateID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.TemplateIDRef,
+		Selector:     mg.Spec.ForProvider.TemplateIDSelector,
+		To: reference.To{
+			List:    &v1alpha12.TemplateList{},
+			Managed: &v1alpha12.Template{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TemplateID")
+	}
+	mg.Spec.ForProvider.TemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TemplateIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TemplateID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.TemplateIDRef,
+		Selector:     mg.Spec.InitProvider.TemplateIDSelector,
+		To: reference.To{
+			List:    &v1alpha12.TemplateList{},
+			Managed: &v1alpha12.Template{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TemplateID")
+	}
+	mg.Spec.InitProvider.TemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TemplateIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Template.
 func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)
@@ -252,8 +297,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.ForProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDRef,
 				Selector:     mg.Spec.ForProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDSelector,
 				To: reference.To{
-					List:    &v1alpha12.SnapshotList{},
-					Managed: &v1alpha12.Snapshot{},
+					List:    &v1alpha13.SnapshotList{},
+					Managed: &v1alpha13.Snapshot{},
 				},
 			})
 			if err != nil {
@@ -290,8 +335,8 @@ func (mg *Template) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.InitProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDRef,
 				Selector:     mg.Spec.InitProvider.Volumes[i3].FromSnapshot[i4].SnapshotIDSelector,
 				To: reference.To{
-					List:    &v1alpha12.SnapshotList{},
-					Managed: &v1alpha12.Snapshot{},
+					List:    &v1alpha13.SnapshotList{},
+					Managed: &v1alpha13.Snapshot{},
 				},
 			})
 			if err != nil {
