@@ -18,7 +18,7 @@ spec:
         ]}
     projectIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: main
+        testing.upbound.io/example-name: project
 
 ---
 
@@ -33,19 +33,3 @@ metadata:
 spec:
   forProvider:
     name: my-observability-project
-
----
-
-apiVersion: cockpit.scaleway.upbound.io/v1alpha1
-kind: Cockpit
-metadata:
-  annotations:
-    meta.upbound.io/example-id: cockpit/v1alpha1/alertmanager
-  labels:
-    testing.upbound.io/example-name: main
-  name: main
-spec:
-  forProvider:
-    projectIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: project

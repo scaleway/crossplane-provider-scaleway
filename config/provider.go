@@ -10,7 +10,10 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/datalab"
 	"github.com/scaleway/crossplane-provider-scaleway/config/interlink"
 	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
+	"github.com/scaleway/crossplane-provider-scaleway/config/mailbox"
+	"github.com/scaleway/crossplane-provider-scaleway/config/messageq"
 	"github.com/scaleway/crossplane-provider-scaleway/config/opensearch"
+	"github.com/scaleway/crossplane-provider-scaleway/config/partner"
 	"github.com/scaleway/crossplane-provider-scaleway/config/s2svpn"
 
 	// Note(turkenh): we are importing this to embed provider schema document
@@ -104,6 +107,9 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		billing.Configure,
 		datalab.Configure,
 		annotations.Configure,
+		partner.Configure,
+		mailbox.Configure,
+		messageq.Configure,
 	}
 }
 

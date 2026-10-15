@@ -10,13 +10,7 @@ package v1alpha1
 func (tr *AlertManager) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Cockpit) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Exporter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *GrafanaUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Source) Hub() {}

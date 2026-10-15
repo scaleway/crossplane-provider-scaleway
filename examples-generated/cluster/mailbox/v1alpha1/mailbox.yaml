@@ -1,0 +1,33 @@
+apiVersion: mailbox.scaleway.upbound.io/v1alpha1
+kind: Mailbox
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/mailbox
+  labels:
+    testing.upbound.io/example-name: john
+  name: john
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    localPart: john.doe
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    subscriptionPeriod: monthly
+
+---
+
+apiVersion: mailbox.scaleway.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/mailbox
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: mail.example.com

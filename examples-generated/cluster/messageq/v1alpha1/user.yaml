@@ -1,0 +1,43 @@
+apiVersion: messageq.scaleway.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: messageq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: app
+  name: app
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: orders-app
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: messageq.scaleway.upbound.io/v1alpha1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: messageq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    name: my-messageq
+    nodeCount: 1
+    nodeType: MESSAGEQ-SHARED-2C-8G
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    userName: admin
+    version: "4.0"
+    volume:
+      sizeInGb: 5
+      type: sbs_5k

@@ -83,6 +83,11 @@ spec:
                       (String, Optional) – The ID of the project the key belongs to.
                       The project_id you want to attach the resource to
                     type: string
+                  protectionLevel:
+                    description: |-
+                      (String, Optional) – The protection level of the key. Valid values are:
+                      Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
+                    type: string
                   region:
                     description: |-
                       par). If not specified, defaults to the provider configuration.
@@ -161,6 +166,11 @@ spec:
                     description: |-
                       (String, Optional) – The ID of the project the key belongs to.
                       The project_id you want to attach the resource to
+                    type: string
+                  protectionLevel:
+                    description: |-
+                      (String, Optional) – The protection level of the key. Valid values are:
+                      Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
                     type: string
                   region:
                     description: |-
@@ -318,6 +328,11 @@ spec:
                       – Whether the key is protected from deletion.
                       Returns true if key protection is applied to the key.
                     type: boolean
+                  protectionLevel:
+                    description: |-
+                      (String, Optional) – The protection level of the key. Valid values are:
+                      Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
+                    type: string
                   region:
                     description: |-
                       par). If not specified, defaults to the provider configuration.

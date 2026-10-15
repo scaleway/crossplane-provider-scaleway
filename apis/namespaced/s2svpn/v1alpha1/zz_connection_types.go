@@ -219,6 +219,14 @@ type ConnectionInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The ID of a Secret Manager secret containing the pre-shared key (PSK).
+	// The ID of a Secret Manager secret containing the PSK
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used.
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used
+	SecretVersion *float64 `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
+
 	// The list of tags to apply to the connection.
 	// The list of tags to apply to the connection
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -314,12 +322,12 @@ type ConnectionObservation struct {
 	// Defines whether route propagation is enabled or not
 	RoutePropagationEnabled *bool `json:"routePropagationEnabled,omitempty" tf:"route_propagation_enabled,omitempty"`
 
-	// The ID of the secret containing the pre-shared key (PSK) for the connection.
-	// The BGP peer IP on customer side
+	// The ID of a Secret Manager secret containing the pre-shared key (PSK).
+	// The ID of a Secret Manager secret containing the PSK
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
-	// The version of the secret containing the PSK.
-	// The BGP peer IP on customer side
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used.
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used
 	SecretVersion *float64 `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
 
 	// The Scaleway Resource Name (SRN) of the connection.
@@ -412,6 +420,16 @@ type ConnectionParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The ID of a Secret Manager secret containing the pre-shared key (PSK).
+	// The ID of a Secret Manager secret containing the PSK
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used.
+	// The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used
+	// +kubebuilder:validation:Optional
+	SecretVersion *float64 `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
 
 	// The list of tags to apply to the connection.
 	// The list of tags to apply to the connection

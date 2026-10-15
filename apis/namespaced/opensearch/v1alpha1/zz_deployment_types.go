@@ -24,8 +24,8 @@ type DeploymentInitParameters struct {
 	// Number of nodes
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
-	// Number of nodes
+	// Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+	// Number of nodes. Changing this value upgrades the deployment in place.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// Type of node to use (e.g., "SEARCHDB-SHARED-2C-8G", "SEARCHDB-DEDICATED-2C-8G"). Changing this forces recreation of the deployment.
@@ -71,8 +71,8 @@ type DeploymentObservation struct {
 	// Date and time of deployment creation (RFC 3339 format)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// List of endpoints for accessing the deployment.
-	// List of endpoints
+	// List of all endpoints returned by the API for accessing the deployment (public and private).
+	// List of all endpoints returned by the API
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// The ID of the deployment in the format {region}/{id}.
@@ -86,8 +86,8 @@ type DeploymentObservation struct {
 	// Number of nodes
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
-	// Number of nodes
+	// Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+	// Number of nodes. Changing this value upgrades the deployment in place.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// Type of node to use (e.g., "SEARCHDB-SHARED-2C-8G", "SEARCHDB-DEDICATED-2C-8G"). Changing this forces recreation of the deployment.
@@ -147,8 +147,8 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeAmount *float64 `json:"nodeAmount,omitempty" tf:"node_amount,omitempty"`
 
-	// Number of nodes in the cluster. Changing this forces recreation of the deployment.
-	// Number of nodes
+	// Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+	// Number of nodes. Changing this value upgrades the deployment in place.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 

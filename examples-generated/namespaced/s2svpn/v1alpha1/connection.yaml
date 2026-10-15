@@ -29,6 +29,8 @@ spec:
       integrity: sha256
     initiationPolicy: customer_gateway
     name: my-vpn-connection
+    secretId: ${scaleway_secret.psk.id}
+    secretVersion: ${scaleway_secret_version.psk.revision}
     vpnGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: gateway
@@ -89,6 +91,41 @@ spec:
     - 10.0.2.0/24
     prefixFilterOut:
     - 10.0.1.0/24
+
+---
+
+apiVersion: secrets.scaleway.m.upbound.io/v1alpha1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: psk
+  name: psk
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: my-s2s-vpn-psk
+
+---
+
+apiVersion: secrets.scaleway.m.upbound.io/v1alpha1
+kind: Version
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s2svpn/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: psk
+  name: psk
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataSecretRef:
+      key: example-key
+      name: example-secret
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: psk
 
 ---
 

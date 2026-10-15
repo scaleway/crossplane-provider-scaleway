@@ -15,7 +15,7 @@ spec:
     region: fr-par
     rule:
     - applyServerSideEncryptionByDefault:
-      - kmsMasterKeyId: my-kms-key
+      - kmsMasterKeyId: rsa-4096-key
         sseAlgorithm: aws:kms
       bucketKeyEnabled: true
 

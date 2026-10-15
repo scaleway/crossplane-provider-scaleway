@@ -4,19 +4,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: keymanager/v1alpha1/key
   labels:
-    testing.upbound.io/example-name: symmetric
-  name: symmetric
+    testing.upbound.io/example-name: rsa_4096
+  name: rsa-4096
 spec:
   forProvider:
-    algorithm: aes_256_gcm
-    description: Key for encrypting secrets
-    name: my-kms-key
-    projectId: your-project-id
+    algorithm: rsa_oaep_4096_sha256
+    description: Key for encrypting large files with RSA-4096
+    name: rsa-4096-key
     region: fr-par
-    rotationPolicy:
-    - rotationPeriod: 720h
-    tags:
-    - env:prod
-    - kms
     unprotected: true
-    usage: symmetric_encryption
+    usage: asymmetric_encryption

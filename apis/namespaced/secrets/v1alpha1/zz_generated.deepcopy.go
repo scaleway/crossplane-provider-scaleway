@@ -145,6 +145,11 @@ func (in *SecretInitParameters) DeepCopyInto(out *SecretInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.KeyID != nil {
+		in, out := &in.KeyID, &out.KeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -255,6 +260,11 @@ func (in *SecretObservation) DeepCopyInto(out *SecretObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyID != nil {
+		in, out := &in.KeyID, &out.KeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -349,6 +359,11 @@ func (in *SecretParameters) DeepCopyInto(out *SecretParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.KeyID != nil {
+		in, out := &in.KeyID, &out.KeyID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

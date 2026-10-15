@@ -8,9 +8,7 @@ metadata:
   name: main
 spec:
   forProvider:
-    srnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: main
+    targetSrn: ${scaleway_key_manager_key.main.srn}
     valueIdSelector:
       matchLabels:
         testing.upbound.io/example-name: production

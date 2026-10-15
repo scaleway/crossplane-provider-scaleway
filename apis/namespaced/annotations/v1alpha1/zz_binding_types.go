@@ -18,16 +18,7 @@ type BindingInitParameters struct {
 
 	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/keymanager/v1alpha1.Key
-	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
-
-	// Reference to a Key in keymanager to populate srn.
-	// +kubebuilder:validation:Optional
-	SrnRef *v1.NamespacedReference `json:"srnRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keymanager to populate srn.
-	// +kubebuilder:validation:Optional
-	SrnSelector *v1.NamespacedSelector `json:"srnSelector,omitempty" tf:"-"`
+	TargetSrn *string `json:"targetSrn,omitempty" tf:"target_srn,omitempty"`
 
 	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
@@ -52,9 +43,13 @@ type BindingObservation struct {
 	// ID of the key associated to the binding.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
+	// The Scaleway Resource Number (SRN) of the binding.
+	// The Scaleway Resource Number (SRN) of the binding.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
-	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+	TargetSrn *string `json:"targetSrn,omitempty" tf:"target_srn,omitempty"`
 
 	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
@@ -65,17 +60,8 @@ type BindingParameters struct {
 
 	// Scaleway Resource Number to associate. Changing this forces a new resource to be created.
 	// Scaleway Resource Number to associate.
-	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/keymanager/v1alpha1.Key
 	// +kubebuilder:validation:Optional
-	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
-
-	// Reference to a Key in keymanager to populate srn.
-	// +kubebuilder:validation:Optional
-	SrnRef *v1.NamespacedReference `json:"srnRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keymanager to populate srn.
-	// +kubebuilder:validation:Optional
-	SrnSelector *v1.NamespacedSelector `json:"srnSelector,omitempty" tf:"-"`
+	TargetSrn *string `json:"targetSrn,omitempty" tf:"target_srn,omitempty"`
 
 	// ID of the value to associate. Changing this forces a new resource to be created.
 	// ID of the value to associate.
@@ -128,8 +114,9 @@ type BindingStatus struct {
 type Binding struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BindingSpec   `json:"spec"`
-	Status            BindingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetSrn) || (has(self.initProvider) && has(self.initProvider.targetSrn))",message="spec.forProvider.targetSrn is a required parameter"
+	Spec   BindingSpec   `json:"spec"`
+	Status BindingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

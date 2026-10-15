@@ -9,7 +9,6 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha1 "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -19,23 +18,6 @@ func (mg *Binding) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Srn),
-		Extract:      reference.ExternalName(),
-		Namespace:    mg.GetNamespace(),
-		Reference:    mg.Spec.ForProvider.SrnRef,
-		Selector:     mg.Spec.ForProvider.SrnSelector,
-		To: reference.To{
-			List:    &v1alpha1.KeyList{},
-			Managed: &v1alpha1.Key{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.Srn")
-	}
-	mg.Spec.ForProvider.Srn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.SrnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ValueID),
@@ -53,23 +35,6 @@ func (mg *Binding) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ValueID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ValueIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Srn),
-		Extract:      reference.ExternalName(),
-		Namespace:    mg.GetNamespace(),
-		Reference:    mg.Spec.InitProvider.SrnRef,
-		Selector:     mg.Spec.InitProvider.SrnSelector,
-		To: reference.To{
-			List:    &v1alpha1.KeyList{},
-			Managed: &v1alpha1.Key{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Srn")
-	}
-	mg.Spec.InitProvider.Srn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.SrnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ValueID),

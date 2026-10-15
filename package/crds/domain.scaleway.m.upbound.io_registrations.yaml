@@ -944,7 +944,7 @@ spec:
                     type: string
                   taskId:
                     description: |-
-                      : ID of the task that created the domain.
+                      : ID of the task that created the domain. This attribute may be empty when the registration was imported by domain name and the original task has already been archived.
                       ID of the task that created the domain.
                     type: string
                   technicalContact:

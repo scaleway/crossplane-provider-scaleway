@@ -74,8 +74,8 @@ spec:
                 properties:
                   consumptionLimit:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
+                      Cost limit for the budget in euros.
+                      Cost limit for the budget in euros.
                     type: number
                   enabled:
                     description: |-
@@ -103,8 +103,8 @@ spec:
                 properties:
                   consumptionLimit:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
+                      Cost limit for the budget in euros.
+                      Cost limit for the budget in euros.
                     type: number
                   enabled:
                     description: |-
@@ -215,8 +215,8 @@ spec:
                 properties:
                   consumptionLimit:
                     description: |-
-                      Cost limit for the budget in cents.
-                      Cost limit for the budget in cents.
+                      Cost limit for the budget in euros.
+                      Cost limit for the budget in euros.
                     type: number
                   createdAt:
                     description: |-
