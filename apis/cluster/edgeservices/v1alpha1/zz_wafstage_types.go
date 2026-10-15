@@ -13,11 +13,37 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type ExclusionRulesInitParameters struct {
+
+	// OWASP CRS rule ID excluded from the WAF.
+	// OWASP CRS rule ID excluded from the WAF
+	RuleID *float64 `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
+}
+
+type ExclusionRulesObservation struct {
+
+	// OWASP CRS rule ID excluded from the WAF.
+	// OWASP CRS rule ID excluded from the WAF
+	RuleID *float64 `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
+}
+
+type ExclusionRulesParameters struct {
+
+	// OWASP CRS rule ID excluded from the WAF.
+	// OWASP CRS rule ID excluded from the WAF
+	// +kubebuilder:validation:Optional
+	RuleID *float64 `json:"ruleId" tf:"rule_id,omitempty"`
+}
+
 type WAFStageInitParameters struct {
 
 	// The ID of the backend stage to forward requests to after the WAF stage.
 	// The ID of the backend stage to forward requests to after the WAF stage
 	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
+
+	// List of OWASP CRS rule IDs excluded from the WAF.
+	// List of OWASP CRS rule IDs excluded from the WAF
+	ExclusionRules []ExclusionRulesInitParameters `json:"exclusionRules,omitempty" tf:"exclusion_rules,omitempty"`
 
 	// The mode defining WAF behavior (disable/log_only/enable).
 	// Mode defining WAF behavior (`disable`/`log_only`/`enable`)
@@ -55,6 +81,10 @@ type WAFStageObservation struct {
 	// The date and time of the creation of the WAF stage
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// List of OWASP CRS rule IDs excluded from the WAF.
+	// List of OWASP CRS rule IDs excluded from the WAF
+	ExclusionRules []ExclusionRulesObservation `json:"exclusionRules,omitempty" tf:"exclusion_rules,omitempty"`
+
 	// The ID of the WAF stage (UUID format).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -85,6 +115,11 @@ type WAFStageParameters struct {
 	// The ID of the backend stage to forward requests to after the WAF stage
 	// +kubebuilder:validation:Optional
 	BackendStageID *string `json:"backendStageId,omitempty" tf:"backend_stage_id,omitempty"`
+
+	// List of OWASP CRS rule IDs excluded from the WAF.
+	// List of OWASP CRS rule IDs excluded from the WAF
+	// +kubebuilder:validation:Optional
+	ExclusionRules []ExclusionRulesParameters `json:"exclusionRules,omitempty" tf:"exclusion_rules,omitempty"`
 
 	// The mode defining WAF behavior (disable/log_only/enable).
 	// Mode defining WAF behavior (`disable`/`log_only`/`enable`)

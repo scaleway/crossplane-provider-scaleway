@@ -27,9 +27,7 @@ import (
 	snapshot "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/block/snapshot"
 	volume "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/block/volume"
 	alertmanager "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/alertmanager"
-	cockpit "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/cockpit"
 	exporter "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/exporter"
-	grafanauser "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/grafanauser"
 	source "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/source"
 	token "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/cockpit/token"
 	container "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/container/container"
@@ -105,6 +103,10 @@ import (
 	lb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/lb"
 	privatenetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/privatenetwork"
 	routelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/lb/route"
+	domainmailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mailbox/domain"
+	mailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mailbox/mailbox"
+	deploymentmessageq "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/messageq/deployment"
+	usermessageq "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/messageq/user"
 	natsaccount "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mnq/natsaccount"
 	natscredentials "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mnq/natscredentials"
 	sns "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/mnq/sns"
@@ -125,6 +127,8 @@ import (
 	policyobject "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/policy"
 	websiteconfiguration "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/object/websiteconfiguration"
 	deploymentopensearch "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/opensearch/deployment"
+	useropensearch "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/opensearch/user"
+	organization "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/partner/organization"
 	providerconfig "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/providerconfig"
 	aclrdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/rdb/acl"
 	databaserdb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/namespaced/rdb/database"
@@ -181,9 +185,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		snapshot.Setup,
 		volume.Setup,
 		alertmanager.Setup,
-		cockpit.Setup,
 		exporter.Setup,
-		grafanauser.Setup,
 		source.Setup,
 		token.Setup,
 		container.Setup,
@@ -259,6 +261,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lb.Setup,
 		privatenetwork.Setup,
 		routelb.Setup,
+		domainmailbox.Setup,
+		mailbox.Setup,
+		deploymentmessageq.Setup,
+		usermessageq.Setup,
 		natsaccount.Setup,
 		natscredentials.Setup,
 		sns.Setup,
@@ -279,6 +285,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policyobject.Setup,
 		websiteconfiguration.Setup,
 		deploymentopensearch.Setup,
+		useropensearch.Setup,
+		organization.Setup,
 		providerconfig.Setup,
 		aclrdb.Setup,
 		databaserdb.Setup,
@@ -341,9 +349,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		snapshot.SetupGated,
 		volume.SetupGated,
 		alertmanager.SetupGated,
-		cockpit.SetupGated,
 		exporter.SetupGated,
-		grafanauser.SetupGated,
 		source.SetupGated,
 		token.SetupGated,
 		container.SetupGated,
@@ -419,6 +425,10 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		lb.SetupGated,
 		privatenetwork.SetupGated,
 		routelb.SetupGated,
+		domainmailbox.SetupGated,
+		mailbox.SetupGated,
+		deploymentmessageq.SetupGated,
+		usermessageq.SetupGated,
 		natsaccount.SetupGated,
 		natscredentials.SetupGated,
 		sns.SetupGated,
@@ -439,6 +449,8 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		policyobject.SetupGated,
 		websiteconfiguration.SetupGated,
 		deploymentopensearch.SetupGated,
+		useropensearch.SetupGated,
+		organization.SetupGated,
 		providerconfig.SetupGated,
 		aclrdb.SetupGated,
 		databaserdb.SetupGated,

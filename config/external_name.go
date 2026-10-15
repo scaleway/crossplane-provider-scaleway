@@ -16,9 +16,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_baremetal_server":                                   config.NameAsIdentifier,
 	"scaleway_block_snapshot":                                     config.NameAsIdentifier,
 	"scaleway_block_volume":                                       config.NameAsIdentifier,
-	"scaleway_cockpit":                                            config.NameAsIdentifier,
 	"scaleway_cockpit_alert_manager":                              config.NameAsIdentifier,
-	"scaleway_cockpit_grafana_user":                               config.NameAsIdentifier,
 	"scaleway_cockpit_source":                                     config.NameAsIdentifier,
 	"scaleway_cockpit_token":                                      config.NameAsIdentifier,
 	"scaleway_container":                                          config.NameAsIdentifier,
@@ -156,6 +154,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_annotations_binding":                                config.NameAsIdentifier,
 	"scaleway_instance_template":                                  config.NameAsIdentifier,
 	"scaleway_autoscaling_group":                                  config.NameAsIdentifier,
+	"scaleway_partner_organization":                               config.NameAsIdentifier,
+	"scaleway_mailbox_domain":                                     config.NameAsIdentifier,
+	"scaleway_opensearch_user":                                    config.NameAsIdentifier,
+	"scaleway_mailbox":                                            config.NameAsIdentifier,
+	"scaleway_messageq_deployment":                                config.NameAsIdentifier,
+	"scaleway_messageq_user":                                      config.NameAsIdentifier,
 	"scaleway_vpc_route":                                          config.NameAsIdentifier,
 }
 

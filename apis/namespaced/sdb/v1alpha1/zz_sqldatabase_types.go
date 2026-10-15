@@ -36,6 +36,11 @@ type SQLDatabaseInitParameters struct {
 	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+	// ~> Important: Updates to the version argument will recreate the database.
+	// The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SQLDatabaseObservation struct {
@@ -67,6 +72,19 @@ type SQLDatabaseObservation struct {
 	// The region in which the resource exists.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the database.
+	// The Scaleway Resource Name (SRN) of the database.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
+	// The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+	// ~> Important: Updates to the version argument will recreate the database.
+	// The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// The end of life date of the database version (RFC3339).
+	// The end of life date of the database version (RFC3339).
+	VersionEndOfLifeAt *string `json:"versionEndOfLifeAt,omitempty" tf:"version_end_of_life_at,omitempty"`
 }
 
 type SQLDatabaseParameters struct {
@@ -96,6 +114,12 @@ type SQLDatabaseParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+	// ~> Important: Updates to the version argument will recreate the database.
+	// The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // SQLDatabaseSpec defines the desired state of SQLDatabase

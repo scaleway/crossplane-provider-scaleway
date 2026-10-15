@@ -116,16 +116,20 @@ spec:
                       type: object
                     type: array
                   logsPolicy:
-                    description: Logs policy configuration
+                    description: |-
+                      Logs policy configuration for remote logs retention on the Database Instance. When not set, the API defaults apply and are returned as computed values.
+                      Logs policy configuration for remote logs retention on the Database Instance
                     items:
                       properties:
                         maxAgeRetention:
-                          description: The max age (in days) of remote logs to keep
-                            on the Database Instance
+                          description: |-
+                            Max age (in days) of remote logs to keep on the Database Instance.
+                            The max age (in days) of remote logs to keep on the Database Instance
                           type: number
                         totalDiskRetention:
-                          description: The max disk size of remote logs to keep on
-                            the Database Instance.
+                          description: |-
+                            Max disk size (in bytes) of remote logs to keep on the Database Instance.
+                            The max disk size (in bytes) of remote logs to keep on the Database Instance
                           type: number
                       type: object
                     type: array
@@ -402,16 +406,20 @@ spec:
                       type: object
                     type: array
                   logsPolicy:
-                    description: Logs policy configuration
+                    description: |-
+                      Logs policy configuration for remote logs retention on the Database Instance. When not set, the API defaults apply and are returned as computed values.
+                      Logs policy configuration for remote logs retention on the Database Instance
                     items:
                       properties:
                         maxAgeRetention:
-                          description: The max age (in days) of remote logs to keep
-                            on the Database Instance
+                          description: |-
+                            Max age (in days) of remote logs to keep on the Database Instance.
+                            The max age (in days) of remote logs to keep on the Database Instance
                           type: number
                         totalDiskRetention:
-                          description: The max disk size of remote logs to keep on
-                            the Database Instance.
+                          description: |-
+                            Max disk size (in bytes) of remote logs to keep on the Database Instance.
+                            The max disk size (in bytes) of remote logs to keep on the Database Instance
                           type: number
                       type: object
                     type: array
@@ -781,16 +789,20 @@ spec:
                       type: object
                     type: array
                   logsPolicy:
-                    description: Logs policy configuration
+                    description: |-
+                      Logs policy configuration for remote logs retention on the Database Instance. When not set, the API defaults apply and are returned as computed values.
+                      Logs policy configuration for remote logs retention on the Database Instance
                     items:
                       properties:
                         maxAgeRetention:
-                          description: The max age (in days) of remote logs to keep
-                            on the Database Instance
+                          description: |-
+                            Max age (in days) of remote logs to keep on the Database Instance.
+                            The max age (in days) of remote logs to keep on the Database Instance
                           type: number
                         totalDiskRetention:
-                          description: The max disk size of remote logs to keep on
-                            the Database Instance.
+                          description: |-
+                            Max disk size (in bytes) of remote logs to keep on the Database Instance.
+                            The max disk size (in bytes) of remote logs to keep on the Database Instance
                           type: number
                       type: object
                     type: array

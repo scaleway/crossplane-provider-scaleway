@@ -77,6 +77,19 @@ spec:
                       The ID of the backend stage to forward requests to after the WAF stage.
                       The ID of the backend stage to forward requests to after the WAF stage
                     type: string
+                  exclusionRules:
+                    description: |-
+                      List of OWASP CRS rule IDs excluded from the WAF.
+                      List of OWASP CRS rule IDs excluded from the WAF
+                    items:
+                      properties:
+                        ruleId:
+                          description: |-
+                            OWASP CRS rule ID excluded from the WAF.
+                            OWASP CRS rule ID excluded from the WAF
+                          type: number
+                      type: object
+                    type: array
                   mode:
                     description: |-
                       The mode defining WAF behavior (disable/log_only/enable).
@@ -192,6 +205,19 @@ spec:
                       The ID of the backend stage to forward requests to after the WAF stage.
                       The ID of the backend stage to forward requests to after the WAF stage
                     type: string
+                  exclusionRules:
+                    description: |-
+                      List of OWASP CRS rule IDs excluded from the WAF.
+                      List of OWASP CRS rule IDs excluded from the WAF
+                    items:
+                      properties:
+                        ruleId:
+                          description: |-
+                            OWASP CRS rule ID excluded from the WAF.
+                            OWASP CRS rule ID excluded from the WAF
+                          type: number
+                      type: object
+                    type: array
                   mode:
                     description: |-
                       The mode defining WAF behavior (disable/log_only/enable).
@@ -395,6 +421,19 @@ spec:
                       The date and time of the creation of the WAF stage.
                       The date and time of the creation of the WAF stage
                     type: string
+                  exclusionRules:
+                    description: |-
+                      List of OWASP CRS rule IDs excluded from the WAF.
+                      List of OWASP CRS rule IDs excluded from the WAF
+                    items:
+                      properties:
+                        ruleId:
+                          description: |-
+                            OWASP CRS rule ID excluded from the WAF.
+                            OWASP CRS rule ID excluded from the WAF
+                          type: number
+                      type: object
+                    type: array
                   id:
                     description: The ID of the WAF stage (UUID format).
                     type: string

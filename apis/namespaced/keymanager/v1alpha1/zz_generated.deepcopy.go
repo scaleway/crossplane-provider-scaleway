@@ -68,6 +68,11 @@ func (in *KeyInitParameters) DeepCopyInto(out *KeyInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProtectionLevel != nil {
+		in, out := &in.ProtectionLevel, &out.ProtectionLevel
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -193,6 +198,11 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ProtectionLevel != nil {
+		in, out := &in.ProtectionLevel, &out.ProtectionLevel
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -288,6 +298,11 @@ func (in *KeyParameters) DeepCopyInto(out *KeyParameters) {
 	}
 	if in.ProjectID != nil {
 		in, out := &in.ProjectID, &out.ProjectID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProtectionLevel != nil {
+		in, out := &in.ProtectionLevel, &out.ProtectionLevel
 		*out = new(string)
 		**out = **in
 	}

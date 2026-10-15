@@ -753,7 +753,7 @@ type RegistrationObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// : ID of the task that created the domain.
+	// : ID of the task that created the domain. This attribute may be empty when the registration was imported by domain name and the original task has already been archived.
 	// ID of the task that created the domain.
 	TaskID *string `json:"taskId,omitempty" tf:"task_id,omitempty"`
 

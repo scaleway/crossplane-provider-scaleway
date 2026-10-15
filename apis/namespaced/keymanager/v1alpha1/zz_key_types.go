@@ -36,6 +36,10 @@ type KeyInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// (String, Optional) – The protection level of the key. Valid values are:
+	// Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
+	ProtectionLevel *string `json:"protectionLevel,omitempty" tf:"protection_level,omitempty"`
+
 	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -93,6 +97,10 @@ type KeyObservation struct {
 	// – Whether the key is protected from deletion.
 	// Returns true if key protection is applied to the key.
 	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
+
+	// (String, Optional) – The protection level of the key. Valid values are:
+	// Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
+	ProtectionLevel *string `json:"protectionLevel,omitempty" tf:"protection_level,omitempty"`
 
 	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to
@@ -161,6 +169,11 @@ type KeyParameters struct {
 	// The project_id you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// (String, Optional) – The protection level of the key. Valid values are:
+	// Protection level of the key. Possible values: software (cryptographic operations are performed in software), hsm (cryptographic operations are performed within a dedicated Hardware Security Module). Defaults to software.
+	// +kubebuilder:validation:Optional
+	ProtectionLevel *string `json:"protectionLevel,omitempty" tf:"protection_level,omitempty"`
 
 	// par). If not specified, defaults to the provider configuration.
 	// The region you want to attach the resource to

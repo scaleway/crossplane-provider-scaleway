@@ -63,11 +63,16 @@ spec:
                       The name of the filesystem. If not provided, a random name will be generated.
                       The name of the filesystem
                     type: string
+                  organizationId:
+                    description: |-
+                      (Defaults to provider organization_id) The ID of the organization the user is associated with.
+                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
+                    type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
                       associated with.
-                      The project_id you want to attach the resource to
+                      The project ID the filesystem belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
                     description: |-
@@ -107,11 +112,16 @@ spec:
                       The name of the filesystem. If not provided, a random name will be generated.
                       The name of the filesystem
                     type: string
+                  organizationId:
+                    description: |-
+                      (Defaults to provider organization_id) The ID of the organization the user is associated with.
+                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
+                    type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
                       associated with.
-                      The project_id you want to attach the resource to
+                      The project ID the filesystem belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
                     description: |-
@@ -222,13 +232,13 @@ spec:
                   organizationId:
                     description: |-
                       (Defaults to provider organization_id) The ID of the organization the user is associated with.
-                      The organization_id you want to attach the resource to
+                      ID of the organization. If not set, the organization ID is derived from the provider configuration.
                     type: string
                   projectId:
                     description: |-
                       (Defaults to provider project_id) The ID of the project the server is
                       associated with.
-                      The project_id you want to attach the resource to
+                      The project ID the filesystem belongs to. Defaults to the provider's project ID.
                     type: string
                   region:
                     description: |-

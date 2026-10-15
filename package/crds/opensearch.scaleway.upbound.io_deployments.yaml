@@ -84,8 +84,8 @@ spec:
                     type: number
                   nodeCount:
                     description: |-
-                      Number of nodes in the cluster. Changing this forces recreation of the deployment.
-                      Number of nodes
+                      Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+                      Number of nodes. Changing this value upgrades the deployment in place.
                     type: number
                   nodeType:
                     description: |-
@@ -195,8 +195,8 @@ spec:
                     type: number
                   nodeCount:
                     description: |-
-                      Number of nodes in the cluster. Changing this forces recreation of the deployment.
-                      Number of nodes
+                      Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+                      Number of nodes. Changing this value upgrades the deployment in place.
                     type: number
                   nodeType:
                     description: |-
@@ -388,8 +388,8 @@ spec:
                     type: string
                   endpoints:
                     description: |-
-                      List of endpoints for accessing the deployment.
-                      List of endpoints
+                      List of all endpoints returned by the API for accessing the deployment (public and private).
+                      List of all endpoints returned by the API
                     items:
                       properties:
                         id:
@@ -437,8 +437,8 @@ spec:
                     type: number
                   nodeCount:
                     description: |-
-                      Number of nodes in the cluster. Changing this forces recreation of the deployment.
-                      Number of nodes
+                      Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).
+                      Number of nodes. Changing this value upgrades the deployment in place.
                     type: number
                   nodeType:
                     description: |-

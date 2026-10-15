@@ -72,6 +72,10 @@ type SecretInitParameters struct {
 	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	EphemeralPolicy []EphemeralPolicyInitParameters `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
 
+	// ID of the Key Manager key used to encrypt and decrypt the secret's versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager uses a Key Manager internal key.
+	// ID of the Scaleway Key Manager key used to encrypt and decrypt secret versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager will use a Key Manager internal key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
 	// Name of the secret (e.g. my-secret).
 	// The secret name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -117,6 +121,10 @@ type SecretObservation struct {
 	EphemeralPolicy []EphemeralPolicyObservation `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the Key Manager key used to encrypt and decrypt the secret's versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager uses a Key Manager internal key.
+	// ID of the Scaleway Key Manager key used to encrypt and decrypt secret versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager will use a Key Manager internal key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Name of the secret (e.g. my-secret).
 	// The secret name
@@ -178,6 +186,11 @@ type SecretParameters struct {
 	// Ephemeral policy of the secret. Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
 	// +kubebuilder:validation:Optional
 	EphemeralPolicy []EphemeralPolicyParameters `json:"ephemeralPolicy,omitempty" tf:"ephemeral_policy,omitempty"`
+
+	// ID of the Key Manager key used to encrypt and decrypt the secret's versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager uses a Key Manager internal key.
+	// ID of the Scaleway Key Manager key used to encrypt and decrypt secret versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager will use a Key Manager internal key.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Name of the secret (e.g. my-secret).
 	// The secret name

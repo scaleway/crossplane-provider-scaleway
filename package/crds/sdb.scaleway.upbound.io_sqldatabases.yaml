@@ -98,6 +98,12 @@ spec:
                       The region in which the resource exists.
                       The region you want to attach the resource to
                     type: string
+                  version:
+                    description: |-
+                      The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+                      ~> Important: Updates to the version argument will recreate the database.
+                      The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -137,6 +143,12 @@ spec:
                     description: |-
                       The region in which the resource exists.
                       The region you want to attach the resource to
+                    type: string
+                  version:
+                    description: |-
+                      The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+                      ~> Important: Updates to the version argument will recreate the database.
+                      The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
                     type: string
                 type: object
               managementPolicies:
@@ -269,6 +281,22 @@ spec:
                     description: |-
                       The region in which the resource exists.
                       The region you want to attach the resource to
+                    type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the database.
+                      The Scaleway Resource Name (SRN) of the database.
+                    type: string
+                  version:
+                    description: |-
+                      The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+                      ~> Important: Updates to the version argument will recreate the database.
+                      The major version of the PostgreSQL engine (e.g. `16`). If not specified, the default version is used.
+                    type: string
+                  versionEndOfLifeAt:
+                    description: |-
+                      The end of life date of the database version (RFC3339).
+                      The end of life date of the database version (RFC3339).
                     type: string
                 type: object
               conditions:

@@ -1,0 +1,12 @@
+apiVersion: mailbox.scaleway.m.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/domain
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: mail.example.com

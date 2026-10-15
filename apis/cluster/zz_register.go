@@ -37,10 +37,13 @@ import (
 	v1alpha1kafka "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/kafka/v1alpha1"
 	v1alpha1keymanager "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/keymanager/v1alpha1"
 	v1alpha1lb "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/lb/v1alpha1"
+	v1alpha1mailbox "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/mailbox/v1alpha1"
+	v1alpha1messageq "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/messageq/v1alpha1"
 	v1alpha1mnq "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/mnq/v1alpha1"
 	v1alpha1mongodb "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/mongodb/v1alpha1"
 	v1alpha1object "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/object/v1alpha1"
 	v1alpha1opensearch "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/opensearch/v1alpha1"
+	v1alpha1partner "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/partner/v1alpha1"
 	v1alpha1rdb "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/rdb/v1alpha1"
 	v1alpha1redis "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/redis/v1alpha1"
 	v1alpha1registry "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/registry/v1alpha1"
@@ -83,10 +86,13 @@ func init() {
 		v1alpha1kafka.SchemeBuilder.AddToScheme,
 		v1alpha1keymanager.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
+		v1alpha1mailbox.SchemeBuilder.AddToScheme,
+		v1alpha1messageq.SchemeBuilder.AddToScheme,
 		v1alpha1mnq.SchemeBuilder.AddToScheme,
 		v1alpha1mongodb.SchemeBuilder.AddToScheme,
 		v1alpha1object.SchemeBuilder.AddToScheme,
 		v1alpha1opensearch.SchemeBuilder.AddToScheme,
+		v1alpha1partner.SchemeBuilder.AddToScheme,
 		v1alpha1rdb.SchemeBuilder.AddToScheme,
 		v1alpha1redis.SchemeBuilder.AddToScheme,
 		v1alpha1registry.SchemeBuilder.AddToScheme,
