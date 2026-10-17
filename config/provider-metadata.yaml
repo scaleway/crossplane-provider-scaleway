@@ -30,6 +30,7 @@ resources:
             id: '- The unique identifier of the project (UUID format).'
             name: '- (Optional) The name of the Project.'
             organization_id: '- (Optional. Defaults to provider organization_id)The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.'
+            srn: '- The Scaleway Resource Name (SRN) of the project.'
             updated_at: '- The last update time of the Project.'
         importStatements: []
     scaleway_account_ssh_key:
@@ -108,6 +109,7 @@ resources:
             id: '- The ID of the annotation key.'
             name: '- (Required) Name of the annotation key.'
             organization_id: '- (Defaults to provider organization_id) The organization ID to create the key in.'
+            srn: '- The Scaleway Resource Name (SRN) of the annotation key.'
         importStatements: []
     scaleway_annotations_value:
         subCategory: Annotations
@@ -134,6 +136,7 @@ resources:
             id: '- The ID of the annotation value.'
             key_id: '- (Required) ID of the key the value is associated to.'
             name: '- (Required) Name of the annotation value.'
+            srn: '- The Scaleway Resource Name (SRN) of the annotation value.'
             value_id: '- The ID of the annotation value.'
         importStatements: []
     scaleway_apple_silicon_runner:
@@ -395,6 +398,7 @@ resources:
             scaling_policy.scale_in_step: '- (Optional, Defaults to 1) The number of instances to remove during scale-in event.'
             scaling_policy.scale_out_cooldown: '- (Optional, Defaults to 1m) The cooldown duration after a scale-out event.'
             scaling_policy.scale_out_step: '- (Optional, Defaults to 1) The number of instances to add during scale-out event.'
+            srn: '- The Scaleway Resource Name (SRN) of the AutoScaling Group.'
             status: '- The current status of the AutoScaling Group.'
             tags: '- (Optional) The tags associated with the AutoScaling Group.'
             template_id: '- (Required) The ID of the Instance Template used to create instances in this group.'
@@ -1657,6 +1661,7 @@ resources:
             scaling_option.cpu_usage_threshold: '- Scale depending on the CPU usage of a container instance.'
             scaling_option.memory_usage_threshold: '- Scale depending on the memory usage of a container instance.'
             secret_environment_variables: '- (Optional) The secret environment variables of the container.'
+            srn: '- The Scaleway Resource Name (SRN) of the container.'
             startup_probe: '- (Optional) Defines how to check if the container has started successfully.'
             status: '- The container status. In case the status is different from ready, a warning will be displayed when Terraform reads the resource.'
             tags: '- (Optional) The list of tags associated with the container.'
@@ -1743,6 +1748,7 @@ resources:
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the container domain.'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the container exists.'
+            srn: '- The Scaleway Resource Name (SRN) of the container domain.'
             url: '- (Deprecated) The URL used to query the container.'
         importStatements: []
     scaleway_container_namespace:
@@ -1771,6 +1777,7 @@ resources:
             registry_endpoint: '- (Deprecated) The registry endpoint of the namespace.'
             registry_namespace_id: '- (Deprecated) The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
+            srn: '- The Scaleway Resource Name (SRN) of the container namespace.'
             tags: '- (Optional) The list of tags associated with the namespace.'
         importStatements: []
     scaleway_container_token:
@@ -1929,6 +1936,7 @@ resources:
             secret_key: '- (Required, Sensitive) The secret key for accessing the SQS queue.'
             server_urls: '- (Required) The list of URLs of the NATS server (e.g., "nats://nats.mnq.fr-par.scaleway.com:4222").'
             sqs: '- The configuration of the Scaleway SQS queue used by the trigger'
+            srn: '- The Scaleway Resource Name (SRN) of the container trigger.'
             subject: '- (Required) NATS subject to subscribe to (e.g., "my-subject")."'
             tags: '- (Optional) The list of tags associated with the trigger.'
             timezone: '- (Required) Timezone for the cron schedule, in tz database format (e.g., "Europe/Paris").'
@@ -2088,6 +2096,7 @@ resources:
             created_at: '- Date and time of deployment creation (RFC 3339 format).'
             dns_record: '- DNS record for the public endpoint.'
             id: '- The ID of the deployment.'
+            move_factor: '- (Optional, Computed) For the tiered storage policy, fraction of free space on the hot volume (Block Storage) below which data is moved to the cold volume (Object Storage). Value between 0 and 1 (API default 0.1). Can be updated in place.'
             name: '- (Required) Name of the Data Warehouse deployment.'
             password: '- (Optional) Password for the first user of the deployment. If not specified, a random password will be generated. Only one of password or password_wo should be specified. Note: plain password is only used during deployment creation; it is not rotated on update.'
             password_wo: '- (Optional) Password for the first user of the deployment in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version. Updates are applied via the Users API to the initial user (an administrator when present, otherwise the first user by name).'
@@ -3439,6 +3448,7 @@ resources:
             runtime: '- (Required) Runtime of the function. Runtimes can be fetched using specific route'
             sandbox: '- (Optional) Execution environment of the function.'
             secret_environment_variables: '- (Optional) The secret environment variables of the function.'
+            srn: '- The Scaleway Resource Name (SRN) of the function.'
             tags: '- (Optional) The list of tags associated with the function.'
             timeout: '- (Optional) The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.'
             zip_file: '- (Optional) Path to the zip file containing your function sources to upload.'
@@ -3446,7 +3456,7 @@ resources:
         importStatements:
             - |-
               $ curl -H "X-Auth-Token: $(terraform output -raw secret_key)" \
-                "https://$(terraform output -raw function_endpoint)/"
+              	"https://$(terraform output -raw function_endpoint)/"
     scaleway_function_cron:
         subCategory: Functions
         name: scaleway_function_cron
@@ -3506,6 +3516,7 @@ resources:
                 - (Optional, Computed, Defaults to provider region) The region
                 in which the function was created.
             schedule: '- (Required) CRON format string (refer to the CRON schedule reference for more information).'
+            srn: '- The Scaleway Resource Name (SRN) of the function cron.'
             status: '- The CRON status.'
         importStatements: []
     scaleway_function_domain:
@@ -3541,6 +3552,7 @@ resources:
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the function domain.'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the domain was created.'
+            srn: '- The Scaleway Resource Name (SRN) of the function domain.'
             url: '- The URL used to query the function.'
         importStatements: []
     scaleway_function_namespace:
@@ -3569,6 +3581,7 @@ resources:
             registry_endpoint: '- The registry endpoint of the namespace.'
             registry_namespace_id: '- The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
+            srn: '- The Scaleway Resource Name (SRN) of the function namespace.'
             tags: '- (Optional) The list of tags associated with the namespace.'
         importStatements: []
     scaleway_function_token:
@@ -3675,6 +3688,7 @@ resources:
             queue: (Required) The name of the SQS queue.
             region: (Optional, Computed) Region where SQS is enabled (defaults to provider region)
             sqs: The configuration of the Scaleway SQS queue used by the trigger
+            srn: '- The Scaleway Resource Name (SRN) of the function trigger.'
             subject: (Required) The subject to listen to.
         importStatements: []
     scaleway_iam_api_key:
@@ -6306,12 +6320,14 @@ resources:
                   ],
                   "node_type": "DEV1-M",
                   "placement_group_id": "${scaleway_instance_placement_group.main.id}",
+                  "private_network_id": "${scaleway_vpc_private_network.other.id}",
                   "size": 3,
                   "version": "${scaleway_k8s_cluster.main.version}"
                 }
               references:
                 cluster_id: scaleway_k8s_cluster.main.id
                 placement_group_id: scaleway_instance_placement_group.main.id
+                private_network_id: scaleway_vpc_private_network.other.id
                 version: scaleway_k8s_cluster.main.version
               dependencies:
                 scaleway_instance_placement_group.main: '{}'
@@ -6325,6 +6341,10 @@ resources:
                     }
                 scaleway_vpc.main: '{}'
                 scaleway_vpc_private_network.main: |-
+                    {
+                      "vpc_id": "${scaleway_vpc.main.id}"
+                    }
+                scaleway_vpc_private_network.other: |-
                     {
                       "vpc_id": "${scaleway_vpc.main.id}"
                     }
@@ -6403,6 +6423,9 @@ resources:
             nodes: '- (List of) The nodes in the default pool.'
             placement_group_id: '- (Optional) The placement group the nodes of the pool will be attached to.'
             private_ips: '- The list of private IPv4 and IPv6 addresses associated with the node.'
+            private_network_id: |-
+                - (Optional) The ID of the private network to which the nodes of the pool will be attached.
+                The private network needs to be in the same VPC as the API server/the cluster.
             public_ip: '- The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
             public_ip_disabled: '- (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.'
             public_ip_v6: '- The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
@@ -6581,7 +6604,7 @@ resources:
                   "usage": "symmetric_encryption"
                 }
         argumentDocs:
-            algorithm: '(String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:'
+            algorithm: '(String, Required) – The cryptographic algorithm to use. The valid algorithms depend on the usage type; see the Key Manager cryptographic details for the full list. Valid values:'
             asymmetric_encryption: – For asymmetric encryption operations
             asymmetric_signing: – For digital signing operations
             created_at: – The date and time when the key was created.
@@ -6590,6 +6613,7 @@ resources:
                 – Cryptographic operations are performed within a dedicated Hardware Security Module.
                 The protection level is immutable: changing it requires replacing the key.
             id: – The ID of the key.
+            key_encapsulation: – For key encapsulation operations
             locked: – Whether the key is locked.
             name: (String) – The name of the key.
             next_rotation_at: (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
@@ -7537,6 +7561,47 @@ resources:
             updated_at: '- Date and time of last update (RFC 3339 format).'
             waiting_domain: – domain is not yet ready.
             waiting_payment: – awaiting payment confirmation.
+        importStatements: []
+    scaleway_mailbox_alias:
+        subCategory: Mailbox
+        name: scaleway_mailbox_alias
+        title: scaleway_mailbox_alias
+        examples:
+            - name: contact
+              manifest: |-
+                {
+                  "description": "Public contact address",
+                  "local_part": "contact",
+                  "mailbox_id": "${scaleway_mailbox.john.id}"
+                }
+              references:
+                mailbox_id: scaleway_mailbox.john.id
+              dependencies:
+                scaleway_mailbox.john: |-
+                    {
+                      "domain_id": "${scaleway_mailbox_domain.main.id}",
+                      "local_part": "john.doe",
+                      "password_wo": "${var.mailbox_password}",
+                      "password_wo_version": 1,
+                      "subscription_period": "monthly"
+                    }
+                scaleway_mailbox_domain.main: |-
+                    {
+                      "name": "mail.example.com"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of alias creation (RFC 3339 format).'
+            deleting: – alias is being deleted.
+            description: '- (Optional) Description of the alias. Can be updated in place. Omit the attribute to leave it empty (do not set an empty string).'
+            email: '- Full email address of the alias (local_part@domain).'
+            id: '- Unique identifier of the alias (UUID).'
+            local_part: '- (Required, Forces new resource) Local part of the alias email address (part before the @). Must be 1–64 characters. Changing this value forces a new alias to be created.'
+            mailbox_id: '- (Required, Forces new resource) UUID of the scaleway_mailbox to which this alias belongs.'
+            provisioning: – alias is being provisioned.
+            ready: – alias is active and ready to use.
+            status: '- Current status of the alias:'
+            unknown_status: – status is not known.
+            updated_at: '- Date and time of last update (RFC 3339 format).'
         importStatements: []
     scaleway_mailbox_domain:
         subCategory: Mailbox

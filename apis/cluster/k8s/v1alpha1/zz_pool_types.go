@@ -100,6 +100,11 @@ type PoolInitParameters struct {
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
+	// The ID of the private network to which the nodes of the pool will be attached.
+	// The private network needs to be in the same VPC as the API server/the cluster.
+	// ID of the private network in which the nodes are attached. Should be a member of the same VPC as the cluster.
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
+
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
 	// Defines if the public IP should be removed from the nodes.
 	PublicIPDisabled *bool `json:"publicIpDisabled,omitempty" tf:"public_ip_disabled,omitempty"`
@@ -220,6 +225,11 @@ type PoolObservation struct {
 	// The placement group the nodes of the pool will be attached to.
 	// ID of the placement group
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// The ID of the private network to which the nodes of the pool will be attached.
+	// The private network needs to be in the same VPC as the API server/the cluster.
+	// ID of the private network in which the nodes are attached. Should be a member of the same VPC as the cluster.
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
 	// Defines if the public IP should be removed from the nodes.
@@ -359,6 +369,12 @@ type PoolParameters struct {
 	// ID of the placement group
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// The ID of the private network to which the nodes of the pool will be attached.
+	// The private network needs to be in the same VPC as the API server/the cluster.
+	// ID of the private network in which the nodes are attached. Should be a member of the same VPC as the cluster.
+	// +kubebuilder:validation:Optional
+	PrivateNetworkID *string `json:"privateNetworkId,omitempty" tf:"private_network_id,omitempty"`
 
 	// (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
 	// Defines if the public IP should be removed from the nodes.

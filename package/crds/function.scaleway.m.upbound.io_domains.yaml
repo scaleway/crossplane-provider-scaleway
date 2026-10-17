@@ -349,6 +349,11 @@ spec:
                       The region in which the domain was created.
                       The region you want to attach the resource to
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the function domain.
+                      The Scaleway Resource Name (SRN) of the function domain
+                    type: string
                   url:
                     description: |-
                       The URL used to query the function.

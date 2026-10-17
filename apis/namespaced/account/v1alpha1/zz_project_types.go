@@ -50,6 +50,10 @@ type ProjectObservation struct {
 	// The organization_id you want to attach the resource to
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the project.
+	// The Scaleway Resource Name (SRN) of the project
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The last update time of the Project.
 	// The date and time of the last update of the Project (Format ISO 8601)
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
