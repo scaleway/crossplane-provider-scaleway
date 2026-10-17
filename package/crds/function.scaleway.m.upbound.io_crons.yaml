@@ -386,6 +386,11 @@ spec:
                       CRON format string (refer to the CRON schedule reference for more information).
                       Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the function cron.
+                      The Scaleway Resource Name (SRN) of the function cron
+                    type: string
                   status:
                     description: |-
                       The CRON status.

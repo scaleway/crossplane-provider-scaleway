@@ -272,6 +272,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
+	if in.MoveFactor != nil {
+		in, out := &in.MoveFactor, &out.MoveFactor
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -419,6 +424,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MoveFactor != nil {
+		in, out := &in.MoveFactor, &out.MoveFactor
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -531,6 +541,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	}
 	if in.CPUMin != nil {
 		in, out := &in.CPUMin, &out.CPUMin
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MoveFactor != nil {
+		in, out := &in.MoveFactor, &out.MoveFactor
 		*out = new(float64)
 		**out = **in
 	}

@@ -199,6 +199,10 @@ type ScalingGroupObservation struct {
 	// The scaling policy configuration.
 	ScalingPolicy *ScalingPolicyObservation `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the AutoScaling Group.
+	// The Scaleway Resource Name (SRN) of the AutoScaling Group.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The current status of the AutoScaling Group.
 	// The current status of the AutoScaling Group.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
