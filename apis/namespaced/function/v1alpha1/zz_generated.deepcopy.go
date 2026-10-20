@@ -155,6 +155,11 @@ func (in *CronObservation) DeepCopyInto(out *CronObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -376,6 +381,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -884,6 +894,11 @@ func (in *FunctionNamespaceObservation) DeepCopyInto(out *FunctionNamespaceObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -1120,6 +1135,11 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.Sandbox != nil {
 		in, out := &in.Sandbox, &out.Sandbox
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}

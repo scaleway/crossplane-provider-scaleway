@@ -189,6 +189,10 @@ type FunctionObservation struct {
 	// Execution environment of the function.
 	Sandbox *string `json:"sandbox,omitempty" tf:"sandbox,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the function.
+	// The Scaleway Resource Name (SRN) of the function
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The list of tags associated with the function.
 	// List of tags ["tag1", "tag2", ...] attached to the function.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

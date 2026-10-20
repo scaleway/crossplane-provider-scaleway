@@ -82,6 +82,10 @@ type FunctionNamespaceObservation struct {
 	// The ID of the registry namespace
 	RegistryNamespaceID *string `json:"registryNamespaceId,omitempty" tf:"registry_namespace_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the function namespace.
+	// The Scaleway Resource Name (SRN) of the function namespace
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The list of tags associated with the namespace.
 	// List of tags ["tag1", "tag2", ...] attached to the function namespace
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
