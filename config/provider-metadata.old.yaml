@@ -58,11 +58,11 @@ resources:
             - name: main
               manifest: |-
                 {
-                  "srn": "${scaleway_key_manager_key.main.srn}",
+                  "target_srn": "${scaleway_key_manager_key.main.srn}",
                   "value_id": "${scaleway_annotations_value.production.id}"
                 }
               references:
-                srn: scaleway_key_manager_key.main.srn
+                target_srn: scaleway_key_manager_key.main.srn
                 value_id: scaleway_annotations_value.production.id
               dependencies:
                 scaleway_annotations_key.environment: |-
@@ -88,7 +88,8 @@ resources:
         argumentDocs:
             id: '- The ID of the annotation binding.'
             key_id: '- ID of the key associated to the binding.'
-            srn: '- (Required) Scaleway Resource Number to associate. Changing this forces a new resource to be created.'
+            srn: '- The Scaleway Resource Number (SRN) of the binding.'
+            target_srn: '- (Required) Scaleway Resource Number to associate. Changing this forces a new resource to be created.'
             value_id: '- (Required) ID of the value to associate. Changing this forces a new resource to be created.'
         importStatements: []
     scaleway_annotations_key:
@@ -997,12 +998,12 @@ resources:
             - name: main
               manifest: |-
                 {
-                  "consumption_limit": 10000,
+                  "consumption_limit": 100,
                   "enabled": true,
                   "organization_id": "11111111-1111-1111-1111-111111111111"
                 }
         argumentDocs:
-            consumption_limit: '- (Required) Cost limit for the budget in cents.'
+            consumption_limit: '- (Required) Cost limit for the budget in euros.'
             created_at: '- The date and time of budget creation'
             enabled: '- (Optional) Whether the budget is enabled or not. Defaults to true.'
             id: '- The ID of the budget'
@@ -1025,7 +1026,7 @@ resources:
               dependencies:
                 scaleway_billing_budget.main: |-
                     {
-                      "consumption_limit": 10000,
+                      "consumption_limit": 100,
                       "enabled": true,
                       "organization_id": "11111111-1111-1111-1111-111111111111"
                     }
@@ -1055,7 +1056,7 @@ resources:
               dependencies:
                 scaleway_billing_budget.main: |-
                     {
-                      "consumption_limit": 10000,
+                      "consumption_limit": 100,
                       "enabled": true,
                       "organization_id": "11111111-1111-1111-1111-111111111111"
                     }
@@ -1077,7 +1078,7 @@ resources:
               dependencies:
                 scaleway_billing_budget.main: |-
                     {
-                      "consumption_limit": 10000,
+                      "consumption_limit": 100,
                       "enabled": true,
                       "organization_id": "11111111-1111-1111-1111-111111111111"
                     }
@@ -1099,7 +1100,7 @@ resources:
               dependencies:
                 scaleway_billing_budget.main: |-
                     {
-                      "consumption_limit": 10000,
+                      "consumption_limit": 100,
                       "enabled": true,
                       "organization_id": "11111111-1111-1111-1111-111111111111"
                     }
@@ -1207,40 +1208,6 @@ resources:
             tags: '- (Optional) A list of tags to apply to the volume.'
             zone: '- (Defaults to the zone specified in the provider configuration). The zone in which the volume should be created.'
         importStatements: []
-    scaleway_cockpit:
-        subCategory: Cockpit
-        name: scaleway_cockpit
-        title: scaleway_cockpit
-        examples:
-            - name: main
-              manifest: '{}'
-            - name: main
-              manifest: |-
-                {
-                  "project_id": "11111111-1111-1111-1111-111111111111"
-                }
-            - name: main
-              manifest: |-
-                {
-                  "plan": "premium",
-                  "project_id": "11111111-1111-1111-1111-111111111111"
-                }
-        argumentDocs:
-            alertmanager_url: '- (Deprecated) URL for the Alert manager.'
-            endpoints: '- (Deprecated) A list of endpoints related to Cockpit, each with specific URLs:'
-            grafana_url: '- (Deprecated) URL for Grafana.'
-            logs_url: '- (Deprecated) URL for logs to retrieve in the Data sources tab of the Scaleway console.'
-            metrics_url: '- (Deprecated) URL for metrics to retrieve in the Data sources tab of the Scaleway console.'
-            plan: |-
-                - (Deprecated) Name of the plan to use. Available plans are: free, premium, and custom.
-                ~> Important: The plan field is deprecated. Any modification or selection will have no effect.
-            plan_id: '- (Deprecated) The ID of the current pricing plan.'
-            project_id: '- (Defaults to the Project specified in the provider''s configuration) The ID of the Project the Cockpit is associated with.'
-            scaleway_cockpit_alert_manager: for managing alert manager
-            scaleway_cockpit_grafana: data source for accessing Grafana (authentication via IAM)
-            scaleway_cockpit_source: for managing data sources (metrics, logs, traces)
-            traces_url: '- (Deprecated) URL for traces to retrieve in the Data sources tab of the Scaleway console.'
-        importStatements: []
     scaleway_cockpit_alert_manager:
         subCategory: Cockpit
         name: scaleway_cockpit_alert_manager
@@ -1255,18 +1222,14 @@ resources:
                     }
                   ],
                   "preconfigured_alert_ids": "${[\n    for alert in data.scaleway_cockpit_preconfigured_alert.all.alerts :\n    alert.preconfigured_rule_id\n    if alert.product_name == \"instance\"\n  ]}",
-                  "project_id": "${scaleway_cockpit.main.project_id}"
+                  "project_id": "${scaleway_account_project.project.id}"
                 }
               references:
-                project_id: scaleway_cockpit.main.project_id
+                project_id: scaleway_account_project.project.id
               dependencies:
                 scaleway_account_project.project: |-
                     {
                       "name": "my-observability-project"
-                    }
-                scaleway_cockpit.main: |-
-                    {
-                      "project_id": "${scaleway_account_project.project.id}"
                     }
             - name: alert_manager
               manifest: |-
@@ -1385,32 +1348,6 @@ resources:
             region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the exporter is located.'
             status: '- Status of the data export (creating, ready, error).'
             updated_at: '- Date and time of last update (RFC 3339 format).'
-        importStatements: []
-    scaleway_cockpit_grafana_user:
-        subCategory: Cockpit
-        name: scaleway_cockpit_grafana_user
-        title: scaleway_cockpit_grafana_user
-        examples:
-            - name: main
-              manifest: |-
-                {
-                  "login": "my-awesome-user",
-                  "project_id": "${scaleway_account_project.project.id}",
-                  "role": "editor"
-                }
-              references:
-                project_id: scaleway_account_project.project.id
-              dependencies:
-                scaleway_account_project.project: |-
-                    {
-                      "name": "test project grafana user"
-                    }
-        argumentDocs:
-            grafana_url: '- URL for Grafana.'
-            login: '- (Required) The username of the Grafana user. The admin user is not yet available for creation. You need your Grafana username to log in to Grafana and access your dashboards.'
-            password: '- The password of the Grafana user.'
-            project_id: '- (Defaults to Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.'
-            role: '- (Required) The role assigned to the Grafana user. Must be editor or viewer.'
         importStatements: []
     scaleway_cockpit_source:
         subCategory: Cockpit
@@ -1677,6 +1614,8 @@ resources:
             deploy: '- (Deprecated) Boolean indicating whether the container is in a production environment.'
             description: (Optional) The description of the container.
             domain_name: '- The native domain name of the container.'
+            enable_default_public_endpoint: '(Optional) Whether the default public_endpoint is enabled or not (default: true).'
+            enable_private_endpoint: '(Optional) Where the private_endpoint is enabled or not (default: false).'
             environment_variables: '- (Optional) The environment variables of the container.'
             error_message: '- The error message of the container.'
             failure_threshold: '- Number of consecutive failures before considering the container has to be restarted.'
@@ -1705,6 +1644,7 @@ resources:
             path: '- Path to use for the HTTP health check.'
             port: '- (Optional) The port to expose the container.'
             privacy: '- (Optional) The privacy type defines the way to authenticate to your container. Please check our dedicated section.'
+            private_endpoint: '- Private URL of the container. This endpoint is only accessible from the private_network on which the container is attached.'
             private_network_id: (Optional) The ID of the Private Network the container is connected to.
             protocol: '- (Optional) The communication protocol http1 or h2c. Defaults to http1.'
             public_endpoint: '- The scheme and domain of the container (e.g., https://example.com).'
@@ -2488,7 +2428,7 @@ resources:
     scaleway_domain_registration:
         subCategory: Domains and DNS
         name: scaleway_domain_registration
-        title: ""
+        title: scaleway_domain_registration
         examples:
             - name: test
               manifest: |-
@@ -2589,7 +2529,7 @@ resources:
             project_id: '(Optional, String): The Scaleway project ID.'
             registrar: ': Name of the registrar.'
             status: ': Status of the domain registration.'
-            task_id: ': ID of the task that created the domain.'
+            task_id: ': ID of the task that created the domain. This attribute may be empty when the registration was imported by domain name and the original task has already been archived.'
             technical_contact: '(Computed, List): Technical contact information.'
             updated_at: ': Timestamp of the last update.'
             vat_identification_code: '(Required, String): VAT identification code.'
@@ -3215,14 +3155,33 @@ resources:
                 }
               references:
                 pipeline_id: scaleway_edge_services_pipeline.main.id
+            - name: main
+              manifest: |-
+                {
+                  "exclusion_rules": [
+                    {
+                      "rule_id": 942100
+                    },
+                    {
+                      "rule_id": 920350
+                    }
+                  ],
+                  "mode": "enable",
+                  "paranoia_level": 3,
+                  "pipeline_id": "${scaleway_edge_services_pipeline.main.id}"
+                }
+              references:
+                pipeline_id: scaleway_edge_services_pipeline.main.id
         argumentDocs:
             backend_stage_id: '- (Optional) The ID of the backend stage to forward requests to after the WAF stage.'
             created_at: '- The date and time of the creation of the WAF stage.'
+            exclusion_rules: '- (Optional) List of OWASP CRS rule IDs excluded from the WAF.'
             id: '- The ID of the WAF stage (UUID format).'
             mode: '- (Optional) The mode defining WAF behavior (disable/log_only/enable).'
             paranoia_level: '- (Required) The sensitivity level (1,2,3,4) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.'
             pipeline_id: '- (Required) The ID of the pipeline.'
             project_id: '- (Defaults to provider project_id) The ID of the project the WAF stage is associated with.'
+            rule_id: '- (Required) OWASP CRS rule ID excluded from the WAF.'
             updated_at: '- The date and time of the last update of the WAF stage.'
         importStatements: []
     scaleway_file_filesystem:
@@ -6459,6 +6418,7 @@ resources:
             taints: '- The list of Kubernetes taints applied and reconciled on the nodes.'
             updated_at: '- The last update date of the pool.'
             upgrade_policy: '- (Optional) The Pool upgrade policy'
+            user_data: '- (Optional) User data applied and reconciled with the pool, as a map of key to content.'
             version: |-
                 - (Optional) The version of the pool. If not explicitly set, the version of the pool will be equal to the version of the cluster.
                 For the field to be properly taken into account, the upgrade_pools field of the cluster must be set to false in order to decouple the version of the pool from the cluster.
@@ -6563,26 +6523,6 @@ resources:
         name: scaleway_key_manager_key
         title: scaleway_key_manager_key
         examples:
-            - name: symmetric
-              manifest: |-
-                {
-                  "algorithm": "aes_256_gcm",
-                  "description": "Key for encrypting secrets",
-                  "name": "my-kms-key",
-                  "project_id": "your-project-id",
-                  "region": "fr-par",
-                  "rotation_policy": [
-                    {
-                      "rotation_period": "720h"
-                    }
-                  ],
-                  "tags": [
-                    "env:prod",
-                    "kms"
-                  ],
-                  "unprotected": true,
-                  "usage": "symmetric_encryption"
-                }
             - name: rsa_4096
               manifest: |-
                 {
@@ -6603,12 +6543,52 @@ resources:
                   "unprotected": true,
                   "usage": "asymmetric_signing"
                 }
+            - name: main
+              manifest: |-
+                {
+                  "algorithm": "aes_256_gcm",
+                  "name": "my-kms-key",
+                  "unprotected": true,
+                  "usage": "symmetric_encryption"
+                }
+            - name: symmetric
+              manifest: |-
+                {
+                  "algorithm": "aes_256_gcm",
+                  "description": "Key for encrypting secrets",
+                  "name": "my-kms-key",
+                  "project_id": "your-project-id",
+                  "region": "fr-par",
+                  "rotation_policy": [
+                    {
+                      "rotation_period": "720h"
+                    }
+                  ],
+                  "tags": [
+                    "env:prod",
+                    "kms"
+                  ],
+                  "unprotected": true,
+                  "usage": "symmetric_encryption"
+                }
+            - name: hsm
+              manifest: |-
+                {
+                  "algorithm": "aes_256_gcm",
+                  "name": "my-kms-key-hsm",
+                  "protection_level": "hsm",
+                  "unprotected": true,
+                  "usage": "symmetric_encryption"
+                }
         argumentDocs:
             algorithm: '(String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:'
             asymmetric_encryption: – For asymmetric encryption operations
             asymmetric_signing: – For digital signing operations
             created_at: – The date and time when the key was created.
             description: (String, Optional) – A description for the key.
+            hsm: |-
+                – Cryptographic operations are performed within a dedicated Hardware Security Module.
+                The protection level is immutable: changing it requires replacing the key.
             id: – The ID of the key.
             locked: – Whether the key is locked.
             name: (String) – The name of the key.
@@ -6616,12 +6596,14 @@ resources:
             origin: '(String, Optional) – The origin of the key. Valid values are:'
             project_id: (String, Optional) – The ID of the project the key belongs to.
             protected: – Whether the key is protected from deletion.
+            protection_level: '(String, Optional) – The protection level of the key. Valid values are:'
             region: (String, Optional, Computed) – The region in which to create the key (e.g., fr-par). If not specified, defaults to the provider configuration.
             rotated_at: – The date and time when the key was last rotated.
             rotation_count: – The number of times the key has been rotated.
             rotation_period: (String, Required) – The period between key rotations (e.g., "720h" for 30 days).
             rotation_policy: '(Block, Optional) – Rotation policy for the key:'
             scaleway_kms: (default)
+            software: (default) – Cryptographic operations are performed in software.
             srn: – The Scaleway Resource Name (SRN) of the key.
             state: – The state of the key (e.g., enabled).
             symmetric_encryption: – For symmetric encryption operations
@@ -7471,6 +7453,286 @@ resources:
             match_subdomains: '- (Default: false) If true, all subdomains will match.'
             updated_at: '- The date on which the route was last updated.'
             zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the Load Balancer was created.'
+        importStatements: []
+    scaleway_mailbox:
+        subCategory: Mailbox
+        name: scaleway_mailbox
+        title: scaleway_mailbox
+        examples:
+            - name: john
+              manifest: |-
+                {
+                  "domain_id": "${scaleway_mailbox_domain.main.id}",
+                  "local_part": "john.doe",
+                  "password": "${var.mailbox_password}",
+                  "subscription_period": "monthly"
+                }
+              references:
+                domain_id: scaleway_mailbox_domain.main.id
+                password: var.mailbox_password
+              dependencies:
+                scaleway_mailbox_domain.main: |-
+                    {
+                      "name": "mail.example.com"
+                    }
+            - name: support
+              manifest: |-
+                {
+                  "domain_id": "${scaleway_mailbox_domain.main.id}",
+                  "local_part": "support",
+                  "password_wo": "${var.mailbox_password}",
+                  "password_wo_version": 1,
+                  "subscription_period": "monthly"
+                }
+              references:
+                domain_id: scaleway_mailbox_domain.main.id
+                password_wo: var.mailbox_password
+              dependencies:
+                scaleway_mailbox_domain.main: |-
+                    {
+                      "name": "mail.example.com"
+                    }
+            - name: employees
+              manifest: |-
+                {
+                  "domain_id": "${scaleway_mailbox_domain.corp.id}",
+                  "for_each": "${local.mailboxes}",
+                  "local_part": "${each.key}",
+                  "password": "${var.mailbox_password}",
+                  "subscription_period": "monthly"
+                }
+              references:
+                domain_id: scaleway_mailbox_domain.corp.id
+                for_each: local.mailboxes
+                local_part: each.key
+                password: var.mailbox_password
+              dependencies:
+                scaleway_mailbox_domain.corp: |-
+                    {
+                      "name": "corp.example.com"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of mailbox creation (RFC 3339 format).'
+            creating: – mailbox is being provisioned.
+            deleting: – mailbox is being deleted.
+            deletion_scheduled: – mailbox is scheduled for deletion.
+            deletion_scheduled_at: '- Scheduled deletion date when status is deletion_scheduled (RFC 3339 format).'
+            domain_id: '- (Required, Forces new resource) UUID of the scaleway_mailbox_domain to which this mailbox belongs.'
+            email: '- Full email address of the mailbox (local_part@domain).'
+            id: '- Unique identifier of the mailbox (UUID).'
+            local_part: '- (Required, Forces new resource) Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.'
+            locked: – mailbox is locked (e.g. billing issue).
+            next_subscription_period: '- Next renewal period (monthly, yearly, or canceled).'
+            next_subscription_period_starts_at: '- Date when the next billing period begins (RFC 3339 format).'
+            password: '- (Optional, Sensitive) Password for the mailbox. Conflicts with password_wo. Stored in state.'
+            password_wo: '- (Optional, Write-only) Password in write-only mode. Conflicts with password. Never stored in state. Requires password_wo_version.'
+            password_wo_version: '- (Optional) Version of the write-only password. Bump it together with password_wo to rotate the password.'
+            payment_failed: – the latest payment failed.
+            ready: – mailbox is active and ready to use.
+            renewing: – subscription renewal is in progress.
+            restoring: – mailbox is being restored.
+            status: '- Current status of the mailbox:'
+            subscription_period: '- (Required) Billing period for the mailbox. Accepted values: monthly, yearly. Can be updated in place to change the next renewal period.'
+            subscription_period_started_at: '- Start date of the current billing period (RFC 3339 format).'
+            updated_at: '- Date and time of last update (RFC 3339 format).'
+            waiting_domain: – domain is not yet ready.
+            waiting_payment: – awaiting payment confirmation.
+        importStatements: []
+    scaleway_mailbox_domain:
+        subCategory: Mailbox
+        name: scaleway_mailbox_domain
+        title: scaleway_mailbox_domain
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "name": "mail.example.com"
+                }
+            - name: main
+              manifest: |-
+                {
+                  "name": "${var.domain_name}"
+                }
+              references:
+                name: var.domain_name
+              dependencies:
+                scaleway_domain_record.mailbox_dns: |-
+                    {
+                      "data": "${each.value.dns_value}",
+                      "dns_zone": "${var.domain_name}",
+                      "for_each": "${{\n    for rec in scaleway_mailbox_domain.main.dns_records :\n    \"${rec.dns_type}-${rec.dns_name}\" =\u003e rec\n    if rec.level == \"required\"\n  }}",
+                      "name": "${each.value.dns_name}",
+                      "type": "${each.value.dns_type}"
+                    }
+            - name: project_domain
+              manifest: |-
+                {
+                  "name": "mail.example.com",
+                  "project_id": "${scaleway_account_project.mail_project.id}"
+                }
+              references:
+                project_id: scaleway_account_project.mail_project.id
+              dependencies:
+                scaleway_account_project.mail_project: |-
+                    {
+                      "name": "mail-project"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of domain creation (RFC 3339 format).'
+            creating: – domain is being registered.
+            deleting: – domain is being deleted.
+            dns_name: – Fully qualified name for this record.
+            dns_records: '- List of DNS records to configure in your DNS zone. Each entry has:'
+            dns_type: – Record type (TXT, MX, CNAME, SRV…).
+            dns_value: – Value to set for this record.
+            error: – Error detail when the record is invalid or not found.
+            id: '- Unique identifier of the domain (UUID).'
+            imap_url: '- IMAP server URL for configuring email clients.'
+            level: – Requirement level (required, recommended, optional).
+            mailbox_total_count: '- Number of mailboxes currently provisioned on this domain.'
+            name: '- (Required, Forces new resource) Fully qualified domain name (e.g. mail.example.com).'
+            pop3_url: '- POP3 server URL for configuring email clients.'
+            project_id: '- (Optional, Computed, Forces new resource, Defaults to provider project_id) The ID of the project the domain is associated with. Changing this forces a new domain.'
+            provisioning: – domain is being provisioned.
+            ready: – domain is ready and mailboxes can be created.
+            smtp_url: '- SMTP server URL for configuring email clients.'
+            status: '- Current status of the domain:'
+            updated_at: '- Date and time of last update (RFC 3339 format).'
+            validating: – validation is in progress.
+            validation_failed: – validation failed; check dns_records[*].error.
+            waiting_validation: – DNS records must be configured and validated.
+            webmail_url: '- URL of the domain''s webmail interface.'
+        importStatements: []
+    scaleway_messageq_deployment:
+        subCategory: MessageQ
+        name: scaleway_messageq_deployment
+        title: scaleway_messageq_deployment
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "name": "my-messageq",
+                  "node_count": 1,
+                  "node_type": "MESSAGEQ-SHARED-2C-8G",
+                  "password": "ThisIsASecurePassword123!",
+                  "user_name": "admin",
+                  "version": "4.0",
+                  "volume": {
+                    "size_in_gb": 5,
+                    "type": "sbs_5k"
+                  }
+                }
+            - name: prod
+              manifest: |-
+                {
+                  "name": "orders-messageq",
+                  "node_count": 3,
+                  "node_type": "MESSAGEQ-DEDICATED-4C-16G",
+                  "password": "${var.admin_password}",
+                  "tags": [
+                    "env=prod",
+                    "team=platform"
+                  ],
+                  "user_name": "admin",
+                  "version": "4.0",
+                  "volume": {
+                    "size_in_gb": 20,
+                    "type": "sbs_15k"
+                  }
+                }
+              references:
+                password: var.admin_password
+            - name: main
+              manifest: |-
+                {
+                  "name": "my-messageq",
+                  "node_count": 1,
+                  "node_type": "MESSAGEQ-DEDICATED-2C-8G",
+                  "password": "ThisIsASecurePassword123!",
+                  "private_network": {
+                    "private_network_id": "${scaleway_vpc_private_network.pn.id}"
+                  },
+                  "user_name": "admin",
+                  "version": "4.0",
+                  "volume": {
+                    "size_in_gb": 5,
+                    "type": "sbs_5k"
+                  }
+                }
+              dependencies:
+                scaleway_vpc.main: |-
+                    {
+                      "name": "my-vpc"
+                    }
+                scaleway_vpc_private_network.pn: |-
+                    {
+                      "name": "my-private-network",
+                      "vpc_id": "${scaleway_vpc.main.id}"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of deployment creation (RFC 3339 format).'
+            endpoints: '- List of endpoints for accessing the deployment.'
+            id: '- The ID of the deployment in the format {region}/{id}.'
+            name: '- (Optional) Name of the MessageQ deployment. If not specified, a random name will be generated.'
+            node_count: '- (Required) Number of nodes in the cluster. Can be updated in-place via the Upgrade API.'
+            node_type: '- (Required, Forces new resource) Type of node to use. Changing this forces recreation of the deployment.'
+            password: '- (Optional, Forces new resource, Sensitive) Bootstrap password for the MessageQ user. Only one of password or password_wo should be specified. Prefer scaleway_messageq_user for additional users and password rotation.'
+            password_wo: '- (Optional, Forces new resource, Write-only) Bootstrap password for the MessageQ user in write-only mode. Only one of password or password_wo should be specified, and password_wo is never stored in the Terraform state. Bootstrap credentials are immutable, so changing password_wo_version recreates the deployment: use scaleway_messageq_user to rotate a password in place.'
+            password_wo_version: '- (Optional, Forces new resource) Version of the write-only password. Required with password_wo.'
+            port: '- Service port number.'
+            private_network: '- (Optional) Private network configuration. Can be added, updated, or removed on an existing deployment.'
+            private_network_id: '- (Required) The ID of the private network. Format: {region}/{id} or just {id}.'
+            project_id: '- (Defaults to provider project_id) The ID of the project the deployment is associated with.'
+            public: '- Whether the endpoint is public (true) or private (false).'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the deployment should be created. Currently only fr-par is supported.'
+            services: '- List of services exposed on the endpoint.'
+            size_in_gb: '- (Required) Volume size in GB. Can be updated in-place via the Upgrade API.'
+            status: '- The status of the deployment (e.g., "ready", "creating", "upgrading").'
+            tags: '- (Optional) List of tags to apply to the deployment.'
+            type: '- (Required, Forces new resource) Volume type. Valid values are sbs_5k (5K IOPS) or sbs_15k (15K IOPS). Changing this forces recreation of the deployment.'
+            updated_at: '- Date and time of deployment last update (RFC 3339 format).'
+            url: '- Full URL to access the service.'
+            user_name: '- (Optional, Forces new resource) Bootstrap username for the deployment. Prefer scaleway_messageq_user for additional users.'
+            version: '- (Required, Forces new resource) MessageQ version to use. Changing this forces recreation of the deployment.'
+            volume: '- (Optional) Volume configuration for the cluster.'
+        importStatements: []
+    scaleway_messageq_user:
+        subCategory: MessageQ
+        name: scaleway_messageq_user
+        title: scaleway_messageq_user
+        examples:
+            - name: app
+              manifest: |-
+                {
+                  "deployment_id": "${scaleway_messageq_deployment.main.id}",
+                  "name": "orders-app",
+                  "password": "${var.app_password}"
+                }
+              references:
+                deployment_id: scaleway_messageq_deployment.main.id
+                password: var.app_password
+              dependencies:
+                scaleway_messageq_deployment.main: |-
+                    {
+                      "name": "my-messageq",
+                      "node_count": 1,
+                      "node_type": "MESSAGEQ-SHARED-2C-8G",
+                      "password": "ThisIsASecurePassword123!",
+                      "user_name": "admin",
+                      "version": "4.0",
+                      "volume": {
+                        "size_in_gb": 5,
+                        "type": "sbs_5k"
+                      }
+                    }
+        argumentDocs:
+            deployment_id: '- (Required, Forces new resource) The ID of the MessageQ deployment.'
+            id: '- The ID of the user in the format {region}/{deployment_id}/{name}.'
+            name: '- (Required, Forces new resource) The username.'
+            password: '- (Optional, Sensitive) The user password. Only one of password or password_wo should be specified.'
+            password_wo: '- (Optional, Write-only) The user password in write-only mode. Only one of password or password_wo should be specified. To rotate the password, update both password_wo and password_wo_version.'
+            password_wo_version: '- (Optional) Version of the write-only password. Required with password_wo.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the user should be created.'
         importStatements: []
     scaleway_mnq_nats_account:
         subCategory: Messaging and Queuing
@@ -9071,11 +9333,11 @@ resources:
                     }
         argumentDocs:
             created_at: '- Date and time of deployment creation (RFC 3339 format).'
-            endpoints: '- List of endpoints for accessing the deployment.'
+            endpoints: '- List of all endpoints returned by the API for accessing the deployment (public and private).'
             id: '- The ID of the deployment in the format {region}/{id}.'
             name: '- (Optional) Name of the OpenSearch deployment. If not specified, a random name will be generated.'
             node_amount: '- (Optional, Forces new resource, Deprecated) Use node_count instead. Changing this forces recreation of the deployment.'
-            node_count: '- (Optional, Forces new resource) Number of nodes in the cluster. Changing this forces recreation of the deployment.'
+            node_count: '- (Optional) Number of nodes in the cluster. Changing this value upgrades the deployment in place (no recreation, no data loss).'
             node_type: '- (Required, Forces new resource) Type of node to use (e.g., "SEARCHDB-SHARED-2C-8G", "SEARCHDB-DEDICATED-2C-8G"). Changing this forces recreation of the deployment.'
             password: '- (Optional, Forces new resource) Password for the OpenSearch user. Must be at least 12 characters long. If not specified, you will need to reset the password through the API or console. Changing this forces recreation of the deployment.'
             port: '- Service port number.'
@@ -9095,6 +9357,86 @@ resources:
             user_name: '- (Optional, Forces new resource) Username for the deployment. If not specified, the default username will be used. Changing this forces recreation of the deployment.'
             version: '- (Required, Forces new resource) OpenSearch version to use (e.g., "2.0"). Changing this forces recreation of the deployment.'
             volume: '- (Required) Volume configuration for the cluster.'
+        importStatements: []
+    scaleway_opensearch_user:
+        subCategory: OpenSearch
+        name: scaleway_opensearch_user
+        title: scaleway_opensearch_user
+        examples:
+            - name: app
+              manifest: |-
+                {
+                  "deployment_id": "${scaleway_opensearch_deployment.main.id}",
+                  "name": "app_user",
+                  "password": "ThisIsASecurePassword123!"
+                }
+              references:
+                deployment_id: scaleway_opensearch_deployment.main.id
+              dependencies:
+                scaleway_opensearch_deployment.main: |-
+                    {
+                      "name": "my-opensearch-cluster",
+                      "node_count": 1,
+                      "node_type": "SEARCHDB-SHARED-2C-8G",
+                      "password": "ThisIsASecurePassword123!",
+                      "user_name": "admin",
+                      "version": "2.0",
+                      "volume": [
+                        {
+                          "size_in_gb": 5,
+                          "type": "sbs_5k"
+                        }
+                      ]
+                    }
+        argumentDocs:
+            deployment_id: '- (Required, Forces new resource) The ID of the OpenSearch deployment the user belongs to.'
+            id: '- The ID of the user, in the format {region}/{deployment_id}/{name}.'
+            name: '- (Required, Forces new resource) Name of the OpenSearch user.'
+            password: '- (Optional, Sensitive) Password for the OpenSearch user. Only one of password and password_wo should be specified.'
+            password_wo: '- (Optional, Write-only) Password for the OpenSearch user in write-only mode. Only one of password and password_wo should be specified. password_wo is not stored in the Terraform state. To update it, also update password_wo_version.'
+            password_wo_version: '- (Optional) Version of the write-only password. Required when password_wo is set; bump this value to rotate the password.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the user should be created.'
+        importStatements: []
+    scaleway_partner_organization:
+        subCategory: Partner
+        name: scaleway_partner_organization
+        title: scaleway_partner_organization
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "customer_id": "customer-123",
+                  "email": "contact@example.com",
+                  "organization_name": "My Organization",
+                  "owner_firstname": "John",
+                  "owner_lastname": "Doe",
+                  "partner_id": "11111111-1111-1111-1111-111111111111",
+                  "phone_number": "+33123456789"
+                }
+            - name: minimal
+              manifest: |-
+                {
+                  "customer_id": "customer-minimal",
+                  "email": "contact@example.com",
+                  "organization_name": "Minimal Organization",
+                  "owner_firstname": "John",
+                  "owner_lastname": "Doe",
+                  "partner_id": "11111111-1111-1111-1111-111111111111"
+                }
+        argumentDocs:
+            created_at: '- Date of organization creation.'
+            customer_id: '- (Required) A custom ID for the customer in your own infrastructure.'
+            email: '- (Required) The email of the new organization owner.'
+            id: '- The ID of the organization resource.'
+            lock_reason_message: '- Human-readable reason if the organization is locked.'
+            locked_at: '- Date of lock.'
+            locked_by: '- Originator of the lock (partner or scaleway).'
+            organization_name: '- (Required) The name of the organization you want to create. Usually the company name.'
+            owner_firstname: '- (Required) The first name of the new organization owner.'
+            owner_lastname: '- (Required) The last name of the new organization owner.'
+            partner_id: '- (Optional) Your personal partner_id. This is the same as your Organization ID. If not provided, the default organization configured in the provider is used.'
+            phone_number: '- (Optional) The phone number of the new organization owner.'
+            status: '- The current status of the organization.'
         importStatements: []
     scaleway_rdb_acl:
         subCategory: Databases
@@ -9291,6 +9633,22 @@ resources:
             - name: main
               manifest: |-
                 {
+                  "engine": "PostgreSQL-15",
+                  "is_ha_cluster": true,
+                  "logs_policy": [
+                    {
+                      "max_age_retention": 30,
+                      "total_disk_retention": 100000000
+                    }
+                  ],
+                  "name": "test-rdb",
+                  "node_type": "DB-DEV-S",
+                  "password": "thiZ_is_v\u0026ry_s3cret",
+                  "user_name": "my_initial_user"
+                }
+            - name: main
+              manifest: |-
+                {
                   "disable_backup": true,
                   "encryption_at_rest": true,
                   "engine": "PostgreSQL-15",
@@ -9418,7 +9776,9 @@ resources:
             load_balancer: |-
                 - (Optional) List of Load Balancer endpoints of the Database Instance. A load-balancer endpoint will be set by default if no Private Network is.
                 This block must be defined if you want a public endpoint in addition to your private endpoint.
+            logs_policy: '- (Optional) Logs policy configuration for remote logs retention on the Database Instance. When not set, the API defaults apply and are returned as computed values.'
             maintenances: '- List of scheduled maintenance events on the Database Instance.'
+            max_age_retention: '- (Optional) Max age (in days) of remote logs to keep on the Database Instance.'
             minor_version: '- Minor version string (e.g., 15.5.0).'
             name: '- (Optional) The name of the Database Instance.'
             node_type: '- (Required) The type of Database Instance you want to create (e.g. db-dev-s).'
@@ -9444,6 +9804,7 @@ resources:
             status: '- Status of the maintenance (pending, ongoing, done, canceled, unknown).'
             stops_at: '- End date of the maintenance window.'
             tags: '- (Optional) The tags associated with the Database Instance.'
+            total_disk_retention: '- (Optional) Max disk size (in bytes) of remote logs to keep on the Database Instance.'
             upgradable_versions: '- List of available engine versions for upgrade. Each version contains:'
             user_name: '- (Optional) Identifier for the first user of the Database Instance.'
             version: '- Version string (e.g., 15.5).'
@@ -9956,11 +10317,15 @@ resources:
                   ],
                   "initiation_policy": "customer_gateway",
                   "name": "my-vpn-connection",
+                  "secret_id": "${scaleway_secret.psk.id}",
+                  "secret_version": "${scaleway_secret_version.psk.revision}",
                   "vpn_gateway_id": "${scaleway_s2s_vpn_gateway.gateway.id}"
                 }
               references:
                 bgp_config_ipv4.routing_policy_id: scaleway_s2s_vpn_routing_policy.policy.id
                 customer_gateway_id: scaleway_s2s_vpn_customer_gateway.customer_gw.id
+                secret_id: scaleway_secret.psk.id
+                secret_version: scaleway_secret_version.psk.revision
                 vpn_gateway_id: scaleway_s2s_vpn_gateway.gateway.id
               dependencies:
                 scaleway_s2s_vpn_customer_gateway.customer_gw: |-
@@ -9984,6 +10349,15 @@ resources:
                       "prefix_filter_out": [
                         "10.0.1.0/24"
                       ]
+                    }
+                scaleway_secret.psk: |-
+                    {
+                      "name": "my-s2s-vpn-psk"
+                    }
+                scaleway_secret_version.psk: |-
+                    {
+                      "data": "your_s2s_vpn.psk",
+                      "secret_id": "${scaleway_secret.psk.id}"
                     }
                 scaleway_vpc.vpc: |-
                     {
@@ -10028,8 +10402,8 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the connection is associated with.'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the connection should be created.'
             route_propagation_enabled: '- Whether route propagation is enabled.'
-            secret_id: '- The ID of the secret containing the pre-shared key (PSK) for the connection.'
-            secret_version: '- The version of the secret containing the PSK.'
+            secret_id: '- (Optional) The ID of a Secret Manager secret containing the pre-shared key (PSK). Prefer creating a , so Terraform manages the secret''s lifecycle.'
+            secret_version: '- (Optional) The version of the secret containing the PSK. Requires secret_id. If omitted, the latest version is used.'
             srn: '- The Scaleway Resource Name (SRN) of the connection.'
             status: '- The status of the connection.'
             tags: '- (Optional) The list of tags to apply to the connection.'
@@ -10199,6 +10573,12 @@ resources:
             - name: database
               manifest: |-
                 {
+                  "name": "my-database",
+                  "version": "16"
+                }
+            - name: database
+              manifest: |-
+                {
                   "max_cpu": 8,
                   "min_cpu": 0,
                   "name": "my-database"
@@ -10237,6 +10617,11 @@ resources:
                 - (Required) The name of the database (e.g. my-new-database).
                 ~> Important: Updates to the name argument will recreate the database.
             region: '- (Optional, Computed, Defaults to provider region) The region in which the resource exists.'
+            srn: '- The Scaleway Resource Name (SRN) of the database.'
+            version: |-
+                - (Optional, Computed) The major version of the PostgreSQL engine (e.g. 16). If not specified, the default version is used.
+                ~> Important: Updates to the version argument will recreate the database.
+            version_end_of_life_at: '- The end of life date of the database version (RFC3339).'
         importStatements: []
     scaleway_secret:
         subCategory: Secrets
@@ -10265,12 +10650,29 @@ resources:
                   ],
                   "name": "foo"
                 }
+            - name: kms
+              manifest: |-
+                {
+                  "key_id": "${scaleway_key_manager_key.main.id}",
+                  "name": "foo"
+                }
+              references:
+                key_id: scaleway_key_manager_key.main.id
+              dependencies:
+                scaleway_key_manager_key.main: |-
+                    {
+                      "algorithm": "aes_256_gcm",
+                      "name": "my-kms-key",
+                      "unprotected": true,
+                      "usage": "symmetric_encryption"
+                    }
         argumentDocs:
             action: '- (Required) Action to perform when the version of a secret expires. Available values can be found in SDK constants.'
             created_at: '- Date and time of the secret''s creation (in RFC 3339 format).'
             description: '- (Optional) Description of the secret (e.g. my-new-description).'
             ephemeral_policy: '- (Optional) Ephemeral policy of the secret. Policy that defines whether/when a secret''s versions expire. By default, the policy is applied to all the secret''s versions.'
             expires_once_accessed: '- (Optional) True if the secret version expires after a single user access.'
+            key_id: '- (Optional, Forces new resource) ID of the Key Manager key used to encrypt and decrypt the secret''s versions. Can be a UUID or a localized ID (region/UUID). If not set, Secret Manager uses a Key Manager internal key.'
             name: '- (Required) Name of the secret (e.g. my-secret).'
             path: '- (Optional) Path of the secret, defaults to /.'
             project_id: '- (Optional) The project ID containing is the secret.'
@@ -11335,7 +11737,6 @@ resources:
             nexthop_private_network_id: '- (Optional) The ID of the nexthop private network.'
             nexthop_resource_id: '- (Optional) The ID of the nexthop resource.'
             nexthop_vpc_connector_id: '- (Optional) The ID of the nexthop VPC Connector.'
-            project_id: '- (Defaults to provider project_id) The ID of the Project the route is associated with.'
             region: '- (Optional, Computed, Defaults to provider region) The region of the route.'
             srn: '- The Scaleway Resource Name (SRN) of the route.'
             tags: '- (Optional) The tags to associate with the route.'

@@ -55,6 +55,10 @@ type DomainObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the container domain.
+	// The Scaleway Resource Name (SRN) of the container domain
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// (Deprecated) The URL used to query the container.
 	// URL used to query the container
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

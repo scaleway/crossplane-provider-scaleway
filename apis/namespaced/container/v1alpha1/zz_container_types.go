@@ -307,6 +307,10 @@ type ContainerObservation struct {
 	// Configuration used to decide when to scale up or down.
 	ScalingOption []ScalingOptionObservation `json:"scalingOption,omitempty" tf:"scaling_option,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the container.
+	// The Scaleway Resource Name (SRN) of the container
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// Defines how to check if the container has started successfully.
 	// Defines how to check if the container has started successfully.
 	StartupProbe []StartupProbeObservation `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`

@@ -55,6 +55,10 @@ type DomainObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the function domain.
+	// The Scaleway Resource Name (SRN) of the function domain
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The URL used to query the function.
 	// URL to use to trigger the function
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

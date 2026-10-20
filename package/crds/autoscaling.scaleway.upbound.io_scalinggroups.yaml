@@ -682,6 +682,11 @@ spec:
                           The number of instances to add during scale-out event.
                         type: number
                     type: object
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the AutoScaling Group.
+                      The Scaleway Resource Name (SRN) of the AutoScaling Group.
+                    type: string
                   status:
                     description: |-
                       The current status of the AutoScaling Group.

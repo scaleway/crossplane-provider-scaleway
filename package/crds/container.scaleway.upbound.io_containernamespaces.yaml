@@ -323,6 +323,11 @@ spec:
                       (Deprecated) The registry namespace ID of the namespace.
                       The ID of the registry namespace
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the container namespace.
+                      The Scaleway Resource Name (SRN) of the container namespace
+                    type: string
                   tags:
                     description: |-
                       The list of tags associated with the namespace.
