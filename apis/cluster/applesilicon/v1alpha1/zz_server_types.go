@@ -187,6 +187,10 @@ type ServerObservation struct {
 	// List of runner ids attach to the server
 	RunnerIds []*string `json:"runnerIds,omitempty" tf:"runner_ids,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the server.
+	// The Scaleway Resource Name (SRN) of the server
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The state of the server.
 	// The state of the server
 	State *string `json:"state,omitempty" tf:"state,omitempty"`

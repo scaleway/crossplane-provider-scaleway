@@ -123,6 +123,10 @@ type PrivateNICObservation struct {
 	// The server ID
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the private network interface.
+	// The Scaleway Resource Name (SRN) of the private network interface
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The tags associated with the private NIC.
 	// The tags associated with the private-nic
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

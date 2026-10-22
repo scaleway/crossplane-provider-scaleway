@@ -16,8 +16,8 @@ import (
 
 type KeyInitParameters struct {
 
-	// (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
-	// Algorithm to use for the key. The valid algorithms depend on the usage type.
+	// (String, Required) – The cryptographic algorithm to use. The valid algorithms depend on the usage type; see the Key Manager cryptographic details for the full list. Valid values:
+	// Algorithm to use for the key. The valid algorithms depend on the usage type. See the [Key Manager cryptographic details](https://www.scaleway.com/en/docs/key-manager/reference-content/cryptographic-details-key-manager/#encryption-algorithm) for the algorithms available for each usage.
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// (String, Optional) – A description for the key.
@@ -57,14 +57,14 @@ type KeyInitParameters struct {
 	Unprotected *bool `json:"unprotected,omitempty" tf:"unprotected,omitempty"`
 
 	// (String, Required) – The usage type of the key. Valid values:
-	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing, key_encapsulation.
 	Usage *string `json:"usage,omitempty" tf:"usage,omitempty"`
 }
 
 type KeyObservation struct {
 
-	// (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
-	// Algorithm to use for the key. The valid algorithms depend on the usage type.
+	// (String, Required) – The cryptographic algorithm to use. The valid algorithms depend on the usage type; see the Key Manager cryptographic details for the full list. Valid values:
+	// Algorithm to use for the key. The valid algorithms depend on the usage type. See the [Key Manager cryptographic details](https://www.scaleway.com/en/docs/key-manager/reference-content/cryptographic-details-key-manager/#encryption-algorithm) for the algorithms available for each usage.
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// – The date and time when the key was created.
@@ -139,14 +139,14 @@ type KeyObservation struct {
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
 	// (String, Required) – The usage type of the key. Valid values:
-	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing, key_encapsulation.
 	Usage *string `json:"usage,omitempty" tf:"usage,omitempty"`
 }
 
 type KeyParameters struct {
 
-	// (String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:
-	// Algorithm to use for the key. The valid algorithms depend on the usage type.
+	// (String, Required) – The cryptographic algorithm to use. The valid algorithms depend on the usage type; see the Key Manager cryptographic details for the full list. Valid values:
+	// Algorithm to use for the key. The valid algorithms depend on the usage type. See the [Key Manager cryptographic details](https://www.scaleway.com/en/docs/key-manager/reference-content/cryptographic-details-key-manager/#encryption-algorithm) for the algorithms available for each usage.
 	// +kubebuilder:validation:Optional
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
@@ -196,7 +196,7 @@ type KeyParameters struct {
 	Unprotected *bool `json:"unprotected,omitempty" tf:"unprotected,omitempty"`
 
 	// (String, Required) – The usage type of the key. Valid values:
-	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
+	// Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing, key_encapsulation.
 	// +kubebuilder:validation:Optional
 	Usage *string `json:"usage,omitempty" tf:"usage,omitempty"`
 }

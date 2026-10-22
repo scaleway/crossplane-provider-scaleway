@@ -72,6 +72,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  monoAzZone:
+                    description: |-
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+                    type: string
+                  multiAz:
+                    description: |-
+                      Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+                      Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+                    type: boolean
                   name:
                     description: |-
                       Name of the Kafka cluster.
@@ -246,6 +256,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  monoAzZone:
+                    description: |-
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+                    type: string
+                  multiAz:
+                    description: |-
+                      Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+                      Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+                    type: boolean
                   name:
                     description: |-
                       Name of the Kafka cluster.
@@ -531,6 +551,16 @@ spec:
                   id:
                     description: The ID of the cluster.
                     type: string
+                  monoAzZone:
+                    description: |-
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+                      Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+                    type: string
+                  multiAz:
+                    description: |-
+                      Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+                      Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+                    type: boolean
                   name:
                     description: |-
                       Name of the Kafka cluster.

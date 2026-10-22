@@ -1264,6 +1264,11 @@ func (in *PlacementGroupObservation) DeepCopyInto(out *PlacementGroupObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -1651,6 +1656,11 @@ func (in *PrivateNICObservation) DeepCopyInto(out *PrivateNICObservation) {
 	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
@@ -4420,6 +4430,11 @@ func (in *TemplateObservation) DeepCopyInto(out *TemplateObservation) {
 	}
 	if in.ServerType != nil {
 		in, out := &in.ServerType, &out.ServerType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}

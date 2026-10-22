@@ -65,6 +65,10 @@ type PlacementGroupObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the placement group.
+	// The Scaleway Resource Name (SRN) of the placement group
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// A list of tags to apply to the placement group.
 	// The tags associated with the placement group
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

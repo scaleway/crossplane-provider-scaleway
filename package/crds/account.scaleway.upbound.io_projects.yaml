@@ -231,6 +231,11 @@ spec:
                       The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.
                       The organization_id you want to attach the resource to
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the project.
+                      The Scaleway Resource Name (SRN) of the project
+                    type: string
                   updatedAt:
                     description: |-
                       The last update time of the Project.

@@ -30,6 +30,7 @@ resources:
             id: '- The unique identifier of the project (UUID format).'
             name: '- (Optional) The name of the Project.'
             organization_id: '- (Optional. Defaults to provider organization_id)The organization ID the Project is associated with. Any change made to the organization_id will recreate the resource.'
+            srn: '- The Scaleway Resource Name (SRN) of the project.'
             updated_at: '- The last update time of the Project.'
         importStatements: []
     scaleway_account_ssh_key:
@@ -108,6 +109,7 @@ resources:
             id: '- The ID of the annotation key.'
             name: '- (Required) Name of the annotation key.'
             organization_id: '- (Defaults to provider organization_id) The organization ID to create the key in.'
+            srn: '- The Scaleway Resource Name (SRN) of the annotation key.'
         importStatements: []
     scaleway_annotations_value:
         subCategory: Annotations
@@ -134,6 +136,7 @@ resources:
             id: '- The ID of the annotation value.'
             key_id: '- (Required) ID of the key the value is associated to.'
             name: '- (Required) Name of the annotation value.'
+            srn: '- The Scaleway Resource Name (SRN) of the annotation value.'
             value_id: '- The ID of the annotation value.'
         importStatements: []
     scaleway_apple_silicon_runner:
@@ -156,6 +159,7 @@ resources:
             labels: '- A list of labels applied to the runner. Only for github provider'
             name: '- (Optional) The name of the runner'
             project_id: '- (Optional) The project_id you want to attach the resource to'
+            srn: '- The Scaleway Resource Name (SRN) of the runner'
             status: '- The status of the runner'
             token: '- (Required) The token used to authenticate the runner to run'
             url: '- (Required) The URL of the runner to run'
@@ -237,6 +241,7 @@ resources:
                 associated with.
             public_bandwidth: (Optional) Configure the available public bandwidth for your server in bits per second. This option may not be available for all offers.
             runner_ids: '- (Optional) List of runner IDs to assign to the server. At the moment, only a single runner can be attached to a server. Compatible only with runners of type github and gitlab, with the devos-sequoia-15.6 offer and M2-L server type'
+            srn: '- The Scaleway Resource Name (SRN) of the server.'
             state: '- The state of the server.'
             status: '- The current status of the private network.'
             type: |-
@@ -395,6 +400,7 @@ resources:
             scaling_policy.scale_in_step: '- (Optional, Defaults to 1) The number of instances to remove during scale-in event.'
             scaling_policy.scale_out_cooldown: '- (Optional, Defaults to 1m) The cooldown duration after a scale-out event.'
             scaling_policy.scale_out_step: '- (Optional, Defaults to 1) The number of instances to add during scale-out event.'
+            srn: '- The Scaleway Resource Name (SRN) of the AutoScaling Group.'
             status: '- The current status of the AutoScaling Group.'
             tags: '- (Optional) The tags associated with the AutoScaling Group.'
             template_id: '- (Required) The ID of the Instance Template used to create instances in this group.'
@@ -1139,6 +1145,25 @@ resources:
                       "name": "some-volume-name",
                       "size_in_gb": 20
                     }
+            - name: block_snapshot
+              manifest: |-
+                {
+                  "name": "some-snapshot-name",
+                  "timeouts": {
+                    "create": "10m",
+                    "read": "10m"
+                  },
+                  "volume_id": "${scaleway_block_volume.block_volume.id}"
+                }
+              references:
+                volume_id: scaleway_block_volume.block_volume.id
+              dependencies:
+                scaleway_block_volume.block_volume: |-
+                    {
+                      "iops": 5000,
+                      "name": "some-volume-name",
+                      "size_in_gb": 20
+                    }
         argumentDocs:
             '{zone}/{id}.srn': '- The Scaleway Resource Name (SRN) of the snapshot.'
             export: |-
@@ -1153,6 +1178,11 @@ resources:
             name: '- (Optional) The name of the snapshot. If not provided, a name will be randomly generated.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration). The ID of the Scaleway Project the snapshot is associated with.'
             tags: '- (Optional) A list of tags to apply to the snapshot.'
+            timeouts: '- (Optional) The timeouts block allows you to configure how long Terraform waits for certain long-running operations. See the Increase Timeout in terraform apply guide for more details.'
+            timeouts.create: '- (Defaults to 5m) Duration to wait for the snapshot to be created.'
+            timeouts.delete: '- (Defaults to 5m) Duration to wait for the snapshot to be deleted.'
+            timeouts.read: '- (Defaults to 5m) Duration to wait for the snapshot to be read.'
+            timeouts.update: '- (Defaults to 5m) Duration to wait for the snapshot to be updated.'
             volume_id: '- (Optional) The ID of the volume to take a snapshot from.'
             zone: '- (Defaults to the zone specified in the provider configuration). The zone in which the snapshot should be created.'
         importStatements: []
@@ -1377,7 +1407,7 @@ resources:
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the data source is associated with.'
             push_url: '- The URL endpoint used for pushing data to the Cockpit data source.'
             region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the data source is located.'
-            retention_days: '- (Required) The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type. Note: Changes to this field will force the creation of a new resource.'
+            retention_days: '- (Required) The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type.'
             synchronized_with_grafana: '- Indicates whether the data source is synchronized with Grafana.'
             type: '- (Required) The type of data source. Possible values are: metrics, logs, or traces.'
             updated_at: '- The date and time the data source was last updated (in RFC 3339 format).'
@@ -1657,6 +1687,7 @@ resources:
             scaling_option.cpu_usage_threshold: '- Scale depending on the CPU usage of a container instance.'
             scaling_option.memory_usage_threshold: '- Scale depending on the memory usage of a container instance.'
             secret_environment_variables: '- (Optional) The secret environment variables of the container.'
+            srn: '- The Scaleway Resource Name (SRN) of the container.'
             startup_probe: '- (Optional) Defines how to check if the container has started successfully.'
             status: '- The container status. In case the status is different from ready, a warning will be displayed when Terraform reads the resource.'
             tags: '- (Optional) The list of tags associated with the container.'
@@ -1743,6 +1774,7 @@ resources:
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the container domain.'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the container exists.'
+            srn: '- The Scaleway Resource Name (SRN) of the container domain.'
             url: '- (Deprecated) The URL used to query the container.'
         importStatements: []
     scaleway_container_namespace:
@@ -1771,6 +1803,7 @@ resources:
             registry_endpoint: '- (Deprecated) The registry endpoint of the namespace.'
             registry_namespace_id: '- (Deprecated) The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
+            srn: '- The Scaleway Resource Name (SRN) of the container namespace.'
             tags: '- (Optional) The list of tags associated with the namespace.'
         importStatements: []
     scaleway_container_token:
@@ -1929,6 +1962,7 @@ resources:
             secret_key: '- (Required, Sensitive) The secret key for accessing the SQS queue.'
             server_urls: '- (Required) The list of URLs of the NATS server (e.g., "nats://nats.mnq.fr-par.scaleway.com:4222").'
             sqs: '- The configuration of the Scaleway SQS queue used by the trigger'
+            srn: '- The Scaleway Resource Name (SRN) of the container trigger.'
             subject: '- (Required) NATS subject to subscribe to (e.g., "my-subject")."'
             tags: '- (Optional) The list of tags associated with the trigger.'
             timezone: '- (Required) Timezone for the cron schedule, in tz database format (e.g., "Europe/Paris").'
@@ -2088,6 +2122,7 @@ resources:
             created_at: '- Date and time of deployment creation (RFC 3339 format).'
             dns_record: '- DNS record for the public endpoint.'
             id: '- The ID of the deployment.'
+            move_factor: '- (Optional, Computed) For the tiered storage policy, fraction of free space on the hot volume (Block Storage) below which data is moved to the cold volume (Object Storage). Value between 0 and 1 (API default 0.1). Can be updated in place.'
             name: '- (Required) Name of the Data Warehouse deployment.'
             password: '- (Optional) Password for the first user of the deployment. If not specified, a random password will be generated. Only one of password or password_wo should be specified. Note: plain password is only used during deployment creation; it is not rotated on update.'
             password_wo: '- (Optional) Password for the first user of the deployment in write-only mode. Only one of password or password_wo should be specified. password_wo will not be set in the Terraform state. To update the password_wo, you must also update the password_wo_version. Updates are applied via the Users API to the initial user (an administrator when present, otherwise the first user by name).'
@@ -3439,6 +3474,7 @@ resources:
             runtime: '- (Required) Runtime of the function. Runtimes can be fetched using specific route'
             sandbox: '- (Optional) Execution environment of the function.'
             secret_environment_variables: '- (Optional) The secret environment variables of the function.'
+            srn: '- The Scaleway Resource Name (SRN) of the function.'
             tags: '- (Optional) The list of tags associated with the function.'
             timeout: '- (Optional) The maximum amount of time your function can spend processing a request before being stopped. Defaults to 300s.'
             zip_file: '- (Optional) Path to the zip file containing your function sources to upload.'
@@ -3446,7 +3482,7 @@ resources:
         importStatements:
             - |-
               $ curl -H "X-Auth-Token: $(terraform output -raw secret_key)" \
-                "https://$(terraform output -raw function_endpoint)/"
+              	"https://$(terraform output -raw function_endpoint)/"
     scaleway_function_cron:
         subCategory: Functions
         name: scaleway_function_cron
@@ -3506,6 +3542,7 @@ resources:
                 - (Optional, Computed, Defaults to provider region) The region
                 in which the function was created.
             schedule: '- (Required) CRON format string (refer to the CRON schedule reference for more information).'
+            srn: '- The Scaleway Resource Name (SRN) of the function cron.'
             status: '- The CRON status.'
         importStatements: []
     scaleway_function_domain:
@@ -3541,6 +3578,7 @@ resources:
             hostname: '- (Required) The hostname with a CNAME record.'
             id: '- The unique identifier of the function domain.'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the domain was created.'
+            srn: '- The Scaleway Resource Name (SRN) of the function domain.'
             url: '- The URL used to query the function.'
         importStatements: []
     scaleway_function_namespace:
@@ -3569,6 +3607,7 @@ resources:
             registry_endpoint: '- The registry endpoint of the namespace.'
             registry_namespace_id: '- The registry namespace ID of the namespace.'
             secret_environment_variables: '- (Optional) The secret environment variables of the namespace.'
+            srn: '- The Scaleway Resource Name (SRN) of the function namespace.'
             tags: '- (Optional) The list of tags associated with the namespace.'
         importStatements: []
     scaleway_function_token:
@@ -3675,6 +3714,7 @@ resources:
             queue: (Required) The name of the SQS queue.
             region: (Optional, Computed) Region where SQS is enabled (defaults to provider region)
             sqs: The configuration of the Scaleway SQS queue used by the trigger
+            srn: '- The Scaleway Resource Name (SRN) of the function trigger.'
             subject: (Required) The subject to listen to.
         importStatements: []
     scaleway_iam_api_key:
@@ -3722,6 +3762,24 @@ resources:
                     {
                       "rotation_years": 1
                     }
+            - name: main
+              manifest: |-
+                {
+                  "application_id": "${scaleway_iam_application.main.id}",
+                  "secret_id": "${scaleway_secret.main.id}"
+                }
+              references:
+                application_id: scaleway_iam_application.main.id
+                secret_id: scaleway_secret.main.id
+              dependencies:
+                scaleway_iam_application.ci_cd: |-
+                    {
+                      "name": "My application"
+                    }
+                scaleway_secret.main: |-
+                    {
+                      "name": "My secret"
+                    }
         argumentDocs:
             access_key: '- The access key of the IAM API key.'
             application_id: ': (Optional) ID of the application attached to the API key.'
@@ -3734,7 +3792,8 @@ resources:
                 - (Optional) The date and time of the expiration of the IAM API key. Please note that in case of any changes,
                 the resource will be recreated.
             id: '- The ID of the API key, which is the access key.'
-            secret_key: ': The secret Key of the IAM API key.'
+            secret_id: '- (Optional) ID of a Secret Manager secret. If set, the secret_key of the API key is stored as a new version of this secret and is not stored in the Terraform state. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).'
+            secret_key: ': The secret Key of the IAM API key. Not set when secret_id is specified, in which case the secret key is stored as a new version of the referenced secret and can be retrieved with the scaleway_secret_version ephemeral resource.'
             srn: '- The Scaleway Resource Name (SRN) of the API key.'
             updated_at: '- The date and time of the last update of the IAM API key.'
             user_id: |-
@@ -4413,6 +4472,7 @@ resources:
             policy_respected: '- Is true when the policy is respected.'
             policy_type: '- (Defaults to max_availability) The policy type of the placement group. Possible values are: low_latency or max_availability.'
             project_id: '- (Defaults to provider project_id) The ID of the project the placement group is associated with.'
+            srn: '- The Scaleway Resource Name (SRN) of the placement group.'
             tags: '- (Optional) A list of tags to apply to the placement group.'
             zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the placement group should be created.'
         importStatements: []
@@ -4500,6 +4560,7 @@ resources:
             private_ips: '- The list of private IPv4 and IPv6 addresses associated with the resource.'
             private_network_id: '- (Required) The ID of the private network attached to.'
             server_id: '- (Required) The ID of the server associated with.'
+            srn: '- The Scaleway Resource Name (SRN) of the private network interface.'
             tags: '- (Optional) The tags associated with the private NIC.'
             zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the server must be created.'
         importStatements: []
@@ -5193,6 +5254,7 @@ resources:
             security_group_id: '- (Optional) The ID of the security group to attach to the servers created using the template.'
             server_tags: '- (Optional) A list of tags to apply to the servers created from the template.'
             server_type: '- (Required) The commercial type of the server defined in the template.'
+            srn: '- The Scaleway Resource Name (SRN) of the Instance template.'
             tags: '- (Optional) A list of tags to apply to the template.'
             updated_at: '- The last update timestamp of the Instance template.'
             volumes: '- (Optional) The list of specs describing the volumes to attach to the servers created using the template.'
@@ -6306,12 +6368,14 @@ resources:
                   ],
                   "node_type": "DEV1-M",
                   "placement_group_id": "${scaleway_instance_placement_group.main.id}",
+                  "private_network_id": "${scaleway_vpc_private_network.other.id}",
                   "size": 3,
                   "version": "${scaleway_k8s_cluster.main.version}"
                 }
               references:
                 cluster_id: scaleway_k8s_cluster.main.id
                 placement_group_id: scaleway_instance_placement_group.main.id
+                private_network_id: scaleway_vpc_private_network.other.id
                 version: scaleway_k8s_cluster.main.version
               dependencies:
                 scaleway_instance_placement_group.main: '{}'
@@ -6325,6 +6389,10 @@ resources:
                     }
                 scaleway_vpc.main: '{}'
                 scaleway_vpc_private_network.main: |-
+                    {
+                      "vpc_id": "${scaleway_vpc.main.id}"
+                    }
+                scaleway_vpc_private_network.other: |-
                     {
                       "vpc_id": "${scaleway_vpc.main.id}"
                     }
@@ -6403,6 +6471,9 @@ resources:
             nodes: '- (List of) The nodes in the default pool.'
             placement_group_id: '- (Optional) The placement group the nodes of the pool will be attached to.'
             private_ips: '- The list of private IPv4 and IPv6 addresses associated with the node.'
+            private_network_id: |-
+                - (Optional) The ID of the private network to which the nodes of the pool will be attached.
+                The private network needs to be in the same VPC as the API server/the cluster.
             public_ip: '- The public IPv4. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
             public_ip_disabled: '- (Defaults to false) Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.'
             public_ip_v6: '- The public IPv6. (Deprecated, Please use the official Kubernetes provider and the kubernetes_nodes data source)'
@@ -6496,10 +6567,44 @@ resources:
                       "region": "fr-par",
                       "vpc_id": "${scaleway_vpc.main.id}"
                     }
+            - name: main
+              manifest: |-
+                {
+                  "multi_az": true,
+                  "name": "my-kafka-multi-az",
+                  "node_amount": 3,
+                  "node_type": "KAFK-PLAY-NANO",
+                  "password": "thiZ_is_v\u0026ry_s3cret",
+                  "private_network": [
+                    {
+                      "pn_id": "${scaleway_vpc_private_network.pn.id}"
+                    }
+                  ],
+                  "user_name": "admin",
+                  "version": "4.1.1",
+                  "volume_size_in_gb": 10,
+                  "volume_type": "sbs_5k"
+                }
+              references:
+                private_network.pn_id: scaleway_vpc_private_network.pn.id
+              dependencies:
+                scaleway_vpc.main: |-
+                    {
+                      "name": "my-vpc",
+                      "region": "fr-par"
+                    }
+                scaleway_vpc_private_network.pn: |-
+                    {
+                      "name": "my-private-network",
+                      "region": "fr-par",
+                      "vpc_id": "${scaleway_vpc.main.id}"
+                    }
         argumentDocs:
             created_at: '- Date and time of cluster creation (RFC 3339 format).'
             dns_records: '- List of DNS records for the public endpoint.'
             id: '- The ID of the cluster.'
+            mono_az_zone: '- (Optional, Computed, Forces new resource) Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.'
+            multi_az: '- (Optional, Computed, Forces new resource) Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.'
             name: '- (Required) Name of the Kafka cluster.'
             node_amount: '- (Required, Forces new resource) Number of nodes in the cluster. Changing this forces recreation of the cluster.'
             node_type: '- (Required, Forces new resource) Node type to use for the cluster. Changing this forces recreation of the cluster.'
@@ -6581,7 +6686,7 @@ resources:
                   "usage": "symmetric_encryption"
                 }
         argumentDocs:
-            algorithm: '(String, Required) – The cryptographic algorithm to use. Valid values depend on the usage:'
+            algorithm: '(String, Required) – The cryptographic algorithm to use. The valid algorithms depend on the usage type; see the Key Manager cryptographic details for the full list. Valid values:'
             asymmetric_encryption: – For asymmetric encryption operations
             asymmetric_signing: – For digital signing operations
             created_at: – The date and time when the key was created.
@@ -6590,6 +6695,7 @@ resources:
                 – Cryptographic operations are performed within a dedicated Hardware Security Module.
                 The protection level is immutable: changing it requires replacing the key.
             id: – The ID of the key.
+            key_encapsulation: – For key encapsulation operations
             locked: – Whether the key is locked.
             name: (String) – The name of the key.
             next_rotation_at: (String, Optional) – The date and time of the next scheduled rotation, in RFC 3339 format. If not set, it is computed by the Key Manager API from rotation_period.
@@ -7538,6 +7644,47 @@ resources:
             waiting_domain: – domain is not yet ready.
             waiting_payment: – awaiting payment confirmation.
         importStatements: []
+    scaleway_mailbox_alias:
+        subCategory: Mailbox
+        name: scaleway_mailbox_alias
+        title: scaleway_mailbox_alias
+        examples:
+            - name: contact
+              manifest: |-
+                {
+                  "description": "Public contact address",
+                  "local_part": "contact",
+                  "mailbox_id": "${scaleway_mailbox.john.id}"
+                }
+              references:
+                mailbox_id: scaleway_mailbox.john.id
+              dependencies:
+                scaleway_mailbox.john: |-
+                    {
+                      "domain_id": "${scaleway_mailbox_domain.main.id}",
+                      "local_part": "john.doe",
+                      "password_wo": "${var.mailbox_password}",
+                      "password_wo_version": 1,
+                      "subscription_period": "monthly"
+                    }
+                scaleway_mailbox_domain.main: |-
+                    {
+                      "name": "mail.example.com"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of alias creation (RFC 3339 format).'
+            deleting: – alias is being deleted.
+            description: '- (Optional) Description of the alias. Can be updated in place. Omit the attribute to leave it empty (do not set an empty string).'
+            email: '- Full email address of the alias (local_part@domain).'
+            id: '- Unique identifier of the alias (UUID).'
+            local_part: '- (Required, Forces new resource) Local part of the alias email address (part before the @). Must be 1–64 characters. Changing this value forces a new alias to be created.'
+            mailbox_id: '- (Required, Forces new resource) UUID of the scaleway_mailbox to which this alias belongs.'
+            provisioning: – alias is being provisioned.
+            ready: – alias is active and ready to use.
+            status: '- Current status of the alias:'
+            unknown_status: – status is not known.
+            updated_at: '- Date and time of last update (RFC 3339 format).'
+        importStatements: []
     scaleway_mailbox_domain:
         subCategory: Mailbox
         name: scaleway_mailbox_domain
@@ -8296,6 +8443,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the MongoDB® instance is associated with.'
             public_network: '- (Optional) Public network endpoint configuration (no arguments).'
             region: '- (Optional, Computed, Defaults to provider region) The region in which the MongoDB® instance should be created.'
+            settings: '- Map of engine settings applied to the instance (read-only).'
             snapshot_id: '- (Optional) Snapshot ID to restore the MongoDB® instance from.'
             snapshot_schedule_frequency_hours: '- (Optional) Snapshot schedule frequency in hours.'
             snapshot_schedule_retention_days: '- (Optional) Snapshot schedule retention in days.'
@@ -10253,6 +10401,7 @@ resources:
             settings: |-
                 - (Optional) Map of settings for Redis™ cluster. Available settings can be found by listing Redis™ versions
                 with scaleway API or CLI
+            srn: '- The Scaleway Resource Name (SRN) of the Redis™ cluster.'
             tags: '- (Optional) The tags associated with the Redis™ cluster.'
             tls_enabled: '- (Defaults to false) Whether TLS is enabled or not.'
             updated_at: '- The date and time of the last update of the Redis™ cluster.'
@@ -10888,21 +11037,10 @@ resources:
                     "terraform"
                   ]
                 }
-            - name: vpc01
-              manifest: |-
-                {
-                  "enable_routing": true,
-                  "name": "my-vpc",
-                  "tags": [
-                    "demo",
-                    "terraform",
-                    "routing"
-                  ]
-                }
         argumentDocs:
             created_at: '- Date and time of VPC''s creation (RFC 3339 format).'
-            enable_custom_routes_propagation: '- (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.'
-            enable_routing: '- (Optional) Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.'
+            enable_custom_routes_propagation: '- (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.'
+            enable_routing: '- (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.'
             enable_transitivity: '- (Optional) Enable packets from peered VPCs to transit through this VPC.'
             id: '- The ID of the VPC.'
             is_default: '- Defines whether the VPC is the default one for its Project.'

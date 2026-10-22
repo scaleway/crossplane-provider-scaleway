@@ -55,6 +55,10 @@ type ValueObservation struct {
 	// Name of the annotation value.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the annotation value.
+	// The Scaleway Resource Name (SRN) of the annotation value.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The ID of the annotation value.
 	// The ID of the annotation value.
 	ValueID *string `json:"valueId,omitempty" tf:"value_id,omitempty"`

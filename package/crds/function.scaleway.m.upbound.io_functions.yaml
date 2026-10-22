@@ -636,6 +636,11 @@ spec:
                       Execution environment of the function.
                       Execution environment of the function.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the function.
+                      The Scaleway Resource Name (SRN) of the function
+                    type: string
                   tags:
                     description: |-
                       The list of tags associated with the function.

@@ -16,11 +16,11 @@ import (
 
 type VPCInitParameters struct {
 
-	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Defines whether the VPC advertises custom routes between its Private Networks
 	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
 
-	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
@@ -51,11 +51,11 @@ type VPCObservation struct {
 	// The date and time of the creation of the private network
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Defines whether the VPC advertises custom routes between its Private Networks
 	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
 
-	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Enable routing between Private Networks in the VPC
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
 
@@ -101,12 +101,12 @@ type VPCObservation struct {
 
 type VPCParameters struct {
 
-	// (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Defines whether the VPC advertises custom routes between its Private Networks
 	// +kubebuilder:validation:Optional
 	EnableCustomRoutesPropagation *bool `json:"enableCustomRoutesPropagation,omitempty" tf:"enable_custom_routes_propagation,omitempty"`
 
-	// Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+	// (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
 	// Enable routing between Private Networks in the VPC
 	// +kubebuilder:validation:Optional
 	EnableRouting *bool `json:"enableRouting,omitempty" tf:"enable_routing,omitempty"`
