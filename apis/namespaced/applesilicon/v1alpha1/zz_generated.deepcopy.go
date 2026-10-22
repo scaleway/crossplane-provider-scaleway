@@ -319,6 +319,11 @@ func (in *RunnerObservation) DeepCopyInto(out *RunnerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -641,6 +646,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
 	}
 	if in.State != nil {
 		in, out := &in.State, &out.State

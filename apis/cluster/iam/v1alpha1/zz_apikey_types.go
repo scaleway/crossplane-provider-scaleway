@@ -41,6 +41,10 @@ type ApiKeyInitParameters struct {
 	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
+	// ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+	// ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
 	// ID of the user attached to the API key.
 	// -> Note You must specify at least one: application_id and/or user_id.
 	// ID of the user attached to the api key
@@ -84,6 +88,10 @@ type ApiKeyObservation struct {
 
 	// The ID of the API key, which is the access key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+	// ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// The Scaleway Resource Name (SRN) of the API key.
 	// The Scaleway Resource Name (SRN) of the API key
@@ -130,6 +138,11 @@ type ApiKeyParameters struct {
 	// The date and time of the expiration of the iam api key. Cannot be changed afterwards
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
+
+	// ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+	// ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// ID of the user attached to the API key.
 	// -> Note You must specify at least one: application_id and/or user_id.

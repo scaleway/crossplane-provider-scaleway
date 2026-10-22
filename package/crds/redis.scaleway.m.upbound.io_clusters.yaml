@@ -630,6 +630,11 @@ spec:
                       Map of settings to define for the cluster.
                     type: object
                     x-kubernetes-map-type: granular
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the Redis™ cluster.
+                      The Scaleway Resource Name (SRN) of the Redis cluster
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the Redis™ cluster.

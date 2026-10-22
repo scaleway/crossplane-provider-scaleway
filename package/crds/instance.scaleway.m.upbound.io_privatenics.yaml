@@ -771,6 +771,11 @@ spec:
                       The ID of the server associated with.
                       The server ID
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the private network interface.
+                      The Scaleway Resource Name (SRN) of the private network interface
+                    type: string
                   tags:
                     description: |-
                       The tags associated with the private NIC.

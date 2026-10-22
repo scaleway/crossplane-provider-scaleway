@@ -73,6 +73,11 @@ func (in *ApiKeyInitParameters) DeepCopyInto(out *ApiKeyInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretID != nil {
+		in, out := &in.SecretID, &out.SecretID
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserID != nil {
 		in, out := &in.UserID, &out.UserID
 		*out = new(string)
@@ -170,6 +175,11 @@ func (in *ApiKeyObservation) DeepCopyInto(out *ApiKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretID != nil {
+		in, out := &in.SecretID, &out.SecretID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Srn != nil {
 		in, out := &in.Srn, &out.Srn
 		*out = new(string)
@@ -227,6 +237,11 @@ func (in *ApiKeyParameters) DeepCopyInto(out *ApiKeyParameters) {
 	}
 	if in.ExpiresAt != nil {
 		in, out := &in.ExpiresAt, &out.ExpiresAt
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretID != nil {
+		in, out := &in.SecretID, &out.SecretID
 		*out = new(string)
 		**out = **in
 	}

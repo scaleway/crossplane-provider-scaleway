@@ -1209,6 +1209,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the container.
+                      The Scaleway Resource Name (SRN) of the container
+                    type: string
                   startupProbe:
                     description: |-
                       Defines how to check if the container has started successfully.

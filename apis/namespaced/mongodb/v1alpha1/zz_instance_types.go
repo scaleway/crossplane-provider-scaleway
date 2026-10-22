@@ -63,10 +63,6 @@ type InstanceInitParameters struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Map of settings to define for the instance.
-	// +mapType=granular
-	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
-
 	// Snapshot ID to restore the MongoDB® instance from.
 	// Snapshot ID to restore the MongoDB instance from
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
@@ -152,7 +148,8 @@ type InstanceObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Map of settings to define for the instance.
+	// Map of engine settings applied to the instance (read-only).
+	// Map of engine settings applied to the instance (read-only).
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
@@ -257,11 +254,6 @@ type InstanceParameters struct {
 	// The region you want to attach the resource to
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
-
-	// Map of settings to define for the instance.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// Snapshot ID to restore the MongoDB® instance from.
 	// Snapshot ID to restore the MongoDB instance from
