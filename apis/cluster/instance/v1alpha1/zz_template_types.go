@@ -169,6 +169,10 @@ type TemplateObservation struct {
 	// The commercial type of the server defined by the Instance Template.
 	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the Instance template.
+	// The Scaleway Resource Name (SRN) of the Instance Template.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// A list of tags to apply to the template.
 	// The tags associated with the Instance Template.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

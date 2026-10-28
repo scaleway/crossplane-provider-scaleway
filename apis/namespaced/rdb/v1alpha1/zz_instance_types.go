@@ -28,6 +28,10 @@ type InstanceInitParameters struct {
 	// Backup schedule retention in days
 	BackupScheduleRetention *float64 `json:"backupScheduleRetention,omitempty" tf:"backup_schedule_retention,omitempty"`
 
+	// The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+	// ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
+	CloneFrom *string `json:"cloneFrom,omitempty" tf:"clone_from,omitempty"`
+
 	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
 	DisableBackup *bool `json:"disableBackup,omitempty" tf:"disable_backup,omitempty"`
@@ -101,8 +105,8 @@ type InstanceInitParameters struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The tags associated with the Database Instance.
@@ -139,6 +143,10 @@ type InstanceObservation struct {
 	// Certificate of the Database Instance.
 	// Certificate of the database instance
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+	// ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
+	CloneFrom *string `json:"cloneFrom,omitempty" tf:"clone_from,omitempty"`
 
 	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
@@ -232,8 +240,8 @@ type InstanceObservation struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The tags associated with the Database Instance.
@@ -273,6 +281,11 @@ type InstanceParameters struct {
 	// Backup schedule retention in days
 	// +kubebuilder:validation:Optional
 	BackupScheduleRetention *float64 `json:"backupScheduleRetention,omitempty" tf:"backup_schedule_retention,omitempty"`
+
+	// The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+	// ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
+	// +kubebuilder:validation:Optional
+	CloneFrom *string `json:"cloneFrom,omitempty" tf:"clone_from,omitempty"`
 
 	// Disable automated backup for the Database Instance.
 	// Disable automated backup for the database instance
@@ -364,8 +377,8 @@ type InstanceParameters struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+	// The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+	// ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 

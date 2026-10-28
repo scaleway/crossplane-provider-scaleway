@@ -254,9 +254,14 @@ spec:
                       The ID of the private NIC.
                       The project_id you want to attach the resource to
                     type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group associated with the private network interface.
+                      The ID of the security group associated with this interface
+                    type: string
                   serverId:
                     description: |-
-                      The ID of the server associated with.
+                      The ID of the server associated with the private network interface.
                       The server ID
                     type: string
                   serverIdRef:
@@ -541,9 +546,14 @@ spec:
                       The ID of the private NIC.
                       The project_id you want to attach the resource to
                     type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group associated with the private network interface.
+                      The ID of the security group associated with this interface
+                    type: string
                   serverId:
                     description: |-
-                      The ID of the server associated with.
+                      The ID of the server associated with the private network interface.
                       The server ID
                     type: string
                   serverIdRef:
@@ -772,10 +782,25 @@ spec:
                       The ID of the private NIC.
                       The project_id you want to attach the resource to
                     type: string
+                  securityGroupId:
+                    description: |-
+                      The ID of the security group associated with the private network interface.
+                      The ID of the security group associated with this interface
+                    type: string
                   serverId:
                     description: |-
-                      The ID of the server associated with.
+                      The ID of the server associated with the private network interface.
                       The server ID
+                    type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the private network interface.
+                      The Scaleway Resource Name (SRN) of the private network interface
+                    type: string
+                  status:
+                    description: |-
+                      The status of the private network interface.
+                      Current status of the private network interface
                     type: string
                   tags:
                     description: |-

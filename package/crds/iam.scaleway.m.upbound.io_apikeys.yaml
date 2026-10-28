@@ -159,6 +159,11 @@ spec:
                       the resource will be recreated.
                       The date and time of the expiration of the iam api key. Cannot be changed afterwards
                     type: string
+                  secretId:
+                    description: |-
+                      ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+                      ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
+                    type: string
                   userId:
                     description: |-
                       ID of the user attached to the API key.
@@ -280,6 +285,11 @@ spec:
                       the resource will be recreated.
                       The date and time of the expiration of the iam api key. Cannot be changed afterwards
                     type: string
+                  secretId:
+                    description: |-
+                      ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+                      ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
+                    type: string
                   userId:
                     description: |-
                       ID of the user attached to the API key.
@@ -393,6 +403,11 @@ spec:
                     type: string
                   id:
                     description: The ID of the API key, which is the access key.
+                    type: string
+                  secretId:
+                    description: |-
+                      ID of a Secret Manager secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID).
+                      ID of a [Secret Manager](https://www.scaleway.com/en/secret-manager/) secret. The secret itself is not managed by this resource. Can be a UUID or a regional ID (region/UUID), in which case the region of the secret is derived from it.
                     type: string
                   srn:
                     description: |-

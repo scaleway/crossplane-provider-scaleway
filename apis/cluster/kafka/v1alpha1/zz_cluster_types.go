@@ -15,6 +15,14 @@ import (
 
 type ClusterInitParameters struct {
 
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+	MonoAzZone *string `json:"monoAzZone,omitempty" tf:"mono_az_zone,omitempty"`
+
+	// Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+	// Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
 	// Name of the Kafka cluster.
 	// Name of the Kafka cluster
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -72,6 +80,14 @@ type ClusterObservation struct {
 
 	// The ID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+	MonoAzZone *string `json:"monoAzZone,omitempty" tf:"mono_az_zone,omitempty"`
+
+	// Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+	// Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
 	// Name of the Kafka cluster.
 	// Name of the Kafka cluster
@@ -131,6 +147,16 @@ type ClusterObservation struct {
 }
 
 type ClusterParameters struct {
+
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Conflicts with multi_az. When unset, defaults to the provider default zone.
+	// Zone for a mono-AZ cluster (e.g. fr-par-1). Defaults to the provider default zone when unset.
+	// +kubebuilder:validation:Optional
+	MonoAzZone *string `json:"monoAzZone,omitempty" tf:"mono_az_zone,omitempty"`
+
+	// Deploy the cluster across multiple availability zones. Conflicts with mono_az_zone. When unset, defaults to mono-AZ on the provider default zone.
+	// Deploy the cluster across multiple availability zones. Defaults to mono-AZ on the provider default zone when unset.
+	// +kubebuilder:validation:Optional
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
 	// Name of the Kafka cluster.
 	// Name of the Kafka cluster

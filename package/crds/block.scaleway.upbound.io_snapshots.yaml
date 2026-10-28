@@ -121,6 +121,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  timeouts:
+                    properties:
+                      create:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be created.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be deleted.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be read.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be updated.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   volumeId:
                     description: |-
                       The ID of the volume to take a snapshot from.
@@ -268,6 +291,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  timeouts:
+                    properties:
+                      create:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be created.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be deleted.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be read.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be updated.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   volumeId:
                     description: |-
                       The ID of the volume to take a snapshot from.
@@ -501,6 +547,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  timeouts:
+                    properties:
+                      create:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be created.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be deleted.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be read.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (Defaults to 5m) Duration to wait for the snapshot to be updated.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   volumeId:
                     description: |-
                       The ID of the volume to take a snapshot from.

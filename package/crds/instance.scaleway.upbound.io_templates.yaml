@@ -1247,6 +1247,11 @@ spec:
                       The commercial type of the server defined in the template.
                       The commercial type of the server defined by the Instance Template.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the Instance template.
+                      The Scaleway Resource Name (SRN) of the Instance Template.
+                    type: string
                   tags:
                     description: |-
                       A list of tags to apply to the template.

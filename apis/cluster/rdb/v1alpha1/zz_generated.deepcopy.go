@@ -971,6 +971,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CloneFrom != nil {
+		in, out := &in.CloneFrom, &out.CloneFrom
+		*out = new(string)
+		**out = **in
+	}
 	if in.DisableBackup != nil {
 		in, out := &in.DisableBackup, &out.DisableBackup
 		*out = new(bool)
@@ -1179,6 +1184,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.Certificate != nil {
 		in, out := &in.Certificate, &out.Certificate
+		*out = new(string)
+		**out = **in
+	}
+	if in.CloneFrom != nil {
+		in, out := &in.CloneFrom, &out.CloneFrom
 		*out = new(string)
 		**out = **in
 	}
@@ -1392,6 +1402,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.BackupScheduleRetention != nil {
 		in, out := &in.BackupScheduleRetention, &out.BackupScheduleRetention
 		*out = new(float64)
+		**out = **in
+	}
+	if in.CloneFrom != nil {
+		in, out := &in.CloneFrom, &out.CloneFrom
+		*out = new(string)
 		**out = **in
 	}
 	if in.DisableBackup != nil {

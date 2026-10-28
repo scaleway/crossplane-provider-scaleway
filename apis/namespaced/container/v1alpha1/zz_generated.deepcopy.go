@@ -521,6 +521,11 @@ func (in *ContainerNamespaceObservation) DeepCopyInto(out *ContainerNamespaceObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]*string, len(*in))
@@ -862,6 +867,11 @@ func (in *ContainerObservation) DeepCopyInto(out *ContainerObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
 	}
 	if in.StartupProbe != nil {
 		in, out := &in.StartupProbe, &out.StartupProbe
@@ -1533,6 +1543,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
 		*out = new(string)
 		**out = **in
 	}
