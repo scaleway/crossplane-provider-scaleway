@@ -13,6 +13,50 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this Alias.
+func (mg *Alias) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MailboxID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.MailboxIDRef,
+		Selector:     mg.Spec.ForProvider.MailboxIDSelector,
+		To: reference.To{
+			List:    &MailboxList{},
+			Managed: &Mailbox{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MailboxID")
+	}
+	mg.Spec.ForProvider.MailboxID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MailboxIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MailboxID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.MailboxIDRef,
+		Selector:     mg.Spec.InitProvider.MailboxIDSelector,
+		To: reference.To{
+			List:    &MailboxList{},
+			Managed: &Mailbox{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MailboxID")
+	}
+	mg.Spec.InitProvider.MailboxID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MailboxIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Domain.
 func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
