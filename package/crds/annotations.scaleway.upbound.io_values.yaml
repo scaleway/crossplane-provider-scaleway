@@ -379,6 +379,11 @@ spec:
                       Name of the annotation value.
                       Name of the annotation value.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the annotation value.
+                      The Scaleway Resource Name (SRN) of the annotation value.
+                    type: string
                   valueId:
                     description: |-
                       The ID of the annotation value.

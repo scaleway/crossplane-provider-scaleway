@@ -45,6 +45,10 @@ type KeyObservation struct {
 	// (Defaults to provider organization_id) The organization ID to create the key in.
 	// ID of the organization. If not set, the organization ID is derived from the provider configuration.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the annotation key.
+	// The Scaleway Resource Name (SRN) of the annotation key.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 }
 
 type KeyParameters struct {

@@ -367,6 +367,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.TLSEnabled != nil {
 		in, out := &in.TLSEnabled, &out.TLSEnabled
 		*out = new(bool)

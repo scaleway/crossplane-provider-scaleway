@@ -72,6 +72,10 @@ type CronObservation struct {
 	// Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the function cron.
+	// The Scaleway Resource Name (SRN) of the function cron
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The CRON status.
 	// Cron job status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

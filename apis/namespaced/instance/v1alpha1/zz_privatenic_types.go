@@ -70,7 +70,11 @@ type PrivateNICInitParameters struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The ID of the server associated with.
+	// The ID of the security group associated with the private network interface.
+	// The ID of the security group associated with this interface
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// The ID of the server associated with the private network interface.
 	// The server ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -120,9 +124,21 @@ type PrivateNICObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The ID of the server associated with.
+	// The ID of the security group associated with the private network interface.
+	// The ID of the security group associated with this interface
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// The ID of the server associated with the private network interface.
 	// The server ID
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the private network interface.
+	// The Scaleway Resource Name (SRN) of the private network interface
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
+	// The status of the private network interface.
+	// Current status of the private network interface
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The tags associated with the private NIC.
 	// The tags associated with the private-nic
@@ -177,7 +193,12 @@ type PrivateNICParameters struct {
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The ID of the server associated with.
+	// The ID of the security group associated with the private network interface.
+	// The ID of the security group associated with this interface
+	// +kubebuilder:validation:Optional
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// The ID of the server associated with the private network interface.
 	// The server ID
 	// +crossplane:generate:reference:type=github.com/scaleway/crossplane-provider-scaleway/apis/namespaced/instance/v1alpha1.Server
 	// +kubebuilder:validation:Optional

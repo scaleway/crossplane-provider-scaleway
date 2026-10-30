@@ -1,0 +1,52 @@
+apiVersion: mailbox.scaleway.m.upbound.io/v1alpha1
+kind: Alias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/alias
+  labels:
+    testing.upbound.io/example-name: contact
+  name: contact
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Public contact address
+    localPart: contact
+    mailboxIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: john
+
+---
+
+apiVersion: mailbox.scaleway.m.upbound.io/v1alpha1
+kind: Mailbox
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/alias
+  labels:
+    testing.upbound.io/example-name: john
+  name: john
+  namespace: upbound-system
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    localPart: john.doe
+    passwordWo: ${var.mailbox_password}
+    passwordWoVersion: 1
+    subscriptionPeriod: monthly
+
+---
+
+apiVersion: mailbox.scaleway.m.upbound.io/v1alpha1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mailbox/v1alpha1/alias
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: mail.example.com

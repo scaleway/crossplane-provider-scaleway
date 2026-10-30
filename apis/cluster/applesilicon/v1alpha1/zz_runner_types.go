@@ -65,6 +65,10 @@ type RunnerObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the runner
+	// The Scaleway Resource Name (SRN) of the runner
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The status of the runner
 	// The status of the runner
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

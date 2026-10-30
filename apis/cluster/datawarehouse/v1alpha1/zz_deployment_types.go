@@ -23,6 +23,10 @@ type DeploymentInitParameters struct {
 	// Minimum CPU count
 	CPUMin *float64 `json:"cpuMin,omitempty" tf:"cpu_min,omitempty"`
 
+	// For the tiered storage policy, fraction of free space on the hot volume (Block Storage) below which data is moved to the cold volume (Object Storage). Value between 0 and 1 (API default 0.1). Can be updated in place.
+	// For the tiered storage policy, fraction of free space on the hot volume below which data is moved to cold storage. Value between 0 and 1 (API default 0.1).
+	MoveFactor *float64 `json:"moveFactor,omitempty" tf:"move_factor,omitempty"`
+
 	// Name of the Data Warehouse deployment.
 	// Name of the Datawarehouse deployment
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -96,6 +100,10 @@ type DeploymentObservation struct {
 
 	// The ID of the deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// For the tiered storage policy, fraction of free space on the hot volume (Block Storage) below which data is moved to the cold volume (Object Storage). Value between 0 and 1 (API default 0.1). Can be updated in place.
+	// For the tiered storage policy, fraction of free space on the hot volume below which data is moved to cold storage. Value between 0 and 1 (API default 0.1).
+	MoveFactor *float64 `json:"moveFactor,omitempty" tf:"move_factor,omitempty"`
 
 	// Name of the Data Warehouse deployment.
 	// Name of the Datawarehouse deployment
@@ -173,6 +181,11 @@ type DeploymentParameters struct {
 	// Minimum CPU count
 	// +kubebuilder:validation:Optional
 	CPUMin *float64 `json:"cpuMin,omitempty" tf:"cpu_min,omitempty"`
+
+	// For the tiered storage policy, fraction of free space on the hot volume (Block Storage) below which data is moved to the cold volume (Object Storage). Value between 0 and 1 (API default 0.1). Can be updated in place.
+	// For the tiered storage policy, fraction of free space on the hot volume below which data is moved to cold storage. Value between 0 and 1 (API default 0.1).
+	// +kubebuilder:validation:Optional
+	MoveFactor *float64 `json:"moveFactor,omitempty" tf:"move_factor,omitempty"`
 
 	// Name of the Data Warehouse deployment.
 	// Name of the Datawarehouse deployment

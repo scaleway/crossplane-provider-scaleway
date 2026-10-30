@@ -409,6 +409,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the server.
+                      The Scaleway Resource Name (SRN) of the server
+                    type: string
                   state:
                     description: |-
                       The state of the server.

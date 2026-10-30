@@ -103,6 +103,7 @@ import (
 	lb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/lb"
 	privatenetwork "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/privatenetwork"
 	routelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/route"
+	alias "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/alias"
 	domainmailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/domain"
 	mailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/mailbox"
 	deploymentmessageq "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/messageq/deployment"
@@ -261,6 +262,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lb.Setup,
 		privatenetwork.Setup,
 		routelb.Setup,
+		alias.Setup,
 		domainmailbox.Setup,
 		mailbox.Setup,
 		deploymentmessageq.Setup,
@@ -425,6 +427,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		lb.SetupGated,
 		privatenetwork.SetupGated,
 		routelb.SetupGated,
+		alias.SetupGated,
 		domainmailbox.SetupGated,
 		mailbox.SetupGated,
 		deploymentmessageq.SetupGated,

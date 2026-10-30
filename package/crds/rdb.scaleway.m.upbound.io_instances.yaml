@@ -73,6 +73,11 @@ spec:
                       Backup schedule retention in days.
                       Backup schedule retention in days
                     type: number
+                  cloneFrom:
+                    description: |-
+                      The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+                      ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
+                    type: string
                   disableBackup:
                     description: |-
                       Disable automated backup for the Database Instance.
@@ -309,8 +314,8 @@ spec:
                     x-kubernetes-map-type: granular
                   snapshotId:
                     description: |-
-                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
                     type: string
                   tags:
                     description: |-
@@ -363,6 +368,11 @@ spec:
                       Backup schedule retention in days.
                       Backup schedule retention in days
                     type: number
+                  cloneFrom:
+                    description: |-
+                      The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+                      ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
+                    type: string
                   disableBackup:
                     description: |-
                       Disable automated backup for the Database Instance.
@@ -599,8 +609,8 @@ spec:
                     x-kubernetes-map-type: granular
                   snapshotId:
                     description: |-
-                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
                     type: string
                   tags:
                     description: |-
@@ -712,6 +722,11 @@ spec:
                     description: |-
                       Certificate of the Database Instance.
                       Certificate of the database instance
+                    type: string
+                  cloneFrom:
+                    description: |-
+                      The ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions, and is fully independent of its parent. You may keep the same node_type or upgrade to a larger one. Conflicts with the engine and snapshot_id parameters.
+                      ID of an existing Database Instance to clone. The clone includes all databases, users, and permissions. Conflicts with the `engine` and `snapshot_id` attributes.
                     type: string
                   disableBackup:
                     description: |-
@@ -971,8 +986,8 @@ spec:
                     x-kubernetes-map-type: granular
                   snapshotId:
                     description: |-
-                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine parameter and backup settings.
-                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` attribute.
+                      The ID of an existing snapshot to restore or create the Database Instance from. Conflicts with the engine and clone_from parameters.
+                      ID of an existing snapshot to create a new instance from. This allows restoring a database instance to the state captured in the specified snapshot. Conflicts with the `engine` and `clone_from` attributes.
                     type: string
                   tags:
                     description: |-

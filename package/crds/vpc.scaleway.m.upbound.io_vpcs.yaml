@@ -60,12 +60,12 @@ spec:
                 properties:
                   enableCustomRoutesPropagation:
                     description: |-
-                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Defines whether the VPC advertises custom routes between its Private Networks
                     type: boolean
                   enableRouting:
                     description: |-
-                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Enable routing between Private Networks in the VPC
                     type: boolean
                   enableTransitivity:
@@ -111,12 +111,12 @@ spec:
                 properties:
                   enableCustomRoutesPropagation:
                     description: |-
-                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Defines whether the VPC advertises custom routes between its Private Networks
                     type: boolean
                   enableRouting:
                     description: |-
-                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Enable routing between Private Networks in the VPC
                     type: boolean
                   enableTransitivity:
@@ -217,12 +217,12 @@ spec:
                     type: string
                   enableCustomRoutesPropagation:
                     description: |-
-                      (true for newly created VPCs) Defines whether the VPC advertises custom routes between its Private Networks. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Custom routes propagation between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Defines whether the VPC advertises custom routes between its Private Networks
                     type: boolean
                   enableRouting:
                     description: |-
-                      Enable routing between Private Networks in the VPC. Note that you will not be able to deactivate it afterwards.
+                      (Deprecated) Routing between Private Networks is always enabled on newly created VPCs and cannot be disabled. It will be removed in a future major version.
                       Enable routing between Private Networks in the VPC
                     type: boolean
                   enableTransitivity:

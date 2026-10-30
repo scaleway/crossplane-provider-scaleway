@@ -189,6 +189,10 @@ type ClusterObservation struct {
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the Redis™ cluster.
+	// The Scaleway Resource Name (SRN) of the Redis cluster
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// (Defaults to false) Whether TLS is enabled or not.
 	// Whether or not TLS is enabled.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
