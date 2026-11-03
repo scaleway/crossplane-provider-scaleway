@@ -12,10 +12,10 @@ require (
 	github.com/scaleway/scaleway-sdk-go v1.39.0
 	golang.org/x/text v0.43.0
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/api v0.35.4
+	k8s.io/api v0.37.2
 	k8s.io/apiextensions-apiserver v0.35.4
 	k8s.io/apimachinery v0.37.2
-	k8s.io/client-go v0.35.4
+	k8s.io/client-go v0.37.2
 	sigs.k8s.io/controller-runtime v0.22.0
 	sigs.k8s.io/controller-tools v0.20.1
 )
@@ -119,7 +119,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/mod v0.41.0 // indirect
 	golang.org/x/net v0.59.0 // indirect
-	golang.org/x/oauth2 v0.30.0 // indirect
+	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.48.0 // indirect
 	golang.org/x/term v0.46.0 // indirect
