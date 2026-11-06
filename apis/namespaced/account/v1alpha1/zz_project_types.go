@@ -16,6 +16,10 @@ import (
 
 type ProjectInitParameters struct {
 
+	// Defaults to false.
+	// If true, deleting the project also deletes all the resources it contains. Defaults to false.
+	DeleteWithResources *bool `json:"deleteWithResources,omitempty" tf:"delete_with_resources,omitempty"`
+
 	// The description of the Project.
 	// Description of the project
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -34,6 +38,10 @@ type ProjectObservation struct {
 	// The creation time of the Project.
 	// The date and time of the creation of the Project (Format ISO 8601)
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// Defaults to false.
+	// If true, deleting the project also deletes all the resources it contains. Defaults to false.
+	DeleteWithResources *bool `json:"deleteWithResources,omitempty" tf:"delete_with_resources,omitempty"`
 
 	// The description of the Project.
 	// Description of the project
@@ -60,6 +68,11 @@ type ProjectObservation struct {
 }
 
 type ProjectParameters struct {
+
+	// Defaults to false.
+	// If true, deleting the project also deletes all the resources it contains. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DeleteWithResources *bool `json:"deleteWithResources,omitempty" tf:"delete_with_resources,omitempty"`
 
 	// The description of the Project.
 	// Description of the project

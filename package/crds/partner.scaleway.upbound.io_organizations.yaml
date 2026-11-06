@@ -327,6 +327,11 @@ spec:
                       The phone number of the new organization owner.
                       The phone number of the new organization owner.
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the organization.
+                      The Scaleway Resource Name (SRN) of the organization.
+                    type: string
                   status:
                     description: |-
                       The current status of the organization.

@@ -74,6 +74,10 @@ type AlertManagerObservation struct {
 	// The region where the alert manager should be enabled.
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The Scaleway Resource Name (SRN) of the alert manager.
+	// The Scaleway Resource Name (SRN) of the alert manager
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
 }
 
 type AlertManagerParameters struct {

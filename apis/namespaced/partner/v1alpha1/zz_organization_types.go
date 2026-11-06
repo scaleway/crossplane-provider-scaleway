@@ -94,6 +94,10 @@ type OrganizationObservation struct {
 	// The phone number of the new organization owner.
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the organization.
+	// The Scaleway Resource Name (SRN) of the organization.
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// The current status of the organization.
 	// The current status of the organization.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
