@@ -58,6 +58,11 @@ spec:
             properties:
               forProvider:
                 properties:
+                  deleteWithResources:
+                    description: |-
+                      Defaults to false.
+                      If true, deleting the project also deletes all the resources it contains. Defaults to false.
+                    type: boolean
                   description:
                     description: |-
                       The description of the Project.
@@ -87,6 +92,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  deleteWithResources:
+                    description: |-
+                      Defaults to false.
+                      If true, deleting the project also deletes all the resources it contains. Defaults to false.
+                    type: boolean
                   description:
                     description: |-
                       The description of the Project.
@@ -171,6 +181,11 @@ spec:
                       The creation time of the Project.
                       The date and time of the creation of the Project (Format ISO 8601)
                     type: string
+                  deleteWithResources:
+                    description: |-
+                      Defaults to false.
+                      If true, deleting the project also deletes all the resources it contains. Defaults to false.
+                    type: boolean
                   description:
                     description: |-
                       The description of the Project.

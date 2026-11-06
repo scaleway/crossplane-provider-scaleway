@@ -78,6 +78,10 @@ type SourceObservation struct {
 	// The number of days to retain data. Use scaleway_cockpit_config data source to read allowed min, max, and default values for each data source type.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the data source.
+	// The Scaleway Resource Name (SRN) of the data source
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// Indicates whether the data source is synchronized with Grafana.
 	// Indicates whether the data source is synchronized with Grafana
 	SynchronizedWithGrafana *bool `json:"synchronizedWithGrafana,omitempty" tf:"synchronized_with_grafana,omitempty"`

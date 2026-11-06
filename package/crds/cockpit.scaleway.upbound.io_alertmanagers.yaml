@@ -435,6 +435,11 @@ spec:
                       The region where the alert manager should be enabled.
                       The region you want to attach the resource to
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the alert manager.
+                      The Scaleway Resource Name (SRN) of the alert manager
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

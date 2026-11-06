@@ -545,6 +545,11 @@ spec:
                       The region where the exporter is located.
                       The region you want to attach the resource to
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the data export.
+                      The Scaleway Resource Name (SRN) of the data export
+                    type: string
                   status:
                     description: |-
                       Status of the data export (creating, ready, error).

@@ -121,6 +121,10 @@ type ExporterObservation struct {
 	// The region you want to attach the resource to
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the data export.
+	// The Scaleway Resource Name (SRN) of the data export
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// Status of the data export (creating, ready, error).
 	// Status of the data export
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
