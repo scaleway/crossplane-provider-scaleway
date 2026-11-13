@@ -217,7 +217,7 @@ type ServerInitParameters struct {
 
 	// The options to enable on the server.
 	// ~> The options block supports:
-	// The options to enable on server
+	// The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The UUID of the os to install on the server.
@@ -247,7 +247,7 @@ type ServerInitParameters struct {
 	PrivateIps []PrivateIpsInitParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private networks to attach to the server. For more information, see the documentation
-	// The private networks to attach to the server
+	// The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
 	PrivateNetwork []PrivateNetworkInitParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -364,7 +364,7 @@ type ServerObservation struct {
 
 	// The options to enable on the server.
 	// ~> The options block supports:
-	// The options to enable on server
+	// The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
 	Options []OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The organization ID the server is associated with.
@@ -398,7 +398,7 @@ type ServerObservation struct {
 	PrivateIps []PrivateIpsObservation `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private networks to attach to the server. For more information, see the documentation
-	// The private networks to attach to the server
+	// The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
 	PrivateNetwork []PrivateNetworkObservation `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
 	// (Defaults to provider project_id) The ID of the project the server is associated with.
@@ -481,7 +481,7 @@ type ServerParameters struct {
 
 	// The options to enable on the server.
 	// ~> The options block supports:
-	// The options to enable on server
+	// The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
@@ -518,7 +518,7 @@ type ServerParameters struct {
 	PrivateIps []PrivateIpsParameters `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// The private networks to attach to the server. For more information, see the documentation
-	// The private networks to attach to the server
+	// The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
 	// +kubebuilder:validation:Optional
 	PrivateNetwork []PrivateNetworkParameters `json:"privateNetwork,omitempty" tf:"private_network,omitempty"`
 
