@@ -29,11 +29,11 @@ type VolumeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the volume belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes.
-	// The volume size in GB
+	// The size of the volume in gigabytes. Defaults to 5GB, or to the snapshot's size if snapshot_id is specified.
+	// The volume size in GB. Defaults to 5GB, or to the snapshot's size if `snapshot_id` is specified
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// If set, the new volume will be created from this snapshot.
@@ -76,11 +76,11 @@ type VolumeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the volume belongs to. Defaults to the provider's project ID.
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes.
-	// The volume size in GB
+	// The size of the volume in gigabytes. Defaults to 5GB, or to the snapshot's size if snapshot_id is specified.
+	// The volume size in GB. Defaults to 5GB, or to the snapshot's size if `snapshot_id` is specified
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// If set, the new volume will be created from this snapshot.
@@ -118,12 +118,12 @@ type VolumeParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.
-	// The project_id you want to attach the resource to
+	// The project ID the volume belongs to. Defaults to the provider's project ID.
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
-	// The size of the volume in gigabytes.
-	// The volume size in GB
+	// The size of the volume in gigabytes. Defaults to 5GB, or to the snapshot's size if snapshot_id is specified.
+	// The volume size in GB. Defaults to 5GB, or to the snapshot's size if `snapshot_id` is specified
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
