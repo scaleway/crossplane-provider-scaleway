@@ -13,6 +13,12 @@ resources:
             - name: project
               manifest: |-
                 {
+                  "delete_with_resources": true,
+                  "name": "my_project"
+                }
+            - name: project
+              manifest: |-
+                {
                   "name": "my_project",
                   "provider": "${scaleway.tmp}"
                 }
@@ -26,6 +32,7 @@ resources:
                     }
         argumentDocs:
             created_at: '- The creation time of the Project.'
+            delete_with_resources: '- (Optional) If true, deleting the project also deletes all the resources it contains, including resources not managed by Terraform. Defaults to false.'
             description: '- (Optional) The description of the Project.'
             id: '- The unique identifier of the project (UUID format).'
             name: '- (Optional) The name of the Project.'
@@ -1306,6 +1313,7 @@ resources:
             preconfigured_alert_ids: '- (Optional, Set of String) A set of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project the Cockpit is associated with.'
             region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the alert manager should be enabled.'
+            srn: '- The Scaleway Resource Name (SRN) of the alert manager.'
         importStatements: []
     scaleway_cockpit_exporter:
         subCategory: Cockpit
@@ -1376,6 +1384,7 @@ resources:
             otlp_destination.headers: '- (Optional) Headers to include in requests.'
             project_id: '- (Defaults to the Project ID specified in the provider configuration) The ID of the Project.'
             region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the exporter is located.'
+            srn: '- The Scaleway Resource Name (SRN) of the data export.'
             status: '- Status of the data export (creating, ready, error).'
             updated_at: '- Date and time of last update (RFC 3339 format).'
         importStatements: []
@@ -1408,6 +1417,7 @@ resources:
             push_url: '- The URL endpoint used for pushing data to the Cockpit data source.'
             region: '- (Optional, Computed, Defaults to the region specified in the provider configuration) The region where the data source is located.'
             retention_days: '- (Required) The number of days to retain data in the data source. Use the scaleway_cockpit_config data source to read the allowed min, max, and default values for each data source type.'
+            srn: '- The Scaleway Resource Name (SRN) of the data source.'
             synchronized_with_grafana: '- Indicates whether the data source is synchronized with Grafana.'
             type: '- (Required) The type of data source. Possible values are: metrics, logs, or traces.'
             updated_at: '- The date and time the data source was last updated (in RFC 3339 format).'
@@ -9586,6 +9596,7 @@ resources:
             owner_lastname: '- (Required) The last name of the new organization owner.'
             partner_id: '- (Optional) Your personal partner_id. This is the same as your Organization ID. If not provided, the default organization configured in the provider is used.'
             phone_number: '- (Optional) The phone number of the new organization owner.'
+            srn: '- The Scaleway Resource Name (SRN) of the organization.'
             status: '- The current status of the organization.'
         importStatements: []
     scaleway_rdb_acl:

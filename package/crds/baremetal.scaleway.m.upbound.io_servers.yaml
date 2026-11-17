@@ -93,7 +93,7 @@ spec:
                     description: |-
                       The options to enable on the server.
                       ~> The options block supports:
-                      The options to enable on server
+                      The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
                     items:
                       properties:
                         expiresAt:
@@ -154,7 +154,7 @@ spec:
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
-                      The private networks to attach to the server
+                      The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
                     items:
                       properties:
                         id:
@@ -376,7 +376,7 @@ spec:
                     description: |-
                       The options to enable on the server.
                       ~> The options block supports:
-                      The options to enable on server
+                      The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
                     items:
                       properties:
                         expiresAt:
@@ -437,7 +437,7 @@ spec:
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
-                      The private networks to attach to the server
+                      The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
                     items:
                       properties:
                         id:
@@ -796,7 +796,7 @@ spec:
                     description: |-
                       The options to enable on the server.
                       ~> The options block supports:
-                      The options to enable on server
+                      The options to enable on server. Retrieving them using the scaleway_baremetal_option datasource is highly recommended.
                     items:
                       properties:
                         expiresAt:
@@ -869,7 +869,7 @@ spec:
                   privateNetwork:
                     description: |-
                       The private networks to attach to the server. For more information, see the documentation
-                      The private networks to attach to the server
+                      The private networks to attach to the server. Requires an option with the private_network attribute to be enabled.
                     items:
                       properties:
                         createdAt:
