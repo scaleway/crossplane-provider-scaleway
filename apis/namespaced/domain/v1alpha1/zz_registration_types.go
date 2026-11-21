@@ -41,11 +41,14 @@ type AdministrativeContactObservation struct {
 
 	EmailAlt *string `json:"emailAlt,omitempty" tf:"email_alt,omitempty"`
 
+	// specific details (european_citizenship).
 	ExtensionEu []ExtensionEuObservation `json:"extensionEu,omitempty" tf:"extension_eu,omitempty"`
 
+	// specific details for French (.fr) domains (mode, and optional nested infos).
 	ExtensionFr []ExtensionFrObservation `json:"extensionFr,omitempty" tf:"extension_fr,omitempty"`
 
-	ExtensionNl []*string `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
+	// specific details for Dutch (.nl) domains:
+	ExtensionNl []ExtensionNlObservation `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
 
 	FaxNumber *string `json:"faxNumber,omitempty" tf:"fax_number,omitempty"`
 
@@ -57,7 +60,7 @@ type AdministrativeContactObservation struct {
 	// : Last name.
 	Lastname *string `json:"lastname,omitempty" tf:"lastname,omitempty"`
 
-	// : Legal form of the contact.
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
 	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
 
 	// : Primary phone number.
@@ -308,6 +311,21 @@ type ExtensionFrTrademarkInfoParameters struct {
 	TrademarkInpi *string `json:"trademarkInpi,omitempty" tf:"trademark_inpi,omitempty"`
 }
 
+type ExtensionNlInitParameters struct {
+}
+
+type ExtensionNlObservation struct {
+
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
+
+	// : KvK (Chamber of Commerce) or other registry registration number.
+	LegalFormRegistrationNumber *string `json:"legalFormRegistrationNumber,omitempty" tf:"legal_form_registration_number,omitempty"`
+}
+
+type ExtensionNlParameters struct {
+}
+
 type IndividualInfoInitParameters struct {
 }
 
@@ -406,6 +424,41 @@ type OwnerContactExtensionFrParameters struct {
 	TrademarkInfo []ExtensionFrTrademarkInfoParameters `json:"trademarkInfo,omitempty" tf:"trademark_info,omitempty"`
 }
 
+type OwnerContactExtensionNlInitParameters struct {
+
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
+
+	// : KvK (Chamber of Commerce) or other registry registration number.
+	// KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+	LegalFormRegistrationNumber *string `json:"legalFormRegistrationNumber,omitempty" tf:"legal_form_registration_number,omitempty"`
+}
+
+type OwnerContactExtensionNlObservation struct {
+
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
+
+	// : KvK (Chamber of Commerce) or other registry registration number.
+	// KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+	LegalFormRegistrationNumber *string `json:"legalFormRegistrationNumber,omitempty" tf:"legal_form_registration_number,omitempty"`
+}
+
+type OwnerContactExtensionNlParameters struct {
+
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+	// +kubebuilder:validation:Optional
+	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
+
+	// : KvK (Chamber of Commerce) or other registry registration number.
+	// KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+	// +kubebuilder:validation:Optional
+	LegalFormRegistrationNumber *string `json:"legalFormRegistrationNumber,omitempty" tf:"legal_form_registration_number,omitempty"`
+}
+
 type OwnerContactInitParameters struct {
 
 	// : Primary address.
@@ -438,14 +491,17 @@ type OwnerContactInitParameters struct {
 	// Alternative email address for the contact.
 	EmailAlt *string `json:"emailAlt,omitempty" tf:"email_alt,omitempty"`
 
+	// specific details (european_citizenship).
 	// Details specific to European domain extensions.
 	ExtensionEu []OwnerContactExtensionEuInitParameters `json:"extensionEu,omitempty" tf:"extension_eu,omitempty"`
 
+	// specific details for French (.fr) domains (mode, and optional nested infos).
 	// Details specific to French domain extensions.
 	ExtensionFr []OwnerContactExtensionFrInitParameters `json:"extensionFr,omitempty" tf:"extension_fr,omitempty"`
 
-	// Extension details specific to Dutch domain registrations.
-	ExtensionNl []*string `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
+	// specific details for Dutch (.nl) domains:
+	// SIDN-specific details for Dutch (.nl) domain registrations.
+	ExtensionNl []OwnerContactExtensionNlInitParameters `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
 
 	// Fax number for the contact (if available).
 	FaxNumber *string `json:"faxNumber,omitempty" tf:"fax_number,omitempty"`
@@ -461,8 +517,8 @@ type OwnerContactInitParameters struct {
 	// Last name of the contact.
 	Lastname *string `json:"lastname,omitempty" tf:"lastname,omitempty"`
 
-	// : Legal form of the contact.
-	// Legal form of the contact (e.g., 'individual' or 'organization').
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
 	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
 
 	// : Primary phone number.
@@ -519,14 +575,17 @@ type OwnerContactObservation struct {
 	// Alternative email address for the contact.
 	EmailAlt *string `json:"emailAlt,omitempty" tf:"email_alt,omitempty"`
 
+	// specific details (european_citizenship).
 	// Details specific to European domain extensions.
 	ExtensionEu []OwnerContactExtensionEuObservation `json:"extensionEu,omitempty" tf:"extension_eu,omitempty"`
 
+	// specific details for French (.fr) domains (mode, and optional nested infos).
 	// Details specific to French domain extensions.
 	ExtensionFr []OwnerContactExtensionFrObservation `json:"extensionFr,omitempty" tf:"extension_fr,omitempty"`
 
-	// Extension details specific to Dutch domain registrations.
-	ExtensionNl []*string `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
+	// specific details for Dutch (.nl) domains:
+	// SIDN-specific details for Dutch (.nl) domain registrations.
+	ExtensionNl []OwnerContactExtensionNlObservation `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
 
 	// Fax number for the contact (if available).
 	FaxNumber *string `json:"faxNumber,omitempty" tf:"fax_number,omitempty"`
@@ -542,8 +601,8 @@ type OwnerContactObservation struct {
 	// Last name of the contact.
 	Lastname *string `json:"lastname,omitempty" tf:"lastname,omitempty"`
 
-	// : Legal form of the contact.
-	// Legal form of the contact (e.g., 'individual' or 'organization').
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
 	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
 
 	// : Primary phone number.
@@ -608,17 +667,20 @@ type OwnerContactParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAlt *string `json:"emailAlt,omitempty" tf:"email_alt,omitempty"`
 
+	// specific details (european_citizenship).
 	// Details specific to European domain extensions.
 	// +kubebuilder:validation:Optional
 	ExtensionEu []OwnerContactExtensionEuParameters `json:"extensionEu,omitempty" tf:"extension_eu,omitempty"`
 
+	// specific details for French (.fr) domains (mode, and optional nested infos).
 	// Details specific to French domain extensions.
 	// +kubebuilder:validation:Optional
 	ExtensionFr []OwnerContactExtensionFrParameters `json:"extensionFr,omitempty" tf:"extension_fr,omitempty"`
 
-	// Extension details specific to Dutch domain registrations.
+	// specific details for Dutch (.nl) domains:
+	// SIDN-specific details for Dutch (.nl) domain registrations.
 	// +kubebuilder:validation:Optional
-	ExtensionNl []*string `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
+	ExtensionNl []OwnerContactExtensionNlParameters `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
 
 	// Fax number for the contact (if available).
 	// +kubebuilder:validation:Optional
@@ -638,8 +700,8 @@ type OwnerContactParameters struct {
 	// +kubebuilder:validation:Optional
 	Lastname *string `json:"lastname" tf:"lastname,omitempty"`
 
-	// : Legal form of the contact.
-	// Legal form of the contact (e.g., 'individual' or 'organization').
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	// Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
 	// +kubebuilder:validation:Optional
 	LegalForm *string `json:"legalForm" tf:"legal_form,omitempty"`
 
@@ -887,6 +949,21 @@ type TechnicalContactExtensionFrTrademarkInfoObservation struct {
 type TechnicalContactExtensionFrTrademarkInfoParameters struct {
 }
 
+type TechnicalContactExtensionNlInitParameters struct {
+}
+
+type TechnicalContactExtensionNlObservation struct {
+
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
+
+	// : KvK (Chamber of Commerce) or other registry registration number.
+	LegalFormRegistrationNumber *string `json:"legalFormRegistrationNumber,omitempty" tf:"legal_form_registration_number,omitempty"`
+}
+
+type TechnicalContactExtensionNlParameters struct {
+}
+
 type TechnicalContactInitParameters struct {
 }
 
@@ -914,11 +991,14 @@ type TechnicalContactObservation struct {
 
 	EmailAlt *string `json:"emailAlt,omitempty" tf:"email_alt,omitempty"`
 
+	// specific details (european_citizenship).
 	ExtensionEu []TechnicalContactExtensionEuObservation `json:"extensionEu,omitempty" tf:"extension_eu,omitempty"`
 
+	// specific details for French (.fr) domains (mode, and optional nested infos).
 	ExtensionFr []TechnicalContactExtensionFrObservation `json:"extensionFr,omitempty" tf:"extension_fr,omitempty"`
 
-	ExtensionNl []*string `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
+	// specific details for Dutch (.nl) domains:
+	ExtensionNl []TechnicalContactExtensionNlObservation `json:"extensionNl,omitempty" tf:"extension_nl,omitempty"`
 
 	FaxNumber *string `json:"faxNumber,omitempty" tf:"fax_number,omitempty"`
 
@@ -930,7 +1010,7 @@ type TechnicalContactObservation struct {
 	// : Last name.
 	Lastname *string `json:"lastname,omitempty" tf:"lastname,omitempty"`
 
-	// : Legal form of the contact.
+	// : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
 	LegalForm *string `json:"legalForm,omitempty" tf:"legal_form,omitempty"`
 
 	// : Primary phone number.

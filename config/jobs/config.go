@@ -11,4 +11,14 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroup
 		r.Kind = "Definition"
 	})
+
+	p.AddResourceConfigurator("scaleway_job_trigger", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Trigger"
+
+		r.References["job_definition_id"] = config.Reference{
+			TerraformName: "scaleway_job_definition",
+		}
+	})
 }

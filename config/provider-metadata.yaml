@@ -1172,6 +1172,7 @@ resources:
                       "size_in_gb": 20
                     }
         argumentDocs:
+            '{zone}/{id}.kms_key_id': '- The UUID of the KMS key used to protect the parent volume''s encryption. Empty if the parent volume is not encrypted.'
             '{zone}/{id}.srn': '- The Scaleway Resource Name (SRN) of the snapshot.'
             export: |-
                 - (Optional) Use this block to export the volume as a QCOW file to Object Storage.
@@ -1238,6 +1239,7 @@ resources:
             '{zone}/{id}.srn': '- The Scaleway Resource Name (SRN) of the volume.'
             id: '- The ID of the volume.'
             iops: '- (Required) The maximum IOPs expected, must match available options.'
+            kms_key_id: '- (Optional) UUID of the KMS key used to protect the volume''s encryption. Using this field will encrypt the new volume. Only available to the Private Beta''s users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot''s kms_key_id.'
             name: '- (Optional) The name of the volume. If not provided, a name will be randomly generated.'
             project_id: '- (Defaults to the Project ID specified in the provider configurqtion). The ID of the Project the volume is associated with.'
             size_in_gb: '- (Optional) The size of the volume in gigabytes. Defaults to 5GB, or to the snapshot''s size if snapshot_id is specified.'
@@ -2035,6 +2037,44 @@ resources:
             updated_at: '- The last update timestamp of the Datalab instance.'
             worker: '- (Optional) The Spark worker nodes configuration.'
         importStatements: []
+    scaleway_dataorchestrator_workflow:
+        subCategory: Data Orchestrator
+        name: scaleway_dataorchestrator_workflow
+        title: scaleway_dataorchestrator_workflow
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "cron_schedule": {
+                    "overlap": "forbid",
+                    "schedule": "0 6 * * *",
+                    "timezone_identifier": "Europe/Paris"
+                  },
+                  "description": "Managed by Terraform",
+                  "name": "example-workflow",
+                  "region": "fr-par",
+                  "version_name": "v1-0-0",
+                  "workflow_dsl": "document:\n  dsl: 1.0.3\n  namespace: example\n  name: example-workflow\n  version: 1.0.0\ndo:\n  - setColor:\n      set:\n        color: blue\n"
+                }
+        argumentDocs:
+            created_at: '- Creation timestamp.'
+            cron_schedule: '- (Optional) Cron schedule of the workflow.'
+            description: '- (Optional) Description of the workflow definition. Omit the attribute to leave it empty; an empty string is not allowed.'
+            environment_variables: '- (Optional) Environment variables of the workflow.'
+            id: '- The ID of the workflow definition.'
+            name: '- (Optional, Computed) Name of the workflow definition. If omitted, a random name is generated.'
+            overlap: '- (Optional) Overlap policy (forbid, allow, queue, …).'
+            project_id: '- (Defaults to provider project_id) The ID of the project the workflow is associated with.'
+            region: '- (Optional, Computed, Defaults to provider region) The region of the workflow.'
+            schedule: '- (Required) UNIX cron expression.'
+            srn: '- Scaleway Resource Name.'
+            timezone_identifier: '- (Required) Canonical TZ identifier (e.g. Europe/Paris).'
+            updated_at: '- Last update timestamp.'
+            version_description: '- (Optional) Description of the workflow version. Omit the attribute to leave it empty; an empty string is not allowed.'
+            version_id: '- ID of the current workflow version.'
+            version_name: '- (Optional, Computed) Name of the workflow version (3-50 chars: letters, digits, -, _). Defaults to v1-0-0 on create.'
+            workflow_dsl: '- (Required) Open Workflow Specification YAML for the current version.'
+        importStatements: []
     scaleway_datawarehouse_database:
         subCategory: Data Warehouse
         name: scaleway_datawarehouse_database
@@ -2564,10 +2604,14 @@ resources:
             email: '(Required, String): Primary email.'
             epp_code: ': EPP code(s) associated with the domain.'
             expired_at: ': Expiration date/time of the domain registration.'
+            extension_eu: '(Optional, List Max: 1): EU-specific details (european_citizenship).'
+            extension_fr: '(Optional, List Max: 1): AFNIC-specific details for French (.fr) domains (mode, and optional nested infos).'
+            extension_nl: '(Optional, List Max: 1): SIDN-specific details for Dutch (.nl) domains:'
             firstname: '(Required, String): First name.'
             id: ': The ID of the domain registration.'
             lastname: '(Required, String): Last name.'
-            legal_form: '(Required, String): Legal form of the contact.'
+            legal_form: '(Required, String): Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.'
+            legal_form_registration_number: '(Optional, String): KvK (Chamber of Commerce) or other registry registration number.'
             owner_contact: '(Optional, List): Details of the owner contact.'
             owner_contact_id: '(Optional, String): The ID of an existing owner contact.'
             phone_number: '(Required, String): Primary phone number.'
@@ -4677,6 +4721,7 @@ resources:
             outbound_default_policy: '- (Defaults to accept) The default policy on outgoing traffic. Possible values are: accept or drop.'
             outbound_rule: '- (Optional) A list of outbound rule to add to the security group. (Structure is documented below.)'
             project_id: '- (Defaults to provider project_id) The ID of the project the security group is associated with.'
+            srn: '- The Scaleway Resource Name (SRN) of the security group.'
             stateful: '- (Defaults to true) A boolean to specify whether the security group should be stateful or not.'
             tags: '- (Optional) The tags of the security group.'
             zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the security group should be created.'
@@ -5031,6 +5076,7 @@ resources:
                 To find the right size use this endpoint and
                 check the volumes_constraint.{min|max}_size (in bytes) for your commercial_type.
                 Depending on volume_type, updates to this field may recreate a new resource.
+            srn: '- The Scaleway Resource Name (SRN) of the server.'
             state: '- (Defaults to started) The state of the server. Possible values are: started, stopped or standby.'
             status: The private NIC state.
             tags: '- (Optional) The tags associated with the server.'
@@ -5124,6 +5170,7 @@ resources:
                 - (Defaults to provider project_id) The ID of the project the snapshot is
                 associated with.
             size_in_gb: '- (Optional) The size of the snapshot.'
+            srn: '- The Scaleway Resource Name (SRN) of the snapshot.'
             tags: '- (Optional) A list of tags to apply to the snapshot.'
             type: |-
                 - (Default to l_ssd) The snapshot's volume type. The possible values are: l_ssd (Local SSD).
@@ -5346,6 +5393,7 @@ resources:
             project_id: '- (Defaults to provider project_id) The ID of the project the volume is associated with.'
             server_id: '- The id of the associated server.'
             size_in_gb: '- (Optional) The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.'
+            srn: '- The Scaleway Resource Name (SRN) of the volume.'
             tags: '- (Optional) A list of tags to apply to the volume.'
             type: '- (Required) The type of the volume. The possible values are: l_ssd (Local SSD), scratch (Local Scratch SSD).'
             zone: '- (Optional, Computed, Defaults to provider zone) The zone in which the volume should be created.'
@@ -5965,6 +6013,100 @@ resources:
             startup_command: '- (Optional) The command (main executable or entrypoint script) that will be run in the container (in list of string format). Overrides the default command defined in the job image.'
             timeout: '- (Optional) The job run timeout, in Go Time format (ex: 2h30m25s)'
             timezone: '- The timezone, must be a canonical TZ identifier as found in this list.'
+        importStatements: []
+    scaleway_job_trigger:
+        subCategory: Jobs
+        name: scaleway_job_trigger
+        title: scaleway_job_trigger
+        examples:
+            - name: main
+              manifest: |-
+                {
+                  "cron_config": {
+                    "schedule": "5 4 1 * *",
+                    "timezone": "Europe/Paris"
+                  },
+                  "job_definition_id": "${scaleway_job_definition.main.id}",
+                  "name": "job-trigger"
+                }
+              references:
+                job_definition_id: scaleway_job_definition.main.id
+              dependencies:
+                scaleway_job_definition.main: |-
+                    {
+                      "cpu_limit": 140,
+                      "image_uri": "docker.io/alpine:latest",
+                      "local_storage_capacity": 5120,
+                      "memory_limit": 256
+                    }
+            - name: main
+              manifest: |-
+                {
+                  "cron_config": {
+                    "args": [
+                      "starting",
+                      "daily",
+                      "job"
+                    ],
+                    "schedule": "0 8 * * *",
+                    "startup_command": [
+                      "echo"
+                    ],
+                    "timezone": "Europe/Paris"
+                  },
+                  "job_definition_id": "${scaleway_job_definition.main.id}",
+                  "name": "job-trigger-main"
+                }
+              references:
+                job_definition_id: scaleway_job_definition.main.id
+              dependencies:
+                scaleway_job_definition.main: |-
+                    {
+                      "cpu_limit": 120,
+                      "image_uri": "docker.io/alpine:latest",
+                      "local_storage_capacity": 5120,
+                      "memory_limit": 256
+                    }
+            - name: secondary
+              manifest: |-
+                {
+                  "cron_config": {
+                    "args": [
+                      "job",
+                      "done"
+                    ],
+                    "schedule": "0 17 * * *",
+                    "startup_command": [
+                      "echo"
+                    ],
+                    "timezone": "Europe/Paris"
+                  },
+                  "job_definition_id": "${scaleway_job_definition.main.id}",
+                  "name": "job-trigger-secondary"
+                }
+              references:
+                job_definition_id: scaleway_job_definition.main.id
+              dependencies:
+                scaleway_job_definition.main: |-
+                    {
+                      "cpu_limit": 120,
+                      "image_uri": "docker.io/alpine:latest",
+                      "local_storage_capacity": 5120,
+                      "memory_limit": 256
+                    }
+        argumentDocs:
+            args: '- (Optional) The arguments passed to the startup command used by the triggered job (in list of string format).'
+            created_at: '- The creation time of the trigger.'
+            cron_config: '- (Required) The configuration of the CRON trigger.'
+            id: '- The ID of the trigger.'
+            job_definition_id: '- (Required) The ID of the job definition to be triggered.'
+            name: '- (Optional) The name of the trigger. If not provided, a random name will be generated.'
+            region: '- (Optional, Computed, Defaults to provider region) The region in which the trigger exists.'
+            schedule: '- (Required) The CRON schedule in UNIX format.'
+            srn: '- The Scaleway Resource Name (SRN) of the trigger.'
+            startup_command: '- (Optional) The startup command that will be used by the triggered job (in list of string format).'
+            timezone: '- (Required) The timezone for the CRON schedule, must be a canonical TZ identifier as found in this list.'
+            updated_at: '- The last update time of the trigger.'
         importStatements: []
     scaleway_k8s_acl:
         subCategory: Kubernetes
@@ -7637,6 +7779,8 @@ resources:
             deletion_scheduled_at: '- Scheduled deletion date when status is deletion_scheduled (RFC 3339 format).'
             domain_id: '- (Required, Forces new resource) UUID of the scaleway_mailbox_domain to which this mailbox belongs.'
             email: '- Full email address of the mailbox (local_part@domain).'
+            forwarding_enabled: '- (Optional) Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).'
+            forwarding_keep_copy: '- (Optional) Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).'
             id: '- Unique identifier of the mailbox (UUID).'
             local_part: '- (Required, Forces new resource) Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.'
             locked: – mailbox is locked (e.g. billing issue).
@@ -7761,6 +7905,47 @@ resources:
             validation_failed: – validation failed; check dns_records[*].error.
             waiting_validation: – DNS records must be configured and validated.
             webmail_url: '- URL of the domain''s webmail interface.'
+        importStatements: []
+    scaleway_mailbox_forwarding:
+        subCategory: Mailbox
+        name: scaleway_mailbox_forwarding
+        title: scaleway_mailbox_forwarding
+        examples:
+            - name: backup
+              manifest: |-
+                {
+                  "email": "backup@example.com",
+                  "mailbox_id": "${scaleway_mailbox.main.id}"
+                }
+              references:
+                mailbox_id: scaleway_mailbox.main.id
+              dependencies:
+                scaleway_mailbox.main: |-
+                    {
+                      "domain_id": "${scaleway_mailbox_domain.main.id}",
+                      "forwarding_enabled": true,
+                      "forwarding_keep_copy": true,
+                      "local_part": "contact",
+                      "password_wo": "${var.mailbox_password}",
+                      "password_wo_version": 1,
+                      "subscription_period": "monthly"
+                    }
+                scaleway_mailbox_domain.main: |-
+                    {
+                      "name": "mail.example.com"
+                    }
+        argumentDocs:
+            created_at: '- Date and time of rule creation (RFC 3339 format).'
+            deleting: – rule is being deleted.
+            email: '- (Required) Destination email address. Can be updated in place. Must not be the mailbox''s own address.'
+            id: '- Unique identifier of the forwarding rule (UUID).'
+            mailbox_id: '- (Required, Forces new resource) UUID of the scaleway_mailbox for which to create the rule.'
+            provisioning: – rule is being provisioned.
+            ready: – rule is active.
+            status: '- Current status of the rule:'
+            unknown_status: – status is not known.
+            updated_at: '- Date and time of last update (RFC 3339 format).'
+            updating: – rule is being updated.
         importStatements: []
     scaleway_messageq_deployment:
         subCategory: MessageQ

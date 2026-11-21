@@ -8,6 +8,7 @@ import (
 	"github.com/scaleway/crossplane-provider-scaleway/config/annotations"
 	"github.com/scaleway/crossplane-provider-scaleway/config/billing"
 	"github.com/scaleway/crossplane-provider-scaleway/config/datalab"
+	"github.com/scaleway/crossplane-provider-scaleway/config/dataorchestrator"
 	"github.com/scaleway/crossplane-provider-scaleway/config/interlink"
 	"github.com/scaleway/crossplane-provider-scaleway/config/kafka"
 	"github.com/scaleway/crossplane-provider-scaleway/config/mailbox"
@@ -110,6 +111,7 @@ func resourceConfigurers() []func(provider *ujconfig.Provider) {
 		partner.Configure,
 		mailbox.Configure,
 		messageq.Configure,
+		dataorchestrator.Configure,
 	}
 }
 
