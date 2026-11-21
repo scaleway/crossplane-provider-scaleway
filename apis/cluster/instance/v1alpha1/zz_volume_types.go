@@ -79,6 +79,10 @@ type VolumeObservation struct {
 	// The size of the volume in gigabyte
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the volume.
+	// The Scaleway Resource Name (SRN) of the volume
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// A list of tags to apply to the volume.
 	// The tags associated with the volume
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -135,6 +135,10 @@ type SnapshotObservation struct {
 	// Import snapshot from a qcow
 	Import []ImportObservation `json:"import,omitempty" tf:"import,omitempty"`
 
+	// The UUID of the KMS key used to protect the parent volume's encryption. Empty if the parent volume is not encrypted.
+	// UUID of the KMS key used to protect the parent volume's encryption
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// The name of the snapshot. If not provided, a name will be randomly generated.
 	// The snapshot name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

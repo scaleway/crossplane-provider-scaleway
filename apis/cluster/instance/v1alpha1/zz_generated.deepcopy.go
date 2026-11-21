@@ -2293,6 +2293,11 @@ func (in *SecurityGroupObservation) DeepCopyInto(out *SecurityGroupObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Stateful != nil {
 		in, out := &in.Stateful, &out.Stateful
 		*out = new(bool)
@@ -3341,6 +3346,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -4005,6 +4015,11 @@ func (in *SnapshotObservation) DeepCopyInto(out *SnapshotObservation) {
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -5088,6 +5103,11 @@ func (in *VolumeObservation) DeepCopyInto(out *VolumeObservation) {
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Srn != nil {
+		in, out := &in.Srn, &out.Srn
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

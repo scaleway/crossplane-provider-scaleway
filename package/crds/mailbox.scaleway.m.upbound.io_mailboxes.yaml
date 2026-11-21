@@ -143,6 +143,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  forwardingEnabled:
+                    description: |-
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+                    type: boolean
+                  forwardingKeepCopy:
+                    description: |-
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+                    type: boolean
                   localPart:
                     description: |-
                       Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.
@@ -276,6 +286,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  forwardingEnabled:
+                    description: |-
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+                    type: boolean
+                  forwardingKeepCopy:
+                    description: |-
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+                    type: boolean
                   localPart:
                     description: |-
                       Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.
@@ -403,6 +423,16 @@ spec:
                       Full email address of the mailbox (local_part@domain).
                       Full email address of the mailbox (local_part@domain)
                     type: string
+                  forwardingEnabled:
+                    description: |-
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+                      Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+                    type: boolean
+                  forwardingKeepCopy:
+                    description: |-
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+                      Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+                    type: boolean
                   id:
                     description: Unique identifier of the mailbox (UUID).
                     type: string

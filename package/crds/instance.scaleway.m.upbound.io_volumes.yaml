@@ -260,6 +260,11 @@ spec:
                       The size of the volume. Only one of size_in_gb and from_snapshot_id should be specified.
                       The size of the volume in gigabyte
                     type: number
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the volume.
+                      The Scaleway Resource Name (SRN) of the volume
+                    type: string
                   tags:
                     description: |-
                       A list of tags to apply to the volume.

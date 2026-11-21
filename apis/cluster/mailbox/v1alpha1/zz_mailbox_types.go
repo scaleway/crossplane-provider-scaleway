@@ -28,6 +28,14 @@ type MailboxInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+	ForwardingEnabled *bool `json:"forwardingEnabled,omitempty" tf:"forwarding_enabled,omitempty"`
+
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+	ForwardingKeepCopy *bool `json:"forwardingKeepCopy,omitempty" tf:"forwarding_keep_copy,omitempty"`
+
 	// Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.
 	// Local part of the email address (the part before the @). Changing this forces a new mailbox.
 	LocalPart *string `json:"localPart,omitempty" tf:"local_part,omitempty"`
@@ -66,6 +74,14 @@ type MailboxObservation struct {
 	// Full email address of the mailbox (local_part@domain).
 	// Full email address of the mailbox (local_part@domain)
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+	ForwardingEnabled *bool `json:"forwardingEnabled,omitempty" tf:"forwarding_enabled,omitempty"`
+
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+	ForwardingKeepCopy *bool `json:"forwardingKeepCopy,omitempty" tf:"forwarding_keep_copy,omitempty"`
 
 	// Unique identifier of the mailbox (UUID).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -122,6 +138,16 @@ type MailboxParameters struct {
 	// Selector for a Domain in mailbox to populate domainId.
 	// +kubebuilder:validation:Optional
 	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted (API default).
+	// Whether email forwarding is enabled for this mailbox. When false, no forwarding rules deliver mail. Defaults to false when omitted.
+	// +kubebuilder:validation:Optional
+	ForwardingEnabled *bool `json:"forwardingEnabled,omitempty" tf:"forwarding_enabled,omitempty"`
+
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted (API default).
+	// Whether to keep a copy of forwarded emails in this mailbox. Defaults to false when omitted.
+	// +kubebuilder:validation:Optional
+	ForwardingKeepCopy *bool `json:"forwardingKeepCopy,omitempty" tf:"forwarding_keep_copy,omitempty"`
 
 	// Local part of the email address (part before the @). Must be 1–64 characters. Changing this value forces a new mailbox to be created.
 	// Local part of the email address (the part before the @). Changing this forces a new mailbox.

@@ -1298,6 +1298,11 @@ spec:
                       The security group the server is attached to.
                       The security group the server is attached to
                     type: string
+                  srn:
+                    description: |-
+                      The Scaleway Resource Name (SRN) of the server.
+                      The Scaleway Resource Name (SRN) of the server
+                    type: string
                   state:
                     description: |-
                       (Defaults to started) The state of the server. Possible values are: started, stopped or standby.

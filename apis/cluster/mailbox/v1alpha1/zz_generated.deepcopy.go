@@ -603,6 +603,16 @@ func (in *MailboxInitParameters) DeepCopyInto(out *MailboxInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ForwardingEnabled != nil {
+		in, out := &in.ForwardingEnabled, &out.ForwardingEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ForwardingKeepCopy != nil {
+		in, out := &in.ForwardingKeepCopy, &out.ForwardingKeepCopy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.LocalPart != nil {
 		in, out := &in.LocalPart, &out.LocalPart
 		*out = new(string)
@@ -695,6 +705,16 @@ func (in *MailboxObservation) DeepCopyInto(out *MailboxObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForwardingEnabled != nil {
+		in, out := &in.ForwardingEnabled, &out.ForwardingEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ForwardingKeepCopy != nil {
+		in, out := &in.ForwardingKeepCopy, &out.ForwardingKeepCopy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -774,6 +794,16 @@ func (in *MailboxParameters) DeepCopyInto(out *MailboxParameters) {
 		in, out := &in.DomainIDSelector, &out.DomainIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ForwardingEnabled != nil {
+		in, out := &in.ForwardingEnabled, &out.ForwardingEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ForwardingKeepCopy != nil {
+		in, out := &in.ForwardingKeepCopy, &out.ForwardingKeepCopy
+		*out = new(bool)
+		**out = **in
 	}
 	if in.LocalPart != nil {
 		in, out := &in.LocalPart, &out.LocalPart
