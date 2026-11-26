@@ -101,6 +101,50 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this Forwarding.
+func (mg *Forwarding) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MailboxID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.MailboxIDRef,
+		Selector:     mg.Spec.ForProvider.MailboxIDSelector,
+		To: reference.To{
+			List:    &MailboxList{},
+			Managed: &Mailbox{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MailboxID")
+	}
+	mg.Spec.ForProvider.MailboxID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MailboxIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MailboxID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.MailboxIDRef,
+		Selector:     mg.Spec.InitProvider.MailboxIDSelector,
+		To: reference.To{
+			List:    &MailboxList{},
+			Managed: &Mailbox{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MailboxID")
+	}
+	mg.Spec.InitProvider.MailboxID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MailboxIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Mailbox.
 func (mg *Mailbox) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)

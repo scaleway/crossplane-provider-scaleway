@@ -1,0 +1,34 @@
+apiVersion: jobs.scaleway.upbound.io/v1alpha1
+kind: Trigger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: jobs/v1alpha1/trigger
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cronConfig:
+      schedule: 5 4 1 * *
+      timezone: Europe/Paris
+    jobDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+    name: job-trigger
+
+---
+
+apiVersion: jobs.scaleway.upbound.io/v1alpha1
+kind: Definition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: jobs/v1alpha1/trigger
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cpuLimit: 140
+    imageUri: docker.io/alpine:latest
+    localStorageCapacity: 5120
+    memoryLimit: 256

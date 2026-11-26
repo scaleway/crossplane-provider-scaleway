@@ -525,6 +525,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  kmsKeyId:
+                    description: |-
+                      The UUID of the KMS key used to protect the parent volume's encryption. Empty if the parent volume is not encrypted.
+                      UUID of the KMS key used to protect the parent volume's encryption
+                    type: string
                   name:
                     description: |-
                       The name of the snapshot. If not provided, a name will be randomly generated.

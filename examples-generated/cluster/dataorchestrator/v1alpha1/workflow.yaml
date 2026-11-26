@@ -1,0 +1,28 @@
+apiVersion: dataorchestrator.scaleway.upbound.io/v1alpha1
+kind: Workflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataorchestrator/v1alpha1/workflow
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    cronSchedule:
+      overlap: forbid
+      schedule: 0 6 * * *
+      timezoneIdentifier: Europe/Paris
+    description: Managed by Terraform
+    name: example-workflow
+    region: fr-par
+    versionName: v1-0-0
+    workflowDsl: |
+      document:
+        dsl: 1.0.3
+        namespace: example
+        name: example-workflow
+        version: 1.0.0
+      do:
+        - setColor:
+            set:
+              color: blue

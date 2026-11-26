@@ -13,4 +13,7 @@ func (tr *Alias) Hub() {}
 func (tr *Domain) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Forwarding) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Mailbox) Hub() {}

@@ -360,6 +360,10 @@ type ServerObservation struct {
 	// The security group the server is attached to
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the server.
+	// The Scaleway Resource Name (SRN) of the server
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// (Defaults to started) The state of the server. Possible values are: started, stopped or standby.
 	// The state of the server should be: started, stopped, standby
 	State *string `json:"state,omitempty" tf:"state,omitempty"`

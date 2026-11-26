@@ -36,6 +36,7 @@ import (
 	domain "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/container/domain"
 	tokencontainer "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/container/token"
 	datalab "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/datalab/datalab"
+	workflow "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/dataorchestrator/workflow"
 	database "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/datawarehouse/database"
 	deployment "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/datawarehouse/deployment"
 	user "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/datawarehouse/user"
@@ -90,6 +91,7 @@ import (
 	ipipam "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/ipam/ip"
 	ipreversedns "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/ipam/ipreversedns"
 	definition "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/jobs/definition"
+	trigger "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/jobs/trigger"
 	acl "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/k8s/acl"
 	cluster "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/k8s/cluster"
 	pool "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/k8s/pool"
@@ -105,6 +107,7 @@ import (
 	routelb "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/lb/route"
 	alias "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/alias"
 	domainmailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/domain"
+	forwarding "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/forwarding"
 	mailbox "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/mailbox/mailbox"
 	deploymentmessageq "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/messageq/deployment"
 	usermessageq "github.com/scaleway/crossplane-provider-scaleway/internal/controller/cluster/messageq/user"
@@ -195,6 +198,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domain.Setup,
 		tokencontainer.Setup,
 		datalab.Setup,
+		workflow.Setup,
 		database.Setup,
 		deployment.Setup,
 		user.Setup,
@@ -249,6 +253,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		ipipam.Setup,
 		ipreversedns.Setup,
 		definition.Setup,
+		trigger.Setup,
 		acl.Setup,
 		cluster.Setup,
 		pool.Setup,
@@ -264,6 +269,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		routelb.Setup,
 		alias.Setup,
 		domainmailbox.Setup,
+		forwarding.Setup,
 		mailbox.Setup,
 		deploymentmessageq.Setup,
 		usermessageq.Setup,
@@ -360,6 +366,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		domain.SetupGated,
 		tokencontainer.SetupGated,
 		datalab.SetupGated,
+		workflow.SetupGated,
 		database.SetupGated,
 		deployment.SetupGated,
 		user.SetupGated,
@@ -414,6 +421,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		ipipam.SetupGated,
 		ipreversedns.SetupGated,
 		definition.SetupGated,
+		trigger.SetupGated,
 		acl.SetupGated,
 		cluster.SetupGated,
 		pool.SetupGated,
@@ -429,6 +437,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		routelb.SetupGated,
 		alias.SetupGated,
 		domainmailbox.SetupGated,
+		forwarding.SetupGated,
 		mailbox.SetupGated,
 		deploymentmessageq.SetupGated,
 		usermessageq.SetupGated,
