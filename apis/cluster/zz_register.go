@@ -20,6 +20,7 @@ import (
 	v1alpha1cockpit "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/cockpit/v1alpha1"
 	v1alpha1container "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/container/v1alpha1"
 	v1alpha1datalab "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/datalab/v1alpha1"
+	v1alpha1dataorchestrator "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/dataorchestrator/v1alpha1"
 	v1alpha1datawarehouse "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/datawarehouse/v1alpha1"
 	v1alpha1domain "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/domain/v1alpha1"
 	v1alpha1edgeservices "github.com/scaleway/crossplane-provider-scaleway/apis/cluster/edgeservices/v1alpha1"
@@ -69,6 +70,7 @@ func init() {
 		v1alpha1cockpit.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1datalab.SchemeBuilder.AddToScheme,
+		v1alpha1dataorchestrator.SchemeBuilder.AddToScheme,
 		v1alpha1datawarehouse.SchemeBuilder.AddToScheme,
 		v1alpha1domain.SchemeBuilder.AddToScheme,
 		v1alpha1edgeservices.SchemeBuilder.AddToScheme,
