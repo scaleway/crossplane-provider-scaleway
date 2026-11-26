@@ -82,6 +82,11 @@ spec:
                       The maximum IOPs expected, must match available options.
                       The maximum IO/s expected, must match available options
                     type: number
+                  kmsKeyId:
+                    description: |-
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+                    type: string
                   name:
                     description: |-
                       The name of the volume. If not provided, a name will be randomly generated.
@@ -212,6 +217,11 @@ spec:
                       The maximum IOPs expected, must match available options.
                       The maximum IO/s expected, must match available options
                     type: number
+                  kmsKeyId:
+                    description: |-
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+                    type: string
                   name:
                     description: |-
                       The name of the volume. If not provided, a name will be randomly generated.
@@ -428,6 +438,11 @@ spec:
                       The maximum IOPs expected, must match available options.
                       The maximum IO/s expected, must match available options
                     type: number
+                  kmsKeyId:
+                    description: |-
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+                      UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+                    type: string
                   name:
                     description: |-
                       The name of the volume. If not provided, a name will be randomly generated.

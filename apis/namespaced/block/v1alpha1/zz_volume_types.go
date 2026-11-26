@@ -24,6 +24,10 @@ type VolumeInitParameters struct {
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -71,6 +75,10 @@ type VolumeObservation struct {
 	// The maximum IO/s expected, must match available options
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -111,6 +119,11 @@ type VolumeParameters struct {
 	// The maximum IO/s expected, must match available options
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the AES-256-GCM algorithm. Cannot be used with instance_volume_id. When creating from a snapshot_id, the value must match the snapshot's kms_key_id.
+	// UUID of the KMS key used to protect the volume's encryption. Using this field will encrypt the new volume. Only available to the Private Beta's users. The KMS key must use symmetric encryption with the "AES-256-GCM" algorithm
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The name of the volume. If not provided, a name will be randomly generated.
 	// The volume name

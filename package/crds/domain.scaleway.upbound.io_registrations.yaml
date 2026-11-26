@@ -137,7 +137,9 @@ spec:
                           description: Alternative email address for the contact.
                           type: string
                         extensionEu:
-                          description: Details specific to European domain extensions.
+                          description: |-
+                            specific details (european_citizenship).
+                            Details specific to European domain extensions.
                           items:
                             properties:
                               europeanCitizenship:
@@ -147,7 +149,9 @@ spec:
                             type: object
                           type: array
                         extensionFr:
-                          description: Details specific to French domain extensions.
+                          description: |-
+                            specific details for French (.fr) domains (mode, and optional nested infos).
+                            Details specific to French domain extensions.
                           items:
                             properties:
                               associationInfo:
@@ -222,10 +226,22 @@ spec:
                             type: object
                           type: array
                         extensionNl:
-                          description: Extension details specific to Dutch domain
-                            registrations.
+                          description: |-
+                            specific details for Dutch (.nl) domains:
+                            SIDN-specific details for Dutch (.nl) domain registrations.
                           items:
-                            type: string
+                            properties:
+                              legalForm:
+                                description: |-
+                                  : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                                  SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+                                type: string
+                              legalFormRegistrationNumber:
+                                description: |-
+                                  : KvK (Chamber of Commerce) or other registry registration number.
+                                  KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+                                type: string
+                            type: object
                           type: array
                         faxNumber:
                           description: Fax number for the contact (if available).
@@ -246,8 +262,8 @@ spec:
                           type: string
                         legalForm:
                           description: |-
-                            : Legal form of the contact.
-                            Legal form of the contact (e.g., 'individual' or 'organization').
+                            : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                            Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
                           type: string
                         phoneNumber:
                           description: |-
@@ -366,7 +382,9 @@ spec:
                           description: Alternative email address for the contact.
                           type: string
                         extensionEu:
-                          description: Details specific to European domain extensions.
+                          description: |-
+                            specific details (european_citizenship).
+                            Details specific to European domain extensions.
                           items:
                             properties:
                               europeanCitizenship:
@@ -376,7 +394,9 @@ spec:
                             type: object
                           type: array
                         extensionFr:
-                          description: Details specific to French domain extensions.
+                          description: |-
+                            specific details for French (.fr) domains (mode, and optional nested infos).
+                            Details specific to French domain extensions.
                           items:
                             properties:
                               associationInfo:
@@ -451,10 +471,22 @@ spec:
                             type: object
                           type: array
                         extensionNl:
-                          description: Extension details specific to Dutch domain
-                            registrations.
+                          description: |-
+                            specific details for Dutch (.nl) domains:
+                            SIDN-specific details for Dutch (.nl) domain registrations.
                           items:
-                            type: string
+                            properties:
+                              legalForm:
+                                description: |-
+                                  : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                                  SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+                                type: string
+                              legalFormRegistrationNumber:
+                                description: |-
+                                  : KvK (Chamber of Commerce) or other registry registration number.
+                                  KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+                                type: string
+                            type: object
                           type: array
                         faxNumber:
                           description: Fax number for the contact (if available).
@@ -475,8 +507,8 @@ spec:
                           type: string
                         legalForm:
                           description: |-
-                            : Legal form of the contact.
-                            Legal form of the contact (e.g., 'individual' or 'organization').
+                            : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                            Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
                           type: string
                         phoneNumber:
                           description: |-
@@ -642,6 +674,7 @@ spec:
                         emailAlt:
                           type: string
                         extensionEu:
+                          description: specific details (european_citizenship).
                           items:
                             properties:
                               europeanCitizenship:
@@ -649,6 +682,8 @@ spec:
                             type: object
                           type: array
                         extensionFr:
+                          description: specific details for French (.fr) domains (mode,
+                            and optional nested infos).
                           items:
                             properties:
                               associationInfo:
@@ -697,8 +732,20 @@ spec:
                             type: object
                           type: array
                         extensionNl:
+                          description: 'specific details for Dutch (.nl) domains:'
                           items:
-                            type: string
+                            properties:
+                              legalForm:
+                                description: ': Legal form of the contact (individual,
+                                  corporate, association, or other). Not the SIDN
+                                  .nl legal form — use extension_nl.legal_form for
+                                  that.'
+                                type: string
+                              legalFormRegistrationNumber:
+                                description: ': KvK (Chamber of Commerce) or other
+                                  registry registration number.'
+                                type: string
+                            type: object
                           type: array
                         faxNumber:
                           type: string
@@ -711,7 +758,9 @@ spec:
                           description: ': Last name.'
                           type: string
                         legalForm:
-                          description: ': Legal form of the contact.'
+                          description: ': Legal form of the contact (individual, corporate,
+                            association, or other). Not the SIDN .nl legal form —
+                            use extension_nl.legal_form for that.'
                           type: string
                         phoneNumber:
                           description: ': Primary phone number.'
@@ -834,7 +883,9 @@ spec:
                           description: Alternative email address for the contact.
                           type: string
                         extensionEu:
-                          description: Details specific to European domain extensions.
+                          description: |-
+                            specific details (european_citizenship).
+                            Details specific to European domain extensions.
                           items:
                             properties:
                               europeanCitizenship:
@@ -844,7 +895,9 @@ spec:
                             type: object
                           type: array
                         extensionFr:
-                          description: Details specific to French domain extensions.
+                          description: |-
+                            specific details for French (.fr) domains (mode, and optional nested infos).
+                            Details specific to French domain extensions.
                           items:
                             properties:
                               associationInfo:
@@ -919,10 +972,22 @@ spec:
                             type: object
                           type: array
                         extensionNl:
-                          description: Extension details specific to Dutch domain
-                            registrations.
+                          description: |-
+                            specific details for Dutch (.nl) domains:
+                            SIDN-specific details for Dutch (.nl) domain registrations.
                           items:
-                            type: string
+                            properties:
+                              legalForm:
+                                description: |-
+                                  : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                                  SIDN legal form for .nl domains (e.g. limited_company, natural_person). Distinct from the contact-level legal_form.
+                                type: string
+                              legalFormRegistrationNumber:
+                                description: |-
+                                  : KvK (Chamber of Commerce) or other registry registration number.
+                                  KvK (Chamber of Commerce) or other registry registration number for the SIDN legal form.
+                                type: string
+                            type: object
                           type: array
                         faxNumber:
                           description: Fax number for the contact (if available).
@@ -943,8 +1008,8 @@ spec:
                           type: string
                         legalForm:
                           description: |-
-                            : Legal form of the contact.
-                            Legal form of the contact (e.g., 'individual' or 'organization').
+                            : Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
+                            Legal form of the contact (individual, corporate, association, or other). Not the SIDN .nl legal form — use extension_nl.legal_form for that.
                           type: string
                         phoneNumber:
                           description: |-
@@ -1018,6 +1083,7 @@ spec:
                         emailAlt:
                           type: string
                         extensionEu:
+                          description: specific details (european_citizenship).
                           items:
                             properties:
                               europeanCitizenship:
@@ -1025,6 +1091,8 @@ spec:
                             type: object
                           type: array
                         extensionFr:
+                          description: specific details for French (.fr) domains (mode,
+                            and optional nested infos).
                           items:
                             properties:
                               associationInfo:
@@ -1073,8 +1141,20 @@ spec:
                             type: object
                           type: array
                         extensionNl:
+                          description: 'specific details for Dutch (.nl) domains:'
                           items:
-                            type: string
+                            properties:
+                              legalForm:
+                                description: ': Legal form of the contact (individual,
+                                  corporate, association, or other). Not the SIDN
+                                  .nl legal form — use extension_nl.legal_form for
+                                  that.'
+                                type: string
+                              legalFormRegistrationNumber:
+                                description: ': KvK (Chamber of Commerce) or other
+                                  registry registration number.'
+                                type: string
+                            type: object
                           type: array
                         faxNumber:
                           type: string
@@ -1087,7 +1167,9 @@ spec:
                           description: ': Last name.'
                           type: string
                         legalForm:
-                          description: ': Legal form of the contact.'
+                          description: ': Legal form of the contact (individual, corporate,
+                            association, or other). Not the SIDN .nl legal form —
+                            use extension_nl.legal_form for that.'
                           type: string
                         phoneNumber:
                           description: ': Primary phone number.'

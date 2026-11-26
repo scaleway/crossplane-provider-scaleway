@@ -122,6 +122,10 @@ type SnapshotObservation struct {
 	// The size of the snapshot in gigabyte
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the snapshot.
+	// The Scaleway Resource Name (SRN) of the snapshot
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// A list of tags to apply to the snapshot.
 	// The tags associated with the snapshot
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`

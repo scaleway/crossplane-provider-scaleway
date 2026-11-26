@@ -298,6 +298,10 @@ type SecurityGroupObservation struct {
 	// The project_id you want to attach the resource to
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
+	// The Scaleway Resource Name (SRN) of the security group.
+	// The Scaleway Resource Name (SRN) of the security group
+	Srn *string `json:"srn,omitempty" tf:"srn,omitempty"`
+
 	// (Defaults to true) A boolean to specify whether the security group should be stateful or not.
 	// The stateful value of the security group
 	Stateful *bool `json:"stateful,omitempty" tf:"stateful,omitempty"`

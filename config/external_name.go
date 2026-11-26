@@ -161,6 +161,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"scaleway_messageq_deployment":                                config.NameAsIdentifier,
 	"scaleway_messageq_user":                                      config.NameAsIdentifier,
 	"scaleway_mailbox_alias":                                      config.NameAsIdentifier,
+	"scaleway_dataorchestrator_workflow":                          config.NameAsIdentifier,
+	"scaleway_mailbox_forwarding":                                 config.NameAsIdentifier,
+	"scaleway_job_trigger":                                        config.NameAsIdentifier,
 	"scaleway_vpc_route":                                          config.NameAsIdentifier,
 }
 

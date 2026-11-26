@@ -35,4 +35,14 @@ func Configure(p *config.Provider) {
 			TerraformName: "scaleway_mailbox",
 		}
 	})
+
+	p.AddResourceConfigurator("scaleway_mailbox_forwarding", func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+		r.ShortGroup = shortGroup
+		r.Kind = "Forwarding"
+
+		r.References["mailbox_id"] = config.Reference{
+			TerraformName: "scaleway_mailbox",
+		}
+	})
 }
