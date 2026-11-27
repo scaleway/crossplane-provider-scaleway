@@ -255,8 +255,8 @@ github.com/prometheus/procfs v0.16.1/go.mod h1:teAbpZRB1iIAJYREa1LsoWUXykVXA1KlT
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
-github.com/scaleway/scaleway-sdk-go v1.40.0 h1:OaMDf+uv5ehaRmu0ggi7k/KRP9QN6tUUOJ9wYh40lkc=
-github.com/scaleway/scaleway-sdk-go v1.40.0/go.mod h1:V7TfEMm3mctsBWYkWVNAW8R6f1KjFUtNgXdoD05onRg=
+github.com/scaleway/scaleway-sdk-go v1.40.1 h1:zf/J64NZb6I1C8gDbikl8Mw0UjnBs9Hty9S+wQWpM0M=
+github.com/scaleway/scaleway-sdk-go v1.40.1/go.mod h1:V7TfEMm3mctsBWYkWVNAW8R6f1KjFUtNgXdoD05onRg=
 github.com/sergi/go-diff v1.0.0/go.mod h1:0CfEIISq7TuYL3j771MWULgwwjU+GofnZX9QAmXWZgo=
 github.com/spf13/afero v1.12.0 h1:UcOPyRBYczmFn6yvphxkn9ZEOY65cpwGKb5mL36mrqs=
 github.com/spf13/afero v1.12.0/go.mod h1:ZTlWwG4/ahT8W7T0WQ5uYmjI9duaLQGy3Q2OAl4sk/4=
